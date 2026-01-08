@@ -51,6 +51,7 @@ import { parsePropertyDeclaration } from "./parse_node/parse_property_declaratio
 import { parseReturnStatement } from "./parse_node/parse_return_statement"
 import { parseSetAccessor } from "./parse_node/parse_set_accessor"
 import { parseSourceFile } from "./parse_node/parse_source_file"
+import { parseSourceFileDefault } from "./parse_node/parse_source_file_default"
 import { parseStringLiteral } from "./parse_node/parse_string_literal"
 import { parseSuperKeyword } from "./parse_node/parse_super_keyword"
 import { parseTemplateExpression } from "./parse_node/parse_template_expression"
@@ -83,6 +84,7 @@ export type ParseState = {
   usages: Map<ts.Identifier, utils.VariableInfo>
   sourceFile: ts.SourceFile
   sourceFileAsset: AssetSourceFile
+  ignoreTypeUses: string[]
 }
 
 export enum ExtraLineType {
@@ -252,7 +254,7 @@ export const parseNode = (
 ): ParseNodeType => {
   switch (genericNode.kind) {
     case SyntaxKind.SourceFile:
-      return parseSourceFile(genericNode as ts.SourceFile, props)
+      return parseSourceFileDefault(genericNode as ts.SourceFile, props)
     case SyntaxKind.ImportDeclaration:
       return parseImportDeclaration(genericNode as ts.ImportDeclaration, props)
     case SyntaxKind.TypeReference:

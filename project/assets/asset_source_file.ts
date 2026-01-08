@@ -387,6 +387,7 @@ Second path: ${chalk.yellow(sf.fsPath)}`,
       usages: utils.collectVariableUsage(sourceFileAst),
       sourceFile: sourceFileAst,
       sourceFileAsset: this,
+      ignoreTypeUses: [],
     })
 
     // TODO: Only do this once per program run max!

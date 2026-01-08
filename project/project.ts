@@ -338,7 +338,10 @@ export const makeTsGdProject = async (
         persistent: !args.buildOnly,
         ignored: ts2gdJson.ignoredPaths(),
       })
-      .on("add", (path) => initialFiles.push(path))
+      .on("add", (path) => {
+        path = path.replace(/\\/g, "/") // Normalize Windows paths
+        initialFiles.push(path)
+      })
       .on("ready", () => {
         watcher.removeAllListeners()
         resolve([watcher, initialFiles])

@@ -19,7 +19,7 @@ export class DefinitionBuilder {
     buildGroupTypes(this.project)
   }
   buildNodePathsTypeForScript(script: AssetSourceFile) {
-    buildNodePathsTypeForScript(script, this.project)
+    // buildNodePathsTypeForScript(script, this.project)
   }
   buildSceneImports() {
     buildSceneImports(this.project)

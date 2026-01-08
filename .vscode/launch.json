@@ -1,6 +1,7 @@
 {
   "version": "1.0.0",
   "configurations": [
+
     {
       "name": "build_lib",
       "type": "node",
@@ -11,6 +12,19 @@
       ],
       "program": "main.ts",
       "cwd": "${workspaceRoot}",
+      "internalConsoleOptions": "openOnSessionStart",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"]
+    },
+    {
+      "name": "debugProject",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/ts-node",
+      "args": [
+        "--buildOnly"
+      ],
+      "program": "${workspaceFolder}/main.ts",
+      "cwd": "C:/Users/chenyichen/Desktop/godot/mockProject",
       "internalConsoleOptions": "openOnSessionStart",
       "skipFiles": ["<node_internals>/**", "node_modules/**"]
     }
