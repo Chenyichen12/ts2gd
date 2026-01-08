@@ -12,7 +12,8 @@ export const isDecoratedAsExports = (
     | ts.GetAccessorDeclaration
     | ts.SetAccessorDeclaration
 ) => {
-  return !!node.decorators?.find(
+  const decs = ts.getDecorators(node);
+  return !!decs?.find(
     (dec) =>
       dec.expression.getText() === "exports" ||
       (ts.isCallExpression(dec.expression) &&
@@ -27,7 +28,8 @@ export const parseExports = (
     | ts.SetAccessorDeclaration,
   props: ParseState
 ) => {
-  const decoration = node.decorators?.find(
+  const decs = ts.getDecorators(node);
+  const decoration = decs?.find(
     (dec) =>
       dec.expression.getText() === "exports" ||
       (ts.isCallExpression(dec.expression) &&
@@ -149,7 +151,8 @@ export const isDecoratedAsExportFlags = (
     | ts.GetAccessorDeclaration
     | ts.SetAccessorDeclaration
 ): boolean => {
-  return !!node.decorators?.find((dec) =>
+  const decs = ts.getDecorators(node);
+  return !!decs?.find((dec) =>
     dec.expression.getText().startsWith("export_flags")
   )
 }
@@ -161,7 +164,8 @@ export const parseExportFlags = (
     | ts.SetAccessorDeclaration,
   props: ParseState
 ): string => {
-  const decoration = node.decorators?.find((dec) =>
+  const decs = ts.getDecorators(node);
+  const decoration = decs?.find((dec) =>
     dec.expression.getText().startsWith("export_flags")
   )
 

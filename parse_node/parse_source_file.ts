@@ -26,8 +26,8 @@ const getClassDeclarationHeader = (
 
     extendsFrom = type.getText()
   }
-
-  const isTool = !!node.decorators?.find(
+  const decs = ts.getDecorators(node);
+  const isTool = !!decs?.find(
     (dec) => dec.expression.getText() === "tool"
   )
 

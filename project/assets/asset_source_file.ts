@@ -277,8 +277,8 @@ ${chalk.green(
     if ("error" in classNode) {
       return false
     }
-
-    for (const dec of classNode.decorators ?? []) {
+    const decs = ts.getDecorators(classNode);
+    for (const dec of decs ?? []) {
       if (dec.expression.getText() === "autoload") {
         return true
       }
