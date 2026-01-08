@@ -842,4 +842,12 @@ declare class Signal<T extends (...args: any[]) => any = () => void> {
 
   /** Emit this signal. */
   emit(...args: Parameters<T>): void;
+  disconnect(): void;
+  get_connections(): any[];
+  get_name(): StringName;
+  get_object(): Object;
+  get_object_id(): int;
+  has_connections(): boolean;
+  is_connected(): boolean;
+  is_null(): boolean;
 }

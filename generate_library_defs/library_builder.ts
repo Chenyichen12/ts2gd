@@ -361,6 +361,9 @@ declare var ${className}: typeof ${className}Constructor & {
       if (fileName === "PackedScene.xml") {
         continue
       }
+      if(fileName === "Signal.xml") {
+        continue
+      }
 
       const result = await this.parseFile(fullPath, singletons)
 
