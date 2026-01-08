@@ -24,12 +24,26 @@ export function parseSourceFileDefault(
         return false;
       }
     ) as ts.ClassDeclaration[];
+    const allTopStatements = statements.filter(
+      (statement) =>{
+        if(statement.kind != ts.SyntaxKind.ClassDeclaration){
+            return true;
+        }
+        return false;
+      }) as ts.Statement[];
     const sourceInfo = props.project
         .sourceFiles()
         .find((file) => file.fsPath === node.fileName)
     const exportPath = sourceInfo?.gdPath;
 
     var sourceContents = ""
+    for(const topNode of allTopStatements){
+      const content = parseNode(topNode, props);
+      sourceContents += content.content;
+    }
+
+
+
 
     for (const classNode of allClasses) {
         if(isExportDefault(classNode)){

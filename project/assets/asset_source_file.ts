@@ -54,6 +54,7 @@ export class AssetSourceFile extends BaseAsset {
         -path.extname(sourceFilePath).length
       ) + ".gd"
     )
+    gdPath = gdPath.replace(/\\/g, "/") // Normalize Windows paths
 
     this.resPath = project.paths.fsPathToResPath(gdPath)
     this.gdPath = gdPath

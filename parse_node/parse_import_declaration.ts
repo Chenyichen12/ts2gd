@@ -7,8 +7,8 @@ import TsGdProject from "../project/project"
 import { ErrorName, addError } from "../errors"
 import { ParseNodeType, ParseState, combine } from "../parse_node"
 import { isEnumType } from "../ts_utils"
-
 const getPathWithoutExtension = (
+
   node: ts.ImportDeclaration,
   props: ParseState
 ) => {
@@ -96,6 +96,7 @@ export const parseImportDeclaration = (
 
   const pathWithoutExtension = getPathWithoutExtension(node, props)
   let pathToImportedTs = pathWithoutExtension + ".ts"
+  pathToImportedTs = pathToImportedTs.replace(/\\/g, "/") // Normalize Windows paths
 
   // Step 2: Parse bindings, sorting between class and enum types (which we need
   // to generate different imports for).
@@ -192,6 +193,15 @@ export const parseImportDeclaration = (
     }
   }
 
+  for(const imp of imports){
+    if(imp.type === "class"){
+      props.ignoreTypeUses.push({
+        typeName: imp.importedName,
+        resourcePath: imp.resPath
+      })
+    }
+  }
+
   return combine({
     parent: node,
     nodes: [],
@@ -199,9 +209,7 @@ export const parseImportDeclaration = (
     parsedStrings: () =>
       imports
         .map(({ importedName, type, resPath }) => {
-          if (type === "class") {
-            return `var ${importedName} = load("${resPath}")`
-          } else if (type === "enum") {
+          if (type === "enum") {
             return `const ${importedName} = preload("${resPath}").${importedName}`
           } else if (type === "scene") {
             return `const ${importedName} = preload("${resPath}")`

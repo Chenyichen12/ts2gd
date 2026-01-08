@@ -65,7 +65,7 @@ export const parseMethodDeclaration = (
         bodyLines = ["pass"]
       }
 
-      body = bodyLines.map((line) => "  " + line + "\n").join("")
+      body = bodyLines.map((line) => "\t" + line + "\n").join("")
 
       return `
 ${isRemote ? "remote " : ""}${isRemoteSync ? "remotesync " : ""}${

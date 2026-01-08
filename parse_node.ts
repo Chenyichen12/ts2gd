@@ -84,7 +84,10 @@ export type ParseState = {
   usages: Map<ts.Identifier, utils.VariableInfo>
   sourceFile: ts.SourceFile
   sourceFileAsset: AssetSourceFile
-  ignoreTypeUses: string[]
+  ignoreTypeUses: {
+    typeName: string,
+    resourcePath: string
+  }[]
 }
 
 export enum ExtraLineType {
@@ -207,7 +210,7 @@ export function combine(args: {
       if (lines.length > 1) {
         // indent all but the first line.
         formattedContent = lines
-          .map((line, i) => (i > 0 ? "  " : "") + line + "\n")
+          .map((line, i) => (i > 0 ? "\t" : "") + line + "\n")
           .join("")
       }
     }
