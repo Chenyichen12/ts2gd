@@ -3,7 +3,7 @@
  * A visual shader node for use of vector operators. Operates on vector `a` and vector `b`.
  *
 */
-declare class VisualShaderNodeVectorOp extends VisualShaderNode  {
+declare class VisualShaderNodeVectorOp extends VisualShaderNodeVectorBase  {
 
   
 /**
@@ -14,7 +14,7 @@ declare class VisualShaderNodeVectorOp extends VisualShaderNode  {
   static "new"(): VisualShaderNodeVectorOp 
 
 
-/** The operator to be used. See [enum Operator] for options. */
+/** The operator to be used. */
 operator: int;
 
 
@@ -94,6 +94,12 @@ static OP_REFLECT: any;
  *
 */
 static OP_STEP: any;
+
+/**
+ * Represents the size of the [enum Operator] enum.
+ *
+*/
+static OP_ENUM_SIZE: any;
 
 
 

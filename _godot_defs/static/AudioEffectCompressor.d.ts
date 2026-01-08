@@ -4,7 +4,7 @@
  *
  * Compressor has many uses in the mix:
  *
- * - In the Master bus to compress the whole output (although an [AudioEffectLimiter] is probably better).
+ * - In the Master bus to compress the whole output (although an [AudioEffectHardLimiter] is probably better).
  *
  * - In voice channels to ensure they sound as balanced as possible.
  *
@@ -21,7 +21,7 @@ declare class AudioEffectCompressor extends AudioEffect  {
  *
  * Compressor has many uses in the mix:
  *
- * - In the Master bus to compress the whole output (although an [AudioEffectLimiter] is probably better).
+ * - In the Master bus to compress the whole output (although an [AudioEffectHardLimiter] is probably better).
  *
  * - In voice channels to ensure they sound as balanced as possible.
  *
@@ -50,7 +50,7 @@ ratio: float;
 release_ms: float;
 
 /** Reduce the sound level using another audio bus for threshold detection. */
-sidechain: string;
+sidechain: StringName;
 
 /** The level above which compression is applied to the audio. Value can range from -60 to 0. */
 threshold: float;

@@ -20,13 +20,8 @@ closed: boolean;
 /** The culling mode to use. */
 cull_mode: int;
 
-/**
- * A [Vector2] array with the index for polygon's vertices positions.
- *
- * **Note:** The returned value is a copy of the underlying array, rather than a reference.
- *
-*/
-polygon: PoolVector2Array;
+/** A [Vector2] array with the index for polygon's vertices positions. */
+polygon: PackedVector2Array;
 
 
 

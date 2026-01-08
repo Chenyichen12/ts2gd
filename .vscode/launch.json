@@ -1,18 +1,18 @@
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-  "version": "0.2.0",
+  "version": "1.0.0",
   "configurations": [
     {
-      "name": "Launch Program",
-      "program": "${workspaceFolder}/js/main.js",
+      "name": "build_lib",
+      "type": "node",
       "request": "launch",
-      "skipFiles": ["<node_internals>/**"],
-      "args": ["${workspaceFolder}/example/ts2gd.json"],
-      "type": "pwa-node",
-      "preLaunchTask": "tsc: build - tsconfig.json",
-      "outFiles": ["${workspaceFolder}/js/**/*.js"]
+      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/ts-node",
+      "args": [
+        "--buildLibraries", "--buildOnly", "mockProject/ts2gd.json"
+      ],
+      "program": "main.ts",
+      "cwd": "${workspaceRoot}",
+      "internalConsoleOptions": "openOnSessionStart",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"]
     }
   ]
 }

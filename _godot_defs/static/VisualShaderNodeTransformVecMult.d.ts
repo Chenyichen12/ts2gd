@@ -1,20 +1,20 @@
 
 /**
- * A multiplication operation on a transform (4x4 matrix) and a vector, with support for different multiplication operators.
+ * A multiplication operation on a transform (4×4 matrix) and a vector, with support for different multiplication operators.
  *
 */
 declare class VisualShaderNodeTransformVecMult extends VisualShaderNode  {
 
   
 /**
- * A multiplication operation on a transform (4x4 matrix) and a vector, with support for different multiplication operators.
+ * A multiplication operation on a transform (4×4 matrix) and a vector, with support for different multiplication operators.
  *
 */
   new(): VisualShaderNodeTransformVecMult; 
   static "new"(): VisualShaderNodeTransformVecMult 
 
 
-/** The multiplication type to be performed. See [enum Operator] for options. */
+/** The multiplication type to be performed. */
 operator: int;
 
 
@@ -46,6 +46,12 @@ static OP_3x3_AxB: any;
  *
 */
 static OP_3x3_BxA: any;
+
+/**
+ * Represents the size of the [enum Operator] enum.
+ *
+*/
+static OP_MAX: any;
 
 
 

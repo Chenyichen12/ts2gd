@@ -2,6 +2,8 @@
 /**
  * This audio effect does not affect sound output, but can be used for real-time audio visualizations.
  *
+ * This resource configures an [AudioEffectSpectrumAnalyzerInstance], which performs the actual analysis at runtime. An instance can be obtained with [method AudioServer.get_bus_effect_instance].
+ *
  * See also [AudioStreamGenerator] for procedurally generating sounds.
  *
 */
@@ -10,6 +12,8 @@ declare class AudioEffectSpectrumAnalyzer extends AudioEffect  {
   
 /**
  * This audio effect does not affect sound output, but can be used for real-time audio visualizations.
+ *
+ * This resource configures an [AudioEffectSpectrumAnalyzerInstance], which performs the actual analysis at runtime. An instance can be obtained with [method AudioServer.get_bus_effect_instance].
  *
  * See also [AudioStreamGenerator] for procedurally generating sounds.
  *
@@ -62,7 +66,7 @@ static FFT_SIZE_2048: any;
 static FFT_SIZE_4096: any;
 
 /**
- * Represents the size of the [enum FFT_Size] enum.
+ * Represents the size of the [enum FFTSize] enum.
  *
 */
 static FFT_SIZE_MAX: any;

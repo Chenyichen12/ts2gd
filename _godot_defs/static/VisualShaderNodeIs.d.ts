@@ -14,7 +14,7 @@ declare class VisualShaderNodeIs extends VisualShaderNode  {
   static "new"(): VisualShaderNodeIs 
 
 
-/** The comparison function. See [enum Function] for options. */
+/** The comparison function. */
 function: int;
 
 
@@ -30,10 +30,16 @@ function: int;
 static FUNC_IS_INF: any;
 
 /**
- * Comparison with `NaN` (Not a Number; denotes invalid numeric results, e.g. division by zero).
+ * Comparison with `NaN` (Not a Number; indicates invalid numeric results, such as division by zero).
  *
 */
 static FUNC_IS_NAN: any;
+
+/**
+ * Represents the size of the [enum Function] enum.
+ *
+*/
+static FUNC_MAX: any;
 
 
 

@@ -14,7 +14,7 @@ declare class AudioEffectPhaser extends AudioEffect  {
   static "new"(): AudioEffectPhaser 
 
 
-/** Governs how high the filter frequencies sweep. Low value will primarily affect bass frequencies. High value can sweep high into the treble. Value can range from 0.1 to 4. */
+/** Determines how high the filter frequencies sweep. Low value will primarily affect bass frequencies. High value can sweep high into the treble. Value can range from [code]0.1[/code] to [code]4.0[/code]. */
 depth: float;
 
 /** Output percent of modified sound. Value can range from 0.1 to 0.9. */

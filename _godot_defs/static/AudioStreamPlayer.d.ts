@@ -1,60 +1,103 @@
 
 /**
- * Plays an audio stream non-positionally.
+ * The [AudioStreamPlayer] node plays an audio stream non-positionally. It is ideal for user interfaces, menus, or background music.
  *
- * To play audio positionally, use [AudioStreamPlayer2D] or [AudioStreamPlayer3D] instead of [AudioStreamPlayer].
+ * To use this node, [member stream] needs to be set to a valid [AudioStream] resource. Playing more than one sound at the same time is also supported, see [member max_polyphony].
+ *
+ * If you need to play audio at a specific position, use [AudioStreamPlayer2D] or [AudioStreamPlayer3D] instead.
  *
 */
 declare class AudioStreamPlayer extends Node  {
 
   
 /**
- * Plays an audio stream non-positionally.
+ * The [AudioStreamPlayer] node plays an audio stream non-positionally. It is ideal for user interfaces, menus, or background music.
  *
- * To play audio positionally, use [AudioStreamPlayer2D] or [AudioStreamPlayer3D] instead of [AudioStreamPlayer].
+ * To use this node, [member stream] needs to be set to a valid [AudioStream] resource. Playing more than one sound at the same time is also supported, see [member max_polyphony].
+ *
+ * If you need to play audio at a specific position, use [AudioStreamPlayer2D] or [AudioStreamPlayer3D] instead.
  *
 */
   new(): AudioStreamPlayer; 
   static "new"(): AudioStreamPlayer 
 
 
-/** If [code]true[/code], audio plays when added to scene tree. */
+/** If [code]true[/code], this node calls [method play] when entering the tree. */
 autoplay: boolean;
 
-/** Bus on which this audio is playing. */
-bus: string;
+/**
+ * The target bus name. All sounds from this node will be playing on this bus.
+ *
+ * **Note:** At runtime, if no bus with the given name exists, all sounds will fall back on `"Master"`. See also [method AudioServer.get_bus_name].
+ *
+*/
+bus: StringName;
 
-/** If the audio configuration has more than two speakers, this sets the target channels. See [enum MixTarget] constants. */
+/** The maximum number of sounds this node can play at the same time. Calling [method play] after this value is reached will cut off the oldest sounds. */
+max_polyphony: int;
+
+/** The mix target channels. Has no effect when two speakers or less are detected (see [enum AudioServer.SpeakerMode]). */
 mix_target: int;
 
-/** The pitch and the tempo of the audio, as a multiplier of the audio sample's sample rate. */
+/** The audio's pitch and tempo, as a multiplier of the [member stream]'s sample rate. A value of [code]2.0[/code] doubles the audio's pitch, while a value of [code]0.5[/code] halves the pitch. */
 pitch_scale: float;
 
-/** If [code]true[/code], audio is playing. */
+/** The playback type of the stream player. If set other than to the default value, it will force that playback type. */
+playback_type: int;
+
+/** If [code]true[/code], this node is playing sounds. Setting this property has the same effect as [method play] and [method stop]. */
 playing: boolean;
 
-/** The [AudioStream] object to be played. */
+/** The [AudioStream] resource to be played. Setting this property stops all currently playing sounds. If left empty, the [AudioStreamPlayer] does not work. */
 stream: AudioStream;
 
-/** If [code]true[/code], the playback is paused. You can resume it by setting [code]stream_paused[/code] to [code]false[/code]. */
+/**
+ * If `true`, the sounds are paused. Setting [member stream_paused] to `false` resumes all sounds.
+ *
+ * **Note:** This property is automatically changed when exiting or entering the tree, or this node is paused (see [member Node.process_mode]).
+ *
+*/
 stream_paused: boolean;
 
-/** Volume of sound, in dB. */
+/**
+ * Volume of sound, in decibels. This is an offset of the [member stream]'s volume.
+ *
+ * **Note:** To convert between decibel and linear energy (like most volume sliders do), use [member volume_linear], or [method @GlobalScope.db_to_linear] and [method @GlobalScope.linear_to_db].
+ *
+*/
 volume_db: float;
 
-/** Returns the position in the [AudioStream] in seconds. */
+/**
+ * Volume of sound, as a linear value.
+ *
+ * **Note:** This member modifies [member volume_db] for convenience. The returned value is equivalent to the result of [method @GlobalScope.db_to_linear] on [member volume_db]. Setting this member is equivalent to setting [member volume_db] to the result of [method @GlobalScope.linear_to_db] on a value.
+ *
+*/
+volume_linear: float;
+
+/**
+ * Returns the position in the [AudioStream] of the latest sound, in seconds. Returns `0.0` if no sounds are playing.
+ *
+ * **Note:** The position is not always accurate, as the [AudioServer] does not mix audio every processed frame. To get more accurate results, add [method AudioServer.get_time_since_last_mix] to the returned position.
+ *
+ * **Note:** This method always returns `0.0` if the [member stream] is an [AudioStreamInteractive], since it can have multiple clips playing at once.
+ *
+*/
 get_playback_position(): float;
 
-/** Returns the [AudioStreamPlayback] object associated with this [AudioStreamPlayer]. */
+/** Returns the latest [AudioStreamPlayback] of this node, usually the most recently created by [method play]. If no sounds are playing, this method fails and returns an empty playback. */
 get_stream_playback(): AudioStreamPlayback;
 
-/** Plays the audio from the given [code]from_position[/code], in seconds. */
-play(from_position?: float): void;
+/** Returns [code]true[/code] if any sound is active, even if [member stream_paused] is set to [code]true[/code]. See also [member playing] and [method get_stream_playback]. */
+has_stream_playback(): boolean;
 
-/** Sets the position from which audio will be played, in seconds. */
-seek(to_position: float): void;
+/** Plays a sound from the beginning, or the given [param from_position] in seconds. */
+play(): void;
 
-/** Stops the audio. */
+/** Restarts all sounds to be played from the given [param to_position], in seconds. Does nothing if no sounds are playing. */
+seek(): void;
+
+/** Stops all sounds from this node. */
 stop(): void;
 
   connect<T extends SignalsOf<AudioStreamPlayer>>(signal: T, method: SignalFunction<AudioStreamPlayer[T]>): number;
@@ -62,7 +105,7 @@ stop(): void;
 
 
 /**
- * The audio will be played only on the first channel.
+ * The audio will be played only on the first channel. This is the default.
  *
 */
 static MIX_TARGET_STEREO: any;
@@ -81,7 +124,7 @@ static MIX_TARGET_CENTER: any;
 
 
 /**
- * Emitted when the audio stops playing.
+ * Emitted when a sound finishes playing without interruptions. This signal is **not** emitted when calling [method stop], or when exiting the tree while sounds are playing.
  *
 */
 $finished: Signal<() => void>

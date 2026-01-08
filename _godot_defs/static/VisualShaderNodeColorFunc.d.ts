@@ -14,7 +14,7 @@ declare class VisualShaderNodeColorFunc extends VisualShaderNode  {
   static "new"(): VisualShaderNodeColorFunc 
 
 
-/** A function to be applied to the input color. See [enum Function] for options. */
+/** A function to be applied to the input color. */
 function: int;
 
 
@@ -40,6 +40,18 @@ function: int;
 static FUNC_GRAYSCALE: any;
 
 /**
+ * Converts HSV vector to RGB equivalent.
+ *
+*/
+static FUNC_HSV2RGB: any;
+
+/**
+ * Converts RGB vector to HSV equivalent.
+ *
+*/
+static FUNC_RGB2HSV: any;
+
+/**
  * Applies sepia tone effect using the following formula:
  *
  * @example 
@@ -54,6 +66,57 @@ static FUNC_GRAYSCALE: any;
  *
 */
 static FUNC_SEPIA: any;
+
+/**
+ * Converts color from linear encoding to nonlinear sRGB encoding using the following formula:
+ *
+ * @example 
+ * 
+ * vec3 c = clamp(c, vec3(0.0), vec3(1.0));
+ * const vec3 a = vec3(0.055f);
+ * return mix((vec3(1.0f) + a) * pow(c.rgb, vec3(1.0f / 2.4f)) - a, 12.92f * c.rgb, lessThan(c.rgb, vec3(0.0031308f)));
+ * @summary 
+ * 
+ *
+ * The Compatibility renderer uses a simpler formula:
+ *
+ * @example 
+ * 
+ * vec3 c = input;
+ * return max(vec3(1.055) * pow(c, vec3(0.416666667)) - vec3(0.055), vec3(0.0));
+ * @summary 
+ * 
+ *
+*/
+static FUNC_LINEAR_TO_SRGB: any;
+
+/**
+ * Converts color from nonlinear sRGB encoding to linear encoding using the following formula:
+ *
+ * @example 
+ * 
+ * vec3 c = input;
+ * return mix(pow((c.rgb + vec3(0.055)) * (1.0 / (1.0 + 0.055)), vec3(2.4)), c.rgb * (1.0 / 12.92), lessThan(c.rgb, vec3(0.04045)));
+ * @summary 
+ * 
+ *
+ * The Compatibility renderer uses a simpler formula:
+ *
+ * @example 
+ * 
+ * vec3 c = input;
+ * return c * (c * (c * 0.305306011 + 0.682171111) + 0.012522878);
+ * @summary 
+ * 
+ *
+*/
+static FUNC_SRGB_TO_LINEAR: any;
+
+/**
+ * Represents the size of the [enum Function] enum.
+ *
+*/
+static FUNC_MAX: any;
 
 
 

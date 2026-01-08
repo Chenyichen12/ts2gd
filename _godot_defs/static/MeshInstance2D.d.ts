@@ -1,13 +1,21 @@
 
 /**
- * Node used for displaying a [Mesh] in 2D. Can be constructed from an existing [Sprite] via a tool in the editor toolbar. Select "Sprite" then "Convert to Mesh2D", select settings in popup and press "Create Mesh2D".
+ * Node used for displaying a [Mesh] in 2D. This can be faster to render compared to displaying a [Sprite2D] node with large transparent areas, especially if the node takes up a lot of space on screen at high viewport resolutions. This is because using a mesh designed to fit the sprite's opaque areas will reduce GPU fill rate utilization (at the cost of increased vertex processing utilization).
+ *
+ * When a [Mesh] has to be instantiated more than thousands of times close to each other, consider using a [MultiMesh] in a [MultiMeshInstance2D] instead.
+ *
+ * A [MeshInstance2D] can be created from an existing [Sprite2D] via a tool in the editor toolbar. Select the [Sprite2D] node, then choose **Sprite2D > Convert to MeshInstance2D** at the top of the 2D editor viewport.
  *
 */
 declare class MeshInstance2D extends Node2D  {
 
   
 /**
- * Node used for displaying a [Mesh] in 2D. Can be constructed from an existing [Sprite] via a tool in the editor toolbar. Select "Sprite" then "Convert to Mesh2D", select settings in popup and press "Create Mesh2D".
+ * Node used for displaying a [Mesh] in 2D. This can be faster to render compared to displaying a [Sprite2D] node with large transparent areas, especially if the node takes up a lot of space on screen at high viewport resolutions. This is because using a mesh designed to fit the sprite's opaque areas will reduce GPU fill rate utilization (at the cost of increased vertex processing utilization).
+ *
+ * When a [Mesh] has to be instantiated more than thousands of times close to each other, consider using a [MultiMesh] in a [MultiMeshInstance2D] instead.
+ *
+ * A [MeshInstance2D] can be created from an existing [Sprite2D] via a tool in the editor toolbar. Select the [Sprite2D] node, then choose **Sprite2D > Convert to MeshInstance2D** at the top of the 2D editor viewport.
  *
 */
   new(): MeshInstance2D; 
@@ -17,16 +25,8 @@ declare class MeshInstance2D extends Node2D  {
 /** The [Mesh] that will be drawn by the [MeshInstance2D]. */
 mesh: Mesh;
 
-/**
- * The normal map that will be used if using the default [CanvasItemMaterial].
- *
- * **Note:** Godot expects the normal map to use X+, Y-, and Z+ coordinates. See [url=http://wiki.polycount.com/wiki/Normal_Map_Technical_Details#Common_Swizzle_Coordinates]this page[/url] for a comparison of normal map coordinates expected by popular engines.
- *
-*/
-normal_map: Texture;
-
-/** The [Texture] that will be used if using the default [CanvasItemMaterial]. Can be accessed as [code]TEXTURE[/code] in CanvasItem shader. */
-texture: Texture;
+/** The [Texture2D] that will be used if using the default [CanvasItemMaterial]. Can be accessed as [code]TEXTURE[/code] in CanvasItem shader. */
+texture: Texture2D;
 
 
 

@@ -15,7 +15,8 @@ declare class JNISingleton extends Object  {
 
 
 
-
+/** Returns [code]true[/code] if the given [param method] name exists in the JNISingleton's Java methods. */
+has_java_method(): boolean;
 
   connect<T extends SignalsOf<JNISingleton>>(signal: T, method: SignalFunction<JNISingleton[T]>): number;
 

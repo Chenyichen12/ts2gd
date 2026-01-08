@@ -20,7 +20,7 @@ fft_size: int;
 /** The oversampling factor to use. Higher values result in better quality, but are more demanding on the CPU and may cause audio cracking if the CPU can't keep up. */
 oversampling: int;
 
-/** The pitch scale to use. [code]1.0[/code] is the default pitch and plays sounds unaltered. [member pitch_scale] can range from [code]0.0[/code] (infinitely low pitch, inaudible) to [code]16[/code] (16 times higher than the initial pitch). */
+/** The pitch scale to use. [code]1.0[/code] is the default pitch and plays sounds unaffected. [member pitch_scale] can range from [code]0.0[/code] (infinitely low pitch, inaudible) to [code]16[/code] (16 times higher than the initial pitch). */
 pitch_scale: float;
 
 
@@ -60,7 +60,7 @@ static FFT_SIZE_2048: any;
 static FFT_SIZE_4096: any;
 
 /**
- * Represents the size of the [enum FFT_Size] enum.
+ * Represents the size of the [enum FFTSize] enum.
  *
 */
 static FFT_SIZE_MAX: any;

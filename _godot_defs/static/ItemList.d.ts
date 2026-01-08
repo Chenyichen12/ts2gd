@@ -1,21 +1,29 @@
 
 /**
- * This control provides a selectable list of items that may be in a single (or multiple columns) with option of text, icons, or both text and icon. Tooltips are supported and may be different for every item in the list.
+ * This control provides a vertical list of selectable items that may be in a single or in multiple columns, with each item having options for text and an icon. Tooltips are supported and may be different for every item in the list.
  *
- * Selectable items in the list may be selected or deselected and multiple selection may be enabled. Selection with right mouse button may also be enabled to allow use of popup context menus. Items may also be "activated" by double-clicking them or by pressing Enter.
+ * Selectable items in the list may be selected or deselected and multiple selection may be enabled. Selection with right mouse button may also be enabled to allow use of popup context menus. Items may also be "activated" by double-clicking them or by pressing [kbd]Enter[/kbd].
  *
- * Item text only supports single-line strings, newline characters (e.g. `\n`) in the string won't produce a newline. Text wrapping is enabled in [constant ICON_MODE_TOP] mode, but column's width is adjusted to fully fit its content by default. You need to set [member fixed_column_width] greater than zero to wrap the text.
+ * Item text only supports single-line strings. Newline characters (e.g. `\n`) in the string won't produce a newline. Text wrapping is enabled in [constant ICON_MODE_TOP] mode, but the column's width is adjusted to fully fit its content by default. You need to set [member fixed_column_width] greater than zero to wrap the text.
+ *
+ * All `set_*` methods allow negative item indices, i.e. `-1` to access the last item, `-2` to select the second-to-last item, and so on.
+ *
+ * **Incremental search:** Like [PopupMenu] and [Tree], [ItemList] supports searching within the list while the control is focused. Press a key that matches the first letter of an item's name to select the first item starting with the given letter. After that point, there are two ways to perform incremental search: 1) Press the same key again before the timeout duration to select the next item starting with the same letter. 2) Press letter keys that match the rest of the word before the timeout duration to match to select the item in question directly. Both of these actions will be reset to the beginning of the list if the timeout duration has passed since the last keystroke was registered. You can adjust the timeout duration by changing [member ProjectSettings.gui/timers/incremental_search_max_interval_msec].
  *
 */
 declare class ItemList extends Control  {
 
   
 /**
- * This control provides a selectable list of items that may be in a single (or multiple columns) with option of text, icons, or both text and icon. Tooltips are supported and may be different for every item in the list.
+ * This control provides a vertical list of selectable items that may be in a single or in multiple columns, with each item having options for text and an icon. Tooltips are supported and may be different for every item in the list.
  *
- * Selectable items in the list may be selected or deselected and multiple selection may be enabled. Selection with right mouse button may also be enabled to allow use of popup context menus. Items may also be "activated" by double-clicking them or by pressing Enter.
+ * Selectable items in the list may be selected or deselected and multiple selection may be enabled. Selection with right mouse button may also be enabled to allow use of popup context menus. Items may also be "activated" by double-clicking them or by pressing [kbd]Enter[/kbd].
  *
- * Item text only supports single-line strings, newline characters (e.g. `\n`) in the string won't produce a newline. Text wrapping is enabled in [constant ICON_MODE_TOP] mode, but column's width is adjusted to fully fit its content by default. You need to set [member fixed_column_width] greater than zero to wrap the text.
+ * Item text only supports single-line strings. Newline characters (e.g. `\n`) in the string won't produce a newline. Text wrapping is enabled in [constant ICON_MODE_TOP] mode, but the column's width is adjusted to fully fit its content by default. You need to set [member fixed_column_width] greater than zero to wrap the text.
+ *
+ * All `set_*` methods allow negative item indices, i.e. `-1` to access the last item, `-2` to select the second-to-last item, and so on.
+ *
+ * **Incremental search:** Like [PopupMenu] and [Tree], [ItemList] supports searching within the list while the control is focused. Press a key that matches the first letter of an item's name to select the first item starting with the given letter. After that point, there are two ways to perform incremental search: 1) Press the same key again before the timeout duration to select the next item starting with the same letter. 2) Press letter keys that match the rest of the word before the timeout duration to match to select the item in question directly. Both of these actions will be reset to the beginning of the list if the timeout duration has passed since the last keystroke was registered. You can adjust the timeout duration by changing [member ProjectSettings.gui/timers/incremental_search_max_interval_msec].
  *
 */
   new(): ItemList; 
@@ -28,8 +36,15 @@ allow_reselect: boolean;
 /** If [code]true[/code], right mouse button click can select items. */
 allow_rmb_select: boolean;
 
+/** If [code]true[/code], allows navigating the [ItemList] with letter keys through incremental search. */
+allow_search: boolean;
+
 /** If [code]true[/code], the control will automatically resize the height to fit its content. */
 auto_height: boolean;
+
+/** If [code]true[/code], the control will automatically resize the width to fit its content. */
+auto_width: boolean;
+
 
 /**
  * The width all columns will be adjusted to.
@@ -45,7 +60,7 @@ fixed_column_width: int;
  * If either X or Y component is not greater than zero, icon size won't be affected.
  *
 */
-fixed_icon_size: Vector2;
+fixed_icon_size: Vector2i;
 
 
 /** The icon position, whether above or to the left of the text. See the [enum IconMode] constants. */
@@ -53,6 +68,9 @@ icon_mode: int;
 
 /** The scale of icon applied after [member fixed_icon_size] and transposing takes effect. */
 icon_scale: float;
+
+/** The number of items currently in the list. */
+item_count: int;
 
 /**
  * Maximum columns the list will have.
@@ -72,7 +90,6 @@ max_columns: int;
 */
 max_text_lines: int;
 
-
 /**
  * Whether all columns will have the same width.
  *
@@ -81,95 +98,147 @@ max_text_lines: int;
 */
 same_column_width: boolean;
 
+/** The way which scroll hints (indicators that show that the content can still be scrolled in a certain direction) will be shown. */
+scroll_hint_mode: int;
+
 /** Allows single or multiple item selection. See the [enum SelectMode] constants. */
 select_mode: int;
 
-/** Adds an item to the item list with no text, only an icon. */
-add_icon_item(icon: Texture, selectable?: boolean): void;
+/** The clipping behavior when the text exceeds an item's bounding rectangle. */
+text_overrun_behavior: int;
+
+/** If [code]true[/code], the scroll hint texture will be tiled instead of stretched. See [member scroll_hint_mode]. */
+tile_scroll_hint: boolean;
 
 /**
- * Adds an item to the item list with specified text. Specify an `icon`, or use `null` as the `icon` for a list item with no icon.
+ * If `true`, the control will automatically move items into a new row to fit its content. See also [HFlowContainer] for this behavior.
  *
- * If selectable is `true`, the list item will be selectable.
+ * If `false`, the control will add a horizontal scrollbar to make all items visible.
  *
 */
-add_item(text: string, icon?: Texture, selectable?: boolean): void;
+wraparound_items: boolean;
+
+/** Adds an item to the item list with no text, only an icon. Returns the index of an added item. */
+add_icon_item(): int;
+
+/**
+ * Adds an item to the item list with specified text. Returns the index of an added item.
+ *
+ * Specify an [param icon], or use `null` as the [param icon] for a list item with no icon.
+ *
+ * If [param selectable] is `true`, the list item will be selectable.
+ *
+*/
+add_item(): int;
 
 /** Removes all items from the list. */
 clear(): void;
 
+/** Ensures the item associated with the specified index is not selected. */
+deselect(): void;
+
+/** Ensures there are no items selected. */
+deselect_all(): void;
+
 /** Ensure current selection is visible, adjusting the scroll position as necessary. */
 ensure_current_is_visible(): void;
 
-/**
- * Returns the item index at the given `position`.
- *
- * When there is no item at that point, -1 will be returned if `exact` is `true`, and the closest item index will be returned otherwise.
- *
-*/
-get_item_at_position(position: Vector2, exact?: boolean): int;
-
-/** Returns the number of items currently in the list. */
-get_item_count(): int;
-
-/** Returns the custom background color of the item specified by [code]idx[/code] index. */
-get_item_custom_bg_color(idx: int): Color;
-
-/** Returns the custom foreground color of the item specified by [code]idx[/code] index. */
-get_item_custom_fg_color(idx: int): Color;
-
-/** Returns the icon associated with the specified index. */
-get_item_icon(idx: int): Texture;
-
-/** Returns a [Color] modulating item's icon at the specified index. */
-get_item_icon_modulate(idx: int): Color;
-
-/** Returns the region of item's icon used. The whole icon will be used if the region has no area. */
-get_item_icon_region(idx: int): Rect2;
-
-/** Returns the metadata value of the specified index. */
-get_item_metadata(idx: int): any;
-
-/** Returns the text associated with the specified index. */
-get_item_text(idx: int): string;
-
-/** Returns the tooltip hint associated with the specified index. */
-get_item_tooltip(idx: int): string;
-
-/** Returns an array with the indexes of the selected items. */
-get_selected_items(): PoolIntArray;
+/** Forces an update to the list size based on its items. This happens automatically whenever size of the items, or other relevant settings like [member auto_height], change. The method can be used to trigger the update ahead of next drawing pass. */
+force_update_list_size(): void;
 
 /**
- * Returns the [Object] ID associated with the list.
+ * Returns the horizontal scrollbar.
  *
  * **Warning:** This is a required internal node, removing and freeing it may cause a crash. If you wish to hide it or any of its children, use their [member CanvasItem.visible] property.
  *
 */
-get_v_scroll(): VScrollBar;
+get_h_scroll_bar(): HScrollBar;
+
+/**
+ * Returns the item index at the given [param position].
+ *
+ * When there is no item at that point, -1 will be returned if [param exact] is `true`, and the closest item index will be returned otherwise.
+ *
+ * **Note:** The returned value is unreliable if called right after modifying the [ItemList], before it redraws in the next frame.
+ *
+*/
+get_item_at_position(): int;
+
+/** Returns item's auto translate mode. */
+get_item_auto_translate_mode(): int;
+
+/** Returns the custom background color of the item specified by [param idx] index. */
+get_item_custom_bg_color(): Color;
+
+/** Returns the custom foreground color of the item specified by [param idx] index. */
+get_item_custom_fg_color(): Color;
+
+/** Returns the icon associated with the specified index. */
+get_item_icon(): Texture2D;
+
+/** Returns a [Color] modulating item's icon at the specified index. */
+get_item_icon_modulate(): Color;
+
+/** Returns the region of item's icon used. The whole icon will be used if the region has no area. */
+get_item_icon_region(): Rect2;
+
+/** Returns item's text language code. */
+get_item_language(): string;
+
+/** Returns the metadata value of the specified index. */
+get_item_metadata(): any;
+
+/**
+ * Returns the position and size of the item with the specified index, in the coordinate system of the [ItemList] node. If [param expand] is `true` the last column expands to fill the rest of the row.
+ *
+ * **Note:** The returned value is unreliable if called right after modifying the [ItemList], before it redraws in the next frame.
+ *
+*/
+get_item_rect(): Rect2;
+
+/** Returns the text associated with the specified index. */
+get_item_text(): string;
+
+/** Returns item's text base writing direction. */
+get_item_text_direction(): int;
+
+/** Returns the tooltip hint associated with the specified index. */
+get_item_tooltip(): string;
+
+/** Returns an array with the indexes of the selected items. */
+get_selected_items(): PackedInt32Array;
+
+/**
+ * Returns the vertical scrollbar.
+ *
+ * **Warning:** This is a required internal node, removing and freeing it may cause a crash. If you wish to hide it or any of its children, use their [member CanvasItem.visible] property.
+ *
+*/
+get_v_scroll_bar(): VScrollBar;
 
 /** Returns [code]true[/code] if one or more items are selected. */
 is_anything_selected(): boolean;
 
 /** Returns [code]true[/code] if the item at the specified index is disabled. */
-is_item_disabled(idx: int): boolean;
+is_item_disabled(): boolean;
 
 /** Returns [code]true[/code] if the item icon will be drawn transposed, i.e. the X and Y axes are swapped. */
-is_item_icon_transposed(idx: int): boolean;
+is_item_icon_transposed(): boolean;
 
 /** Returns [code]true[/code] if the item at the specified index is selectable. */
-is_item_selectable(idx: int): boolean;
+is_item_selectable(): boolean;
 
 /** Returns [code]true[/code] if the tooltip is enabled for specified item index. */
-is_item_tooltip_enabled(idx: int): boolean;
+is_item_tooltip_enabled(): boolean;
 
 /** Returns [code]true[/code] if the item at the specified index is currently selected. */
-is_selected(idx: int): boolean;
+is_selected(): boolean;
 
-/** Moves item from index [code]from_idx[/code] to [code]to_idx[/code]. */
-move_item(from_idx: int, to_idx: int): void;
+/** Moves item from index [param from_idx] to [param to_idx]. */
+move_item(): void;
 
-/** Removes the item specified by [code]idx[/code] index from the list. */
-remove_item(idx: int): void;
+/** Removes the item specified by [param idx] index from the list. */
+remove_item(): void;
 
 /**
  * Select the item at the specified index.
@@ -177,57 +246,65 @@ remove_item(idx: int): void;
  * **Note:** This method does not trigger the item selection signal.
  *
 */
-select(idx: int, single?: boolean): void;
+select(): void;
 
-/** Sets the background color of the item specified by [code]idx[/code] index to the specified [Color]. */
-set_item_custom_bg_color(idx: int, custom_bg_color: Color): void;
+/**
+ * Sets the auto translate mode of the item associated with the specified index.
+ *
+ * Items use [constant Node.AUTO_TRANSLATE_MODE_INHERIT] by default, which uses the same auto translate mode as the [ItemList] itself.
+ *
+*/
+set_item_auto_translate_mode(): void;
 
-/** Sets the foreground color of the item specified by [code]idx[/code] index to the specified [Color]. */
-set_item_custom_fg_color(idx: int, custom_fg_color: Color): void;
+/** Sets the background color of the item specified by [param idx] index to the specified [Color]. */
+set_item_custom_bg_color(): void;
+
+/** Sets the foreground color of the item specified by [param idx] index to the specified [Color]. */
+set_item_custom_fg_color(): void;
 
 /**
  * Disables (or enables) the item at the specified index.
  *
- * Disabled items cannot be selected and do not trigger activation signals (when double-clicking or pressing Enter).
+ * Disabled items cannot be selected and do not trigger activation signals (when double-clicking or pressing [kbd]Enter[/kbd]).
  *
 */
-set_item_disabled(idx: int, disabled: boolean): void;
+set_item_disabled(): void;
 
-/** Sets (or replaces) the icon's [Texture] associated with the specified index. */
-set_item_icon(idx: int, icon: Texture): void;
+/** Sets (or replaces) the icon's [Texture2D] associated with the specified index. */
+set_item_icon(): void;
 
 /** Sets a modulating [Color] of the item associated with the specified index. */
-set_item_icon_modulate(idx: int, modulate: Color): void;
+set_item_icon_modulate(): void;
 
 /** Sets the region of item's icon used. The whole icon will be used if the region has no area. */
-set_item_icon_region(idx: int, rect: Rect2): void;
+set_item_icon_region(): void;
 
 /** Sets whether the item icon will be drawn transposed. */
-set_item_icon_transposed(idx: int, transposed: boolean): void;
+set_item_icon_transposed(): void;
+
+/** Sets the language code of the text for the item at the given index to [param language]. This is used for line-breaking and text shaping algorithms. If [param language] is empty, the current locale is used. */
+set_item_language(): void;
 
 /** Sets a value (of any type) to be stored with the item associated with the specified index. */
-set_item_metadata(idx: int, metadata: any): void;
+set_item_metadata(): void;
 
 /** Allows or disallows selection of the item associated with the specified index. */
-set_item_selectable(idx: int, selectable: boolean): void;
+set_item_selectable(): void;
 
 /** Sets text of the item associated with the specified index. */
-set_item_text(idx: int, text: string): void;
+set_item_text(): void;
+
+/** Sets item's text base writing direction. */
+set_item_text_direction(): void;
 
 /** Sets the tooltip hint for the item associated with the specified index. */
-set_item_tooltip(idx: int, tooltip: string): void;
+set_item_tooltip(): void;
 
 /** Sets whether the tooltip hint is enabled for specified item index. */
-set_item_tooltip_enabled(idx: int, enable: boolean): void;
+set_item_tooltip_enabled(): void;
 
 /** Sorts items in the list by their text. */
 sort_items_by_text(): void;
-
-/** Ensures the item associated with the specified index is not selected. */
-unselect(idx: int): void;
-
-/** Ensures there are no items selected. */
-unselect_all(): void;
 
   connect<T extends SignalsOf<ItemList>>(signal: T, method: SignalFunction<ItemList[T]>): number;
 
@@ -252,55 +329,77 @@ static ICON_MODE_LEFT: any;
 static SELECT_SINGLE: any;
 
 /**
- * Allows selecting multiple items by holding Ctrl or Shift.
+ * Allows selecting multiple items by holding [kbd]Ctrl[/kbd] or [kbd]Shift[/kbd].
  *
 */
 static SELECT_MULTI: any;
 
-
 /**
- * Triggered when specified list item is activated via double-clicking or by pressing Enter.
+ * Allows selecting multiple items by toggling them on and off.
  *
 */
-$item_activated: Signal<(index: int) => void>
+static SELECT_TOGGLE: any;
 
 /**
- * Triggered when specified list item has been selected via right mouse clicking.
- *
- * The click position is also provided to allow appropriate popup of context menus at the correct location.
- *
- * [member allow_rmb_select] must be enabled.
+ * Scroll hints will never be shown.
  *
 */
-$item_rmb_selected: Signal<(index: int, at_position: Vector2) => void>
+static SCROLL_HINT_MODE_DISABLED: any;
 
 /**
- * Triggered when specified item has been selected.
+ * Scroll hints will be shown at the top and bottom.
+ *
+*/
+static SCROLL_HINT_MODE_BOTH: any;
+
+/**
+ * Only the top scroll hint will be shown.
+ *
+*/
+static SCROLL_HINT_MODE_TOP: any;
+
+/**
+ * Only the bottom scroll hint will be shown.
+ *
+*/
+static SCROLL_HINT_MODE_BOTTOM: any;
+
+
+/**
+ * Emitted when any mouse click is issued within the rect of the list but on empty space.
+ *
+ * [param at_position] is the click position in this control's local coordinate system.
+ *
+*/
+$empty_clicked: Signal<() => void>
+
+/**
+ * Emitted when specified list item is activated via double-clicking or by pressing [kbd]Enter[/kbd].
+ *
+*/
+$item_activated: Signal<() => void>
+
+/**
+ * Emitted when specified list item has been clicked with any mouse button.
+ *
+ * [param at_position] is the click position in this control's local coordinate system.
+ *
+*/
+$item_clicked: Signal<() => void>
+
+/**
+ * Emitted when specified item has been selected. Only applicable in single selection mode.
  *
  * [member allow_reselect] must be enabled to reselect an item.
  *
 */
-$item_selected: Signal<(index: int) => void>
+$item_selected: Signal<() => void>
 
 /**
- * Triggered when a multiple selection is altered on a list allowing multiple selection.
+ * Emitted when a multiple selection is altered on a list allowing multiple selection.
  *
 */
-$multi_selected: Signal<(index: int, selected: boolean) => void>
-
-/**
- * Triggered when a left mouse click is issued within the rect of the list but on empty space.
- *
-*/
-$nothing_selected: Signal<() => void>
-
-/**
- * Triggered when a right mouse click is issued within the rect of the list but on empty space.
- *
- * [member allow_rmb_select] must be enabled.
- *
-*/
-$rmb_clicked: Signal<(at_position: Vector2) => void>
+$multi_selected: Signal<() => void>
 
 }
 

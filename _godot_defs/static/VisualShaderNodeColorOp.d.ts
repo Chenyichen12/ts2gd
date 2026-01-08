@@ -14,7 +14,7 @@ declare class VisualShaderNodeColorOp extends VisualShaderNode  {
   static "new"(): VisualShaderNodeColorOp 
 
 
-/** An operator to be applied to the inputs. See [enum Operator] for options. */
+/** An operator to be applied to the inputs. */
 operator: int;
 
 
@@ -77,13 +77,13 @@ static OP_LIGHTEN: any;
  * @example 
  * 
  * for (int i = 0; i < 3; i++) {
- *     float base = a**;
- *     float blend = b**;
- *     if (base < 0.5) {
- *         result** = 2.0 * base * blend;
- *     } else {
- *         result** = 1.0 - 2.0 * (1.0 - blend) * (1.0 - base);
- *     }
+ * 	float base = a**;
+ * 	float blend = b**;
+ * 	if (base < 0.5) {
+ * 		result** = 2.0 * base * blend;
+ * 	} else {
+ * 		result** = 1.0 - 2.0 * (1.0 - blend) * (1.0 - base);
+ * 	}
  * }
  * @summary 
  * 
@@ -121,13 +121,13 @@ static OP_BURN: any;
  * @example 
  * 
  * for (int i = 0; i < 3; i++) {
- *     float base = a**;
- *     float blend = b**;
- *     if (base < 0.5) {
- *         result** = base * (blend + 0.5);
- *     } else {
- *         result** = 1.0 - (1.0 - base) * (1.0 - (blend - 0.5));
- *     }
+ * 	float base = a**;
+ * 	float blend = b**;
+ * 	if (base < 0.5) {
+ * 		result** = base * (blend + 0.5);
+ * 	} else {
+ * 		result** = 1.0 - (1.0 - base) * (1.0 - (blend - 0.5));
+ * 	}
  * }
  * @summary 
  * 
@@ -141,19 +141,25 @@ static OP_SOFT_LIGHT: any;
  * @example 
  * 
  * for (int i = 0; i < 3; i++) {
- *     float base = a**;
- *     float blend = b**;
- *     if (base < 0.5) {
- *         result** = base * (2.0 * blend);
- *     } else {
- *         result** = 1.0 - (1.0 - base) * (1.0 - 2.0 * (blend - 0.5));
- *     }
+ * 	float base = a**;
+ * 	float blend = b**;
+ * 	if (base < 0.5) {
+ * 		result** = base * (2.0 * blend);
+ * 	} else {
+ * 		result** = 1.0 - (1.0 - base) * (1.0 - 2.0 * (blend - 0.5));
+ * 	}
  * }
  * @summary 
  * 
  *
 */
 static OP_HARD_LIGHT: any;
+
+/**
+ * Represents the size of the [enum Operator] enum.
+ *
+*/
+static OP_MAX: any;
 
 
 

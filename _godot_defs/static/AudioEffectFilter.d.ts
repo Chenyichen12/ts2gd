@@ -17,6 +17,8 @@ declare class AudioEffectFilter extends AudioEffect  {
 /** Threshold frequency for the filter, in Hz. */
 cutoff_hz: float;
 
+/** Steepness of the cutoff curve in dB per octave, also known as the order of the filter. Higher orders have a more aggressive cutoff. */
+db: int;
 
 /** Gain amount of the frequencies after the filter. */
 gain: float;
@@ -30,16 +32,28 @@ resonance: float;
 
 
 
-/** No documentation provided. */
+/**
+ * Cutting off at 6dB per octave.
+ *
+*/
 static FILTER_6DB: any;
 
-/** No documentation provided. */
+/**
+ * Cutting off at 12dB per octave.
+ *
+*/
 static FILTER_12DB: any;
 
-/** No documentation provided. */
+/**
+ * Cutting off at 18dB per octave.
+ *
+*/
 static FILTER_18DB: any;
 
-/** No documentation provided. */
+/**
+ * Cutting off at 24dB per octave.
+ *
+*/
 static FILTER_24DB: any;
 
 

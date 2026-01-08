@@ -2,9 +2,7 @@
 /**
  * CPU-based 2D particle node used to create a variety of particle systems and effects.
  *
- * See also [Particles2D], which provides the same functionality with hardware acceleration, but may not run on older devices.
- *
- * **Note:** Unlike [Particles2D], the visibility rect is generated on-the-fly and doesn't need to be configured by the user.
+ * See also [GPUParticles2D], which provides the same functionality with hardware acceleration, but may not run on older devices.
  *
 */
 declare class CPUParticles2D extends Node2D  {
@@ -13,109 +11,113 @@ declare class CPUParticles2D extends Node2D  {
 /**
  * CPU-based 2D particle node used to create a variety of particle systems and effects.
  *
- * See also [Particles2D], which provides the same functionality with hardware acceleration, but may not run on older devices.
- *
- * **Note:** Unlike [Particles2D], the visibility rect is generated on-the-fly and doesn't need to be configured by the user.
+ * See also [GPUParticles2D], which provides the same functionality with hardware acceleration, but may not run on older devices.
  *
 */
   new(): CPUParticles2D; 
   static "new"(): CPUParticles2D 
 
 
-/**
- * The number of particles emitted in one emission cycle (corresponding to the [member lifetime]).
- *
- * **Note:** Changing [member amount] will reset the particle emission, therefore removing all particles that were already emitted before changing [member amount].
- *
-*/
+/** Number of particles emitted in one emission cycle. */
 amount: int;
 
-/** Initial rotation applied to each particle, in degrees. */
-angle: float;
-
-/** Each particle's rotation will be animated along this [Curve]. */
+/** Each particle's rotation will be animated along this [Curve]. Should be a unit [Curve]. */
 angle_curve: Curve;
 
-/** Rotation randomness ratio. */
-angle_random: float;
+/** Maximum initial rotation applied to each particle, in degrees. */
+angle_max: float;
 
-/** Initial angular velocity applied to each particle. Sets the speed of rotation of the particle. */
-angular_velocity: float;
+/** Minimum equivalent of [member angle_max]. */
+angle_min: float;
 
-/** Each particle's angular velocity will vary along this [Curve]. */
+/** Each particle's angular velocity will vary along this [Curve]. Should be a unit [Curve]. */
 angular_velocity_curve: Curve;
 
-/** Angular velocity randomness ratio. */
-angular_velocity_random: float;
+/** Maximum initial angular velocity (rotation speed) applied to each particle in [i]degrees[/i] per second. */
+angular_velocity_max: float;
 
-/** Particle animation offset. */
-anim_offset: float;
+/** Minimum equivalent of [member angular_velocity_max]. */
+angular_velocity_min: float;
 
-/** Each particle's animation offset will vary along this [Curve]. */
+/** Each particle's animation offset will vary along this [Curve]. Should be a unit [Curve]. */
 anim_offset_curve: Curve;
 
-/** Animation offset randomness ratio. */
-anim_offset_random: float;
+/** Maximum animation offset that corresponds to frame index in the texture. [code]0[/code] is the first frame, [code]1[/code] is the last one. See [member CanvasItemMaterial.particles_animation]. */
+anim_offset_max: float;
 
-/** Particle animation speed. */
-anim_speed: float;
+/** Minimum equivalent of [member anim_offset_max]. */
+anim_offset_min: float;
 
-/** Each particle's animation speed will vary along this [Curve]. */
+/** Each particle's animation speed will vary along this [Curve]. Should be a unit [Curve]. */
 anim_speed_curve: Curve;
 
-/** Animation speed randomness ratio. */
-anim_speed_random: float;
+/**
+ * Maximum particle animation speed. Animation speed of `1` means that the particles will make full `0` to `1` offset cycle during lifetime, `2` means `2` cycles etc.
+ *
+ * With animation speed greater than `1`, remember to enable [member CanvasItemMaterial.particles_anim_loop] property if you want the animation to repeat.
+ *
+*/
+anim_speed_max: float;
+
+/** Minimum equivalent of [member anim_speed_max]. */
+anim_speed_min: float;
 
 /** Each particle's initial color. If [member texture] is defined, it will be multiplied by this color. */
 color: Color;
 
-/** Each particle's color will vary along this [Gradient] (multiplied with [member color]). */
+/** Each particle's initial color will vary along this [Gradient] (multiplied with [member color]). */
+color_initial_ramp: Gradient;
+
+/** Each particle's color will vary along this [Gradient] over its lifetime (multiplied with [member color]). */
 color_ramp: Gradient;
 
-/** The rate at which particles lose velocity. */
-damping: float;
-
-/** Damping will vary along this [Curve]. */
+/** Damping will vary along this [Curve]. Should be a unit [Curve]. */
 damping_curve: Curve;
 
-/** Damping randomness ratio. */
-damping_random: float;
+/** The maximum rate at which particles lose velocity. For example value of [code]100[/code] means that the particle will go from [code]100[/code] velocity to [code]0[/code] in [code]1[/code] second. */
+damping_max: float;
+
+/** Minimum equivalent of [member damping_max]. */
+damping_min: float;
 
 /** Unit vector specifying the particles' emission direction. */
 direction: Vector2;
 
-/** Particle draw order. Uses [enum DrawOrder] values. */
+/** Particle draw order. */
 draw_order: int;
 
 /** Sets the [Color]s to modulate particles by when using [constant EMISSION_SHAPE_POINTS] or [constant EMISSION_SHAPE_DIRECTED_POINTS]. */
-emission_colors: PoolColorArray;
+emission_colors: PackedColorArray;
 
 /** Sets the direction the particles will be emitted in when using [constant EMISSION_SHAPE_DIRECTED_POINTS]. */
-emission_normals: PoolVector2Array;
+emission_normals: PackedVector2Array;
 
 /** Sets the initial positions to spawn particles when using [constant EMISSION_SHAPE_POINTS] or [constant EMISSION_SHAPE_DIRECTED_POINTS]. */
-emission_points: PoolVector2Array;
+emission_points: PackedVector2Array;
 
 /** The rectangle's extents if [member emission_shape] is set to [constant EMISSION_SHAPE_RECTANGLE]. */
 emission_rect_extents: Vector2;
 
-/** Particles will be emitted inside this region. See [enum EmissionShape] for possible values. */
+/** The ring's inner radius if [member emission_shape] is set to [constant EMISSION_SHAPE_RING]. */
+emission_ring_inner_radius: float;
+
+/** The ring's outer radius if [member emission_shape] is set to [constant EMISSION_SHAPE_RING]. */
+emission_ring_radius: float;
+
+/** Particles will be emitted inside this region. */
 emission_shape: int;
 
 /** The sphere's radius if [member emission_shape] is set to [constant EMISSION_SHAPE_SPHERE]. */
 emission_sphere_radius: float;
 
-/** If [code]true[/code], particles are being emitted. */
+/** If [code]true[/code], particles are being emitted. [member emitting] can be used to start and stop particles from emitting. However, if [member one_shot] is [code]true[/code] setting [member emitting] to [code]true[/code] will not restart the emission cycle until after all active particles finish processing. You can use the [signal finished] signal to be notified once all active particles finish processing. */
 emitting: boolean;
 
 /** How rapidly particles in an emission cycle are emitted. If greater than [code]0[/code], there will be a gap in emissions before the next cycle begins. */
 explosiveness: float;
 
-/** The particle system's frame rate is fixed to a value. For instance, changing the value to 2 will make the particles render at 2 frames per second. Note this does not slow down the simulation of the particle system itself. */
+/** The particle system's frame rate is fixed to a value. For example, changing the value to 2 will make the particles render at 2 frames per second. Note this does not slow down the simulation of the particle system itself. */
 fixed_fps: int;
-
-/** Align Y axis of particle with the direction of its velocity. */
-flag_align_y: boolean;
 
 /** If [code]true[/code], results in fractional delta calculation which has a smoother particles display effect. */
 fract_delta: boolean;
@@ -123,130 +125,164 @@ fract_delta: boolean;
 /** Gravity applied to every particle. */
 gravity: Vector2;
 
-/** Initial hue variation applied to each particle. */
-hue_variation: float;
-
-/** Each particle's hue will vary along this [Curve]. */
+/** Each particle's hue will vary along this [Curve]. Should be a unit [Curve]. */
 hue_variation_curve: Curve;
 
-/** Hue variation randomness ratio. */
-hue_variation_random: float;
+/** Maximum initial hue variation applied to each particle. It will shift the particle color's hue. */
+hue_variation_max: float;
 
-/** Initial velocity magnitude for each particle. Direction comes from [member spread] and the node's orientation. */
-initial_velocity: float;
+/** Minimum equivalent of [member hue_variation_max]. */
+hue_variation_min: float;
 
-/** Initial velocity randomness ratio. */
-initial_velocity_random: float;
+/** Maximum initial velocity magnitude for each particle. Direction comes from [member direction] and [member spread]. */
+initial_velocity_max: float;
 
-/** The amount of time each particle will exist (in seconds). */
+/** Minimum equivalent of [member initial_velocity_max]. */
+initial_velocity_min: float;
+
+/** Amount of time each particle will exist. */
 lifetime: float;
 
 /** Particle lifetime randomness ratio. */
 lifetime_randomness: float;
 
-/** Linear acceleration applied to each particle in the direction of motion. */
-linear_accel: float;
-
-/** Each particle's linear acceleration will vary along this [Curve]. */
+/** Each particle's linear acceleration will vary along this [Curve]. Should be a unit [Curve]. */
 linear_accel_curve: Curve;
 
-/** Linear acceleration randomness ratio. */
-linear_accel_random: float;
+/** Maximum linear acceleration applied to each particle in the direction of motion. */
+linear_accel_max: float;
 
-/** If [code]true[/code], particles use the parent node's coordinate space. If [code]false[/code], they use global coordinates. */
+/** Minimum equivalent of [member linear_accel_max]. */
+linear_accel_min: float;
+
+/** If [code]true[/code], particles use the parent node's coordinate space (known as local coordinates). This will cause particles to move and rotate along the [CPUParticles2D] node (and its parents) when it is moved or rotated. If [code]false[/code], particles use global coordinates; they will not move or rotate along the [CPUParticles2D] node (and its parents) when it is moved or rotated. */
 local_coords: boolean;
-
-/**
- * Normal map to be used for the [member texture] property.
- *
- * **Note:** Godot expects the normal map to use X+, Y-, and Z+ coordinates. See [url=http://wiki.polycount.com/wiki/Normal_Map_Technical_Details#Common_Swizzle_Coordinates]this page[/url] for a comparison of normal map coordinates expected by popular engines.
- *
-*/
-normalmap: Texture;
 
 /** If [code]true[/code], only one emission cycle occurs. If set [code]true[/code] during a cycle, emission will stop at the cycle's end. */
 one_shot: boolean;
 
-/** Orbital velocity applied to each particle. Makes the particles circle around origin. Specified in number of full rotations around origin per second. */
-orbit_velocity: float;
-
-/** Each particle's orbital velocity will vary along this [Curve]. */
+/** Each particle's orbital velocity will vary along this [Curve]. Should be a unit [Curve]. */
 orbit_velocity_curve: Curve;
 
-/** Orbital velocity randomness ratio. */
-orbit_velocity_random: float;
+/** Maximum orbital velocity applied to each particle. Makes the particles circle around origin. Specified in number of full rotations around origin per second. */
+orbit_velocity_max: float;
+
+/** Minimum equivalent of [member orbit_velocity_max]. */
+orbit_velocity_min: float;
+
+/** Align Y axis of particle with the direction of its velocity. */
+particle_flag_align_y: boolean;
+
 
 /** Particle system starts as if it had already run for this many seconds. */
 preprocess: float;
 
-/** Radial acceleration applied to each particle. Makes particle accelerate away from origin. */
-radial_accel: float;
-
-/** Each particle's radial acceleration will vary along this [Curve]. */
+/** Each particle's radial acceleration will vary along this [Curve]. Should be a unit [Curve]. */
 radial_accel_curve: Curve;
 
-/** Radial acceleration randomness ratio. */
-radial_accel_random: float;
+/** Maximum radial acceleration applied to each particle. Makes particle accelerate away from the origin or towards it if negative. */
+radial_accel_max: float;
+
+/** Minimum equivalent of [member radial_accel_max]. */
+radial_accel_min: float;
 
 /** Emission lifetime randomness ratio. */
 randomness: float;
 
-/** Initial scale applied to each particle. */
-scale_amount: float;
-
-/** Each particle's scale will vary along this [Curve]. */
+/** Each particle's scale will vary along this [Curve]. Should be a unit [Curve]. */
 scale_amount_curve: Curve;
 
-/** Scale randomness ratio. */
-scale_amount_random: float;
+/** Maximum initial scale applied to each particle. */
+scale_amount_max: float;
+
+/** Minimum equivalent of [member scale_amount_max]. */
+scale_amount_min: float;
+
+/**
+ * Each particle's horizontal scale will vary along this [Curve]. Should be a unit [Curve].
+ *
+ * [member split_scale] must be enabled.
+ *
+*/
+scale_curve_x: Curve;
+
+/**
+ * Each particle's vertical scale will vary along this [Curve]. Should be a unit [Curve].
+ *
+ * [member split_scale] must be enabled.
+ *
+*/
+scale_curve_y: Curve;
+
+/** Sets the random seed used by the particle system. Only effective if [member use_fixed_seed] is [code]true[/code]. */
+seed: int;
 
 /** Particle system's running speed scaling ratio. A value of [code]0[/code] can be used to pause the particles. */
 speed_scale: float;
 
+/** If [code]true[/code], the scale curve will be split into x and y components. See [member scale_curve_x] and [member scale_curve_y]. */
+split_scale: boolean;
+
 /** Each particle's initial direction range from [code]+spread[/code] to [code]-spread[/code] degrees. */
 spread: float;
 
-/** Tangential acceleration applied to each particle. Tangential acceleration is perpendicular to the particle's velocity giving the particles a swirling motion. */
-tangential_accel: float;
-
-/** Each particle's tangential acceleration will vary along this [Curve]. */
+/** Each particle's tangential acceleration will vary along this [Curve]. Should be a unit [Curve]. */
 tangential_accel_curve: Curve;
 
-/** Tangential acceleration randomness ratio. */
-tangential_accel_random: float;
+/** Maximum tangential acceleration applied to each particle. Tangential acceleration is perpendicular to the particle's velocity giving the particles a swirling motion. */
+tangential_accel_max: float;
+
+/** Minimum equivalent of [member tangential_accel_max]. */
+tangential_accel_min: float;
 
 /** Particle texture. If [code]null[/code], particles will be squares. */
-texture: Texture;
+texture: Texture2D;
 
-/** Sets this node's properties to match a given [Particles2D] node with an assigned [ParticlesMaterial]. */
-convert_from_particles(particles: Node): void;
+/** If [code]true[/code], particles will use the same seed for every simulation using the seed defined in [member seed]. This is useful for situations where the visual outcome should be consistent across replays, for example when using Movie Maker mode. */
+use_fixed_seed: boolean;
 
-/** Returns the base value of the parameter specified by [enum Parameter]. */
-get_param(param: int): float;
+/** Sets this node's properties to match a given [GPUParticles2D] node with an assigned [ParticleProcessMaterial]. */
+convert_from_particles(): void;
 
 /** Returns the [Curve] of the parameter specified by [enum Parameter]. */
-get_param_curve(param: int): Curve;
+get_param_curve(): Curve;
 
-/** Returns the randomness factor of the parameter specified by [enum Parameter]. */
-get_param_randomness(param: int): float;
+/** Returns the maximum value range for the given parameter. */
+get_param_max(): float;
 
-/** Returns the enabled state of the given flag (see [enum Flags] for options). */
-get_particle_flag(flag: int): boolean;
+/** Returns the minimum value range for the given parameter. */
+get_param_min(): float;
 
-/** Restarts the particle emitter. */
+/** Returns the enabled state of the given particle flag. */
+get_particle_flag(): boolean;
+
+/**
+ * Requests the particles to process for extra process time during a single frame.
+ *
+ * Useful for particle playback, if used in combination with [member use_fixed_seed] or by calling [method restart] with parameter `keep_seed` set to `true`.
+ *
+*/
+request_particles_process(): void;
+
+/**
+ * Restarts the particle emitter.
+ *
+ * If [param keep_seed] is `true`, the current random seed will be preserved. Useful for seeking and playback.
+ *
+*/
 restart(): void;
 
-/** Sets the base value of the parameter specified by [enum Parameter]. */
-set_param(param: int, value: float): void;
+/** Sets the [Curve] of the parameter specified by [enum Parameter]. Should be a unit [Curve]. */
+set_param_curve(): void;
 
-/** Sets the [Curve] of the parameter specified by [enum Parameter]. */
-set_param_curve(param: int, curve: Curve): void;
+/** Sets the maximum value for the given parameter. */
+set_param_max(): void;
 
-/** Sets the randomness factor of the parameter specified by [enum Parameter]. */
-set_param_randomness(param: int, randomness: float): void;
+/** Sets the minimum value for the given parameter. */
+set_param_min(): void;
 
-/** Enables or disables the given flag (see [enum Flags] for options). */
-set_particle_flag(flag: int, enable: boolean): void;
+/** Enables or disables the given particle flag. */
+set_particle_flag(): void;
 
   connect<T extends SignalsOf<CPUParticles2D>>(signal: T, method: SignalFunction<CPUParticles2D[T]>): number;
 
@@ -259,79 +295,79 @@ set_particle_flag(flag: int, enable: boolean): void;
 static DRAW_ORDER_INDEX: any;
 
 /**
- * Particles are drawn in order of remaining lifetime.
+ * Particles are drawn in order of remaining lifetime. In other words, the particle with the highest lifetime is drawn at the front.
  *
 */
 static DRAW_ORDER_LIFETIME: any;
 
 /**
- * Use with [method set_param], [method set_param_randomness], and [method set_param_curve] to set initial velocity properties.
+ * Use with [method set_param_min], [method set_param_max], and [method set_param_curve] to set initial velocity properties.
  *
 */
 static PARAM_INITIAL_LINEAR_VELOCITY: any;
 
 /**
- * Use with [method set_param], [method set_param_randomness], and [method set_param_curve] to set angular velocity properties.
+ * Use with [method set_param_min], [method set_param_max], and [method set_param_curve] to set angular velocity properties.
  *
 */
 static PARAM_ANGULAR_VELOCITY: any;
 
 /**
- * Use with [method set_param], [method set_param_randomness], and [method set_param_curve] to set orbital velocity properties.
+ * Use with [method set_param_min], [method set_param_max], and [method set_param_curve] to set orbital velocity properties.
  *
 */
 static PARAM_ORBIT_VELOCITY: any;
 
 /**
- * Use with [method set_param], [method set_param_randomness], and [method set_param_curve] to set linear acceleration properties.
+ * Use with [method set_param_min], [method set_param_max], and [method set_param_curve] to set linear acceleration properties.
  *
 */
 static PARAM_LINEAR_ACCEL: any;
 
 /**
- * Use with [method set_param], [method set_param_randomness], and [method set_param_curve] to set radial acceleration properties.
+ * Use with [method set_param_min], [method set_param_max], and [method set_param_curve] to set radial acceleration properties.
  *
 */
 static PARAM_RADIAL_ACCEL: any;
 
 /**
- * Use with [method set_param], [method set_param_randomness], and [method set_param_curve] to set tangential acceleration properties.
+ * Use with [method set_param_min], [method set_param_max], and [method set_param_curve] to set tangential acceleration properties.
  *
 */
 static PARAM_TANGENTIAL_ACCEL: any;
 
 /**
- * Use with [method set_param], [method set_param_randomness], and [method set_param_curve] to set damping properties.
+ * Use with [method set_param_min], [method set_param_max], and [method set_param_curve] to set damping properties.
  *
 */
 static PARAM_DAMPING: any;
 
 /**
- * Use with [method set_param], [method set_param_randomness], and [method set_param_curve] to set angle properties.
+ * Use with [method set_param_min], [method set_param_max], and [method set_param_curve] to set angle properties.
  *
 */
 static PARAM_ANGLE: any;
 
 /**
- * Use with [method set_param], [method set_param_randomness], and [method set_param_curve] to set scale properties.
+ * Use with [method set_param_min], [method set_param_max], and [method set_param_curve] to set scale properties.
  *
 */
 static PARAM_SCALE: any;
 
 /**
- * Use with [method set_param], [method set_param_randomness], and [method set_param_curve] to set hue variation properties.
+ * Use with [method set_param_min], [method set_param_max], and [method set_param_curve] to set hue variation properties.
  *
 */
 static PARAM_HUE_VARIATION: any;
 
 /**
- * Use with [method set_param], [method set_param_randomness], and [method set_param_curve] to set animation speed properties.
+ * Use with [method set_param_min], [method set_param_max], and [method set_param_curve] to set animation speed properties.
  *
 */
 static PARAM_ANIM_SPEED: any;
 
 /**
- * Use with [method set_param], [method set_param_randomness], and [method set_param_curve] to set animation offset properties.
+ * Use with [method set_param_min], [method set_param_max], and [method set_param_curve] to set animation offset properties.
  *
 */
 static PARAM_ANIM_OFFSET: any;
@@ -343,28 +379,28 @@ static PARAM_ANIM_OFFSET: any;
 static PARAM_MAX: any;
 
 /**
- * Use with [method set_particle_flag] to set [member flag_align_y].
+ * Use with [method set_particle_flag] to set [member particle_flag_align_y].
  *
 */
-static FLAG_ALIGN_Y_TO_VELOCITY: any;
+static PARTICLE_FLAG_ALIGN_Y_TO_VELOCITY: any;
 
 /**
  * Present for consistency with 3D particle nodes, not used in 2D.
  *
 */
-static FLAG_ROTATE_Y: any;
+static PARTICLE_FLAG_ROTATE_Y: any;
 
 /**
  * Present for consistency with 3D particle nodes, not used in 2D.
  *
 */
-static FLAG_DISABLE_Z: any;
+static PARTICLE_FLAG_DISABLE_Z: any;
 
 /**
- * Represents the size of the [enum Flags] enum.
+ * Represents the size of the [enum ParticleFlags] enum.
  *
 */
-static FLAG_MAX: any;
+static PARTICLE_FLAG_MAX: any;
 
 /**
  * All particles will be emitted from a single point.
@@ -373,10 +409,16 @@ static FLAG_MAX: any;
 static EMISSION_SHAPE_POINT: any;
 
 /**
- * Particles will be emitted on the surface of a sphere flattened to two dimensions.
+ * Particles will be emitted in the volume of a sphere flattened to two dimensions.
  *
 */
 static EMISSION_SHAPE_SPHERE: any;
+
+/**
+ * Particles will be emitted on the surface of a sphere flattened to two dimensions.
+ *
+*/
+static EMISSION_SHAPE_SPHERE_SURFACE: any;
 
 /**
  * Particles will be emitted in the area of a rectangle.
@@ -397,12 +439,23 @@ static EMISSION_SHAPE_POINTS: any;
 static EMISSION_SHAPE_DIRECTED_POINTS: any;
 
 /**
+ * Particles will be emitted in the area of a ring parameterized by its outer and inner radius.
+ *
+*/
+static EMISSION_SHAPE_RING: any;
+
+/**
  * Represents the size of the [enum EmissionShape] enum.
  *
 */
 static EMISSION_SHAPE_MAX: any;
 
 
+/**
+ * Emitted when all active particles have finished processing. When [member one_shot] is disabled, particles will process continuously, so this is never emitted.
+ *
+*/
+$finished: Signal<() => void>
 
 }
 

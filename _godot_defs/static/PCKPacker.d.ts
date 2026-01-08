@@ -4,17 +4,27 @@
  *
  * @example 
  * 
+ * 
  * var packer = PCKPacker.new()
  * packer.pck_start("test.pck")
  * packer.add_file("res://text.txt", "text.txt")
  * packer.flush()
+ * 
+ * 
+ * var packer = new PckPacker();
+ * packer.PckStart("test.pck");
+ * packer.AddFile("res://text.txt", "text.txt");
+ * packer.Flush();
+ * 
  * @summary 
  * 
  *
  * The above [PCKPacker] creates package `test.pck`, then adds a file named `text.txt` at the root of the package.
  *
+ * **Note:** PCK is Godot's own pack file format. To create ZIP archives that can be read by any program, use [ZIPPacker] instead.
+ *
 */
-declare class PCKPacker extends Reference  {
+declare class PCKPacker extends RefCounted  {
 
   
 /**
@@ -22,14 +32,24 @@ declare class PCKPacker extends Reference  {
  *
  * @example 
  * 
+ * 
  * var packer = PCKPacker.new()
  * packer.pck_start("test.pck")
  * packer.add_file("res://text.txt", "text.txt")
  * packer.flush()
+ * 
+ * 
+ * var packer = new PckPacker();
+ * packer.PckStart("test.pck");
+ * packer.AddFile("res://text.txt", "text.txt");
+ * packer.Flush();
+ * 
  * @summary 
  * 
  *
  * The above [PCKPacker] creates package `test.pck`, then adds a file named `text.txt` at the root of the package.
+ *
+ * **Note:** PCK is Godot's own pack file format. To create ZIP archives that can be read by any program, use [ZIPPacker] instead.
  *
 */
   new(): PCKPacker; 
@@ -37,14 +57,22 @@ declare class PCKPacker extends Reference  {
 
 
 
-/** Adds the [code]source_path[/code] file to the current PCK package at the [code]pck_path[/code] internal path (should start with [code]res://[/code]). */
-add_file(pck_path: string, source_path: string): int;
+/** Adds the [param source_path] file to the current PCK package at the [param target_path] internal path. The [code]res://[/code] prefix for [param target_path] is optional and stripped internally. File content is immediately written to the PCK. */
+add_file(): int;
 
-/** Writes the files specified using all [method add_file] calls since the last flush. If [code]verbose[/code] is [code]true[/code], a list of files added will be printed to the console for easier debugging. */
-flush(verbose?: boolean): int;
+/** Registers a file removal of the [param target_path] internal path to the PCK. This is mainly used for patches. If the file at this path has been loaded from a previous PCK, it will be removed. The [code]res://[/code] prefix for [param target_path] is optional and stripped internally. */
+add_file_removal(): int;
 
-/** Creates a new PCK file with the name [code]pck_name[/code]. The [code].pck[/code] file extension isn't added automatically, so it should be part of [code]pck_name[/code] (even though it's not required). */
-pck_start(pck_name: string, alignment?: int): int;
+/**
+ * Writes the file directory and closes the PCK. If [param verbose] is `true`, a list of files added will be printed to the console for easier debugging.
+ *
+ * **Note:** [PCKPacker] will automatically flush when it's freed, which happens when it goes out of scope or when it gets assigned with `null`. In C# the reference must be disposed after use, either with the `using` statement or by calling the `Dispose` method directly.
+ *
+*/
+flush(): int;
+
+/** Creates a new PCK file at the file path [param pck_path]. The [code].pck[/code] file extension isn't added automatically, so it should be part of [param pck_path] (even though it's not required). */
+pck_start(): int;
 
   connect<T extends SignalsOf<PCKPacker>>(signal: T, method: SignalFunction<PCKPacker[T]>): number;
 

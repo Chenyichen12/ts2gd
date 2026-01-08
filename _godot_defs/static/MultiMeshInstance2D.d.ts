@@ -1,17 +1,17 @@
 
 /**
- * [MultiMeshInstance2D] is a specialized node to instance a [MultiMesh] resource in 2D.
+ * [MultiMeshInstance2D] is a specialized node to instance a [MultiMesh] resource in 2D. This can be faster to render compared to displaying many [Sprite2D] nodes with large transparent areas, especially if the nodes take up a lot of space on screen at high viewport resolutions. This is because using a mesh designed to fit the sprites' opaque areas will reduce GPU fill rate utilization (at the cost of increased vertex processing utilization).
  *
- * Usage is the same as [MultiMeshInstance].
+ * Usage is the same as [MultiMeshInstance3D].
  *
 */
 declare class MultiMeshInstance2D extends Node2D  {
 
   
 /**
- * [MultiMeshInstance2D] is a specialized node to instance a [MultiMesh] resource in 2D.
+ * [MultiMeshInstance2D] is a specialized node to instance a [MultiMesh] resource in 2D. This can be faster to render compared to displaying many [Sprite2D] nodes with large transparent areas, especially if the nodes take up a lot of space on screen at high viewport resolutions. This is because using a mesh designed to fit the sprites' opaque areas will reduce GPU fill rate utilization (at the cost of increased vertex processing utilization).
  *
- * Usage is the same as [MultiMeshInstance].
+ * Usage is the same as [MultiMeshInstance3D].
  *
 */
   new(): MultiMeshInstance2D; 
@@ -21,16 +21,8 @@ declare class MultiMeshInstance2D extends Node2D  {
 /** The [MultiMesh] that will be drawn by the [MultiMeshInstance2D]. */
 multimesh: MultiMesh;
 
-/**
- * The normal map that will be used if using the default [CanvasItemMaterial].
- *
- * **Note:** Godot expects the normal map to use X+, Y-, and Z+ coordinates. See [url=http://wiki.polycount.com/wiki/Normal_Map_Technical_Details#Common_Swizzle_Coordinates]this page[/url] for a comparison of normal map coordinates expected by popular engines.
- *
-*/
-normal_map: Texture;
-
-/** The [Texture] that will be used if using the default [CanvasItemMaterial]. Can be accessed as [code]TEXTURE[/code] in CanvasItem shader. */
-texture: Texture;
+/** The [Texture2D] that will be used if using the default [CanvasItemMaterial]. Can be accessed as [code]TEXTURE[/code] in CanvasItem shader. */
+texture: Texture2D;
 
 
 
