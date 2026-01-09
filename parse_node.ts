@@ -283,6 +283,9 @@ export const parseNode = (
         genericNode as ts.ObjectLiteralExpression,
         props
       )
+
+    case SyntaxKind.DebuggerStatement:
+      return { content: "breakpoint\n" }
     case SyntaxKind.PrefixUnaryExpression:
       return parsePrefixUnaryExpression(
         genericNode as ts.PrefixUnaryExpression,
