@@ -291,7 +291,13 @@ export const parsePropertyDeclaration = (
 
   const decs = ts.getDecorators(node)
 
-  const decsText = decs?.map((dec) => dec.getText()).join("\n") ?? ""
+  const decsText = decs?.map((dec) => {
+    let text = dec.getText()
+    if(text.startsWith("@exports")) {
+      text = text.replace("@exports", "@export")
+    }
+    return text
+  }).join("\n") ?? ""
   let decsType = typeHintName ?? undefined
   if (decsType == undefined) {
     const typeCustomName = props.program.getTypeChecker().typeToString(type)
