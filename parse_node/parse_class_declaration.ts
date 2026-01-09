@@ -12,7 +12,7 @@ import {
   parseExports,
 } from "./parse_property_declaration"
 
-const getSettersAndGetters = (
+export const getSettersAndGetters = (
   members: readonly ts.ClassElement[],
   props: ParseState
 ) => {

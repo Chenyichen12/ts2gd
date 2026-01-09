@@ -1,6 +1,6 @@
 import path from "path"
 
-import { UsageDomain } from "tsutils"
+import { isInterfaceType, UsageDomain } from "tsutils"
 import ts, { SyntaxKind } from "typescript"
 
 import TsGdProject from "../project/project"
@@ -106,65 +106,51 @@ export const parseImportDeclaration = (
   // parse the default import
   const defaultImport = node.importClause?.name
   // check the import type is global class
+  let defaultImportName = ""
+
   if (defaultImport) {
-    let shouldToIgnoreDefault = false
-    const type = props.program.getTypeChecker().getTypeAtLocation(defaultImport)
-    // get class declaration
-    if (type.symbol?.declarations) {
-      const classDeclaration = type.symbol.declarations.find((decl) =>
-        ts.isClassDeclaration(decl)
-      ) as ts.ClassDeclaration | undefined
-      // is global class
-      const decorators = ts.getDecorators(classDeclaration!)
-      if (decorators) {
-        let isGlobal = true
-        for (const dec of decorators) {
+    defaultImportName = defaultImport.text
+    props.preserveTypeMap.set(defaultImportName, defaultImportName)
+    // if not global class, add to preload
+    const classDecl = props.program
+      .getTypeChecker()
+      .getTypeAtLocation(defaultImport)
+      .symbol.declarations?.find((decl) => ts.isClassDeclaration(decl))
+
+    if (classDecl) {
+      const declarations = ts.getDecorators(classDecl as ts.ClassDeclaration)
+      if (declarations != undefined) {
+        for (const dec of declarations) {
           if (dec.expression.getText() === "anonymous") {
-            isGlobal = false
+            preloadContainer.push({
+              typeName: defaultImportName,
+              preloadPath: importedSourceFile.resPath,
+            })
             break
           }
-        }
-        if (!isGlobal) {
-          shouldToIgnoreDefault = true
         }
       }
     }
 
-    if (shouldToIgnoreDefault) {
-      props.ignoreTypeUses.push({
-        typeName: defaultImport.text,
-        resourcePath: importedSourceFile.resPath,
-        redirectType: undefined,
-      })
-      preloadContainer.push({
-        typeName: defaultImport.text,
-        preloadPath: importedSourceFile.resPath,
-      })
+    // name bindings map
+    const namedBindings = node.importClause?.namedBindings
+    if (namedBindings && ts.isNamedImports(namedBindings)) {
+      const bindings = namedBindings as ts.NamedImports
+      for (const element of bindings.elements) {
+        const typeName = element.name.text
+        // if type has default import, ignore it
+        props.preserveTypeMap.set(typeName, defaultImportName + "." + typeName)
+      }
     }
-  }
-  // get named bindings
-
-  // check the default import at that script
-  const targetExport = importedSourceFile.getExportDefaultClassName()
-
-  const namedBindings = node.importClause?.namedBindings
-  if (namedBindings && ts.isNamedImports(namedBindings)) {
-    const bindings = namedBindings as ts.NamedImports
-    for (const element of bindings.elements) {
-      const typeName = element.name.text
-      // if type has default import, ignore it
-      if (targetExport && !targetExport.isAnonymous) {
-        props.ignoreTypeUses.push({
-          typeName: typeName,
-          resourcePath: importedSourceFile.resPath,
-          redirectType: targetExport.className + "." + typeName,
-        })
-      } else {
-        props.ignoreTypeUses.push({
-          typeName: typeName,
-          resourcePath: importedSourceFile.resPath,
-          redirectType: undefined,
-        })
+  } else {
+    defaultImportName = ""
+    const namedBindings = node.importClause?.namedBindings
+    if (namedBindings && ts.isNamedImports(namedBindings)) {
+      const bindings = namedBindings as ts.NamedImports
+      for (const element of bindings.elements) {
+        const typeName = element.name.text
+        // if type has default import, ignore it
+        props.preserveTypeMap.set(typeName, typeName)
         preloadContainer.push({
           typeName: typeName,
           preloadPath: importedSourceFile.resPath,
@@ -182,12 +168,13 @@ export const parseImportDeclaration = (
     parsedStrings: () =>
       preloadContainer
         .map((v) => {
-          return `const ${v.typeName} = preload("${v.preloadPath}")${v.preloadSubffix ?? ""}`
+          return `const ${v.typeName} = preload("${v.preloadPath}")${
+            v.preloadSubffix ?? ""
+          }`
         })
         .join("\n"),
   })
 }
-
 
 export const parseImportDeclaration2 = (
   node: ts.ImportDeclaration,
@@ -315,12 +302,6 @@ export const parseImportDeclaration2 = (
         exportClassString.className = exportClassString + "." + imp.importedName
         noNeedPreloadClass.push(imp.importedName)
       }
-
-      props.ignoreTypeUses.push({
-        typeName: imp.importedName,
-        resourcePath: imp.resPath,
-        redirectType: exportClassString?.className,
-      })
 
       // props.ignoreTypeUses.push({
       //   typeName: imp.importedName,

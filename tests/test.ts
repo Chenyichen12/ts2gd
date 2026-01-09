@@ -149,7 +149,7 @@ export const compileTs = (code: string, isAutoload: boolean): ParseNodeType => {
     mostRecentControlStructureIsSwitch: false,
     isAutoload: false,
     usages: utils.collectVariableUsage(sourceFile),
-    ignoreTypeUses: [],
+    preserveTypeMap: new Map<string, string>(),
   })
 
   return godotFile

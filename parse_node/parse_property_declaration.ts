@@ -292,19 +292,39 @@ export const parsePropertyDeclaration = (
   const decs = ts.getDecorators(node)
 
   const decsText = decs?.map((dec) => dec.getText()).join("\n") ?? ""
-  let decsType = typeHintName
-  if (decsType == undefined || decsType == null) {
-    var ignoreTypeUse = props.ignoreTypeUses.find(
-      (v) => v.typeName === typeName
-    )
-    if (ignoreTypeUse) {
-      decsType = ignoreTypeUse.redirectType ?? ignoreTypeUse.typeName
-    }
-    else {
-      decsType = typeName
-    }
+  let decsType = typeHintName ?? undefined
+  if (decsType == undefined) {
+    const typeCustomName = props.program.getTypeChecker().typeToString(type)
+    decsType = props.preserveTypeMap.get(typeCustomName)
   }
 
+  // if (decsType == undefined && node.type) {
+  //   const symbol = props.program
+  //     .getTypeChecker()
+  //     .getSymbolAtLocation(node.type)
+    
+
+  //   const declarations = symbol?.getDeclarations()
+  //   const isInterface = declarations?.some(
+  //     (decl) => decl.kind === ts.SyntaxKind.InterfaceDeclaration
+  //   )
+  //   if(!isInterface){
+  //     decsType = typeName;
+  //   }
+  // }
+  decsType = decsType ?? "Object"
+
+  // if (decsType == undefined || decsType == null) {
+  //   var ignoreTypeUse = props.ignoreTypeUses.find(
+  //     (v) => v.typeName === typeName
+  //   )
+  //   if (ignoreTypeUse) {
+  //     decsType = ignoreTypeUse.redirectType ?? ignoreTypeUse.typeName
+  //   }
+  //   else {
+  //     decsType = typeName
+  //   }
+  // }
 
   return combine({
     parent: node,

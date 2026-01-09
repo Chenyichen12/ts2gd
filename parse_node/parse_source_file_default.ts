@@ -1,7 +1,12 @@
 import ts from "typescript"
 import { combine, parseNode, ParseNodeType, ParseState } from "../parse_node"
-import { parseClassExportDefault } from "./parse_class_export_default"
+import {
+  parseClassExportDefault,
+  parseClassExportHeader,
+} from "./parse_class_export_default"
 import { parseClassExportNormal } from "./parse_class_normal"
+import exp from "constants"
+import { parseClassDeclaration } from "./parse_class_declaration"
 
 function isExportDefault(node: ts.ClassDeclaration) {
   const mods = node.modifiers
@@ -9,6 +14,17 @@ function isExportDefault(node: ts.ClassDeclaration) {
     mods?.some((mod) => mod.kind === ts.SyntaxKind.ExportKeyword) &&
     mods?.some((mod) => mod.kind === ts.SyntaxKind.DefaultKeyword)
   )
+}
+function isClassAnonymous(node: ts.ClassDeclaration) {
+  const declarations = ts.getDecorators(node)
+  if (declarations != undefined) {
+    for (const dec of declarations) {
+      if (dec.expression.getText() === "anonymous") {
+        return true
+      }
+    }
+  }
+  return false
 }
 
 export function parseSourceFileDefault(
@@ -29,6 +45,30 @@ export function parseSourceFileDefault(
     }
     return false
   }) as ts.ClassDeclaration[]
+
+  const predefine = statements
+    .filter((statement) => {
+      if (
+        statement.kind == ts.SyntaxKind.InterfaceDeclaration ||
+        statement.kind == ts.SyntaxKind.EnumDeclaration
+      ) {
+        return true
+      }
+      if (statement.kind == ts.SyntaxKind.ClassDeclaration) {
+        if (isExportDefault(statement as ts.ClassDeclaration) && isClassAnonymous(statement as ts.ClassDeclaration)) {
+          return false
+        } else {
+          return true
+        }
+      }
+    })
+    .map((statement) => {
+      return (statement as ts.DeclarationStatement).name!.getText()
+    })
+  for (const name of predefine) {
+    props.preserveTypeMap.set(name, name)
+  }
+
   const allTopStatements = statements.filter((statement) => {
     if (statement.kind != ts.SyntaxKind.ClassDeclaration) {
       return true
@@ -44,13 +84,23 @@ export function parseSourceFileDefault(
   const exportdefaultClassNode = allClasses.find((classNode) =>
     isExportDefault(classNode)
   )
-  if (exportdefaultClassNode) {
-    const content = parseClassExportDefault(exportdefaultClassNode, props)
-    sourceContents += content.content
-  }
   for (const topNode of allTopStatements) {
     const content = parseNode(topNode, props)
     sourceContents += content.content
+  }
+
+
+
+  if (exportdefaultClassNode) {
+    // const content = parseClassExportDefault(exportdefaultClassNode, props)
+    const header = parseClassExportHeader(exportdefaultClassNode, props)
+    sourceContents = header.content + sourceContents
+  }
+  if (exportdefaultClassNode) {
+    sourceContents += parseClassDeclaration(
+      exportdefaultClassNode,
+      props
+    ).content
   }
   for (const classNode of allClasses) {
     if (classNode === exportdefaultClassNode) {

@@ -115,8 +115,10 @@ declare enum ExportHint {
 declare function exports(...args: (ExportHint | string | number)[]): (target: Node, name: string) => void;
 declare function exports(target: Node, name: string): void;
 declare const export_flags: (...flags: any[]) => (target: Node, name: string) => void
+declare const export_custom: (target: PropertyHint, ...args: any[]) => (target: Node, name: string) => void;
 declare function autoload(target: typeof Node): void
 declare function tool(target: typeof Node): void;
+declare function anonymous(target: any): void;
 
 declare type int = number;
 declare type float = number;

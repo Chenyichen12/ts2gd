@@ -65,6 +65,7 @@ import { parseVariableStatement } from "./parse_node/parse_variable_statement"
 import { parseWhileStatement } from "./parse_node/parse_while_statement"
 import { parseYieldExpression } from "./parse_node/parse_yield_expression"
 import TsGdProject from "./project"
+import { parseInterfaceDeclaration } from "./parse_node/parse_class_normal"
 
 export type ParseState = {
   isConstructor: boolean
@@ -83,12 +84,8 @@ export type ParseState = {
   }
   usages: Map<ts.Identifier, utils.VariableInfo>
   sourceFile: ts.SourceFile
-  sourceFileAsset: AssetSourceFile
-  ignoreTypeUses: {
-    typeName: string
-    resourcePath: string
-    redirectType?: string
-  }[]
+  sourceFileAsset: AssetSourceFile,
+  preserveTypeMap: Map<string, string>
 }
 
 export enum ExtraLineType {
@@ -263,6 +260,8 @@ export const parseNode = (
       return parseImportDeclaration(genericNode as ts.ImportDeclaration, props)
     case SyntaxKind.TypeReference:
       return parseTypeReference(genericNode as ts.TypeReferenceNode, props)
+    case SyntaxKind.InterfaceDeclaration:
+      return parseInterfaceDeclaration(genericNode as ts.InterfaceDeclaration, props)
     case SyntaxKind.TypeAliasDeclaration:
       return parseTypeAliasDeclaration(
         genericNode as ts.TypeAliasDeclaration,

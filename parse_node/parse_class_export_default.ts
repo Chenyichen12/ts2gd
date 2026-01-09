@@ -10,16 +10,52 @@ export function getExtentContent(
   if (!hasExtends) {
     return ""
   }
+
   let targetExtend = node.heritageClauses![0].types[0].getText()
-  let ignoreTarget = props.ignoreTypeUses.find(
-    (ite) => ite.typeName === targetExtend
-  )
-  if (ignoreTarget == undefined) {
-    return "extends " + targetExtend
-  } else {
-    return `extends "${ignoreTarget.resourcePath}".${ignoreTarget.typeName}`
+  if(props.preserveTypeMap.has(targetExtend)){
+    targetExtend = props.preserveTypeMap.get(targetExtend)!
+  }
+  return "extends " + targetExtend;
+  // let ignoreTarget = props.ignoreTypeUses.find(
+  //   (ite) => ite.typeName === targetExtend
+  // )
+  // if (ignoreTarget == undefined) {
+  //   return "extends " + targetExtend
+  // } else {
+  //   return `extends "${ignoreTarget.resourcePath}".${ignoreTarget.typeName}`
+  // }
+}
+
+export function parseClassExportHeader(
+  node: ts.ClassDeclaration | ts.ClassExpression,
+  props: ParseState
+): ParseNodeType {
+  let isAnnoumousClass = false
+  // get decorator name to check if is annoumous class
+  const decorators = ts.getDecorators(node)
+  if (decorators != undefined) {
+    for (const dec of decorators) {
+      if (dec.expression.getText() === "anonymous") {
+        isAnnoumousClass = true
+        break
+      }
+    }
+  }
+  let classNameString = ""
+  if (!isAnnoumousClass) {
+    classNameString = `class_name ${node.name?.getText()}\n`
+  }
+  let content = ""
+  var extendsString = getExtentContent(node, props)
+  content = `
+${classNameString}
+${extendsString}
+`
+  return {
+    content: content,
   }
 }
+
 
 export function parseClassExportDefault(
   node: ts.ClassDeclaration | ts.ClassExpression,
