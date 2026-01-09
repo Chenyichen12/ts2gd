@@ -12,7 +12,7 @@ export const isDecoratedAsExports = (
     | ts.GetAccessorDeclaration
     | ts.SetAccessorDeclaration
 ) => {
-  const decs = ts.getDecorators(node);
+  const decs = ts.getDecorators(node)
   return !!decs?.find(
     (dec) =>
       dec.expression.getText() === "exports" ||
@@ -28,7 +28,7 @@ export const parseExports = (
     | ts.SetAccessorDeclaration,
   props: ParseState
 ) => {
-  const decs = ts.getDecorators(node);
+  const decs = ts.getDecorators(node)
   const decoration = decs?.find(
     (dec) =>
       dec.expression.getText() === "exports" ||
@@ -151,7 +151,7 @@ export const isDecoratedAsExportFlags = (
     | ts.GetAccessorDeclaration
     | ts.SetAccessorDeclaration
 ): boolean => {
-  const decs = ts.getDecorators(node);
+  const decs = ts.getDecorators(node)
   return !!decs?.find((dec) =>
     dec.expression.getText().startsWith("export_flags")
   )
@@ -164,7 +164,7 @@ export const parseExportFlags = (
     | ts.SetAccessorDeclaration,
   props: ParseState
 ): string => {
-  const decs = ts.getDecorators(node);
+  const decs = ts.getDecorators(node)
   const decoration = decs?.find((dec) =>
     dec.expression.getText().startsWith("export_flags")
   )
@@ -286,6 +286,40 @@ export const parsePropertyDeclaration = (
     })
   }
 
+  // handle the fallback all declared properties
+  // copy the whole declaration
+
+  const decs = ts.getDecorators(node)
+
+  const decsText = decs?.map((dec) => dec.getText()).join("\n") ?? ""
+  let decsType = typeHintName
+  if (decsType == undefined || decsType == null) {
+    var ignoreTypeUse = props.ignoreTypeUses.find(
+      (v) => v.typeName === typeName
+    )
+    if (ignoreTypeUse) {
+      decsType = ignoreTypeUse.redirectType ?? ignoreTypeUse.typeName
+    }
+    else {
+      decsType = typeName
+    }
+  }
+
+
+  return combine({
+    parent: node,
+    nodes: [node.initializer, node.name],
+    props,
+    parsedStrings: (initializer, name) => {
+      return `
+${decsText}
+var ${name}: ${decsType}${initializer ? ` = ${initializer}` : ""}
+      `
+    },
+  })
+
+  /*
+
   let exportText = ""
 
   if (isDecoratedAsExports(node)) {
@@ -317,6 +351,7 @@ export const parsePropertyDeclaration = (
       }${initializer && ` = ${initializer}`}`
     },
   })
+  */
 }
 
 export const testNormalExportedVariable: Test = {

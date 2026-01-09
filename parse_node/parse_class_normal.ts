@@ -13,7 +13,7 @@ export function parseClassExportNormal(node: ts.ClassDeclaration | ts.ClassExpre
 
     const isResultNullString = result.content.trim() === "";
     if(isResultNullString){
-        result.content = "  pass"
+        result.content = "pass"
     }
     else{
         result.content = result.content

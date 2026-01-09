@@ -85,8 +85,9 @@ export type ParseState = {
   sourceFile: ts.SourceFile
   sourceFileAsset: AssetSourceFile
   ignoreTypeUses: {
-    typeName: string,
+    typeName: string
     resourcePath: string
+    redirectType?: string
   }[]
 }
 

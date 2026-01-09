@@ -167,6 +167,8 @@ export class TsGdProject {
   }
 
   async onAddAsset(path: string): Promise<string> {
+    path = path.replace(/\\/g, "/") // Normalize Windows paths
+
     const newAsset = this.createAsset(path)
 
     // Do this first because some assets expect themselves to exist - e.g.
@@ -188,6 +190,8 @@ export class TsGdProject {
   }
 
   async onChangeAsset(path: string): Promise<string> {
+    path = path.replace(/\\/g, "/") // Normalize Windows paths
+
     let start = new Date().getTime()
     let showTime = false
     let message = ""
@@ -260,6 +264,8 @@ export class TsGdProject {
   }
 
   async onRemoveAsset(path: string) {
+    path = path.replace(/\\/g, "/") // Normalize Windows paths
+    
     console.info("Delete:\t", path)
 
     const changedAsset = this.assets.find((asset) => asset.fsPath === path)

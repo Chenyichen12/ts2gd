@@ -129,6 +129,55 @@ This is a ts2gd bug. Please create an issue on GitHub for it.`,
     return topLevelClasses[0]
   }
 
+  getExportDefaultClassName(): {
+    className: string
+    isAnonymous: boolean
+  } | undefined{
+    const ast = this.getAst()
+    if ("error" in ast) {
+      return undefined
+    }
+
+    const topLevelDefinitions = ast.getChildren()[0] // SyntaxList
+    for( const d of topLevelDefinitions.getChildren()){
+      if (d.kind === SyntaxKind.ClassDeclaration) {
+        const classDecl = d as ts.ClassDeclaration
+        const mods = ts.getModifiers(classDecl);
+        const declarations = ts.getDecorators(classDecl);
+        if(mods){
+          let isDefault = false;
+          let isExported = false;
+
+          for(const mod of mods){
+            if(mod.kind === SyntaxKind.ExportKeyword){
+              isExported = true;
+            }
+            if(mod.kind === SyntaxKind.DefaultKeyword){
+              isDefault = true;
+            }
+          }
+          if(isDefault && isExported && classDecl.name){
+            // return classDecl.name.getText();
+            // get decorators to check if it's anonymous
+            let isAnonymous = false;
+            for(const dec of declarations ?? []){
+              if(dec.expression.getText() === "anonymous"){
+                isAnonymous = true;
+                break;
+              }
+            }
+            return {
+              className: classDecl.name.getText(),
+              isAnonymous: isAnonymous
+            }
+
+          }
+        }
+      }
+    }
+    return undefined
+  }
+
   // This can be different than the Godot class name for autoload classes.
   exportedTsClassName(): string | TsGdError {
     const node = this.getClassNode()
