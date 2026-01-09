@@ -9,51 +9,73 @@ export const parseEnumDeclaration = (
   node: ts.EnumDeclaration,
   props: ParseState
 ): ParseNodeType => {
-  const enumText = combine({
+  return combine({
     parent: node,
     nodes: node.members.map((member) => member.initializer ?? undefined),
     props,
     parsedStrings: (...initializers) => {
-      let result = `const ${node.name.text} = {\n`
+      let result = `enum ${node.name.text} {\n`
       let initializedValue = 0
-
-      for (let i = 0; i < initializers.length; i++) {
-        result += `  "${node.members[i].name.getText()}": ${
-          initializers[i] ? initializers[i] : initializedValue
-        },\n`
-
-        if (initializers[i] && !isNaN(Number(initializers[i]))) {
-          initializedValue = Number(initializers[i]) + 1
-        } else {
-          initializedValue++
+      for(let i = 0; i < initializers.length; i++) {
+        result += `\t${node.members[i].name.getText()}`
+        if(initializers[i]) {
+          result += ` = ${initializers[i]}`
         }
+        result += ",\n"
       }
-
-      result += "}"
+      result += "}\n"
 
       return result
     },
   })
 
-  const enumType = props.program.getTypeChecker().getTypeAtLocation(node)
-  const { resPath, enumName } = getImportResPathForEnum(enumType, props)
 
-  const fileName =
-    props.sourceFileAsset.gdContainingDirectory +
-    props.sourceFileAsset.name +
-    "_" +
-    enumName +
-    ".gd"
 
-  return {
-    content: `const ${enumName} = preload("${resPath}").${enumName}`,
-    files: [
-      {
-        body: enumText.content,
-        filePath: fileName,
-      },
-    ],
-  }
+  // const enumText = combine({
+  //   parent: node,
+  //   nodes: node.members.map((member) => member.initializer ?? undefined),
+  //   props,
+  //   parsedStrings: (...initializers) => {
+  //     let result = `const ${node.name.text} = {\n`
+  //     let initializedValue = 0
+
+  //     for (let i = 0; i < initializers.length; i++) {
+  //       result += `  "${node.members[i].name.getText()}": ${
+  //         initializers[i] ? initializers[i] : initializedValue
+  //       },\n`
+
+  //       if (initializers[i] && !isNaN(Number(initializers[i]))) {
+  //         initializedValue = Number(initializers[i]) + 1
+  //       } else {
+  //         initializedValue++
+  //       }
+  //     }
+
+  //     result += "}"
+
+  //     return result
+  //   },
+  // })
+
+  // const enumType = props.program.getTypeChecker().getTypeAtLocation(node)
+  // const { resPath, enumName } = getImportResPathForEnum(enumType, props)
+
+  // const fileName =
+  //   props.sourceFileAsset.gdContainingDirectory +
+  //   props.sourceFileAsset.name +
+  //   "_" +
+  //   enumName +
+  //   ".gd"
+
+  // return {
+  //   content: `const ${enumName} = preload("${resPath}").${enumName}`,
+  //   files: [
+  //     {
+  //       body: enumText.content,
+  //       filePath: fileName,
+  //     },
+  //   ],
+  // }
 }
 
 export const testEnumDeclaration: Test = {

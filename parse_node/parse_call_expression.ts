@@ -41,8 +41,17 @@ export const parseCallExpression = (
 
 
   let callIdentifier: ts.Identifier | undefined = undefined
-  let callFullText = node.expression.getText()
-  callFullText = callFullText.replace("this.", "self.")
+
+  // callFullText = callFullText.replace("this.", "self.")
+  let callFullText = combine({
+    parent: node,
+    nodes: node.expression,
+    props,
+    parsedStrings: (expr) => {
+      return expr
+    },
+  }).content
+
 
   if(node.expression.kind === SyntaxKind.PropertyAccessExpression){
     const prop = node.expression as ts.PropertyAccessExpression

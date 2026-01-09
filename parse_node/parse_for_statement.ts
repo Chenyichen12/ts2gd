@@ -61,8 +61,8 @@ export const parseForStatement = (
       return `
 ${initializer || ""}
 while ${cond || "true"}:
-  ${statement}
-  ${incrementText}
+\t${statement}
+\t${incrementText}
 `
     },
   })

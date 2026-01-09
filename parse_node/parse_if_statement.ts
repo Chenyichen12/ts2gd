@@ -21,18 +21,18 @@ export const parseIfStatement = (
         expression.extraLines?.filter((line) => line.type === "after") ?? []
 
       let thenBody =
-        afterLines.map(({ line }) => "  " + line + "\n") +
+        afterLines.map(({ line }) => "\t" + line + "\n") +
         (thenStatement.content.trim() === ""
           ? ""
-          : "  " + thenStatement.content)
+          : "\t" + thenStatement.content)
       let elseBody =
-        afterLines.map(({ line }) => "  " + line + "\n") +
+        afterLines.map(({ line }) => "\t" + line + "\n") +
         (elseStatement.content.trim() === ""
           ? ""
-          : "  " + elseStatement.content)
+          : "\t" + elseStatement.content)
 
       if (thenBody.trim() === "") {
-        thenBody = "  pass"
+        thenBody = "\tpass"
       }
 
       return `

@@ -30,9 +30,9 @@ export const parseWhileStatement = (
 
       return `${beforeLines}
 while ${expr.content}:
-  ${afterLines}
-  ${statement.content}
-  ${beforeLines}
+\t${afterLines}
+\t${statement.content}
+\t${beforeLines}
 `
     },
   })

@@ -25,7 +25,7 @@ export const parseForInStatement = (
       addIndent: true,
       parsedStrings: (name, expr, statement) => `
 for ${name} in ${expr}:
-  ${statement}
+\t${statement}
 `,
     })
   } else {
@@ -38,7 +38,7 @@ for ${name} in ${expr}:
       addIndent: true,
       parsedStrings: (initExpr, expr, statement) => `
 for ${initExpr} in ${expr}:
-  ${statement}
+\t${statement}
 `,
     })
   }

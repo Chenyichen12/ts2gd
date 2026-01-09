@@ -163,6 +163,9 @@ export const parsePropertyAccessExpression = (
       ) {
         return `self.${rhs}`
       }
+      if(props.preserveTypeMap.has(lhs)){
+        lhs = props.preserveTypeMap.get(lhs)!
+      }
 
       return `${lhs}.${rhs}`
     },

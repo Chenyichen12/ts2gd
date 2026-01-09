@@ -35,7 +35,7 @@ export const parseForOfStatement = (
         addIndent: true,
         parsedStrings: (expr, statement, name) => `
 for ${name} in ${expr}:
-  ${statement}
+\t${statement}
 `,
       })
     } else {
@@ -65,7 +65,7 @@ for ${name} in ${expr}:
 for ${genName} in ${expr}:
 ${nodes
   .map(
-    (node, i) => `  var ${node} = ${genName}${destructuredNames[i].access}\n`
+    (node, i) => `\tvar ${node} = ${genName}${destructuredNames[i].access}\n`
   )
   .join("")}
   ${statement}
@@ -82,7 +82,7 @@ ${nodes
       addIndent: true,
       parsedStrings: (expr, statement) => `
 for ${initExpr} in ${expr}:
-  ${statement}
+\t${statement}
 `,
     })
   }
