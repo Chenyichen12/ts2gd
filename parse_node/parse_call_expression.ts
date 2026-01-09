@@ -22,15 +22,72 @@ export const parseCallExpression = (
   let expression = node.expression
   let args = node.arguments
 
+
   if (node.expression.kind === SyntaxKind.SuperKeyword) {
     return combine({
       parent: node,
       nodes: node.expression,
       props,
-      parsedStrings: () => "",
+      parsedStrings: () => {
+        if(args.length === 0){
+          return ""
+        }else{
+          let parsedArgs = args.map((arg) => parseNode(arg, props).content)
+          return `super(${parsedArgs.join(", ")})`
+        }
+      },
     })
   }
 
+
+  let callIdentifier: ts.Identifier | undefined = undefined
+  let callFullText = node.expression.getText()
+  callFullText = callFullText.replace("this.", "self.")
+
+  if(node.expression.kind === SyntaxKind.PropertyAccessExpression){
+    const prop = node.expression as ts.PropertyAccessExpression
+    callIdentifier = prop.name as ts.Identifier
+  }
+  else if(node.expression.kind === SyntaxKind.Identifier){
+    callIdentifier = node.expression as ts.Identifier
+  }
+
+  // test the callIdentifier is method or function
+  var symbol = props.program.getTypeChecker().getSymbolAtLocation(callIdentifier!)
+  function isMethodOrFunction(symbol: ts.Symbol | undefined): boolean {
+    if (!symbol) return false
+    const declarations = symbol.getDeclarations()
+    if (!declarations) return false
+    for (const decl of declarations) {
+      if (ts.isMethodDeclaration(decl) || ts.isMethodSignature(decl) || ts.isFunctionDeclaration(decl)) {
+        return true
+      }
+    }
+    return false
+  }
+  if (!isMethodOrFunction(symbol)) {
+    return combine({
+      parent: node,
+      nodes: [...args],
+      props,
+      parsedStrings: (...parsedArgs) => {
+        let parsedArgContents = parsedArgs.join(", ")
+        return callFullText + `.call(${parsedArgContents})`
+      }
+    })
+  }else{
+    return combine({
+      parent: node,
+      nodes: [...args],
+      props,
+      parsedStrings: (...parsedArgs) => {
+        let parsedArgContents = parsedArgs.join(", ")
+        return callFullText + `(${parsedArgContents})`
+      }
+    })
+  }
+
+  /*
   // node = [[ a.b(c) ]]
   if (node.expression.kind === SyntaxKind.PropertyAccessExpression) {
     // prop = [[ a.b ]](c)
@@ -384,6 +441,7 @@ export const parseCallExpression = (
   }
 
   return result
+  */
 }
 
 export const testBasicCall: Test = {

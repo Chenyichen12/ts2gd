@@ -91,14 +91,14 @@ export const parseClassDeclaration = (
     (dec) => dec.expression.getText() === "autoload"
   )
 
-  if (!modifiers?.includes("export") && !isAutoload) {
-    addError({
-      description: "You must export this class.",
-      error: ErrorName.ClassMustBeExported,
-      location: node,
-      stack: new Error().stack ?? "",
-    })
-  }
+  // if (!modifiers?.includes("export") && !isAutoload) {
+  //   addError({
+  //     description: "You must export this class.",
+  //     error: ErrorName.ClassMustBeExported,
+  //     location: node,
+  //     stack: new Error().stack ?? "",
+  //   })
+  // }
 
   // Preprocess set/get to make setget declarations
   const settersAndGetters = getSettersAndGetters(node.members, props)

@@ -6,5 +6,8 @@ export const parseSuperKeyword = (
   node: ts.SuperExpression,
   props: ParseState
 ): ParseNodeType => {
-  return combine({ parent: node, nodes: [], props, parsedStrings: () => `` })
+  return combine({ parent: node, nodes: [], props, 
+    parsedStrings: () => {
+      return "super"
+    }})
 }

@@ -1,7 +1,7 @@
 import ts, { SyntaxKind } from "typescript"
 
 import { ErrorName, addError } from "../errors"
-import { ParseNodeType, ParseState, combine } from "../parse_node"
+import { ParseNodeType, ParseState, combine, parseNode } from "../parse_node"
 
 /**
  * Get all identifiers in a scope that were declared in an enclosing scope.
@@ -147,66 +147,88 @@ export const parseArrowFunction = (
   node: ts.ArrowFunction,
   props: ParseState
 ): ParseNodeType => {
-  const name = props.scope.createUniqueName()
-
-  const { unwrapCapturedScope } = getCapturedScope(node, props)
-
-  props.scope.enterScope()
-
-  let parsed = combine({
+  var paramContent = combine({
     parent: node,
-    nodes: [node.body, ...node.parameters],
+    nodes:[...node.parameters],
     props,
-    addIndent: true,
-    parsedStrings: (body, ...args) => {
-      if (node.body.kind === SyntaxKind.Block) {
-        return `
-func ${name}(${[...args, "captures"].join(", ")}):
-${unwrapCapturedScope}
-  ${body.trim() === "" ? "pass" : body}
-        `
-      } else {
-        // Single line arrow function, with implicit return.
-
-        return `
-func ${name}(${[...args, "captures"].join(", ")}):
-${unwrapCapturedScope}
-  return ${body}
-        `
-      }
-    },
+    parsedStrings: (...args) => {
+      return `func (${args.join(", ")}):\n`
+    }
   })
-
-  props.scope.leaveScope()
-
-  const decls = props.program.getTypeChecker().getTypeAtLocation(node)
-    .symbol?.declarations
-
-  if (!decls) {
-    addError({
-      error: ErrorName.DeclarationNotGiven,
-      location: node,
-      stack: new Error().stack ?? "",
-      description: `
-Declaration not provided for arrow function. This is an internal ts2gd bug. Please report it. 
-        `,
-    })
+  var bodyContent = parseNode(node.body, props)
+  let bodyString = ""
+  if(bodyContent.content.trim().length > 0){
+    // add indent to body content
+    bodyString = bodyContent.content.replace(/\n/g, "\n\t")
   }
-
-  const capturedScopeObject = decls
-    ? getCapturedScope(decls[0] as ts.ArrowFunction, props).capturedScopeObject
-    : "{}"
-
-  // NOTE: parse_call_expression expects all arrow functions to be declared on self.
+  else{
+    bodyString = "pass"
+  }
   return {
-    content: `[funcref(self, "${name}"), ${capturedScopeObject}]`,
-    hoistedArrowFunctions: [
-      {
-        name,
-        node,
-        content: parsed.content,
-      },
-      ...(parsed.hoistedArrowFunctions ?? []),
-    ],
+    content: `${paramContent.content}\t${bodyString}`,
   }
+  
+  
+//   const name = props.scope.createUniqueName()
+
+//   const { unwrapCapturedScope } = getCapturedScope(node, props)
+
+//   props.scope.enterScope()
+
+//   let parsed = combine({
+//     parent: node,
+//     nodes: [node.body, ...node.parameters],
+//     props,
+//     addIndent: true,
+//     parsedStrings: (body, ...args) => {
+//       if (node.body.kind === SyntaxKind.Block) {
+//         return `
+// func ${name}(${[...args, "captures"].join(", ")}):
+// ${unwrapCapturedScope}
+//   ${body.trim() === "" ? "pass" : body}
+//         `
+//       } else {
+//         // Single line arrow function, with implicit return.
+
+//         return `
+// func ${name}(${[...args, "captures"].join(", ")}):
+// ${unwrapCapturedScope}
+//   return ${body}
+//         `
+//       }
+//     },
+//   })
+
+//   props.scope.leaveScope()
+
+//   const decls = props.program.getTypeChecker().getTypeAtLocation(node)
+//     .symbol?.declarations
+
+//   if (!decls) {
+//     addError({
+//       error: ErrorName.DeclarationNotGiven,
+//       location: node,
+//       stack: new Error().stack ?? "",
+//       description: `
+// Declaration not provided for arrow function. This is an internal ts2gd bug. Please report it. 
+//         `,
+//     })
+//   }
+
+//   const capturedScopeObject = decls
+//     ? getCapturedScope(decls[0] as ts.ArrowFunction, props).capturedScopeObject
+//     : "{}"
+
+//   // NOTE: parse_call_expression expects all arrow functions to be declared on self.
+//   return {
+//     content: `[funcref(self, "${name}"), ${capturedScopeObject}]`,
+//     hoistedArrowFunctions: [
+//       {
+//         name,
+//         node,
+//         content: parsed.content,
+//       },
+//       ...(parsed.hoistedArrowFunctions ?? []),
+//     ],
+//   }
 }

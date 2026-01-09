@@ -8,6 +8,15 @@ export const parseConstructor = (
 ): ParseNodeType => {
   if (node.body) {
     // The trim() is for a constructor with only one element: a super() call
+    let paramString = ""
+    for(let i = 0; i < node.parameters.length; i++) {
+      const param = node.parameters[i]
+      const paramName = param.name.getText()
+      paramString += paramName
+      if (i < node.parameters.length - 1) {
+        paramString += ", "
+      }
+    }
 
     return combine({
       parent: node,
@@ -15,8 +24,8 @@ export const parseConstructor = (
       props,
       addIndent: true,
       parsedStrings: (body) => `
-func _ready(): 
-  ${body.trim().length > 0 ? body : "pass"}
+func _init(${paramString}): 
+\t${body.trim().length > 0 ? body : "pass"}
 `,
     })
   } else {
@@ -24,7 +33,7 @@ func _ready():
       parent: node,
       nodes: [],
       props,
-      parsedStrings: () => `func _ready():\n pass`,
+      parsedStrings: () => `func _init():\n\tpass`,
     })
   }
 }
