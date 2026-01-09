@@ -208,7 +208,7 @@ protected _get_focused_accessibility_element(): RID;
  * **Note:** This method is only called if the node is present in the scene tree (i.e. if it's not an orphan).
  *
 */
-protected _input(): void;
+protected _input(event: InputEvent): void;
 
 /**
  * Called once on each physics tick, and allows Nodes to synchronize their logic with physics ticks. [param delta] is the logical time between physics ticks in seconds and is equal to [member Engine.time_scale] / [member Engine.physics_ticks_per_second].
@@ -224,7 +224,7 @@ protected _input(): void;
  * **Note:** Accumulated [param delta] may diverge from real world seconds.
  *
 */
-protected _physics_process(): void;
+protected _physics_process(delta: float): void;
 
 /**
  * Called on each idle frame, prior to rendering, and after physics ticks have been processed. [param delta] is the time between frames in seconds.
@@ -244,7 +244,7 @@ protected _physics_process(): void;
  * **Note:** Frame delta may be post-processed by [member OS.delta_smoothing] if this is enabled for the project.
  *
 */
-protected _process(): void;
+protected _process(delta: float): void;
 
 /**
  * Called when the node is "ready", i.e. when both the node and its children have entered the scene tree. If the node has children, their [method _ready] callbacks get triggered first, and the parent node will receive the ready notification afterwards.
@@ -270,7 +270,7 @@ protected _ready(): void;
  * **Note:** This method is only called if the node is present in the scene tree (i.e. if it's not orphan).
  *
 */
-protected _shortcut_input(): void;
+protected _shortcut_input(event: InputEvent): void;
 
 /**
  * Called when an [InputEvent] hasn't been consumed by [method _input] or any GUI [Control] item. It is called after [method _shortcut_input] and after [method _unhandled_key_input]. The input event propagates up through the node tree until a node consumes it.
@@ -284,7 +284,7 @@ protected _shortcut_input(): void;
  * **Note:** This method is only called if the node is present in the scene tree (i.e. if it's not an orphan).
  *
 */
-protected _unhandled_input(): void;
+protected _unhandled_input(event: InputEvent): void;
 
 /**
  * Called when an [InputEventKey] hasn't been consumed by [method _input] or any GUI [Control] item. It is called after [method _shortcut_input] but before [method _unhandled_input]. The input event propagates up through the node tree until a node consumes it.
@@ -300,7 +300,7 @@ protected _unhandled_input(): void;
  * **Note:** This method is only called if the node is present in the scene tree (i.e. if it's not an orphan).
  *
 */
-protected _unhandled_key_input(): void;
+protected _unhandled_key_input(event: InputEvent): void;
 
 /**
  * Adds a child [param node]. Nodes can have any number of children, but every child must have a unique name. Child nodes are automatically deleted when the parent node is deleted, so an entire scene can be removed by deleting its topmost node.
@@ -335,7 +335,7 @@ protected _unhandled_key_input(): void;
  * **Note:** If you want a child to be persisted to a [PackedScene], you must set [member owner] in addition to calling [method add_child]. This is typically relevant for [url=$DOCS_URL/tutorials/plugins/running_code_in_the_editor.html]tool scripts[/url] and [url=$DOCS_URL/tutorials/plugins/editor/index.html]editor plugins[/url]. If [method add_child] is called without setting [member owner], the newly added [Node] will not be visible in the scene tree, though it will be visible in the 2D/3D view.
  *
 */
-add_child(): void;
+add_child(node: Node, force_readable_name?: boolean, internal?: int): void;
 
 /**
  * Adds a [param sibling] node to this node's parent, and moves the added sibling right below this node.
@@ -347,7 +347,7 @@ add_child(): void;
  * **Note:** If this node is internal, the added sibling will be internal too (see [method add_child]'s `internal` parameter).
  *
 */
-add_sibling(): void;
+add_sibling(sibling: Node, force_readable_name?: boolean): void;
 
 /**
  * Adds the node to the [param group]. Groups can be helpful to organize a subset of nodes, for example `"enemies"` or `"collectables"`. See notes in the description, and the group methods in [SceneTree].
@@ -359,7 +359,7 @@ add_sibling(): void;
  * **Note:** [SceneTree]'s group methods will **not** work on this node if not inside the tree (see [method is_inside_tree]).
  *
 */
-add_to_group(): void;
+add_to_group(group: keyof Groups, persistent?: boolean): void;
 
 /**
  * Translates a [param message], using the translation catalogs configured in the Project Settings. Further [param context] can be specified to help with the translation. Note that most [Control] nodes automatically translate their strings, so this method is mostly useful for formatted strings or custom drawn text.
@@ -371,7 +371,7 @@ add_to_group(): void;
  * For detailed examples, see [url=$DOCS_URL/tutorials/i18n/internationalizing_games.html]Internationalizing games[/url].
  *
 */
-atr(): string;
+atr(message: string, context?: StringName): string;
 
 /**
  * Translates a [param message] or [param plural_message], using the translation catalogs configured in the Project Settings. Further [param context] can be specified to help with the translation.
@@ -387,7 +387,7 @@ atr(): string;
  * **Note:** Negative and [float] numbers may not properly apply to some countable subjects. It's recommended to handle these cases with [method atr].
  *
 */
-atr_n(): string;
+atr_n(message: string, plural_message: StringName, n: int, context?: StringName): string;
 
 /** This function is similar to [method Object.call_deferred] except that the call will take place when the node thread group is processed. If the node thread group processes in sub-threads, then the call will be done on that thread, right before [constant NOTIFICATION_PROCESS] or [constant NOTIFICATION_PHYSICS_PROCESS], the [method _process] or [method _physics_process] or their internal versions are called. */
 call_deferred_thread_group(...args: any[]): any;
@@ -447,7 +447,7 @@ create_tween(): Tween;
  * **Note:** By default, this method will duplicate only properties marked for serialization (i.e. using [constant @GlobalScope.PROPERTY_USAGE_STORAGE], or in GDScript, [annotation @GDScript.@export]). If you want to duplicate all properties, use [constant DUPLICATE_INTERNAL_STATE].
  *
 */
-duplicate(): Node;
+duplicate(flags?: int): Node;
 
 /**
  * Finds the first descendant of this node whose [member name] matches [param pattern], returning `null` if no match is found. The matching is done against node names, **not** their paths, through [method String.match]. As such, it is case-sensitive, `"*"` matches zero or more characters, and `"?"` matches any single character.
@@ -461,7 +461,7 @@ duplicate(): Node;
  * **Note:** To find all descendant nodes matching a pattern or a class type, see [method find_children].
  *
 */
-find_child(): Node;
+find_child(pattern: string, recursive?: boolean, owned?: boolean): Node;
 
 /**
  * Finds all descendants of this node whose names match [param pattern], returning an empty [Array] if no match is found. The matching is done against node names, **not** their paths, through [method String.match]. As such, it is case-sensitive, `"*"` matches zero or more characters, and `"?"` matches any single character.
@@ -477,7 +477,7 @@ find_child(): Node;
  * **Note:** To find a single descendant node matching a pattern, see [method find_child].
  *
 */
-find_children(): Node[];
+find_children(pattern: string, type?: string, recursive?: boolean, owned?: boolean): Node[];
 
 /**
  * Finds the first ancestor of this node whose [member name] matches [param pattern], returning `null` if no match is found. The matching is done through [method String.match]. As such, it is case-sensitive, `"*"` matches zero or more characters, and `"?"` matches any single character. See also [method find_child] and [method find_children].
@@ -485,7 +485,7 @@ find_children(): Node[];
  * **Note:** As this method walks upwards in the scene tree, it can be slow in large, deeply nested nodes. Consider storing a reference to the found node in a variable. Alternatively, use [method get_node] with unique names (see [member unique_name_in_owner]).
  *
 */
-find_parent(): Node;
+find_parent(pattern: string): Node;
 
 /**
  * Returns main accessibility element RID.
@@ -514,7 +514,7 @@ get_accessibility_element(): RID;
  * **Note:** To fetch a node by [NodePath], use [method get_node].
  *
 */
-get_child(): Node;
+get_child(idx: int, include_internal?: boolean): Node;
 
 /**
  * Returns the number of children of this node.
@@ -522,7 +522,7 @@ get_child(): Node;
  * If [param include_internal] is `false`, internal children are not counted (see [method add_child]'s `internal` parameter).
  *
 */
-get_child_count(): int;
+get_child_count(include_internal?: boolean): int;
 
 /**
  * Returns all children of this node inside an [Array].
@@ -530,7 +530,7 @@ get_child_count(): int;
  * If [param include_internal] is `false`, excludes internal children from the returned array (see [method add_child]'s `internal` parameter).
  *
 */
-get_children(): Node[];
+get_children(include_internal?: boolean): Node[];
 
 /**
  * Returns an [Array] of group names that the node has been added to.
@@ -569,7 +569,7 @@ get_groups(): StringName[];
  * If [param include_internal] is `false`, returns the index ignoring internal children. The first, non-internal child will have an index of `0` (see [method add_child]'s `internal` parameter).
  *
 */
-get_index(): int;
+get_index(include_internal?: boolean): int;
 
 /** Returns the [Window] that contains this node, or the last exclusive child in a chain of windows starting with the one that contains this node. */
 get_last_exclusive_window(): Window;
@@ -683,6 +683,7 @@ get_node(path: NodePathType): Node;
  * 
  *
 */
+get_node<T extends Node>(path: NodePathType): T;
 get_node_unsafe<T extends Node>(path: NodePathType): T;
 
 
@@ -731,10 +732,10 @@ get_node_unsafe<T extends Node>(path: NodePathType): T;
  * 
  *
 */
-get_node_and_resource(): any[];
+get_node_and_resource(path: NodePathType): any[];
 
 /** Fetches a node by [NodePath]. Similar to [method get_node], but does not generate an error if [param path] does not point to a valid node. */
-get_node_or_null(): Node;
+get_node_or_null(path: NodePathType): Node;
 
 /**
  * Returns a [Dictionary] mapping method names to their RPC configuration defined for this node using [method rpc_config].
@@ -766,7 +767,7 @@ get_path(): NodePathType;
  * **Note:** If you get a relative path which starts from a unique node, the path may be longer than a normal relative path, due to the addition of the unique node's name.
  *
 */
-get_path_to(): NodePathType;
+get_path_to(node: Node, use_unique_path?: boolean): NodePathType;
 
 /**
  * Returns the time elapsed (in seconds) since the last physics callback. This value is identical to [method _physics_process]'s `delta` parameter, and is often consistent at run-time, unless [member Engine.physics_ticks_per_second] is changed. See also [constant NOTIFICATION_PHYSICS_PROCESS].
@@ -847,25 +848,25 @@ get_viewport(): Viewport;
 get_window(): Window;
 
 /** Returns [code]true[/code] if the [param path] points to a valid node. See also [method get_node]. */
-has_node(): boolean;
+has_node(path: NodePathType): boolean;
 
 /** Returns [code]true[/code] if [param path] points to a valid node and its subnames point to a valid [Resource], e.g. [code]Area2D/CollisionShape2D:shape[/code]. Properties that are not [Resource] types (such as nodes or other [Variant] types) are not considered. See also [method get_node_and_resource]. */
-has_node_and_resource(): boolean;
+has_node_and_resource(path: NodePathType): boolean;
 
 /** Returns [code]true[/code] if the given [param node] is a direct or indirect child of this node. */
-is_ancestor_of(): boolean;
+is_ancestor_of(node: Node): boolean;
 
 /** Returns [code]true[/code] if the node is folded (collapsed) in the Scene dock. This method is intended to be used in editor plugins and tools. See also [method set_display_folded]. */
 is_displayed_folded(): boolean;
 
 /** Returns [code]true[/code] if [param node] has editable children enabled relative to this node. This method is intended to be used in editor plugins and tools. See also [method set_editable_instance]. */
-is_editable_instance(): boolean;
+is_editable_instance(node: Node): boolean;
 
 /** Returns [code]true[/code] if the given [param node] occurs later in the scene hierarchy than this node. A node occurring later is usually processed last. */
-is_greater_than(): boolean;
+is_greater_than(node: Node): boolean;
 
 /** Returns [code]true[/code] if this node has been added to the given [param group]. See [method add_to_group] and [method remove_from_group]. See also notes in the description, and the [SceneTree]'s group methods. */
-is_in_group(): boolean;
+is_in_group(group: keyof Groups): boolean;
 
 /** Returns [code]true[/code] if this node is currently inside a [SceneTree]. See also [method get_tree]. */
 is_inside_tree(): boolean;
@@ -932,13 +933,13 @@ is_processing_unhandled_key_input(): boolean;
  * **Note:** The processing order of several engine callbacks ([method _ready], [method _process], etc.) and notifications sent through [method propagate_notification] is affected by tree order. [CanvasItem] nodes are also rendered in tree order. See also [member process_priority].
  *
 */
-move_child(): void;
+move_child(child_node: Node, to_index: int): void;
 
 /** Similar to [method call_deferred_thread_group], but for notifications. */
-notify_deferred_thread_group(): void;
+notify_deferred_thread_group(what: int): void;
 
 /** Similar to [method call_thread_safe], but for notifications. */
-notify_thread_safe(): void;
+notify_thread_safe(what: int): void;
 
 /**
  * Prints all orphan nodes (nodes outside the [SceneTree]). Useful for debugging.
@@ -1004,10 +1005,10 @@ print_tree_pretty(): void;
  * If [param parent_first] is `true`, the method is called on this node first, then on all of its children. If `false`, the children's methods are called first.
  *
 */
-propagate_call(): void;
+propagate_call(method: StringName, args?: any[], parent_first?: boolean): void;
 
 /** Calls [method Object.notification] with [param what] on this node and all of its children, recursively. */
-propagate_notification(): void;
+propagate_notification(what: int): void;
 
 /** Queues an accessibility information update for this node. */
 queue_accessibility_update(): void;
@@ -1028,10 +1029,10 @@ queue_free(): void;
  * **Note:** When this node is inside the tree, this method sets the [member owner] of the removed [param node] (or its descendants) to `null`, if their [member owner] is no longer an ancestor (see [method is_ancestor_of]).
  *
 */
-remove_child(): void;
+remove_child(node: Node): void;
 
 /** Removes the node from the given [param group]. Does nothing if the node is not in the [param group]. See also notes in the description, and the [SceneTree]'s group methods. */
-remove_from_group(): void;
+remove_from_group(group: keyof Groups): void;
 
 /**
  * Changes the parent of this [Node] to the [param new_parent]. The node needs to already have a parent. The node's [member owner] is preserved if its owner is still reachable from the new location (i.e., the node is still a descendant of the new parent after the operation).
@@ -1039,7 +1040,7 @@ remove_from_group(): void;
  * If [param keep_global_transform] is `true`, the node's global transform will be preserved if supported. [Node2D], [Node3D] and [Control] support this argument (but [Control] keeps only position).
  *
 */
-reparent(): void;
+reparent(new_parent: Node, keep_global_transform?: boolean): void;
 
 /**
  * Replaces this node by the given [param node]. All children of this node are moved to [param node].
@@ -1049,7 +1050,7 @@ reparent(): void;
  * **Warning:** The replaced node is removed from the tree, but it is **not** deleted. To prevent memory leaks, store a reference to the node in a variable, or use [method Object.free].
  *
 */
-replace_by(): void;
+replace_by(node: Node, keep_groups?: boolean): void;
 
 /**
  * Requests [method _ready] to be called again the next time the node enters the tree. Does **not** immediately call [method _ready].
@@ -1087,18 +1088,18 @@ reset_physics_interpolation(): void;
  * **Note:** In GDScript, this method corresponds to the [annotation @GDScript.@rpc] annotation, with various parameters passed (`@rpc(any)`, `@rpc(authority)`...). See also the [url=$DOCS_URL/tutorials/networking/high_level_multiplayer.html]high-level multiplayer[/url] tutorial.
  *
 */
-rpc_config(): void;
+rpc_config(method: StringName, config: any): void;
 
 
 
 /** Similar to [method call_deferred_thread_group], but for setting properties. */
-set_deferred_thread_group(): void;
+set_deferred_thread_group(property: StringName, value: any): void;
 
 /** If set to [code]true[/code], the node appears folded in the Scene dock. As a result, all of its children are hidden. This method is intended to be used in editor plugins and tools, but it also works in release builds. See also [method is_displayed_folded]. */
-set_display_folded(): void;
+set_display_folded(fold: boolean): void;
 
 /** Set to [code]true[/code] to allow all nodes owned by [param node] to be available, and editable, in the Scene dock, even if their [member owner] is not the scene root. This method is intended to be used in editor plugins and tools, but it also works in release builds. See also [method is_editable_instance]. */
-set_editable_instance(): void;
+set_editable_instance(node: Node, is_editable: boolean): void;
 
 /**
  * Sets the node's multiplayer authority to the peer with the given peer [param id]. The multiplayer authority is the peer that has authority over the node on the network. Defaults to peer ID 1 (the server). Useful in conjunction with [method rpc_config] and the [MultiplayerAPI].
@@ -1108,7 +1109,7 @@ set_editable_instance(): void;
  * **Warning:** This does **not** automatically replicate the new authority to other peers. It is the developer's responsibility to do so. You may replicate the new authority's information using [member MultiplayerSpawner.spawn_function], an RPC, or a [MultiplayerSynchronizer]. Furthermore, the parent's authority does **not** propagate to newly added children.
  *
 */
-set_multiplayer_authority(): void;
+set_multiplayer_authority(id: int, recursive?: boolean): void;
 
 /**
  * If set to `true`, enables physics (fixed framerate) processing. When a node is being processed, it will receive a [constant NOTIFICATION_PHYSICS_PROCESS] at a fixed (usually 60 FPS, see [member Engine.physics_ticks_per_second] to change) interval (and the [method _physics_process] callback will be called if it exists).
@@ -1116,7 +1117,7 @@ set_multiplayer_authority(): void;
  * **Note:** If [method _physics_process] is overridden, this will be automatically enabled before [method _ready] is called.
  *
 */
-set_physics_process(): void;
+set_physics_process(enable: boolean): void;
 
 /**
  * If set to `true`, enables internal physics for this node. Internal physics processing happens in isolation from the normal [method _physics_process] calls and is used by some nodes internally to guarantee proper functioning even if the node is paused or physics processing is disabled for scripting ([method set_physics_process]).
@@ -1124,7 +1125,7 @@ set_physics_process(): void;
  * **Warning:** Built-in nodes rely on internal processing for their internal logic. Disabling it is unsafe and may lead to unexpected behavior. Use this method if you know what you are doing.
  *
 */
-set_physics_process_internal(): void;
+set_physics_process_internal(enable: boolean): void;
 
 /**
  * If set to `true`, enables processing. When a node is being processed, it will receive a [constant NOTIFICATION_PROCESS] on every drawn frame (and the [method _process] callback will be called if it exists).
@@ -1134,7 +1135,7 @@ set_physics_process_internal(): void;
  * **Note:** This method only affects the [method _process] callback, i.e. it has no effect on other callbacks like [method _physics_process]. If you want to disable all processing for the node, set [member process_mode] to [constant PROCESS_MODE_DISABLED].
  *
 */
-set_process(): void;
+set_process(enable: boolean): void;
 
 /**
  * If set to `true`, enables input processing.
@@ -1142,7 +1143,7 @@ set_process(): void;
  * **Note:** If [method _input] is overridden, this will be automatically enabled before [method _ready] is called. Input processing is also already enabled for GUI controls, such as [Button] and [TextEdit].
  *
 */
-set_process_input(): void;
+set_process_input(enable: boolean): void;
 
 /**
  * If set to `true`, enables internal processing for this node. Internal processing happens in isolation from the normal [method _process] calls and is used by some nodes internally to guarantee proper functioning even if the node is paused or processing is disabled for scripting ([method set_process]).
@@ -1150,7 +1151,7 @@ set_process_input(): void;
  * **Warning:** Built-in nodes rely on internal processing for their internal logic. Disabling it is unsafe and may lead to unexpected behavior. Use this method if you know what you are doing.
  *
 */
-set_process_internal(): void;
+set_process_internal(enable: boolean): void;
 
 /**
  * If set to `true`, enables shortcut processing for this node.
@@ -1158,7 +1159,7 @@ set_process_internal(): void;
  * **Note:** If [method _shortcut_input] is overridden, this will be automatically enabled before [method _ready] is called.
  *
 */
-set_process_shortcut_input(): void;
+set_process_shortcut_input(enable: boolean): void;
 
 /**
  * If set to `true`, enables unhandled input processing. It enables the node to receive all input that was not previously handled (usually by a [Control]).
@@ -1166,7 +1167,7 @@ set_process_shortcut_input(): void;
  * **Note:** If [method _unhandled_input] is overridden, this will be automatically enabled before [method _ready] is called. Unhandled input processing is also already enabled for GUI controls, such as [Button] and [TextEdit].
  *
 */
-set_process_unhandled_input(): void;
+set_process_unhandled_input(enable: boolean): void;
 
 /**
  * If set to `true`, enables unhandled key input processing.
@@ -1174,13 +1175,13 @@ set_process_unhandled_input(): void;
  * **Note:** If [method _unhandled_key_input] is overridden, this will be automatically enabled before [method _ready] is called.
  *
 */
-set_process_unhandled_key_input(): void;
+set_process_unhandled_key_input(enable: boolean): void;
 
 /** If set to [code]true[/code], the node becomes an [InstancePlaceholder] when packed and instantiated from a [PackedScene]. See also [method get_scene_instance_load_placeholder]. */
-set_scene_instance_load_placeholder(): void;
+set_scene_instance_load_placeholder(load_placeholder: boolean): void;
 
 /** Similar to [method call_thread_safe], but for setting properties. */
-set_thread_safe(): void;
+set_thread_safe(property: StringName, value: any): void;
 
 /**
  * Makes this node inherit the translation domain from its parent node. If this node has no parent, the main translation domain will be used.

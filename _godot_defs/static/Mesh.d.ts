@@ -24,40 +24,40 @@ protected _get_aabb(): AABB;
 protected _get_blend_shape_count(): int;
 
 /** Virtual method to override the retrieval of blend shape names for a custom class extending [Mesh]. */
-protected _get_blend_shape_name(): StringName;
+protected _get_blend_shape_name(index: int): StringName;
 
 /** Virtual method to override the surface count for a custom class extending [Mesh]. */
 protected _get_surface_count(): int;
 
 /** Virtual method to override the names of blend shapes for a custom class extending [Mesh]. */
-protected _set_blend_shape_name(): void;
+protected _set_blend_shape_name(index: int, name: StringName): void;
 
 /** Virtual method to override the surface array index length for a custom class extending [Mesh]. */
-protected _surface_get_array_index_len(): int;
+protected _surface_get_array_index_len(index: int): int;
 
 /** Virtual method to override the surface array length for a custom class extending [Mesh]. */
-protected _surface_get_array_len(): int;
+protected _surface_get_array_len(index: int): int;
 
 /** Virtual method to override the surface arrays for a custom class extending [Mesh]. */
-protected _surface_get_arrays(): any[];
+protected _surface_get_arrays(index: int): any[];
 
 /** Virtual method to override the blend shape arrays for a custom class extending [Mesh]. */
-protected _surface_get_blend_shape_arrays(): Array[];
+protected _surface_get_blend_shape_arrays(index: int): Array[];
 
 /** Virtual method to override the surface format for a custom class extending [Mesh]. */
-protected _surface_get_format(): int;
+protected _surface_get_format(index: int): int;
 
 /** Virtual method to override the surface LODs for a custom class extending [Mesh]. */
-protected _surface_get_lods(): Dictionary<any, any>;
+protected _surface_get_lods(index: int): Dictionary<any, any>;
 
 /** Virtual method to override the surface material for a custom class extending [Mesh]. */
-protected _surface_get_material(): Material;
+protected _surface_get_material(index: int): Material;
 
 /** Virtual method to override the surface primitive type for a custom class extending [Mesh]. */
-protected _surface_get_primitive_type(): int;
+protected _surface_get_primitive_type(index: int): int;
 
 /** Virtual method to override the setting of a [param material] at the given [param index] for a custom class extending [Mesh]. */
-protected _surface_set_material(): void;
+protected _surface_set_material(index: int, material: Material): void;
 
 /**
  * Calculate a [ConvexPolygonShape3D] from the mesh.
@@ -67,7 +67,7 @@ protected _surface_set_material(): void;
  * If [param simplify] is `true`, the geometry can be further simplified to reduce the number of vertices. Disabled by default.
  *
 */
-create_convex_shape(): ConvexPolygonShape3D;
+create_convex_shape(clean?: boolean, simplify?: boolean): ConvexPolygonShape3D;
 
 /**
  * Calculate an outline mesh at a defined offset (margin) from the original mesh.
@@ -75,7 +75,7 @@ create_convex_shape(): ConvexPolygonShape3D;
  * **Note:** This method typically returns the vertices in reverse order (e.g. clockwise to counterclockwise).
  *
 */
-create_outline(): Mesh;
+create_outline(margin: float): Mesh;
 
 /** Creates a placeholder version of this resource ([PlaceholderMesh]). */
 create_placeholder(): Resource;
@@ -101,10 +101,10 @@ get_faces(): PackedVector3Array;
 get_surface_count(): int;
 
 /** Returns the arrays for the vertices, normals, UVs, etc. that make up the requested surface (see [method ArrayMesh.add_surface_from_arrays]). */
-surface_get_arrays(): any[];
+surface_get_arrays(surf_idx: int): any[];
 
 /** Returns the blend shape arrays for the requested surface. */
-surface_get_blend_shape_arrays(): Array[];
+surface_get_blend_shape_arrays(surf_idx: int): Array[];
 
 /**
  * Returns a [Material] in a given surface. Surface is rendered using this material.
@@ -112,7 +112,7 @@ surface_get_blend_shape_arrays(): Array[];
  * **Note:** This returns the material within the [Mesh] resource, not the [Material] associated to the [MeshInstance3D]'s Surface Material Override properties. To get the [Material] associated to the [MeshInstance3D]'s Surface Material Override properties, use [method MeshInstance3D.get_surface_override_material] instead.
  *
 */
-surface_get_material(): Material;
+surface_get_material(surf_idx: int): Material;
 
 /**
  * Sets a [Material] for a given surface. Surface will be rendered using this material.
@@ -120,7 +120,7 @@ surface_get_material(): Material;
  * **Note:** This assigns the material within the [Mesh] resource, not the [Material] associated to the [MeshInstance3D]'s Surface Material Override properties. To set the [Material] associated to the [MeshInstance3D]'s Surface Material Override properties, use [method MeshInstance3D.set_surface_override_material] instead.
  *
 */
-surface_set_material(): void;
+surface_set_material(surf_idx: int, material: Material): void;
 
   connect<T extends SignalsOf<Mesh>>(signal: T, method: SignalFunction<Mesh[T]>): number;
 

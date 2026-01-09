@@ -86,10 +86,10 @@ tint_progress: Color;
 tint_under: Color;
 
 /** Returns the stretch margin with the specified index. See [member stretch_margin_bottom] and related properties. */
-get_stretch_margin(): int;
+get_stretch_margin(margin: int): int;
 
 /** Sets the stretch margin with the specified index. See [member stretch_margin_bottom] and related properties. */
-set_stretch_margin(): void;
+set_stretch_margin(margin: int, value: int): void;
 
   connect<T extends SignalsOf<TextureProgressBar>>(signal: T, method: SignalFunction<TextureProgressBar[T]>): number;
 

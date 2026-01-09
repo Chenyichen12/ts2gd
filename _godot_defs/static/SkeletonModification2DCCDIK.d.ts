@@ -36,31 +36,31 @@ target_nodepath: NodePathType;
 tip_nodepath: NodePathType;
 
 /** Returns the [Bone2D] node assigned to the CCDIK joint at [param joint_idx]. */
-get_ccdik_joint_bone2d_node(): NodePathType;
+get_ccdik_joint_bone2d_node(joint_idx: int): NodePathType;
 
 /** Returns the index of the [Bone2D] node assigned to the CCDIK joint at [param joint_idx]. */
-get_ccdik_joint_bone_index(): int;
+get_ccdik_joint_bone_index(joint_idx: int): int;
 
 /** Returns whether the CCDIK joint at [param joint_idx] uses an inverted joint constraint. See [method set_ccdik_joint_constraint_angle_invert] for details. */
-get_ccdik_joint_constraint_angle_invert(): boolean;
+get_ccdik_joint_constraint_angle_invert(joint_idx: int): boolean;
 
 /** Returns the maximum angle constraint for the joint at [param joint_idx]. */
-get_ccdik_joint_constraint_angle_max(): float;
+get_ccdik_joint_constraint_angle_max(joint_idx: int): float;
 
 /** Returns the minimum angle constraint for the joint at [param joint_idx]. */
-get_ccdik_joint_constraint_angle_min(): float;
+get_ccdik_joint_constraint_angle_min(joint_idx: int): float;
 
 /** Returns whether angle constraints on the CCDIK joint at [param joint_idx] are enabled. */
-get_ccdik_joint_enable_constraint(): boolean;
+get_ccdik_joint_enable_constraint(joint_idx: int): boolean;
 
 /** Returns whether the joint at [param joint_idx] is set to rotate from the joint, [code]true[/code], or to rotate from the tip, [code]false[/code]. The default is to rotate from the tip. */
-get_ccdik_joint_rotate_from_joint(): boolean;
+get_ccdik_joint_rotate_from_joint(joint_idx: int): boolean;
 
 /** Sets the [Bone2D] node assigned to the CCDIK joint at [param joint_idx]. */
-set_ccdik_joint_bone2d_node(): void;
+set_ccdik_joint_bone2d_node(joint_idx: int, bone2d_nodepath: NodePathType): void;
 
 /** Sets the bone index, [param bone_idx], of the CCDIK joint at [param joint_idx]. When possible, this will also update the [code]bone2d_node[/code] of the CCDIK joint based on data provided by the linked skeleton. */
-set_ccdik_joint_bone_index(): void;
+set_ccdik_joint_bone_index(joint_idx: int, bone_idx: int): void;
 
 /**
  * Sets whether the CCDIK joint at [param joint_idx] uses an inverted joint constraint.
@@ -68,19 +68,19 @@ set_ccdik_joint_bone_index(): void;
  * An inverted joint constraint only constraints the CCDIK joint to the angles **outside of** the inputted minimum and maximum angles. For this reason, it is referred to as an inverted joint constraint, as it constraints the joint to the outside of the inputted values.
  *
 */
-set_ccdik_joint_constraint_angle_invert(): void;
+set_ccdik_joint_constraint_angle_invert(joint_idx: int, invert: boolean): void;
 
 /** Sets the maximum angle constraint for the joint at [param joint_idx]. */
-set_ccdik_joint_constraint_angle_max(): void;
+set_ccdik_joint_constraint_angle_max(joint_idx: int, angle_max: float): void;
 
 /** Sets the minimum angle constraint for the joint at [param joint_idx]. */
-set_ccdik_joint_constraint_angle_min(): void;
+set_ccdik_joint_constraint_angle_min(joint_idx: int, angle_min: float): void;
 
 /** Determines whether angle constraints on the CCDIK joint at [param joint_idx] are enabled. When [code]true[/code], constraints will be enabled and taken into account when solving. */
-set_ccdik_joint_enable_constraint(): void;
+set_ccdik_joint_enable_constraint(joint_idx: int, enable_constraint: boolean): void;
 
 /** Sets whether the joint at [param joint_idx] is set to rotate from the joint, [code]true[/code], or to rotate from the tip, [code]false[/code]. */
-set_ccdik_joint_rotate_from_joint(): void;
+set_ccdik_joint_rotate_from_joint(joint_idx: int, rotate_from_joint: boolean): void;
 
   connect<T extends SignalsOf<SkeletonModification2DCCDIK>>(signal: T, method: SignalFunction<SkeletonModification2DCCDIK[T]>): number;
 

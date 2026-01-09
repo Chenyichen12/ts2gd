@@ -20,7 +20,7 @@ declare class KinematicCollision2D extends RefCounted  {
 
 
 /** Returns the collision angle according to [param up_direction], which is [constant Vector2.UP] by default. This value is always positive. */
-get_angle(): float;
+get_angle(up_direction?: Vector2): float;
 
 /** Returns the colliding body's attached [Object]. */
 get_collider(): Object;

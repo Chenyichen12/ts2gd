@@ -42,7 +42,7 @@ get_uniform_buffer(): RID;
 get_view_count(): int;
 
 /** Returns the eye offset per view used to render this frame. This is the offset between our camera transform and the eye transform. */
-get_view_eye_offset(): Vector3;
+get_view_eye_offset(view: int): Vector3;
 
 /**
  * Returns the view projection per view used to render this frame.
@@ -50,7 +50,7 @@ get_view_eye_offset(): Vector3;
  * **Note:** If a single view is rendered, this returns the camera projection. If more than one view is rendered, this will return a projection for the given view including the eye offset.
  *
 */
-get_view_projection(): Projection;
+get_view_projection(view: int): Projection;
 
   connect<T extends SignalsOf<RenderSceneData>>(signal: T, method: SignalFunction<RenderSceneData[T]>): number;
 

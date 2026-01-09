@@ -60,7 +60,7 @@ declare class ScriptCreateDialog extends ConfirmationDialog  {
 
 
 /** Prefills required fields to configure the ScriptCreateDialog for use. */
-config(): void;
+config(inherits: string, path: string, built_in_enabled?: boolean, load_enabled?: boolean): void;
 
   connect<T extends SignalsOf<ScriptCreateDialog>>(signal: T, method: SignalFunction<ScriptCreateDialog[T]>): number;
 

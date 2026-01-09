@@ -37,10 +37,10 @@ axis_lock_linear_y: boolean;
 axis_lock_linear_z: boolean;
 
 /** Adds a body to the list of bodies that this body can't collide with. */
-add_collision_exception_with(): void;
+add_collision_exception_with(body: Node): void;
 
 /** Returns [code]true[/code] if the specified linear or rotational [param axis] is locked. */
-get_axis_lock(): boolean;
+get_axis_lock(axis: int): boolean;
 
 /** Returns an array of nodes that were added as collision exceptions for this body. */
 get_collision_exceptions(): PhysicsBody3D[];
@@ -62,13 +62,13 @@ get_gravity(): Vector3;
  * [param max_collisions] allows to retrieve more than one collision result.
  *
 */
-move_and_collide(): KinematicCollision3D;
+move_and_collide(motion: Vector3, test_only?: boolean, safe_margin?: float, recovery_as_collision?: boolean, max_collisions?: int): KinematicCollision3D;
 
 /** Removes a body from the list of bodies that this body can't collide with. */
-remove_collision_exception_with(): void;
+remove_collision_exception_with(body: Node): void;
 
 /** Locks or unlocks the specified linear or rotational [param axis] depending on the value of [param lock]. */
-set_axis_lock(): void;
+set_axis_lock(axis: int, lock: boolean): void;
 
 /**
  * Checks for collisions without moving the body. In order to be frame rate independent in [method Node._physics_process] or [method Node._process], [param motion] should be computed using `delta`.
@@ -84,7 +84,7 @@ set_axis_lock(): void;
  * [param max_collisions] allows to retrieve more than one collision result.
  *
 */
-test_move(): boolean;
+test_move(from: Transform3D, motion: Vector3, collision?: KinematicCollision3D, safe_margin?: float, recovery_as_collision?: boolean, max_collisions?: int): boolean;
 
   connect<T extends SignalsOf<PhysicsBody3D>>(signal: T, method: SignalFunction<PhysicsBody3D[T]>): number;
 

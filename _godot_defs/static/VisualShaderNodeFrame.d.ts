@@ -38,10 +38,10 @@ tint_color_enabled: boolean;
 title: string;
 
 /** Adds a node to the list of nodes attached to the frame. Should not be called directly, use the [method VisualShader.attach_node_to_frame] method instead. */
-add_attached_node(): void;
+add_attached_node(node: int): void;
 
 /** Removes a node from the list of nodes attached to the frame. Should not be called directly, use the [method VisualShader.detach_node_from_frame] method instead. */
-remove_attached_node(): void;
+remove_attached_node(node: int): void;
 
   connect<T extends SignalsOf<VisualShaderNodeFrame>>(signal: T, method: SignalFunction<VisualShaderNodeFrame[T]>): number;
 

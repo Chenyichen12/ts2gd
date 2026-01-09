@@ -32,13 +32,13 @@ declare class NavigationMeshGeneratorClass extends Object  {
 
 
 /** Bakes the [param navigation_mesh] with source geometry collected starting from the [param root_node]. */
-bake(): void;
+bake(navigation_mesh: NavigationMesh, root_node: Node): void;
 
 /** Bakes the provided [param navigation_mesh] with the data from the provided [param source_geometry_data]. After the process is finished the optional [param callback] will be called. */
-bake_from_source_geometry_data(): void;
+bake_from_source_geometry_data(navigation_mesh: NavigationMesh, source_geometry_data: NavigationMeshSourceGeometryData3D, callback?: Callable): void;
 
 /** Removes all polygons and vertices from the provided [param navigation_mesh] resource. */
-clear(): void;
+clear(navigation_mesh: NavigationMesh): void;
 
 /**
  * Parses the [SceneTree] for source geometry according to the properties of [param navigation_mesh]. Updates the provided [param source_geometry_data] resource with the resulting data. The resource can then be used to bake a navigation mesh with [method bake_from_source_geometry_data]. After the process is finished the optional [param callback] will be called.
@@ -48,7 +48,7 @@ clear(): void;
  * **Performance:** While convenient, reading data arrays from [Mesh] resources can affect the frame rate negatively. The data needs to be received from the GPU, stalling the [RenderingServer] in the process. For performance prefer the use of e.g. collision shapes or creating the data arrays entirely in code.
  *
 */
-parse_source_geometry_data(): void;
+parse_source_geometry_data(navigation_mesh: NavigationMesh, source_geometry_data: NavigationMeshSourceGeometryData3D, root_node: Node, callback?: Callable): void;
 
   connect<T extends SignalsOf<NavigationMeshGeneratorClass>>(signal: T, method: SignalFunction<NavigationMeshGeneratorClass[T]>): number;
 

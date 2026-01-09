@@ -53,10 +53,10 @@ usage_bits: int;
 width: int;
 
 /** Adds [param format] as a valid format for the corresponding [RDTextureView]'s [member RDTextureView.format_override] property. If any format is added as shareable, then the main [member format] must also be added. */
-add_shareable_format(): void;
+add_shareable_format(format: int): void;
 
 /** Removes [param format] from the list of valid formats that the corresponding [RDTextureView]'s [member RDTextureView.format_override] property can be set to. */
-remove_shareable_format(): void;
+remove_shareable_format(format: int): void;
 
   connect<T extends SignalsOf<RDTextureFormat>>(signal: T, method: SignalFunction<RDTextureFormat[T]>): number;
 

@@ -20,7 +20,7 @@ declare class EditorExportPlatform extends RefCounted  {
 
 
 /** Adds a message to the export log that will be displayed when exporting ends. */
-add_message(): void;
+add_message(type: int, category: string, message: string): void;
 
 /** Clears the export log. */
 clear_messages(): void;
@@ -29,7 +29,7 @@ clear_messages(): void;
 create_preset(): EditorExportPreset;
 
 /** Creates a PCK archive at [param path] for the specified [param preset]. */
-export_pack(): int;
+export_pack(preset: EditorExportPreset, debug: boolean, path: string, flags?: int): int;
 
 /**
  * Creates a patch PCK archive at [param path] for the specified [param preset], containing only the files that have changed since the last patch.
@@ -37,10 +37,10 @@ export_pack(): int;
  * **Note:** [param patches] is an optional override of the set of patches defined in the export preset. When empty the patches defined in the export preset will be used instead.
  *
 */
-export_pack_patch(): int;
+export_pack_patch(preset: EditorExportPreset, debug: boolean, path: string, patches?: PackedStringArray, flags?: int): int;
 
 /** Creates a full project at [param path] for the specified [param preset]. */
-export_project(): int;
+export_project(preset: EditorExportPreset, debug: boolean, path: string, flags?: int): int;
 
 /**
  * Exports project files for the specified preset. This method can be used to implement custom export format, other than PCK and ZIP. One of the callbacks is called for each exported file.
@@ -52,10 +52,10 @@ export_project(): int;
  * **Note:** `file_index` and `file_count` are intended for progress tracking only and aren't necessarily unique and precise.
  *
 */
-export_project_files(): int;
+export_project_files(preset: EditorExportPreset, debug: boolean, save_cb: Callable, shared_cb?: Callable): int;
 
 /** Create a ZIP archive at [param path] for the specified [param preset]. */
-export_zip(): int;
+export_zip(preset: EditorExportPreset, debug: boolean, path: string, flags?: int): int;
 
 /**
  * Create a patch ZIP archive at [param path] for the specified [param preset], containing only the files that have changed since the last patch.
@@ -63,34 +63,34 @@ export_zip(): int;
  * **Note:** [param patches] is an optional override of the set of patches defined in the export preset. When empty the patches defined in the export preset will be used instead.
  *
 */
-export_zip_patch(): int;
+export_zip_patch(preset: EditorExportPreset, debug: boolean, path: string, patches?: PackedStringArray, flags?: int): int;
 
 /** Locates export template for the platform, and returns [Dictionary] with the following keys: [code]path: String[/code] and [code]error: String[/code]. This method is provided for convenience and custom export platforms aren't required to use it or keep export templates stored in the same way official templates are. */
-find_export_template(): Dictionary<any, any>;
+find_export_template(template_file_name: string): Dictionary<any, any>;
 
 /** Generates array of command line arguments for the default export templates for the debug flags and editor settings. */
-gen_export_flags(): PackedStringArray;
+gen_export_flags(flags: int): PackedStringArray;
 
 /** Returns array of [EditorExportPreset]s for this platform. */
 get_current_presets(): any[];
 
 /** Returns array of core file names that always should be exported regardless of preset config. */
-get_forced_export_files(): PackedStringArray;
+get_forced_export_files(preset?: EditorExportPreset): PackedStringArray;
 
 /** Returns additional files that should always be exported regardless of preset configuration, and are not part of the project source. The returned [Dictionary] contains filename keys ([String]) and their corresponding raw data ([PackedByteArray]). */
-get_internal_export_files(): Dictionary<any, any>;
+get_internal_export_files(preset: EditorExportPreset, debug: boolean): Dictionary<any, any>;
 
 /** Returns the message category for the message with the given [param index]. */
-get_message_category(): string;
+get_message_category(index: int): string;
 
 /** Returns the number of messages in the export log. */
 get_message_count(): int;
 
 /** Returns the text for the message with the given [param index]. */
-get_message_text(): string;
+get_message_text(index: int): string;
 
 /** Returns the type for the message with the given [param index]. */
-get_message_type(): int;
+get_message_type(index: int): int;
 
 /** Returns the name of the export operating system handled by this [EditorExportPlatform] class, as a friendly string. Possible return values are [code]Windows[/code], [code]Linux[/code], [code]macOS[/code], [code]Android[/code], [code]iOS[/code], and [code]Web[/code]. */
 get_os_name(): string;
@@ -104,25 +104,25 @@ get_worst_message_type(): int;
  * If [param embed] is `true`, PCK content is appended to the end of [param path] file and return [Dictionary] additionally include following keys: `embedded_start: int` (embedded PCK offset) and `embedded_size: int` (embedded PCK size).
  *
 */
-save_pack(): Dictionary<any, any>;
+save_pack(preset: EditorExportPreset, debug: boolean, path: string, embed?: boolean): Dictionary<any, any>;
 
 /** Saves patch PCK archive and returns [Dictionary] with the following keys: [code]result: Error[/code], [code]so_files: Array[/code] (array of the shared/static objects which contains dictionaries with the following keys: [code]path: String[/code], [code]tags: PackedStringArray[/code], and [code]target_folder: String[/code]). */
-save_pack_patch(): Dictionary<any, any>;
+save_pack_patch(preset: EditorExportPreset, debug: boolean, path: string): Dictionary<any, any>;
 
 /** Saves ZIP archive and returns [Dictionary] with the following keys: [code]result: Error[/code], [code]so_files: Array[/code] (array of the shared/static objects which contains dictionaries with the following keys: [code]path: String[/code], [code]tags: PackedStringArray[/code], and [code]target_folder: String[/code]). */
-save_zip(): Dictionary<any, any>;
+save_zip(preset: EditorExportPreset, debug: boolean, path: string): Dictionary<any, any>;
 
 /** Saves patch ZIP archive and returns [Dictionary] with the following keys: [code]result: Error[/code], [code]so_files: Array[/code] (array of the shared/static objects which contains dictionaries with the following keys: [code]path: String[/code], [code]tags: PackedStringArray[/code], and [code]target_folder: String[/code]). */
-save_zip_patch(): Dictionary<any, any>;
+save_zip_patch(preset: EditorExportPreset, debug: boolean, path: string): Dictionary<any, any>;
 
 /** Uploads specified file over SCP protocol to the remote host. */
-ssh_push_to_remote(): int;
+ssh_push_to_remote(host: string, port: string, scp_args: PackedStringArray, src_file: string, dst_file: string): int;
 
 /** Executes specified command on the remote host via SSH protocol and returns command output in the [param output]. */
-ssh_run_on_remote(): int;
+ssh_run_on_remote(host: string, port: string, ssh_arg: PackedStringArray, cmd_args: string, output?: any[], port_fwd?: int): int;
 
 /** Executes specified command on the remote host via SSH protocol and returns process ID (on the remote host) without waiting for command to finish. */
-ssh_run_on_remote_no_wait(): int;
+ssh_run_on_remote_no_wait(host: string, port: string, ssh_args: PackedStringArray, cmd_args: string, port_fwd?: int): int;
 
   connect<T extends SignalsOf<EditorExportPlatform>>(signal: T, method: SignalFunction<EditorExportPlatform[T]>): number;
 

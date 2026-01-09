@@ -56,19 +56,19 @@ declare class CameraServerClass extends Object  {
 monitoring_feeds: boolean;
 
 /** Adds the camera [param feed] to the camera server. */
-add_feed(): void;
+add_feed(feed: CameraFeed): void;
 
 /** Returns an array of [CameraFeed]s. */
 feeds(): CameraFeed[];
 
 /** Returns the [CameraFeed] corresponding to the camera with the given [param index]. */
-get_feed(): CameraFeed;
+get_feed(index: int): CameraFeed;
 
 /** Returns the number of [CameraFeed]s registered. */
 get_feed_count(): int;
 
 /** Removes the specified camera [param feed]. */
-remove_feed(): void;
+remove_feed(feed: CameraFeed): void;
 
   connect<T extends SignalsOf<CameraServerClass>>(signal: T, method: SignalFunction<CameraServerClass[T]>): number;
 

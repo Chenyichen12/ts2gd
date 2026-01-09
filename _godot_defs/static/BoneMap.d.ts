@@ -27,7 +27,7 @@ profile: SkeletonProfile;
  * In the retargeting process, the returned bone name is the bone name of the target skeleton.
  *
 */
-find_profile_bone_name(): StringName;
+find_profile_bone_name(skeleton_bone_name: StringName): StringName;
 
 /**
  * Returns a skeleton bone name is mapped to [param profile_bone_name].
@@ -35,7 +35,7 @@ find_profile_bone_name(): StringName;
  * In the retargeting process, the returned bone name is the bone name of the source skeleton.
  *
 */
-get_skeleton_bone_name(): StringName;
+get_skeleton_bone_name(profile_bone_name: StringName): StringName;
 
 /**
  * Maps a skeleton bone name to [param profile_bone_name].
@@ -43,7 +43,7 @@ get_skeleton_bone_name(): StringName;
  * In the retargeting process, the setting bone name is the bone name of the source skeleton.
  *
 */
-set_skeleton_bone_name(): void;
+set_skeleton_bone_name(profile_bone_name: StringName, skeleton_bone_name: StringName): void;
 
   connect<T extends SignalsOf<BoneMap>>(signal: T, method: SignalFunction<BoneMap[T]>): number;
 

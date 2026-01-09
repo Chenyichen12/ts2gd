@@ -16,10 +16,10 @@ declare class AnimationLibrary extends Resource  {
 
 
 /** Adds the [param animation] to the library, accessible by the key [param name]. */
-add_animation(): int;
+add_animation(name: StringName, animation: Animation): int;
 
 /** Returns the [Animation] with the key [param name]. If the animation does not exist, [code]null[/code] is returned and an error is logged. */
-get_animation(): Animation;
+get_animation(name: StringName): Animation;
 
 /** Returns the keys for the [Animation]s stored in the library. */
 get_animation_list(): StringName[];
@@ -28,13 +28,13 @@ get_animation_list(): StringName[];
 get_animation_list_size(): int;
 
 /** Returns [code]true[/code] if the library stores an [Animation] with [param name] as the key. */
-has_animation(): boolean;
+has_animation(name: StringName): boolean;
 
 /** Removes the [Animation] with the key [param name]. */
-remove_animation(): void;
+remove_animation(name: StringName): void;
 
 /** Changes the key of the [Animation] associated with the key [param name] to [param newname]. */
-rename_animation(): void;
+rename_animation(name: StringName, newname: StringName): void;
 
   connect<T extends SignalsOf<AnimationLibrary>>(signal: T, method: SignalFunction<AnimationLibrary[T]>): number;
 

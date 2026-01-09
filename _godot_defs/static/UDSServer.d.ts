@@ -25,7 +25,7 @@ declare class UDSServer extends SocketServer  {
  * **Note:** The socket file must not already exist at the specified path. You may need to remove any existing socket file before calling this method.
  *
 */
-listen(): int;
+listen(path: string): int;
 
 /** If a connection is available, returns a StreamPeerUDS with the connection. */
 take_connection(): StreamPeerUDS;

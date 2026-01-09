@@ -80,10 +80,10 @@ declare class PerformanceClass extends Object  {
  * Callables are called with arguments supplied in argument array.
  *
 */
-add_custom_monitor(): void;
+add_custom_monitor(id: StringName, callable: Callable, arguments?: any[], type?: int): void;
 
 /** Returns the value of custom monitor with given [param id]. The callable is called to get the value of custom monitor. See also [method has_custom_monitor]. Prints an error if the given [param id] is absent. */
-get_custom_monitor(): any;
+get_custom_monitor(id: StringName): any;
 
 /** Returns the names of active custom monitors in an [Array]. */
 get_custom_monitor_names(): StringName[];
@@ -108,16 +108,16 @@ get_custom_monitor_types(): PackedInt32Array;
  * See [method get_custom_monitor] to query custom performance monitors' values.
  *
 */
-get_monitor(): float;
+get_monitor(monitor: int): float;
 
 /** Returns the last tick in which custom monitor was added/removed (in microseconds since the engine started). This is set to [method Time.get_ticks_usec] when the monitor is updated. */
 get_monitor_modification_time(): int;
 
 /** Returns [code]true[/code] if custom monitor with the given [param id] is present, [code]false[/code] otherwise. */
-has_custom_monitor(): boolean;
+has_custom_monitor(id: StringName): boolean;
 
 /** Removes the custom monitor with given [param id]. Prints an error if the given [param id] is already absent. */
-remove_custom_monitor(): void;
+remove_custom_monitor(id: StringName): void;
 
   connect<T extends SignalsOf<PerformanceClass>>(signal: T, method: SignalFunction<PerformanceClass[T]>): number;
 

@@ -20,7 +20,7 @@ declare class EditorDebuggerSession extends RefCounted  {
 
 
 /** Adds the given [param control] to the debug session UI in the debugger bottom panel. The [param control]'s node name will be used as the tab title. */
-add_session_tab(): void;
+add_session_tab(control: Control): void;
 
 /** Returns [code]true[/code] if the debug session is currently attached to a remote instance. */
 is_active(): boolean;
@@ -32,16 +32,16 @@ is_breaked(): boolean;
 is_debuggable(): boolean;
 
 /** Removes the given [param control] from the debug session UI in the debugger bottom panel. */
-remove_session_tab(): void;
+remove_session_tab(control: Control): void;
 
 /** Sends the given [param message] to the attached remote instance, optionally passing additionally [param data]. See [EngineDebugger] for how to retrieve those messages. */
-send_message(): void;
+send_message(message: string, data?: any[]): void;
 
 /** Enables or disables a specific breakpoint based on [param enabled], updating the Editor Breakpoint Panel accordingly. */
-set_breakpoint(): void;
+set_breakpoint(path: string, line: int, enabled: boolean): void;
 
 /** Toggle the given [param profiler] on the attached remote instance, optionally passing additionally [param data]. See [EngineProfiler] for more details. */
-toggle_profiler(): void;
+toggle_profiler(profiler: string, enable: boolean, data?: any[]): void;
 
   connect<T extends SignalsOf<EditorDebuggerSession>>(signal: T, method: SignalFunction<EditorDebuggerSession[T]>): number;
 

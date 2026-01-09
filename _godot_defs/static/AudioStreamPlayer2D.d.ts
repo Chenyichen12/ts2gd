@@ -88,10 +88,10 @@ get_stream_playback(): AudioStreamPlayback;
 has_stream_playback(): boolean;
 
 /** Queues the audio to play on the next physics frame, from the given position [param from_position], in seconds. */
-play(): void;
+play(from_position?: float): void;
 
 /** Sets the position from which audio will be played, in seconds. */
-seek(): void;
+seek(to_position: float): void;
 
 /** Stops the audio. */
 stop(): void;

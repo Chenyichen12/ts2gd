@@ -24,10 +24,10 @@ declare class PackedByteArray {
 
 
 /** Appends an element at the end of the array (alias of [method push_back]). */
-append(): boolean;
+append(value: int): boolean;
 
 /** Appends a [PackedByteArray] at the end of this array. */
-append_array(): void;
+append_array(array: PackedByteArray): void;
 
 /**
  * Finds the index of an existing value (or the insertion index that maintains sorting order, if the value is not yet present in the array) using binary search. Optionally, a [param before] specifier can be passed. If `false`, the returned index comes after all existing entries of the value in the array.
@@ -35,64 +35,64 @@ append_array(): void;
  * **Note:** Calling [method bsearch] on an unsorted array results in unexpected behavior.
  *
 */
-bsearch(): int;
+bsearch(value: int, before?: boolean): int;
 
 /** Swaps the byte order of [param count] 16-bit segments of the array starting at [param offset]. Swap is done in-place. If [param count] is less than zero, all segments to the end of array are processed, if processed data size is not a multiple of 2, the byte after the last processed 16-bit segment is not modified. */
-bswap16(): void;
+bswap16(offset?: int, count?: int): void;
 
 /** Swaps the byte order of [param count] 32-bit segments of the array starting at [param offset]. Swap is done in-place. If [param count] is less than zero, all segments to the end of array are processed, if processed data size is not a multiple of 4, bytes after the last processed 32-bit segment are not modified. */
-bswap32(): void;
+bswap32(offset?: int, count?: int): void;
 
 /** Swaps the byte order of [param count] 64-bit segments of the array starting at [param offset]. Swap is done in-place. If [param count] is less than zero, all segments to the end of array are processed, if processed data size is not a multiple of 8, bytes after the last processed 64-bit segment are not modified. */
-bswap64(): void;
+bswap64(offset?: int, count?: int): void;
 
 /** Clears the array. This is equivalent to using [method resize] with a size of [code]0[/code]. */
 clear(): void;
 
 /** Returns a new [PackedByteArray] with the data compressed. Set the compression mode using one of [enum FileAccess.CompressionMode]'s constants. */
-compress(): PackedByteArray;
+compress(compression_mode?: int): PackedByteArray;
 
 /** Returns the number of times an element is in the array. */
-count(): int;
+count(value: int): int;
 
 /** Decodes a 64-bit floating-point number from the bytes starting at [param byte_offset]. Fails if the byte count is insufficient. Returns [code]0.0[/code] if a valid number can't be decoded. */
-decode_double(): float;
+decode_double(byte_offset: int): float;
 
 /** Decodes a 32-bit floating-point number from the bytes starting at [param byte_offset]. Fails if the byte count is insufficient. Returns [code]0.0[/code] if a valid number can't be decoded. */
-decode_float(): float;
+decode_float(byte_offset: int): float;
 
 /** Decodes a 16-bit floating-point number from the bytes starting at [param byte_offset]. Fails if the byte count is insufficient. Returns [code]0.0[/code] if a valid number can't be decoded. */
-decode_half(): float;
+decode_half(byte_offset: int): float;
 
 /** Decodes a 8-bit signed integer number from the bytes starting at [param byte_offset]. Fails if the byte count is insufficient. Returns [code]0[/code] if a valid number can't be decoded. */
-decode_s8(): int;
+decode_s8(byte_offset: int): int;
 
 /** Decodes a 16-bit signed integer number from the bytes starting at [param byte_offset]. Fails if the byte count is insufficient. Returns [code]0[/code] if a valid number can't be decoded. */
-decode_s16(): int;
+decode_s16(byte_offset: int): int;
 
 /** Decodes a 32-bit signed integer number from the bytes starting at [param byte_offset]. Fails if the byte count is insufficient. Returns [code]0[/code] if a valid number can't be decoded. */
-decode_s32(): int;
+decode_s32(byte_offset: int): int;
 
 /** Decodes a 64-bit signed integer number from the bytes starting at [param byte_offset]. Fails if the byte count is insufficient. Returns [code]0[/code] if a valid number can't be decoded. */
-decode_s64(): int;
+decode_s64(byte_offset: int): int;
 
 /** Decodes a 8-bit unsigned integer number from the bytes starting at [param byte_offset]. Fails if the byte count is insufficient. Returns [code]0[/code] if a valid number can't be decoded. */
-decode_u8(): int;
+decode_u8(byte_offset: int): int;
 
 /** Decodes a 16-bit unsigned integer number from the bytes starting at [param byte_offset]. Fails if the byte count is insufficient. Returns [code]0[/code] if a valid number can't be decoded. */
-decode_u16(): int;
+decode_u16(byte_offset: int): int;
 
 /** Decodes a 32-bit unsigned integer number from the bytes starting at [param byte_offset]. Fails if the byte count is insufficient. Returns [code]0[/code] if a valid number can't be decoded. */
-decode_u32(): int;
+decode_u32(byte_offset: int): int;
 
 /** Decodes a 64-bit unsigned integer number from the bytes starting at [param byte_offset]. Fails if the byte count is insufficient. Returns [code]0[/code] if a valid number can't be decoded. */
-decode_u64(): int;
+decode_u64(byte_offset: int): int;
 
 /** Decodes a [Variant] from the bytes starting at [param byte_offset]. Returns [code]null[/code] if a valid variant can't be decoded or the value is [Object]-derived and [param allow_objects] is [code]false[/code]. */
-decode_var(): any;
+decode_var(byte_offset: int, allow_objects?: boolean): any;
 
 /** Decodes a size of a [Variant] from the bytes starting at [param byte_offset]. Requires at least 4 bytes of data starting at the offset, otherwise fails. */
-decode_var_size(): int;
+decode_var_size(byte_offset: int, allow_objects?: boolean): int;
 
 /**
  * Returns a new [PackedByteArray] with the data decompressed. Set [param buffer_size] to the size of the uncompressed data. Set the compression mode using one of [enum FileAccess.CompressionMode]'s constants.
@@ -100,7 +100,7 @@ decode_var_size(): int;
  * **Note:** Decompression is not guaranteed to work with data not compressed by Godot, for example if data compressed with the deflate compression mode lacks a checksum or header.
  *
 */
-decompress(): PackedByteArray;
+decompress(buffer_size: int, compression_mode?: int): PackedByteArray;
 
 /**
  * Returns a new [PackedByteArray] with the data decompressed. Set the compression mode using one of [enum FileAccess.CompressionMode]'s constants. **This method only accepts brotli, gzip, and deflate compression modes.**
@@ -112,55 +112,55 @@ decompress(): PackedByteArray;
  * **Note:** Decompression is not guaranteed to work with data not compressed by Godot, for example if data compressed with the deflate compression mode lacks a checksum or header.
  *
 */
-decompress_dynamic(): PackedByteArray;
+decompress_dynamic(max_output_size: int, compression_mode?: int): PackedByteArray;
 
 /** Creates a copy of the array, and returns it. */
 duplicate(): PackedByteArray;
 
 /** Encodes a 64-bit floating-point number as bytes at the index of [param byte_offset] bytes. The array must have at least 8 bytes of allocated space, starting at the offset. */
-encode_double(): void;
+encode_double(byte_offset: int, value: float): void;
 
 /** Encodes a 32-bit floating-point number as bytes at the index of [param byte_offset] bytes. The array must have at least 4 bytes of space, starting at the offset. */
-encode_float(): void;
+encode_float(byte_offset: int, value: float): void;
 
 /** Encodes a 16-bit floating-point number as bytes at the index of [param byte_offset] bytes. The array must have at least 2 bytes of space, starting at the offset. */
-encode_half(): void;
+encode_half(byte_offset: int, value: float): void;
 
 /** Encodes a 8-bit signed integer number (signed byte) at the index of [param byte_offset] bytes. The array must have at least 1 byte of space, starting at the offset. */
-encode_s8(): void;
+encode_s8(byte_offset: int, value: int): void;
 
 /** Encodes a 16-bit signed integer number as bytes at the index of [param byte_offset] bytes. The array must have at least 2 bytes of space, starting at the offset. */
-encode_s16(): void;
+encode_s16(byte_offset: int, value: int): void;
 
 /** Encodes a 32-bit signed integer number as bytes at the index of [param byte_offset] bytes. The array must have at least 4 bytes of space, starting at the offset. */
-encode_s32(): void;
+encode_s32(byte_offset: int, value: int): void;
 
 /** Encodes a 64-bit signed integer number as bytes at the index of [param byte_offset] bytes. The array must have at least 8 bytes of space, starting at the offset. */
-encode_s64(): void;
+encode_s64(byte_offset: int, value: int): void;
 
 /** Encodes a 8-bit unsigned integer number (byte) at the index of [param byte_offset] bytes. The array must have at least 1 byte of space, starting at the offset. */
-encode_u8(): void;
+encode_u8(byte_offset: int, value: int): void;
 
 /** Encodes a 16-bit unsigned integer number as bytes at the index of [param byte_offset] bytes. The array must have at least 2 bytes of space, starting at the offset. */
-encode_u16(): void;
+encode_u16(byte_offset: int, value: int): void;
 
 /** Encodes a 32-bit unsigned integer number as bytes at the index of [param byte_offset] bytes. The array must have at least 4 bytes of space, starting at the offset. */
-encode_u32(): void;
+encode_u32(byte_offset: int, value: int): void;
 
 /** Encodes a 64-bit unsigned integer number as bytes at the index of [param byte_offset] bytes. The array must have at least 8 bytes of space, starting at the offset. */
-encode_u64(): void;
+encode_u64(byte_offset: int, value: int): void;
 
 /** Encodes a [Variant] at the index of [param byte_offset] bytes. A sufficient space must be allocated, depending on the encoded variant's size. If [param allow_objects] is [code]false[/code], [Object]-derived values are not permitted and will instead be serialized as ID-only. */
-encode_var(): int;
+encode_var(byte_offset: int, value: any, allow_objects?: boolean): int;
 
 /** Removes the first occurrence of a value from the array and returns [code]true[/code]. If the value does not exist in the array, nothing happens and [code]false[/code] is returned. To remove an element by index, use [method remove_at] instead. */
-erase(): boolean;
+erase(value: int): boolean;
 
 /** Assigns the given value to all elements in the array. This can typically be used together with [method resize] to create an array with a given size and initialized elements. */
-fill(): void;
+fill(value: int): void;
 
 /** Searches the array for a value and returns its index or [code]-1[/code] if not found. Optionally, the initial search index can be passed. */
-find(): int;
+find(value: int, from?: int): int;
 
 /**
  * Returns the byte at the given [param index] in the array. If [param index] is out-of-bounds or negative, this method fails and returns `0`.
@@ -168,7 +168,7 @@ find(): int;
  * This method is similar (but not identical) to the `[]` operator. Most notably, when this method fails, it doesn't pause project execution if run from the editor.
  *
 */
-get(): int;
+get(index: int): int;
 
 /** Converts ASCII/Latin-1 encoded array to [String]. Fast alternative to [method get_string_from_utf8] if the content is ASCII/Latin-1 only. Unlike the UTF-8 function this function maps every byte to a character in the array. Multibyte sequences will not be interpreted correctly. For parsing user input always use [method get_string_from_utf8]. This is the inverse of [method String.to_ascii_buffer]. */
 get_string_from_ascii(): string;
@@ -183,7 +183,7 @@ get_string_from_ascii(): string;
  * - For macOS and Linux/BSD, see `libiconv` library documentation and `iconv --list` for a list of supported encodings.
  *
 */
-get_string_from_multibyte_char(): string;
+get_string_from_multibyte_char(encoding?: string): string;
 
 /** Converts UTF-8 encoded array to [String]. Slower than [method get_string_from_ascii] but supports UTF-8 encoded data. Use this function if you are unsure about the source of the data. For user input this function should always be preferred. Returns empty string if source array is not valid UTF-8 string. This is the inverse of [method String.to_utf8_buffer]. */
 get_string_from_utf8(): string;
@@ -198,10 +198,10 @@ get_string_from_utf32(): string;
 get_string_from_wchar(): string;
 
 /** Returns [code]true[/code] if the array contains [param value]. */
-has(): boolean;
+has(value: int): boolean;
 
 /** Returns [code]true[/code] if a valid [Variant] value can be decoded at the [param byte_offset]. Returns [code]false[/code] otherwise or when the value is [Object]-derived and [param allow_objects] is [code]false[/code]. */
-has_encoded_var(): boolean;
+has_encoded_var(byte_offset: int, allow_objects?: boolean): boolean;
 
 /**
  * Returns a hexadecimal representation of this array as a [String].
@@ -223,16 +223,16 @@ has_encoded_var(): boolean;
 hex_encode(): string;
 
 /** Inserts a new element at a given position in the array. The position must be valid, or at the end of the array ([code]idx == size()[/code]). */
-insert(): int;
+insert(at_index: int, value: int): int;
 
 /** Returns [code]true[/code] if the array is empty. */
 is_empty(): boolean;
 
 /** Appends an element at the end of the array. */
-push_back(): boolean;
+push_back(value: int): boolean;
 
 /** Removes an element from the array by index. */
-remove_at(): void;
+remove_at(index: int): void;
 
 /**
  * Sets the size of the array. If the array is grown, reserves elements at the end of the array. If the array is shrunk, truncates the array to the new size. Calling [method resize] once and assigning the new values is faster than adding new elements one by one.
@@ -240,16 +240,16 @@ remove_at(): void;
  * Returns [constant OK] on success, or one of the following [enum Error] constants if this method fails: [constant ERR_INVALID_PARAMETER] if the size is negative, or [constant ERR_OUT_OF_MEMORY] if allocations fail. Use [method size] to find the actual size of the array after resize.
  *
 */
-resize(): int;
+resize(new_size: int): int;
 
 /** Reverses the order of the elements in the array. */
 reverse(): void;
 
 /** Searches the array in reverse order. Optionally, a start search index can be passed. If negative, the start index is considered relative to the end of the array. */
-rfind(): int;
+rfind(value: int, from?: int): int;
 
 /** Changes the byte at the given index. */
-set(): void;
+set(index: int, value: int): void;
 
 /** Returns the number of elements in the array. */
 size(): int;
@@ -262,7 +262,7 @@ size(): int;
  * If either [param begin] or [param end] are negative, they will be relative to the end of the array (i.e. `arr.slice(0, -2)` is a shorthand for `arr.slice(0, arr.size() - 2)`).
  *
 */
-slice(): PackedByteArray;
+slice(begin: int, end?: int): PackedByteArray;
 
 /** Sorts the elements of the array in ascending order. */
 sort(): void;

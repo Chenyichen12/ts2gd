@@ -40,22 +40,22 @@ protected _is_playing(): boolean;
 protected _play(): void;
 
 /** Seeks to [param time] seconds. Called in response to the [member VideoStreamPlayer.stream_position] setter. */
-protected _seek(): void;
+protected _seek(time: float): void;
 
 /** Select the audio track [param idx]. Called when playback starts, and in response to the [member VideoStreamPlayer.audio_track] setter. */
-protected _set_audio_track(): void;
+protected _set_audio_track(idx: int): void;
 
 /** Set the paused status of video playback. [method _is_paused] must return [param paused]. Called in response to the [member VideoStreamPlayer.paused] setter. */
-protected _set_paused(): void;
+protected _set_paused(paused: boolean): void;
 
 /** Stops playback. May be called multiple times before [method _play], or in response to [method VideoStreamPlayer.stop]. [method _is_playing] should return [code]false[/code] once stopped. */
 protected _stop(): void;
 
 /** Ticks video playback for [param delta] seconds. Called every frame as long as both [method _is_paused] and [method _is_playing] return [code]true[/code]. */
-protected _update(): void;
+protected _update(delta: float): void;
 
 /** Render [param num_frames] audio frames (of [method _get_channels] floats each) from [param buffer], starting from index [param offset] in the array. Returns the number of audio frames rendered, or -1 on error. */
-mix_audio(): int;
+mix_audio(num_frames: int, buffer?: PackedFloat32Array, offset?: int): int;
 
   connect<T extends SignalsOf<VideoStreamPlayback>>(signal: T, method: SignalFunction<VideoStreamPlayback[T]>): number;
 

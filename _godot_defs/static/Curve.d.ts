@@ -37,7 +37,7 @@ min_value: float;
 point_count: int;
 
 /** Adds a point to the curve. For each side, if the [code]*_mode[/code] is [constant TANGENT_LINEAR], the [code]*_tangent[/code] angle (in degrees) uses the slope of the curve halfway to the adjacent point. Allows custom assignments to the [code]*_tangent[/code] angle if [code]*_mode[/code] is set to [constant TANGENT_FREE]. */
-add_point(): int;
+add_point(position: Vector2, left_tangent?: float, right_tangent?: float, left_mode?: int, right_mode?: int): int;
 
 /** Recomputes the baked cache of points for the curve. */
 bake(): void;
@@ -52,49 +52,49 @@ clear_points(): void;
 get_domain_range(): float;
 
 /** Returns the left [enum TangentMode] for the point at [param index]. */
-get_point_left_mode(): int;
+get_point_left_mode(index: int): int;
 
 /** Returns the left tangent angle (in degrees) for the point at [param index]. */
-get_point_left_tangent(): float;
+get_point_left_tangent(index: int): float;
 
 /** Returns the curve coordinates for the point at [param index]. */
-get_point_position(): Vector2;
+get_point_position(index: int): Vector2;
 
 /** Returns the right [enum TangentMode] for the point at [param index]. */
-get_point_right_mode(): int;
+get_point_right_mode(index: int): int;
 
 /** Returns the right tangent angle (in degrees) for the point at [param index]. */
-get_point_right_tangent(): float;
+get_point_right_tangent(index: int): float;
 
 /** Returns the difference between [member min_value] and [member max_value]. */
 get_value_range(): float;
 
 /** Removes the point at [param index] from the curve. */
-remove_point(): void;
+remove_point(index: int): void;
 
 /** Returns the Y value for the point that would exist at the X position [param offset] along the curve. */
-sample(): float;
+sample(offset: float): float;
 
 /** Returns the Y value for the point that would exist at the X position [param offset] along the curve using the baked cache. Bakes the curve's points if not already baked. */
-sample_baked(): float;
+sample_baked(offset: float): float;
 
 /** Sets the left [enum TangentMode] for the point at [param index] to [param mode]. */
-set_point_left_mode(): void;
+set_point_left_mode(index: int, mode: int): void;
 
 /** Sets the left tangent angle for the point at [param index] to [param tangent]. */
-set_point_left_tangent(): void;
+set_point_left_tangent(index: int, tangent: float): void;
 
 /** Sets the offset from [code]0.5[/code]. */
-set_point_offset(): int;
+set_point_offset(index: int, offset: float): int;
 
 /** Sets the right [enum TangentMode] for the point at [param index] to [param mode]. */
-set_point_right_mode(): void;
+set_point_right_mode(index: int, mode: int): void;
 
 /** Sets the right tangent angle for the point at [param index] to [param tangent]. */
-set_point_right_tangent(): void;
+set_point_right_tangent(index: int, tangent: float): void;
 
 /** Assigns the vertical position [param y] to the point at [param index]. */
-set_point_value(): void;
+set_point_value(index: int, y: float): void;
 
   connect<T extends SignalsOf<Curve>>(signal: T, method: SignalFunction<Curve[T]>): number;
 

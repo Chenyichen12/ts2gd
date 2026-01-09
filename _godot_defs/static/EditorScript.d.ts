@@ -79,7 +79,7 @@ declare class EditorScript extends RefCounted  {
 protected _run(): void;
 
 /** Makes [param node] root of the currently opened scene. Only works if the scene is empty. If the [param node] is a scene instance, an inheriting scene will be created. */
-add_root_node(): void;
+add_root_node(node: Node): void;
 
 /** Returns the [EditorInterface] singleton instance. */
 get_editor_interface(): EditorInterface;

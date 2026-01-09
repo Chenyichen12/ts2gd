@@ -20,7 +20,7 @@ declare class EditorResourceTooltipPlugin extends RefCounted  {
 
 
 /** Return [code]true[/code] if the plugin is going to handle the given [Resource] [param type]. */
-protected _handles(): boolean;
+protected _handles(type: string): boolean;
 
 /**
  * Create and return a tooltip that will be displayed when the user hovers a resource under the given [param path] in filesystem dock.
@@ -44,10 +44,10 @@ protected _handles(): boolean;
  * 
  *
 */
-protected _make_tooltip_for_path(): Control;
+protected _make_tooltip_for_path(path: string, metadata: Dictionary<any, any>, base: Control): Control;
 
 /** Requests a thumbnail for the given [TextureRect]. The thumbnail is created asynchronously by [EditorResourcePreview] and automatically set when available. */
-request_thumbnail(): void;
+request_thumbnail(path: string, control: TextureRect): void;
 
   connect<T extends SignalsOf<EditorResourceTooltipPlugin>>(signal: T, method: SignalFunction<EditorResourceTooltipPlugin[T]>): number;
 

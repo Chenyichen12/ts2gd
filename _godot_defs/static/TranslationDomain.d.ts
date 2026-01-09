@@ -94,34 +94,34 @@ pseudolocalization_skip_placeholders_enabled: boolean;
 pseudolocalization_suffix: string;
 
 /** Adds a translation. */
-add_translation(): void;
+add_translation(translation: Translation): void;
 
 /** Removes all translations. */
 clear(): void;
 
 /** Returns the [Translation] instances that match [param locale] (see [method TranslationServer.compare_locales]). If [param exact] is [code]true[/code], only instances whose locale exactly equals [param locale] will be returned. */
-find_translations(): Translation[];
+find_translations(locale: string, exact: boolean): Translation[];
 
 /** Returns the locale override of the domain. Returns an empty string if locale override is disabled. */
 get_locale_override(): string;
 
 /** Returns the [Translation] instance that best matches [param locale]. Returns [code]null[/code] if there are no matches. */
-get_translation_object(): Translation;
+get_translation_object(locale: string): Translation;
 
 /** Returns all available [Translation] instances as added by [method add_translation]. */
 get_translations(): Translation[];
 
 /** Returns [code]true[/code] if this translation domain contains the given [param translation]. */
-has_translation(): boolean;
+has_translation(translation: Translation): boolean;
 
 /** Returns [code]true[/code] if there are any [Translation] instances that match [param locale] (see [method TranslationServer.compare_locales]). If [param exact] is [code]true[/code], only instances whose locale exactly equals [param locale] are considered. */
-has_translation_for_locale(): boolean;
+has_translation_for_locale(locale: string, exact: boolean): boolean;
 
 /** Returns the pseudolocalized string based on the [param message] passed in. */
-pseudolocalize(): StringName;
+pseudolocalize(message: StringName): StringName;
 
 /** Removes the given translation. */
-remove_translation(): void;
+remove_translation(translation: Translation): void;
 
 /**
  * Sets the locale override of the domain.
@@ -131,10 +131,10 @@ remove_translation(): void;
  * **Note:** Calling this method does not automatically update texts in the scene tree. Please propagate the [constant MainLoop.NOTIFICATION_TRANSLATION_CHANGED] signal manually.
  *
 */
-set_locale_override(): void;
+set_locale_override(locale: string): void;
 
 /** Returns the current locale's translation for the given message and context. */
-translate(): StringName;
+translate(message: StringName, context?: StringName): StringName;
 
 /**
  * Returns the current locale's translation for the given message, plural message and context.
@@ -142,7 +142,7 @@ translate(): StringName;
  * The number [param n] is the number or quantity of the plural object. It will be used to guide the translation system to fetch the correct plural form for the selected language.
  *
 */
-translate_plural(): StringName;
+translate_plural(message: StringName, message_plural: StringName, n: int, context?: StringName): StringName;
 
   connect<T extends SignalsOf<TranslationDomain>>(signal: T, method: SignalFunction<TranslationDomain[T]>): number;
 

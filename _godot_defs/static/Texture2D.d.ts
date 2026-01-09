@@ -33,7 +33,7 @@ declare class Texture2D extends Texture  {
  * **Note:** This is only used in 2D rendering, not 3D.
  *
 */
-protected _draw(): void;
+protected _draw(to_canvas_item: RID, pos: Vector2, modulate: Color, transpose: boolean): void;
 
 /**
  * Called when the [Texture2D] is requested to be drawn onto [CanvasItem]'s specified [param rect]. [param modulate] specifies a multiplier for the colors being drawn, while [param transpose] specifies whether drawing should be performed in column-major order instead of row-major order (resulting in 90-degree clockwise rotation).
@@ -41,7 +41,7 @@ protected _draw(): void;
  * **Note:** This is only used in 2D rendering, not 3D.
  *
 */
-protected _draw_rect(): void;
+protected _draw_rect(to_canvas_item: RID, rect: Rect2, tile: boolean, modulate: Color, transpose: boolean): void;
 
 /**
  * Called when a part of the [Texture2D] specified by [param src_rect]'s coordinates is requested to be drawn onto [CanvasItem]'s specified [param rect]. [param modulate] specifies a multiplier for the colors being drawn, while [param transpose] specifies whether drawing should be performed in column-major order instead of row-major order (resulting in 90-degree clockwise rotation).
@@ -49,7 +49,7 @@ protected _draw_rect(): void;
  * **Note:** This is only used in 2D rendering, not 3D.
  *
 */
-protected _draw_rect_region(): void;
+protected _draw_rect_region(to_canvas_item: RID, rect: Rect2, src_rect: Rect2, modulate: Color, transpose: boolean, clip_uv: boolean): void;
 
 /** Called when the [Texture2D]'s height is queried. */
 protected _get_height(): int;
@@ -61,19 +61,19 @@ protected _get_width(): int;
 protected _has_alpha(): boolean;
 
 /** Called when a pixel's opaque state in the [Texture2D] is queried at the specified [code](x, y)[/code] position. */
-protected _is_pixel_opaque(): boolean;
+protected _is_pixel_opaque(x: int, y: int): boolean;
 
 /** Creates a placeholder version of this resource ([PlaceholderTexture2D]). */
 create_placeholder(): Resource;
 
 /** Draws the texture using a [CanvasItem] with the [RenderingServer] API at the specified [param position]. */
-draw(): void;
+draw(canvas_item: RID, position: Vector2, modulate?: Color, transpose?: boolean): void;
 
 /** Draws the texture using a [CanvasItem] with the [RenderingServer] API. */
-draw_rect(): void;
+draw_rect(canvas_item: RID, rect: Rect2, tile: boolean, modulate?: Color, transpose?: boolean): void;
 
 /** Draws a part of the texture using a [CanvasItem] with the [RenderingServer] API. */
-draw_rect_region(): void;
+draw_rect_region(canvas_item: RID, rect: Rect2, src_rect: Rect2, modulate?: Color, transpose?: boolean, clip_uv?: boolean): void;
 
 /** Returns the texture height in pixels. */
 get_height(): int;

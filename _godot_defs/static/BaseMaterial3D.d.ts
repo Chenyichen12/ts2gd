@@ -585,22 +585,22 @@ vertex_color_use_as_albedo: boolean;
 z_clip_scale: float;
 
 /** Returns [code]true[/code] if the specified [param feature] is enabled. */
-get_feature(): boolean;
+get_feature(feature: int): boolean;
 
 /** Returns [code]true[/code] if the specified [param flag] is enabled. */
-get_flag(): boolean;
+get_flag(flag: int): boolean;
 
 /** Returns the [Texture2D] associated with the specified texture [param param]. */
-get_texture(): Texture2D;
+get_texture(param: int): Texture2D;
 
 /** If [param enable] is [code]true[/code], enables the specified [param feature]. Many features that are available in [BaseMaterial3D] need to be enabled before use. This way, the cost for using the feature is only incurred when specified. Features can also be enabled by setting their corresponding property to [code]true[/code]. */
-set_feature(): void;
+set_feature(feature: int, enable: boolean): void;
 
 /** If [param enable] is [code]true[/code], enables the specified [param flag]. Flags are optional behavior that can be turned on and off. Only one flag can be enabled at a time with this function, the flag enumerators cannot be bit-masked together to enable or disable multiple flags at once. Flags can also be enabled by setting their corresponding property to [code]true[/code]. */
-set_flag(): void;
+set_flag(flag: int, enable: boolean): void;
 
 /** Sets the texture for the slot specified by [param param]. */
-set_texture(): void;
+set_texture(param: int, texture: Texture2D): void;
 
   connect<T extends SignalsOf<BaseMaterial3D>>(signal: T, method: SignalFunction<BaseMaterial3D[T]>): number;
 

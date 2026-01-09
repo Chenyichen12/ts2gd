@@ -314,7 +314,7 @@ clear(): void;
 delete_char_at_caret(): void;
 
 /** Deletes a section of the [member text] going from position [param from_column] to [param to_column]. Both parameters should be within the text's length. */
-delete_text(): void;
+delete_text(from_column: int, to_column: int): void;
 
 /** Clears the current selection. */
 deselect(): void;
@@ -325,7 +325,7 @@ deselect(): void;
  * See also [member keep_editing_on_text_submit].
  *
 */
-edit(): void;
+edit(hide_focus?: boolean): void;
 
 /**
  * Returns the [PopupMenu] of this [LineEdit]. By default, this menu is displayed when right-clicking on the [LineEdit].
@@ -382,7 +382,7 @@ get_menu(): PopupMenu;
  * **Note:** To check at caret location use `get_next_composite_character_column(get_caret_column())`
  *
 */
-get_next_composite_character_column(): int;
+get_next_composite_character_column(column: int): int;
 
 /**
  * Returns the correct column at the start of a composite character like ❤️‍🩹 (mending heart; Unicode: `U+2764 U+FE0F U+200D U+1FA79`) which is comprised of more than one Unicode code point, if the caret is at the end of the composite character. Also returns the correct column with the caret at mid grapheme and for non-composite characters.
@@ -390,7 +390,7 @@ get_next_composite_character_column(): int;
  * **Note:** To check at caret location use `get_previous_composite_character_column(get_caret_column())`
  *
 */
-get_previous_composite_character_column(): int;
+get_previous_composite_character_column(column: int): int;
 
 /** Returns the scroll offset due to [member caret_column], as a number of characters. */
 get_scroll_offset(): float;
@@ -417,7 +417,7 @@ has_selection(): boolean;
 has_undo(): boolean;
 
 /** Inserts [param text] at the caret. If the resulting value is longer than [member max_length], nothing happens. */
-insert_text_at_caret(): void;
+insert_text_at_caret(text: string): void;
 
 /** Returns whether the [LineEdit] is being edited. */
 is_editing(): boolean;
@@ -426,7 +426,7 @@ is_editing(): boolean;
 is_menu_visible(): boolean;
 
 /** Executes a given action as defined in the [enum MenuItems] enum. */
-menu_option(): void;
+menu_option(option: int): void;
 
 /**
  * Selects characters inside [LineEdit] between [param from] and [param to]. By default, [param from] is at the beginning and [param to] at the end.
@@ -449,7 +449,7 @@ menu_option(): void;
  * 
  *
 */
-select(): void;
+select(from?: int, to?: int): void;
 
 /** Selects the whole [String]. */
 select_all(): void;

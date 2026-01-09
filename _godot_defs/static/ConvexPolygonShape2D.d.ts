@@ -35,7 +35,7 @@ declare class ConvexPolygonShape2D extends Shape2D  {
 points: PackedVector2Array;
 
 /** Based on the set of points provided, this assigns the [member points] property using the convex hull algorithm, removing all unneeded points. See [method Geometry2D.convex_hull] for details. */
-set_point_cloud(): void;
+set_point_cloud(point_cloud: PackedVector2Array): void;
 
   connect<T extends SignalsOf<ConvexPolygonShape2D>>(signal: T, method: SignalFunction<ConvexPolygonShape2D[T]>): number;
 

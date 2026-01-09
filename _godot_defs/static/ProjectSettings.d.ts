@@ -4821,13 +4821,13 @@ declare class ProjectSettingsClass extends Object  {
  * **Note:** Setting `"usage"` for the property is not supported. Use [method set_as_basic], [method set_restart_if_changed], and [method set_as_internal] to modify usage flags.
  *
 */
-add_property_info(): void;
+add_property_info(hint: Dictionary<any, any>): void;
 
 /** Checks if any settings with the prefix [param setting_prefix] exist in the set of changed settings. See also [method get_changed_settings]. */
-check_changed_settings_in_group(): boolean;
+check_changed_settings_in_group(setting_prefix: string): boolean;
 
 /** Clears the whole configuration (not recommended, may break things). */
-clear(): void;
+clear(name: string): void;
 
 /** Gets an array of the settings which have been changed since the last save. Note that internally [code]changed_settings[/code] is cleared after a successful save, so generally the most appropriate place to use this method is when processing [signal settings_changed]. */
 get_changed_settings(): PackedStringArray;
@@ -4851,7 +4851,7 @@ get_changed_settings(): PackedStringArray;
 get_global_class_list(): Dictionary[];
 
 /** Returns the order of a configuration value (influences when saved to the config file). */
-get_order(): int;
+get_order(name: string): int;
 
 /**
  * Returns the value of the setting identified by [param name]. If the setting doesn't exist and [param default_value] is specified, the value of [param default_value] is returned. Otherwise, `null` is returned.
@@ -4874,7 +4874,7 @@ get_order(): int;
  * See also [method has_setting] to check whether a setting exists.
  *
 */
-get_setting(): any;
+get_setting(name: string, default_value?: any): any;
 
 /**
  * Similar to [method get_setting], but applies feature tag overrides if any exists and is valid.
@@ -4893,10 +4893,10 @@ get_setting(): any;
  * 
  *
 */
-get_setting_with_override(): any;
+get_setting_with_override(name: StringName): any;
 
 /** Similar to [method get_setting_with_override], but applies feature tag overrides instead of current OS features. */
-get_setting_with_override_and_custom_features(): any;
+get_setting_with_override_and_custom_features(name: StringName, features: PackedStringArray): any;
 
 /**
  * Returns the absolute, native OS path corresponding to the localized [param path] (starting with `res://` or `user://`). The returned path will vary depending on the operating system and user preferences. See [url=$DOCS_URL/tutorials/io/data_paths.html]File paths in Godot projects[/url] to see what those paths convert to. See also [method localize_path].
@@ -4920,7 +4920,7 @@ get_setting_with_override_and_custom_features(): any;
  * 
  *
 */
-globalize_path(): string;
+globalize_path(path: string): string;
 
 /**
  * Returns `true` if a configuration value is present.
@@ -4928,7 +4928,7 @@ globalize_path(): string;
  * **Note:** In order to be be detected, custom settings have to be either defined with [method set_setting], or exist in the `project.godot` file. This is especially relevant when using [method set_initial_value].
  *
 */
-has_setting(): boolean;
+has_setting(name: string): boolean;
 
 /**
  * Loads the contents of the .pck or .zip file specified by [param pack] into the resource filesystem (`res://`). Returns `true` on success.
@@ -4940,10 +4940,10 @@ has_setting(): boolean;
  * **Note:** [DirAccess] will not show changes made to the contents of `res://` after calling this function.
  *
 */
-load_resource_pack(): boolean;
+load_resource_pack(pack: string, replace_files?: boolean, offset?: int): boolean;
 
 /** Returns the localized path (starting with [code]res://[/code]) corresponding to the absolute, native OS [param path]. See also [method globalize_path]. */
-localize_path(): string;
+localize_path(path: string): string;
 
 /**
  * Saves the configuration to the `project.godot` file.
@@ -4954,13 +4954,13 @@ localize_path(): string;
 save(): int;
 
 /** Saves the configuration to a custom file. The file extension must be [code].godot[/code] (to save in text-based [ConfigFile] format) or [code].binary[/code] (to save in binary format). You can also save [code]override.cfg[/code] file, which is also text, but can be used in exported projects unlike other formats. */
-save_custom(): int;
+save_custom(file: string): int;
 
 /** Defines if the specified setting is considered basic or advanced. Basic settings will always be shown in the project settings. Advanced settings will only be shown if the user enables the "Advanced Settings" option. */
-set_as_basic(): void;
+set_as_basic(name: string, basic: boolean): void;
 
 /** Defines if the specified setting is considered internal. An internal setting won't show up in the Project Settings dialog. This is mostly useful for addons that need to store their own internal settings without exposing them directly to the user. */
-set_as_internal(): void;
+set_as_internal(name: string, internal: boolean): void;
 
 /**
  * Sets the specified setting's initial value. This is the value the setting reverts to. The setting should already exist before calling this method. Note that project settings equal to their default value are not saved, so your code needs to account for that.
@@ -4980,10 +4980,10 @@ set_as_internal(): void;
  * If you have a project setting defined by an [EditorPlugin], but want to use it in a running project, you will need a similar code at runtime.
  *
 */
-set_initial_value(): void;
+set_initial_value(name: string, value: any): void;
 
 /** Sets the order of a configuration value (influences when saved to the config file). */
-set_order(): void;
+set_order(name: string, position: int): void;
 
 /**
  * Sets whether a setting requires restarting the editor to properly take effect.
@@ -4991,7 +4991,7 @@ set_order(): void;
  * **Note:** This is just a hint to display to the user that the editor must be restarted for changes to take effect. Enabling [method set_restart_if_changed] does **not** delay the setting being set when changed.
  *
 */
-set_restart_if_changed(): void;
+set_restart_if_changed(name: string, restart: boolean): void;
 
 /**
  * Sets the value of a setting.
@@ -5010,7 +5010,7 @@ set_restart_if_changed(): void;
  * This can also be used to erase custom project settings. To do this change the setting value to `null`.
  *
 */
-set_setting(): void;
+set_setting(name: string, value: any): void;
 
   connect<T extends SignalsOf<ProjectSettingsClass>>(signal: T, method: SignalFunction<ProjectSettingsClass[T]>): number;
 

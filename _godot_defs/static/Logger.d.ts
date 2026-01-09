@@ -29,7 +29,7 @@ declare class Logger extends RefCounted  {
  * **Note:** Logging errors from this method using functions like [method @GlobalScope.push_error] or [method @GlobalScope.push_warning] is not supported, as it could cause infinite recursion. These errors will only show up in the console output.
  *
 */
-protected _log_error(): void;
+protected _log_error(function: string, file: string, line: int, code: string, rationale: string, editor_notify: boolean, error_type: int, script_backtraces: ScriptBacktrace[]): void;
 
 /**
  * Called when a message is logged. If [param error] is `true`, then this message was meant to be sent to `stderr`.
@@ -39,7 +39,7 @@ protected _log_error(): void;
  * **Note:** Logging another message from this method using functions like [method @GlobalScope.print] is not supported, as it could cause infinite recursion. These messages will only show up in the console output.
  *
 */
-protected _log_message(): void;
+protected _log_message(message: string, error: boolean): void;
 
   connect<T extends SignalsOf<Logger>>(signal: T, method: SignalFunction<Logger[T]>): number;
 

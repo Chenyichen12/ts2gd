@@ -62,34 +62,34 @@ declare class ConvertTransformModifier3D extends BoneConstraint3D  {
 setting_count: int;
 
 /** Returns the axis of the remapping destination transform. */
-get_apply_axis(): int;
+get_apply_axis(index: int): int;
 
 /** Returns the maximum value of the remapping destination range. */
-get_apply_range_max(): float;
+get_apply_range_max(index: int): float;
 
 /** Returns the minimum value of the remapping destination range. */
-get_apply_range_min(): float;
+get_apply_range_min(index: int): float;
 
 /** Returns the operation of the remapping destination transform. */
-get_apply_transform_mode(): int;
+get_apply_transform_mode(index: int): int;
 
 /** Returns the axis of the remapping source transform. */
-get_reference_axis(): int;
+get_reference_axis(index: int): int;
 
 /** Returns the maximum value of the remapping source range. */
-get_reference_range_max(): float;
+get_reference_range_max(index: int): float;
 
 /** Returns the minimum value of the remapping source range. */
-get_reference_range_min(): float;
+get_reference_range_min(index: int): float;
 
 /** Returns the operation of the remapping source transform. */
-get_reference_transform_mode(): int;
+get_reference_transform_mode(index: int): int;
 
 /** Returns [code]true[/code] if the additive option is enabled in the setting at [param index]. */
-is_additive(): boolean;
+is_additive(index: int): boolean;
 
 /** Returns [code]true[/code] if the relative option is enabled in the setting at [param index]. */
-is_relative(): boolean;
+is_relative(index: int): boolean;
 
 /**
  * Sets additive option in the setting at [param index] to [param enabled]. This mainly affects the process of applying transform to the [method BoneConstraint3D.set_apply_bone].
@@ -99,31 +99,31 @@ is_relative(): boolean;
  * If sets [param enabled] to `false`, the pose of the current apply bone is replaced with the processed transform. However, if set [method set_relative] to `true`, the transform is relative to rest.
  *
 */
-set_additive(): void;
+set_additive(index: int, enabled: boolean): void;
 
 /** Sets the axis of the remapping destination transform. */
-set_apply_axis(): void;
+set_apply_axis(index: int, axis: int): void;
 
 /** Sets the maximum value of the remapping destination range. */
-set_apply_range_max(): void;
+set_apply_range_max(index: int, range_max: float): void;
 
 /** Sets the minimum value of the remapping destination range. */
-set_apply_range_min(): void;
+set_apply_range_min(index: int, range_min: float): void;
 
 /** Sets the operation of the remapping destination transform. */
-set_apply_transform_mode(): void;
+set_apply_transform_mode(index: int, transform_mode: int): void;
 
 /** Sets the axis of the remapping source transform. */
-set_reference_axis(): void;
+set_reference_axis(index: int, axis: int): void;
 
 /** Sets the maximum value of the remapping source range. */
-set_reference_range_max(): void;
+set_reference_range_max(index: int, range_max: float): void;
 
 /** Sets the minimum value of the remapping source range. */
-set_reference_range_min(): void;
+set_reference_range_min(index: int, range_min: float): void;
 
 /** Sets the operation of the remapping source transform. */
-set_reference_transform_mode(): void;
+set_reference_transform_mode(index: int, transform_mode: int): void;
 
 /**
  * Sets relative option in the setting at [param index] to [param enabled].
@@ -133,7 +133,7 @@ set_reference_transform_mode(): void;
  * If sets [param enabled] to `false`, the extracted transform is absolute.
  *
 */
-set_relative(): void;
+set_relative(index: int, enabled: boolean): void;
 
   connect<T extends SignalsOf<ConvertTransformModifier3D>>(signal: T, method: SignalFunction<ConvertTransformModifier3D[T]>): number;
 

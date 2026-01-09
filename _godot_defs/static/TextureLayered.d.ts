@@ -38,7 +38,7 @@ protected _get_format(): int;
 protected _get_height(): int;
 
 /** Called when the data for a layer in the [TextureLayered] is queried. */
-protected _get_layer_data(): Image;
+protected _get_layer_data(layer_index: int): Image;
 
 /** Called when the layers' type in the [TextureLayered] is queried. */
 protected _get_layered_type(): int;
@@ -59,7 +59,7 @@ get_format(): int;
 get_height(): int;
 
 /** Returns an [Image] resource with the data from specified [param layer]. */
-get_layer_data(): Image;
+get_layer_data(layer: int): Image;
 
 /** Returns the [TextureLayered]'s type. The type determines how the data is accessed, with cubemaps having special types. */
 get_layered_type(): int;

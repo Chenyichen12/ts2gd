@@ -16,19 +16,19 @@ declare class NavigationMeshSourceGeometryData3D extends Resource  {
 
 
 /** Adds an array of vertex positions to the geometry data for navigation mesh baking to form triangulated faces. For each face the array must have three vertex positions in clockwise winding order. Since [NavigationMesh] resources have no transform, all vertex positions need to be offset by the node's transform using [param xform]. */
-add_faces(): void;
+add_faces(faces: PackedVector3Array, xform: Transform3D): void;
 
 /** Adds the geometry data of a [Mesh] resource to the navigation mesh baking data. The mesh must have valid triangulated mesh data to be considered. Since [NavigationMesh] resources have no transform, all vertex positions need to be offset by the node's transform using [param xform]. */
-add_mesh(): void;
+add_mesh(mesh: Mesh, xform: Transform3D): void;
 
 /** Adds an [Array] the size of [constant Mesh.ARRAY_MAX] and with vertices at index [constant Mesh.ARRAY_VERTEX] and indices at index [constant Mesh.ARRAY_INDEX] to the navigation mesh baking data. The array must have valid triangulated mesh data to be considered. Since [NavigationMesh] resources have no transform, all vertex positions need to be offset by the node's transform using [param xform]. */
-add_mesh_array(): void;
+add_mesh_array(mesh_array: any[], xform: Transform3D): void;
 
 /** Adds a projected obstruction shape to the source geometry. The [param vertices] are considered projected on an xz-axes plane, placed at the global y-axis [param elevation] and extruded by [param height]. If [param carve] is [code]true[/code] the carved shape will not be affected by additional offsets (e.g. agent radius) of the navigation mesh baking process. */
-add_projected_obstruction(): void;
+add_projected_obstruction(vertices: PackedVector3Array, elevation: float, height: float, carve: boolean): void;
 
 /** Appends arrays of [param vertices] and [param indices] at the end of the existing arrays. Adds the existing index as an offset to the appended indices. */
-append_arrays(): void;
+append_arrays(vertices: PackedFloat32Array, indices: PackedInt32Array): void;
 
 /** Clears the internal data. */
 clear(): void;
@@ -63,7 +63,7 @@ get_vertices(): PackedFloat32Array;
 has_data(): boolean;
 
 /** Adds the geometry data of another [NavigationMeshSourceGeometryData3D] to the navigation mesh baking data. */
-merge(): void;
+merge(other_geometry: NavigationMeshSourceGeometryData3D): void;
 
 /**
  * Sets the parsed source geometry data indices. The indices need to be matched with appropriated vertices.
@@ -71,7 +71,7 @@ merge(): void;
  * **Warning:** Inappropriate data can crash the baking process of the involved third-party libraries.
  *
 */
-set_indices(): void;
+set_indices(indices: PackedInt32Array): void;
 
 /**
  * Sets the projected obstructions with an Array of Dictionaries with the following key value pairs:
@@ -88,7 +88,7 @@ set_indices(): void;
  * 
  *
 */
-set_projected_obstructions(): void;
+set_projected_obstructions(projected_obstructions: any[]): void;
 
 /**
  * Sets the parsed source geometry data vertices. The vertices need to be matched with appropriated indices.
@@ -96,7 +96,7 @@ set_projected_obstructions(): void;
  * **Warning:** Inappropriate data can crash the baking process of the involved third-party libraries.
  *
 */
-set_vertices(): void;
+set_vertices(vertices: PackedFloat32Array): void;
 
   connect<T extends SignalsOf<NavigationMeshSourceGeometryData3D>>(signal: T, method: SignalFunction<NavigationMeshSourceGeometryData3D[T]>): number;
 

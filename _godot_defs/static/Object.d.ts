@@ -126,7 +126,7 @@ declare class Object {
  * **Note:** Unlike other virtual methods, this method is called automatically for every script that overrides it. This means that the base implementation should not be called via `super` in GDScript or its equivalents in other languages. The bottom-most sub-class will be called first, with subsequent calls ascending the class hierarchy. The call chain will stop on the first class that returns a non-`null` value.
  *
 */
-protected _get(): any;
+protected _get(property: StringName): any;
 
 /**
  * Override this method to provide a custom list of additional properties to handle by the engine.
@@ -250,7 +250,7 @@ protected _init(): void;
  * **Tip:** In GDScript, you can use a subtype of [Variant] as the return type for [method _iter_get]. The specified type will be used to set the type of the iterator variable in `for` loops, enhancing type safety.
  *
 */
-protected _iter_get(): any;
+protected _iter_get(iter: any): any;
 
 /**
  * Initializes the iterator. [param iter] stores the iteration state. Since GDScript does not support passing arguments by reference, a single-element array is used as a wrapper. Returns `true` so long as the iterator has not reached the end.
@@ -282,10 +282,10 @@ protected _iter_get(): any;
  * **Note:** Alternatively, you can ignore [param iter] and use the object's state instead, see [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_advanced.html#custom-iterators]online docs[/url] for an example. Note that in this case you will not be able to reuse the same iterator instance in nested loops. Also, make sure you reset the iterator state in this method if you want to reuse the same instance multiple times.
  *
 */
-protected _iter_init(): boolean;
+protected _iter_init(iter: any[]): boolean;
 
 /** Moves the iterator to the next iteration. [param iter] stores the iteration state. Since GDScript does not support passing arguments by reference, a single-element array is used as a wrapper. Returns [code]true[/code] so long as the iterator has not reached the end. */
-protected _iter_next(): boolean;
+protected _iter_next(iter: any[]): boolean;
 
 /**
  * Called when the object receives a notification, which can be identified in [param what] by comparing it with a constant. See also [method notification].
@@ -314,7 +314,7 @@ protected _iter_next(): boolean;
  * **Note:** Unlike other virtual methods, this method is called automatically for every script that overrides it. This means that the base implementation should not be called via `super` in GDScript or its equivalents in other languages. Call order depends on the `reversed` argument of [method notification] and varies between different notifications. Most notifications are sent in the forward order (i.e. Object class first, most derived class last).
  *
 */
-protected _notification(): void;
+protected _notification(what: int): void;
 
 /**
  * Override this method to customize the given [param property]'s revert behavior. Should return `true` if the [param property] has a custom default value and is revertible in the Inspector dock. Use [method _property_get_revert] to specify the [param property]'s default value.
@@ -324,7 +324,7 @@ protected _notification(): void;
  * **Note:** Unlike other virtual methods, this method is called automatically for every script that overrides it. This means that the base implementation should not be called via `super` in GDScript or its equivalents in other languages. The bottom-most sub-class will be called first, with subsequent calls ascending the class hierarchy. The call chain will stop on the first class that returns `true`.
  *
 */
-protected _property_can_revert(): boolean;
+protected _property_can_revert(property: StringName): boolean;
 
 /**
  * Override this method to customize the given [param property]'s revert behavior. Should return the default value for the [param property]. If the default value differs from the [param property]'s current value, a revert icon is displayed in the Inspector dock.
@@ -334,7 +334,7 @@ protected _property_can_revert(): boolean;
  * **Note:** Unlike other virtual methods, this method is called automatically for every script that overrides it. This means that the base implementation should not be called via `super` in GDScript or its equivalents in other languages. The bottom-most sub-class will be called first, with subsequent calls ascending the class hierarchy. The call chain will stop on the first class that returns a non-`null` value.
  *
 */
-protected _property_get_revert(): any;
+protected _property_get_revert(property: StringName): any;
 
 /**
  * Override this method to customize the behavior of [method set]. Should set the [param property] to [param value] and return `true`, or `false` if the [param property] should be handled normally. The **exact** way to set the [param property] is up to this method's implementation.
@@ -388,7 +388,7 @@ protected _property_get_revert(): any;
  * **Note:** Unlike other virtual methods, this method is called automatically for every script that overrides it. This means that the base implementation should not be called via `super` in GDScript or its equivalents in other languages. The bottom-most sub-class will be called first, with subsequent calls ascending the class hierarchy. The call chain will stop on the first class that returns `true`.
  *
 */
-protected _set(): boolean;
+protected _set(property: StringName, value: any): boolean;
 
 /**
  * Override this method to customize the return value of [method to_string], and therefore the object's representation as a [String].
@@ -454,7 +454,7 @@ protected _to_string(): string;
  * 
  *
 */
-protected _validate_property(): void;
+protected _validate_property(property: Dictionary<any, any>): void;
 
 /**
  * Adds a user-defined signal named [param signal]. Optional arguments for the signal can be added as an [Array] of dictionaries, each defining a `name` [String] and a `type` [int] (see [enum Variant.Type]). See also [method has_user_signal] and [method remove_user_signal].
@@ -486,7 +486,7 @@ protected _validate_property(): void;
  * 
  *
 */
-add_user_signal(): void;
+add_user_signal(signal: string, arguments?: any[]): void;
 
 /**
  * Calls the [param method] on the object and returns the result. This method supports a variable number of arguments, so parameters can be passed as a comma separated list.
@@ -570,7 +570,7 @@ call_deferred(...args: any[]): any;
  * **Note:** In C#, [param method] must be in snake_case when referring to built-in Godot methods. Prefer using the names exposed in the `MethodName` class to avoid allocating a new [StringName] on each call.
  *
 */
-callv(): any;
+callv(method: StringName, arg_array: any[]): any;
 
 /** Returns [code]true[/code] if the object is allowed to translate messages with [method tr] and [method tr_n]. See also [method set_message_translation]. */
 can_translate_messages(): boolean;
@@ -581,7 +581,7 @@ cancel_free(): void;
 
 
 /** Disconnects a [param signal] by name from a given [param callable]. If the connection does not exist, generates an error. Use [method is_connected] to make sure that the connection exists. */
-disconnect(): void;
+disconnect(signal: StringName, callable: Callable): void;
 
 /**
  * Emits the given [param signal] by name. The signal must exist, so it should be a built-in signal of this class or one of its inherited classes, or a user-defined signal (see [method add_user_signal]). This method supports a variable number of arguments, so parameters can be passed as a comma separated list.
@@ -630,7 +630,7 @@ free(): void;
  * **Note:** In C#, [param property] must be in snake_case when referring to built-in Godot properties. Prefer using the names exposed in the `PropertyName` class to avoid allocating a new [StringName] on each call.
  *
 */
-get(): any;
+get(property: StringName): any;
 
 /**
  * Returns the object's built-in class name, as a [String]. See also [method is_class].
@@ -679,7 +679,7 @@ get_incoming_connections(): Dictionary[];
  * **Note:** This method does not support actual paths to nodes in the [SceneTree], only sub-property paths. In the context of nodes, use [method Node.get_node_and_resource] instead.
  *
 */
-get_indexed(): any;
+get_indexed(property_path: NodePathType): any;
 
 /**
  * Returns the object's unique instance ID. This ID can be saved in [EncodedObjectAsID], and can be used to retrieve this object instance with [method @GlobalScope.instance_from_id].
@@ -697,7 +697,7 @@ get_instance_id(): int;
  * **Note:** Metadata that has a name starting with an underscore (`_`) is considered editor-only. Editor-only metadata is not displayed in the Inspector and should not be edited, although it can still be found by this method.
  *
 */
-get_meta(): any;
+get_meta(name: StringName, _default?: any): any;
 
 /** Returns the object's metadata entry names as an [Array] of [StringName]s. */
 get_meta_list(): StringName[];
@@ -708,7 +708,7 @@ get_meta_list(): StringName[];
  * **Note:** In C#, [param method] must be in snake_case when referring to built-in Godot methods. Prefer using the names exposed in the `MethodName` class to avoid allocating a new [StringName] on each call.
  *
 */
-get_method_argument_count(): int;
+get_method_argument_count(method: StringName): int;
 
 /**
  * Returns this object's methods and their signatures as an [Array] of dictionaries. Each [Dictionary] contains the following entries:
@@ -763,7 +763,7 @@ get_script(): any;
  * - `flags` is a combination of [enum ConnectFlags].
  *
 */
-get_signal_connection_list(): Dictionary[];
+get_signal_connection_list(signal: StringName): Dictionary[];
 
 /**
  * Returns the list of existing signals as an [Array] of dictionaries.
@@ -782,7 +782,7 @@ get_translation_domain(): StringName;
  * **Note:** In C#, [param signal] must be in snake_case when referring to built-in Godot methods. Prefer using the names exposed in the `SignalName` class to avoid allocating a new [StringName] on each call.
  *
 */
-has_connections(): boolean;
+has_connections(signal: StringName): boolean;
 
 /**
  * Returns `true` if a metadata entry is found with the given [param name]. See also [method get_meta], [method set_meta] and [method remove_meta].
@@ -792,7 +792,7 @@ has_connections(): boolean;
  * **Note:** Metadata that has a name starting with an underscore (`_`) is considered editor-only. Editor-only metadata is not displayed in the Inspector and should not be edited, although it can still be found by this method.
  *
 */
-has_meta(): boolean;
+has_meta(name: StringName): boolean;
 
 /**
  * Returns `true` if the given [param method] name exists in the object.
@@ -800,7 +800,7 @@ has_meta(): boolean;
  * **Note:** In C#, [param method] must be in snake_case when referring to built-in Godot methods. Prefer using the names exposed in the `MethodName` class to avoid allocating a new [StringName] on each call.
  *
 */
-has_method(): boolean;
+has_method(method: StringName): boolean;
 
 /**
  * Returns `true` if the given [param signal] name exists in the object.
@@ -808,10 +808,10 @@ has_method(): boolean;
  * **Note:** In C#, [param signal] must be in snake_case when referring to built-in Godot signals. Prefer using the names exposed in the `SignalName` class to avoid allocating a new [StringName] on each call.
  *
 */
-has_signal(): boolean;
+has_signal(signal: StringName): boolean;
 
 /** Returns [code]true[/code] if the given user-defined [param signal] name exists. Only signals added with [method add_user_signal] are included. See also [method remove_user_signal]. */
-has_user_signal(): boolean;
+has_user_signal(signal: StringName): boolean;
 
 /** Returns [code]true[/code] if the object is blocking its signals from being emitted. See [method set_block_signals]. */
 is_blocking_signals(): boolean;
@@ -839,7 +839,7 @@ is_blocking_signals(): boolean;
  * **Note:** This method ignores `class_name` declarations in the object's script.
  *
 */
-is_class(): boolean;
+is_class(_class: string): boolean;
 
 /**
  * Returns `true` if a connection exists between the given [param signal] name and [param callable].
@@ -847,7 +847,7 @@ is_class(): boolean;
  * **Note:** In C#, [param signal] must be in snake_case when referring to built-in Godot signals. Prefer using the names exposed in the `SignalName` class to avoid allocating a new [StringName] on each call.
  *
 */
-is_connected(): boolean;
+is_connected(signal: StringName, callable: Callable): boolean;
 
 /** Returns [code]true[/code] if the [method Node.queue_free] method was called for the object. */
 is_queued_for_deletion(): boolean;
@@ -879,7 +879,7 @@ is_queued_for_deletion(): boolean;
  * 
  *
 */
-notification(): void;
+notification(what: int, reversed?: boolean): void;
 
 /** Emits the [signal property_list_changed] signal. This is mainly used to refresh the editor, so that the Inspector and editor plugins are properly updated. */
 notify_property_list_changed(): void;
@@ -890,7 +890,7 @@ notify_property_list_changed(): void;
  * **Note:** This method is used by the Inspector dock to display a revert icon. The object must implement [method _property_can_revert] to customize the default value. If [method _property_can_revert] is not implemented, this method returns `false`.
  *
 */
-property_can_revert(): boolean;
+property_can_revert(property: StringName): boolean;
 
 /**
  * Returns the custom default value of the given [param property]. Use [method property_can_revert] to check if the [param property] has a custom default value.
@@ -898,7 +898,7 @@ property_can_revert(): boolean;
  * **Note:** This method is used by the Inspector dock to display a revert icon. The object must implement [method _property_get_revert] to customize the default value. If [method _property_get_revert] is not implemented, this method returns `null`.
  *
 */
-property_get_revert(): any;
+property_get_revert(property: StringName): any;
 
 /**
  * Removes the given entry [param name] from the object's metadata. See also [method has_meta], [method get_meta] and [method set_meta].
@@ -908,10 +908,10 @@ property_get_revert(): any;
  * **Note:** Metadata that has a name starting with an underscore (`_`) is considered editor-only. Editor-only metadata is not displayed in the Inspector and should not be edited, although it can still be found by this method.
  *
 */
-remove_meta(): void;
+remove_meta(name: StringName): void;
 
 /** Removes the given user signal [param signal] from the object. See also [method add_user_signal] and [method has_user_signal]. */
-remove_user_signal(): void;
+remove_user_signal(signal: StringName): void;
 
 /**
  * Assigns [param value] to the given [param property]. If the property does not exist or the given [param value]'s type doesn't match, nothing happens.
@@ -934,10 +934,10 @@ remove_user_signal(): void;
  * **Note:** In C#, [param property] must be in snake_case when referring to built-in Godot properties. Prefer using the names exposed in the `PropertyName` class to avoid allocating a new [StringName] on each call.
  *
 */
-set(): void;
+set(property: StringName, value: any): void;
 
 /** If set to [code]true[/code], the object becomes unable to emit signals. As such, [method emit_signal] and signal connections will not work, until it is set to [code]false[/code]. */
-set_block_signals(): void;
+set_block_signals(enable: boolean): void;
 
 /**
  * Assigns [param value] to the given [param property], at the end of the current frame. This is equivalent to calling [method set] through [method call_deferred].
@@ -967,7 +967,7 @@ set_block_signals(): void;
  * **Note:** In C#, [param property] must be in snake_case when referring to built-in Godot properties. Prefer using the names exposed in the `PropertyName` class to avoid allocating a new [StringName] on each call.
  *
 */
-set_deferred(): void;
+set_deferred(property: StringName, value: any): void;
 
 /**
  * Assigns a new [param value] to the property identified by the [param property_path]. The path should be a [NodePath] relative to this object, and can use the colon character (`:`) to access nested properties.
@@ -992,10 +992,10 @@ set_deferred(): void;
  * **Note:** In C#, [param property_path] must be in snake_case when referring to built-in Godot properties. Prefer using the names exposed in the `PropertyName` class to avoid allocating a new [StringName] on each call.
  *
 */
-set_indexed(): void;
+set_indexed(property_path: NodePathType, value: any): void;
 
 /** If set to [code]true[/code], allows the object to translate messages with [method tr] and [method tr_n]. Enabled by default. See also [method can_translate_messages]. */
-set_message_translation(): void;
+set_message_translation(enable: boolean): void;
 
 /**
  * Adds or changes the entry [param name] inside the object's metadata. The metadata [param value] can be any [Variant], although some types cannot be serialized correctly.
@@ -1007,7 +1007,7 @@ set_message_translation(): void;
  * **Note:** Metadata that has a name starting with an underscore (`_`) is considered editor-only. Editor-only metadata is not displayed in the Inspector and should not be edited, although it can still be found by this method.
  *
 */
-set_meta(): void;
+set_meta(name: StringName, value: any): void;
 
 /**
  * Attaches [param script] to the object, and instantiates it. As a result, the script's [method _init] is called. A [Script] is used to extend the object's functionality.
@@ -1015,10 +1015,10 @@ set_meta(): void;
  * If a script already exists, its instance is detached, and its property values and state are lost. Built-in property values are still kept.
  *
 */
-set_script(): void;
+set_script(script: any): void;
 
 /** Sets the name of the translation domain used by [method tr] and [method tr_n]. See also [TranslationServer]. */
-set_translation_domain(): void;
+set_translation_domain(domain: StringName): void;
 
 /** Returns a [String] representing the object. Defaults to [code]"<ClassName#RID>"[/code]. Override [method _to_string] to customize the string representation of the object. */
 to_string(): string;
@@ -1033,7 +1033,7 @@ to_string(): string;
  * **Note:** This method can't be used without an [Object] instance, as it requires the [method can_translate_messages] method. To translate strings in a static context, use [method TranslationServer.translate].
  *
 */
-tr(): string;
+tr(message: StringName, context?: StringName): string;
 
 /**
  * Translates a [param message] or [param plural_message], using the translation catalogs configured in the Project Settings. Further [param context] can be specified to help with the translation.
@@ -1049,7 +1049,7 @@ tr(): string;
  * **Note:** This method can't be used without an [Object] instance, as it requires the [method can_translate_messages] method. To translate strings in a static context, use [method TranslationServer.translate_plural].
  *
 */
-tr_n(): string;
+tr_n(message: StringName, plural_message: StringName, n: int, context?: StringName): string;
 
   connect<T extends SignalsOf<Object>>(signal: T, method: SignalFunction<Object[T]>): number;
 

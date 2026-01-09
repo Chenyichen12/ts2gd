@@ -30,19 +30,19 @@ protected _get_extensions(): PackedStringArray;
  * When the user is editing project settings, [param path] will be empty. It is recommended to add all options when [param path] is empty to allow the user to customize Import Defaults.
  *
 */
-protected _get_import_options(): void;
+protected _get_import_options(path: string): void;
 
 /** Should return [code]true[/code] to show the given option, [code]false[/code] to hide the given option, or [code]null[/code] to ignore. */
-protected _get_option_visibility(): any;
+protected _get_option_visibility(path: string, for_animation: boolean, option: string): any;
 
 /** Perform the bulk of the scene import logic here, for example using [GLTFDocument] or [FBXDocument]. */
-protected _import_scene(): Object;
+protected _import_scene(path: string, flags: int, options: Dictionary<any, any>): Object;
 
 /** Add a specific import option (name and default value only). This function can only be called from [method _get_import_options]. */
-add_import_option(): void;
+add_import_option(name: string, value: any): void;
 
 /** Add a specific import option. This function can only be called from [method _get_import_options]. */
-add_import_option_advanced(): void;
+add_import_option_advanced(type: int, name: string, default_value: any, hint?: int, hint_string?: string, usage_flags?: int): void;
 
   connect<T extends SignalsOf<EditorSceneFormatImporter>>(signal: T, method: SignalFunction<EditorSceneFormatImporter[T]>): number;
 

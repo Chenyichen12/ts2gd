@@ -96,10 +96,10 @@ declare class SliderJoint3D extends Joint3D  {
 "linear_ortho/softness": float;
 
 /** Returns the value of the given parameter. */
-get_param(): float;
+get_param(param: int): float;
 
 /** Assigns [param value] to the given parameter. */
-set_param(): void;
+set_param(param: int, value: float): void;
 
   connect<T extends SignalsOf<SliderJoint3D>>(signal: T, method: SignalFunction<SliderJoint3D[T]>): number;
 

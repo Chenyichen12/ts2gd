@@ -43,16 +43,16 @@ get_joint_two_bone2d_node(): NodePathType;
 get_joint_two_bone_idx(): int;
 
 /** Sets the [Bone2D] node that is being used as the first bone in the TwoBoneIK modification. */
-set_joint_one_bone2d_node(): void;
+set_joint_one_bone2d_node(bone2d_node: NodePathType): void;
 
 /** Sets the index of the [Bone2D] node that is being used as the first bone in the TwoBoneIK modification. */
-set_joint_one_bone_idx(): void;
+set_joint_one_bone_idx(bone_idx: int): void;
 
 /** Sets the [Bone2D] node that is being used as the second bone in the TwoBoneIK modification. */
-set_joint_two_bone2d_node(): void;
+set_joint_two_bone2d_node(bone2d_node: NodePathType): void;
 
 /** Sets the index of the [Bone2D] node that is being used as the second bone in the TwoBoneIK modification. */
-set_joint_two_bone_idx(): void;
+set_joint_two_bone_idx(bone_idx: int): void;
 
   connect<T extends SignalsOf<SkeletonModification2DTwoBoneIK>>(signal: T, method: SignalFunction<SkeletonModification2DTwoBoneIK[T]>): number;
 

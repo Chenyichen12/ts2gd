@@ -49,7 +49,7 @@ declare class TextServer extends RefCounted  {
 create_font(): RID;
 
 /** Creates a new variation existing font which is reusing the same glyph cache and font data. To free the resulting resource, use the [method free_rid] method. */
-create_font_linked_variation(): RID;
+create_font_linked_variation(font_rid: RID): RID;
 
 /**
  * Creates a new buffer for complex text layout, with the given [param direction] and [param orientation]. To free the resulting buffer, use [method free_rid] method.
@@ -59,10 +59,10 @@ create_font_linked_variation(): RID;
  * **Note:** Orientation is ignored if server does not support [constant FEATURE_VERTICAL_LAYOUT] feature (supported by [TextServerAdvanced]).
  *
 */
-create_shaped_text(): RID;
+create_shaped_text(direction?: int, orientation?: int): RID;
 
 /** Draws box displaying character hexadecimal code. Used for replacing missing characters. */
-draw_hex_code_box(): void;
+draw_hex_code_box(canvas: RID, size: int, pos: Vector2, index: int, color: Color): void;
 
 /**
  * Removes all rendered glyph information from the cache entry.
@@ -70,13 +70,13 @@ draw_hex_code_box(): void;
  * **Note:** This function will not remove textures associated with the glyphs, use [method font_remove_texture] to remove them manually.
  *
 */
-font_clear_glyphs(): void;
+font_clear_glyphs(font_rid: RID, size: Vector2i): void;
 
 /** Removes all kerning overrides. */
-font_clear_kerning_map(): void;
+font_clear_kerning_map(font_rid: RID, size: int): void;
 
 /** Removes all font sizes from the cache entry. */
-font_clear_size_cache(): void;
+font_clear_size_cache(font_rid: RID): void;
 
 /** Frees all automatically loaded system fonts. */
 font_clear_system_fallback_cache(): void;
@@ -87,7 +87,7 @@ font_clear_system_fallback_cache(): void;
  * **Note:** This function will not remove glyphs associated with the texture, use [method font_remove_glyph] to remove them manually.
  *
 */
-font_clear_textures(): void;
+font_clear_textures(font_rid: RID, size: Vector2i): void;
 
 /**
  * Draws single glyph into a canvas item at the position, using [param font_rid] at the size [param size]. If [param oversampling] is greater than zero, it is used as font oversampling factor, otherwise viewport oversampling settings are used.
@@ -97,7 +97,7 @@ font_clear_textures(): void;
  * **Note:** If there are pending glyphs to render, calling this function might trigger the texture cache update.
  *
 */
-font_draw_glyph(): void;
+font_draw_glyph(font_rid: RID, canvas: RID, size: int, pos: Vector2, index: int, color?: Color, oversampling?: float): void;
 
 /**
  * Draws single glyph outline of size [param outline_size] into a canvas item at the position, using [param font_rid] at the size [param size]. If [param oversampling] is greater than zero, it is used as font oversampling factor, otherwise viewport oversampling settings are used.
@@ -107,43 +107,43 @@ font_draw_glyph(): void;
  * **Note:** If there are pending glyphs to render, calling this function might trigger the texture cache update.
  *
 */
-font_draw_glyph_outline(): void;
+font_draw_glyph_outline(font_rid: RID, canvas: RID, size: int, outline_size: int, pos: Vector2, index: int, color?: Color, oversampling?: float): void;
 
 /** Returns font anti-aliasing mode. */
-font_get_antialiasing(): int;
+font_get_antialiasing(font_rid: RID): int;
 
 /** Returns the font ascent (number of pixels above the baseline). */
-font_get_ascent(): float;
+font_get_ascent(font_rid: RID, size: int): float;
 
 /** Returns extra baseline offset (as a fraction of font height). */
-font_get_baseline_offset(): float;
+font_get_baseline_offset(font_rid: RID): float;
 
 /** Returns character code associated with [param glyph_index], or [code]0[/code] if [param glyph_index] is invalid. See [method font_get_glyph_index]. */
-font_get_char_from_glyph_index(): int;
+font_get_char_from_glyph_index(font_rid: RID, size: int, glyph_index: int): int;
 
 /** Returns the font descent (number of pixels below the baseline). */
-font_get_descent(): float;
+font_get_descent(font_rid: RID, size: int): float;
 
 /** Returns whether the font's embedded bitmap loading is disabled. */
-font_get_disable_embedded_bitmaps(): boolean;
+font_get_disable_embedded_bitmaps(font_rid: RID): boolean;
 
 /** Returns font embolden strength. */
-font_get_embolden(): float;
+font_get_embolden(font_rid: RID): float;
 
 /** Returns number of faces in the TrueType / OpenType collection. */
-font_get_face_count(): int;
+font_get_face_count(font_rid: RID): int;
 
 /** Returns an active face index in the TrueType / OpenType collection. */
-font_get_face_index(): int;
+font_get_face_index(font_rid: RID): int;
 
 /** Returns bitmap font fixed size. */
-font_get_fixed_size(): int;
+font_get_fixed_size(font_rid: RID): int;
 
 /** Returns bitmap font scaling mode. */
-font_get_fixed_size_scale_mode(): int;
+font_get_fixed_size_scale_mode(font_rid: RID): int;
 
 /** Returns [code]true[/code] if font texture mipmap generation is enabled. */
-font_get_generate_mipmaps(): boolean;
+font_get_generate_mipmaps(font_rid: RID): boolean;
 
 /** This method does nothing and always returns [code]1.0[/code]. */
 font_get_global_oversampling(): float;
@@ -154,7 +154,7 @@ font_get_global_oversampling(): float;
  * **Note:** Advance for glyphs outlines is the same as the base glyph advance and is not saved.
  *
 */
-font_get_glyph_advance(): Vector2;
+font_get_glyph_advance(font_rid: RID, size: int, glyph: int): Vector2;
 
 /**
  * Returns outline contours of the glyph as a [Dictionary] with the following contents:
@@ -176,22 +176,22 @@ font_get_glyph_advance(): Vector2;
  * - Each contour is closed. The last point of a contour uses the first point of a contour as its next point, and vice versa. The first point can be [constant CONTOUR_CURVE_TAG_OFF_CONIC] point.
  *
 */
-font_get_glyph_contours(): Dictionary<any, any>;
+font_get_glyph_contours(font: RID, size: int, index: int): Dictionary<any, any>;
 
 /** Returns the glyph index of a [param char], optionally modified by the [param variation_selector]. See [method font_get_char_from_glyph_index]. */
-font_get_glyph_index(): int;
+font_get_glyph_index(font_rid: RID, size: int, char: int, variation_selector: int): int;
 
 /** Returns list of rendered glyphs in the cache entry. */
-font_get_glyph_list(): PackedInt32Array;
+font_get_glyph_list(font_rid: RID, size: Vector2i): PackedInt32Array;
 
 /** Returns glyph offset from the baseline. */
-font_get_glyph_offset(): Vector2;
+font_get_glyph_offset(font_rid: RID, size: Vector2i, glyph: int): Vector2;
 
 /** Returns size of the glyph. */
-font_get_glyph_size(): Vector2;
+font_get_glyph_size(font_rid: RID, size: Vector2i, glyph: int): Vector2;
 
 /** Returns index of the cache texture containing the glyph. */
-font_get_glyph_texture_idx(): int;
+font_get_glyph_texture_idx(font_rid: RID, size: Vector2i, glyph: int): int;
 
 /**
  * Returns resource ID of the cache texture containing the glyph.
@@ -199,7 +199,7 @@ font_get_glyph_texture_idx(): int;
  * **Note:** If there are pending glyphs to render, calling this function might trigger the texture cache update.
  *
 */
-font_get_glyph_texture_rid(): RID;
+font_get_glyph_texture_rid(font_rid: RID, size: Vector2i, glyph: int): RID;
 
 /**
  * Returns size of the cache texture containing the glyph.
@@ -207,127 +207,127 @@ font_get_glyph_texture_rid(): RID;
  * **Note:** If there are pending glyphs to render, calling this function might trigger the texture cache update.
  *
 */
-font_get_glyph_texture_size(): Vector2;
+font_get_glyph_texture_size(font_rid: RID, size: Vector2i, glyph: int): Vector2;
 
 /** Returns rectangle in the cache texture containing the glyph. */
-font_get_glyph_uv_rect(): Rect2;
+font_get_glyph_uv_rect(font_rid: RID, size: Vector2i, glyph: int): Rect2;
 
 /** Returns the font hinting mode. Used by dynamic fonts only. */
-font_get_hinting(): int;
+font_get_hinting(font_rid: RID): int;
 
 /** Returns glyph position rounding behavior. If set to [code]true[/code], when aligning glyphs to the pixel boundaries rounding remainders are accumulated to ensure more uniform glyph distribution. This setting has no effect if subpixel positioning is enabled. */
-font_get_keep_rounding_remainders(): boolean;
+font_get_keep_rounding_remainders(font_rid: RID): boolean;
 
 /** Returns kerning for the pair of glyphs. */
-font_get_kerning(): Vector2;
+font_get_kerning(font_rid: RID, size: int, glyph_pair: Vector2i): Vector2;
 
 /** Returns list of the kerning overrides. */
-font_get_kerning_list(): Vector2i[];
+font_get_kerning_list(font_rid: RID, size: int): Vector2i[];
 
 /** Returns [code]true[/code] if support override is enabled for the [param language]. */
-font_get_language_support_override(): boolean;
+font_get_language_support_override(font_rid: RID, language: string): boolean;
 
 /** Returns list of language support overrides. */
-font_get_language_support_overrides(): PackedStringArray;
+font_get_language_support_overrides(font_rid: RID): PackedStringArray;
 
 /** Returns the width of the range around the shape between the minimum and maximum representable signed distance. */
-font_get_msdf_pixel_range(): int;
+font_get_msdf_pixel_range(font_rid: RID): int;
 
 /** Returns source font size used to generate MSDF textures. */
-font_get_msdf_size(): int;
+font_get_msdf_size(font_rid: RID): int;
 
 /** Returns font family name. */
-font_get_name(): string;
+font_get_name(font_rid: RID): string;
 
 /** Returns font OpenType feature set override. */
-font_get_opentype_feature_overrides(): Dictionary<any, any>;
+font_get_opentype_feature_overrides(font_rid: RID): Dictionary<any, any>;
 
 /** Returns [Dictionary] with OpenType font name strings (localized font names, version, description, license information, sample text, etc.). */
-font_get_ot_name_strings(): Dictionary<any, any>;
+font_get_ot_name_strings(font_rid: RID): Dictionary<any, any>;
 
 /** Returns oversampling factor override. If set to a positive value, overrides the oversampling factor of the viewport this font is used in. See [member Viewport.oversampling]. This value doesn't override the [code skip-lint]oversampling[/code] parameter of [code skip-lint]draw_*[/code] methods. Used by dynamic fonts only. */
-font_get_oversampling(): float;
+font_get_oversampling(font_rid: RID): float;
 
 /** Returns scaling factor of the color bitmap font. */
-font_get_scale(): float;
+font_get_scale(font_rid: RID, size: int): float;
 
 /** Returns [code]true[/code] if support override is enabled for the [param script]. */
-font_get_script_support_override(): boolean;
+font_get_script_support_override(font_rid: RID, script: string): boolean;
 
 /** Returns list of script support overrides. */
-font_get_script_support_overrides(): PackedStringArray;
+font_get_script_support_overrides(font_rid: RID): PackedStringArray;
 
 /** Returns font cache information, each entry contains the following fields: [code]Vector2i size_px[/code] - font size in pixels, [code]float viewport_oversampling[/code] - viewport oversampling factor, [code]int glyphs[/code] - number of rendered glyphs, [code]int textures[/code] - number of used textures, [code]int textures_size[/code] - size of texture data in bytes. */
-font_get_size_cache_info(): Dictionary[];
+font_get_size_cache_info(font_rid: RID): Dictionary[];
 
 /** Returns list of the font sizes in the cache. Each size is [Vector2i] with font size and outline size. */
-font_get_size_cache_list(): Vector2i[];
+font_get_size_cache_list(font_rid: RID): Vector2i[];
 
 /** Returns the spacing for [param spacing] in pixels (not relative to the font size). */
-font_get_spacing(): int;
+font_get_spacing(font_rid: RID, spacing: int): int;
 
 /** Returns font stretch amount, compared to a normal width. A percentage value between [code]50%[/code] and [code]200%[/code]. */
-font_get_stretch(): int;
+font_get_stretch(font_rid: RID): int;
 
 /** Returns font style flags. */
-font_get_style(): int;
+font_get_style(font_rid: RID): int;
 
 /** Returns font style name. */
-font_get_style_name(): string;
+font_get_style_name(font_rid: RID): string;
 
 /** Returns font subpixel glyph positioning mode. */
-font_get_subpixel_positioning(): int;
+font_get_subpixel_positioning(font_rid: RID): int;
 
 /** Returns a string containing all the characters available in the font. */
-font_get_supported_chars(): string;
+font_get_supported_chars(font_rid: RID): string;
 
 /** Returns an array containing all glyph indices in the font. */
-font_get_supported_glyphs(): PackedInt32Array;
+font_get_supported_glyphs(font_rid: RID): PackedInt32Array;
 
 /** Returns number of textures used by font cache entry. */
-font_get_texture_count(): int;
+font_get_texture_count(font_rid: RID, size: Vector2i): int;
 
 /** Returns font cache texture image data. */
-font_get_texture_image(): Image;
+font_get_texture_image(font_rid: RID, size: Vector2i, texture_index: int): Image;
 
 /** Returns array containing glyph packing data. */
-font_get_texture_offsets(): PackedInt32Array;
+font_get_texture_offsets(font_rid: RID, size: Vector2i, texture_index: int): PackedInt32Array;
 
 /** Returns 2D transform applied to the font outlines. */
-font_get_transform(): Transform2D;
+font_get_transform(font_rid: RID): Transform2D;
 
 /** Returns pixel offset of the underline below the baseline. */
-font_get_underline_position(): float;
+font_get_underline_position(font_rid: RID, size: int): float;
 
 /** Returns thickness of the underline in pixels. */
-font_get_underline_thickness(): float;
+font_get_underline_thickness(font_rid: RID, size: int): float;
 
 /** Returns variation coordinates for the specified font cache entry. See [method font_supported_variation_list] for more info. */
-font_get_variation_coordinates(): Dictionary<any, any>;
+font_get_variation_coordinates(font_rid: RID): Dictionary<any, any>;
 
 /** Returns weight (boldness) of the font. A value in the [code]100...999[/code] range, normal font weight is [code]400[/code], bold font weight is [code]700[/code]. */
-font_get_weight(): int;
+font_get_weight(font_rid: RID): int;
 
 /** Returns [code]true[/code] if a Unicode [param char] is available in the font. */
-font_has_char(): boolean;
+font_has_char(font_rid: RID, char: int): boolean;
 
 /** Returns [code]true[/code] if system fonts can be automatically used as fallbacks. */
-font_is_allow_system_fallback(): boolean;
+font_is_allow_system_fallback(font_rid: RID): boolean;
 
 /** Returns [code]true[/code] if auto-hinting is supported and preferred over font built-in hinting. Used by dynamic fonts only. */
-font_is_force_autohinter(): boolean;
+font_is_force_autohinter(font_rid: RID): boolean;
 
 /** Returns [code]true[/code] if the font supports the given language (as a [url=https://en.wikipedia.org/wiki/ISO_639-1]ISO 639[/url] code). */
-font_is_language_supported(): boolean;
+font_is_language_supported(font_rid: RID, language: string): boolean;
 
 /** Returns [code]true[/code] if color modulation is applied when drawing the font's colored glyphs. */
-font_is_modulate_color_glyphs(): boolean;
+font_is_modulate_color_glyphs(font_rid: RID): boolean;
 
 /** Returns [code]true[/code] if glyphs of all sizes are rendered using single multichannel signed distance field generated from the dynamic font vector data. */
-font_is_multichannel_signed_distance_field(): boolean;
+font_is_multichannel_signed_distance_field(font_rid: RID): boolean;
 
 /** Returns [code]true[/code] if the font supports the given script (as a [url=https://en.wikipedia.org/wiki/ISO_15924]ISO 15924[/url] code). */
-font_is_script_supported(): boolean;
+font_is_script_supported(font_rid: RID, script: string): boolean;
 
 /**
  * Removes specified rendered glyph information from the cache entry.
@@ -335,19 +335,19 @@ font_is_script_supported(): boolean;
  * **Note:** This function will not remove textures associated with the glyphs, use [method font_remove_texture] to remove them manually.
  *
 */
-font_remove_glyph(): void;
+font_remove_glyph(font_rid: RID, size: Vector2i, glyph: int): void;
 
 /** Removes kerning override for the pair of glyphs. */
-font_remove_kerning(): void;
+font_remove_kerning(font_rid: RID, size: int, glyph_pair: Vector2i): void;
 
 /** Remove language support override. */
-font_remove_language_support_override(): void;
+font_remove_language_support_override(font_rid: RID, language: string): void;
 
 /** Removes script support override. */
-font_remove_script_support_override(): void;
+font_remove_script_support_override(font_rid: RID, script: string): void;
 
 /** Removes specified font size from the cache entry. */
-font_remove_size_cache(): void;
+font_remove_size_cache(font_rid: RID, size: Vector2i): void;
 
 /**
  * Removes specified texture from the cache entry.
@@ -355,55 +355,55 @@ font_remove_size_cache(): void;
  * **Note:** This function will not remove glyphs associated with the texture, remove them manually, using [method font_remove_glyph].
  *
 */
-font_remove_texture(): void;
+font_remove_texture(font_rid: RID, size: Vector2i, texture_index: int): void;
 
 /** Renders specified glyph to the font cache texture. */
-font_render_glyph(): void;
+font_render_glyph(font_rid: RID, size: Vector2i, index: int): void;
 
 /** Renders the range of characters to the font cache texture. */
-font_render_range(): void;
+font_render_range(font_rid: RID, size: Vector2i, start: int, end: int): void;
 
 /** If set to [code]true[/code], system fonts can be automatically used as fallbacks. */
-font_set_allow_system_fallback(): void;
+font_set_allow_system_fallback(font_rid: RID, allow_system_fallback: boolean): void;
 
 /** Sets font anti-aliasing mode. */
-font_set_antialiasing(): void;
+font_set_antialiasing(font_rid: RID, antialiasing: int): void;
 
 /** Sets the font ascent (number of pixels above the baseline). */
-font_set_ascent(): void;
+font_set_ascent(font_rid: RID, size: int, ascent: float): void;
 
 /** Sets extra baseline offset (as a fraction of font height). */
-font_set_baseline_offset(): void;
+font_set_baseline_offset(font_rid: RID, baseline_offset: float): void;
 
 /** Sets font source data, e.g contents of the dynamic font source file. */
-font_set_data(): void;
+font_set_data(font_rid: RID, data: PackedByteArray): void;
 
 /** Sets the font descent (number of pixels below the baseline). */
-font_set_descent(): void;
+font_set_descent(font_rid: RID, size: int, descent: float): void;
 
 /** If set to [code]true[/code], embedded font bitmap loading is disabled (bitmap-only and color fonts ignore this property). */
-font_set_disable_embedded_bitmaps(): void;
+font_set_disable_embedded_bitmaps(font_rid: RID, disable_embedded_bitmaps: boolean): void;
 
 /** Sets font embolden strength. If [param strength] is not equal to zero, emboldens the font outlines. Negative values reduce the outline thickness. */
-font_set_embolden(): void;
+font_set_embolden(font_rid: RID, strength: float): void;
 
 /** Sets an active face index in the TrueType / OpenType collection. */
-font_set_face_index(): void;
+font_set_face_index(font_rid: RID, face_index: int): void;
 
 /** Sets bitmap font fixed size. If set to value greater than zero, same cache entry will be used for all font sizes. */
-font_set_fixed_size(): void;
+font_set_fixed_size(font_rid: RID, fixed_size: int): void;
 
 /** Sets bitmap font scaling mode. This property is used only if [code]fixed_size[/code] is greater than zero. */
-font_set_fixed_size_scale_mode(): void;
+font_set_fixed_size_scale_mode(font_rid: RID, fixed_size_scale_mode: int): void;
 
 /** If set to [code]true[/code] auto-hinting is preferred over font built-in hinting. */
-font_set_force_autohinter(): void;
+font_set_force_autohinter(font_rid: RID, force_autohinter: boolean): void;
 
 /** If set to [code]true[/code] font texture mipmap generation is enabled. */
-font_set_generate_mipmaps(): void;
+font_set_generate_mipmaps(font_rid: RID, generate_mipmaps: boolean): void;
 
 /** This method does nothing. */
-font_set_global_oversampling(): void;
+font_set_global_oversampling(oversampling: float): void;
 
 /**
  * Sets glyph advance (offset of the next glyph).
@@ -411,40 +411,40 @@ font_set_global_oversampling(): void;
  * **Note:** Advance for glyphs outlines is the same as the base glyph advance and is not saved.
  *
 */
-font_set_glyph_advance(): void;
+font_set_glyph_advance(font_rid: RID, size: int, glyph: int, advance: Vector2): void;
 
 /** Sets glyph offset from the baseline. */
-font_set_glyph_offset(): void;
+font_set_glyph_offset(font_rid: RID, size: Vector2i, glyph: int, offset: Vector2): void;
 
 /** Sets size of the glyph. */
-font_set_glyph_size(): void;
+font_set_glyph_size(font_rid: RID, size: Vector2i, glyph: int, gl_size: Vector2): void;
 
 /** Sets index of the cache texture containing the glyph. */
-font_set_glyph_texture_idx(): void;
+font_set_glyph_texture_idx(font_rid: RID, size: Vector2i, glyph: int, texture_idx: int): void;
 
 /** Sets rectangle in the cache texture containing the glyph. */
-font_set_glyph_uv_rect(): void;
+font_set_glyph_uv_rect(font_rid: RID, size: Vector2i, glyph: int, uv_rect: Rect2): void;
 
 /** Sets font hinting mode. Used by dynamic fonts only. */
-font_set_hinting(): void;
+font_set_hinting(font_rid: RID, hinting: int): void;
 
 /** Sets glyph position rounding behavior. If set to [code]true[/code], when aligning glyphs to the pixel boundaries rounding remainders are accumulated to ensure more uniform glyph distribution. This setting has no effect if subpixel positioning is enabled. */
-font_set_keep_rounding_remainders(): void;
+font_set_keep_rounding_remainders(font_rid: RID, keep_rounding_remainders: boolean): void;
 
 /** Sets kerning for the pair of glyphs. */
-font_set_kerning(): void;
+font_set_kerning(font_rid: RID, size: int, glyph_pair: Vector2i, kerning: Vector2): void;
 
 /** Adds override for [method font_is_language_supported]. */
-font_set_language_support_override(): void;
+font_set_language_support_override(font_rid: RID, language: string, supported: boolean): void;
 
 /** If set to [code]true[/code], color modulation is applied when drawing colored glyphs, otherwise it's applied to the monochrome glyphs only. */
-font_set_modulate_color_glyphs(): void;
+font_set_modulate_color_glyphs(font_rid: RID, force_autohinter: boolean): void;
 
 /** Sets the width of the range around the shape between the minimum and maximum representable signed distance. */
-font_set_msdf_pixel_range(): void;
+font_set_msdf_pixel_range(font_rid: RID, msdf_pixel_range: int): void;
 
 /** Sets source font size used to generate MSDF textures. */
-font_set_msdf_size(): void;
+font_set_msdf_size(font_rid: RID, msdf_size: int): void;
 
 /**
  * If set to `true`, glyphs of all sizes are rendered using single multichannel signed distance field generated from the dynamic font vector data. MSDF rendering allows displaying the font at any scaling factor without blurriness, and without incurring a CPU cost when the font size changes (since the font no longer needs to be rasterized on the CPU). As a downside, font hinting is not available with MSDF. The lack of font hinting may result in less crisp and less readable fonts at small sizes.
@@ -452,25 +452,25 @@ font_set_msdf_size(): void;
  * **Note:** MSDF font rendering does not render glyphs with overlapping shapes correctly. Overlapping shapes are not valid per the OpenType standard, but are still commonly found in many font files, especially those converted by Google Fonts. To avoid issues with overlapping glyphs, consider downloading the font file directly from the type foundry instead of relying on Google Fonts.
  *
 */
-font_set_multichannel_signed_distance_field(): void;
+font_set_multichannel_signed_distance_field(font_rid: RID, msdf: boolean): void;
 
 /** Sets the font family name. */
-font_set_name(): void;
+font_set_name(font_rid: RID, name: string): void;
 
 /** Sets font OpenType feature set override. */
-font_set_opentype_feature_overrides(): void;
+font_set_opentype_feature_overrides(font_rid: RID, overrides: Dictionary<any, any>): void;
 
 /** If set to a positive value, overrides the oversampling factor of the viewport this font is used in. See [member Viewport.oversampling]. This value doesn't override the [code skip-lint]oversampling[/code] parameter of [code skip-lint]draw_*[/code] methods. Used by dynamic fonts only. */
-font_set_oversampling(): void;
+font_set_oversampling(font_rid: RID, oversampling: float): void;
 
 /** Sets scaling factor of the color bitmap font. */
-font_set_scale(): void;
+font_set_scale(font_rid: RID, size: int, scale: float): void;
 
 /** Adds override for [method font_is_script_supported]. */
-font_set_script_support_override(): void;
+font_set_script_support_override(font_rid: RID, script: string, supported: boolean): void;
 
 /** Sets the spacing for [param spacing] to [param value] in pixels (not relative to the font size). */
-font_set_spacing(): void;
+font_set_spacing(font_rid: RID, spacing: int, value: int): void;
 
 /**
  * Sets font stretch amount, compared to a normal width. A percentage value between `50%` and `200%`.
@@ -478,7 +478,7 @@ font_set_spacing(): void;
  * **Note:** This value is used for font matching only and will not affect font rendering. Use [method font_set_face_index], [method font_set_variation_coordinates], or [method font_set_transform] instead.
  *
 */
-font_set_stretch(): void;
+font_set_stretch(font_rid: RID, weight: int): void;
 
 /**
  * Sets the font style flags.
@@ -486,19 +486,19 @@ font_set_stretch(): void;
  * **Note:** This value is used for font matching only and will not affect font rendering. Use [method font_set_face_index], [method font_set_variation_coordinates], [method font_set_embolden], or [method font_set_transform] instead.
  *
 */
-font_set_style(): void;
+font_set_style(font_rid: RID, style: int): void;
 
 /** Sets the font style name. */
-font_set_style_name(): void;
+font_set_style_name(font_rid: RID, name: string): void;
 
 /** Sets font subpixel glyph positioning mode. */
-font_set_subpixel_positioning(): void;
+font_set_subpixel_positioning(font_rid: RID, subpixel_positioning: int): void;
 
 /** Sets font cache texture image data. */
-font_set_texture_image(): void;
+font_set_texture_image(font_rid: RID, size: Vector2i, texture_index: int, image: Image): void;
 
 /** Sets array containing glyph packing data. */
-font_set_texture_offsets(): void;
+font_set_texture_offsets(font_rid: RID, size: Vector2i, texture_index: int, offset: PackedInt32Array): void;
 
 /**
  * Sets 2D transform, applied to the font outlines, can be used for slanting, flipping, and rotating glyphs.
@@ -506,16 +506,16 @@ font_set_texture_offsets(): void;
  * For example, to simulate italic typeface by slanting, apply the following transform `Transform2D(1.0, slant, 0.0, 1.0, 0.0, 0.0)`.
  *
 */
-font_set_transform(): void;
+font_set_transform(font_rid: RID, transform: Transform2D): void;
 
 /** Sets pixel offset of the underline below the baseline. */
-font_set_underline_position(): void;
+font_set_underline_position(font_rid: RID, size: int, underline_position: float): void;
 
 /** Sets thickness of the underline in pixels. */
-font_set_underline_thickness(): void;
+font_set_underline_thickness(font_rid: RID, size: int, underline_thickness: float): void;
 
 /** Sets variation coordinates for the specified font cache entry. See [method font_supported_variation_list] for more info. */
-font_set_variation_coordinates(): void;
+font_set_variation_coordinates(font_rid: RID, variation_coordinates: Dictionary<any, any>): void;
 
 /**
  * Sets weight (boldness) of the font. A value in the `100...999` range, normal font weight is `400`, bold font weight is `700`.
@@ -523,13 +523,13 @@ font_set_variation_coordinates(): void;
  * **Note:** This value is used for font matching only and will not affect font rendering. Use [method font_set_face_index], [method font_set_variation_coordinates], or [method font_set_embolden] instead.
  *
 */
-font_set_weight(): void;
+font_set_weight(font_rid: RID, weight: int): void;
 
 /** Returns the dictionary of the supported OpenType features. */
-font_supported_feature_list(): Dictionary<any, any>;
+font_supported_feature_list(font_rid: RID): Dictionary<any, any>;
 
 /** Returns the dictionary of the supported OpenType variation coordinates. */
-font_supported_variation_list(): Dictionary<any, any>;
+font_supported_variation_list(font_rid: RID): Dictionary<any, any>;
 
 /**
  * Converts a number from Western Arabic (0..9) to the numeral system used in the given [param language].
@@ -537,16 +537,16 @@ font_supported_variation_list(): Dictionary<any, any>;
  * If [param language] is an empty string, the active locale will be used.
  *
 */
-format_number(): string;
+format_number(number: string, language?: string): string;
 
 /** Frees an object created by this [TextServer]. */
-free_rid(): void;
+free_rid(rid: RID): void;
 
 /** Returns text server features, see [enum Feature]. */
 get_features(): int;
 
 /** Returns size of the replacement character (box with character hexadecimal code that is drawn in place of invalid characters). */
-get_hex_code_box_size(): Vector2;
+get_hex_code_box_size(size: int, index: int): Vector2;
 
 /** Returns the name of the server interface. */
 get_name(): string;
@@ -561,10 +561,10 @@ get_support_data_filename(): string;
 get_support_data_info(): string;
 
 /** Returns [code]true[/code] if [param rid] is valid resource owned by this text server. */
-has(): boolean;
+has(rid: RID): boolean;
 
 /** Returns [code]true[/code] if the server supports a feature. */
-has_feature(): boolean;
+has_feature(feature: int): boolean;
 
 /**
  * Returns index of the first string in [param dict] which is visually confusable with the [param string], or `-1` if none is found.
@@ -574,13 +574,13 @@ has_feature(): boolean;
  * **Note:** Always returns `-1` if the server does not support the [constant FEATURE_UNICODE_SECURITY] feature.
  *
 */
-is_confusable(): int;
+is_confusable(string: string, dict: PackedStringArray): int;
 
 /** Returns [code]true[/code] if locale is right-to-left. */
-is_locale_right_to_left(): boolean;
+is_locale_right_to_left(locale: string): boolean;
 
 /** Returns [code]true[/code] if the locale requires text server support data for line/word breaking. */
-is_locale_using_support_data(): boolean;
+is_locale_using_support_data(locale: string): boolean;
 
 /**
  * Returns `true` if [param string] is a valid identifier.
@@ -602,10 +602,10 @@ is_locale_using_support_data(): boolean;
  * - May contain Unicode characters of class XID_Continue in the other positions.
  *
 */
-is_valid_identifier(): boolean;
+is_valid_identifier(string: string): boolean;
 
 /** Returns [code]true[/code] if the given code point is a valid letter, i.e. it belongs to the Unicode category "L". */
-is_valid_letter(): boolean;
+is_valid_letter(unicode: int): boolean;
 
 /**
  * Loads optional TextServer database (e.g. ICU break iterators and dictionaries).
@@ -613,10 +613,10 @@ is_valid_letter(): boolean;
  * **Note:** This function should be called before any other TextServer functions used, otherwise it won't have any effect.
  *
 */
-load_support_data(): boolean;
+load_support_data(filename: string): boolean;
 
 /** Converts the given readable name of a feature, variation, script, or language to an OpenType tag. */
-name_to_tag(): int;
+name_to_tag(name: string): int;
 
 /**
  * Converts [param number] from the numeral system used in the given [param language] to Western Arabic (0..9).
@@ -624,10 +624,10 @@ name_to_tag(): int;
  * If [param language] is an empty string, the active locale will be used.
  *
 */
-parse_number(): string;
+parse_number(number: string, language?: string): string;
 
 /** Default implementation of the BiDi algorithm override function. */
-parse_structured_text(): Vector3i[];
+parse_structured_text(parser_type: int, args: any[], text: string): Vector3i[];
 
 /**
  * Returns the percent sign used in the given [param language].
@@ -635,7 +635,7 @@ parse_structured_text(): Vector3i[];
  * If [param language] is an empty string, the active locale will be used.
  *
 */
-percent_sign(): string;
+percent_sign(language?: string): string;
 
 /**
  * Saves optional TextServer database (e.g. ICU break iterators and dictionaries) to the file.
@@ -643,64 +643,64 @@ percent_sign(): string;
  * **Note:** This function is used by during project export, to include TextServer database.
  *
 */
-save_support_data(): boolean;
+save_support_data(filename: string): boolean;
 
 /** Returns the number of uniform text runs in the buffer. */
-shaped_get_run_count(): int;
+shaped_get_run_count(shaped: RID): int;
 
 /** Returns the direction of the [param index] text run (in visual order). */
-shaped_get_run_direction(): int;
+shaped_get_run_direction(shaped: RID, index: int): int;
 
 /** Returns the font RID of the [param index] text run (in visual order). */
-shaped_get_run_font_rid(): RID;
+shaped_get_run_font_rid(shaped: RID, index: int): RID;
 
 /** Returns the font size of the [param index] text run (in visual order). */
-shaped_get_run_font_size(): int;
+shaped_get_run_font_size(shaped: RID, index: int): int;
 
 /** Returns the language of the [param index] text run (in visual order). */
-shaped_get_run_language(): string;
+shaped_get_run_language(shaped: RID, index: int): string;
 
 /** Returns the embedded object of the [param index] text run (in visual order). */
-shaped_get_run_object(): any;
+shaped_get_run_object(shaped: RID, index: int): any;
 
 /** Returns the source text range of the [param index] text run (in visual order). */
-shaped_get_run_range(): Vector2i;
+shaped_get_run_range(shaped: RID, index: int): Vector2i;
 
 /** Returns the source text of the [param index] text run (in visual order). */
-shaped_get_run_text(): string;
+shaped_get_run_text(shaped: RID, index: int): string;
 
 /** Returns number of text spans added using [method shaped_text_add_string] or [method shaped_text_add_object]. */
-shaped_get_span_count(): int;
+shaped_get_span_count(shaped: RID): int;
 
 /** Returns text embedded object key. */
-shaped_get_span_embedded_object(): any;
+shaped_get_span_embedded_object(shaped: RID, index: int): any;
 
 /** Returns text span metadata. */
-shaped_get_span_meta(): any;
+shaped_get_span_meta(shaped: RID, index: int): any;
 
 /** Returns the text span embedded object key. */
-shaped_get_span_object(): any;
+shaped_get_span_object(shaped: RID, index: int): any;
 
 /** Returns the text span source text. */
-shaped_get_span_text(): string;
+shaped_get_span_text(shaped: RID, index: int): string;
 
 /** Returns the text buffer source text, including object replacement characters. */
-shaped_get_text(): string;
+shaped_get_text(shaped: RID): string;
 
 /** Changes text span font, font size, and OpenType features, without changing the text. */
-shaped_set_span_update_font(): void;
+shaped_set_span_update_font(shaped: RID, index: int, fonts: RID[], size: int, opentype_features?: Dictionary<any, any>): void;
 
 /** Adds inline object to the text buffer, [param key] must be unique. In the text, object is represented as [param length] object replacement characters. */
-shaped_text_add_object(): boolean;
+shaped_text_add_object(shaped: RID, key: any, size: Vector2, inline_align?: int, length?: int, baseline?: float): boolean;
 
 /** Adds text span and font to draw it to the text buffer. */
-shaped_text_add_string(): boolean;
+shaped_text_add_string(shaped: RID, text: string, fonts: RID[], size: int, opentype_features?: Dictionary<any, any>, language?: string, meta?: any): boolean;
 
 /** Clears text buffer (removes text and inline objects). */
-shaped_text_clear(): void;
+shaped_text_clear(rid: RID): void;
 
 /** Returns composite character position closest to the [param pos]. */
-shaped_text_closest_character_pos(): int;
+shaped_text_closest_character_pos(shaped: RID, pos: int): int;
 
 /**
  * Draw shaped text into a canvas item at a given position, with [param color]. [param pos] specifies the leftmost point of the baseline (for horizontal layout) or topmost point of the baseline (for vertical layout). If [param oversampling] is greater than zero, it is used as font oversampling factor, otherwise viewport oversampling settings are used.
@@ -708,7 +708,7 @@ shaped_text_closest_character_pos(): int;
  * [param clip_l] and [param clip_r] are offsets relative to [param pos], going to the right in horizontal layout and downward in vertical layout. If [param clip_l] is not negative, glyphs starting before the offset are clipped. If [param clip_r] is not negative, glyphs ending after the offset are clipped.
  *
 */
-shaped_text_draw(): void;
+shaped_text_draw(shaped: RID, canvas: RID, pos: Vector2, clip_l?: float, clip_r?: float, color?: Color, oversampling?: float): void;
 
 /**
  * Draw the outline of the shaped text into a canvas item at a given position, with [param color]. [param pos] specifies the leftmost point of the baseline (for horizontal layout) or topmost point of the baseline (for vertical layout). If [param oversampling] is greater than zero, it is used as font oversampling factor, otherwise viewport oversampling settings are used.
@@ -716,13 +716,13 @@ shaped_text_draw(): void;
  * [param clip_l] and [param clip_r] are offsets relative to [param pos], going to the right in horizontal layout and downward in vertical layout. If [param clip_l] is not negative, glyphs starting before the offset are clipped. If [param clip_r] is not negative, glyphs ending after the offset are clipped.
  *
 */
-shaped_text_draw_outline(): void;
+shaped_text_draw_outline(shaped: RID, canvas: RID, pos: Vector2, clip_l?: float, clip_r?: float, outline_size?: int, color?: Color, oversampling?: float): void;
 
 /** Duplicates shaped text buffer. */
-shaped_text_duplicate(): RID;
+shaped_text_duplicate(rid: RID): RID;
 
 /** Adjusts text width to fit to specified width, returns new text width. */
-shaped_text_fit_to_width(): float;
+shaped_text_fit_to_width(shaped: RID, width: float, justification_flags?: int): float;
 
 /**
  * Returns the text ascent (number of pixels above the baseline for horizontal layout or to the left of baseline for vertical).
@@ -730,19 +730,19 @@ shaped_text_fit_to_width(): float;
  * **Note:** Overall ascent can be higher than font ascent, if some glyphs are displaced from the baseline.
  *
 */
-shaped_text_get_ascent(): float;
+shaped_text_get_ascent(shaped: RID): float;
 
 /** Returns shapes of the carets corresponding to the character offset [param position] in the text. Returned caret shape is 1 pixel wide rectangle. */
-shaped_text_get_carets(): Dictionary<any, any>;
+shaped_text_get_carets(shaped: RID, position: int): Dictionary<any, any>;
 
 /** Returns array of the composite character boundaries. */
-shaped_text_get_character_breaks(): PackedInt32Array;
+shaped_text_get_character_breaks(shaped: RID): PackedInt32Array;
 
 /** Returns ellipsis character used for text clipping. */
-shaped_text_get_custom_ellipsis(): int;
+shaped_text_get_custom_ellipsis(shaped: RID): int;
 
 /** Returns custom punctuation character list, used for word breaking. If set to empty string, server defaults are used. */
-shaped_text_get_custom_punctuation(): string;
+shaped_text_get_custom_punctuation(shaped: RID): string;
 
 /**
  * Returns the text descent (number of pixels below the baseline for horizontal layout or to the right of baseline for vertical).
@@ -750,61 +750,61 @@ shaped_text_get_custom_punctuation(): string;
  * **Note:** Overall descent can be higher than font descent, if some glyphs are displaced from the baseline.
  *
 */
-shaped_text_get_descent(): float;
+shaped_text_get_descent(shaped: RID): float;
 
 /** Returns direction of the text. */
-shaped_text_get_direction(): int;
+shaped_text_get_direction(shaped: RID): int;
 
 /** Returns dominant direction of in the range of text. */
-shaped_text_get_dominant_direction_in_range(): int;
+shaped_text_get_dominant_direction_in_range(shaped: RID, start: int, end: int): int;
 
 /** Returns number of glyphs in the ellipsis. */
-shaped_text_get_ellipsis_glyph_count(): int;
+shaped_text_get_ellipsis_glyph_count(shaped: RID): int;
 
 /** Returns array of the glyphs in the ellipsis. */
-shaped_text_get_ellipsis_glyphs(): Dictionary[];
+shaped_text_get_ellipsis_glyphs(shaped: RID): Dictionary[];
 
 /** Returns position of the ellipsis. */
-shaped_text_get_ellipsis_pos(): int;
+shaped_text_get_ellipsis_pos(shaped: RID): int;
 
 /** Returns number of glyphs in the buffer. */
-shaped_text_get_glyph_count(): int;
+shaped_text_get_glyph_count(shaped: RID): int;
 
 /** Returns an array of glyphs in the visual order. */
-shaped_text_get_glyphs(): Dictionary[];
+shaped_text_get_glyphs(shaped: RID): Dictionary[];
 
 /** Returns composite character's bounds as offsets from the start of the line. */
-shaped_text_get_grapheme_bounds(): Vector2;
+shaped_text_get_grapheme_bounds(shaped: RID, pos: int): Vector2;
 
 /** Returns direction of the text, inferred by the BiDi algorithm. */
-shaped_text_get_inferred_direction(): int;
+shaped_text_get_inferred_direction(shaped: RID): int;
 
 /** Breaks text to the lines and returns character ranges for each line. */
-shaped_text_get_line_breaks(): PackedInt32Array;
+shaped_text_get_line_breaks(shaped: RID, width: float, start?: int, break_flags?: int): PackedInt32Array;
 
 /** Breaks text to the lines and columns. Returns character ranges for each segment. */
-shaped_text_get_line_breaks_adv(): PackedInt32Array;
+shaped_text_get_line_breaks_adv(shaped: RID, width: PackedFloat32Array, start?: int, once?: boolean, break_flags?: int): PackedInt32Array;
 
 /** Returns the glyph index of the inline object. */
-shaped_text_get_object_glyph(): int;
+shaped_text_get_object_glyph(shaped: RID, key: any): int;
 
 /** Returns the character range of the inline object. */
-shaped_text_get_object_range(): Vector2i;
+shaped_text_get_object_range(shaped: RID, key: any): Vector2i;
 
 /** Returns bounding rectangle of the inline object. */
-shaped_text_get_object_rect(): Rect2;
+shaped_text_get_object_rect(shaped: RID, key: any): Rect2;
 
 /** Returns array of inline objects. */
-shaped_text_get_objects(): any[];
+shaped_text_get_objects(shaped: RID): any[];
 
 /** Returns text orientation. */
-shaped_text_get_orientation(): int;
+shaped_text_get_orientation(shaped: RID): int;
 
 /** Returns the parent buffer from which the substring originates. */
-shaped_text_get_parent(): RID;
+shaped_text_get_parent(shaped: RID): RID;
 
 /** Returns [code]true[/code] if text buffer is configured to display control characters. */
-shaped_text_get_preserve_control(): boolean;
+shaped_text_get_preserve_control(shaped: RID): boolean;
 
 /**
  * Returns `true` if text buffer is configured to display hexadecimal codes in place of invalid characters.
@@ -812,67 +812,67 @@ shaped_text_get_preserve_control(): boolean;
  * **Note:** If set to `false`, nothing is displayed in place of invalid characters.
  *
 */
-shaped_text_get_preserve_invalid(): boolean;
+shaped_text_get_preserve_invalid(shaped: RID): boolean;
 
 /** Returns substring buffer character range in the parent buffer. */
-shaped_text_get_range(): Vector2i;
+shaped_text_get_range(shaped: RID): Vector2i;
 
 /** Returns selection rectangles for the specified character range. */
-shaped_text_get_selection(): PackedVector2Array;
+shaped_text_get_selection(shaped: RID, start: int, end: int): PackedVector2Array;
 
 /** Returns size of the text. */
-shaped_text_get_size(): Vector2;
+shaped_text_get_size(shaped: RID): Vector2;
 
 /** Returns extra spacing added between glyphs or lines in pixels. */
-shaped_text_get_spacing(): int;
+shaped_text_get_spacing(shaped: RID, spacing: int): int;
 
 /** Returns the position of the overrun trim. */
-shaped_text_get_trim_pos(): int;
+shaped_text_get_trim_pos(shaped: RID): int;
 
 /** Returns pixel offset of the underline below the baseline. */
-shaped_text_get_underline_position(): float;
+shaped_text_get_underline_position(shaped: RID): float;
 
 /** Returns thickness of the underline. */
-shaped_text_get_underline_thickness(): float;
+shaped_text_get_underline_thickness(shaped: RID): float;
 
 /** Returns width (for horizontal layout) or height (for vertical) of the text. */
-shaped_text_get_width(): float;
+shaped_text_get_width(shaped: RID): float;
 
 /** Breaks text into words and returns array of character ranges. Use [param grapheme_flags] to set what characters are used for breaking. */
-shaped_text_get_word_breaks(): PackedInt32Array;
+shaped_text_get_word_breaks(shaped: RID, grapheme_flags?: int, skip_grapheme_flags?: int): PackedInt32Array;
 
 /** Returns [code]true[/code] if an object with [param key] is embedded in this shaped text buffer. */
-shaped_text_has_object(): boolean;
+shaped_text_has_object(shaped: RID, key: any): boolean;
 
 /** Returns [code]true[/code] if text buffer contains any visible characters. */
-shaped_text_has_visible_chars(): boolean;
+shaped_text_has_visible_chars(shaped: RID): boolean;
 
 /** Returns grapheme index at the specified pixel offset at the baseline, or [code]-1[/code] if none is found. */
-shaped_text_hit_test_grapheme(): int;
+shaped_text_hit_test_grapheme(shaped: RID, coords: float): int;
 
 /** Returns caret character offset at the specified pixel offset at the baseline. This function always returns a valid position. */
-shaped_text_hit_test_position(): int;
+shaped_text_hit_test_position(shaped: RID, coords: float): int;
 
 /** Returns [code]true[/code] if buffer is successfully shaped. */
-shaped_text_is_ready(): boolean;
+shaped_text_is_ready(shaped: RID): boolean;
 
 /** Returns composite character end position closest to the [param pos]. */
-shaped_text_next_character_pos(): int;
+shaped_text_next_character_pos(shaped: RID, pos: int): int;
 
 /** Returns grapheme end position closest to the [param pos]. */
-shaped_text_next_grapheme_pos(): int;
+shaped_text_next_grapheme_pos(shaped: RID, pos: int): int;
 
 /** Trims text if it exceeds the given width. */
-shaped_text_overrun_trim_to_width(): void;
+shaped_text_overrun_trim_to_width(shaped: RID, width?: float, overrun_trim_flags?: int): void;
 
 /** Returns composite character start position closest to the [param pos]. */
-shaped_text_prev_character_pos(): int;
+shaped_text_prev_character_pos(shaped: RID, pos: int): int;
 
 /** Returns grapheme start position closest to the [param pos]. */
-shaped_text_prev_grapheme_pos(): int;
+shaped_text_prev_grapheme_pos(shaped: RID, pos: int): int;
 
 /** Sets new size and alignment of embedded object. */
-shaped_text_resize_object(): boolean;
+shaped_text_resize_object(shaped: RID, key: any, size: Vector2, inline_align?: int, baseline?: float): boolean;
 
 /**
  * Overrides BiDi for the structured text.
@@ -880,13 +880,13 @@ shaped_text_resize_object(): boolean;
  * Override ranges should cover full source text without overlaps. BiDi algorithm will be used on each range separately.
  *
 */
-shaped_text_set_bidi_override(): void;
+shaped_text_set_bidi_override(shaped: RID, override: any[]): void;
 
 /** Sets ellipsis character used for text clipping. */
-shaped_text_set_custom_ellipsis(): void;
+shaped_text_set_custom_ellipsis(shaped: RID, char: int): void;
 
 /** Sets custom punctuation character list, used for word breaking. If set to empty string, server defaults are used. */
-shaped_text_set_custom_punctuation(): void;
+shaped_text_set_custom_punctuation(shaped: RID, punct: string): void;
 
 /**
  * Sets desired text direction. If set to [constant DIRECTION_AUTO], direction will be detected based on the buffer contents and current locale.
@@ -894,7 +894,7 @@ shaped_text_set_custom_punctuation(): void;
  * **Note:** Direction is ignored if server does not support [constant FEATURE_BIDI_LAYOUT] feature (supported by [TextServerAdvanced]).
  *
 */
-shaped_text_set_direction(): void;
+shaped_text_set_direction(shaped: RID, direction?: int): void;
 
 /**
  * Sets desired text orientation.
@@ -902,16 +902,16 @@ shaped_text_set_direction(): void;
  * **Note:** Orientation is ignored if server does not support [constant FEATURE_VERTICAL_LAYOUT] feature (supported by [TextServerAdvanced]).
  *
 */
-shaped_text_set_orientation(): void;
+shaped_text_set_orientation(shaped: RID, orientation?: int): void;
 
 /** If set to [code]true[/code] text buffer will display control characters. */
-shaped_text_set_preserve_control(): void;
+shaped_text_set_preserve_control(shaped: RID, enabled: boolean): void;
 
 /** If set to [code]true[/code] text buffer will display invalid characters as hexadecimal codes, otherwise nothing is displayed. */
-shaped_text_set_preserve_invalid(): void;
+shaped_text_set_preserve_invalid(shaped: RID, enabled: boolean): void;
 
 /** Sets extra spacing added between glyphs or lines in pixels. */
-shaped_text_set_spacing(): void;
+shaped_text_set_spacing(shaped: RID, spacing: int, value: int): void;
 
 /**
  * Shapes buffer if it's not shaped. Returns `true` if the string is shaped successfully.
@@ -919,16 +919,16 @@ shaped_text_set_spacing(): void;
  * **Note:** It is not necessary to call this function manually, buffer will be shaped automatically as soon as any of its output data is requested.
  *
 */
-shaped_text_shape(): boolean;
+shaped_text_shape(shaped: RID): boolean;
 
 /** Returns text glyphs in the logical order. */
-shaped_text_sort_logical(): Dictionary[];
+shaped_text_sort_logical(shaped: RID): Dictionary[];
 
 /** Returns text buffer for the substring of the text in the [param shaped] text buffer (including inline objects). */
-shaped_text_substr(): RID;
+shaped_text_substr(shaped: RID, start: int, length: int): RID;
 
 /** Aligns shaped text to the given tab-stops. */
-shaped_text_tab_align(): float;
+shaped_text_tab_align(shaped: RID, tab_stops: PackedFloat32Array): float;
 
 /**
  * Returns `true` if [param string] is likely to be an attempt at confusing the reader.
@@ -936,7 +936,7 @@ shaped_text_tab_align(): float;
  * **Note:** Always returns `false` if the server does not support the [constant FEATURE_UNICODE_SECURITY] feature.
  *
 */
-spoof_check(): boolean;
+spoof_check(string: string): boolean;
 
 /**
  * Returns array of the composite character boundaries.
@@ -949,7 +949,7 @@ spoof_check(): boolean;
  * 
  *
 */
-string_get_character_breaks(): PackedInt32Array;
+string_get_character_breaks(string: string, language?: string): PackedInt32Array;
 
 /**
  * Returns an array of the word break boundaries. Elements in the returned array are the offsets of the start and end of words. Therefore the length of the array is always even.
@@ -969,7 +969,7 @@ string_get_character_breaks(): PackedInt32Array;
  * 
  *
 */
-string_get_word_breaks(): PackedInt32Array;
+string_get_word_breaks(string: string, language?: string, chars_per_line?: int): PackedInt32Array;
 
 /**
  * Returns the string converted to `lowercase`.
@@ -979,7 +979,7 @@ string_get_word_breaks(): PackedInt32Array;
  * **Note:** The result may be longer or shorter than the original.
  *
 */
-string_to_lower(): string;
+string_to_lower(string: string, language?: string): string;
 
 /**
  * Returns the string converted to `Title Case`.
@@ -989,7 +989,7 @@ string_to_lower(): string;
  * **Note:** The result may be longer or shorter than the original.
  *
 */
-string_to_title(): string;
+string_to_title(string: string, language?: string): string;
 
 /**
  * Returns the string converted to `UPPERCASE`.
@@ -999,7 +999,7 @@ string_to_title(): string;
  * **Note:** The result may be longer or shorter than the original.
  *
 */
-string_to_upper(): string;
+string_to_upper(string: string, language?: string): string;
 
 /**
  * Strips diacritics from the string.
@@ -1007,10 +1007,10 @@ string_to_upper(): string;
  * **Note:** The result may be longer or shorter than the original.
  *
 */
-strip_diacritics(): string;
+strip_diacritics(string: string): string;
 
 /** Converts the given OpenType tag to the readable name of a feature, variation, script, or language. */
-tag_to_name(): string;
+tag_to_name(tag: int): string;
 
   connect<T extends SignalsOf<TextServer>>(signal: T, method: SignalFunction<TextServer[T]>): number;
 

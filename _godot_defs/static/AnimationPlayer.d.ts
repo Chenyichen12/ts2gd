@@ -88,16 +88,16 @@ playback_default_blend_time: float;
 speed_scale: float;
 
 /** Returns the key of the animation which is queued to play after the [param animation_from] animation. */
-animation_get_next(): StringName;
+animation_get_next(animation_from: StringName): StringName;
 
 /** Triggers the [param animation_to] animation when the [param animation_from] animation completes. */
-animation_set_next(): void;
+animation_set_next(animation_from: StringName, animation_to: StringName): void;
 
 /** Clears all queued, unplayed animations. */
 clear_queue(): void;
 
 /** Returns the blend time (in seconds) between two animations, referenced by their keys. */
-get_blend_time(): float;
+get_blend_time(animation_from: StringName, animation_to: StringName): float;
 
 /** Returns the call mode used for "Call Method" tracks. */
 get_method_call_mode(): int;
@@ -164,7 +164,7 @@ pause(): void;
  * **Note:** The animation will be updated the next time the [AnimationPlayer] is processed. If other variables are updated at the same time this is called, they may be updated too early. To perform the update immediately, call `advance(0)`.
  *
 */
-play(): void;
+play(name?: StringName, custom_blend?: float, custom_speed?: float, from_end?: boolean): void;
 
 /**
  * Plays the animation with key [param name] in reverse.
@@ -172,7 +172,7 @@ play(): void;
  * This method is a shorthand for [method play] with `custom_speed = -1.0` and `from_end = true`, so see its description for more information.
  *
 */
-play_backwards(): void;
+play_backwards(name?: StringName, custom_blend?: float): void;
 
 /**
  * Plays the animation with key [param name] and the section starting from [param start_time] and ending on [param end_time]. See also [method play].
@@ -180,7 +180,7 @@ play_backwards(): void;
  * Setting [param start_time] to a value outside the range of the animation means the start of the animation will be used instead, and setting [param end_time] to a value outside the range of the animation means the end of the animation will be used instead. [param start_time] cannot be equal to [param end_time].
  *
 */
-play_section(): void;
+play_section(name?: StringName, start_time?: float, end_time?: float, custom_blend?: float, custom_speed?: float, from_end?: boolean): void;
 
 /**
  * Plays the animation with key [param name] and the section starting from [param start_time] and ending on [param end_time] in reverse.
@@ -188,7 +188,7 @@ play_section(): void;
  * This method is a shorthand for [method play_section] with `custom_speed = -1.0` and `from_end = true`, see its description for more information.
  *
 */
-play_section_backwards(): void;
+play_section_backwards(name?: StringName, start_time?: float, end_time?: float, custom_blend?: float): void;
 
 /**
  * Plays the animation with key [param name] and the section starting from [param start_marker] and ending on [param end_marker].
@@ -196,7 +196,7 @@ play_section_backwards(): void;
  * If the start marker is empty, the section starts from the beginning of the animation. If the end marker is empty, the section ends on the end of the animation. See also [method play].
  *
 */
-play_section_with_markers(): void;
+play_section_with_markers(name?: StringName, start_marker?: StringName, end_marker?: StringName, custom_blend?: float, custom_speed?: float, from_end?: boolean): void;
 
 /**
  * Plays the animation with key [param name] and the section starting from [param start_marker] and ending on [param end_marker] in reverse.
@@ -204,7 +204,7 @@ play_section_with_markers(): void;
  * This method is a shorthand for [method play_section_with_markers] with `custom_speed = -1.0` and `from_end = true`, see its description for more information.
  *
 */
-play_section_with_markers_backwards(): void;
+play_section_with_markers_backwards(name?: StringName, start_marker?: StringName, end_marker?: StringName, custom_blend?: float): void;
 
 /**
  * See also [method AnimationMixer.capture].
@@ -225,7 +225,7 @@ play_section_with_markers_backwards(): void;
  * **Note:** The [param duration] takes [member speed_scale] into account, but [param custom_speed] does not, because the capture cache is interpolated with the blend result and the result may contain multiple animations.
  *
 */
-play_with_capture(): void;
+play_with_capture(name?: StringName, duration?: float, custom_blend?: float, custom_speed?: float, from_end?: boolean, trans_type?: int, ease_type?: int): void;
 
 /**
  * Queues an animation for playback once the current animation and all previously queued animations are done.
@@ -233,7 +233,7 @@ play_with_capture(): void;
  * **Note:** If a looped animation is currently playing, the queued animation will never play unless the looped animation is stopped somehow.
  *
 */
-queue(): void;
+queue(name: StringName): void;
 
 /** Resets the current section. Does nothing if a section has not been set. */
 reset_section(): void;
@@ -246,22 +246,22 @@ reset_section(): void;
  * **Note:** Seeking to the end of the animation doesn't emit [signal AnimationMixer.animation_finished]. If you want to skip animation and emit the signal, use [method AnimationMixer.advance].
  *
 */
-seek(): void;
+seek(seconds: float, update?: boolean, update_only?: boolean): void;
 
 /** Specifies a blend time (in seconds) between two animations, referenced by their keys. */
-set_blend_time(): void;
+set_blend_time(animation_from: StringName, animation_to: StringName, sec: float): void;
 
 /** Sets the call mode used for "Call Method" tracks. */
-set_method_call_mode(): void;
+set_method_call_mode(mode: int): void;
 
 /** Sets the process notification in which to update animations. */
-set_process_callback(): void;
+set_process_callback(mode: int): void;
 
 /** Sets the node which node path references will travel from. */
-set_root(): void;
+set_root(path: NodePathType): void;
 
 /** Changes the start and end times of the section being played. The current playback position will be clamped within the new section. See also [method play_section]. */
-set_section(): void;
+set_section(start_time?: float, end_time?: float): void;
 
 /**
  * Changes the start and end markers of the section being played. The current playback position will be clamped within the new section. See also [method play_section_with_markers].
@@ -269,7 +269,7 @@ set_section(): void;
  * If the argument is empty, the section uses the beginning or end of the animation. If both are empty, it means that the section is not set.
  *
 */
-set_section_with_markers(): void;
+set_section_with_markers(start_marker?: StringName, end_marker?: StringName): void;
 
 /**
  * Stops the currently playing animation. The animation position is reset to `0` and the `custom_speed` is reset to `1.0`. See also [method pause].
@@ -279,7 +279,7 @@ set_section_with_markers(): void;
  * **Note:** The method / audio / animation playback tracks will not be processed by this method.
  *
 */
-stop(): void;
+stop(keep_state?: boolean): void;
 
   connect<T extends SignalsOf<AnimationPlayer>>(signal: T, method: SignalFunction<AnimationPlayer[T]>): number;
 

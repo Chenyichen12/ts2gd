@@ -44,37 +44,37 @@ text_direction: int;
 get_menu_count(): int;
 
 /** Returns [PopupMenu] associated with menu item. */
-get_menu_popup(): PopupMenu;
+get_menu_popup(menu: int): PopupMenu;
 
 /** Returns menu item title. */
-get_menu_title(): string;
+get_menu_title(menu: int): string;
 
 /** Returns menu item tooltip. */
-get_menu_tooltip(): string;
+get_menu_tooltip(menu: int): string;
 
 /** Returns [code]true[/code] if the menu item is disabled. */
-is_menu_disabled(): boolean;
+is_menu_disabled(menu: int): boolean;
 
 /** Returns [code]true[/code] if the menu item is hidden. */
-is_menu_hidden(): boolean;
+is_menu_hidden(menu: int): boolean;
 
 /** Returns [code]true[/code] if the current system's global menu is supported and used by this [MenuBar]. */
 is_native_menu(): boolean;
 
 /** If [code]true[/code], shortcuts are disabled and cannot be used to trigger the button. */
-set_disable_shortcuts(): void;
+set_disable_shortcuts(disabled: boolean): void;
 
 /** If [code]true[/code], menu item is disabled. */
-set_menu_disabled(): void;
+set_menu_disabled(menu: int, disabled: boolean): void;
 
 /** If [code]true[/code], menu item is hidden. */
-set_menu_hidden(): void;
+set_menu_hidden(menu: int, hidden: boolean): void;
 
 /** Sets menu item title. */
-set_menu_title(): void;
+set_menu_title(menu: int, title: string): void;
 
 /** Sets menu item tooltip. */
-set_menu_tooltip(): void;
+set_menu_tooltip(menu: int, tooltip: string): void;
 
   connect<T extends SignalsOf<MenuBar>>(signal: T, method: SignalFunction<MenuBar[T]>): number;
 

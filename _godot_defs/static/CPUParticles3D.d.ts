@@ -283,19 +283,19 @@ visibility_aabb: AABB;
 capture_aabb(): AABB;
 
 /** Sets this node's properties to match a given [GPUParticles3D] node with an assigned [ParticleProcessMaterial]. */
-convert_from_particles(): void;
+convert_from_particles(particles: Node): void;
 
 /** Returns the [Curve] of the parameter specified by [enum Parameter]. */
-get_param_curve(): Curve;
+get_param_curve(param: int): Curve;
 
 /** Returns the maximum value range for the given parameter. */
-get_param_max(): float;
+get_param_max(param: int): float;
 
 /** Returns the minimum value range for the given parameter. */
-get_param_min(): float;
+get_param_min(param: int): float;
 
 /** Returns the enabled state of the given particle flag. */
-get_particle_flag(): boolean;
+get_particle_flag(particle_flag: int): boolean;
 
 /**
  * Requests the particles to process for extra process time during a single frame.
@@ -303,7 +303,7 @@ get_particle_flag(): boolean;
  * Useful for particle playback, if used in combination with [member use_fixed_seed] or by calling [method restart] with parameter `keep_seed` set to `true`.
  *
 */
-request_particles_process(): void;
+request_particles_process(process_time: float): void;
 
 /**
  * Restarts the particle emitter.
@@ -311,19 +311,19 @@ request_particles_process(): void;
  * If [param keep_seed] is `true`, the current random seed will be preserved. Useful for seeking and playback.
  *
 */
-restart(): void;
+restart(keep_seed?: boolean): void;
 
 /** Sets the [Curve] of the parameter specified by [enum Parameter]. Should be a unit [Curve]. */
-set_param_curve(): void;
+set_param_curve(param: int, curve: Curve): void;
 
 /** Sets the maximum value for the given parameter. */
-set_param_max(): void;
+set_param_max(param: int, value: float): void;
 
 /** Sets the minimum value for the given parameter. */
-set_param_min(): void;
+set_param_min(param: int, value: float): void;
 
 /** Enables or disables the given particle flag. */
-set_particle_flag(): void;
+set_particle_flag(particle_flag: int, enable: boolean): void;
 
   connect<T extends SignalsOf<CPUParticles3D>>(signal: T, method: SignalFunction<CPUParticles3D[T]>): number;
 

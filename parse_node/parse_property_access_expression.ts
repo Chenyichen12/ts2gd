@@ -166,6 +166,34 @@ export const parsePropertyAccessExpression = (
       if(props.preserveTypeMap.has(lhs)){
         lhs = props.preserveTypeMap.get(lhs)!
       }
+      // special call add mul div sub for Vector2/3
+      if(rhs === "add" || rhs === "mul" || rhs === "div" || rhs === "sub"){
+        const lhsType = tc.typeToString(
+          tc.getTypeAtLocation(node.expression).getNonNullableType()
+        )
+        let translateOp = false;
+        if(
+          (lhsType === "Vector2Constructor" ||
+          lhsType === "Vector2iConstructor" ||
+          lhsType === "Vector3Constructor" ||
+          lhsType === "Vector3iConstructor")
+        ){
+          translateOp = true
+        }
+        if(translateOp){
+          switch(rhs) {
+            case "add":
+              return `${lhs} + `
+            case "sub":
+              return `${lhs} - `
+            case "mul":
+              return `${lhs} * `
+            case "div":
+              return `${lhs} / `
+          }
+        }
+        return `${lhs}.${rhs}`
+      }
 
       return `${lhs}.${rhs}`
     },

@@ -85,7 +85,7 @@ get_min_height(): float;
  * **Note:** Using a heightmap with 16-bit or 32-bit data, stored in EXR or HDR format is recommended. Using 8-bit height data, or a format like PNG that Godot imports as 8-bit, will result in a terraced terrain.
  *
 */
-update_map_data_from_image(): void;
+update_map_data_from_image(image: Image, height_min: float, height_max: float): void;
 
   connect<T extends SignalsOf<HeightMapShape3D>>(signal: T, method: SignalFunction<HeightMapShape3D[T]>): number;
 

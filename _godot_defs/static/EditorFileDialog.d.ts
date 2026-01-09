@@ -26,7 +26,7 @@ declare class EditorFileDialog extends FileDialog  {
 disable_overwrite_warning: boolean;
 
 /** This method is kept for compatibility and does nothing. As an alternative, you can display another dialog after showing the file dialog. */
-add_side_menu(): void;
+add_side_menu(menu: Control, title?: string): void;
 
   connect<T extends SignalsOf<EditorFileDialog>>(signal: T, method: SignalFunction<EditorFileDialog[T]>): number;
 

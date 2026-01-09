@@ -20,7 +20,7 @@ declare class RenderSceneBuffers extends RefCounted  {
 
 
 /** This method is called by the rendering server when the associated viewport's configuration is changed. It will discard the old buffers and recreate the internal buffers used. */
-configure(): void;
+configure(config: RenderSceneBuffersConfiguration): void;
 
   connect<T extends SignalsOf<RenderSceneBuffers>>(signal: T, method: SignalFunction<RenderSceneBuffers[T]>): number;
 

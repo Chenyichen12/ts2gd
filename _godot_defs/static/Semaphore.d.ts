@@ -32,7 +32,7 @@ declare class Semaphore extends RefCounted  {
 
 
 /** Lowers the [Semaphore], allowing one thread in, or more if [param count] is specified. */
-post(): void;
+post(count?: int): void;
 
 /** Like [method wait], but won't block, so if the value is zero, fails immediately and returns [code]false[/code]. If non-zero, it returns [code]true[/code] to report success. */
 try_wait(): boolean;

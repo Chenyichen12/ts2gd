@@ -30,10 +30,10 @@ locale: string;
 plural_rules_override: string;
 
 /** Virtual method to override [method get_message]. */
-protected _get_message(): StringName;
+protected _get_message(src_message: StringName, context: StringName): StringName;
 
 /** Virtual method to override [method get_plural_message]. */
-protected _get_plural_message(): StringName;
+protected _get_plural_message(src_message: StringName, src_plural_message: StringName, n: int, context: StringName): StringName;
 
 /**
  * Adds a message if nonexistent, followed by its translation.
@@ -41,7 +41,7 @@ protected _get_plural_message(): StringName;
  * An additional context could be used to specify the translation context or differentiate polysemic words.
  *
 */
-add_message(): void;
+add_message(src_message: StringName, xlated_message: StringName, context?: StringName): void;
 
 /**
  * Adds a message involving plural translation if nonexistent, followed by its translation.
@@ -49,13 +49,13 @@ add_message(): void;
  * An additional context could be used to specify the translation context or differentiate polysemic words.
  *
 */
-add_plural_message(): void;
+add_plural_message(src_message: StringName, xlated_messages: PackedStringArray, context?: StringName): void;
 
 /** Erases a message. */
-erase_message(): void;
+erase_message(src_message: StringName, context?: StringName): void;
 
 /** Returns a message's translation. */
-get_message(): StringName;
+get_message(src_message: StringName, context?: StringName): StringName;
 
 /** Returns the number of existing messages. */
 get_message_count(): int;
@@ -90,7 +90,7 @@ get_message_list(): PackedStringArray;
  * **Note:** Plurals are only supported in [url=$DOCS_URL/tutorials/i18n/localization_using_gettext.html]gettext-based translations (PO)[/url], not CSV.
  *
 */
-get_plural_message(): StringName;
+get_plural_message(src_message: StringName, src_plural_message: StringName, n: int, context?: StringName): StringName;
 
 /** Returns all the translated strings. */
 get_translated_message_list(): PackedStringArray;

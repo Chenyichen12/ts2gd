@@ -20,7 +20,7 @@ declare class ImporterMesh extends Resource  {
 
 
 /** Adds name for a blend shape that will be added with [method add_surface]. Must be called before surface is added. */
-add_blend_shape(): void;
+add_blend_shape(name: string): void;
 
 /**
  * Creates a new surface. [method Mesh.get_surface_count] will become the `surf_idx` for this new surface.
@@ -38,13 +38,13 @@ add_blend_shape(): void;
  * **Note:** When using indices, it is recommended to only use points, lines, or triangles.
  *
 */
-add_surface(): void;
+add_surface(primitive: int, arrays: any[], blend_shapes?: Array[], lods?: Dictionary<any, any>, material?: Material, name?: string, flags?: int): void;
 
 /** Removes all surfaces and blend shapes from this [ImporterMesh]. */
 clear(): void;
 
 /** Converts the given [Mesh] into an [ImporterMesh] by copying all its surfaces, blend shapes, materials, and metadata into a new [ImporterMesh] object. */
-from_mesh(): ImporterMesh;
+from_mesh(mesh: Mesh): ImporterMesh;
 
 /**
  * Generates all lods for this ImporterMesh.
@@ -58,7 +58,7 @@ from_mesh(): ImporterMesh;
  * [param bone_transform_array] is an [Array] which can be either empty or contain [Transform3D]s which, for each of the mesh's bone IDs, will apply mesh skinning when generating the LOD mesh variations. This is usually used to account for discrepancies in scale between the mesh itself and its skinning data.
  *
 */
-generate_lods(): void;
+generate_lods(normal_merge_angle: float, normal_split_angle: float, bone_transform_array: any[]): void;
 
 /** Returns the number of blend shapes that the mesh holds. */
 get_blend_shape_count(): int;
@@ -67,7 +67,7 @@ get_blend_shape_count(): int;
 get_blend_shape_mode(): int;
 
 /** Returns the name of the blend shape at this index. */
-get_blend_shape_name(): string;
+get_blend_shape_name(blend_shape_idx: int): string;
 
 /** Returns the size hint of this mesh for lightmap-unwrapping in UV-space. */
 get_lightmap_size_hint(): Vector2i;
@@ -80,49 +80,49 @@ get_lightmap_size_hint(): Vector2i;
  * If not yet cached and [param base_mesh] is provided, [param base_mesh] will be used and mutated.
  *
 */
-get_mesh(): ArrayMesh;
+get_mesh(base_mesh?: ArrayMesh): ArrayMesh;
 
 /** Returns the arrays for the vertices, normals, UVs, etc. that make up the requested surface. See [method add_surface]. */
-get_surface_arrays(): any[];
+get_surface_arrays(surface_idx: int): any[];
 
 /** Returns a single set of blend shape arrays for the requested blend shape index for a surface. */
-get_surface_blend_shape_arrays(): any[];
+get_surface_blend_shape_arrays(surface_idx: int, blend_shape_idx: int): any[];
 
 /** Returns the number of surfaces that the mesh holds. */
 get_surface_count(): int;
 
 /** Returns the format of the surface that the mesh holds. */
-get_surface_format(): int;
+get_surface_format(surface_idx: int): int;
 
 /** Returns the number of lods that the mesh holds on a given surface. */
-get_surface_lod_count(): int;
+get_surface_lod_count(surface_idx: int): int;
 
 /** Returns the index buffer of a lod for a surface. */
-get_surface_lod_indices(): PackedInt32Array;
+get_surface_lod_indices(surface_idx: int, lod_idx: int): PackedInt32Array;
 
 /** Returns the screen ratio which activates a lod for a surface. */
-get_surface_lod_size(): float;
+get_surface_lod_size(surface_idx: int, lod_idx: int): float;
 
 /** Returns a [Material] in a given surface. Surface is rendered using this material. */
-get_surface_material(): Material;
+get_surface_material(surface_idx: int): Material;
 
 /** Gets the name assigned to this surface. */
-get_surface_name(): string;
+get_surface_name(surface_idx: int): string;
 
 /** Returns the primitive type of the requested surface (see [method add_surface]). */
-get_surface_primitive_type(): int;
+get_surface_primitive_type(surface_idx: int): int;
 
 /** Sets the blend shape mode. */
-set_blend_shape_mode(): void;
+set_blend_shape_mode(mode: int): void;
 
 /** Sets the size hint of this mesh for lightmap-unwrapping in UV-space. */
-set_lightmap_size_hint(): void;
+set_lightmap_size_hint(size: Vector2i): void;
 
 /** Sets a [Material] for a given surface. Surface will be rendered using this material. */
-set_surface_material(): void;
+set_surface_material(surface_idx: int, material: Material): void;
 
 /** Sets a name for a given surface. */
-set_surface_name(): void;
+set_surface_name(surface_idx: int, name: string): void;
 
   connect<T extends SignalsOf<ImporterMesh>>(signal: T, method: SignalFunction<ImporterMesh[T]>): number;
 

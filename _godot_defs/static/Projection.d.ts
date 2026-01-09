@@ -35,10 +35,10 @@ y: Vector4;
 z: Vector4;
 
 /** Creates a new [Projection] that projects positions from a depth range of [code]-1[/code] to [code]1[/code] to one that ranges from [code]0[/code] to [code]1[/code], and flips the projected positions vertically, according to [param flip_y]. */
-create_depth_correction(): Projection;
+create_depth_correction(flip_y: boolean): Projection;
 
 /** Creates a new [Projection] that scales a given projection to fit around a given [AABB] in projection space. */
-create_fit_aabb(): Projection;
+create_fit_aabb(aabb: AABB): Projection;
 
 /**
  * Creates a new [Projection] for projecting positions onto a head-mounted display with the given X:Y aspect ratio, distance between eyes, display width, distance to lens, oversampling factor, and depth clipping planes.
@@ -46,10 +46,10 @@ create_fit_aabb(): Projection;
  * [param eye] creates the projection for the left eye when set to 1, or the right eye when set to 2.
  *
 */
-create_for_hmd(): Projection;
+create_for_hmd(eye: int, aspect: float, intraocular_dist: float, display_width: float, display_to_lens: float, oversample: float, z_near: float, z_far: float): Projection;
 
 /** Creates a new [Projection] that projects positions in a frustum with the given clipping planes. */
-create_frustum(): Projection;
+create_frustum(left: float, right: float, bottom: float, top: float, z_near: float, z_far: float): Projection;
 
 /**
  * Creates a new [Projection] that projects positions in a frustum with the given size, X:Y aspect ratio, offset, and clipping planes.
@@ -57,13 +57,13 @@ create_frustum(): Projection;
  * [param flip_fov] determines whether the projection's field of view is flipped over its diagonal.
  *
 */
-create_frustum_aspect(): Projection;
+create_frustum_aspect(size: float, aspect: float, offset: Vector2, z_near: float, z_far: float, flip_fov?: boolean): Projection;
 
 /** Creates a new [Projection] that projects positions into the given [Rect2]. */
-create_light_atlas_rect(): Projection;
+create_light_atlas_rect(rect: Rect2): Projection;
 
 /** Creates a new [Projection] that projects positions using an orthogonal projection with the given clipping planes. */
-create_orthogonal(): Projection;
+create_orthogonal(left: float, right: float, bottom: float, top: float, z_near: float, z_far: float): Projection;
 
 /**
  * Creates a new [Projection] that projects positions using an orthogonal projection with the given size, X:Y aspect ratio, and clipping planes.
@@ -71,7 +71,7 @@ create_orthogonal(): Projection;
  * [param flip_fov] determines whether the projection's field of view is flipped over its diagonal.
  *
 */
-create_orthogonal_aspect(): Projection;
+create_orthogonal_aspect(size: float, aspect: float, z_near: float, z_far: float, flip_fov?: boolean): Projection;
 
 /**
  * Creates a new [Projection] that projects positions using a perspective projection with the given Y-axis field of view (in degrees), X:Y aspect ratio, and clipping planes.
@@ -79,7 +79,7 @@ create_orthogonal_aspect(): Projection;
  * [param flip_fov] determines whether the projection's field of view is flipped over its diagonal.
  *
 */
-create_perspective(): Projection;
+create_perspective(fovy: float, aspect: float, z_near: float, z_far: float, flip_fov?: boolean): Projection;
 
 /**
  * Creates a new [Projection] that projects positions using a perspective projection with the given Y-axis field of view (in degrees), X:Y aspect ratio, and clipping distances. The projection is adjusted for a head-mounted display with the given distance between eyes and distance to a point that can be focused on.
@@ -89,7 +89,7 @@ create_perspective(): Projection;
  * [param flip_fov] determines whether the projection's field of view is flipped over its diagonal.
  *
 */
-create_perspective_hmd(): Projection;
+create_perspective_hmd(fovy: float, aspect: float, z_near: float, z_far: float, flip_fov: boolean, eye: int, intraocular_dist: float, convergence_dist: float): Projection;
 
 /**
  * Returns a scalar value that is the signed factor by which areas are scaled by this matrix. If the sign is negative, the matrix flips the orientation of the area.
@@ -117,13 +117,13 @@ get_fov(): float;
  * **Note:** Unlike most methods of [Projection], [param aspect] is expected to be 1 divided by the X:Y aspect ratio.
  *
 */
-get_fovy(): float;
+get_fovy(fovx: float, aspect: float): float;
 
 /** Returns the factor by which the visible level of detail is scaled by this [Projection]. */
 get_lod_multiplier(): float;
 
 /** Returns [param for_pixel_width] divided by the viewport's width measured in meters on the near plane, after this [Projection] is applied. */
-get_pixels_per_meter(): int;
+get_pixels_per_meter(for_pixel_width: int): int;
 
 /**
  * Returns the clipping plane of this [Projection] whose index is given by [param plane].
@@ -131,7 +131,7 @@ get_pixels_per_meter(): int;
  * [param plane] should be equal to one of [constant PLANE_NEAR], [constant PLANE_FAR], [constant PLANE_LEFT], [constant PLANE_TOP], [constant PLANE_RIGHT], or [constant PLANE_BOTTOM].
  *
 */
-get_projection_plane(): Plane;
+get_projection_plane(plane: int): Plane;
 
 /** Returns the dimensions of the viewport plane that this [Projection] projects positions onto, divided by two. */
 get_viewport_half_extents(): Vector2;
@@ -149,7 +149,7 @@ inverse(): Projection;
 is_orthogonal(): boolean;
 
 /** Returns a [Projection] with the X and Y values from the given [Vector2] added to the first and second values of the final column respectively. */
-jitter_offseted(): Projection;
+jitter_offseted(offset: Vector2): Projection;
 
 /**
  * Returns a [Projection] with the near clipping distance adjusted to be [param new_znear].
@@ -157,7 +157,7 @@ jitter_offseted(): Projection;
  * **Note:** The original [Projection] must be a perspective projection.
  *
 */
-perspective_znear_adjusted(): Projection;
+perspective_znear_adjusted(new_znear: float): Projection;
 
   connect<T extends SignalsOf<Projection>>(signal: T, method: SignalFunction<Projection[T]>): number;
 

@@ -21,7 +21,7 @@ binding: int;
 uniform_type: int;
 
 /** Binds the given id to the uniform. The data associated with the id is then used when the uniform is passed to a shader. */
-add_id(): void;
+add_id(id: RID): void;
 
 /** Unbinds all ids currently bound to the uniform. */
 clear_ids(): void;

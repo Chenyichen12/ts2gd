@@ -34,7 +34,7 @@ skin: Skin;
  * **Performance:** [Mesh] data needs to be received from the GPU, stalling the [RenderingServer] in the process.
  *
 */
-bake_mesh_from_current_blend_shape_mix(): ArrayMesh;
+bake_mesh_from_current_blend_shape_mix(existing?: ArrayMesh): ArrayMesh;
 
 /**
  * Takes a snapshot of the current animated skeleton pose of the skinned mesh and bakes it to the provided [param existing] mesh. If no [param existing] mesh is provided a new [ArrayMesh] is created, baked, and returned. Requires a skeleton with a registered skin to work. Blendshapes are ignored. Mesh surface materials are not copied.
@@ -42,7 +42,7 @@ bake_mesh_from_current_blend_shape_mix(): ArrayMesh;
  * **Performance:** [Mesh] data needs to be retrieved from the GPU, stalling the [RenderingServer] in the process.
  *
 */
-bake_mesh_from_current_skeleton_pose(): ArrayMesh;
+bake_mesh_from_current_skeleton_pose(existing?: ArrayMesh): ArrayMesh;
 
 /**
  * This helper creates a [StaticBody3D] child node with a [ConvexPolygonShape3D] collision shape calculated from the mesh geometry. It's mainly used for testing.
@@ -52,19 +52,19 @@ bake_mesh_from_current_skeleton_pose(): ArrayMesh;
  * If [param simplify] is `true`, the geometry can be further simplified to reduce the number of vertices. Disabled by default.
  *
 */
-create_convex_collision(): void;
+create_convex_collision(clean?: boolean, simplify?: boolean): void;
 
 /** This helper creates a [MeshInstance3D] child node with gizmos at every vertex calculated from the mesh geometry. It's mainly used for testing. */
 create_debug_tangents(): void;
 
 /** This helper creates a [StaticBody3D] child node with multiple [ConvexPolygonShape3D] collision shapes calculated from the mesh geometry via convex decomposition. The convex decomposition operation can be controlled with parameters from the optional [param settings]. */
-create_multiple_convex_collisions(): void;
+create_multiple_convex_collisions(settings?: MeshConvexDecompositionSettings): void;
 
 /** This helper creates a [StaticBody3D] child node with a [ConcavePolygonShape3D] collision shape calculated from the mesh geometry. It's mainly used for testing. */
 create_trimesh_collision(): void;
 
 /** Returns the index of the blend shape with the given [param name]. Returns [code]-1[/code] if no blend shape with this name exists, including when [member mesh] is [code]null[/code]. */
-find_blend_shape_by_name(): int;
+find_blend_shape_by_name(name: StringName): int;
 
 /**
  * Returns the [Material] that will be used by the [Mesh] when drawing. This can return the [member GeometryInstance3D.material_override], the surface override [Material] defined in this [MeshInstance3D], or the surface [Material] defined in the [member mesh]. For example, if [member GeometryInstance3D.material_override] is used, all surfaces will return the override material.
@@ -72,13 +72,13 @@ find_blend_shape_by_name(): int;
  * Returns `null` if no material is active, including when [member mesh] is `null`.
  *
 */
-get_active_material(): Material;
+get_active_material(surface: int): Material;
 
 /** Returns the number of blend shapes available. Produces an error if [member mesh] is [code]null[/code]. */
 get_blend_shape_count(): int;
 
 /** Returns the value of the blend shape at the given [param blend_shape_idx]. Returns [code]0.0[/code] and produces an error if [member mesh] is [code]null[/code] or doesn't have a blend shape at that index. */
-get_blend_shape_value(): float;
+get_blend_shape_value(blend_shape_idx: int): float;
 
 /** Returns the internal [SkinReference] containing the skeleton's [RID] attached to this RID. See also [method Resource.get_rid], [method SkinReference.get_skeleton], and [method RenderingServer.instance_attach_skeleton]. */
 get_skin_reference(): SkinReference;
@@ -89,13 +89,13 @@ get_skin_reference(): SkinReference;
  * **Note:** This returns the [Material] associated to the [MeshInstance3D]'s Surface Material Override properties, not the material within the [Mesh] resource. To get the material within the [Mesh] resource, use [method Mesh.surface_get_material] instead.
  *
 */
-get_surface_override_material(): Material;
+get_surface_override_material(surface: int): Material;
 
 /** Returns the number of surface override materials. This is equivalent to [method Mesh.get_surface_count]. See also [method get_surface_override_material]. */
 get_surface_override_material_count(): int;
 
 /** Sets the value of the blend shape at [param blend_shape_idx] to [param value]. Produces an error if [member mesh] is [code]null[/code] or doesn't have a blend shape at that index. */
-set_blend_shape_value(): void;
+set_blend_shape_value(blend_shape_idx: int, value: float): void;
 
 /**
  * Sets the override [param material] for the specified [param surface] of the [Mesh] resource. This material is associated with this [MeshInstance3D] rather than with [member mesh].
@@ -103,7 +103,7 @@ set_blend_shape_value(): void;
  * **Note:** This assigns the [Material] associated to the [MeshInstance3D]'s Surface Material Override properties, not the material within the [Mesh] resource. To set the material within the [Mesh] resource, use [method Mesh.surface_set_material] instead.
  *
 */
-set_surface_override_material(): void;
+set_surface_override_material(surface: int, material: Material): void;
 
   connect<T extends SignalsOf<MeshInstance3D>>(signal: T, method: SignalFunction<MeshInstance3D[T]>): number;
 

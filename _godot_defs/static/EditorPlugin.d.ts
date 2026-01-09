@@ -47,7 +47,7 @@ protected _disable_plugin(): void;
  * [param object] can be `null` if the plugin was editing an object, but there is no longer any selected object handled by this plugin. It can be used to cleanup editing state.
  *
 */
-protected _edit(): void;
+protected _edit(object: Object): void;
 
 /** Called by the engine when the user enables the [EditorPlugin] in the Plugin tab of the project settings window. */
 protected _enable_plugin(): void;
@@ -89,7 +89,7 @@ protected _enable_plugin(): void;
  * 
  *
 */
-protected _forward_3d_draw_over_viewport(): void;
+protected _forward_3d_draw_over_viewport(viewport_control: Control): void;
 
 /**
  * This method is the same as [method _forward_3d_draw_over_viewport], except it draws on top of everything. Useful when you need an extra layer that shows over anything else.
@@ -97,7 +97,7 @@ protected _forward_3d_draw_over_viewport(): void;
  * You need to enable calling of this method by using [method set_force_draw_over_forwarding_enabled].
  *
 */
-protected _forward_3d_force_draw_over_viewport(): void;
+protected _forward_3d_force_draw_over_viewport(viewport_control: Control): void;
 
 /**
  * Called when there is a root node in the current edited scene, [method _handles] is implemented, and an [InputEvent] happens in the 3D viewport. The return value decides whether the [InputEvent] is consumed or forwarded to other [EditorPlugin]s. See [enum AfterGUIInput] for options.
@@ -139,7 +139,7 @@ protected _forward_3d_force_draw_over_viewport(): void;
  * 
  *
 */
-protected _forward_3d_gui_input(): int;
+protected _forward_3d_gui_input(viewport_camera: Camera3D, event: InputEvent): int;
 
 /**
  * Called by the engine when the 2D editor's viewport is updated. [param viewport_control] is an overlay on top of the viewport and it can be used for drawing. You can update the viewport manually by calling [method update_overlays].
@@ -178,7 +178,7 @@ protected _forward_3d_gui_input(): int;
  * 
  *
 */
-protected _forward_canvas_draw_over_viewport(): void;
+protected _forward_canvas_draw_over_viewport(viewport_control: Control): void;
 
 /**
  * This method is the same as [method _forward_canvas_draw_over_viewport], except it draws on top of everything. Useful when you need an extra layer that shows over anything else.
@@ -186,7 +186,7 @@ protected _forward_canvas_draw_over_viewport(): void;
  * You need to enable calling of this method by using [method set_force_draw_over_forwarding_enabled].
  *
 */
-protected _forward_canvas_force_draw_over_viewport(): void;
+protected _forward_canvas_force_draw_over_viewport(viewport_control: Control): void;
 
 /**
  * Called when there is a root node in the current edited scene, [method _handles] is implemented, and an [InputEvent] happens in the 2D viewport. If this method returns `true`, [param event] is intercepted by this [EditorPlugin], otherwise [param event] is forwarded to other Editor classes.
@@ -234,7 +234,7 @@ protected _forward_canvas_force_draw_over_viewport(): void;
  * 
  *
 */
-protected _forward_canvas_gui_input(): boolean;
+protected _forward_canvas_gui_input(event: InputEvent): boolean;
 
 /** This is for editors that edit script-based objects. You can return a list of breakpoints in the format ([code]script:line[/code]), for example: [code]res://path_to_script.gd:25[/code]. */
 protected _get_breakpoints(): PackedStringArray;
@@ -330,7 +330,7 @@ protected _get_state(): Dictionary<any, any>;
  * 
  *
 */
-protected _get_unsaved_status(): string;
+protected _get_unsaved_status(for_scene: string): string;
 
 /**
  * Override this method to provide the GUI layout of the plugin or any other data you want to be stored. This is used to save the project's editor layout when [method queue_save_layout] is called or the editor layout was changed (for example changing the position of a dock). The data is stored in the `editor_layout.cfg` file in the editor metadata directory.
@@ -346,7 +346,7 @@ protected _get_unsaved_status(): string;
  * 
  *
 */
-protected _get_window_layout(): void;
+protected _get_window_layout(configuration: ConfigFile): void;
 
 /**
  * Implement this function if your plugin edits a specific type of object (Resource or Node). If you return `true`, then you will get the functions [method _edit] and [method _make_visible] called when the editor requests them. If you have declared the methods [method _forward_canvas_gui_input] and [method _forward_3d_gui_input] these will be called too.
@@ -354,7 +354,7 @@ protected _get_window_layout(): void;
  * **Note:** Each plugin should handle only one type of objects at a time. If a plugin handles more types of objects and they are edited at the same time, it will result in errors.
  *
 */
-protected _handles(): boolean;
+protected _handles(object: Object): boolean;
 
 /**
  * Returns `true` if this is a main screen editor plugin (it goes in the workspace selector together with **2D**, **3D**, **Script**, **Game**, and **AssetLib**).
@@ -390,7 +390,7 @@ protected _has_main_screen(): boolean;
  * Remember that you have to manage the visibility of all your editor controls manually.
  *
 */
-protected _make_visible(): void;
+protected _make_visible(visible: boolean): void;
 
 /**
  * This function is called when an individual scene is about to be played in the editor. [param args] is a list of command line arguments that will be passed to the new Godot instance, which will be replaced by the list returned by this function.
@@ -406,7 +406,7 @@ protected _make_visible(): void;
  * **Note:** Text that is printed in this method will not be visible in the editor's Output panel unless [member EditorSettings.run/output/always_clear_output_on_play] is `false`.
  *
 */
-protected _run_scene(): PackedStringArray;
+protected _run_scene(scene: string, args: PackedStringArray): PackedStringArray;
 
 /** This method is called after the editor saves the project or when it's closed. It asks the plugin to save edited external scenes/resources. */
 protected _save_external_data(): void;
@@ -425,7 +425,7 @@ protected _save_external_data(): void;
  * 
  *
 */
-protected _set_state(): void;
+protected _set_state(state: Dictionary<any, any>): void;
 
 /**
  * Restore the plugin GUI layout and data saved by [method _get_window_layout]. This method is called for every plugin on editor startup. Use the provided [param configuration] file to read your saved data.
@@ -439,10 +439,10 @@ protected _set_state(): void;
  * 
  *
 */
-protected _set_window_layout(): void;
+protected _set_window_layout(configuration: ConfigFile): void;
 
 /** Adds a script at [param path] to the Autoload list as [param name]. */
-add_autoload_singleton(): void;
+add_autoload_singleton(name: string, path: string): void;
 
 /**
  * Adds a plugin to the context menu. [param slot] is the context menu where the plugin will be added.
@@ -450,7 +450,7 @@ add_autoload_singleton(): void;
  * **Note:** A plugin instance can belong only to a single context menu slot.
  *
 */
-add_context_menu_plugin(): void;
+add_context_menu_plugin(slot: int, plugin: EditorContextMenuPlugin): void;
 
 /**
  * Adds a control to the bottom panel (together with Output, Debug, Animation, etc.). Returns a reference to a button that is outside the scene tree. It's up to you to hide/show the button when needed. When your plugin is deactivated, make sure to remove your custom control with [method remove_control_from_bottom_panel] and free it with [method Node.queue_free].
@@ -460,7 +460,7 @@ add_context_menu_plugin(): void;
  * **Note** See the default editor bottom panel shortcuts in the Editor Settings for inspiration. By convention, they all use [kbd]Alt[/kbd] modifier.
  *
 */
-add_control_to_bottom_panel(): Button;
+add_control_to_bottom_panel(control: Control, title: string, shortcut?: Shortcut): Button;
 
 /**
  * Adds a custom control to a container in the editor UI.
@@ -470,7 +470,7 @@ add_control_to_bottom_panel(): Button;
  * When your plugin is deactivated, make sure to remove your custom control with [method remove_control_from_container] and free it with [method Node.queue_free].
  *
 */
-add_control_to_container(): void;
+add_control_to_container(container: int, control: Control): void;
 
 /**
  * Adds the control to a specific dock slot.
@@ -482,7 +482,7 @@ add_control_to_container(): void;
  * Optionally, you can specify a shortcut parameter. When pressed, this shortcut will open and focus the dock.
  *
 */
-add_control_to_dock(): void;
+add_control_to_dock(slot: int, control: Control, shortcut?: Shortcut): void;
 
 /**
  * Adds a custom type, which will appear in the list of nodes or resources.
@@ -498,10 +498,10 @@ add_control_to_dock(): void;
  * **Note:** Custom types added this way are not true classes. They are just a helper to create a node with specific script.
  *
 */
-add_custom_type(): void;
+add_custom_type(type: string, base: string, script: Script, icon: Texture2D): void;
 
 /** Adds a [Script] as debugger plugin to the Debugger. The script must extend [EditorDebuggerPlugin]. */
-add_debugger_plugin(): void;
+add_debugger_plugin(script: EditorDebuggerPlugin): void;
 
 /**
  * Adds a new dock.
@@ -509,10 +509,10 @@ add_debugger_plugin(): void;
  * When your plugin is deactivated, make sure to remove your custom dock with [method remove_dock] and free it with [method Node.queue_free].
  *
 */
-add_dock(): void;
+add_dock(dock: EditorDock): void;
 
 /** Registers a new [EditorExportPlatform]. Export platforms provides functionality of exporting to the specific platform. */
-add_export_platform(): void;
+add_export_platform(platform: EditorExportPlatform): void;
 
 /**
  * Registers a new [EditorExportPlugin]. Export plugins are used to perform tasks when the project is being exported.
@@ -520,7 +520,7 @@ add_export_platform(): void;
  * See [method add_inspector_plugin] for an example of how to register a plugin.
  *
 */
-add_export_plugin(): void;
+add_export_plugin(plugin: EditorExportPlugin): void;
 
 /**
  * Registers a new [EditorImportPlugin]. Import plugins are used to import custom and unsupported assets as a custom [Resource] type.
@@ -532,7 +532,7 @@ add_export_plugin(): void;
  * See [method add_inspector_plugin] for an example of how to register a plugin.
  *
 */
-add_import_plugin(): void;
+add_import_plugin(importer: EditorImportPlugin, first_priority?: boolean): void;
 
 /**
  * Registers a new [EditorInspectorPlugin]. Inspector plugins are used to extend [EditorInspector] and provide custom configuration tools for your object's properties.
@@ -553,7 +553,7 @@ add_import_plugin(): void;
  * 
  *
 */
-add_inspector_plugin(): void;
+add_inspector_plugin(plugin: EditorInspectorPlugin): void;
 
 /**
  * Registers a new [EditorNode3DGizmoPlugin]. Gizmo plugins are used to add custom gizmos to the 3D preview viewport for a [Node3D].
@@ -561,7 +561,7 @@ add_inspector_plugin(): void;
  * See [method add_inspector_plugin] for an example of how to register a plugin.
  *
 */
-add_node_3d_gizmo_plugin(): void;
+add_node_3d_gizmo_plugin(plugin: EditorNode3DGizmoPlugin): void;
 
 /**
  * Registers a new [EditorResourceConversionPlugin]. Resource conversion plugins are used to add custom resource converters to the editor inspector.
@@ -569,7 +569,7 @@ add_node_3d_gizmo_plugin(): void;
  * See [EditorResourceConversionPlugin] for an example of how to create a resource conversion plugin.
  *
 */
-add_resource_conversion_plugin(): void;
+add_resource_conversion_plugin(plugin: EditorResourceConversionPlugin): void;
 
 /**
  * Registers a new [EditorSceneFormatImporter]. Scene importers are used to import custom 3D asset formats as scenes.
@@ -577,7 +577,7 @@ add_resource_conversion_plugin(): void;
  * If [param first_priority] is `true`, the new import plugin is inserted first in the list and takes precedence over pre-existing plugins.
  *
 */
-add_scene_format_importer_plugin(): void;
+add_scene_format_importer_plugin(scene_format_importer: EditorSceneFormatImporter, first_priority?: boolean): void;
 
 /**
  * Add an [EditorScenePostImportPlugin]. These plugins allow customizing the import process of 3D assets by adding new options to the import dialogs.
@@ -585,16 +585,16 @@ add_scene_format_importer_plugin(): void;
  * If [param first_priority] is `true`, the new import plugin is inserted first in the list and takes precedence over pre-existing plugins.
  *
 */
-add_scene_post_import_plugin(): void;
+add_scene_post_import_plugin(scene_import_plugin: EditorScenePostImportPlugin, first_priority?: boolean): void;
 
 /** Adds a custom menu item to [b]Project > Tools[/b] named [param name]. When clicked, the provided [param callable] will be called. */
-add_tool_menu_item(): void;
+add_tool_menu_item(name: string, callable: Callable): void;
 
 /** Adds a custom [PopupMenu] submenu under [b]Project > Tools >[/b] [param name]. Use [method remove_tool_menu_item] on plugin clean up to remove the menu. */
-add_tool_submenu_item(): void;
+add_tool_submenu_item(name: string, submenu: PopupMenu): void;
 
 /** Registers a custom translation parser plugin for extracting translatable strings from custom files. */
-add_translation_parser_plugin(): void;
+add_translation_parser_plugin(parser: EditorTranslationParserPlugin): void;
 
 /**
  * Hooks a callback into the undo/redo action creation when a property is modified in the inspector. This allows, for example, to save other properties that may be lost when a given property is modified.
@@ -602,7 +602,7 @@ add_translation_parser_plugin(): void;
  * The callback should have 4 arguments: [Object] `undo_redo`, [Object] `modified_object`, [String] `property` and [Variant] `new_value`. They are, respectively, the [UndoRedo] object used by the inspector, the currently modified object, the name of the modified property and the new value the property is about to take.
  *
 */
-add_undo_redo_inspector_hook_callback(): void;
+add_undo_redo_inspector_hook_callback(callable: Callable): void;
 
 /** Returns the [EditorInterface] singleton instance. */
 get_editor_interface(): EditorInterface;
@@ -630,70 +630,70 @@ get_undo_redo(): EditorUndoRedoManager;
 hide_bottom_panel(): void;
 
 /** Makes a specific item in the bottom panel visible. */
-make_bottom_panel_item_visible(): void;
+make_bottom_panel_item_visible(item: Control): void;
 
 /** Queue save the project's editor layout. */
 queue_save_layout(): void;
 
 /** Removes an Autoload [param name] from the list. */
-remove_autoload_singleton(): void;
+remove_autoload_singleton(name: string): void;
 
 /** Removes the specified context menu plugin. */
-remove_context_menu_plugin(): void;
+remove_context_menu_plugin(plugin: EditorContextMenuPlugin): void;
 
 /** Removes the control from the bottom panel. You have to manually [method Node.queue_free] the control. */
-remove_control_from_bottom_panel(): void;
+remove_control_from_bottom_panel(control: Control): void;
 
 /** Removes the control from the specified container. You have to manually [method Node.queue_free] the control. */
-remove_control_from_container(): void;
+remove_control_from_container(container: int, control: Control): void;
 
 /** Removes the control from the dock. You have to manually [method Node.queue_free] the control. */
-remove_control_from_docks(): void;
+remove_control_from_docks(control: Control): void;
 
 /** Removes a custom type added by [method add_custom_type]. */
-remove_custom_type(): void;
+remove_custom_type(type: string): void;
 
 /** Removes the debugger plugin with given script from the Debugger. */
-remove_debugger_plugin(): void;
+remove_debugger_plugin(script: EditorDebuggerPlugin): void;
 
 /** Removes [param dock] from the available docks. You should manually call [method Node.queue_free] to free it. */
-remove_dock(): void;
+remove_dock(dock: EditorDock): void;
 
 /** Removes an export platform registered by [method add_export_platform]. */
-remove_export_platform(): void;
+remove_export_platform(platform: EditorExportPlatform): void;
 
 /** Removes an export plugin registered by [method add_export_plugin]. */
-remove_export_plugin(): void;
+remove_export_plugin(plugin: EditorExportPlugin): void;
 
 /** Removes an import plugin registered by [method add_import_plugin]. */
-remove_import_plugin(): void;
+remove_import_plugin(importer: EditorImportPlugin): void;
 
 /** Removes an inspector plugin registered by [method add_inspector_plugin]. */
-remove_inspector_plugin(): void;
+remove_inspector_plugin(plugin: EditorInspectorPlugin): void;
 
 /** Removes a gizmo plugin registered by [method add_node_3d_gizmo_plugin]. */
-remove_node_3d_gizmo_plugin(): void;
+remove_node_3d_gizmo_plugin(plugin: EditorNode3DGizmoPlugin): void;
 
 /** Removes a resource conversion plugin registered by [method add_resource_conversion_plugin]. */
-remove_resource_conversion_plugin(): void;
+remove_resource_conversion_plugin(plugin: EditorResourceConversionPlugin): void;
 
 /** Removes a scene format importer registered by [method add_scene_format_importer_plugin]. */
-remove_scene_format_importer_plugin(): void;
+remove_scene_format_importer_plugin(scene_format_importer: EditorSceneFormatImporter): void;
 
 /** Remove the [EditorScenePostImportPlugin], added with [method add_scene_post_import_plugin]. */
-remove_scene_post_import_plugin(): void;
+remove_scene_post_import_plugin(scene_import_plugin: EditorScenePostImportPlugin): void;
 
 /** Removes a menu [param name] from [b]Project > Tools[/b]. */
-remove_tool_menu_item(): void;
+remove_tool_menu_item(name: string): void;
 
 /** Removes a custom translation parser plugin registered by [method add_translation_parser_plugin]. */
-remove_translation_parser_plugin(): void;
+remove_translation_parser_plugin(parser: EditorTranslationParserPlugin): void;
 
 /** Removes a callback previously added by [method add_undo_redo_inspector_hook_callback]. */
-remove_undo_redo_inspector_hook_callback(): void;
+remove_undo_redo_inspector_hook_callback(callable: Callable): void;
 
 /** Sets the tab icon for the given control in a dock slot. Setting to [code]null[/code] removes the icon. */
-set_dock_tab_icon(): void;
+set_dock_tab_icon(control: Control, icon: Texture2D): void;
 
 /** Enables calling of [method _forward_canvas_force_draw_over_viewport] for the 2D editor and [method _forward_3d_force_draw_over_viewport] for the 3D editor when their viewports are updated. You need to call this method only once and it will work permanently for this plugin. */
 set_force_draw_over_forwarding_enabled(): void;

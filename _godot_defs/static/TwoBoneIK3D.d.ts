@@ -22,25 +22,25 @@ declare class TwoBoneIK3D extends IKModifier3D  {
 setting_count: int;
 
 /** Returns the end bone index. */
-get_end_bone(): int;
+get_end_bone(index: int): int;
 
 /** Returns the end bone's tail direction when [method is_end_bone_extended] is [code]true[/code]. */
-get_end_bone_direction(): int;
+get_end_bone_direction(index: int): int;
 
 /** Returns the end bone tail length of the bone chain when [method is_end_bone_extended] is [code]true[/code]. */
-get_end_bone_length(): float;
+get_end_bone_length(index: int): float;
 
 /** Returns the end bone name. */
-get_end_bone_name(): string;
+get_end_bone_name(index: int): string;
 
 /** Returns the middle bone index. */
-get_middle_bone(): int;
+get_middle_bone(index: int): int;
 
 /** Returns the middle bone name. */
-get_middle_bone_name(): string;
+get_middle_bone_name(index: int): string;
 
 /** Returns the pole direction. */
-get_pole_direction(): int;
+get_pole_direction(index: int): int;
 
 /**
  * Returns the pole direction vector.
@@ -48,34 +48,34 @@ get_pole_direction(): int;
  * If [method get_pole_direction] is [constant SkeletonModifier3D.SECONDARY_DIRECTION_NONE], this method returns `Vector3(0, 0, 0)`.
  *
 */
-get_pole_direction_vector(): Vector3;
+get_pole_direction_vector(index: int): Vector3;
 
 /** Returns the pole target node that constructs a plane which the joints are all on and the pole is trying to direct. */
-get_pole_node(): NodePathType;
+get_pole_node(index: int): NodePathType;
 
 /** Returns the root bone index. */
-get_root_bone(): int;
+get_root_bone(index: int): int;
 
 /** Returns the root bone name. */
-get_root_bone_name(): string;
+get_root_bone_name(index: int): string;
 
 /** Returns the target node that the end bone is trying to reach. */
-get_target_node(): NodePathType;
+get_target_node(index: int): NodePathType;
 
 /** Returns [code]true[/code] if the end bone is extended to have a tail. */
-is_end_bone_extended(): boolean;
+is_end_bone_extended(index: int): boolean;
 
 /** Returns [code]true[/code] if the end bone is extended from the middle bone as a virtual bone. */
-is_using_virtual_end(): boolean;
+is_using_virtual_end(index: int): boolean;
 
 /** Sets the end bone index. */
-set_end_bone(): void;
+set_end_bone(index: int, bone: int): void;
 
 /** Sets the end bone tail direction when [method is_end_bone_extended] is [code]true[/code]. */
-set_end_bone_direction(): void;
+set_end_bone_direction(index: int, bone_direction: int): void;
 
 /** Sets the end bone tail length when [method is_end_bone_extended] is [code]true[/code]. */
-set_end_bone_length(): void;
+set_end_bone_length(index: int, length: float): void;
 
 /**
  * Sets the end bone name.
@@ -83,13 +83,13 @@ set_end_bone_length(): void;
  * **Note:** The end bone must be a child of the middle bone.
  *
 */
-set_end_bone_name(): void;
+set_end_bone_name(index: int, bone_name: string): void;
 
 /** If [param enabled] is [code]true[/code], the end bone is extended to have a tail. */
-set_extend_end_bone(): void;
+set_extend_end_bone(index: int, enabled: boolean): void;
 
 /** Sets the middle bone index. */
-set_middle_bone(): void;
+set_middle_bone(index: int, bone: int): void;
 
 /**
  * Sets the middle bone name.
@@ -97,7 +97,7 @@ set_middle_bone(): void;
  * **Note:** The middle bone must be a child of the root bone.
  *
 */
-set_middle_bone_name(): void;
+set_middle_bone_name(index: int, bone_name: string): void;
 
 /**
  * Sets the pole direction.
@@ -109,7 +109,7 @@ set_middle_bone_name(): void;
  * **Note:** The pole direction and the forward vector shouldn't be colinear to avoid unintended rotation.
  *
 */
-set_pole_direction(): void;
+set_pole_direction(index: int, direction: int): void;
 
 /**
  * Sets the pole direction vector.
@@ -119,22 +119,22 @@ set_pole_direction(): void;
  * If the vector length is `0`, it is considered synonymous with [constant SkeletonModifier3D.SECONDARY_DIRECTION_NONE].
  *
 */
-set_pole_direction_vector(): void;
+set_pole_direction_vector(index: int, vector: Vector3): void;
 
 /** Sets the pole target node that constructs a plane which the joints are all on and the pole is trying to direct. */
-set_pole_node(): void;
+set_pole_node(index: int, pole_node: NodePathType): void;
 
 /** Sets the root bone index. */
-set_root_bone(): void;
+set_root_bone(index: int, bone: int): void;
 
 /** Sets the root bone name. */
-set_root_bone_name(): void;
+set_root_bone_name(index: int, bone_name: string): void;
 
 /** Sets the target node that the end bone is trying to reach. */
-set_target_node(): void;
+set_target_node(index: int, target_node: NodePathType): void;
 
 /** If [param enabled] is [code]true[/code], the end bone is extended from the middle bone as a virtual bone. */
-set_use_virtual_end(): void;
+set_use_virtual_end(index: int, enabled: boolean): void;
 
   connect<T extends SignalsOf<TwoBoneIK3D>>(signal: T, method: SignalFunction<TwoBoneIK3D[T]>): number;
 

@@ -47,61 +47,61 @@ use_gravity: boolean;
 get_collision_mask(): int;
 
 /** Returns the [Bone2D] node assigned to the Jiggle joint at [param joint_idx]. */
-get_jiggle_joint_bone2d_node(): NodePathType;
+get_jiggle_joint_bone2d_node(joint_idx: int): NodePathType;
 
 /** Returns the index of the [Bone2D] node assigned to the Jiggle joint at [param joint_idx]. */
-get_jiggle_joint_bone_index(): int;
+get_jiggle_joint_bone_index(joint_idx: int): int;
 
 /** Returns the amount of damping of the Jiggle joint at [param joint_idx]. */
-get_jiggle_joint_damping(): float;
+get_jiggle_joint_damping(joint_idx: int): float;
 
 /** Returns a [Vector2] representing the amount of gravity the Jiggle joint at [param joint_idx] is influenced by. */
-get_jiggle_joint_gravity(): Vector2;
+get_jiggle_joint_gravity(joint_idx: int): Vector2;
 
 /** Returns the amount of mass of the jiggle joint at [param joint_idx]. */
-get_jiggle_joint_mass(): float;
+get_jiggle_joint_mass(joint_idx: int): float;
 
 /** Returns a boolean that indicates whether the joint at [param joint_idx] is overriding the default Jiggle joint data defined in the modification. */
-get_jiggle_joint_override(): boolean;
+get_jiggle_joint_override(joint_idx: int): boolean;
 
 /** Returns the stiffness of the Jiggle joint at [param joint_idx]. */
-get_jiggle_joint_stiffness(): float;
+get_jiggle_joint_stiffness(joint_idx: int): float;
 
 /** Returns a boolean that indicates whether the joint at [param joint_idx] is using gravity or not. */
-get_jiggle_joint_use_gravity(): boolean;
+get_jiggle_joint_use_gravity(joint_idx: int): boolean;
 
 /** Returns whether the jiggle modifier is taking physics colliders into account when solving. */
 get_use_colliders(): boolean;
 
 /** Sets the collision mask that the Jiggle modifier will use when reacting to colliders, if the Jiggle modifier is set to take colliders into account. */
-set_collision_mask(): void;
+set_collision_mask(collision_mask: int): void;
 
 /** Sets the [Bone2D] node assigned to the Jiggle joint at [param joint_idx]. */
-set_jiggle_joint_bone2d_node(): void;
+set_jiggle_joint_bone2d_node(joint_idx: int, bone2d_node: NodePathType): void;
 
 /** Sets the bone index, [param bone_idx], of the Jiggle joint at [param joint_idx]. When possible, this will also update the [code]bone2d_node[/code] of the Jiggle joint based on data provided by the linked skeleton. */
-set_jiggle_joint_bone_index(): void;
+set_jiggle_joint_bone_index(joint_idx: int, bone_idx: int): void;
 
 /** Sets the amount of damping of the Jiggle joint at [param joint_idx]. */
-set_jiggle_joint_damping(): void;
+set_jiggle_joint_damping(joint_idx: int, damping: float): void;
 
 /** Sets the gravity vector of the Jiggle joint at [param joint_idx]. */
-set_jiggle_joint_gravity(): void;
+set_jiggle_joint_gravity(joint_idx: int, gravity: Vector2): void;
 
 /** Sets the of mass of the Jiggle joint at [param joint_idx]. */
-set_jiggle_joint_mass(): void;
+set_jiggle_joint_mass(joint_idx: int, mass: float): void;
 
 /** Sets whether the Jiggle joint at [param joint_idx] should override the default Jiggle joint settings. Setting this to [code]true[/code] will make the joint use its own settings rather than the default ones attached to the modification. */
-set_jiggle_joint_override(): void;
+set_jiggle_joint_override(joint_idx: int, override: boolean): void;
 
 /** Sets the of stiffness of the Jiggle joint at [param joint_idx]. */
-set_jiggle_joint_stiffness(): void;
+set_jiggle_joint_stiffness(joint_idx: int, stiffness: float): void;
 
 /** Sets whether the Jiggle joint at [param joint_idx] should use gravity. */
-set_jiggle_joint_use_gravity(): void;
+set_jiggle_joint_use_gravity(joint_idx: int, use_gravity: boolean): void;
 
 /** If [code]true[/code], the Jiggle modifier will take colliders into account, keeping them from entering into these collision objects. */
-set_use_colliders(): void;
+set_use_colliders(use_colliders: boolean): void;
 
   connect<T extends SignalsOf<SkeletonModification2DJiggle>>(signal: T, method: SignalFunction<SkeletonModification2DJiggle[T]>): number;
 

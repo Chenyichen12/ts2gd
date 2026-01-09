@@ -142,10 +142,10 @@ velocity: Vector2;
 distance_to_target(): float;
 
 /** Returns whether or not the specified layer of the [member avoidance_layers] bitmask is enabled, given a [param layer_number] between 1 and 32. */
-get_avoidance_layer_value(): boolean;
+get_avoidance_layer_value(layer_number: int): boolean;
 
 /** Returns whether or not the specified mask of the [member avoidance_mask] bitmask is enabled, given a [param mask_number] between 1 and 32. */
-get_avoidance_mask_value(): boolean;
+get_avoidance_mask_value(mask_number: int): boolean;
 
 /** Returns this agent's current path from start to finish in global coordinates. The path only updates when the target position is changed or the agent requires a repath. The path array is not intended to be used in direct path movement as the agent has its own internal path logic that would get corrupted by changing the path array manually. Use the intended [method get_next_path_position] once every physics frame to receive the next path point for the agents movement as this function also updates the internal path logic. */
 get_current_navigation_path(): PackedVector2Array;
@@ -160,7 +160,7 @@ get_current_navigation_result(): NavigationPathQueryResult2D;
 get_final_position(): Vector2;
 
 /** Returns whether or not the specified layer of the [member navigation_layers] bitmask is enabled, given a [param layer_number] between 1 and 32. */
-get_navigation_layer_value(): boolean;
+get_navigation_layer_value(layer_number: int): boolean;
 
 /** Returns the [RID] of the navigation map for this NavigationAgent node. This function returns always the map set on the NavigationAgent node and not the map of the abstract agent on the NavigationServer. If the agent map is changed directly with the NavigationServer API the NavigationAgent node will not be aware of the map change. Use [method set_navigation_map] to change the navigation map for the NavigationAgent and also update the agent on the NavigationServer. */
 get_navigation_map(): RID;
@@ -189,19 +189,19 @@ is_target_reachable(): boolean;
 is_target_reached(): boolean;
 
 /** Based on [param value], enables or disables the specified layer in the [member avoidance_layers] bitmask, given a [param layer_number] between 1 and 32. */
-set_avoidance_layer_value(): void;
+set_avoidance_layer_value(layer_number: int, value: boolean): void;
 
 /** Based on [param value], enables or disables the specified mask in the [member avoidance_mask] bitmask, given a [param mask_number] between 1 and 32. */
-set_avoidance_mask_value(): void;
+set_avoidance_mask_value(mask_number: int, value: boolean): void;
 
 /** Based on [param value], enables or disables the specified layer in the [member navigation_layers] bitmask, given a [param layer_number] between 1 and 32. */
-set_navigation_layer_value(): void;
+set_navigation_layer_value(layer_number: int, value: boolean): void;
 
 /** Sets the [RID] of the navigation map this NavigationAgent node should use and also updates the [code]agent[/code] on the NavigationServer. */
-set_navigation_map(): void;
+set_navigation_map(navigation_map: RID): void;
 
 /** Replaces the internal velocity in the collision avoidance simulation with [param velocity]. When an agent is teleported to a new position this function should be used in the same frame. If called frequently this function can get agents stuck. */
-set_velocity_forced(): void;
+set_velocity_forced(velocity: Vector2): void;
 
   connect<T extends SignalsOf<NavigationAgent2D>>(signal: T, method: SignalFunction<NavigationAgent2D[T]>): number;
 

@@ -30,7 +30,7 @@ declare class ResourceImporter extends RefCounted  {
  * 
  *
 */
-protected _get_build_dependencies(): PackedStringArray;
+protected _get_build_dependencies(path: string): PackedStringArray;
 
   connect<T extends SignalsOf<ResourceImporter>>(signal: T, method: SignalFunction<ResourceImporter[T]>): number;
 

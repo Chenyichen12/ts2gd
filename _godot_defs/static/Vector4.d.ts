@@ -45,13 +45,13 @@ abs(): Vector4;
 ceil(): Vector4;
 
 /** Returns a new vector with all components clamped between the components of [param min] and [param max], by running [method @GlobalScope.clamp] on each component. */
-clamp(): Vector4;
+clamp(min: Vector4, max: Vector4): Vector4;
 
 /** Returns a new vector with all components clamped between [param min] and [param max], by running [method @GlobalScope.clamp] on each component. */
-clampf(): Vector4;
+clampf(min: float, max: float): Vector4;
 
 /** Performs a cubic interpolation between this vector and [param b] using [param pre_a] and [param post_b] as handles, and returns the result at position [param weight]. [param weight] is on the range of 0.0 to 1.0, representing the amount of interpolation. */
-cubic_interpolate(): Vector4;
+cubic_interpolate(b: Vector4, pre_a: Vector4, post_b: Vector4, weight: float): Vector4;
 
 /**
  * Performs a cubic interpolation between this vector and [param b] using [param pre_a] and [param post_b] as handles, and returns the result at position [param weight]. [param weight] is on the range of 0.0 to 1.0, representing the amount of interpolation.
@@ -59,10 +59,10 @@ cubic_interpolate(): Vector4;
  * It can perform smoother interpolation than [method cubic_interpolate] by the time values.
  *
 */
-cubic_interpolate_in_time(): Vector4;
+cubic_interpolate_in_time(b: Vector4, pre_a: Vector4, post_b: Vector4, weight: float, b_t: float, pre_a_t: float, post_b_t: float): Vector4;
 
 /** Returns the normalized vector pointing from this vector to [param to]. This is equivalent to using [code](b - a).normalized()[/code]. */
-direction_to(): Vector4;
+direction_to(to: Vector4): Vector4;
 
 /**
  * Returns the squared distance between this vector and [param to].
@@ -70,13 +70,13 @@ direction_to(): Vector4;
  * This method runs faster than [method distance_to], so prefer it if you need to compare vectors or need the squared distance for some formula.
  *
 */
-distance_squared_to(): float;
+distance_squared_to(to: Vector4): float;
 
 /** Returns the distance between this vector and [param to]. */
-distance_to(): float;
+distance_to(to: Vector4): float;
 
 /** Returns the dot product of this vector and [param with]. */
-dot(): float;
+dot(_with: Vector4): float;
 
 /** Returns a new vector with all components rounded down (towards negative infinity). */
 floor(): Vector4;
@@ -85,7 +85,7 @@ floor(): Vector4;
 inverse(): Vector4;
 
 /** Returns [code]true[/code] if this vector and [param to] are approximately equal, by running [method @GlobalScope.is_equal_approx] on each component. */
-is_equal_approx(): boolean;
+is_equal_approx(to: Vector4): boolean;
 
 /** Returns [code]true[/code] if this vector is finite, by calling [method @GlobalScope.is_finite] on each component. */
 is_finite(): boolean;
@@ -113,25 +113,25 @@ length(): float;
 length_squared(): float;
 
 /** Returns the result of the linear interpolation between this vector and [param to] by amount [param weight]. [param weight] is on the range of [code]0.0[/code] to [code]1.0[/code], representing the amount of interpolation. */
-lerp(): Vector4;
+lerp(to: Vector4, weight: float): Vector4;
 
 /** Returns the component-wise maximum of this and [param with], equivalent to [code]Vector4(maxf(x, with.x), maxf(y, with.y), maxf(z, with.z), maxf(w, with.w))[/code]. */
-max(): Vector4;
+max(_with: Vector4): Vector4;
 
 /** Returns the axis of the vector's highest value. See [code]AXIS_*[/code] constants. If all components are equal, this method returns [constant AXIS_X]. */
 max_axis_index(): int;
 
 /** Returns the component-wise maximum of this and [param with], equivalent to [code]Vector4(maxf(x, with), maxf(y, with), maxf(z, with), maxf(w, with))[/code]. */
-maxf(): Vector4;
+maxf(_with: float): Vector4;
 
 /** Returns the component-wise minimum of this and [param with], equivalent to [code]Vector4(minf(x, with.x), minf(y, with.y), minf(z, with.z), minf(w, with.w))[/code]. */
-min(): Vector4;
+min(_with: Vector4): Vector4;
 
 /** Returns the axis of the vector's lowest value. See [code]AXIS_*[/code] constants. If all components are equal, this method returns [constant AXIS_W]. */
 min_axis_index(): int;
 
 /** Returns the component-wise minimum of this and [param with], equivalent to [code]Vector4(minf(x, with), minf(y, with), minf(z, with), minf(w, with))[/code]. */
-minf(): Vector4;
+minf(_with: float): Vector4;
 
 /**
  * Returns the result of scaling the vector to unit length. Equivalent to `v / v.length()`. Returns `(0, 0, 0, 0)` if `v.length() == 0`. See also [method is_normalized].
@@ -142,10 +142,10 @@ minf(): Vector4;
 normalized(): Vector4;
 
 /** Returns a vector composed of the [method @GlobalScope.fposmod] of this vector's components and [param mod]. */
-posmod(): Vector4;
+posmod(mod: float): Vector4;
 
 /** Returns a vector composed of the [method @GlobalScope.fposmod] of this vector's components and [param modv]'s components. */
-posmodv(): Vector4;
+posmodv(modv: Vector4): Vector4;
 
 /** Returns a new vector with all components rounded to the nearest integer, with halfway cases rounded away from zero. */
 round(): Vector4;
@@ -154,10 +154,10 @@ round(): Vector4;
 sign(): Vector4;
 
 /** Returns a new vector with each component snapped to the nearest multiple of the corresponding component in [param step]. This can also be used to round the components to an arbitrary number of decimals. */
-snapped(): Vector4;
+snapped(step: Vector4): Vector4;
 
 /** Returns a new vector with each component snapped to the nearest multiple of [param step]. This can also be used to round the components to an arbitrary number of decimals. */
-snappedf(): Vector4;
+snappedf(step: float): Vector4;
 
   connect<T extends SignalsOf<Vector4>>(signal: T, method: SignalFunction<Vector4[T]>): number;
 

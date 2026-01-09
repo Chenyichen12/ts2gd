@@ -27,7 +27,7 @@ declare class OptimizedTranslation extends Translation  {
  * **Note:** This method is intended to be used in the editor. It does nothing when called from an exported project.
  *
 */
-generate(): void;
+generate(from: Translation): void;
 
   connect<T extends SignalsOf<OptimizedTranslation>>(signal: T, method: SignalFunction<OptimizedTranslation[T]>): number;
 

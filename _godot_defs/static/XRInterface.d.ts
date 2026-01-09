@@ -43,7 +43,7 @@ get_name(): StringName;
 get_play_area(): PackedVector3Array;
 
 /** Returns the projection matrix for a view/eye. */
-get_projection_for_view(): Projection;
+get_projection_for_view(view: int, aspect: float, near: float, far: float): Projection;
 
 /** Returns the resolution at which we should render our intermediate results before things like lens distortion are applied by the VR platform. */
 get_render_target_size(): Vector2;
@@ -70,7 +70,7 @@ get_tracking_status(): int;
  * [param cam_transform] is the transform that maps device coordinates to scene coordinates, typically the [member Node3D.global_transform] of the current XROrigin3D.
  *
 */
-get_transform_for_view(): Transform3D;
+get_transform_for_view(view: int, cam_transform: Transform3D): Transform3D;
 
 /** Returns the number of views that need to be rendered for this device. 1 for Monoscopic, 2 for Stereoscopic. */
 get_view_count(): int;
@@ -122,7 +122,7 @@ is_passthrough_supported(): boolean;
  * 
  *
 */
-set_environment_blend_mode(): boolean;
+set_environment_blend_mode(mode: int): boolean;
 
 /**
  * Sets the active play area mode, will return `false` if the mode can't be used with this interface.
@@ -130,7 +130,7 @@ set_environment_blend_mode(): boolean;
  * **Note:** Changing this after the interface has already been initialized can be jarring for the player, so it's recommended to recenter on the HMD with [method XRServer.center_on_hmd] (if switching to [constant XRInterface.XR_PLAY_AREA_STAGE]) or make the switch during a scene change.
  *
 */
-set_play_area_mode(): boolean;
+set_play_area_mode(mode: int): boolean;
 
 /**
  * Starts passthrough, will return `false` if passthrough couldn't be started.
@@ -144,7 +144,7 @@ start_passthrough(): boolean;
 stop_passthrough(): void;
 
 /** Call this to find out if a given play area mode is supported by this interface. */
-supports_play_area_mode(): boolean;
+supports_play_area_mode(mode: int): boolean;
 
 /**
  * Triggers a haptic pulse on a device associated with this interface.
@@ -162,7 +162,7 @@ supports_play_area_mode(): boolean;
  * [param delay_sec] is a delay in seconds before the pulse is given.
  *
 */
-trigger_haptic_pulse(): void;
+trigger_haptic_pulse(action_name: string, tracker_name: StringName, frequency: float, amplitude: float, duration_sec: float, delay_sec: float): void;
 
 /** Turns the interface off. */
 uninitialize(): void;

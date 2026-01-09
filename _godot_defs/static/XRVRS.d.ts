@@ -29,7 +29,7 @@ vrs_strength: float;
  * The result will be cached, requesting a VRS texture with unchanged parameters and settings will return the cached RID.
  *
 */
-make_vrs_texture(): RID;
+make_vrs_texture(target_size: Vector2, eye_foci: PackedVector2Array): RID;
 
   connect<T extends SignalsOf<XRVRS>>(signal: T, method: SignalFunction<XRVRS[T]>): number;
 

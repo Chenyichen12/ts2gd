@@ -44,7 +44,7 @@ shape: Shape3D;
 spring_length: float;
 
 /** Adds the [PhysicsBody3D] object with the given [RID] to the list of [PhysicsBody3D] objects excluded from the collision check. */
-add_excluded_object(): void;
+add_excluded_object(RID: RID): void;
 
 /** Clears the list of [PhysicsBody3D] objects excluded from the collision check. */
 clear_excluded_objects(): void;
@@ -53,7 +53,7 @@ clear_excluded_objects(): void;
 get_hit_length(): float;
 
 /** Removes the given [RID] from the list of [PhysicsBody3D] objects excluded from the collision check. */
-remove_excluded_object(): boolean;
+remove_excluded_object(RID: RID): boolean;
 
   connect<T extends SignalsOf<SpringArm3D>>(signal: T, method: SignalFunction<SpringArm3D[T]>): number;
 

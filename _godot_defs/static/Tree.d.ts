@@ -146,7 +146,7 @@ clear(): void;
  * The new item will be the [param index]-th child of parent, or it will be the last child if there are not enough siblings.
  *
 */
-create_item(): TreeItem;
+create_item(parent?: TreeItem, index?: int): TreeItem;
 
 /** Deselects all tree items (rows and columns). In [constant SELECT_MULTI] mode also removes selection cursor. */
 deselect_all(): void;
@@ -159,7 +159,7 @@ deselect_all(): void;
  * Returns `true` if the item could be edited. Fails if no item is selected.
  *
 */
-edit_selected(): boolean;
+edit_selected(force_edit?: boolean): boolean;
 
 /**
  * Makes the currently focused cell visible.
@@ -172,31 +172,31 @@ edit_selected(): boolean;
 ensure_cursor_is_visible(): void;
 
 /** Returns the button ID at [param position], or -1 if no button is there. */
-get_button_id_at_position(): int;
+get_button_id_at_position(position: Vector2): int;
 
 /** Returns the column index at [param position], or -1 if no item is there. */
-get_column_at_position(): int;
+get_column_at_position(position: Vector2): int;
 
 /** Returns the expand ratio assigned to the column. */
-get_column_expand_ratio(): int;
+get_column_expand_ratio(column: int): int;
 
 /** Returns the column's title. */
-get_column_title(): string;
+get_column_title(column: int): string;
 
 /** Returns the column title alignment. */
-get_column_title_alignment(): int;
+get_column_title_alignment(column: int): int;
 
 /** Returns column title base writing direction. */
-get_column_title_direction(): int;
+get_column_title_direction(column: int): int;
 
 /** Returns column title language code. */
-get_column_title_language(): string;
+get_column_title_language(column: int): string;
 
 /** Returns the column title's tooltip text. */
-get_column_title_tooltip_text(): string;
+get_column_title_tooltip_text(column: int): string;
 
 /** Returns the column's width in pixels. */
-get_column_width(): int;
+get_column_width(column: int): int;
 
 /** Returns the rectangle for custom popups. Helper to create custom cell controls that display a popup. See [method TreeItem.set_cell_mode]. */
 get_custom_popup_rect(): Rect2;
@@ -209,7 +209,7 @@ get_custom_popup_rect(): Rect2;
  * To get the item which the returned drop section is relative to, use [method get_item_at_position].
  *
 */
-get_drop_section_at_position(): int;
+get_drop_section_at_position(position: Vector2): int;
 
 /**
  * Returns the currently edited item. Can be used with [signal item_edited] to get the item that was modified.
@@ -242,10 +242,10 @@ get_edited(): TreeItem;
 get_edited_column(): int;
 
 /** Returns the rectangle area for the specified [TreeItem]. If [param column] is specified, only get the position and size of that column, otherwise get the rectangle containing all columns. If a button index is specified, the rectangle of that button will be returned. */
-get_item_area_rect(): Rect2;
+get_item_area_rect(item: TreeItem, column?: int, button_index?: int): Rect2;
 
 /** Returns the tree item at the specified position (relative to the tree origin position). */
-get_item_at_position(): TreeItem;
+get_item_at_position(position: Vector2): TreeItem;
 
 /**
  * Returns the next selected [TreeItem] after the given one, or `null` if the end is reached.
@@ -253,7 +253,7 @@ get_item_at_position(): TreeItem;
  * If [param from] is `null`, this returns the first selected item.
  *
 */
-get_next_selected(): TreeItem;
+get_next_selected(from: TreeItem): TreeItem;
 
 /** Returns the last pressed button's index. */
 get_pressed_button(): int;
@@ -285,43 +285,43 @@ get_selected(): TreeItem;
 get_selected_column(): int;
 
 /** Returns [code]true[/code] if the column has enabled clipping (see [method set_column_clip_content]). */
-is_column_clipping_content(): boolean;
+is_column_clipping_content(column: int): boolean;
 
 /** Returns [code]true[/code] if the column has enabled expanding (see [method set_column_expand]). */
-is_column_expanding(): boolean;
+is_column_expanding(column: int): boolean;
 
 /** Causes the [Tree] to jump to the specified [TreeItem]. */
-scroll_to_item(): void;
+scroll_to_item(item: TreeItem, center_on_item?: boolean): void;
 
 /** Allows to enable clipping for column's content, making the content size ignored. */
-set_column_clip_content(): void;
+set_column_clip_content(column: int, enable: boolean): void;
 
 /** Overrides the calculated minimum width of a column. It can be set to [code]0[/code] to restore the default behavior. Columns that have the "Expand" flag will use their "min_width" in a similar fashion to [member Control.size_flags_stretch_ratio]. */
-set_column_custom_minimum_width(): void;
+set_column_custom_minimum_width(column: int, min_width: int): void;
 
 /** If [code]true[/code], the column will have the "Expand" flag of [Control]. Columns that have the "Expand" flag will use their expand ratio in a similar fashion to [member Control.size_flags_stretch_ratio] (see [method set_column_expand_ratio]). */
-set_column_expand(): void;
+set_column_expand(column: int, expand: boolean): void;
 
 /** Sets the relative expand ratio for a column. See [method set_column_expand]. */
-set_column_expand_ratio(): void;
+set_column_expand_ratio(column: int, ratio: int): void;
 
 /** Sets the title of a column. */
-set_column_title(): void;
+set_column_title(column: int, title: string): void;
 
 /** Sets the column title alignment. Note that [constant @GlobalScope.HORIZONTAL_ALIGNMENT_FILL] is not supported for column titles. */
-set_column_title_alignment(): void;
+set_column_title_alignment(column: int, title_alignment: int): void;
 
 /** Sets column title base writing direction. */
-set_column_title_direction(): void;
+set_column_title_direction(column: int, direction: int): void;
 
 /** Sets the language code of the given [param column]'s title to [param language]. This is used for line-breaking and text shaping algorithms. If [param language] is empty, the current locale is used. */
-set_column_title_language(): void;
+set_column_title_language(column: int, language: string): void;
 
 /** Sets the column title's tooltip text. */
-set_column_title_tooltip_text(): void;
+set_column_title_tooltip_text(column: int, tooltip_text: string): void;
 
 /** Selects the specified [TreeItem] and column. */
-set_selected(): void;
+set_selected(item: TreeItem, column: int): void;
 
   connect<T extends SignalsOf<Tree>>(signal: T, method: SignalFunction<Tree[T]>): number;
 

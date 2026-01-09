@@ -68,7 +68,7 @@ z: float;
  * **Note:** The magnitude of the floating-point error for this method is abnormally high, so methods such as `is_zero_approx` will not work reliably.
  *
 */
-angle_to(): float;
+angle_to(to: Quaternion): float;
 
 /**
  * Returns the dot product between this quaternion and [param with].
@@ -76,13 +76,13 @@ angle_to(): float;
  * This is equivalent to `(quat.x * with.x) + (quat.y * with.y) + (quat.z * with.z) + (quat.w * with.w)`.
  *
 */
-dot(): float;
+dot(_with: Quaternion): float;
 
 /** Returns the exponential of this quaternion. The rotation axis of the result is the normalized rotation axis of this quaternion, the angle of the result is the length of the vector part of this quaternion. */
 exp(): Quaternion;
 
 /** Constructs a new [Quaternion] from the given [Vector3] of [url=https://en.wikipedia.org/wiki/Euler_angles]Euler angles[/url], in radians. This method always uses the YXZ convention ([constant EULER_ORDER_YXZ]). */
-from_euler(): Quaternion;
+from_euler(euler: Vector3): Quaternion;
 
 /**
  * Returns the angle of the rotation represented by this quaternion.
@@ -101,13 +101,13 @@ get_axis(): Vector3;
  * The order of each consecutive rotation can be changed with [param order] (see [enum EulerOrder] constants). By default, the YXZ convention is used ([constant EULER_ORDER_YXZ]): Z (roll) is calculated first, then X (pitch), and lastly Y (yaw). When using the opposite method [method from_euler], this order is reversed.
  *
 */
-get_euler(): Vector3;
+get_euler(order?: int): Vector3;
 
 /** Returns the inverse version of this quaternion, inverting the sign of every component except [member w]. */
 inverse(): Quaternion;
 
 /** Returns [code]true[/code] if this quaternion and [param to] are approximately equal, by calling [method @GlobalScope.is_equal_approx] on each component. */
-is_equal_approx(): boolean;
+is_equal_approx(to: Quaternion): boolean;
 
 /** Returns [code]true[/code] if this quaternion is finite, by calling [method @GlobalScope.is_finite] on each component. */
 is_finite(): boolean;
@@ -133,13 +133,13 @@ log(): Quaternion;
 normalized(): Quaternion;
 
 /** Performs a spherical-linear interpolation with the [param to] quaternion, given a [param weight] and returns the result. Both this quaternion and [param to] must be normalized. */
-slerp(): Quaternion;
+slerp(to: Quaternion, weight: float): Quaternion;
 
 /** Performs a spherical-linear interpolation with the [param to] quaternion, given a [param weight] and returns the result. Unlike [method slerp], this method does not check if the rotation path is smaller than 90 degrees. Both this quaternion and [param to] must be normalized. */
-slerpni(): Quaternion;
+slerpni(to: Quaternion, weight: float): Quaternion;
 
 /** Performs a spherical cubic interpolation between quaternions [param pre_a], this vector, [param b], and [param post_b], by the given amount [param weight]. */
-spherical_cubic_interpolate(): Quaternion;
+spherical_cubic_interpolate(b: Quaternion, pre_a: Quaternion, post_b: Quaternion, weight: float): Quaternion;
 
 /**
  * Performs a spherical cubic interpolation between quaternions [param pre_a], this vector, [param b], and [param post_b], by the given amount [param weight].
@@ -147,7 +147,7 @@ spherical_cubic_interpolate(): Quaternion;
  * It can perform smoother interpolation than [method spherical_cubic_interpolate] by the time values.
  *
 */
-spherical_cubic_interpolate_in_time(): Quaternion;
+spherical_cubic_interpolate_in_time(b: Quaternion, pre_a: Quaternion, post_b: Quaternion, weight: float, b_t: float, pre_a_t: float, post_b_t: float): Quaternion;
 
   connect<T extends SignalsOf<Quaternion>>(signal: T, method: SignalFunction<Quaternion[T]>): number;
 

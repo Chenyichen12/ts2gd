@@ -26,7 +26,7 @@ declare class AudioEffectCapture extends AudioEffect  {
 buffer_length: float;
 
 /** Returns [code]true[/code] if at least [param frames] audio frames are available to read in the internal ring buffer. */
-can_get_buffer(): boolean;
+can_get_buffer(frames: int): boolean;
 
 /**
  * Clears the internal ring buffer.
@@ -44,7 +44,7 @@ clear_buffer(): void;
  * The samples are signed floating-point PCM between `-1` and `1`. You will have to scale them if you want to use them as 8 or 16-bit integer samples. (`v = 0x7fff * samples[0].x`)
  *
 */
-get_buffer(): PackedVector2Array;
+get_buffer(frames: int): PackedVector2Array;
 
 /** Returns the total size of the internal ring buffer in frames. */
 get_buffer_length_frames(): int;

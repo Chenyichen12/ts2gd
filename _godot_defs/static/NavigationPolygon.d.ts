@@ -153,13 +153,13 @@ source_geometry_group_name: StringName;
 source_geometry_mode: int;
 
 /** Appends a [PackedVector2Array] that contains the vertices of an outline to the internal array that contains all the outlines. */
-add_outline(): void;
+add_outline(outline: PackedVector2Array): void;
 
 /** Adds a [PackedVector2Array] that contains the vertices of an outline to the internal array that contains all the outlines at a fixed position. */
-add_outline_at_index(): void;
+add_outline_at_index(outline: PackedVector2Array, index: int): void;
 
 /** Adds a polygon using the indices of the vertices you get when calling [method get_vertices]. */
-add_polygon(): void;
+add_polygon(polygon: PackedInt32Array): void;
 
 /** Clears the internal arrays for vertices and polygon indices. */
 clear(): void;
@@ -174,16 +174,16 @@ clear_polygons(): void;
 get_navigation_mesh(): NavigationMesh;
 
 /** Returns a [PackedVector2Array] containing the vertices of an outline that was created in the editor or by script. */
-get_outline(): PackedVector2Array;
+get_outline(idx: int): PackedVector2Array;
 
 /** Returns the number of outlines that were created in the editor or by script. */
 get_outline_count(): int;
 
 /** Returns whether or not the specified layer of the [member parsed_collision_mask] is enabled, given a [param layer_number] between 1 and 32. */
-get_parsed_collision_mask_value(): boolean;
+get_parsed_collision_mask_value(layer_number: int): boolean;
 
 /** Returns a [PackedInt32Array] containing the indices of the vertices of a created polygon. */
-get_polygon(): PackedInt32Array;
+get_polygon(idx: int): PackedInt32Array;
 
 /** Returns the count of all polygons. */
 get_polygon_count(): int;
@@ -195,16 +195,16 @@ get_vertices(): PackedVector2Array;
 make_polygons_from_outlines(): void;
 
 /** Removes an outline created in the editor or by script. You have to call [method make_polygons_from_outlines] for the polygons to update. */
-remove_outline(): void;
+remove_outline(idx: int): void;
 
 /** Changes an outline created in the editor or by script. You have to call [method make_polygons_from_outlines] for the polygons to update. */
-set_outline(): void;
+set_outline(idx: int, outline: PackedVector2Array): void;
 
 /** Based on [param value], enables or disables the specified layer in the [member parsed_collision_mask], given a [param layer_number] between 1 and 32. */
-set_parsed_collision_mask_value(): void;
+set_parsed_collision_mask_value(layer_number: int, value: boolean): void;
 
 /** Sets the vertices that can be then indexed to create polygons with the [method add_polygon] method. */
-set_vertices(): void;
+set_vertices(vertices: PackedVector2Array): void;
 
   connect<T extends SignalsOf<NavigationPolygon>>(signal: T, method: SignalFunction<NavigationPolygon[T]>): number;
 

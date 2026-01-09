@@ -40,7 +40,7 @@ propagation: float;
 use_two_bounces: boolean;
 
 /** No documentation provided. */
-allocate(): void;
+allocate(to_cell_xform: Transform3D, aabb: AABB, octree_size: Vector3, octree_cells: PackedByteArray, data_cells: PackedByteArray, distance_field: PackedByteArray, level_counts: PackedInt32Array): void;
 
 /**
  * Returns the bounds of the baked voxel data as an [AABB], which should match [member VoxelGI.size] after being baked (which only contains the size as a [Vector3]).

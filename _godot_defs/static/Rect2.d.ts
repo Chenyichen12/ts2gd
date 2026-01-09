@@ -60,7 +60,7 @@ size: Vector2;
 abs(): Rect2;
 
 /** Returns [code]true[/code] if this rectangle [i]completely[/i] encloses the [param b] rectangle. */
-encloses(): boolean;
+encloses(b: Rect2): boolean;
 
 /**
  * Returns a copy of this rectangle expanded to align the edges with the given [param to] point, if necessary.
@@ -81,7 +81,7 @@ encloses(): boolean;
  * 
  *
 */
-expand(): Rect2;
+expand(to: Vector2): Rect2;
 
 /** Returns the rectangle's area. This is equivalent to [code]size.x * size.y[/code]. See also [method has_area]. */
 get_area(): float;
@@ -90,7 +90,7 @@ get_area(): float;
 get_center(): Vector2;
 
 /** Returns the vertex's position of this rect that's the farthest in the given direction. This point is commonly known as the support point in collision detection algorithms. */
-get_support(): Vector2;
+get_support(direction: Vector2): Vector2;
 
 /**
  * Returns a copy of this rectangle extended on all sides by the given [param amount]. A negative [param amount] shrinks the rectangle instead. See also [method grow_individual] and [method grow_side].
@@ -109,13 +109,13 @@ get_support(): Vector2;
  * 
  *
 */
-grow(): Rect2;
+grow(amount: float): Rect2;
 
 /** Returns a copy of this rectangle with its [param left], [param top], [param right], and [param bottom] sides extended by the given amounts. Negative values shrink the sides, instead. See also [method grow] and [method grow_side]. */
-grow_individual(): Rect2;
+grow_individual(left: float, top: float, right: float, bottom: float): Rect2;
 
 /** Returns a copy of this rectangle with its [param side] extended by the given [param amount] (see [enum Side] constants). A negative [param amount] shrinks the rectangle, instead. See also [method grow] and [method grow_individual]. */
-grow_side(): Rect2;
+grow_side(side: int, amount: float): Rect2;
 
 /** Returns [code]true[/code] if this rectangle has positive width and height. See also [method get_area]. */
 has_area(): boolean;
@@ -126,7 +126,7 @@ has_area(): boolean;
  * **Note:** This method is not reliable for [Rect2] with a **negative** [member size]. Use [method abs] first to get a valid rectangle.
  *
 */
-has_point(): boolean;
+has_point(point: Vector2): boolean;
 
 /**
  * Returns the intersection between this rectangle and [param b]. If the rectangles do not intersect, returns an empty [Rect2].
@@ -149,19 +149,19 @@ has_point(): boolean;
  * **Note:** If you only need to know whether two rectangles are overlapping, use [method intersects], instead.
  *
 */
-intersection(): Rect2;
+intersection(b: Rect2): Rect2;
 
 /** Returns [code]true[/code] if this rectangle overlaps with the [param b] rectangle. The edges of both rectangles are excluded, unless [param include_borders] is [code]true[/code]. */
-intersects(): boolean;
+intersects(b: Rect2, include_borders?: boolean): boolean;
 
 /** Returns [code]true[/code] if this rectangle and [param rect] are approximately equal, by calling [method Vector2.is_equal_approx] on the [member position] and the [member size]. */
-is_equal_approx(): boolean;
+is_equal_approx(rect: Rect2): boolean;
 
 /** Returns [code]true[/code] if this rectangle's values are finite, by calling [method Vector2.is_finite] on the [member position] and the [member size]. */
 is_finite(): boolean;
 
 /** Returns a [Rect2] that encloses both this rectangle and [param b] around the edges. See also [method encloses]. */
-merge(): Rect2;
+merge(b: Rect2): Rect2;
 
   connect<T extends SignalsOf<Rect2>>(signal: T, method: SignalFunction<Rect2[T]>): number;
 

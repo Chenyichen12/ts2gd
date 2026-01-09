@@ -82,7 +82,7 @@ width_curve: Curve;
  * If [param index] is given, the new point is inserted before the existing point identified by index [param index]. The indices of the points after the new point get increased by 1. The provided [param index] must not exceed the number of existing points in the polyline. See [method get_point_count].
  *
 */
-add_point(): void;
+add_point(position: Vector2, index?: int): void;
 
 /** Removes all points from the polyline, making it empty. */
 clear_points(): void;
@@ -91,13 +91,13 @@ clear_points(): void;
 get_point_count(): int;
 
 /** Returns the position of the point at index [param index]. */
-get_point_position(): Vector2;
+get_point_position(index: int): Vector2;
 
 /** Removes the point at index [param index] from the polyline. */
-remove_point(): void;
+remove_point(index: int): void;
 
 /** Overwrites the position of the point at the given [param index] with the supplied [param position]. */
-set_point_position(): void;
+set_point_position(index: int, position: Vector2): void;
 
   connect<T extends SignalsOf<Line2D>>(signal: T, method: SignalFunction<Line2D[T]>): number;
 

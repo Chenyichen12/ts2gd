@@ -16,10 +16,10 @@ declare class ShaderIncludeDB extends Object  {
 
 
 /** Returns the code for the built-in shader fragment. You can also access this in your shader code through [code]#include "filename"[/code]. */
-get_built_in_include_file(): string;
+get_built_in_include_file(filename: string): string;
 
 /** Returns [code]true[/code] if an include file with this name exists. */
-has_built_in_include_file(): boolean;
+has_built_in_include_file(filename: string): boolean;
 
 /** Returns a list of built-in include files that are currently registered. */
 list_built_in_include_files(): PackedStringArray;

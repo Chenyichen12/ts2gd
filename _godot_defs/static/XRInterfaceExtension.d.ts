@@ -46,13 +46,13 @@ protected _get_play_area(): PackedVector3Array;
 protected _get_play_area_mode(): int;
 
 /** Returns the projection matrix for the given view as a [PackedFloat64Array]. */
-protected _get_projection_for_view(): PackedFloat64Array;
+protected _get_projection_for_view(view: int, aspect: float, z_near: float, z_far: float): PackedFloat64Array;
 
 /** Returns the size of our render target for this interface, this overrides the size of the [Viewport] marked as the xr viewport. */
 protected _get_render_target_size(): Vector2;
 
 /** Returns a [PackedStringArray] with pose names configured by this interface. Note that user configuration can override this list. */
-protected _get_suggested_pose_names(): PackedStringArray;
+protected _get_suggested_pose_names(tracker_name: StringName): PackedStringArray;
 
 /** Returns a [PackedStringArray] with tracker names configured by this interface. Note that user configuration can override this list. */
 protected _get_suggested_tracker_names(): PackedStringArray;
@@ -64,7 +64,7 @@ protected _get_system_info(): Dictionary<any, any>;
 protected _get_tracking_status(): int;
 
 /** Returns a [Transform3D] for a given view. */
-protected _get_transform_for_view(): Transform3D;
+protected _get_transform_for_view(view: int, cam_transform: Transform3D): Transform3D;
 
 /** Return velocity texture into which to render (if applicable). */
 protected _get_velocity_texture(): RID;
@@ -85,10 +85,10 @@ protected _initialize(): boolean;
 protected _is_initialized(): boolean;
 
 /** Called after the XR [Viewport] draw logic has completed. */
-protected _post_draw_viewport(): void;
+protected _post_draw_viewport(render_target: RID, screen_rect: Rect2): void;
 
 /** Called if this is our primary [XRInterfaceExtension] before we start processing a [Viewport] for every active XR [Viewport], returns [code]true[/code] if that viewport should be rendered. An XR interface may return [code]false[/code] if the user has taken off their headset and we can pause rendering. */
-protected _pre_draw_viewport(): boolean;
+protected _pre_draw_viewport(render_target: RID): boolean;
 
 /** Called if this [XRInterfaceExtension] is active before rendering starts. Most XR interfaces will sync tracking at this point in time. */
 protected _pre_render(): void;
@@ -97,22 +97,22 @@ protected _pre_render(): void;
 protected _process(): void;
 
 /** Enables anchor detection on this interface if supported. */
-protected _set_anchor_detection_is_enabled(): void;
+protected _set_anchor_detection_is_enabled(enabled: boolean): void;
 
 /** Set the play area mode for this interface. */
-protected _set_play_area_mode(): boolean;
+protected _set_play_area_mode(mode: int): boolean;
 
 /** Returns [code]true[/code] if this interface supports this play area mode. */
-protected _supports_play_area_mode(): boolean;
+protected _supports_play_area_mode(mode: int): boolean;
 
 /** Triggers a haptic pulse to be emitted on the specified tracker. */
-protected _trigger_haptic_pulse(): void;
+protected _trigger_haptic_pulse(action_name: string, tracker_name: StringName, frequency: float, amplitude: float, duration_sec: float, delay_sec: float): void;
 
 /** Uninitialize the interface. */
 protected _uninitialize(): void;
 
 /** Blits our render results to screen optionally applying lens distortion. This can only be called while processing [code]_commit_views[/code]. */
-add_blit(): void;
+add_blit(render_target: RID, src_rect: Rect2, dst_rect: Rect2i, use_layer: boolean, layer: int, apply_lens_distortion: boolean, eye_center: Vector2, k1: float, k2: float, upscale: float, aspect_ratio: float): void;
 
 /** No documentation provided. */
 get_color_texture(): RID;
@@ -121,7 +121,7 @@ get_color_texture(): RID;
 get_depth_texture(): RID;
 
 /** Returns a valid [RID] for a texture to which we should render the current frame if supported by the interface. */
-get_render_target_texture(): RID;
+get_render_target_texture(render_target: RID): RID;
 
 /** No documentation provided. */
 get_velocity_texture(): RID;

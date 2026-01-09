@@ -20,13 +20,13 @@ declare class FileSystemDock extends EditorDock  {
 
 
 /** Registers a new [EditorResourceTooltipPlugin]. */
-add_resource_tooltip_plugin(): void;
+add_resource_tooltip_plugin(plugin: EditorResourceTooltipPlugin): void;
 
 /** Sets the given [param path] as currently selected, ensuring that the selected file/directory is visible. */
-navigate_to_path(): void;
+navigate_to_path(path: string): void;
 
 /** Removes an [EditorResourceTooltipPlugin]. Fails if the plugin wasn't previously added. */
-remove_resource_tooltip_plugin(): void;
+remove_resource_tooltip_plugin(plugin: EditorResourceTooltipPlugin): void;
 
   connect<T extends SignalsOf<FileSystemDock>>(signal: T, method: SignalFunction<FileSystemDock[T]>): number;
 

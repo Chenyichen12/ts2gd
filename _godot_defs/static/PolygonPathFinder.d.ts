@@ -12,19 +12,19 @@ declare class PolygonPathFinder extends Resource  {
 
 
 /** No documentation provided. */
-find_path(): PackedVector2Array;
+find_path(from: Vector2, to: Vector2): PackedVector2Array;
 
 /** No documentation provided. */
 get_bounds(): Rect2;
 
 /** No documentation provided. */
-get_closest_point(): Vector2;
+get_closest_point(point: Vector2): Vector2;
 
 /** No documentation provided. */
-get_intersections(): PackedVector2Array;
+get_intersections(from: Vector2, to: Vector2): PackedVector2Array;
 
 /** No documentation provided. */
-get_point_penalty(): float;
+get_point_penalty(idx: int): float;
 
 /**
  * Returns `true` if [param point] falls inside the polygon area.
@@ -56,10 +56,10 @@ get_point_penalty(): float;
  * 
  *
 */
-is_point_inside(): boolean;
+is_point_inside(point: Vector2): boolean;
 
 /** No documentation provided. */
-set_point_penalty(): void;
+set_point_penalty(idx: int, penalty: float): void;
 
 /**
  * Sets up [PolygonPathFinder] with an array of points that define the vertices of the polygon, and an array of indices that determine the edges of the polygon.
@@ -89,7 +89,7 @@ set_point_penalty(): void;
  * 
  *
 */
-setup(): void;
+setup(points: PackedVector2Array, connections: PackedInt32Array): void;
 
   connect<T extends SignalsOf<PolygonPathFinder>>(signal: T, method: SignalFunction<PolygonPathFinder[T]>): number;
 

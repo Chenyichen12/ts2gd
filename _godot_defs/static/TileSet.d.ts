@@ -55,7 +55,7 @@ uv_clipping: boolean;
  * Custom data layers allow assigning custom properties to atlas tiles.
  *
 */
-add_custom_data_layer(): void;
+add_custom_data_layer(to_position?: int): void;
 
 /**
  * Adds a navigation layer to the TileSet at the given position [param to_position] in the array. If [param to_position] is -1, adds it at the end of the array.
@@ -63,7 +63,7 @@ add_custom_data_layer(): void;
  * Navigation layers allow assigning a navigable area to atlas tiles.
  *
 */
-add_navigation_layer(): void;
+add_navigation_layer(to_position?: int): void;
 
 /**
  * Adds an occlusion layer to the TileSet at the given position [param to_position] in the array. If [param to_position] is -1, adds it at the end of the array.
@@ -71,10 +71,10 @@ add_navigation_layer(): void;
  * Occlusion layers allow assigning occlusion polygons to atlas tiles.
  *
 */
-add_occlusion_layer(): void;
+add_occlusion_layer(to_position?: int): void;
 
 /** Adds a [TileMapPattern] to be stored in the TileSet resource. If provided, insert it at the given [param index]. */
-add_pattern(): int;
+add_pattern(pattern: TileMapPattern, index?: int): int;
 
 /**
  * Adds a physics layer to the TileSet at the given position [param to_position] in the array. If [param to_position] is -1, adds it at the end of the array.
@@ -82,7 +82,7 @@ add_pattern(): int;
  * Physics layers allow assigning collision polygons to atlas tiles.
  *
 */
-add_physics_layer(): void;
+add_physics_layer(to_position?: int): void;
 
 /**
  * Adds a [TileSetSource] to the TileSet. If [param atlas_source_id_override] is not -1, also set its source ID. Otherwise, a unique identifier is automatically generated.
@@ -92,13 +92,13 @@ add_physics_layer(): void;
  * **Warning:** A source cannot belong to two TileSets at the same time. If the added source was attached to another [TileSet], it will be removed from that one.
  *
 */
-add_source(): int;
+add_source(source: TileSetSource, atlas_source_id_override?: int): int;
 
 /** Adds a new terrain to the given terrain set [param terrain_set] at the given position [param to_position] in the array. If [param to_position] is -1, adds it at the end of the array. */
-add_terrain(): void;
+add_terrain(terrain_set: int, to_position?: int): void;
 
 /** Adds a new terrain set at the given position [param to_position] in the array. If [param to_position] is -1, adds it at the end of the array. */
-add_terrain_set(): void;
+add_terrain_set(to_position?: int): void;
 
 /** Clears tile proxies pointing to invalid tiles. */
 cleanup_invalid_tile_proxies(): void;
@@ -112,7 +112,7 @@ clear_tile_proxies(): void;
  * If the TileSet has no proxy for the given identifiers, returns an empty Array.
  *
 */
-get_alternative_level_tile_proxy(): any[];
+get_alternative_level_tile_proxy(source_from: int, coords_from: Vector2i, alternative_from: int): any[];
 
 /**
  * Returns the coordinate-level proxy for the given identifiers. The returned array contains the two target identifiers of the proxy (source ID and atlas coordinates ID).
@@ -120,25 +120,25 @@ get_alternative_level_tile_proxy(): any[];
  * If the TileSet has no proxy for the given identifiers, returns an empty Array.
  *
 */
-get_coords_level_tile_proxy(): any[];
+get_coords_level_tile_proxy(source_from: int, coords_from: Vector2i): any[];
 
 /** Returns the index of the custom data layer identified by the given name. */
-get_custom_data_layer_by_name(): int;
+get_custom_data_layer_by_name(layer_name: string): int;
 
 /** Returns the name of the custom data layer identified by the given index. */
-get_custom_data_layer_name(): string;
+get_custom_data_layer_name(layer_index: int): string;
 
 /** Returns the type of the custom data layer identified by the given index. */
-get_custom_data_layer_type(): int;
+get_custom_data_layer_type(layer_index: int): int;
 
 /** Returns the custom data layers count. */
 get_custom_data_layers_count(): int;
 
 /** Returns whether or not the specified navigation layer of the TileSet navigation data layer identified by the given [param layer_index] is enabled, given a navigation_layers [param layer_number] between 1 and 32. */
-get_navigation_layer_layer_value(): boolean;
+get_navigation_layer_layer_value(layer_index: int, layer_number: int): boolean;
 
 /** Returns the navigation layers (as in the Navigation server) of the given TileSet navigation layer. */
-get_navigation_layer_layers(): int;
+get_navigation_layer_layers(layer_index: int): int;
 
 /** Returns the navigation layers count. */
 get_navigation_layers_count(): int;
@@ -147,43 +147,43 @@ get_navigation_layers_count(): int;
 get_next_source_id(): int;
 
 /** Returns the light mask of the occlusion layer. */
-get_occlusion_layer_light_mask(): int;
+get_occlusion_layer_light_mask(layer_index: int): int;
 
 /** Returns if the occluders from this layer use [code]sdf_collision[/code]. */
-get_occlusion_layer_sdf_collision(): boolean;
+get_occlusion_layer_sdf_collision(layer_index: int): boolean;
 
 /** Returns the occlusion layers count. */
 get_occlusion_layers_count(): int;
 
 /** Returns the [TileMapPattern] at the given [param index]. */
-get_pattern(): TileMapPattern;
+get_pattern(index?: int): TileMapPattern;
 
 /** Returns the number of [TileMapPattern] this tile set handles. */
 get_patterns_count(): int;
 
 /** Returns the collision layer (as in the physics server) bodies on the given TileSet's physics layer are in. */
-get_physics_layer_collision_layer(): int;
+get_physics_layer_collision_layer(layer_index: int): int;
 
 /** Returns the collision mask of bodies on the given TileSet's physics layer. */
-get_physics_layer_collision_mask(): int;
+get_physics_layer_collision_mask(layer_index: int): int;
 
 /** Returns the collision priority of bodies on the given TileSet's physics layer. */
-get_physics_layer_collision_priority(): float;
+get_physics_layer_collision_priority(layer_index: int): float;
 
 /** Returns the physics material of bodies on the given TileSet's physics layer. */
-get_physics_layer_physics_material(): PhysicsMaterial;
+get_physics_layer_physics_material(layer_index: int): PhysicsMaterial;
 
 /** Returns the physics layers count. */
 get_physics_layers_count(): int;
 
 /** Returns the [TileSetSource] with ID [param source_id]. */
-get_source(): TileSetSource;
+get_source(source_id: int): TileSetSource;
 
 /** Returns the number of [TileSetSource] in this TileSet. */
 get_source_count(): int;
 
 /** Returns the source ID for source with index [param index]. */
-get_source_id(): int;
+get_source_id(index: int): int;
 
 /**
  * Returns the source-level proxy for the given source identifier.
@@ -191,37 +191,37 @@ get_source_id(): int;
  * If the TileSet has no proxy for the given identifier, returns -1.
  *
 */
-get_source_level_tile_proxy(): int;
+get_source_level_tile_proxy(source_from: int): int;
 
 /** Returns a terrain's color. */
-get_terrain_color(): Color;
+get_terrain_color(terrain_set: int, terrain_index: int): Color;
 
 /** Returns a terrain's name. */
-get_terrain_name(): string;
+get_terrain_name(terrain_set: int, terrain_index: int): string;
 
 /** Returns a terrain set mode. */
-get_terrain_set_mode(): int;
+get_terrain_set_mode(terrain_set: int): int;
 
 /** Returns the terrain sets count. */
 get_terrain_sets_count(): int;
 
 /** Returns the number of terrains in the given terrain set. */
-get_terrains_count(): int;
+get_terrains_count(terrain_set: int): int;
 
 /** Returns if there is an alternative-level proxy for the given identifiers. */
-has_alternative_level_tile_proxy(): boolean;
+has_alternative_level_tile_proxy(source_from: int, coords_from: Vector2i, alternative_from: int): boolean;
 
 /** Returns if there is a coodinates-level proxy for the given identifiers. */
-has_coords_level_tile_proxy(): boolean;
+has_coords_level_tile_proxy(source_from: int, coords_from: Vector2i): boolean;
 
 /** Returns if there is a custom data layer named [param layer_name]. */
-has_custom_data_layer_by_name(): boolean;
+has_custom_data_layer_by_name(layer_name: string): boolean;
 
 /** Returns if this TileSet has a source for the given source ID. */
-has_source(): boolean;
+has_source(source_id: int): boolean;
 
 /** Returns if there is a source-level proxy for the given source ID. */
-has_source_level_tile_proxy(): boolean;
+has_source_level_tile_proxy(source_from: int): boolean;
 
 /**
  * According to the configured proxies, maps the provided identifiers to a new set of identifiers. The source ID, atlas coordinates ID and alternative tile ID are returned as a 3 elements Array.
@@ -231,58 +231,58 @@ has_source_level_tile_proxy(): boolean;
  * If no proxy corresponding to provided identifiers are found, returns the same values the ones used as arguments.
  *
 */
-map_tile_proxy(): any[];
+map_tile_proxy(source_from: int, coords_from: Vector2i, alternative_from: int): any[];
 
 /** Moves the custom data layer at index [param layer_index] to the given position [param to_position] in the array. Also updates the atlas tiles accordingly. */
-move_custom_data_layer(): void;
+move_custom_data_layer(layer_index: int, to_position: int): void;
 
 /** Moves the navigation layer at index [param layer_index] to the given position [param to_position] in the array. Also updates the atlas tiles accordingly. */
-move_navigation_layer(): void;
+move_navigation_layer(layer_index: int, to_position: int): void;
 
 /** Moves the occlusion layer at index [param layer_index] to the given position [param to_position] in the array. Also updates the atlas tiles accordingly. */
-move_occlusion_layer(): void;
+move_occlusion_layer(layer_index: int, to_position: int): void;
 
 /** Moves the physics layer at index [param layer_index] to the given position [param to_position] in the array. Also updates the atlas tiles accordingly. */
-move_physics_layer(): void;
+move_physics_layer(layer_index: int, to_position: int): void;
 
 /** Moves the terrain at index [param terrain_index] for terrain set [param terrain_set] to the given position [param to_position] in the array. Also updates the atlas tiles accordingly. */
-move_terrain(): void;
+move_terrain(terrain_set: int, terrain_index: int, to_position: int): void;
 
 /** Moves the terrain set at index [param terrain_set] to the given position [param to_position] in the array. Also updates the atlas tiles accordingly. */
-move_terrain_set(): void;
+move_terrain_set(terrain_set: int, to_position: int): void;
 
 /** Removes an alternative-level proxy for the given identifiers. */
-remove_alternative_level_tile_proxy(): void;
+remove_alternative_level_tile_proxy(source_from: int, coords_from: Vector2i, alternative_from: int): void;
 
 /** Removes a coordinates-level proxy for the given identifiers. */
-remove_coords_level_tile_proxy(): void;
+remove_coords_level_tile_proxy(source_from: int, coords_from: Vector2i): void;
 
 /** Removes the custom data layer at index [param layer_index]. Also updates the atlas tiles accordingly. */
-remove_custom_data_layer(): void;
+remove_custom_data_layer(layer_index: int): void;
 
 /** Removes the navigation layer at index [param layer_index]. Also updates the atlas tiles accordingly. */
-remove_navigation_layer(): void;
+remove_navigation_layer(layer_index: int): void;
 
 /** Removes the occlusion layer at index [param layer_index]. Also updates the atlas tiles accordingly. */
-remove_occlusion_layer(): void;
+remove_occlusion_layer(layer_index: int): void;
 
 /** Remove the [TileMapPattern] at the given index. */
-remove_pattern(): void;
+remove_pattern(index: int): void;
 
 /** Removes the physics layer at index [param layer_index]. Also updates the atlas tiles accordingly. */
-remove_physics_layer(): void;
+remove_physics_layer(layer_index: int): void;
 
 /** Removes the source with the given source ID. */
-remove_source(): void;
+remove_source(source_id: int): void;
 
 /** Removes a source-level tile proxy. */
-remove_source_level_tile_proxy(): void;
+remove_source_level_tile_proxy(source_from: int): void;
 
 /** Removes the terrain at index [param terrain_index] in the given terrain set [param terrain_set]. Also updates the atlas tiles accordingly. */
-remove_terrain(): void;
+remove_terrain(terrain_set: int, terrain_index: int): void;
 
 /** Removes the terrain set at index [param terrain_set]. Also updates the atlas tiles accordingly. */
-remove_terrain_set(): void;
+remove_terrain_set(terrain_set: int): void;
 
 /**
  * Create an alternative-level proxy for the given identifiers. A proxy will map set of tile identifiers to another set of identifiers.
@@ -290,7 +290,7 @@ remove_terrain_set(): void;
  * Proxied tiles can be automatically replaced in TileMapLayer nodes using the editor.
  *
 */
-set_alternative_level_tile_proxy(): void;
+set_alternative_level_tile_proxy(source_from: int, coords_from: Vector2i, alternative_from: int, source_to: int, coords_to: Vector2i, alternative_to: int): void;
 
 /**
  * Creates a coordinates-level proxy for the given identifiers. A proxy will map set of tile identifiers to another set of identifiers. The alternative tile ID is kept the same when using coordinates-level proxies.
@@ -298,40 +298,40 @@ set_alternative_level_tile_proxy(): void;
  * Proxied tiles can be automatically replaced in TileMapLayer nodes using the editor.
  *
 */
-set_coords_level_tile_proxy(): void;
+set_coords_level_tile_proxy(p_source_from: int, coords_from: Vector2i, source_to: int, coords_to: Vector2i): void;
 
 /** Sets the name of the custom data layer identified by the given index. Names are identifiers of the layer therefore if the name is already taken it will fail and raise an error. */
-set_custom_data_layer_name(): void;
+set_custom_data_layer_name(layer_index: int, layer_name: string): void;
 
 /** Sets the type of the custom data layer identified by the given index. */
-set_custom_data_layer_type(): void;
+set_custom_data_layer_type(layer_index: int, layer_type: int): void;
 
 /** Based on [param value], enables or disables the specified navigation layer of the TileSet navigation data layer identified by the given [param layer_index], given a navigation_layers [param layer_number] between 1 and 32. */
-set_navigation_layer_layer_value(): void;
+set_navigation_layer_layer_value(layer_index: int, layer_number: int, value: boolean): void;
 
 /** Sets the navigation layers (as in the navigation server) for navigation regions in the given TileSet navigation layer. */
-set_navigation_layer_layers(): void;
+set_navigation_layer_layers(layer_index: int, layers: int): void;
 
 /** Sets the occlusion layer (as in the rendering server) for occluders in the given TileSet occlusion layer. */
-set_occlusion_layer_light_mask(): void;
+set_occlusion_layer_light_mask(layer_index: int, light_mask: int): void;
 
 /** Enables or disables SDF collision for occluders in the given TileSet occlusion layer. */
-set_occlusion_layer_sdf_collision(): void;
+set_occlusion_layer_sdf_collision(layer_index: int, sdf_collision: boolean): void;
 
 /** Sets the collision layer (as in the physics server) for bodies in the given TileSet physics layer. */
-set_physics_layer_collision_layer(): void;
+set_physics_layer_collision_layer(layer_index: int, layer: int): void;
 
 /** Sets the collision mask for bodies in the given TileSet physics layer. */
-set_physics_layer_collision_mask(): void;
+set_physics_layer_collision_mask(layer_index: int, mask: int): void;
 
 /** Sets the collision priority for bodies in the given TileSet physics layer. */
-set_physics_layer_collision_priority(): void;
+set_physics_layer_collision_priority(layer_index: int, priority: float): void;
 
 /** Sets the physics material for bodies in the given TileSet physics layer. */
-set_physics_layer_physics_material(): void;
+set_physics_layer_physics_material(layer_index: int, physics_material: PhysicsMaterial): void;
 
 /** Changes a source's ID. */
-set_source_id(): void;
+set_source_id(source_id: int, new_source_id: int): void;
 
 /**
  * Creates a source-level proxy for the given source ID. A proxy will map set of tile identifiers to another set of identifiers. Both the atlas coordinates ID and the alternative tile ID are kept the same when using source-level proxies.
@@ -339,16 +339,16 @@ set_source_id(): void;
  * Proxied tiles can be automatically replaced in TileMapLayer nodes using the editor.
  *
 */
-set_source_level_tile_proxy(): void;
+set_source_level_tile_proxy(source_from: int, source_to: int): void;
 
 /** Sets a terrain's color. This color is used for identifying the different terrains in the TileSet editor. */
-set_terrain_color(): void;
+set_terrain_color(terrain_set: int, terrain_index: int, color: Color): void;
 
 /** Sets a terrain's name. */
-set_terrain_name(): void;
+set_terrain_name(terrain_set: int, terrain_index: int, name: string): void;
 
 /** Sets a terrain mode. Each mode determines which bits of a tile shape is used to match the neighboring tiles' terrains. */
-set_terrain_set_mode(): void;
+set_terrain_set_mode(terrain_set: int, mode: int): void;
 
   connect<T extends SignalsOf<TileSet>>(signal: T, method: SignalFunction<TileSet[T]>): number;
 

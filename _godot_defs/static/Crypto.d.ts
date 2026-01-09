@@ -127,7 +127,7 @@ declare class Crypto extends RefCounted  {
  * See [url=https://paragonie.com/blog/2015/11/preventing-timing-attacks-on-string-comparison-with-double-hmac-strategy]this blog post[/url] for more information.
  *
 */
-constant_time_compare(): boolean;
+constant_time_compare(trusted: PackedByteArray, received: PackedByteArray): boolean;
 
 /**
  * Decrypt the given [param ciphertext] with the provided private [param key].
@@ -135,7 +135,7 @@ constant_time_compare(): boolean;
  * **Note:** The maximum size of accepted ciphertext is limited by the key size.
  *
 */
-decrypt(): PackedByteArray;
+decrypt(key: CryptoKey, ciphertext: PackedByteArray): PackedByteArray;
 
 /**
  * Encrypt the given [param plaintext] with the provided public [param key].
@@ -143,13 +143,13 @@ decrypt(): PackedByteArray;
  * **Note:** The maximum size of accepted plaintext is limited by the key size.
  *
 */
-encrypt(): PackedByteArray;
+encrypt(key: CryptoKey, plaintext: PackedByteArray): PackedByteArray;
 
 /** Generates a [PackedByteArray] of cryptographically secure random bytes with given [param size]. */
-generate_random_bytes(): PackedByteArray;
+generate_random_bytes(size: int): PackedByteArray;
 
 /** Generates an RSA [CryptoKey] that can be used for creating self-signed certificates and passed to [method StreamPeerTLS.accept_stream]. */
-generate_rsa(): CryptoKey;
+generate_rsa(size: int): CryptoKey;
 
 /**
  * Generates a self-signed [X509Certificate] from the given [CryptoKey] and [param issuer_name]. The certificate validity will be defined by [param not_before] and [param not_after] (first valid date and last valid date). The [param issuer_name] must contain at least "CN=" (common name, i.e. the domain name), "O=" (organization, i.e. your company name), "C=" (country, i.e. 2 lettered ISO-3166 code of the country the organization is based in).
@@ -176,7 +176,7 @@ generate_rsa(): CryptoKey;
  * 
  *
 */
-generate_self_signed_certificate(): X509Certificate;
+generate_self_signed_certificate(key: CryptoKey, issuer_name?: string, not_before?: string, not_after?: string): X509Certificate;
 
 /**
  * Generates an [url=https://en.wikipedia.org/wiki/HMAC]HMAC[/url] digest of [param msg] using [param key]. The [param hash_type] parameter is the hashing algorithm that is used for the inner and outer hashes.
@@ -184,13 +184,13 @@ generate_self_signed_certificate(): X509Certificate;
  * Currently, only [constant HashingContext.HASH_SHA256] and [constant HashingContext.HASH_SHA1] are supported.
  *
 */
-hmac_digest(): PackedByteArray;
+hmac_digest(hash_type: int, key: PackedByteArray, msg: PackedByteArray): PackedByteArray;
 
 /** Sign a given [param hash] of type [param hash_type] with the provided private [param key]. */
-sign(): PackedByteArray;
+sign(hash_type: int, hash: PackedByteArray, key: CryptoKey): PackedByteArray;
 
 /** Verify that a given [param signature] for [param hash] of type [param hash_type] against the provided public [param key]. */
-verify(): boolean;
+verify(hash_type: int, hash: PackedByteArray, signature: PackedByteArray, key: CryptoKey): boolean;
 
   connect<T extends SignalsOf<Crypto>>(signal: T, method: SignalFunction<Crypto[T]>): number;
 

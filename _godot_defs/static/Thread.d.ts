@@ -69,7 +69,7 @@ is_started(): boolean;
  * **Note:** Even in the case of having disabled the checks in a [WorkerThreadPool] task, there's no need to re-enable them at the end. The engine will do so.
  *
 */
-set_thread_safety_checks_enabled(): void;
+set_thread_safety_checks_enabled(enabled: boolean): void;
 
 /**
  * Starts a new [Thread] that calls [param callable].
@@ -81,7 +81,7 @@ set_thread_safety_checks_enabled(): void;
  * Returns [constant OK] on success, or [constant ERR_CANT_CREATE] on failure.
  *
 */
-start(): int;
+start(callable: Callable, priority?: int): int;
 
 /**
  * Joins the [Thread] and waits for it to finish. Returns the output of the [Callable] passed to [method start].

@@ -160,7 +160,7 @@ has_overlapping_bodies(): boolean;
  * **Note:** The result of this test is not immediate after moving objects. For performance, list of overlaps is updated once per frame and before the physics step. Consider using signals instead.
  *
 */
-overlaps_area(): boolean;
+overlaps_area(area: Node): boolean;
 
 /**
  * Returns `true` if the given physics body intersects or overlaps this [Area3D], `false` otherwise.
@@ -170,7 +170,7 @@ overlaps_area(): boolean;
  * The [param body] argument can either be a [PhysicsBody3D] or a [GridMap] instance. While GridMaps are not physics body themselves, they register their tiles with collision shapes as a virtual physics body.
  *
 */
-overlaps_body(): boolean;
+overlaps_body(body: Node): boolean;
 
   connect<T extends SignalsOf<Area3D>>(signal: T, method: SignalFunction<Area3D[T]>): number;
 

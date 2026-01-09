@@ -151,7 +151,7 @@ visible: boolean;
  * **Note:** [param gizmo] should be an [EditorNode3DGizmo]. The argument type is [Node3DGizmo] to avoid depending on editor classes in [Node3D].
  *
 */
-add_gizmo(): void;
+add_gizmo(gizmo: Node3DGizmo): void;
 
 /** Clears all [EditorNode3DGizmo] objects attached to this node. Only works in the editor. */
 clear_gizmos(): void;
@@ -197,7 +197,7 @@ get_parent_node_3d(): Node3D;
 get_world_3d(): World3D;
 
 /** Rotates this node's [member global_basis] around the global [param axis] by the given [param angle], in radians. This operation is calculated in global space (relative to the world) and preserves the [member global_position]. */
-global_rotate(): void;
+global_rotate(axis: Vector3, angle: float): void;
 
 /**
  * Scales this node's [member global_basis] by the given [param scale] factor. This operation is calculated in global space (relative to the world) and preserves the [member global_position].
@@ -205,10 +205,10 @@ global_rotate(): void;
  * **Note:** This method is not to be confused with the [member scale] property.
  *
 */
-global_scale(): void;
+global_scale(scale: Vector3): void;
 
 /** Adds the given translation [param offset] to the node's [member global_position] in global space (relative to the world). */
-global_translate(): void;
+global_translate(offset: Vector3): void;
 
 /** Prevents this node from being rendered. Equivalent to setting [member visible] to [code]false[/code]. This is the opposite of [method show]. */
 hide(): void;
@@ -247,31 +247,31 @@ is_visible_in_tree(): boolean;
  * **Note:** This method fails if the node is not in the scene tree. If necessary, use [method look_at_from_position] instead.
  *
 */
-look_at(): void;
+look_at(target: Vector3, up?: Vector3, use_model_front?: boolean): void;
 
 /** Moves the node to the specified [param position], then rotates the node to point toward the [param target] position, similar to [method look_at]. This operation is calculated in global space (relative to the world). */
-look_at_from_position(): void;
+look_at_from_position(position: Vector3, target: Vector3, up?: Vector3, use_model_front?: boolean): void;
 
 /** Orthonormalizes this node's [member basis]. This method sets this node's [member scale] to [constant Vector3.ONE] (or its negative counterpart), but preserves the [member position] and [member rotation]. See also [method Transform3D.orthonormalized]. */
 orthonormalize(): void;
 
 /** Rotates this node's [member basis] around the [param axis] by the given [param angle], in radians. This operation is calculated in parent space (relative to the parent) and preserves the [member position]. */
-rotate(): void;
+rotate(axis: Vector3, angle: float): void;
 
 /** Rotates this node's [member basis] around the [param axis] by the given [param angle], in radians. This operation is calculated in local space (relative to this node) and preserves the [member position]. */
-rotate_object_local(): void;
+rotate_object_local(axis: Vector3, angle: float): void;
 
 /** Rotates this node's [member basis] around the X axis by the given [param angle], in radians. This operation is calculated in parent space (relative to the parent) and preserves the [member position]. */
-rotate_x(): void;
+rotate_x(angle: float): void;
 
 /** Rotates this node's [member basis] around the Y axis by the given [param angle], in radians. This operation is calculated in parent space (relative to the parent) and preserves the [member position]. */
-rotate_y(): void;
+rotate_y(angle: float): void;
 
 /** Rotates this node's [member basis] around the Z axis by the given [param angle], in radians. This operation is calculated in parent space (relative to the parent) and preserves the [member position]. */
-rotate_z(): void;
+rotate_z(angle: float): void;
 
 /** Scales this node's [member basis] by the given [param scale] factor. This operation is calculated in local space (relative to this node) and preserves the [member position]. */
-scale_object_local(): void;
+scale_object_local(scale: Vector3): void;
 
 /**
  * If `true`, this node's [member global_transform] is automatically orthonormalized. This results in this node not appearing distorted, as if its global scale were set to [constant Vector3.ONE] (or its negative counterpart). See also [method is_scale_disabled] and [method orthonormalize].
@@ -279,7 +279,7 @@ scale_object_local(): void;
  * **Note:** [member transform] is not affected by this setting.
  *
 */
-set_disable_scale(): void;
+set_disable_scale(disable: boolean): void;
 
 /** Sets this node's [member transform] to [constant Transform3D.IDENTITY], which resets all transformations in parent space ([member position], [member rotation], and [member scale]). */
 set_identity(): void;
@@ -290,7 +290,7 @@ set_identity(): void;
  * It may useful to call this method when handling these notifications to prevent infinite recursion.
  *
 */
-set_ignore_transform_notification(): void;
+set_ignore_transform_notification(enabled: boolean): void;
 
 /**
  * If `true`, the node will receive [constant NOTIFICATION_LOCAL_TRANSFORM_CHANGED] whenever [member transform] changes.
@@ -298,7 +298,7 @@ set_ignore_transform_notification(): void;
  * **Note:** Some 3D nodes such as [CSGShape3D] or [CollisionShape3D] automatically enable this to function correctly.
  *
 */
-set_notify_local_transform(): void;
+set_notify_local_transform(enable: boolean): void;
 
 /**
  * If `true`, the node will receive [constant NOTIFICATION_TRANSFORM_CHANGED] whenever [member global_transform] changes.
@@ -308,7 +308,7 @@ set_notify_local_transform(): void;
  * **Note:** In the editor, nodes will propagate this notification to their children if a gizmo is attached (see [method add_gizmo]).
  *
 */
-set_notify_transform(): void;
+set_notify_transform(enable: boolean): void;
 
 /**
  * Selects the [param gizmo]'s subgizmo with the given [param id] and sets its transform. Only works in the editor.
@@ -316,16 +316,16 @@ set_notify_transform(): void;
  * **Note:** The gizmo object would typically be an instance of [EditorNode3DGizmo], but the argument type is kept generic to avoid creating a dependency on editor classes in [Node3D].
  *
 */
-set_subgizmo_selection(): void;
+set_subgizmo_selection(gizmo: Node3DGizmo, id: int, transform: Transform3D): void;
 
 /** Allows this node to be rendered. Equivalent to setting [member visible] to [code]true[/code]. This is the opposite of [method hide]. */
 show(): void;
 
 /** Returns the [param local_point] converted from this node's local space to global space. This is the opposite of [method to_local]. */
-to_global(): Vector3;
+to_global(local_point: Vector3): Vector3;
 
 /** Returns the [param global_point] converted from global space to this node's local space. This is the opposite of [method to_global]. */
-to_local(): Vector3;
+to_local(global_point: Vector3): Vector3;
 
 /**
  * Adds the given translation [param offset] to the node's position, in local space (relative to this node).
@@ -335,10 +335,10 @@ to_local(): Vector3;
  * **Note:** Despite the naming convention, this operation is **not** calculated in parent space for compatibility reasons. To translate in parent space, add [param offset] to the [member position] (`node_3d.position += offset`).
  *
 */
-translate(): void;
+translate(offset: Vector3): void;
 
 /** Adds the given translation [param offset] to the node's position, in local space (relative to this node). */
-translate_object_local(): void;
+translate_object_local(offset: Vector3): void;
 
 /** Updates all the [EditorNode3DGizmo] objects attached to this node. Only works in the editor. */
 update_gizmos(): void;

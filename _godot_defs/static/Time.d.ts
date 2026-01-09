@@ -37,10 +37,10 @@ declare class TimeClass extends Object  {
  * The returned values are in the system's local time when [param utc] is `false`, otherwise they are in UTC.
  *
 */
-get_date_dict_from_system(): Dictionary<any, any>;
+get_date_dict_from_system(utc?: boolean): Dictionary<any, any>;
 
 /** Converts the given Unix timestamp to a dictionary of keys: [code]year[/code], [code]month[/code], [code]day[/code], and [code]weekday[/code]. */
-get_date_dict_from_unix_time(): Dictionary<any, any>;
+get_date_dict_from_unix_time(unix_time_val: int): Dictionary<any, any>;
 
 /**
  * Returns the current date as an ISO 8601 date string (YYYY-MM-DD).
@@ -48,10 +48,10 @@ get_date_dict_from_unix_time(): Dictionary<any, any>;
  * The returned values are in the system's local time when [param utc] is `false`, otherwise they are in UTC.
  *
 */
-get_date_string_from_system(): string;
+get_date_string_from_system(utc?: boolean): string;
 
 /** Converts the given Unix timestamp to an ISO 8601 date string (YYYY-MM-DD). */
-get_date_string_from_unix_time(): string;
+get_date_string_from_unix_time(unix_time_val: int): string;
 
 /**
  * Converts the given ISO 8601 date and time string (YYYY-MM-DDTHH:MM:SS) to a dictionary of keys: `year`, `month`, `day`, [code skip-lint]weekday`, `hour`, `minute`, and `second`.
@@ -61,10 +61,10 @@ get_date_string_from_unix_time(): string;
  * **Note:** Any decimal fraction in the time string will be ignored silently.
  *
 */
-get_datetime_dict_from_datetime_string(): Dictionary<any, any>;
+get_datetime_dict_from_datetime_string(datetime: string, weekday: boolean): Dictionary<any, any>;
 
 /** Returns the current date as a dictionary of keys: [code]year[/code], [code]month[/code], [code]day[/code], [code]weekday[/code], [code]hour[/code], [code]minute[/code], [code]second[/code], and [code]dst[/code] (Daylight Savings Time). */
-get_datetime_dict_from_system(): Dictionary<any, any>;
+get_datetime_dict_from_system(utc?: boolean): Dictionary<any, any>;
 
 /**
  * Converts the given Unix timestamp to a dictionary of keys: `year`, `month`, `day`, `weekday`, `hour`, `minute`, and `second`.
@@ -72,7 +72,7 @@ get_datetime_dict_from_system(): Dictionary<any, any>;
  * The returned Dictionary's values will be the same as the [method get_datetime_dict_from_system] if the Unix timestamp is the current time, with the exception of Daylight Savings Time as it cannot be determined from the epoch.
  *
 */
-get_datetime_dict_from_unix_time(): Dictionary<any, any>;
+get_datetime_dict_from_unix_time(unix_time_val: int): Dictionary<any, any>;
 
 /**
  * Converts the given dictionary of keys to an ISO 8601 date and time string (YYYY-MM-DDTHH:MM:SS).
@@ -84,7 +84,7 @@ get_datetime_dict_from_unix_time(): Dictionary<any, any>;
  * If [param use_space] is `true`, the date and time bits are separated by an empty space character instead of the letter T.
  *
 */
-get_datetime_string_from_datetime_dict(): string;
+get_datetime_string_from_datetime_dict(datetime: Dictionary<any, any>, use_space: boolean): string;
 
 /**
  * Returns the current date and time as an ISO 8601 date and time string (YYYY-MM-DDTHH:MM:SS).
@@ -94,7 +94,7 @@ get_datetime_string_from_datetime_dict(): string;
  * If [param use_space] is `true`, the date and time bits are separated by an empty space character instead of the letter T.
  *
 */
-get_datetime_string_from_system(): string;
+get_datetime_string_from_system(utc?: boolean, use_space?: boolean): string;
 
 /**
  * Converts the given Unix timestamp to an ISO 8601 date and time string (YYYY-MM-DDTHH:MM:SS).
@@ -102,10 +102,10 @@ get_datetime_string_from_system(): string;
  * If [param use_space] is `true`, the date and time bits are separated by an empty space character instead of the letter T.
  *
 */
-get_datetime_string_from_unix_time(): string;
+get_datetime_string_from_unix_time(unix_time_val: int, use_space?: boolean): string;
 
 /** Converts the given timezone offset in minutes to a timezone offset string. For example, -480 returns "-08:00", 345 returns "+05:45", and 0 returns "+00:00". */
-get_offset_string_from_offset_minutes(): string;
+get_offset_string_from_offset_minutes(offset_minutes: int): string;
 
 /**
  * Returns the amount of time passed in milliseconds since the engine started.
@@ -129,10 +129,10 @@ get_ticks_usec(): int;
  * The returned values are in the system's local time when [param utc] is `false`, otherwise they are in UTC.
  *
 */
-get_time_dict_from_system(): Dictionary<any, any>;
+get_time_dict_from_system(utc?: boolean): Dictionary<any, any>;
 
 /** Converts the given time to a dictionary of keys: [code]hour[/code], [code]minute[/code], and [code]second[/code]. */
-get_time_dict_from_unix_time(): Dictionary<any, any>;
+get_time_dict_from_unix_time(unix_time_val: int): Dictionary<any, any>;
 
 /**
  * Returns the current time as an ISO 8601 time string (HH:MM:SS).
@@ -140,10 +140,10 @@ get_time_dict_from_unix_time(): Dictionary<any, any>;
  * The returned values are in the system's local time when [param utc] is `false`, otherwise they are in UTC.
  *
 */
-get_time_string_from_system(): string;
+get_time_string_from_system(utc?: boolean): string;
 
 /** Converts the given Unix timestamp to an ISO 8601 time string (HH:MM:SS). */
-get_time_string_from_unix_time(): string;
+get_time_string_from_unix_time(unix_time_val: int): string;
 
 /**
  * Returns the current time zone as a dictionary of keys: `bias` and `name`.
@@ -167,7 +167,7 @@ get_time_zone_from_system(): Dictionary<any, any>;
  * **Note:** Unix timestamps are often in UTC. This method does not do any timezone conversion, so the timestamp will be in the same timezone as the given datetime dictionary.
  *
 */
-get_unix_time_from_datetime_dict(): int;
+get_unix_time_from_datetime_dict(datetime: Dictionary<any, any>): int;
 
 /**
  * Converts the given ISO 8601 date and/or time string to a Unix timestamp. The string can contain a date only, a time only, or both.
@@ -177,7 +177,7 @@ get_unix_time_from_datetime_dict(): int;
  * **Note:** Any decimal fraction in the time string will be ignored silently.
  *
 */
-get_unix_time_from_datetime_string(): int;
+get_unix_time_from_datetime_string(datetime: string): int;
 
 /**
  * Returns the current Unix timestamp in seconds based on the system time in UTC. This method is implemented by the operating system and always returns the time in UTC. The Unix timestamp is the number of seconds passed since 1970-01-01 at 00:00:00, the [url=https://en.wikipedia.org/wiki/Unix_time]Unix epoch[/url].

@@ -19,13 +19,13 @@ declare class BoneConstraint3D extends SkeletonModifier3D  {
 clear_setting(): void;
 
 /** Returns the apply amount of the setting at [param index]. */
-get_amount(): float;
+get_amount(index: int): float;
 
 /** Returns the apply bone of the setting at [param index]. This bone will be modified. */
-get_apply_bone(): int;
+get_apply_bone(index: int): int;
 
 /** Returns the apply bone name of the setting at [param index]. This bone will be modified. */
-get_apply_bone_name(): string;
+get_apply_bone_name(index: int): string;
 
 /**
  * Returns the reference bone of the setting at [param index].
@@ -33,7 +33,7 @@ get_apply_bone_name(): string;
  * This bone will be only referenced and not modified by this modifier.
  *
 */
-get_reference_bone(): int;
+get_reference_bone(index: int): int;
 
 /**
  * Returns the reference bone name of the setting at [param index].
@@ -41,7 +41,7 @@ get_reference_bone(): int;
  * This bone will be only referenced and not modified by this modifier.
  *
 */
-get_reference_bone_name(): string;
+get_reference_bone_name(index: int): string;
 
 /**
  * Returns the reference node path of the setting at [param index].
@@ -49,22 +49,22 @@ get_reference_bone_name(): string;
  * This node will be only referenced and not modified by this modifier.
  *
 */
-get_reference_node(): NodePathType;
+get_reference_node(index: int): NodePathType;
 
 /** Returns the reference target type of the setting at [param index]. See also [enum ReferenceType]. */
-get_reference_type(): int;
+get_reference_type(index: int): int;
 
 /** Returns the number of settings in the modifier. */
 get_setting_count(): int;
 
 /** Sets the apply amount of the setting at [param index] to [param amount]. */
-set_amount(): void;
+set_amount(index: int, amount: float): void;
 
 /** Sets the apply bone of the setting at [param index] to [param bone]. This bone will be modified. */
-set_apply_bone(): void;
+set_apply_bone(index: int, bone: int): void;
 
 /** Sets the apply bone of the setting at [param index] to [param bone_name]. This bone will be modified. */
-set_apply_bone_name(): void;
+set_apply_bone_name(index: int, bone_name: string): void;
 
 /**
  * Sets the reference bone of the setting at [param index] to [param bone].
@@ -72,7 +72,7 @@ set_apply_bone_name(): void;
  * This bone will be only referenced and not modified by this modifier.
  *
 */
-set_reference_bone(): void;
+set_reference_bone(index: int, bone: int): void;
 
 /**
  * Sets the reference bone of the setting at [param index] to [param bone_name].
@@ -80,7 +80,7 @@ set_reference_bone(): void;
  * This bone will be only referenced and not modified by this modifier.
  *
 */
-set_reference_bone_name(): void;
+set_reference_bone_name(index: int, bone_name: string): void;
 
 /**
  * Sets the reference node path of the setting at [param index] to [param node].
@@ -88,13 +88,13 @@ set_reference_bone_name(): void;
  * This node will be only referenced and not modified by this modifier.
  *
 */
-set_reference_node(): void;
+set_reference_node(index: int, node: NodePathType): void;
 
 /** Sets the reference target type of the setting at [param index] to [param type]. See also [enum ReferenceType]. */
-set_reference_type(): void;
+set_reference_type(index: int, type: int): void;
 
 /** Sets the number of settings in the modifier. */
-set_setting_count(): void;
+set_setting_count(count: int): void;
 
   connect<T extends SignalsOf<BoneConstraint3D>>(signal: T, method: SignalFunction<BoneConstraint3D[T]>): number;
 

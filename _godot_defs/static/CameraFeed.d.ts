@@ -50,10 +50,10 @@ get_name(): string;
 get_position(): int;
 
 /** Returns the texture backend ID (usable by some external libraries that need a handle to a texture to write data). */
-get_texture_tex_id(): int;
+get_texture_tex_id(feed_image_type: int): int;
 
 /** Sets the feed as external feed provided by another library. */
-set_external(): void;
+set_external(width: int, height: int): void;
 
 /**
  * Sets the feed format parameters for the given [param index] in the [member formats] array. Returns `true` on success. By default, the YUYV encoded stream is transformed to [constant FEED_RGB]. The YUYV encoded stream output format can be changed by setting [param parameters]'s `output` entry to one of the following:
@@ -65,22 +65,22 @@ set_external(): void;
  * - `"copy"` will result in [constant FEED_YCBCR].
  *
 */
-set_format(): boolean;
+set_format(index: int, parameters: Dictionary<any, any>): boolean;
 
 /** Sets the camera's name. */
-set_name(): void;
+set_name(name: string): void;
 
 /** Sets the position of this camera. */
-set_position(): void;
+set_position(position: int): void;
 
 /** Sets RGB image for this feed. */
-set_rgb_image(): void;
+set_rgb_image(rgb_image: Image): void;
 
 /** Sets YCbCr image for this feed. */
-set_ycbcr_image(): void;
+set_ycbcr_image(ycbcr_image: Image): void;
 
 /** Sets Y and CbCr images for this feed. */
-set_ycbcr_images(): void;
+set_ycbcr_images(y_image: Image, cbcr_image: Image): void;
 
   connect<T extends SignalsOf<CameraFeed>>(signal: T, method: SignalFunction<CameraFeed[T]>): number;
 

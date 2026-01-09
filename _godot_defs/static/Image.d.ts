@@ -30,13 +30,13 @@ declare class Image extends Resource  {
 data: Dictionary<any, any>;
 
 /** Adjusts this image's [param brightness], [param contrast], and [param saturation] by the given values. Does not work if the image is compressed (see [method is_compressed]). */
-adjust_bcs(): void;
+adjust_bcs(brightness: float, contrast: float, saturation: float): void;
 
 /** Alpha-blends [param src_rect] from [param src] image to this image at coordinates [param dst], clipped accordingly to both image bounds. This image and [param src] image [b]must[/b] have the same format. [param src_rect] with non-positive size is treated as empty. */
-blend_rect(): void;
+blend_rect(src: Image, src_rect: Rect2i, dst: Vector2i): void;
 
 /** Alpha-blends [param src_rect] from [param src] image to this image using [param mask] image at coordinates [param dst], clipped accordingly to both image bounds. Alpha channels are required for both [param src] and [param mask]. [param dst] pixels and [param src] pixels will blend if the corresponding mask pixel's alpha value is not 0. This image and [param src] image [b]must[/b] have the same format. [param src] image and [param mask] image [b]must[/b] have the same size (width and height) but they can have different formats. [param src_rect] with non-positive size is treated as empty. */
-blend_rect_mask(): void;
+blend_rect_mask(src: Image, mask: Image, src_rect: Rect2i, dst: Vector2i): void;
 
 /**
  * Copies [param src_rect] from [param src] image to this image at coordinates [param dst], clipped accordingly to both image bounds. This image and [param src] image **must** have the same format. [param src_rect] with non-positive size is treated as empty.
@@ -44,13 +44,13 @@ blend_rect_mask(): void;
  * **Note:** The alpha channel data in [param src] will overwrite the corresponding data in this image at the target position. To blend alpha channels, use [method blend_rect] instead.
  *
 */
-blit_rect(): void;
+blit_rect(src: Image, src_rect: Rect2i, dst: Vector2i): void;
 
 /** Blits [param src_rect] area from [param src] image to this image at the coordinates given by [param dst], clipped accordingly to both image bounds. [param src] pixel is copied onto [param dst] if the corresponding [param mask] pixel's alpha value is not 0. This image and [param src] image [b]must[/b] have the same format. [param src] image and [param mask] image [b]must[/b] have the same size (width and height) but they can have different formats. [param src_rect] with non-positive size is treated as empty. */
-blit_rect_mask(): void;
+blit_rect_mask(src: Image, mask: Image, src_rect: Rect2i, dst: Vector2i): void;
 
 /** Converts a bump map to a normal map. A bump map provides a height offset per-pixel, while a normal map provides a normal direction per pixel. */
-bump_map_to_normal_map(): void;
+bump_map_to_normal_map(bump_scale?: float): void;
 
 /** Removes the image's mipmaps. */
 clear_mipmaps(): void;
@@ -65,7 +65,7 @@ clear_mipmaps(): void;
  * **Note:** [method compress] is only supported in editor builds. When run in an exported project, this method always returns [constant ERR_UNAVAILABLE].
  *
 */
-compress(): int;
+compress(mode: int, source?: int, astc_format?: int): int;
 
 /**
  * Compresses the image with a VRAM-compressed format to use less memory. Can not directly access pixel data while the image is compressed. Returns error if the chosen compression mode is not available.
@@ -77,7 +77,7 @@ compress(): int;
  * **Note:** [method compress_from_channels] is only supported in editor builds. When run in an exported project, this method always returns [constant ERR_UNAVAILABLE].
  *
 */
-compress_from_channels(): int;
+compress_from_channels(mode: int, channels: int, astc_format?: int): int;
 
 /**
  * Compute image metrics on the current image and the compared image. This can be used to calculate the similarity between two images.
@@ -85,25 +85,25 @@ compress_from_channels(): int;
  * The dictionary contains `max`, `mean`, `mean_squared`, `root_mean_squared` and `peak_snr`.
  *
 */
-compute_image_metrics(): Dictionary<any, any>;
+compute_image_metrics(compared_image: Image, use_luma: boolean): Dictionary<any, any>;
 
 /** Converts this image's format to the given [param format]. */
-convert(): void;
+convert(format: int): void;
 
 /** Copies [param src] image to this image. */
-copy_from(): void;
+copy_from(src: Image): void;
 
 /** Creates an empty image of the given size and format. If [param use_mipmaps] is [code]true[/code], generates mipmaps for this image (see [method generate_mipmaps]). */
-create(): Image;
+create(width: int, height: int, use_mipmaps: boolean, format: int): Image;
 
 /** Creates an empty image of the given size and format. If [param use_mipmaps] is [code]true[/code], generates mipmaps for this image (see [method generate_mipmaps]). */
-create_empty(): Image;
+create_empty(width: int, height: int, use_mipmaps: boolean, format: int): Image;
 
 /** Creates a new image of the given size and format. Fills the image with the given raw data. If [param use_mipmaps] is [code]true[/code], loads the mipmaps for this image from [param data]. See [method generate_mipmaps]. */
-create_from_data(): Image;
+create_from_data(width: int, height: int, use_mipmaps: boolean, format: int, data: PackedByteArray): Image;
 
 /** Crops the image to the given [param width] and [param height]. If the specified size is larger than the current size, the extra area is filled with black pixels. */
-crop(): void;
+crop(width: int, height: int): void;
 
 /** Decompresses the image if it is VRAM-compressed in a supported format. This increases memory utilization, but allows modifying the image. Returns [constant OK] if the format is supported, otherwise [constant ERR_UNAVAILABLE]. All VRAM-compressed formats supported by Godot can be decompressed with this method, except [constant FORMAT_ETC2_R11S], [constant FORMAT_ETC2_RG11S], and [constant FORMAT_ETC2_RGB8A1]. */
 decompress(): int;
@@ -112,13 +112,13 @@ decompress(): int;
 detect_alpha(): int;
 
 /** Returns the color channels used by this image. If the image is compressed, the original [param source] must be specified. */
-detect_used_channels(): int;
+detect_used_channels(source?: int): int;
 
 /** Fills the image with [param color]. */
-fill(): void;
+fill(color: Color): void;
 
 /** Fills [param rect] with [param color]. */
-fill_rect(): void;
+fill_rect(rect: Rect2i, color: Color): void;
 
 /** Blends low-alpha pixels with nearby pixels. */
 fix_alpha_edges(): void;
@@ -135,7 +135,7 @@ flip_y(): void;
  * It is possible to check if the image has mipmaps by calling [method has_mipmaps] or [method get_mipmap_count]. Calling [method generate_mipmaps] on an image that already has mipmaps will replace existing mipmaps in the image.
  *
 */
-generate_mipmaps(): int;
+generate_mipmaps(renormalize?: boolean): int;
 
 /** Returns a copy of the image's raw data. */
 get_data(): PackedByteArray;
@@ -153,7 +153,7 @@ get_height(): int;
 get_mipmap_count(): int;
 
 /** Returns the offset where the image's mipmap with index [param mipmap] is stored in the [member data] dictionary. */
-get_mipmap_offset(): int;
+get_mipmap_offset(mipmap: int): int;
 
 /**
  * Returns the color of the pixel at `(x, y)`.
@@ -161,7 +161,7 @@ get_mipmap_offset(): int;
  * This is the same as [method get_pixelv], but with two integer arguments instead of a [Vector2i] argument.
  *
 */
-get_pixel(): Color;
+get_pixel(x: int, y: int): Color;
 
 /**
  * Returns the color of the pixel at [param point].
@@ -169,10 +169,10 @@ get_pixel(): Color;
  * This is the same as [method get_pixel], but with a [Vector2i] argument instead of two integer arguments.
  *
 */
-get_pixelv(): Color;
+get_pixelv(point: Vector2i): Color;
 
 /** Returns a new [Image] that is a copy of this [Image]'s area specified with [param region]. */
-get_region(): Image;
+get_region(region: Rect2i): Image;
 
 /** Returns the image's size (width and height). */
 get_size(): Vector2i;
@@ -206,7 +206,7 @@ linear_to_srgb(): void;
  * See also [ImageTexture] description for usage examples.
  *
 */
-load(): int;
+load(path: string): int;
 
 /**
  * Loads an image from the binary contents of a BMP file.
@@ -216,7 +216,7 @@ load(): int;
  * **Note:** This method is only available in engine builds with the BMP module enabled. By default, the BMP module is enabled, but it can be disabled at build-time using the `module_bmp_enabled=no` SCons option.
  *
 */
-load_bmp_from_buffer(): int;
+load_bmp_from_buffer(buffer: PackedByteArray): int;
 
 /**
  * Loads an image from the binary contents of a DDS file.
@@ -224,16 +224,16 @@ load_bmp_from_buffer(): int;
  * **Note:** This method is only available in engine builds with the DDS module enabled. By default, the DDS module is enabled, but it can be disabled at build-time using the `module_dds_enabled=no` SCons option.
  *
 */
-load_dds_from_buffer(): int;
+load_dds_from_buffer(buffer: PackedByteArray): int;
 
 /** Loads an image from the binary contents of an OpenEXR file. */
-load_exr_from_buffer(): int;
+load_exr_from_buffer(buffer: PackedByteArray): int;
 
 /** Creates a new [Image] and loads data from the specified file. */
-load_from_file(): Image;
+load_from_file(path: string): Image;
 
 /** Loads an image from the binary contents of a JPEG file. */
-load_jpg_from_buffer(): int;
+load_jpg_from_buffer(buffer: PackedByteArray): int;
 
 /**
  * Loads an image from the binary contents of a [url=https://github.com/KhronosGroup/KTX-Software]KTX[/url] file. Unlike most image formats, KTX can store VRAM-compressed data and embed mipmaps.
@@ -243,10 +243,10 @@ load_jpg_from_buffer(): int;
  * **Note:** This method is only available in engine builds with the KTX module enabled. By default, the KTX module is enabled, but it can be disabled at build-time using the `module_ktx_enabled=no` SCons option.
  *
 */
-load_ktx_from_buffer(): int;
+load_ktx_from_buffer(buffer: PackedByteArray): int;
 
 /** Loads an image from the binary contents of a PNG file. */
-load_png_from_buffer(): int;
+load_png_from_buffer(buffer: PackedByteArray): int;
 
 /**
  * Loads an image from the UTF-8 binary contents of an **uncompressed** SVG file (**.svg**).
@@ -256,7 +256,7 @@ load_png_from_buffer(): int;
  * **Note:** This method is only available in engine builds with the SVG module enabled. By default, the SVG module is enabled, but it can be disabled at build-time using the `module_svg_enabled=no` SCons option.
  *
 */
-load_svg_from_buffer(): int;
+load_svg_from_buffer(buffer: PackedByteArray, scale?: float): int;
 
 /**
  * Loads an image from the string contents of an SVG file (**.svg**).
@@ -264,7 +264,7 @@ load_svg_from_buffer(): int;
  * **Note:** This method is only available in engine builds with the SVG module enabled. By default, the SVG module is enabled, but it can be disabled at build-time using the `module_svg_enabled=no` SCons option.
  *
 */
-load_svg_from_string(): int;
+load_svg_from_string(svg_str: string, scale?: float): int;
 
 /**
  * Loads an image from the binary contents of a TGA file.
@@ -272,10 +272,10 @@ load_svg_from_string(): int;
  * **Note:** This method is only available in engine builds with the TGA module enabled. By default, the TGA module is enabled, but it can be disabled at build-time using the `module_tga_enabled=no` SCons option.
  *
 */
-load_tga_from_buffer(): int;
+load_tga_from_buffer(buffer: PackedByteArray): int;
 
 /** Loads an image from the binary contents of a WebP file. */
-load_webp_from_buffer(): int;
+load_webp_from_buffer(buffer: PackedByteArray): int;
 
 /** Converts the image's data to represent coordinates on a 3D plane. This is used when the image represents a normal map. A normal map can add lots of detail to a 3D surface without increasing the polygon count. */
 normal_map_to_xy(): void;
@@ -284,16 +284,16 @@ normal_map_to_xy(): void;
 premultiply_alpha(): void;
 
 /** Resizes the image to the given [param width] and [param height]. New pixels are calculated using the [param interpolation] mode defined via [enum Interpolation] constants. */
-resize(): void;
+resize(width: int, height: int, interpolation?: int): void;
 
 /** Resizes the image to the nearest power of 2 for the width and height. If [param square] is [code]true[/code], sets width and height to be the same. New pixels are calculated using the [param interpolation] mode defined via [enum Interpolation] constants. */
-resize_to_po2(): void;
+resize_to_po2(square?: boolean, interpolation?: int): void;
 
 /** Converts a standard linear RGBE (Red Green Blue Exponent) image to an image that uses nonlinear sRGB encoding. */
 rgbe_to_srgb(): Image;
 
 /** Rotates the image in the specified [param direction] by [code]90[/code] degrees. The width and height of the image must be greater than [code]1[/code]. If the width and height are not equal, the image will be resized. */
-rotate_90(): void;
+rotate_90(direction: int): void;
 
 /** Rotates the image by [code]180[/code] degrees. The width and height of the image must be greater than [code]1[/code]. */
 rotate_180(): void;
@@ -304,7 +304,7 @@ rotate_180(): void;
  * **Note:** The DDS module may be disabled in certain builds, which means [method save_dds] will return [constant ERR_UNAVAILABLE] when it is called from an exported project.
  *
 */
-save_dds(): int;
+save_dds(path: string): int;
 
 /**
  * Saves the image as a DDS (DirectDraw Surface) file to a byte array. DDS is a container format that can store textures in various compression formats, such as DXT1, DXT5, or BC7. This function will return an empty byte array if Godot was compiled without the DDS module.
@@ -315,10 +315,10 @@ save_dds(): int;
 save_dds_to_buffer(): PackedByteArray;
 
 /** Saves the image as an EXR file to [param path]. If [param grayscale] is [code]true[/code] and the image has only one channel, it will be saved explicitly as monochrome rather than one red channel. This function will return [constant ERR_UNAVAILABLE] if Godot was compiled without the TinyEXR module. */
-save_exr(): int;
+save_exr(path: string, grayscale?: boolean): int;
 
 /** Saves the image as an EXR file to a byte array. If [param grayscale] is [code]true[/code] and the image has only one channel, it will be saved explicitly as monochrome rather than one red channel. This function will return an empty byte array if Godot was compiled without the TinyEXR module. */
-save_exr_to_buffer(): PackedByteArray;
+save_exr_to_buffer(grayscale?: boolean): PackedByteArray;
 
 /**
  * Saves the image as a JPEG file to [param path] with the specified [param quality] between `0.01` and `1.0` (inclusive). Higher [param quality] values result in better-looking output at the cost of larger file sizes. Recommended [param quality] values are between `0.75` and `0.90`. Even at quality `1.00`, JPEG compression remains lossy.
@@ -326,7 +326,7 @@ save_exr_to_buffer(): PackedByteArray;
  * **Note:** JPEG does not save an alpha channel. If the [Image] contains an alpha channel, the image will still be saved, but the resulting JPEG file won't contain the alpha channel.
  *
 */
-save_jpg(): int;
+save_jpg(path: string, quality?: float): int;
 
 /**
  * Saves the image as a JPEG file to a byte array with the specified [param quality] between `0.01` and `1.0` (inclusive). Higher [param quality] values result in better-looking output at the cost of larger byte array sizes (and therefore memory usage). Recommended [param quality] values are between `0.75` and `0.90`. Even at quality `1.00`, JPEG compression remains lossy.
@@ -334,10 +334,10 @@ save_jpg(): int;
  * **Note:** JPEG does not save an alpha channel. If the [Image] contains an alpha channel, the image will still be saved, but the resulting byte array won't contain the alpha channel.
  *
 */
-save_jpg_to_buffer(): PackedByteArray;
+save_jpg_to_buffer(quality?: float): PackedByteArray;
 
 /** Saves the image as a PNG file to the file at [param path]. */
-save_png(): int;
+save_png(path: string): int;
 
 /** Saves the image as a PNG file to a byte array. */
 save_png_to_buffer(): PackedByteArray;
@@ -348,7 +348,7 @@ save_png_to_buffer(): PackedByteArray;
  * **Note:** The WebP format is limited to a size of 16383×16383 pixels, while PNG can save larger images.
  *
 */
-save_webp(): int;
+save_webp(path: string, lossy?: boolean, quality?: float): int;
 
 /**
  * Saves the image as a WebP (Web Picture) file to a byte array. By default it will save lossless. If [param lossy] is `true`, the image will be saved lossy, using the [param quality] setting between `0.0` and `1.0` (inclusive). Lossless WebP offers more efficient compression than PNG.
@@ -356,10 +356,10 @@ save_webp(): int;
  * **Note:** The WebP format is limited to a size of 16383×16383 pixels, while PNG can save larger images.
  *
 */
-save_webp_to_buffer(): PackedByteArray;
+save_webp_to_buffer(lossy?: boolean, quality?: float): PackedByteArray;
 
 /** Overwrites data of an existing [Image]. Non-static equivalent of [method create_from_data]. */
-set_data(): void;
+set_data(width: int, height: int, use_mipmaps: boolean, format: int, data: PackedByteArray): void;
 
 /**
  * Sets the [Color] of the pixel at `(x, y)` to [param color].
@@ -388,7 +388,7 @@ set_data(): void;
  * **Note:** On grayscale image formats, only the red channel of [param color] is used (and alpha if relevant). The green and blue channels are ignored.
  *
 */
-set_pixel(): void;
+set_pixel(x: int, y: int, color: Color): void;
 
 /**
  * Sets the [Color] of the pixel at [param point] to [param color].
@@ -417,7 +417,7 @@ set_pixel(): void;
  * **Note:** On grayscale image formats, only the red channel of [param color] is used (and alpha if relevant). The green and blue channels are ignored.
  *
 */
-set_pixelv(): void;
+set_pixelv(point: Vector2i, color: Color): void;
 
 /** Shrinks the image by a factor of 2 on each axis (this divides the pixel count by 4). */
 shrink_x2(): void;

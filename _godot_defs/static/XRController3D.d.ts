@@ -33,7 +33,7 @@ declare class XRController3D extends XRNode3D  {
  * **Note:** The current [XRInterface] defines the [param name] for each input. In the case of OpenXR, these are the names of actions in the current action set.
  *
 */
-get_float(): float;
+get_float(name: StringName): float;
 
 /**
  * Returns a [Variant] for the input with the given [param name]. This works for any input type, the variant will be typed according to the actions configuration.
@@ -41,7 +41,7 @@ get_float(): float;
  * **Note:** The current [XRInterface] defines the [param name] for each input. In the case of OpenXR, these are the names of actions in the current action set.
  *
 */
-get_input(): any;
+get_input(name: StringName): any;
 
 /** Returns the hand holding this controller, if known. */
 get_tracker_hand(): int;
@@ -52,7 +52,7 @@ get_tracker_hand(): int;
  * **Note:** The current [XRInterface] defines the [param name] for each input. In the case of OpenXR, these are the names of actions in the current action set.
  *
 */
-get_vector2(): Vector2;
+get_vector2(name: StringName): Vector2;
 
 /**
  * Returns `true` if the button with the given [param name] is pressed.
@@ -60,7 +60,7 @@ get_vector2(): Vector2;
  * **Note:** The current [XRInterface] defines the [param name] for each input. In the case of OpenXR, these are the names of actions in the current action set.
  *
 */
-is_button_pressed(): boolean;
+is_button_pressed(name: StringName): boolean;
 
   connect<T extends SignalsOf<XRController3D>>(signal: T, method: SignalFunction<XRController3D[T]>): number;
 

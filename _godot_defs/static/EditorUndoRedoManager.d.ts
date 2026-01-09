@@ -57,10 +57,10 @@ add_do_method(...args: any[]): void;
  * If this is the first operation, the [param object] will be used to deduce target undo history.
  *
 */
-add_do_property(): void;
+add_do_property(object: Object, property: StringName, value: any): void;
 
 /** Register a reference for "do" that will be erased if the "do" history is lost. This is useful mostly for new nodes created for the "do" call. Do not use for resources. */
-add_do_reference(): void;
+add_do_reference(object: Object): void;
 
 /**
  * Register a method that will be called when the action is undone (i.e. the "undo" action).
@@ -76,10 +76,10 @@ add_undo_method(...args: any[]): void;
  * If this is the first operation, the [param object] will be used to deduce target undo history.
  *
 */
-add_undo_property(): void;
+add_undo_property(object: Object, property: StringName, value: any): void;
 
 /** Register a reference for "undo" that will be erased if the "undo" history is lost. This is useful mostly for nodes removed with the "do" call (not the "undo" call!). */
-add_undo_reference(): void;
+add_undo_reference(object: Object): void;
 
 /**
  * Clears the given undo history. You can clear history for a specific scene, global history, or for all histories at once (except [constant REMOTE_HISTORY]) if [param id] is [constant INVALID_HISTORY].
@@ -97,10 +97,10 @@ add_undo_reference(): void;
  * **Note:** If you want to mark an edited scene as unsaved without clearing its history, use [method EditorInterface.mark_scene_as_unsaved] instead.
  *
 */
-clear_history(): void;
+clear_history(id?: int, increase_version?: boolean): void;
 
 /** Commits the action. If [param execute] is [code]true[/code] (default), all "do" methods/properties are called/set when this function is called. */
-commit_action(): void;
+commit_action(execute?: boolean): void;
 
 /**
  * Create a new action. After this is called, do all your calls to [method add_do_method], [method add_undo_method], [method add_do_property], and [method add_undo_property], then commit the action with [method commit_action].
@@ -114,7 +114,7 @@ commit_action(): void;
  * If [param mark_unsaved] is `false`, the action will not mark the history as unsaved. This is useful for example for actions that change a selection, or a setting that will be saved automatically. Otherwise, this should be left to `true` if the action requires saving by the user or if it can cause data loss when left unsaved.
  *
 */
-create_action(): void;
+create_action(name: string, merge_mode?: int, custom_context?: Object, backward_undo_ops?: boolean, mark_unsaved?: boolean): void;
 
 /**
  * Forces the next operation (e.g. [method add_do_method]) to use the action's history rather than guessing it from the object. This is sometimes needed when a history can't be correctly determined, like for a nested resource that doesn't have a path yet.
@@ -132,10 +132,10 @@ force_fixed_history(): void;
  * Best used with [method get_object_history_id]. This method is only provided in case you need some more advanced methods of [UndoRedo] (but keep in mind that directly operating on the [UndoRedo] object might affect editor's stability).
  *
 */
-get_history_undo_redo(): UndoRedo;
+get_history_undo_redo(id: int): UndoRedo;
 
 /** Returns the history ID deduced from the given [param object]. It can be used with [method get_history_undo_redo]. */
-get_object_history_id(): int;
+get_object_history_id(object: Object): int;
 
 /** Returns [code]true[/code] if the [EditorUndoRedoManager] is currently committing the action, i.e. running its "do" method or property change (see [method commit_action]). */
 is_committing_action(): boolean;

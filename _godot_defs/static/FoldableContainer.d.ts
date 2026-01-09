@@ -54,7 +54,7 @@ title_text_overrun_behavior: int;
  * The control will be added as a child of this container and removed from previous parent if necessary. The controls will be placed aligned to the right, with the first added control being the leftmost one.
  *
 */
-add_title_bar_control(): void;
+add_title_bar_control(control: Control): void;
 
 /** Expands the container and emits [signal folding_changed]. */
 expand(): void;
@@ -63,7 +63,7 @@ expand(): void;
 fold(): void;
 
 /** Removes a [Control] added with [method add_title_bar_control]. The node is not freed automatically, you need to use [method Node.queue_free]. */
-remove_title_bar_control(): void;
+remove_title_bar_control(control: Control): void;
 
   connect<T extends SignalsOf<FoldableContainer>>(signal: T, method: SignalFunction<FoldableContainer[T]>): number;
 

@@ -37,7 +37,7 @@ source_tesselation_evaluation: string;
 source_vertex: string;
 
 /** Returns source code for the specified shader [param stage]. Equivalent to getting one of [member source_compute], [member source_fragment], [member source_tesselation_control], [member source_tesselation_evaluation] or [member source_vertex]. */
-get_stage_source(): string;
+get_stage_source(stage: int): string;
 
 /**
  * Sets [param source] code for the specified shader [param stage]. Equivalent to setting one of [member source_compute], [member source_fragment], [member source_tesselation_control], [member source_tesselation_evaluation] or [member source_vertex].
@@ -45,7 +45,7 @@ get_stage_source(): string;
  * **Note:** If you set the compute shader source code using this method directly, remember to remove the Godot-specific hint `#[compute]`.
  *
 */
-set_stage_source(): void;
+set_stage_source(stage: int, source: string): void;
 
   connect<T extends SignalsOf<RDShaderSource>>(signal: T, method: SignalFunction<RDShaderSource[T]>): number;
 

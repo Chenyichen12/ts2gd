@@ -59,7 +59,7 @@ get_global_name(): StringName;
 get_instance_base_type(): StringName;
 
 /** Returns the default value of the specified property. */
-get_property_default_value(): any;
+get_property_default_value(property: StringName): any;
 
 /** Returns a [Dictionary] mapping method names to their RPC configuration defined by this script. */
 get_rpc_config(): any;
@@ -92,7 +92,7 @@ get_script_property_list(): Dictionary[];
 get_script_signal_list(): Dictionary[];
 
 /** Returns [code]true[/code] if the script, or a base class, defines a signal with the given name. */
-has_script_signal(): boolean;
+has_script_signal(signal_name: StringName): boolean;
 
 /**
  * Returns `true` if the script contains non-empty source code.
@@ -103,7 +103,7 @@ has_script_signal(): boolean;
 has_source_code(): boolean;
 
 /** Returns [code]true[/code] if [param base_object] is an instance of this script. */
-instance_has(): boolean;
+instance_has(base_object: Object): boolean;
 
 /** Returns [code]true[/code] if the script is an abstract script. An abstract script does not have a constructor and cannot be instantiated. */
 is_abstract(): boolean;
@@ -112,7 +112,7 @@ is_abstract(): boolean;
 is_tool(): boolean;
 
 /** Reloads the script's class implementation. Returns an error code. */
-reload(): int;
+reload(keep_state?: boolean): int;
 
   connect<T extends SignalsOf<Script>>(signal: T, method: SignalFunction<Script[T]>): number;
 

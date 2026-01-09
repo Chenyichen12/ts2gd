@@ -33,7 +33,7 @@ declare class ResourceLoaderClass extends Object  {
  * This method is performed implicitly for ResourceFormatLoaders written in GDScript (see [ResourceFormatLoader] for more information).
  *
 */
-add_resource_format_loader(): void;
+add_resource_format_loader(format_loader: ResourceFormatLoader, at_front?: boolean): void;
 
 /**
  * Returns whether a recognized resource exists for the given [param path].
@@ -43,7 +43,7 @@ add_resource_format_loader(): void;
  * **Note:** If you use [method Resource.take_over_path], this method will return `true` for the taken path even if the resource wasn't saved (i.e. exists only in resource cache).
  *
 */
-exists(): boolean;
+exists(path: string, type_hint?: string): boolean;
 
 /**
  * Returns the cached resource reference for the given [param path].
@@ -51,7 +51,7 @@ exists(): boolean;
  * **Note:** If the resource is not cached, the returned [Resource] will be invalid.
  *
 */
-get_cached_ref(): Resource;
+get_cached_ref(path: string): Resource;
 
 /**
  * Returns the dependencies for the resource at the given [param path].
@@ -70,13 +70,13 @@ get_cached_ref(): Resource;
  * 
  *
 */
-get_dependencies(): PackedStringArray;
+get_dependencies(path: string): PackedStringArray;
 
 /** Returns the list of recognized extensions for a resource type. */
-get_recognized_extensions_for_type(): PackedStringArray;
+get_recognized_extensions_for_type(type: string): PackedStringArray;
 
 /** Returns the ID associated with a given resource path, or [code]-1[/code] when no such ID exists. */
-get_resource_uid(): int;
+get_resource_uid(path: string): int;
 
 /**
  * Returns whether a cached resource is available for the given [param path].
@@ -84,7 +84,7 @@ get_resource_uid(): int;
  * Once a resource has been loaded by the engine, it is cached in memory for faster access, and future calls to the [method load] method will use the cached version. The cached resource can be overridden by using [method Resource.take_over_path] on a new resource for that same path.
  *
 */
-has_cached(): boolean;
+has_cached(path: string): boolean;
 
 /**
  * Lists a directory, returning all resources and subdirectories contained within. The resource files have the original file names as visible in the editor before exporting. The directories have `"/"` appended.
@@ -101,7 +101,7 @@ has_cached(): boolean;
  * **Note:** To normally traverse the filesystem, see [DirAccess].
  *
 */
-list_directory(): PackedStringArray;
+list_directory(directory_path: string): PackedStringArray;
 
 /**
  * Loads a resource at the given [param path], caching the result for further access.
@@ -121,7 +121,7 @@ list_directory(): PackedStringArray;
  * **Note:** Relative paths will be prefixed with `"res://"` before loading, to avoid unexpected results make sure your paths are absolute.
  *
 */
-load(): Resource;
+load(path: string, type_hint?: string, cache_mode?: int): Resource;
 
 /**
  * Returns the resource loaded by [method load_threaded_request].
@@ -129,7 +129,7 @@ load(): Resource;
  * If this is called before the loading thread is done (i.e. [method load_threaded_get_status] is not [constant THREAD_LOAD_LOADED]), the calling thread will be blocked until the resource has finished loading. However, it's recommended to use [method load_threaded_get_status] to known when the load has actually completed.
  *
 */
-load_threaded_get(): Resource;
+load_threaded_get(path: string): Resource;
 
 /**
  * Returns the status of a threaded loading operation started with [method load_threaded_request] for the resource at [param path].
@@ -139,7 +139,7 @@ load_threaded_get(): Resource;
  * **Note:** The recommended way of using this method is to call it during different frames (e.g., in [method Node._process], instead of a loop).
  *
 */
-load_threaded_get_status(): int;
+load_threaded_get_status(path: string, progress?: any[]): int;
 
 /**
  * Loads the resource using threads. If [param use_sub_threads] is `true`, multiple threads will be used to load the resource, which makes loading faster, but may affect the main thread (and thus cause game slowdowns).
@@ -147,13 +147,13 @@ load_threaded_get_status(): int;
  * The [param cache_mode] parameter defines whether and how the cache should be used or updated when loading the resource.
  *
 */
-load_threaded_request(): int;
+load_threaded_request(path: string, type_hint?: string, use_sub_threads?: boolean, cache_mode?: int): int;
 
 /** Unregisters the given [ResourceFormatLoader]. */
-remove_resource_format_loader(): void;
+remove_resource_format_loader(format_loader: ResourceFormatLoader): void;
 
 /** Changes the behavior on missing sub-resources. The default behavior is to abort loading. */
-set_abort_on_missing_resources(): void;
+set_abort_on_missing_resources(abort: boolean): void;
 
   connect<T extends SignalsOf<ResourceLoaderClass>>(signal: T, method: SignalFunction<ResourceLoaderClass[T]>): number;
 

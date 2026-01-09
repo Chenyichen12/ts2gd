@@ -33,10 +33,10 @@ z: int;
 abs(): Vector3i;
 
 /** Returns a new vector with all components clamped between the components of [param min] and [param max], by running [method @GlobalScope.clamp] on each component. */
-clamp(): Vector3i;
+clamp(min: Vector3i, max: Vector3i): Vector3i;
 
 /** Returns a new vector with all components clamped between [param min] and [param max], by running [method @GlobalScope.clamp] on each component. */
-clampi(): Vector3i;
+clampi(min: int, max: int): Vector3i;
 
 /**
  * Returns the squared distance between this vector and [param to].
@@ -44,10 +44,10 @@ clampi(): Vector3i;
  * This method runs faster than [method distance_to], so prefer it if you need to compare vectors or need the squared distance for some formula.
  *
 */
-distance_squared_to(): int;
+distance_squared_to(to: Vector3i): int;
 
 /** Returns the distance between this vector and [param to]. */
-distance_to(): float;
+distance_to(to: Vector3i): float;
 
 /** Returns the length (magnitude) of this vector. */
 length(): float;
@@ -61,31 +61,31 @@ length(): float;
 length_squared(): int;
 
 /** Returns the component-wise maximum of this and [param with], equivalent to [code]Vector3i(maxi(x, with.x), maxi(y, with.y), maxi(z, with.z))[/code]. */
-max(): Vector3i;
+max(_with: Vector3i): Vector3i;
 
 /** Returns the axis of the vector's highest value. See [code]AXIS_*[/code] constants. If all components are equal, this method returns [constant AXIS_X]. */
 max_axis_index(): int;
 
 /** Returns the component-wise maximum of this and [param with], equivalent to [code]Vector3i(maxi(x, with), maxi(y, with), maxi(z, with))[/code]. */
-maxi(): Vector3i;
+maxi(_with: int): Vector3i;
 
 /** Returns the component-wise minimum of this and [param with], equivalent to [code]Vector3i(mini(x, with.x), mini(y, with.y), mini(z, with.z))[/code]. */
-min(): Vector3i;
+min(_with: Vector3i): Vector3i;
 
 /** Returns the axis of the vector's lowest value. See [code]AXIS_*[/code] constants. If all components are equal, this method returns [constant AXIS_Z]. */
 min_axis_index(): int;
 
 /** Returns the component-wise minimum of this and [param with], equivalent to [code]Vector3i(mini(x, with), mini(y, with), mini(z, with))[/code]. */
-mini(): Vector3i;
+mini(_with: int): Vector3i;
 
 /** Returns a new vector with each component set to [code]1[/code] if it's positive, [code]-1[/code] if it's negative, and [code]0[/code] if it's zero. The result is identical to calling [method @GlobalScope.sign] on each component. */
 sign(): Vector3i;
 
 /** Returns a new vector with each component snapped to the closest multiple of the corresponding component in [param step]. */
-snapped(): Vector3i;
+snapped(step: Vector3i): Vector3i;
 
 /** Returns a new vector with each component snapped to the closest multiple of [param step]. */
-snappedi(): Vector3i;
+snappedi(step: int): Vector3i;
 
   connect<T extends SignalsOf<Vector3i>>(signal: T, method: SignalFunction<Vector3i[T]>): number;
 

@@ -13,7 +13,7 @@
  * **Note:** Due to the lower precision of [method Color8] compared to the standard [Color] constructor, a color created with [method Color8] will generally not be equal to the same color created with the standard [Color] constructor. Use [method Color.is_equal_approx] for comparisons to avoid issues with floating-point precision error.
  *
 */
-declare const Color8: () => Color
+declare const Color8: (r8: int, g8: int, b8: int, a8?: int) => Color
     
     
 /**
@@ -37,7 +37,7 @@ declare const Color8: () => Color
  * **Note:** [method assert] is a keyword, not a function. So you cannot access it as a [Callable] or use it inside expressions.
  *
 */
-declare const assert: () => asserts condition
+declare const assert: (condition: boolean, message?: string) => asserts condition
     
     
 /**
@@ -53,7 +53,7 @@ declare const assert: () => asserts condition
  * This is the inverse of [method ord]. See also [method String.chr] and [method String.unicode_at].
  *
 */
-declare const char: () => string
+declare const char: (code: int) => string
     
     
 /**
@@ -70,11 +70,11 @@ declare const char: () => string
  * 
  *
 */
-declare const convert: () => any
+declare const convert: (what: any, type: int) => any
     
     
 /** Converts a [param dictionary] (created with [method inst_to_dict]) back to an Object instance. Can be useful for deserializing. */
-declare const dict_to_inst: () => Object
+declare const dict_to_inst: (dictionary: Dictionary<any, any>) => Object
     
     
 /**
@@ -137,7 +137,7 @@ declare const get_stack: () => any[]
  * **Note:** This function is not recursive, which means that nested objects will not be represented as dictionaries. Also, properties passed by reference ([Object], [Dictionary], [Array], and packed arrays) are copied by reference, not duplicated.
  *
 */
-declare const inst_to_dict: () => Dictionary<any, any>
+declare const inst_to_dict: (instance: Object) => Dictionary<any, any>
     
     
 /**
@@ -167,7 +167,7 @@ declare const inst_to_dict: () => Dictionary<any, any>
  * See also [method @GlobalScope.typeof], [method type_exists], [method Array.is_same_typed] (and other [Array] methods).
  *
 */
-declare const is_instance_of: () => boolean
+declare const is_instance_of: (value: any, type: any) => boolean
     
     
 /**
@@ -183,7 +183,7 @@ declare const is_instance_of: () => boolean
  * 
  *
 */
-declare const len: () => int
+declare const len: (_var: any) => int
     
     
 /**
@@ -199,7 +199,7 @@ declare const len: () => int
  * This is the inverse of [method char]. See also [method String.chr] and [method String.unicode_at].
  *
 */
-declare const ord: () => int
+declare const ord: (char: string) => int
     
     
 /**
@@ -328,6 +328,6 @@ declare const range: (...args: any[]) => any[]
  * 
  *
 */
-declare const type_exists: () => boolean
+declare const type_exists: (type: StringName) => boolean
     
     

@@ -58,91 +58,91 @@ mutable_bone_axes: boolean;
 setting_count: int;
 
 /** Returns [code]true[/code] if all child [SpringBoneCollision3D]s are contained in the collision list at [param index] in the settings. */
-are_all_child_collisions_enabled(): boolean;
+are_all_child_collisions_enabled(index: int): boolean;
 
 /** Clears all collisions from the collision list at [param index] in the settings when [method are_all_child_collisions_enabled] is [code]false[/code]. */
-clear_collisions(): void;
+clear_collisions(index: int): void;
 
 /** Clears all exclude collisions from the collision list at [param index] in the settings when [method are_all_child_collisions_enabled] is [code]true[/code]. */
-clear_exclude_collisions(): void;
+clear_exclude_collisions(index: int): void;
 
 /** Clears all settings. */
 clear_settings(): void;
 
 /** Returns the center bone index of the bone chain. */
-get_center_bone(): int;
+get_center_bone(index: int): int;
 
 /** Returns the center bone name of the bone chain. */
-get_center_bone_name(): string;
+get_center_bone_name(index: int): string;
 
 /** Returns what the center originates from in the bone chain. */
-get_center_from(): int;
+get_center_from(index: int): int;
 
 /** Returns the center node path of the bone chain. */
-get_center_node(): NodePathType;
+get_center_node(index: int): NodePathType;
 
 /** Returns the collision count of the bone chain's collision list when [method are_all_child_collisions_enabled] is [code]false[/code]. */
-get_collision_count(): int;
+get_collision_count(index: int): int;
 
 /** Returns the node path of the [SpringBoneCollision3D] at [param collision] in the bone chain's collision list when [method are_all_child_collisions_enabled] is [code]false[/code]. */
-get_collision_path(): NodePathType;
+get_collision_path(index: int, collision: int): NodePathType;
 
 /** Returns the drag force damping curve of the bone chain. */
-get_drag(): float;
+get_drag(index: int): float;
 
 /** Returns the drag force damping curve of the bone chain. */
-get_drag_damping_curve(): Curve;
+get_drag_damping_curve(index: int): Curve;
 
 /** Returns the end bone index of the bone chain. */
-get_end_bone(): int;
+get_end_bone(index: int): int;
 
 /** Returns the tail direction of the end bone of the bone chain when [method is_end_bone_extended] is [code]true[/code]. */
-get_end_bone_direction(): int;
+get_end_bone_direction(index: int): int;
 
 /** Returns the end bone tail length of the bone chain when [method is_end_bone_extended] is [code]true[/code]. */
-get_end_bone_length(): float;
+get_end_bone_length(index: int): float;
 
 /** Returns the end bone name of the bone chain. */
-get_end_bone_name(): string;
+get_end_bone_name(index: int): string;
 
 /** Returns the exclude collision count of the bone chain's exclude collision list when [method are_all_child_collisions_enabled] is [code]true[/code]. */
-get_exclude_collision_count(): int;
+get_exclude_collision_count(index: int): int;
 
 /** Returns the node path of the [SpringBoneCollision3D] at [param collision] in the bone chain's exclude collision list when [method are_all_child_collisions_enabled] is [code]true[/code]. */
-get_exclude_collision_path(): NodePathType;
+get_exclude_collision_path(index: int, collision: int): NodePathType;
 
 /** Returns the gravity amount of the bone chain. */
-get_gravity(): float;
+get_gravity(index: int): float;
 
 /** Returns the gravity amount damping curve of the bone chain. */
-get_gravity_damping_curve(): Curve;
+get_gravity_damping_curve(index: int): Curve;
 
 /** Returns the gravity direction of the bone chain. */
-get_gravity_direction(): Vector3;
+get_gravity_direction(index: int): Vector3;
 
 /** Returns the bone index at [param joint] in the bone chain's joint list. */
-get_joint_bone(): int;
+get_joint_bone(index: int, joint: int): int;
 
 /** Returns the bone name at [param joint] in the bone chain's joint list. */
-get_joint_bone_name(): string;
+get_joint_bone_name(index: int, joint: int): string;
 
 /** Returns the joint count of the bone chain's joint list. */
-get_joint_count(): int;
+get_joint_count(index: int): int;
 
 /** Returns the drag force at [param joint] in the bone chain's joint list. */
-get_joint_drag(): float;
+get_joint_drag(index: int, joint: int): float;
 
 /** Returns the gravity amount at [param joint] in the bone chain's joint list. */
-get_joint_gravity(): float;
+get_joint_gravity(index: int, joint: int): float;
 
 /** Returns the gravity direction at [param joint] in the bone chain's joint list. */
-get_joint_gravity_direction(): Vector3;
+get_joint_gravity_direction(index: int, joint: int): Vector3;
 
 /** Returns the radius at [param joint] in the bone chain's joint list. */
-get_joint_radius(): float;
+get_joint_radius(index: int, joint: int): float;
 
 /** Returns the rotation axis at [param joint] in the bone chain's joint list. */
-get_joint_rotation_axis(): int;
+get_joint_rotation_axis(index: int, joint: int): int;
 
 /**
  * Returns the rotation axis vector for the specified joint in the bone chain. This vector represents the axis around which the joint can rotate. It is determined based on the rotation axis set for the joint.
@@ -150,25 +150,25 @@ get_joint_rotation_axis(): int;
  * If [method get_joint_rotation_axis] is [constant SkeletonModifier3D.ROTATION_AXIS_ALL], this method returns `Vector3(0, 0, 0)`.
  *
 */
-get_joint_rotation_axis_vector(): Vector3;
+get_joint_rotation_axis_vector(index: int, joint: int): Vector3;
 
 /** Returns the stiffness force at [param joint] in the bone chain's joint list. */
-get_joint_stiffness(): float;
+get_joint_stiffness(index: int, joint: int): float;
 
 /** Returns the joint radius of the bone chain. */
-get_radius(): float;
+get_radius(index: int): float;
 
 /** Returns the joint radius damping curve of the bone chain. */
-get_radius_damping_curve(): Curve;
+get_radius_damping_curve(index: int): Curve;
 
 /** Returns the root bone index of the bone chain. */
-get_root_bone(): int;
+get_root_bone(index: int): int;
 
 /** Returns the root bone name of the bone chain. */
-get_root_bone_name(): string;
+get_root_bone_name(index: int): string;
 
 /** Returns the rotation axis of the bone chain. */
-get_rotation_axis(): int;
+get_rotation_axis(index: int): int;
 
 /**
  * Returns the rotation axis vector of the bone chain. This vector represents the axis around which the bone chain can rotate. It is determined based on the rotation axis set for the bone chain.
@@ -176,19 +176,19 @@ get_rotation_axis(): int;
  * If [method get_rotation_axis] is [constant SkeletonModifier3D.ROTATION_AXIS_ALL], this method returns `Vector3(0, 0, 0)`.
  *
 */
-get_rotation_axis_vector(): Vector3;
+get_rotation_axis_vector(index: int): Vector3;
 
 /** Returns the stiffness force of the bone chain. */
-get_stiffness(): float;
+get_stiffness(index: int): float;
 
 /** Returns the stiffness force damping curve of the bone chain. */
-get_stiffness_damping_curve(): Curve;
+get_stiffness_damping_curve(index: int): Curve;
 
 /** Returns [code]true[/code] if the config can be edited individually for each joint. */
-is_config_individual(): boolean;
+is_config_individual(index: int): boolean;
 
 /** Returns [code]true[/code] if the end bone is extended to have a tail. */
-is_end_bone_extended(): boolean;
+is_end_bone_extended(index: int): boolean;
 
 /**
  * Resets a simulating state with respect to the current bone pose.
@@ -199,10 +199,10 @@ is_end_bone_extended(): boolean;
 reset(): void;
 
 /** Sets the center bone index of the bone chain. */
-set_center_bone(): void;
+set_center_bone(index: int, bone: int): void;
 
 /** Sets the center bone name of the bone chain. */
-set_center_bone_name(): void;
+set_center_bone_name(index: int, bone_name: string): void;
 
 /**
  * Sets what the center originates from in the bone chain.
@@ -214,16 +214,16 @@ set_center_bone_name(): void;
  * In this case, only a change in the bone pose is considered to be a bone movement.
  *
 */
-set_center_from(): void;
+set_center_from(index: int, center_from: int): void;
 
 /** Sets the center node path of the bone chain. */
-set_center_node(): void;
+set_center_node(index: int, node_path: NodePathType): void;
 
 /** Sets the number of collisions in the collision list at [param index] in the settings when [method are_all_child_collisions_enabled] is [code]false[/code]. */
-set_collision_count(): void;
+set_collision_count(index: int, count: int): void;
 
 /** Sets the node path of the [SpringBoneCollision3D] at [param collision] in the bone chain's collision list when [method are_all_child_collisions_enabled] is [code]false[/code]. */
-set_collision_path(): void;
+set_collision_path(index: int, collision: int, node_path: NodePathType): void;
 
 /**
  * Sets the drag force of the bone chain. The greater the value, the more suppressed the wiggling.
@@ -231,10 +231,10 @@ set_collision_path(): void;
  * The value is scaled by [method set_drag_damping_curve] and cached in each joint setting in the joint list.
  *
 */
-set_drag(): void;
+set_drag(index: int, drag: float): void;
 
 /** Sets the drag force damping curve of the bone chain. */
-set_drag_damping_curve(): void;
+set_drag_damping_curve(index: int, curve: Curve): void;
 
 /**
  * If [param enabled] is `true`, all child [SpringBoneCollision3D]s are colliding and [method set_exclude_collision_path] is enabled as an exclusion list at [param index] in the settings.
@@ -242,16 +242,16 @@ set_drag_damping_curve(): void;
  * If [param enabled] is `false`, you need to manually register all valid collisions with [method set_collision_path].
  *
 */
-set_enable_all_child_collisions(): void;
+set_enable_all_child_collisions(index: int, enabled: boolean): void;
 
 /** Sets the end bone index of the bone chain. */
-set_end_bone(): void;
+set_end_bone(index: int, bone: int): void;
 
 /** Sets the end bone tail direction of the bone chain when [method is_end_bone_extended] is [code]true[/code]. */
-set_end_bone_direction(): void;
+set_end_bone_direction(index: int, bone_direction: int): void;
 
 /** Sets the end bone tail length of the bone chain when [method is_end_bone_extended] is [code]true[/code]. */
-set_end_bone_length(): void;
+set_end_bone_length(index: int, length: float): void;
 
 /**
  * Sets the end bone name of the bone chain.
@@ -259,13 +259,13 @@ set_end_bone_length(): void;
  * **Note:** End bone must be the root bone or a child of the root bone. If they are the same, the tail must be extended by [method set_extend_end_bone] to jiggle the bone.
  *
 */
-set_end_bone_name(): void;
+set_end_bone_name(index: int, bone_name: string): void;
 
 /** Sets the number of exclude collisions in the exclude collision list at [param index] in the settings when [method are_all_child_collisions_enabled] is [code]true[/code]. */
-set_exclude_collision_count(): void;
+set_exclude_collision_count(index: int, count: int): void;
 
 /** Sets the node path of the [SpringBoneCollision3D] at [param collision] in the bone chain's exclude collision list when [method are_all_child_collisions_enabled] is [code]true[/code]. */
-set_exclude_collision_path(): void;
+set_exclude_collision_path(index: int, collision: int, node_path: NodePathType): void;
 
 /**
  * If [param enabled] is `true`, the end bone is extended to have a tail.
@@ -273,7 +273,7 @@ set_exclude_collision_path(): void;
  * The extended tail config is allocated to the last element in the joint list. In other words, if you set [param enabled] to `false`, the config of the last element in the joint list has no effect in the simulated result.
  *
 */
-set_extend_end_bone(): void;
+set_extend_end_bone(index: int, enabled: boolean): void;
 
 /**
  * Sets the gravity amount of the bone chain. This value is not an acceleration, but a constant velocity of movement in [method set_gravity_direction].
@@ -283,10 +283,10 @@ set_extend_end_bone(): void;
  * The value is scaled by [method set_gravity_damping_curve] and cached in each joint setting in the joint list.
  *
 */
-set_gravity(): void;
+set_gravity(index: int, gravity: float): void;
 
 /** Sets the gravity amount damping curve of the bone chain. */
-set_gravity_damping_curve(): void;
+set_gravity_damping_curve(index: int, curve: Curve): void;
 
 /**
  * Sets the gravity direction of the bone chain. This value is internally normalized and then multiplied by [method set_gravity].
@@ -294,22 +294,22 @@ set_gravity_damping_curve(): void;
  * The value is cached in each joint setting in the joint list.
  *
 */
-set_gravity_direction(): void;
+set_gravity_direction(index: int, gravity_direction: Vector3): void;
 
 /** If [param enabled] is [code]true[/code], the config can be edited individually for each joint. */
-set_individual_config(): void;
+set_individual_config(index: int, enabled: boolean): void;
 
 /** Sets the drag force at [param joint] in the bone chain's joint list when [method is_config_individual] is [code]true[/code]. */
-set_joint_drag(): void;
+set_joint_drag(index: int, joint: int, drag: float): void;
 
 /** Sets the gravity amount at [param joint] in the bone chain's joint list when [method is_config_individual] is [code]true[/code]. */
-set_joint_gravity(): void;
+set_joint_gravity(index: int, joint: int, gravity: float): void;
 
 /** Sets the gravity direction at [param joint] in the bone chain's joint list when [method is_config_individual] is [code]true[/code]. */
-set_joint_gravity_direction(): void;
+set_joint_gravity_direction(index: int, joint: int, gravity_direction: Vector3): void;
 
 /** Sets the joint radius at [param joint] in the bone chain's joint list when [method is_config_individual] is [code]true[/code]. */
-set_joint_radius(): void;
+set_joint_radius(index: int, joint: int, radius: float): void;
 
 /**
  * Sets the rotation axis at [param joint] in the bone chain's joint list when [method is_config_individual] is `true`.
@@ -319,7 +319,7 @@ set_joint_radius(): void;
  * **Note:** The rotation axis and the forward vector shouldn't be colinear to avoid unintended rotation since [SpringBoneSimulator3D] does not factor in twisting forces.
  *
 */
-set_joint_rotation_axis(): void;
+set_joint_rotation_axis(index: int, joint: int, axis: int): void;
 
 /**
  * Sets the rotation axis vector for the specified joint in the bone chain.
@@ -329,10 +329,10 @@ set_joint_rotation_axis(): void;
  * If the vector length is `0`, it is considered synonymous with [constant SkeletonModifier3D.ROTATION_AXIS_ALL].
  *
 */
-set_joint_rotation_axis_vector(): void;
+set_joint_rotation_axis_vector(index: int, joint: int, vector: Vector3): void;
 
 /** Sets the stiffness force at [param joint] in the bone chain's joint list when [method is_config_individual] is [code]true[/code]. */
-set_joint_stiffness(): void;
+set_joint_stiffness(index: int, joint: int, stiffness: float): void;
 
 /**
  * Sets the joint radius of the bone chain. It is used to move and slide with the [SpringBoneCollision3D] in the collision list.
@@ -340,16 +340,16 @@ set_joint_stiffness(): void;
  * The value is scaled by [method set_radius_damping_curve] and cached in each joint setting in the joint list.
  *
 */
-set_radius(): void;
+set_radius(index: int, radius: float): void;
 
 /** Sets the joint radius damping curve of the bone chain. */
-set_radius_damping_curve(): void;
+set_radius_damping_curve(index: int, curve: Curve): void;
 
 /** Sets the root bone index of the bone chain. */
-set_root_bone(): void;
+set_root_bone(index: int, bone: int): void;
 
 /** Sets the root bone name of the bone chain. */
-set_root_bone_name(): void;
+set_root_bone_name(index: int, bone_name: string): void;
 
 /**
  * Sets the rotation axis of the bone chain. If set to a specific axis, it acts like a hinge joint. The value is cached in each joint setting in the joint list.
@@ -359,7 +359,7 @@ set_root_bone_name(): void;
  * **Note:** The rotation axis vector and the forward vector shouldn't be colinear to avoid unintended rotation since [SpringBoneSimulator3D] does not factor in twisting forces.
  *
 */
-set_rotation_axis(): void;
+set_rotation_axis(index: int, axis: int): void;
 
 /**
  * Sets the rotation axis vector of the bone chain. The value is cached in each joint setting in the joint list.
@@ -369,7 +369,7 @@ set_rotation_axis(): void;
  * If the vector length is `0`, it is considered synonymous with [constant SkeletonModifier3D.ROTATION_AXIS_ALL].
  *
 */
-set_rotation_axis_vector(): void;
+set_rotation_axis_vector(index: int, vector: Vector3): void;
 
 /**
  * Sets the stiffness force of the bone chain. The greater the value, the faster it recovers to its initial pose.
@@ -379,10 +379,10 @@ set_rotation_axis_vector(): void;
  * The value is scaled by [method set_stiffness_damping_curve] and cached in each joint setting in the joint list.
  *
 */
-set_stiffness(): void;
+set_stiffness(index: int, stiffness: float): void;
 
 /** Sets the stiffness force damping curve of the bone chain. */
-set_stiffness_damping_curve(): void;
+set_stiffness_damping_curve(index: int, curve: Curve): void;
 
   connect<T extends SignalsOf<SpringBoneSimulator3D>>(signal: T, method: SignalFunction<SpringBoneSimulator3D[T]>): number;
 

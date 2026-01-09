@@ -312,7 +312,7 @@ export const parsePropertyDeclaration = (
   //     decsType = typeName;
   //   }
   // }
-  decsType = decsType ?? "Object"
+  decsType = decsType ?? typeName
 
   // if (decsType == undefined || decsType == null) {
   //   var ignoreTypeUse = props.ignoreTypeUses.find(
@@ -326,6 +326,11 @@ export const parsePropertyDeclaration = (
   //   }
   // }
 
+  // check is static property
+  const isStatic = node.modifiers?.some(
+    (mod) => mod.kind === ts.SyntaxKind.StaticKeyword
+  )
+
   return combine({
     parent: node,
     nodes: [node.initializer, node.name],
@@ -333,7 +338,7 @@ export const parsePropertyDeclaration = (
     parsedStrings: (initializer, name) => {
       return `
 ${decsText}
-var ${name}: ${decsType}${initializer ? ` = ${initializer}` : ""}
+${isStatic ? "static " : ""}var ${name}: ${decsType}${initializer ? ` = ${initializer}` : ""}
       `
     },
   })

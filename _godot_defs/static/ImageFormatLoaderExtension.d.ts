@@ -23,7 +23,7 @@ declare class ImageFormatLoaderExtension extends ImageFormatLoader  {
 protected _get_recognized_extensions(): PackedStringArray;
 
 /** Loads the content of [param fileaccess] into the provided [param image]. */
-protected _load_image(): int;
+protected _load_image(image: Image, fileaccess: FileAccess, flags: int, scale: float): int;
 
 /** Add this format loader to the engine, allowing it to recognize the file extensions returned by [method _get_recognized_extensions]. */
 add_format_loader(): void;

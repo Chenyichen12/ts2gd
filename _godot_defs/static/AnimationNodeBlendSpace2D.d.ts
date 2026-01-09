@@ -52,37 +52,37 @@ x_label: string;
 y_label: string;
 
 /** Adds a new point that represents a [param node] at the position set by [param pos]. You can insert it at a specific index using the [param at_index] argument. If you use the default value for [param at_index], the point is inserted at the end of the blend points array. */
-add_blend_point(): void;
+add_blend_point(node: AnimationRootNode, pos: Vector2, at_index?: int): void;
 
 /** Creates a new triangle using three points [param x], [param y], and [param z]. Triangles can overlap. You can insert the triangle at a specific index using the [param at_index] argument. If you use the default value for [param at_index], the point is inserted at the end of the blend points array. */
-add_triangle(): void;
+add_triangle(x: int, y: int, z: int, at_index?: int): void;
 
 /** Returns the number of points in the blend space. */
 get_blend_point_count(): int;
 
 /** Returns the [AnimationRootNode] referenced by the point at index [param point]. */
-get_blend_point_node(): AnimationRootNode;
+get_blend_point_node(point: int): AnimationRootNode;
 
 /** Returns the position of the point at index [param point]. */
-get_blend_point_position(): Vector2;
+get_blend_point_position(point: int): Vector2;
 
 /** Returns the number of triangles in the blend space. */
 get_triangle_count(): int;
 
 /** Returns the position of the point at index [param point] in the triangle of index [param triangle]. */
-get_triangle_point(): int;
+get_triangle_point(triangle: int, point: int): int;
 
 /** Removes the point at index [param point] from the blend space. */
-remove_blend_point(): void;
+remove_blend_point(point: int): void;
 
 /** Removes the triangle at index [param triangle] from the blend space. */
-remove_triangle(): void;
+remove_triangle(triangle: int): void;
 
 /** Changes the [AnimationNode] referenced by the point at index [param point]. */
-set_blend_point_node(): void;
+set_blend_point_node(point: int, node: AnimationRootNode): void;
 
 /** Updates the position of the point at index [param point] in the blend space. */
-set_blend_point_position(): void;
+set_blend_point_position(point: int, pos: Vector2): void;
 
   connect<T extends SignalsOf<AnimationNodeBlendSpace2D>>(signal: T, method: SignalFunction<AnimationNodeBlendSpace2D[T]>): number;
 

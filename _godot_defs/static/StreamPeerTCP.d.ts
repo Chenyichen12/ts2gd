@@ -25,10 +25,10 @@ declare class StreamPeerTCP extends StreamPeerSocket  {
  * This method is generally not needed, and only used to force the subsequent call to [method connect_to_host] to use the specified [param host] and [param port] as source address. This can be desired in some NAT punchthrough techniques, or when forcing the source network interface.
  *
 */
-bind(): int;
+bind(port: int, host?: string): int;
 
 /** Connects to the specified [code]host:port[/code] pair. A hostname will be resolved if valid. Returns [constant OK] on success. */
-connect_to_host(): int;
+connect_to_host(host: string, port: int): int;
 
 /** Returns the IP of this peer. */
 get_connected_host(): string;
@@ -45,7 +45,7 @@ get_local_port(): int;
  * **Note:** It's recommended to leave this disabled for applications that send large packets or need to transfer a lot of data, as enabling this can decrease the total available bandwidth.
  *
 */
-set_no_delay(): void;
+set_no_delay(enabled: boolean): void;
 
   connect<T extends SignalsOf<StreamPeerTCP>>(signal: T, method: SignalFunction<StreamPeerTCP[T]>): number;
 

@@ -60,7 +60,7 @@ sliders_visible: boolean;
  * **Note:** The presets list is only for **this** color picker.
  *
 */
-add_preset(): void;
+add_preset(color: Color): void;
 
 /**
  * Adds the given color to a list of color recent presets so that it can be picked later. Recent presets are the colors that were picked recently, a new preset is automatically created and added to recent presets when you pick a new color.
@@ -68,13 +68,13 @@ add_preset(): void;
  * **Note:** The recent presets list is only for **this** color picker.
  *
 */
-add_recent_preset(): void;
+add_recent_preset(color: Color): void;
 
 /** Removes the given color from the list of color presets of this color picker. */
-erase_preset(): void;
+erase_preset(color: Color): void;
 
 /** Removes the given color from the list of color recent presets of this color picker. */
-erase_recent_preset(): void;
+erase_recent_preset(color: Color): void;
 
 /** Returns the list of colors in the presets of the color picker. */
 get_presets(): PackedColorArray;

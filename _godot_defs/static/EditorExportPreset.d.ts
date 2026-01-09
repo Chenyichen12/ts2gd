@@ -52,7 +52,7 @@ get_export_filter(): int;
 get_export_path(): string;
 
 /** Returns file export mode for the specified file. */
-get_file_export_mode(): int;
+get_file_export_mode(path: string, _default?: int): int;
 
 /** Returns array of files to export. */
 get_files_to_export(): PackedStringArray;
@@ -61,7 +61,7 @@ get_files_to_export(): PackedStringArray;
 get_include_filter(): string;
 
 /** Returns export option value or value of environment variable if it is set. */
-get_or_env(): any;
+get_or_env(name: StringName, env_var: string): any;
 
 /** Returns the list of packs on which to base a patch export on. */
 get_patches(): PackedStringArray;
@@ -70,7 +70,7 @@ get_patches(): PackedStringArray;
 get_preset_name(): string;
 
 /** Returns the value of the setting identified by [param name] using export preset feature tag overrides instead of current OS features. */
-get_project_setting(): any;
+get_project_setting(name: StringName): any;
 
 /** Returns the export mode used by GDScript files. [code]0[/code] for "Text", [code]1[/code] for "Binary tokens", and [code]2[/code] for "Compressed binary tokens (smaller files)". */
 get_script_export_mode(): int;
@@ -81,13 +81,13 @@ get_script_export_mode(): int;
  * If [param windows_version] is `true`, formats the returned version number to be compatible with Windows executable metadata.
  *
 */
-get_version(): string;
+get_version(name: StringName, windows_version: boolean): string;
 
 /** Returns [code]true[/code] if the preset has the property named [param property]. */
-has(): boolean;
+has(property: StringName): boolean;
 
 /** Returns [code]true[/code] if the file at the specified [param path] will be exported. */
-has_export_file(): boolean;
+has_export_file(path: string): boolean;
 
 /** Returns [code]true[/code] if the dedicated server export mode is selected in the export dialog. */
 is_dedicated_server(): boolean;

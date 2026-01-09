@@ -159,7 +159,7 @@ bind(): Callable;
  * **Note:** When this method is chained with other similar methods, the order in which the argument list is modified is read from right to left.
  *
 */
-bindv(): Callable;
+bindv(arguments: any[]): Callable;
 
 /** Calls the method represented by this [Callable]. Arguments can be passed and should match the method's signature. */
 call(): any;
@@ -190,7 +190,7 @@ call(): any;
 call_deferred(): void;
 
 /** Calls the method represented by this [Callable]. Unlike [method call], this method expects all arguments to be contained inside the [param arguments] [Array]. */
-callv(): any;
+callv(arguments: any[]): any;
 
 /**
  * Creates a new [Callable] for the method named [param method] in the specified [param variant]. To represent a method of a built-in [Variant] type, a custom callable is used (see [method is_custom]). If [param variant] is [Object], then a standard callable will be created instead.
@@ -198,7 +198,7 @@ callv(): any;
  * **Note:** This method is always necessary for the [Dictionary] type, as property syntax is used to access its entries. You may also use this method when [param variant]'s type is not known in advance (for polymorphism).
  *
 */
-create(): Callable;
+create(variant: any, method: StringName): Callable;
 
 /** Returns the total number of arguments this [Callable] should take, including optional arguments. This means that any arguments bound with [method bind] are [i]subtracted[/i] from the result, and any arguments unbound with [method unbind] are [i]added[/i] to the result. */
 get_argument_count(): int;
@@ -298,7 +298,7 @@ is_valid(): boolean;
  * 
  *
 */
-unbind(): Callable;
+unbind(argcount: int): Callable;
 
   connect<T extends SignalsOf<Callable>>(signal: T, method: SignalFunction<Callable[T]>): number;
 

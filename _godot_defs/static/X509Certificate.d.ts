@@ -20,13 +20,13 @@ declare class X509Certificate extends Resource  {
 
 
 /** Loads a certificate from [param path] ("*.crt" file). */
-load(): int;
+load(path: string): int;
 
 /** Loads a certificate from the given [param string]. */
-load_from_string(): int;
+load_from_string(string: string): int;
 
 /** Saves a certificate to the given [param path] (should be a "*.crt" file). */
-save(): int;
+save(path: string): int;
 
 /** Returns a string representation of the certificate, or an empty string if the certificate is invalid. */
 save_to_string(): string;

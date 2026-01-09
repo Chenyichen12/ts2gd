@@ -79,10 +79,10 @@ simulation_precision: int;
 total_mass: float;
 
 /** Adds a body to the list of bodies that this body can't collide with. */
-add_collision_exception_with(): void;
+add_collision_exception_with(body: Node): void;
 
 /** Distributes and applies a force to all points. A force is time dependent and meant to be applied every physics update. */
-apply_central_force(): void;
+apply_central_force(force: Vector3): void;
 
 /**
  * Distributes and applies an impulse to all points.
@@ -90,10 +90,10 @@ apply_central_force(): void;
  * An impulse is time-independent! Applying an impulse every frame would result in a framerate-dependent force. For this reason, it should only be used when simulating one-time impacts (use the "_force" functions otherwise).
  *
 */
-apply_central_impulse(): void;
+apply_central_impulse(impulse: Vector3): void;
 
 /** Applies a force to a point. A force is time dependent and meant to be applied every physics update. */
-apply_force(): void;
+apply_force(point_index: int, force: Vector3): void;
 
 /**
  * Applies an impulse to a point.
@@ -101,37 +101,37 @@ apply_force(): void;
  * An impulse is time-independent! Applying an impulse every frame would result in a framerate-dependent force. For this reason, it should only be used when simulating one-time impacts (use the "_force" functions otherwise).
  *
 */
-apply_impulse(): void;
+apply_impulse(point_index: int, impulse: Vector3): void;
 
 /** Returns an array of nodes that were added as collision exceptions for this body. */
 get_collision_exceptions(): PhysicsBody3D[];
 
 /** Returns whether or not the specified layer of the [member collision_layer] is enabled, given a [param layer_number] between 1 and 32. */
-get_collision_layer_value(): boolean;
+get_collision_layer_value(layer_number: int): boolean;
 
 /** Returns whether or not the specified layer of the [member collision_mask] is enabled, given a [param layer_number] between 1 and 32. */
-get_collision_mask_value(): boolean;
+get_collision_mask_value(layer_number: int): boolean;
 
 /** Returns the internal [RID] used by the [PhysicsServer3D] for this body. */
 get_physics_rid(): RID;
 
 /** Returns local translation of a vertex in the surface array. */
-get_point_transform(): Vector3;
+get_point_transform(point_index: int): Vector3;
 
 /** Returns [code]true[/code] if vertex is set to pinned. */
-is_point_pinned(): boolean;
+is_point_pinned(point_index: int): boolean;
 
 /** Removes a body from the list of bodies that this body can't collide with. */
-remove_collision_exception_with(): void;
+remove_collision_exception_with(body: Node): void;
 
 /** Based on [param value], enables or disables the specified layer in the [member collision_layer], given a [param layer_number] between 1 and 32. */
-set_collision_layer_value(): void;
+set_collision_layer_value(layer_number: int, value: boolean): void;
 
 /** Based on [param value], enables or disables the specified layer in the [member collision_mask], given a [param layer_number] between 1 and 32. */
-set_collision_mask_value(): void;
+set_collision_mask_value(layer_number: int, value: boolean): void;
 
 /** Sets the pinned state of a surface vertex. When set to [code]true[/code], the optional [param attachment_path] can define a [Node3D] the pinned vertex will be attached to. */
-set_point_pinned(): void;
+set_point_pinned(point_index: int, pinned: boolean, attachment_path?: NodePathType, insert_at?: int): void;
 
   connect<T extends SignalsOf<SoftBody3D>>(signal: T, method: SignalFunction<SoftBody3D[T]>): number;
 

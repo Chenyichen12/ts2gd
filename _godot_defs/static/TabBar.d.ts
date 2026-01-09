@@ -63,13 +63,13 @@ tab_count: int;
 tabs_rearrange_group: int;
 
 /** Adds a new tab. */
-add_tab(): void;
+add_tab(title?: string, icon?: Texture2D): void;
 
 /** Clears all tabs. */
 clear_tabs(): void;
 
 /** Moves the scroll view to make the tab visible. */
-ensure_tab_visible(): void;
+ensure_tab_visible(idx: int): void;
 
 /** Returns [code]true[/code] if the offset buttons (the ones that appear when there's not enough space for all tabs) are visible. */
 get_offset_buttons_visible(): boolean;
@@ -78,49 +78,49 @@ get_offset_buttons_visible(): boolean;
 get_previous_tab(): int;
 
 /** Returns the icon for the right button of the tab at index [param tab_idx] or [code]null[/code] if the right button has no icon. */
-get_tab_button_icon(): Texture2D;
+get_tab_button_icon(tab_idx: int): Texture2D;
 
 /** Returns the icon for the tab at index [param tab_idx] or [code]null[/code] if the tab has no icon. */
-get_tab_icon(): Texture2D;
+get_tab_icon(tab_idx: int): Texture2D;
 
 /** Returns the maximum allowed width of the icon for the tab at index [param tab_idx]. */
-get_tab_icon_max_width(): int;
+get_tab_icon_max_width(tab_idx: int): int;
 
 /** Returns the index of the tab at local coordinates [param point]. Returns [code]-1[/code] if the point is outside the control boundaries or if there's no tab at the queried position. */
-get_tab_idx_at_point(): int;
+get_tab_idx_at_point(point: Vector2): int;
 
 /** Returns tab title language code. */
-get_tab_language(): string;
+get_tab_language(tab_idx: int): string;
 
 /** Returns the metadata value set to the tab at index [param tab_idx] using [method set_tab_metadata]. If no metadata was previously set, returns [code]null[/code] by default. */
-get_tab_metadata(): any;
+get_tab_metadata(tab_idx: int): any;
 
 /** Returns the number of hidden tabs offsetted to the left. */
 get_tab_offset(): int;
 
 /** Returns tab [Rect2] with local position and size. */
-get_tab_rect(): Rect2;
+get_tab_rect(tab_idx: int): Rect2;
 
 /** Returns tab title text base writing direction. */
-get_tab_text_direction(): int;
+get_tab_text_direction(tab_idx: int): int;
 
 /** Returns the title of the tab at index [param tab_idx]. */
-get_tab_title(): string;
+get_tab_title(tab_idx: int): string;
 
 /** Returns the tooltip text of the tab at index [param tab_idx]. */
-get_tab_tooltip(): string;
+get_tab_tooltip(tab_idx: int): string;
 
 /** Returns [code]true[/code] if the tab at index [param tab_idx] is disabled. */
-is_tab_disabled(): boolean;
+is_tab_disabled(tab_idx: int): boolean;
 
 /** Returns [code]true[/code] if the tab at index [param tab_idx] is hidden. */
-is_tab_hidden(): boolean;
+is_tab_hidden(tab_idx: int): boolean;
 
 /** Moves a tab from [param from] to [param to]. */
-move_tab(): void;
+move_tab(from: int, to: int): void;
 
 /** Removes the tab at index [param tab_idx]. */
-remove_tab(): void;
+remove_tab(tab_idx: int): void;
 
 /** Selects the first available tab with greater index than the currently selected. Returns [code]true[/code] if tab selection changed. */
 select_next_available(): boolean;
@@ -129,31 +129,31 @@ select_next_available(): boolean;
 select_previous_available(): boolean;
 
 /** Sets an [param icon] for the button of the tab at index [param tab_idx] (located to the right, before the close button), making it visible and clickable (See [signal tab_button_pressed]). Giving it a [code]null[/code] value will hide the button. */
-set_tab_button_icon(): void;
+set_tab_button_icon(tab_idx: int, icon: Texture2D): void;
 
 /** If [param disabled] is [code]true[/code], disables the tab at index [param tab_idx], making it non-interactable. */
-set_tab_disabled(): void;
+set_tab_disabled(tab_idx: int, disabled: boolean): void;
 
 /** If [param hidden] is [code]true[/code], hides the tab at index [param tab_idx], making it disappear from the tab area. */
-set_tab_hidden(): void;
+set_tab_hidden(tab_idx: int, hidden: boolean): void;
 
 /** Sets an [param icon] for the tab at index [param tab_idx]. */
-set_tab_icon(): void;
+set_tab_icon(tab_idx: int, icon: Texture2D): void;
 
 /** Sets the maximum allowed width of the icon for the tab at index [param tab_idx]. This limit is applied on top of the default size of the icon and on top of [theme_item icon_max_width]. The height is adjusted according to the icon's ratio. */
-set_tab_icon_max_width(): void;
+set_tab_icon_max_width(tab_idx: int, width: int): void;
 
 /** Sets the language code of the title for the tab at index [param tab_idx] to [param language]. This is used for line-breaking and text shaping algorithms. If [param language] is empty, the current locale is used. */
-set_tab_language(): void;
+set_tab_language(tab_idx: int, language: string): void;
 
 /** Sets the metadata value for the tab at index [param tab_idx], which can be retrieved later using [method get_tab_metadata]. */
-set_tab_metadata(): void;
+set_tab_metadata(tab_idx: int, metadata: any): void;
 
 /** Sets tab title base writing direction. */
-set_tab_text_direction(): void;
+set_tab_text_direction(tab_idx: int, direction: int): void;
 
 /** Sets a [param title] for the tab at index [param tab_idx]. */
-set_tab_title(): void;
+set_tab_title(tab_idx: int, title: string): void;
 
 /**
  * Sets a [param tooltip] for tab at index [param tab_idx].
@@ -161,7 +161,7 @@ set_tab_title(): void;
  * **Note:** By default, if the [param tooltip] is empty and the tab text is truncated (not all characters fit into the tab), the title will be displayed as a tooltip. To hide the tooltip, assign `" "` as the [param tooltip] text.
  *
 */
-set_tab_tooltip(): void;
+set_tab_tooltip(tab_idx: int, tooltip: string): void;
 
   connect<T extends SignalsOf<TabBar>>(signal: T, method: SignalFunction<TabBar[T]>): number;
 

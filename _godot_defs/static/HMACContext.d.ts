@@ -105,10 +105,10 @@ declare class HMACContext extends RefCounted  {
 finish(): PackedByteArray;
 
 /** Initializes the HMACContext. This method cannot be called again on the same HMACContext until [method finish] has been called. */
-start(): int;
+start(hash_type: int, key: PackedByteArray): int;
 
 /** Updates the message to be HMACed. This can be called multiple times before [method finish] is called to append [param data] to the message, but cannot be called until [method start] has been called. */
-update(): int;
+update(data: PackedByteArray): int;
 
   connect<T extends SignalsOf<HMACContext>>(signal: T, method: SignalFunction<HMACContext[T]>): number;
 

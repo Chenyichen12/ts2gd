@@ -99,7 +99,7 @@ visible_characters_behavior: int;
 visible_ratio: float;
 
 /** Returns the bounding rectangle of the character at position [param pos] in the label's local coordinate system. If the character is a non-visual character or [param pos] is outside the valid range, an empty [Rect2] is returned. If the character is a part of a composite grapheme, the bounding rectangle of the whole grapheme is returned. */
-get_character_bounds(): Rect2;
+get_character_bounds(pos: int): Rect2;
 
 /** Returns the number of lines of text the Label has. */
 get_line_count(): int;
@@ -112,7 +112,7 @@ get_line_count(): int;
  * If there are no lines, returns font size in pixels.
  *
 */
-get_line_height(): int;
+get_line_height(line?: int): int;
 
 /** Returns the total number of printable characters in the text (excluding spaces and newlines). */
 get_total_character_count(): int;

@@ -23,7 +23,7 @@ declare class SceneState extends RefCounted  {
 get_base_scene_state(): SceneState;
 
 /** Returns the list of bound parameters for the signal at [param idx]. */
-get_connection_binds(): any[];
+get_connection_binds(idx: int): any[];
 
 /**
  * Returns the number of signal connections in the scene.
@@ -34,22 +34,22 @@ get_connection_binds(): any[];
 get_connection_count(): int;
 
 /** Returns the connection flags for the signal at [param idx]. See [enum Object.ConnectFlags] constants. */
-get_connection_flags(): int;
+get_connection_flags(idx: int): int;
 
 /** Returns the method connected to the signal at [param idx]. */
-get_connection_method(): StringName;
+get_connection_method(idx: int): StringName;
 
 /** Returns the name of the signal at [param idx]. */
-get_connection_signal(): StringName;
+get_connection_signal(idx: int): StringName;
 
 /** Returns the path to the node that owns the signal at [param idx], relative to the root node. */
-get_connection_source(): NodePathType;
+get_connection_source(idx: int): NodePathType;
 
 /** Returns the path to the node that owns the method connected to the signal at [param idx], relative to the root node. */
-get_connection_target(): NodePathType;
+get_connection_target(idx: int): NodePathType;
 
 /** Returns the number of unbound parameters for the signal at [param idx]. */
-get_connection_unbinds(): int;
+get_connection_unbinds(idx: int): int;
 
 /**
  * Returns the number of nodes in the scene.
@@ -60,22 +60,22 @@ get_connection_unbinds(): int;
 get_node_count(): int;
 
 /** Returns the list of group names associated with the node at [param idx]. */
-get_node_groups(): PackedStringArray;
+get_node_groups(idx: int): PackedStringArray;
 
 /** Returns the node's index, which is its position relative to its siblings. This is only relevant and saved in scenes for cases where new nodes are added to an instantiated or inherited scene among siblings from the base scene. Despite the name, this index is not related to the [param idx] argument used here and in other methods. */
-get_node_index(): int;
+get_node_index(idx: int): int;
 
 /** Returns a [PackedScene] for the node at [param idx] (i.e. the whole branch starting at this node, with its child nodes and resources), or [code]null[/code] if the node is not an instance. */
-get_node_instance(): PackedScene<any>;
+get_node_instance(idx: int): PackedScene<any>;
 
 /** Returns the path to the represented scene file if the node at [param idx] is an [InstancePlaceholder]. */
-get_node_instance_placeholder(): string;
+get_node_instance_placeholder(idx: int): string;
 
 /** Returns the name of the node at [param idx]. */
-get_node_name(): StringName;
+get_node_name(idx: int): StringName;
 
 /** Returns the path to the owner of the node at [param idx], relative to the root node. */
-get_node_owner_path(): NodePathType;
+get_node_owner_path(idx: int): NodePathType;
 
 /**
  * Returns the path to the node at [param idx].
@@ -83,7 +83,7 @@ get_node_owner_path(): NodePathType;
  * If [param for_parent] is `true`, returns the path of the [param idx] node's parent instead.
  *
 */
-get_node_path(): NodePathType;
+get_node_path(idx: int, for_parent?: boolean): NodePathType;
 
 /**
  * Returns the number of exported or overridden properties for the node at [param idx].
@@ -91,22 +91,22 @@ get_node_path(): NodePathType;
  * The `prop_idx` argument used to query node property data in other `get_node_property_*` methods in the interval `[0, get_node_property_count() - 1]`.
  *
 */
-get_node_property_count(): int;
+get_node_property_count(idx: int): int;
 
 /** Returns the name of the property at [param prop_idx] for the node at [param idx]. */
-get_node_property_name(): StringName;
+get_node_property_name(idx: int, prop_idx: int): StringName;
 
 /** Returns the value of the property at [param prop_idx] for the node at [param idx]. */
-get_node_property_value(): any;
+get_node_property_value(idx: int, prop_idx: int): any;
 
 /** Returns the type of the node at [param idx]. */
-get_node_type(): StringName;
+get_node_type(idx: int): StringName;
 
 /** Returns the resource path to the represented [PackedScene]. */
 get_path(): string;
 
 /** Returns [code]true[/code] if the node at [param idx] is an [InstancePlaceholder]. */
-is_node_instance_placeholder(): boolean;
+is_node_instance_placeholder(idx: int): boolean;
 
   connect<T extends SignalsOf<SceneState>>(signal: T, method: SignalFunction<SceneState[T]>): number;
 

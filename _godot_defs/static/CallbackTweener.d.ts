@@ -36,7 +36,7 @@ declare class CallbackTweener extends Tweener  {
  * 
  *
 */
-set_delay(): CallbackTweener;
+set_delay(delay: float): CallbackTweener;
 
   connect<T extends SignalsOf<CallbackTweener>>(signal: T, method: SignalFunction<CallbackTweener[T]>): number;
 

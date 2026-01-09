@@ -149,10 +149,10 @@ align(): void;
 force_update_scroll(): void;
 
 /** Returns the specified [enum Side]'s margin. See also [member drag_bottom_margin], [member drag_top_margin], [member drag_left_margin], and [member drag_right_margin]. */
-get_drag_margin(): float;
+get_drag_margin(margin: int): float;
 
 /** Returns the camera limit for the specified [enum Side]. See also [member limit_bottom], [member limit_top], [member limit_left], and [member limit_right]. */
-get_limit(): int;
+get_limit(margin: int): int;
 
 /**
  * Returns the center of the screen from this camera's point of view, in global coordinates.
@@ -193,10 +193,10 @@ make_current(): void;
 reset_smoothing(): void;
 
 /** Sets the specified [enum Side]'s margin. See also [member drag_bottom_margin], [member drag_top_margin], [member drag_left_margin], and [member drag_right_margin]. */
-set_drag_margin(): void;
+set_drag_margin(margin: int, drag_margin: float): void;
 
 /** Sets the camera limit for the specified [enum Side]. See also [member limit_bottom], [member limit_top], [member limit_left], and [member limit_right]. */
-set_limit(): void;
+set_limit(margin: int, limit: int): void;
 
   connect<T extends SignalsOf<Camera2D>>(signal: T, method: SignalFunction<Camera2D[T]>): number;
 

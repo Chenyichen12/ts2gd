@@ -24,7 +24,7 @@ lightmap_textures: TextureLayered[];
 shadowmask_textures: TextureLayered[];
 
 /** Adds an object that is considered baked within this [LightmapGIData]. */
-add_user(): void;
+add_user(path: NodePathType, uv_scale: Rect2, slice_index: int, sub_instance: int): void;
 
 /** Clear all objects that are considered baked within this [LightmapGIData]. */
 clear_users(): void;
@@ -33,7 +33,7 @@ clear_users(): void;
 get_user_count(): int;
 
 /** Returns the [NodePath] of the baked object at index [param user_idx]. */
-get_user_path(): NodePathType;
+get_user_path(user_idx: int): NodePathType;
 
 /** If [code]true[/code], lightmaps were baked with directional information. See also [member LightmapGI.directional]. */
 is_using_spherical_harmonics(): boolean;
@@ -44,7 +44,7 @@ is_using_spherical_harmonics(): boolean;
  * **Note:** Changing this value on already baked lightmaps will not cause them to be baked again. This means the material appearance will look incorrect until lightmaps are baked again, in which case the value set here is discarded as the entire [LightmapGIData] resource is replaced by the lightmapper.
  *
 */
-set_uses_spherical_harmonics(): void;
+set_uses_spherical_harmonics(uses_spherical_harmonics: boolean): void;
 
   connect<T extends SignalsOf<LightmapGIData>>(signal: T, method: SignalFunction<LightmapGIData[T]>): number;
 

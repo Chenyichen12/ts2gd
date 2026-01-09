@@ -26,7 +26,7 @@ declare class ShaderMaterial extends Material  {
 shader: Shader;
 
 /** Returns the current value set for this material of a uniform in the shader. */
-get_shader_parameter(): any;
+get_shader_parameter(param: StringName): any;
 
 /**
  * Changes the value set for this material of a uniform in the shader.
@@ -36,7 +36,7 @@ get_shader_parameter(): any;
  * **Note:** Changes to the shader uniform will be effective on all instances using this [ShaderMaterial]. To prevent this, use per-instance uniforms with [method GeometryInstance3D.set_instance_shader_parameter] or duplicate the [ShaderMaterial] resource using [method Resource.duplicate]. Per-instance uniforms allow for better shader reuse and are therefore faster, so they should be preferred over duplicating the [ShaderMaterial] when possible.
  *
 */
-set_shader_parameter(): void;
+set_shader_parameter(param: StringName, value: any): void;
 
   connect<T extends SignalsOf<ShaderMaterial>>(signal: T, method: SignalFunction<ShaderMaterial[T]>): number;
 

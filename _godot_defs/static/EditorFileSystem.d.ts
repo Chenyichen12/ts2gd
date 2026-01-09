@@ -20,13 +20,13 @@ declare class EditorFileSystem extends Node  {
 
 
 /** Returns the resource type of the file, given the full path. This returns a string such as [code]"Resource"[/code] or [code]"GDScript"[/code], [i]not[/i] a file extension such as [code]".gd"[/code]. */
-get_file_type(): string;
+get_file_type(path: string): string;
 
 /** Gets the root directory object. */
 get_filesystem(): EditorFileSystemDirectory;
 
 /** Returns a view into the filesystem at [param path]. */
-get_filesystem_path(): EditorFileSystemDirectory;
+get_filesystem_path(path: string): EditorFileSystemDirectory;
 
 /** Returns the scan progress for 0 to 1 if the FS is being scanned. */
 get_scanning_progress(): float;
@@ -42,7 +42,7 @@ is_scanning(): boolean;
  * **Note:** This function blocks until the import is finished. However, the main loop iteration, including timers and [method Node._process], will occur during the import process due to progress bar updates. Avoid calls to [method reimport_files] or [method scan] while an import is in progress.
  *
 */
-reimport_files(): void;
+reimport_files(files: PackedStringArray): void;
 
 /** Scan the filesystem for changes. */
 scan(): void;
@@ -56,7 +56,7 @@ scan_sources(): void;
  * This will not import the file. To reimport, call [method reimport_files] or [method scan] methods.
  *
 */
-update_file(): void;
+update_file(path: string): void;
 
   connect<T extends SignalsOf<EditorFileSystem>>(signal: T, method: SignalFunction<EditorFileSystem[T]>): number;
 

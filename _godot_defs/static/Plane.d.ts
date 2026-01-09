@@ -40,37 +40,37 @@ y: float;
 z: float;
 
 /** Returns the shortest distance from the plane to the position [param point]. If the point is above the plane, the distance will be positive. If below, the distance will be negative. */
-distance_to(): float;
+distance_to(point: Vector3): float;
 
 /** Returns the center of the plane. */
 get_center(): Vector3;
 
 /** Returns [code]true[/code] if [param point] is inside the plane. Comparison uses a custom minimum [param tolerance] threshold. */
-has_point(): boolean;
+has_point(point: Vector3, tolerance?: float): boolean;
 
 /** Returns the intersection point of the three planes [param b], [param c] and this plane. If no intersection is found, [code]null[/code] is returned. */
-intersect_3(): any;
+intersect_3(b: Plane, c: Plane): any;
 
 /** Returns the intersection point of a ray consisting of the position [param from] and the direction normal [param dir] with this plane. If no intersection is found, [code]null[/code] is returned. */
-intersects_ray(): any;
+intersects_ray(from: Vector3, dir: Vector3): any;
 
 /** Returns the intersection point of a segment from position [param from] to position [param to] with this plane. If no intersection is found, [code]null[/code] is returned. */
-intersects_segment(): any;
+intersects_segment(from: Vector3, to: Vector3): any;
 
 /** Returns [code]true[/code] if this plane and [param to_plane] are approximately equal, by running [method @GlobalScope.is_equal_approx] on each component. */
-is_equal_approx(): boolean;
+is_equal_approx(to_plane: Plane): boolean;
 
 /** Returns [code]true[/code] if this plane is finite, by calling [method @GlobalScope.is_finite] on each component. */
 is_finite(): boolean;
 
 /** Returns [code]true[/code] if [param point] is located above the plane. */
-is_point_over(): boolean;
+is_point_over(point: Vector3): boolean;
 
 /** Returns a copy of the plane, with normalized [member normal] (so it's a unit vector). Returns [code]Plane(0, 0, 0, 0)[/code] if [member normal] can't be normalized (it has zero length). */
 normalized(): Plane;
 
 /** Returns the orthogonal projection of [param point] into a point in the plane. */
-project(): Vector3;
+project(point: Vector3): Vector3;
 
   connect<T extends SignalsOf<Plane>>(signal: T, method: SignalFunction<Plane[T]>): number;
 

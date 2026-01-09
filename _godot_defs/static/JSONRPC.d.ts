@@ -23,7 +23,7 @@ declare class JSONRPC extends Object  {
  * - [param params]: An array or dictionary of parameters being passed to the method.
  *
 */
-make_notification(): Dictionary<any, any>;
+make_notification(method: string, params: any): Dictionary<any, any>;
 
 /**
  * Returns a dictionary in the form of a JSON-RPC request. Requests are sent to a server with the expectation of a response. The ID field is used for the server to specify which exact request it is responding to.
@@ -35,7 +35,7 @@ make_notification(): Dictionary<any, any>;
  * - [param id]: Uniquely identifies this request. The server is expected to send a response with the same ID.
  *
 */
-make_request(): Dictionary<any, any>;
+make_request(method: string, params: any, id: any): Dictionary<any, any>;
 
 /**
  * When a server has received and processed a request, it is expected to send a response. If you did not want a response then you need to have sent a Notification instead.
@@ -45,7 +45,7 @@ make_request(): Dictionary<any, any>;
  * - [param id]: The ID of the request this response is targeted to.
  *
 */
-make_response(): Dictionary<any, any>;
+make_response(result: any, id: any): Dictionary<any, any>;
 
 /**
  * Creates a response which indicates a previous reply has failed in some way.
@@ -57,7 +57,7 @@ make_response(): Dictionary<any, any>;
  * - [param id]: The request this error is a response to.
  *
 */
-make_response_error(): Dictionary<any, any>;
+make_response_error(code: int, message: string, id?: any): Dictionary<any, any>;
 
 /**
  * Given a Dictionary which takes the form of a JSON-RPC request: unpack the request and run it. Methods are resolved by looking at the field called "method" and looking for an equivalently named function in the JSONRPC object. If one is found that method is called.
@@ -67,10 +67,10 @@ make_response_error(): Dictionary<any, any>;
  * [param action]: The action to be run, as a Dictionary in the form of a JSON-RPC request or notification.
  *
 */
-process_action(): any;
+process_action(action: any, recurse?: boolean): any;
 
 /** No documentation provided. */
-process_string(): string;
+process_string(action: string): string;
 
 /**
  * Registers a callback for the given method name.
@@ -80,7 +80,7 @@ process_string(): string;
  * - [param callback]: The callback which will handle the specified method.
  *
 */
-set_method(): void;
+set_method(name: string, callback: Callable): void;
 
   connect<T extends SignalsOf<JSONRPC>>(signal: T, method: SignalFunction<JSONRPC[T]>): number;
 

@@ -47,13 +47,13 @@ pause: boolean;
 speed_scale: float;
 
 /** Returns the given [param frame]'s duration, in seconds. */
-get_frame_duration(): float;
+get_frame_duration(frame: int): float;
 
 /** Returns the given frame's [Texture2D]. */
-get_frame_texture(): Texture2D;
+get_frame_texture(frame: int): Texture2D;
 
 /** Sets the duration of any given [param frame]. The final duration is affected by the [member speed_scale]. If set to [code]0[/code], the frame is skipped during playback. */
-set_frame_duration(): void;
+set_frame_duration(frame: int, duration: float): void;
 
 /**
  * Assigns a [Texture2D] to the given frame. Frame IDs start at 0, so the first frame has ID 0, and the last frame of the animation has ID [member frames] - 1.
@@ -61,7 +61,7 @@ set_frame_duration(): void;
  * You can define any number of textures up to [constant MAX_FRAMES], but keep in mind that only frames from 0 to [member frames] - 1 will be part of the animation.
  *
 */
-set_frame_texture(): void;
+set_frame_texture(frame: int, texture: Texture2D): void;
 
   connect<T extends SignalsOf<AnimatedTexture>>(signal: T, method: SignalFunction<AnimatedTexture[T]>): number;
 

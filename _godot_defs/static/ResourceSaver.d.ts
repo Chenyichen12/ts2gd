@@ -25,16 +25,16 @@ declare class ResourceSaverClass extends Object  {
  * This method is performed implicitly for ResourceFormatSavers written in GDScript (see [ResourceFormatSaver] for more information).
  *
 */
-add_resource_format_saver(): void;
+add_resource_format_saver(format_saver: ResourceFormatSaver, at_front?: boolean): void;
 
 /** Returns the list of extensions available for saving a resource of a given type. */
-get_recognized_extensions(): PackedStringArray;
+get_recognized_extensions(type: Resource): PackedStringArray;
 
 /** Returns the resource ID for the given path. If [param generate] is [code]true[/code], a new resource ID will be generated if one for the path is not found. If [param generate] is [code]false[/code] and the path is not found, [constant ResourceUID.INVALID_ID] is returned. */
-get_resource_id_for_path(): int;
+get_resource_id_for_path(path: string, generate?: boolean): int;
 
 /** Unregisters the given [ResourceFormatSaver]. */
-remove_resource_format_saver(): void;
+remove_resource_format_saver(format_saver: ResourceFormatSaver): void;
 
 /**
  * Saves a resource to disk to the given path, using a [ResourceFormatSaver] that recognizes the resource object. If [param path] is empty, [ResourceSaver] will try to use [member Resource.resource_path].
@@ -46,7 +46,7 @@ remove_resource_format_saver(): void;
  * **Note:** When the project is running, any generated UID associated with the resource will not be saved as the required code is only executed in editor mode.
  *
 */
-save(): int;
+save(resource: Resource, path?: string, flags?: int): int;
 
 /**
  * Sets the UID of the given [param resource] path to [param uid]. You can generate a new UID using [method ResourceUID.create_id].
@@ -54,7 +54,7 @@ save(): int;
  * Since resources will normally get a UID automatically, this method is only useful in very specific cases.
  *
 */
-set_uid(): int;
+set_uid(resource: string, uid: int): int;
 
   connect<T extends SignalsOf<ResourceSaverClass>>(signal: T, method: SignalFunction<ResourceSaverClass[T]>): number;
 

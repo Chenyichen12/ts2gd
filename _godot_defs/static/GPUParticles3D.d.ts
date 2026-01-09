@@ -164,7 +164,7 @@ visibility_aabb: AABB;
 capture_aabb(): AABB;
 
 /** Sets this node's properties to match a given [CPUParticles3D] node. */
-convert_from_particles(): void;
+convert_from_particles(particles: Node): void;
 
 /**
  * Emits a single particle. Whether [param xform], [param velocity], [param color] and [param custom] are applied depends on the value of [param flags]. See [enum EmitFlags].
@@ -174,10 +174,10 @@ convert_from_particles(): void;
  * **Note:** [method emit_particle] is only supported on the Forward+ and Mobile rendering methods, not Compatibility.
  *
 */
-emit_particle(): void;
+emit_particle(xform: Transform3D, velocity: Vector3, color: Color, custom: Color, flags: int): void;
 
 /** Returns the [Mesh] that is drawn at index [param pass]. */
-get_draw_pass_mesh(): Mesh;
+get_draw_pass_mesh(pass: int): Mesh;
 
 /**
  * Requests the particles to process for extra process time during a single frame.
@@ -185,7 +185,7 @@ get_draw_pass_mesh(): Mesh;
  * Useful for particle playback, if used in combination with [member use_fixed_seed] or by calling [method restart] with parameter `keep_seed` set to `true`.
  *
 */
-request_particles_process(): void;
+request_particles_process(process_time: float): void;
 
 /**
  * Restarts the particle emission cycle, clearing existing particles. To avoid particles vanishing from the viewport, wait for the [signal finished] signal before calling.
@@ -195,10 +195,10 @@ request_particles_process(): void;
  * If [param keep_seed] is `true`, the current random seed will be preserved. Useful for seeking and playback.
  *
 */
-restart(): void;
+restart(keep_seed?: boolean): void;
 
 /** Sets the [Mesh] that is drawn at index [param pass]. */
-set_draw_pass_mesh(): void;
+set_draw_pass_mesh(pass: int, mesh: Mesh): void;
 
   connect<T extends SignalsOf<GPUParticles3D>>(signal: T, method: SignalFunction<GPUParticles3D[T]>): number;
 

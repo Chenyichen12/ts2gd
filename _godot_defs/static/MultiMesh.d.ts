@@ -92,16 +92,16 @@ visible_instance_count: int;
 get_aabb(): AABB;
 
 /** Gets a specific instance's color multiplier. */
-get_instance_color(): Color;
+get_instance_color(instance: int): Color;
 
 /** Returns the custom data that has been set for a specific instance. */
-get_instance_custom_data(): Color;
+get_instance_custom_data(instance: int): Color;
 
 /** Returns the [Transform3D] of a specific instance. */
-get_instance_transform(): Transform3D;
+get_instance_transform(instance: int): Transform3D;
 
 /** Returns the [Transform2D] of a specific instance. */
-get_instance_transform_2d(): Transform2D;
+get_instance_transform_2d(instance: int): Transform2D;
 
 /**
  * When using **physics interpolation**, this function allows you to prevent interpolation on an instance in the current physics tick.
@@ -109,7 +109,7 @@ get_instance_transform_2d(): Transform2D;
  * This allows you to move instances instantaneously, and should usually be used when initially placing an instance such as a bullet to prevent graphical glitches.
  *
 */
-reset_instance_physics_interpolation(): void;
+reset_instance_physics_interpolation(instance: int): void;
 
 /**
  * When using **physics interpolation**, this function allows you to prevent interpolation for all instances in the current physics tick.
@@ -127,7 +127,7 @@ reset_instances_physics_interpolation(): void;
  * When the order of instances is coherent, the simpler alternative of setting [member buffer] can still be used with interpolation.
  *
 */
-set_buffer_interpolated(): void;
+set_buffer_interpolated(buffer_curr: PackedFloat32Array, buffer_prev: PackedFloat32Array): void;
 
 /**
  * Sets the color of a specific instance by **multiplying** the mesh's existing vertex colors. This allows for different color tinting per instance.
@@ -137,7 +137,7 @@ set_buffer_interpolated(): void;
  * For the color to take effect, ensure that [member use_colors] is `true` on the [MultiMesh] and [member BaseMaterial3D.vertex_color_use_as_albedo] is `true` on the material. If you intend to set an absolute color instead of tinting, make sure the material's albedo color is set to pure white (`Color(1, 1, 1)`).
  *
 */
-set_instance_color(): void;
+set_instance_color(instance: int, color: Color): void;
 
 /**
  * Sets custom data for a specific instance. [param custom_data] is a [Color] type only to contain 4 floating-point numbers.
@@ -149,13 +149,13 @@ set_instance_color(): void;
  * This custom instance data has to be manually accessed in your custom shader using `INSTANCE_CUSTOM`.
  *
 */
-set_instance_custom_data(): void;
+set_instance_custom_data(instance: int, custom_data: Color): void;
 
 /** Sets the [Transform3D] for a specific instance. */
-set_instance_transform(): void;
+set_instance_transform(instance: int, transform: Transform3D): void;
 
 /** Sets the [Transform2D] for a specific instance. */
-set_instance_transform_2d(): void;
+set_instance_transform_2d(instance: int, transform: Transform2D): void;
 
   connect<T extends SignalsOf<MultiMesh>>(signal: T, method: SignalFunction<MultiMesh[T]>): number;
 

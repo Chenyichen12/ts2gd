@@ -32,7 +32,7 @@ declare class RenderingDevice extends Object  {
 
 
 /** This method does nothing. */
-barrier(): void;
+barrier(from?: int, to?: int): void;
 
 /**
  * Clears the contents of the [param buffer], clearing [param size_bytes] bytes, starting at [param offset].
@@ -48,7 +48,7 @@ barrier(): void;
  * - a compute list is currently active (created by [method compute_list_begin])
  *
 */
-buffer_clear(): int;
+buffer_clear(buffer: RID, offset: int, size_bytes: int): int;
 
 /**
  * Copies [param size] bytes from the [param src_buffer] at [param src_offset] into [param dst_buffer] at [param dst_offset].
@@ -62,7 +62,7 @@ buffer_clear(): int;
  * - a compute list is currently active (created by [method compute_list_begin])
  *
 */
-buffer_copy(): int;
+buffer_copy(src_buffer: RID, dst_buffer: RID, src_offset: int, dst_offset: int, size: int): int;
 
 /**
  * Returns a copy of the data of the specified [param buffer], optionally [param offset_bytes] and [param size_bytes] can be set to copy only a portion of the buffer.
@@ -70,7 +70,7 @@ buffer_copy(): int;
  * **Note:** This method will block the GPU from working until the data is retrieved. Refer to [method buffer_get_data_async] for an alternative that returns the data in more performant way.
  *
 */
-buffer_get_data(): PackedByteArray;
+buffer_get_data(buffer: RID, offset_bytes?: int, size_bytes?: int): PackedByteArray;
 
 /**
  * Asynchronous version of [method buffer_get_data]. RenderingDevice will call [param callback] in a certain amount of frames with the data the buffer had at the time of the request.
@@ -89,7 +89,7 @@ buffer_get_data(): PackedByteArray;
  * 
  *
 */
-buffer_get_data_async(): int;
+buffer_get_data_async(buffer: RID, callback: Callable, offset_bytes?: int, size_bytes?: int): int;
 
 /**
  * Returns the address of the given [param buffer] which can be passed to shaders in any way to access underlying data. Buffer must have been created with this feature enabled.
@@ -97,7 +97,7 @@ buffer_get_data_async(): int;
  * **Note:** You must check that the GPU supports this functionality by calling [method has_feature] with [constant SUPPORTS_BUFFER_DEVICE_ADDRESS] as a parameter.
  *
 */
-buffer_get_device_address(): int;
+buffer_get_device_address(buffer: RID): int;
 
 /**
  * Updates a region of [param size_bytes] bytes, starting at [param offset], in the buffer, with the specified [param data].
@@ -111,13 +111,13 @@ buffer_get_device_address(): int;
  * - a compute list is currently active (created by [method compute_list_begin])
  *
 */
-buffer_update(): int;
+buffer_update(buffer: RID, offset: int, size_bytes: int, data: PackedByteArray): int;
 
 /** Creates a timestamp marker with the specified [param name]. This is used for performance reporting with the [method get_captured_timestamp_cpu_time], [method get_captured_timestamp_gpu_time] and [method get_captured_timestamp_name] methods. */
-capture_timestamp(): void;
+capture_timestamp(name: string): void;
 
 /** Raises a Vulkan compute barrier in the specified [param compute_list]. */
-compute_list_add_barrier(): void;
+compute_list_add_barrier(compute_list: int): void;
 
 /**
  * Starts a list of compute commands created with the `compute_*` methods. The returned value should be passed to other `compute_list_*` functions.
@@ -145,22 +145,22 @@ compute_list_add_barrier(): void;
 compute_list_begin(): int;
 
 /** Tells the GPU what compute pipeline to use when processing the compute list. If the shader has changed since the last time this function was called, Godot will unbind all descriptor sets and will re-bind them inside [method compute_list_dispatch]. */
-compute_list_bind_compute_pipeline(): void;
+compute_list_bind_compute_pipeline(compute_list: int, compute_pipeline: RID): void;
 
 /** Binds the [param uniform_set] to this [param compute_list]. Godot ensures that all textures in the uniform set have the correct Vulkan access masks. If Godot had to change access masks of textures, it will raise a Vulkan image memory barrier. */
-compute_list_bind_uniform_set(): void;
+compute_list_bind_uniform_set(compute_list: int, uniform_set: RID, set_index: int): void;
 
 /** Submits the compute list for processing on the GPU. This is the compute equivalent to [method draw_list_draw]. */
-compute_list_dispatch(): void;
+compute_list_dispatch(compute_list: int, x_groups: int, y_groups: int, z_groups: int): void;
 
 /** Submits the compute list for processing on the GPU with the given group counts stored in the [param buffer] at [param offset]. Buffer must have been created with [constant STORAGE_BUFFER_USAGE_DISPATCH_INDIRECT] flag. */
-compute_list_dispatch_indirect(): void;
+compute_list_dispatch_indirect(compute_list: int, buffer: RID, offset: int): void;
 
 /** Finishes a list of compute commands created with the [code]compute_*[/code] methods. */
 compute_list_end(): void;
 
 /** Sets the push constant data to [param buffer] for the specified [param compute_list]. The shader determines how this binary data is used. The buffer's size in bytes must also be specified in [param size_bytes] (this can be obtained by calling the [method PackedByteArray.size] method on the passed [param buffer]). */
-compute_list_set_push_constant(): void;
+compute_list_set_push_constant(compute_list: int, buffer: PackedByteArray, size_bytes: int): void;
 
 /**
  * Creates a new compute pipeline. It can be accessed with the RID that is returned.
@@ -170,10 +170,10 @@ compute_list_set_push_constant(): void;
  * This will be freed automatically when the [param shader] is freed.
  *
 */
-compute_pipeline_create(): RID;
+compute_pipeline_create(shader: RID, specialization_constants?: RDPipelineSpecializationConstant[]): RID;
 
 /** Returns [code]true[/code] if the compute pipeline specified by the [param compute_pipeline] RID is valid, [code]false[/code] otherwise. */
-compute_pipeline_is_valid(): boolean;
+compute_pipeline_is_valid(compute_pipeline: RID): boolean;
 
 /** Create a new local [RenderingDevice]. This is most useful for performing compute operations on the GPU independently from the rest of the engine. */
 create_local_device(): RenderingDevice;
@@ -184,13 +184,13 @@ create_local_device(): RenderingDevice;
  * The `VK_EXT_DEBUG_UTILS_EXTENSION_NAME` Vulkan extension must be available and enabled for command buffer debug label region to work. See also [method draw_command_end_label].
  *
 */
-draw_command_begin_label(): void;
+draw_command_begin_label(name: string, color: Color): void;
 
 /** Ends the command buffer debug label region started by a [method draw_command_begin_label] call. */
 draw_command_end_label(): void;
 
 /** This method does nothing. */
-draw_command_insert_label(): void;
+draw_command_insert_label(name: string, color: Color): void;
 
 /**
  * Starts a list of raster drawing commands created with the `draw_*` methods. The returned value should be passed to other `draw_list_*` functions.
@@ -231,7 +231,7 @@ draw_command_insert_label(): void;
  * 
  *
 */
-draw_list_begin(): int;
+draw_list_begin(framebuffer: RID, draw_flags?: int, clear_color_values?: PackedColorArray, clear_depth_value?: float, clear_stencil_value?: int, region?: Rect2, breadcrumb?: int): int;
 
 /**
  * High-level variant of [method draw_list_begin], with the parameters automatically being adjusted for drawing onto the window specified by the [param screen] ID.
@@ -239,34 +239,34 @@ draw_list_begin(): int;
  * **Note:** Cannot be used with local RenderingDevices, as these don't have a screen. If called on a local RenderingDevice, [method draw_list_begin_for_screen] returns [constant INVALID_ID].
  *
 */
-draw_list_begin_for_screen(): int;
+draw_list_begin_for_screen(screen?: int, clear_color?: Color): int;
 
 /** This method does nothing and always returns an empty [PackedInt64Array]. */
-draw_list_begin_split(): PackedInt64Array;
+draw_list_begin_split(framebuffer: RID, splits: int, initial_color_action: int, final_color_action: int, initial_depth_action: int, final_depth_action: int, clear_color_values?: PackedColorArray, clear_depth?: float, clear_stencil?: int, region?: Rect2, storage_textures?: RID[]): PackedInt64Array;
 
 /** Binds [param index_array] to the specified [param draw_list]. */
-draw_list_bind_index_array(): void;
+draw_list_bind_index_array(draw_list: int, index_array: RID): void;
 
 /** Binds [param render_pipeline] to the specified [param draw_list]. */
-draw_list_bind_render_pipeline(): void;
+draw_list_bind_render_pipeline(draw_list: int, render_pipeline: RID): void;
 
 /** Binds [param uniform_set] to the specified [param draw_list]. A [param set_index] must also be specified, which is an identifier starting from [code]0[/code] that must match the one expected by the draw list. */
-draw_list_bind_uniform_set(): void;
+draw_list_bind_uniform_set(draw_list: int, uniform_set: RID, set_index: int): void;
 
 /** Binds [param vertex_array] to the specified [param draw_list]. */
-draw_list_bind_vertex_array(): void;
+draw_list_bind_vertex_array(draw_list: int, vertex_array: RID): void;
 
 /** Binds a set of [param vertex_buffers] directly to the specified [param draw_list] using [param vertex_format] without creating a vertex array RID. Provide the number of vertices in [param vertex_count]; optional per-buffer byte [param offsets] may also be supplied. */
-draw_list_bind_vertex_buffers_format(): void;
+draw_list_bind_vertex_buffers_format(draw_list: int, vertex_format: int, vertex_count: int, vertex_buffers: RID[], offsets?: PackedInt64Array): void;
 
 /** Removes and disables the scissor rectangle for the specified [param draw_list]. See also [method draw_list_enable_scissor]. */
-draw_list_disable_scissor(): void;
+draw_list_disable_scissor(draw_list: int): void;
 
 /** Submits [param draw_list] for rendering on the GPU. This is the raster equivalent to [method compute_list_dispatch]. */
-draw_list_draw(): void;
+draw_list_draw(draw_list: int, use_indices: boolean, instances: int, procedural_vertex_count?: int): void;
 
 /** Submits [param draw_list] for rendering on the GPU with the given parameters stored in the [param buffer] at [param offset]. Parameters being integers: vertex count, instance count, first vertex, first instance. And when using indices: index count, instance count, first index, vertex offset, first instance. Buffer must have been created with [constant STORAGE_BUFFER_USAGE_DISPATCH_INDIRECT] flag. */
-draw_list_draw_indirect(): void;
+draw_list_draw_indirect(draw_list: int, use_indices: boolean, buffer: RID, offset?: int, draw_count?: int, stride?: int): void;
 
 /**
  * Creates a scissor rectangle and enables it for the specified [param draw_list]. Scissor rectangles are used for clipping by discarding fragments that fall outside a specified rectangular portion of the screen. See also [method draw_list_disable_scissor].
@@ -274,22 +274,22 @@ draw_list_draw_indirect(): void;
  * **Note:** The specified [param rect] is automatically intersected with the screen's dimensions, which means it cannot exceed the screen's dimensions.
  *
 */
-draw_list_enable_scissor(): void;
+draw_list_enable_scissor(draw_list: int, rect?: Rect2): void;
 
 /** Finishes a list of raster drawing commands created with the [code]draw_*[/code] methods. */
 draw_list_end(): void;
 
 /** Sets blend constants for the specified [param draw_list] to [param color]. Blend constants are used only if the graphics pipeline is created with [constant DYNAMIC_STATE_BLEND_CONSTANTS] flag set. */
-draw_list_set_blend_constants(): void;
+draw_list_set_blend_constants(draw_list: int, color: Color): void;
 
 /** Sets the push constant data to [param buffer] for the specified [param draw_list]. The shader determines how this binary data is used. The buffer's size in bytes must also be specified in [param size_bytes] (this can be obtained by calling the [method PackedByteArray.size] method on the passed [param buffer]). */
-draw_list_set_push_constant(): void;
+draw_list_set_push_constant(draw_list: int, buffer: PackedByteArray, size_bytes: int): void;
 
 /** Switches to the next draw pass. */
 draw_list_switch_to_next_pass(): int;
 
 /** This method does nothing and always returns an empty [PackedInt64Array]. */
-draw_list_switch_to_next_pass_split(): PackedInt64Array;
+draw_list_switch_to_next_pass_split(splits: int): PackedInt64Array;
 
 /**
  * Creates a new framebuffer. It can be accessed with the RID that is returned.
@@ -299,7 +299,7 @@ draw_list_switch_to_next_pass_split(): PackedInt64Array;
  * This will be freed automatically when any of the [param textures] is freed.
  *
 */
-framebuffer_create(): RID;
+framebuffer_create(textures: RID[], validate_with_format?: int, view_count?: int): RID;
 
 /**
  * Creates a new empty framebuffer. It can be accessed with the RID that is returned.
@@ -307,7 +307,7 @@ framebuffer_create(): RID;
  * Once finished with your RID, you will want to free the RID using the RenderingDevice's [method free_rid] method.
  *
 */
-framebuffer_create_empty(): RID;
+framebuffer_create_empty(size: Vector2i, samples?: int, validate_with_format?: int): RID;
 
 /**
  * Creates a new multipass framebuffer. It can be accessed with the RID that is returned.
@@ -317,7 +317,7 @@ framebuffer_create_empty(): RID;
  * This will be freed automatically when any of the [param textures] is freed.
  *
 */
-framebuffer_create_multipass(): RID;
+framebuffer_create_multipass(textures: RID[], passes: RDFramebufferPass[], validate_with_format?: int, view_count?: int): RID;
 
 /**
  * Creates a new framebuffer format with the specified [param attachments] and [param view_count]. Returns the new framebuffer's unique framebuffer format ID.
@@ -325,37 +325,37 @@ framebuffer_create_multipass(): RID;
  * If [param view_count] is greater than or equal to `2`, enables multiview which is used for VR rendering. This requires support for the Vulkan multiview extension.
  *
 */
-framebuffer_format_create(): int;
+framebuffer_format_create(attachments: RDAttachmentFormat[], view_count?: int): int;
 
 /** Creates a new empty framebuffer format with the specified number of [param samples] and returns its ID. */
-framebuffer_format_create_empty(): int;
+framebuffer_format_create_empty(samples?: int): int;
 
 /** Creates a multipass framebuffer format with the specified [param attachments], [param passes] and [param view_count] and returns its ID. If [param view_count] is greater than or equal to [code]2[/code], enables multiview which is used for VR rendering. This requires support for the Vulkan multiview extension. */
-framebuffer_format_create_multipass(): int;
+framebuffer_format_create_multipass(attachments: RDAttachmentFormat[], passes: RDFramebufferPass[], view_count?: int): int;
 
 /** Returns the number of texture samples used for the given framebuffer [param format] ID (returned by [method framebuffer_get_format]). */
-framebuffer_format_get_texture_samples(): int;
+framebuffer_format_get_texture_samples(format: int, render_pass?: int): int;
 
 /** Returns the format ID of the framebuffer specified by the [param framebuffer] RID. This ID is guaranteed to be unique for the same formats and does not need to be freed. */
-framebuffer_get_format(): int;
+framebuffer_get_format(framebuffer: RID): int;
 
 /** Returns [code]true[/code] if the framebuffer specified by the [param framebuffer] RID is valid, [code]false[/code] otherwise. */
-framebuffer_is_valid(): boolean;
+framebuffer_is_valid(framebuffer: RID): boolean;
 
 /** Tries to free an object in the RenderingDevice. To avoid memory leaks, this should be called after using an object as memory management does not occur automatically when using RenderingDevice directly. */
-free_rid(): void;
+free_rid(rid: RID): void;
 
 /** This method does nothing. */
 full_barrier(): void;
 
 /** Returns the timestamp in CPU time for the rendering step specified by [param index] (in microseconds since the engine started). See also [method get_captured_timestamp_gpu_time] and [method capture_timestamp]. */
-get_captured_timestamp_cpu_time(): int;
+get_captured_timestamp_cpu_time(index: int): int;
 
 /** Returns the timestamp in GPU time for the rendering step specified by [param index] (in microseconds since the engine started). See also [method get_captured_timestamp_cpu_time] and [method capture_timestamp]. */
-get_captured_timestamp_gpu_time(): int;
+get_captured_timestamp_gpu_time(index: int): int;
 
 /** Returns the timestamp's name for the rendering step specified by [param index]. See also [method capture_timestamp]. */
-get_captured_timestamp_name(): string;
+get_captured_timestamp_name(index: int): string;
 
 /** Returns the total number of timestamps (rendering steps) available for profiling. */
 get_captured_timestamps_count(): int;
@@ -379,7 +379,7 @@ get_device_allocation_count(): int;
  * This is only used by Vulkan in debug builds and can return 0 when this information is not tracked or unknown.
  *
 */
-get_device_allocs_by_object_type(): int;
+get_device_allocs_by_object_type(type: int): int;
 
 /**
  * Same as [method get_device_total_memory] but filtered for a given object type.
@@ -389,7 +389,7 @@ get_device_allocs_by_object_type(): int;
  * This is only used by Vulkan in debug builds and can return 0 when this information is not tracked or unknown.
  *
 */
-get_device_memory_by_object_type(): int;
+get_device_memory_by_object_type(type: int): int;
 
 /** Returns the name of the video adapter (e.g. "GeForce GTX 1080/PCIe/SSE2"). Equivalent to [method RenderingServer.get_video_adapter_name]. See also [method get_device_vendor_name]. */
 get_device_name(): string;
@@ -424,7 +424,7 @@ get_driver_allocation_count(): int;
  * This is only used by Vulkan in debug builds and can return 0 when this information is not tracked or unknown.
  *
 */
-get_driver_allocs_by_object_type(): int;
+get_driver_allocs_by_object_type(type: int): int;
 
 /**
  * Returns string report in CSV format using the following methods:
@@ -462,10 +462,10 @@ get_driver_and_device_memory_report(): string;
  * This is only used by Vulkan in debug builds and can return 0 when this information is not tracked or unknown.
  *
 */
-get_driver_memory_by_object_type(): int;
+get_driver_memory_by_object_type(type: int): int;
 
 /** Returns the unique identifier of the driver [param resource] for the specified [param rid]. Some driver resource types ignore the specified [param rid]. [param index] is always ignored but must be specified anyway. */
-get_driver_resource(): int;
+get_driver_resource(resource: int, rid: RID, index: int): int;
 
 /**
  * Returns how much bytes the GPU driver is using for internal driver structures.
@@ -479,7 +479,7 @@ get_driver_total_memory(): int;
 get_frame_delay(): int;
 
 /** Returns the memory usage in bytes corresponding to the given [param type]. When using Vulkan, these statistics are calculated by [url=https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator]Vulkan Memory Allocator[/url]. */
-get_memory_usage(): int;
+get_memory_usage(type: int): int;
 
 /** Returns a string with a performance report from the past frame. Updates every frame. */
 get_perf_report(): string;
@@ -502,7 +502,7 @@ get_perf_report(): string;
  * This is only used by Vulkan in debug builds. Godot must also be started with the `--extra-gpu-memory-tracking` [url=$DOCS_URL/tutorials/editor/command_line_tutorial.html]command line argument[/url].
  *
 */
-get_tracked_object_name(): string;
+get_tracked_object_name(type_index: int): string;
 
 /**
  * Returns how many types of trackable objects there are.
@@ -513,7 +513,7 @@ get_tracked_object_name(): string;
 get_tracked_object_type_count(): int;
 
 /** Returns [code]true[/code] if the [param feature] is supported by the GPU. */
-has_feature(): boolean;
+has_feature(feature: int): boolean;
 
 /**
  * Creates a new index array. It can be accessed with the RID that is returned.
@@ -523,7 +523,7 @@ has_feature(): boolean;
  * This will be freed automatically when the [param index_buffer] is freed.
  *
 */
-index_array_create(): RID;
+index_array_create(index_buffer: RID, index_offset: int, index_count: int): RID;
 
 /**
  * Creates a new index buffer. It can be accessed with the RID that is returned.
@@ -531,7 +531,7 @@ index_array_create(): RID;
  * Once finished with your RID, you will want to free the RID using the RenderingDevice's [method free_rid] method.
  *
 */
-index_buffer_create(): RID;
+index_buffer_create(size_indices: int, format: int, data?: PackedByteArray, use_restart_indices?: boolean, creation_bits?: int): RID;
 
 /**
  * Returns the value of the specified [param limit]. This limit varies depending on the current graphics hardware (and sometimes the driver version). If the given limit is exceeded, rendering errors will occur.
@@ -539,7 +539,7 @@ index_buffer_create(): RID;
  * Limits for various graphics hardware can be found in the [url=https://vulkan.gpuinfo.org/]Vulkan Hardware Database[/url].
  *
 */
-limit_get(): int;
+limit_get(limit: int): int;
 
 /**
  * Creates a new render pipeline. It can be accessed with the RID that is returned.
@@ -549,10 +549,10 @@ limit_get(): int;
  * This will be freed automatically when the [param shader] is freed.
  *
 */
-render_pipeline_create(): RID;
+render_pipeline_create(shader: RID, framebuffer_format: int, vertex_format: int, primitive: int, rasterization_state: RDPipelineRasterizationState, multisample_state: RDPipelineMultisampleState, stencil_state: RDPipelineDepthStencilState, color_blend_state: RDPipelineColorBlendState, dynamic_state_flags?: int, for_render_pass?: int, specialization_constants?: RDPipelineSpecializationConstant[]): RID;
 
 /** Returns [code]true[/code] if the render pipeline specified by the [param render_pipeline] RID is valid, [code]false[/code] otherwise. */
-render_pipeline_is_valid(): boolean;
+render_pipeline_is_valid(render_pipeline: RID): boolean;
 
 /**
  * Creates a new sampler. It can be accessed with the RID that is returned.
@@ -560,10 +560,10 @@ render_pipeline_is_valid(): boolean;
  * Once finished with your RID, you will want to free the RID using the RenderingDevice's [method free_rid] method.
  *
 */
-sampler_create(): RID;
+sampler_create(state: RDSamplerState): RID;
 
 /** Returns [code]true[/code] if implementation supports using a texture of [param format] with the given [param sampler_filter]. */
-sampler_is_format_supported_for_filter(): boolean;
+sampler_is_format_supported_for_filter(format: int, sampler_filter: int): boolean;
 
 /**
  * Returns the framebuffer format of the given screen.
@@ -571,7 +571,7 @@ sampler_is_format_supported_for_filter(): boolean;
  * **Note:** Only the main [RenderingDevice] returned by [method RenderingServer.get_rendering_device] has a format. If called on a local [RenderingDevice], this method prints an error and returns [constant INVALID_ID].
  *
 */
-screen_get_framebuffer_format(): int;
+screen_get_framebuffer_format(screen?: int): int;
 
 /**
  * Returns the window height matching the graphics API context for the given window ID (in pixels). Despite the parameter being named [param screen], this returns the **window** size. See also [method screen_get_width].
@@ -579,7 +579,7 @@ screen_get_framebuffer_format(): int;
  * **Note:** Only the main [RenderingDevice] returned by [method RenderingServer.get_rendering_device] has a height. If called on a local [RenderingDevice], this method prints an error and returns [constant INVALID_ID].
  *
 */
-screen_get_height(): int;
+screen_get_height(screen?: int): int;
 
 /**
  * Returns the window width matching the graphics API context for the given window ID (in pixels). Despite the parameter being named [param screen], this returns the **window** size. See also [method screen_get_height].
@@ -587,7 +587,7 @@ screen_get_height(): int;
  * **Note:** Only the main [RenderingDevice] returned by [method RenderingServer.get_rendering_device] has a width. If called on a local [RenderingDevice], this method prints an error and returns [constant INVALID_ID].
  *
 */
-screen_get_width(): int;
+screen_get_width(screen?: int): int;
 
 /**
  * Sets the resource name for [param id] to [param name]. This is used for debugging with third-party tools such as [url=https://renderdoc.org/]RenderDoc[/url].
@@ -597,7 +597,7 @@ screen_get_width(): int;
  * **Note:** Resource names are only set when the engine runs in verbose mode ([method OS.is_stdout_verbose] = `true`), or when using an engine build compiled with the `dev_mode=yes` SCons option. The graphics driver must also support the `VK_EXT_DEBUG_UTILS_EXTENSION_NAME` Vulkan extension for named resources to work.
  *
 */
-set_resource_name(): void;
+set_resource_name(id: RID, name: string): void;
 
 /**
  * Compiles a binary shader from [param spirv_data] and returns the compiled binary data as a [PackedByteArray]. This compiled shader is specific to the GPU model and driver version used; it will not work on different GPU models or even different driver versions. See also [method shader_compile_spirv_from_source].
@@ -605,7 +605,7 @@ set_resource_name(): void;
  * [param name] is an optional human-readable name that can be given to the compiled shader for organizational purposes.
  *
 */
-shader_compile_binary_from_spirv(): PackedByteArray;
+shader_compile_binary_from_spirv(spirv_data: RDShaderSPIRV, name?: string): PackedByteArray;
 
 /**
  * Compiles a SPIR-V from the shader source code in [param shader_source] and returns the SPIR-V as an [RDShaderSPIRV]. This intermediate language shader is portable across different GPU models and driver versions, but cannot be run directly by GPUs until compiled into a binary shader using [method shader_compile_binary_from_spirv].
@@ -613,7 +613,7 @@ shader_compile_binary_from_spirv(): PackedByteArray;
  * If [param allow_cache] is `true`, make use of the shader cache generated by Godot. This avoids a potentially lengthy shader compilation step if the shader is already in cache. If [param allow_cache] is `false`, Godot's shader cache is ignored and the shader will always be recompiled.
  *
 */
-shader_compile_spirv_from_source(): RDShaderSPIRV;
+shader_compile_spirv_from_source(shader_source: RDShaderSource, allow_cache?: boolean): RDShaderSPIRV;
 
 /**
  * Creates a new shader instance from a binary compiled shader. It can be accessed with the RID that is returned.
@@ -621,7 +621,7 @@ shader_compile_spirv_from_source(): RDShaderSPIRV;
  * Once finished with your RID, you will want to free the RID using the RenderingDevice's [method free_rid] method. See also [method shader_compile_binary_from_spirv] and [method shader_create_from_spirv].
  *
 */
-shader_create_from_bytecode(): RID;
+shader_create_from_bytecode(binary_data: PackedByteArray, placeholder_rid?: RID): RID;
 
 /**
  * Creates a new shader instance from SPIR-V intermediate code. It can be accessed with the RID that is returned.
@@ -629,13 +629,13 @@ shader_create_from_bytecode(): RID;
  * Once finished with your RID, you will want to free the RID using the RenderingDevice's [method free_rid] method. See also [method shader_compile_spirv_from_source] and [method shader_create_from_bytecode].
  *
 */
-shader_create_from_spirv(): RID;
+shader_create_from_spirv(spirv_data: RDShaderSPIRV, name?: string): RID;
 
 /** Create a placeholder RID by allocating an RID without initializing it for use in [method shader_create_from_bytecode]. This allows you to create an RID for a shader and pass it around, but defer compiling the shader to a later time. */
 shader_create_placeholder(): RID;
 
 /** Returns the internal vertex input mask. Internally, the vertex input mask is an unsigned integer consisting of the locations (specified in GLSL via. [code]layout(location = ...)[/code]) of the input variables (specified in GLSL by the [code]in[/code] keyword). */
-shader_get_vertex_input_attribute_mask(): int;
+shader_get_vertex_input_attribute_mask(shader: RID): int;
 
 /**
  * Creates a [url=https://vkguide.dev/docs/chapter-4/storage_buffers/]storage buffer[/url] with the specified [param data] and [param usage]. It can be accessed with the RID that is returned.
@@ -643,7 +643,7 @@ shader_get_vertex_input_attribute_mask(): int;
  * Once finished with your RID, you will want to free the RID using the RenderingDevice's [method free_rid] method.
  *
 */
-storage_buffer_create(): RID;
+storage_buffer_create(size_bytes: int, data?: PackedByteArray, usage?: int, creation_bits?: int): RID;
 
 /**
  * Pushes the frame setup and draw command buffers then marks the local device as currently processing (which allows calling [method sync]).
@@ -669,7 +669,7 @@ sync(): void;
  * Once finished with your RID, you will want to free the RID using the RenderingDevice's [method free_rid] method.
  *
 */
-texture_buffer_create(): RID;
+texture_buffer_create(size_bytes: int, format: int, data?: PackedByteArray): RID;
 
 /**
  * Clears the specified [param texture] by replacing all of its pixels with the specified [param color]. [param base_mipmap] and [param mipmap_count] determine which mipmaps of the texture are affected by this clear operation, while [param base_layer] and [param layer_count] determine which layers of a 3D texture (or texture array) are affected by this clear operation. For 2D textures (which only have one layer by design), [param base_layer] must be `0` and [param layer_count] must be `1`.
@@ -677,7 +677,7 @@ texture_buffer_create(): RID;
  * **Note:** [param texture] can't be cleared while a draw list that uses it as part of a framebuffer is being created. Ensure the draw list is finalized (and that the color/depth texture using it is not set to [constant FINAL_ACTION_CONTINUE]) to clear this texture.
  *
 */
-texture_clear(): int;
+texture_clear(texture: RID, color: Color, base_mipmap: int, mipmap_count: int, base_layer: int, layer_count: int): int;
 
 /**
  * Copies the [param from_texture] to [param to_texture] with the specified [param from_pos], [param to_pos] and [param size] coordinates. The Z axis of the [param from_pos], [param to_pos] and [param size] must be `0` for 2-dimensional textures. Source and destination mipmaps/layers must also be specified, with these parameters being `0` for textures without mipmaps or single-layer textures. Returns [constant @GlobalScope.OK] if the texture copy was successful or [constant @GlobalScope.ERR_INVALID_PARAMETER] otherwise.
@@ -693,7 +693,7 @@ texture_clear(): int;
  * **Note:** [param from_texture] and [param to_texture] must be of the same type (color or depth).
  *
 */
-texture_copy(): int;
+texture_copy(from_texture: RID, to_texture: RID, from_pos: Vector3, to_pos: Vector3, size: Vector3, src_mipmap: int, dst_mipmap: int, src_layer: int, dst_layer: int): int;
 
 /**
  * Creates a new texture. It can be accessed with the RID that is returned.
@@ -705,10 +705,10 @@ texture_copy(): int;
  * **Note:** Not to be confused with [method RenderingServer.texture_2d_create], which creates the Godot-specific [Texture2D] resource as opposed to the graphics API's own texture type.
  *
 */
-texture_create(): RID;
+texture_create(format: RDTextureFormat, view: RDTextureView, data?: PackedByteArray[]): RID;
 
 /** Returns an RID for an existing [param image] ([code]VkImage[/code]) with the given [param type], [param format], [param samples], [param usage_flags], [param width], [param height], [param depth], [param layers], and [param mipmaps]. This can be used to allow Godot to render onto foreign images. */
-texture_create_from_extension(): RID;
+texture_create_from_extension(type: int, format: int, samples: int, usage_flags: int, image: int, width: int, height: int, depth: int, layers: int, mipmaps?: int): RID;
 
 /**
  * Creates a shared texture using the specified [param view] and the texture information from [param with_texture].
@@ -716,7 +716,7 @@ texture_create_from_extension(): RID;
  * This will be freed automatically when the [param with_texture] is freed.
  *
 */
-texture_create_shared(): RID;
+texture_create_shared(view: RDTextureView, with_texture: RID): RID;
 
 /**
  * Creates a shared texture using the specified [param view] and the texture information from [param with_texture]'s [param layer] and [param mipmap]. The number of included mipmaps from the original texture can be controlled using the [param mipmaps] parameter. Only relevant for textures with multiple layers, such as 3D textures, texture arrays and cubemaps. For single-layer textures, use [method texture_create_shared].
@@ -728,7 +728,7 @@ texture_create_shared(): RID;
  * This will be freed automatically when the [param with_texture] is freed.
  *
 */
-texture_create_shared_from_slice(): RID;
+texture_create_shared_from_slice(view: RDTextureView, with_texture: RID, layer: int, mipmap: int, mipmaps?: int, slice_type?: int): RID;
 
 /**
  * Returns the [param texture] data for the specified [param layer] as raw binary data. For 2D textures (which only have one layer), [param layer] must be `0`.
@@ -740,7 +740,7 @@ texture_create_shared_from_slice(): RID;
  * **Note:** This method will block the GPU from working until the data is retrieved. Refer to [method texture_get_data_async] for an alternative that returns the data in more performant way.
  *
 */
-texture_get_data(): PackedByteArray;
+texture_get_data(texture: RID, layer: int): PackedByteArray;
 
 /**
  * Asynchronous version of [method texture_get_data]. RenderingDevice will call [param callback] in a certain amount of frames with the data the texture had at the time of the request.
@@ -759,10 +759,10 @@ texture_get_data(): PackedByteArray;
  * 
  *
 */
-texture_get_data_async(): int;
+texture_get_data_async(texture: RID, layer: int, callback: Callable): int;
 
 /** Returns the data format used to create this texture. */
-texture_get_format(): RDTextureFormat;
+texture_get_format(texture: RID): RDTextureFormat;
 
 /**
  * Returns the internal graphics handle for this texture object. For use when communicating with third-party APIs mostly with GDExtension.
@@ -770,19 +770,19 @@ texture_get_format(): RDTextureFormat;
  * **Note:** This function returns a `uint64_t` which internally maps to a `GLuint` (OpenGL) or `VkImage` (Vulkan).
  *
 */
-texture_get_native_handle(): int;
+texture_get_native_handle(texture: RID): int;
 
 /** Returns [code]true[/code] if the [param texture] is discardable, [code]false[/code] otherwise. See [RDTextureFormat] or [method texture_set_discardable]. */
-texture_is_discardable(): boolean;
+texture_is_discardable(texture: RID): boolean;
 
 /** Returns [code]true[/code] if the specified [param format] is supported for the given [param usage_flags], [code]false[/code] otherwise. */
-texture_is_format_supported_for_usage(): boolean;
+texture_is_format_supported_for_usage(format: int, usage_flags: int): boolean;
 
 /** Returns [code]true[/code] if the [param texture] is shared, [code]false[/code] otherwise. See [RDTextureView]. */
-texture_is_shared(): boolean;
+texture_is_shared(texture: RID): boolean;
 
 /** Returns [code]true[/code] if the [param texture] is valid, [code]false[/code] otherwise. */
-texture_is_valid(): boolean;
+texture_is_valid(texture: RID): boolean;
 
 /**
  * Resolves the [param from_texture] texture onto [param to_texture] with multisample antialiasing enabled. This must be used when rendering a framebuffer for MSAA to work. Returns [constant @GlobalScope.OK] if successful, [constant @GlobalScope.ERR_INVALID_PARAMETER] otherwise.
@@ -802,7 +802,7 @@ texture_is_valid(): boolean;
  * **Note:** [param to_texture] texture must **not** be multisampled and must also be 2D (or a slice of a 3D/cubemap texture).
  *
 */
-texture_resolve_multisample(): int;
+texture_resolve_multisample(from_texture: RID, to_texture: RID): int;
 
 /**
  * Updates the discardable property of [param texture].
@@ -812,7 +812,7 @@ texture_resolve_multisample(): int;
  * This information is used by [RenderingDevice] to figure out if a texture's contents can be discarded, eliminating unnecessary writes to memory and boosting performance.
  *
 */
-texture_set_discardable(): void;
+texture_set_discardable(texture: RID, discardable: boolean): void;
 
 /**
  * Updates texture data with new data, replacing the previous data in place. The updated texture data must have the same dimensions and format. For 2D textures (which only have one layer), [param layer] must be `0`. Returns [constant @GlobalScope.OK] if the update was successful, [constant @GlobalScope.ERR_INVALID_PARAMETER] otherwise.
@@ -824,7 +824,7 @@ texture_set_discardable(): void;
  * **Note:** The existing [param texture] requires the [constant TEXTURE_USAGE_CAN_UPDATE_BIT] to be updatable.
  *
 */
-texture_update(): int;
+texture_update(texture: RID, layer: int, data: PackedByteArray): int;
 
 /**
  * Creates a new uniform buffer. It can be accessed with the RID that is returned.
@@ -832,7 +832,7 @@ texture_update(): int;
  * Once finished with your RID, you will want to free the RID using the RenderingDevice's [method free_rid] method.
  *
 */
-uniform_buffer_create(): RID;
+uniform_buffer_create(size_bytes: int, data?: PackedByteArray, creation_bits?: int): RID;
 
 /**
  * Creates a new uniform set. It can be accessed with the RID that is returned.
@@ -842,10 +842,10 @@ uniform_buffer_create(): RID;
  * This will be freed automatically when the [param shader] or any of the RIDs in the [param uniforms] is freed.
  *
 */
-uniform_set_create(): RID;
+uniform_set_create(uniforms: RDUniform[], shader: RID, shader_set: int): RID;
 
 /** Checks if the [param uniform_set] is valid, i.e. is owned. */
-uniform_set_is_valid(): boolean;
+uniform_set_is_valid(uniform_set: RID): boolean;
 
 /**
  * Creates a vertex array based on the specified buffers. Optionally, [param offsets] (in bytes) may be defined for each buffer.
@@ -855,7 +855,7 @@ uniform_set_is_valid(): boolean;
  * This will be freed automatically when any of the [param src_buffers] is freed.
  *
 */
-vertex_array_create(): RID;
+vertex_array_create(vertex_count: int, vertex_format: int, src_buffers: RID[], offsets?: PackedInt64Array): RID;
 
 /**
  * Creates a new vertex buffer. It can be accessed with the RID that is returned.
@@ -863,10 +863,10 @@ vertex_array_create(): RID;
  * Once finished with your RID, you will want to free the RID using the RenderingDevice's [method free_rid] method.
  *
 */
-vertex_buffer_create(): RID;
+vertex_buffer_create(size_bytes: int, data?: PackedByteArray, creation_bits?: int): RID;
 
 /** Creates a new vertex format with the specified [param vertex_descriptions]. Returns a unique vertex format ID corresponding to the newly created vertex format. */
-vertex_format_create(): int;
+vertex_format_create(vertex_descriptions: RDVertexAttribute[]): int;
 
   connect<T extends SignalsOf<RenderingDevice>>(signal: T, method: SignalFunction<RenderingDevice[T]>): number;
 

@@ -55,7 +55,7 @@ subdiv: int;
  * **Note:** [GeometryInstance3D]s and [Light3D]s must be fully ready before [method bake] is called. If you are procedurally creating those and some meshes or lights are missing from your baked [VoxelGI], use `call_deferred("bake")` instead of calling [method bake] directly.
  *
 */
-bake(): void;
+bake(from_node?: Node, create_visual_debug?: boolean): void;
 
 /** Calls [method bake] with [code]create_visual_debug[/code] enabled. */
 debug_bake(): void;

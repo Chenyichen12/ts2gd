@@ -31,10 +31,10 @@ clear(): void;
 finish(): int;
 
 /** Start the stream in compression mode with the given [param buffer_size], if [param use_deflate] is [code]true[/code] uses deflate instead of GZIP. */
-start_compression(): int;
+start_compression(use_deflate?: boolean, buffer_size?: int): int;
 
 /** Start the stream in decompression mode with the given [param buffer_size], if [param use_deflate] is [code]true[/code] uses deflate instead of GZIP. */
-start_decompression(): int;
+start_decompression(use_deflate?: boolean, buffer_size?: int): int;
 
   connect<T extends SignalsOf<StreamPeerGZIP>>(signal: T, method: SignalFunction<StreamPeerGZIP[T]>): number;
 

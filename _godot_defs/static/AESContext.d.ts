@@ -161,7 +161,7 @@ finish(): void;
 get_iv_state(): PackedByteArray;
 
 /** Start the AES context in the given [param mode]. A [param key] of either 16 or 32 bytes must always be provided, while an [param iv] (initialization vector) of exactly 16 bytes, is only needed when [param mode] is either [constant MODE_CBC_ENCRYPT] or [constant MODE_CBC_DECRYPT]. */
-start(): int;
+start(mode: int, key: PackedByteArray, iv?: PackedByteArray): int;
 
 /**
  * Run the desired operation for this AES context. Will return a [PackedByteArray] containing the result of encrypting (or decrypting) the given [param src]. See [method start] for mode of operation.
@@ -169,7 +169,7 @@ start(): int;
  * **Note:** The size of [param src] must be a multiple of 16. Apply some padding if needed.
  *
 */
-update(): PackedByteArray;
+update(src: PackedByteArray): PackedByteArray;
 
   connect<T extends SignalsOf<AESContext>>(signal: T, method: SignalFunction<AESContext[T]>): number;
 

@@ -20,7 +20,7 @@ declare class EditorContextMenuPlugin extends RefCounted  {
 
 
 /** Called when creating a context menu, custom options can be added by using the [method add_context_menu_item] or [method add_context_menu_item_from_shortcut] functions. [param paths] contains currently selected paths (depending on menu), which can be used to conditionally add options. */
-protected _popup_menu(): void;
+protected _popup_menu(paths: PackedStringArray): void;
 
 /**
  * Add custom option to the context menu of the plugin's specified slot. When the option is activated, [param callback] will be called. Callback should take single [Array] argument; array contents depend on context menu slot.
@@ -35,7 +35,7 @@ protected _popup_menu(): void;
  * If you want to assign shortcut to the menu item, use [method add_context_menu_item_from_shortcut] instead.
  *
 */
-add_context_menu_item(): void;
+add_context_menu_item(name: string, callback: Callable, icon?: Texture2D): void;
 
 /**
  * Add custom option to the context menu of the plugin's specified slot. The option will have the [param shortcut] assigned and reuse its callback. The shortcut has to be registered beforehand with [method add_menu_shortcut].
@@ -50,7 +50,7 @@ add_context_menu_item(): void;
  * 
  *
 */
-add_context_menu_item_from_shortcut(): void;
+add_context_menu_item_from_shortcut(name: string, shortcut: Shortcut, icon?: Texture2D): void;
 
 /**
  * Add a submenu to the context menu of the plugin's specified slot. The submenu is not automatically handled, you need to connect to its signals yourself. Also the submenu is freed on every popup, so provide a new [PopupMenu] every time.
@@ -67,7 +67,7 @@ add_context_menu_item_from_shortcut(): void;
  * 
  *
 */
-add_context_submenu_item(): void;
+add_context_submenu_item(name: string, menu: PopupMenu, icon?: Texture2D): void;
 
 /**
  * Registers a shortcut associated with the plugin's context menu. This method should be called once (e.g. in plugin's [method Object._init]). [param callback] will be called when user presses the specified [param shortcut] while the menu's context is in effect (e.g. FileSystem dock is focused). Callback should take single [Array] argument; array contents depend on context menu slot.
@@ -80,7 +80,7 @@ add_context_submenu_item(): void;
  * 
  *
 */
-add_menu_shortcut(): void;
+add_menu_shortcut(shortcut: Shortcut, callback: Callable): void;
 
   connect<T extends SignalsOf<EditorContextMenuPlugin>>(signal: T, method: SignalFunction<EditorContextMenuPlugin[T]>): number;
 

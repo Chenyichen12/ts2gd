@@ -175,7 +175,7 @@ get_concatenated_subnames(): StringName;
  * 
  *
 */
-get_name(): StringName;
+get_name(idx: int): StringName;
 
 /**
  * Returns the number of node names in the path. Property subnames are not included.
@@ -204,7 +204,7 @@ get_name_count(): int;
  * 
  *
 */
-get_subname(): StringName;
+get_subname(idx: int): StringName;
 
 /**
  * Returns the number of property names ("subnames") in the path. Each subname in the node path is listed after a colon character (`:`).
@@ -236,7 +236,7 @@ is_empty(): boolean;
  * If either [param begin] or [param end] are negative, they will be relative to the end of the [NodePath] (i.e. `path.slice(0, -2)` is a shorthand for `path.slice(0, path.get_name_count() + path.get_subname_count() - 2)`).
  *
 */
-slice(): NodePathType;
+slice(begin: int, end?: int): NodePathType;
 
   connect<T extends SignalsOf<NodePath>>(signal: T, method: SignalFunction<NodePath[T]>): number;
 

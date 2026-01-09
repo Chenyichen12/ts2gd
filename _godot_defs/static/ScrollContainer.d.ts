@@ -91,7 +91,7 @@ vertical_scroll_mode: int;
  * 
  *
 */
-ensure_control_visible(): void;
+ensure_control_visible(control: Control): void;
 
 /**
  * Returns the horizontal scrollbar [HScrollBar] of this [ScrollContainer].

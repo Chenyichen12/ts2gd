@@ -16,7 +16,7 @@ declare class ScriptEditorBase extends VBoxContainer  {
 
 
 /** Adds an [EditorSyntaxHighlighter] to the open script. */
-add_syntax_highlighter(): void;
+add_syntax_highlighter(highlighter: EditorSyntaxHighlighter): void;
 
 /** Returns the underlying [Control] used for editing scripts. For text scripts, this is a [CodeEdit]. */
 get_base_editor(): Control;

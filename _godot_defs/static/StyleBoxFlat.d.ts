@@ -174,34 +174,34 @@ shadow_size: int;
 skew: Vector2;
 
 /** Returns the specified [enum Side]'s border width. */
-get_border_width(): int;
+get_border_width(margin: int): int;
 
 /** Returns the smallest border width out of all four borders. */
 get_border_width_min(): int;
 
 /** Returns the given [param corner]'s radius. */
-get_corner_radius(): int;
+get_corner_radius(corner: int): int;
 
 /** Returns the size of the specified [enum Side]'s expand margin. */
-get_expand_margin(): float;
+get_expand_margin(margin: int): float;
 
 /** Sets the specified [enum Side]'s border width to [param width] pixels. */
-set_border_width(): void;
+set_border_width(margin: int, width: int): void;
 
 /** Sets the border width to [param width] pixels for all sides. */
-set_border_width_all(): void;
+set_border_width_all(width: int): void;
 
 /** Sets the corner radius to [param radius] pixels for the given [param corner]. */
-set_corner_radius(): void;
+set_corner_radius(corner: int, radius: int): void;
 
 /** Sets the corner radius to [param radius] pixels for all corners. */
-set_corner_radius_all(): void;
+set_corner_radius_all(radius: int): void;
 
 /** Sets the expand margin to [param size] pixels for the specified [enum Side]. */
-set_expand_margin(): void;
+set_expand_margin(margin: int, size: float): void;
 
 /** Sets the expand margin to [param size] pixels for all sides. */
-set_expand_margin_all(): void;
+set_expand_margin_all(size: float): void;
 
   connect<T extends SignalsOf<StyleBoxFlat>>(signal: T, method: SignalFunction<StyleBoxFlat[T]>): number;
 

@@ -23,10 +23,10 @@ blend_shapes: PackedFloat32Array;
 
 
 /** Returns the requested face blend shape weight. */
-get_blend_shape(): float;
+get_blend_shape(blend_shape: int): float;
 
 /** Sets a face blend shape weight. */
-set_blend_shape(): void;
+set_blend_shape(blend_shape: int, weight: float): void;
 
   connect<T extends SignalsOf<XRFaceTracker>>(signal: T, method: SignalFunction<XRFaceTracker[T]>): number;
 

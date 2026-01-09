@@ -32,7 +32,7 @@ declare class TileSetSource extends Resource  {
 
 
 /** Returns the alternative ID for the tile with coordinates ID [param atlas_coords] at index [param index]. */
-get_alternative_tile_id(): int;
+get_alternative_tile_id(atlas_coords: Vector2i, index: int): int;
 
 /**
  * Returns the number of alternatives tiles for the coordinates ID [param atlas_coords].
@@ -42,19 +42,19 @@ get_alternative_tile_id(): int;
  * Returns -1 if there is not tile at the given coords.
  *
 */
-get_alternative_tiles_count(): int;
+get_alternative_tiles_count(atlas_coords: Vector2i): int;
 
 /** Returns the tile coordinates ID of the tile with index [param index]. */
-get_tile_id(): Vector2i;
+get_tile_id(index: int): Vector2i;
 
 /** Returns how many tiles this atlas source defines (not including alternative tiles). */
 get_tiles_count(): int;
 
 /** Returns if the base tile at coordinates [param atlas_coords] has an alternative with ID [param alternative_tile]. */
-has_alternative_tile(): boolean;
+has_alternative_tile(atlas_coords: Vector2i, alternative_tile: int): boolean;
 
 /** Returns if this atlas has a tile with coordinates ID [param atlas_coords]. */
-has_tile(): boolean;
+has_tile(atlas_coords: Vector2i): boolean;
 
   connect<T extends SignalsOf<TileSetSource>>(signal: T, method: SignalFunction<TileSetSource[T]>): number;
 

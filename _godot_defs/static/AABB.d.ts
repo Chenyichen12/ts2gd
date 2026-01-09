@@ -90,7 +90,7 @@ abs(): AABB;
  * 
  *
 */
-encloses(): boolean;
+encloses(_with: AABB): boolean;
 
 /**
  * Returns a copy of this bounding box expanded to align the edges with the given [param to_point], if necessary.
@@ -119,13 +119,13 @@ encloses(): boolean;
  * 
  *
 */
-expand(): AABB;
+expand(to_point: Vector3): AABB;
 
 /** Returns the center point of the bounding box. This is the same as [code]position + (size / 2.0)[/code]. */
 get_center(): Vector3;
 
 /** Returns the position of one of the 8 vertices that compose this bounding box. With an [param idx] of [code]0[/code] this is the same as [member position], and an [param idx] of [code]7[/code] is the same as [member end]. */
-get_endpoint(): Vector3;
+get_endpoint(idx: int): Vector3;
 
 /**
  * Returns the longest normalized axis of this bounding box's [member size], as a [Vector3] ([constant Vector3.RIGHT], [constant Vector3.UP], or [constant Vector3.BACK]).
@@ -210,7 +210,7 @@ get_shortest_axis_index(): int;
 get_shortest_axis_size(): float;
 
 /** Returns the vertex's position of this bounding box that's the farthest in the given direction. This point is commonly known as the support point in collision detection algorithms. */
-get_support(): Vector3;
+get_support(direction: Vector3): Vector3;
 
 /** Returns the bounding box's volume. This is equivalent to [code]size.x * size.y * size.z[/code]. See also [method has_volume]. */
 get_volume(): float;
@@ -240,7 +240,7 @@ get_volume(): float;
  * 
  *
 */
-grow(): AABB;
+grow(by: float): AABB;
 
 /**
  * Returns `true` if the bounding box contains the given [param point]. By convention, points exactly on the right, top, and front sides are **not** included.
@@ -248,7 +248,7 @@ grow(): AABB;
  * **Note:** This method is not reliable for [AABB] with a **negative** [member size]. Use [method abs] first to get a valid bounding box.
  *
 */
-has_point(): boolean;
+has_point(point: Vector3): boolean;
 
 /** Returns [code]true[/code] if this bounding box has a surface or a length, that is, at least one component of [member size] is greater than [code]0[/code]. Otherwise, returns [code]false[/code]. */
 has_surface(): boolean;
@@ -281,13 +281,13 @@ has_volume(): boolean;
  * **Note:** If you only need to know whether two bounding boxes are intersecting, use [method intersects], instead.
  *
 */
-intersection(): AABB;
+intersection(_with: AABB): AABB;
 
 /** Returns [code]true[/code] if this bounding box overlaps with the box [param with]. The edges of both boxes are [i]always[/i] excluded. */
-intersects(): boolean;
+intersects(_with: AABB): boolean;
 
 /** Returns [code]true[/code] if this bounding box is on both sides of the given [param plane]. */
-intersects_plane(): boolean;
+intersects_plane(plane: Plane): boolean;
 
 /**
  * Returns the first point where this bounding box and the given ray intersect, as a [Vector3]. If no intersection occurs, returns `null`.
@@ -295,7 +295,7 @@ intersects_plane(): boolean;
  * The ray begin at [param from], faces [param dir] and extends towards infinity.
  *
 */
-intersects_ray(): any;
+intersects_ray(from: Vector3, dir: Vector3): any;
 
 /**
  * Returns the first point where this bounding box and the given segment intersect, as a [Vector3]. If no intersection occurs, returns `null`.
@@ -303,16 +303,16 @@ intersects_ray(): any;
  * The segment begins at [param from] and ends at [param to].
  *
 */
-intersects_segment(): any;
+intersects_segment(from: Vector3, to: Vector3): any;
 
 /** Returns [code]true[/code] if this bounding box and [param aabb] are approximately equal, by calling [method Vector3.is_equal_approx] on the [member position] and the [member size]. */
-is_equal_approx(): boolean;
+is_equal_approx(aabb: AABB): boolean;
 
 /** Returns [code]true[/code] if this bounding box's values are finite, by calling [method Vector3.is_finite] on the [member position] and the [member size]. */
 is_finite(): boolean;
 
 /** Returns an [AABB] that encloses both this bounding box and [param with] around the edges. See also [method encloses]. */
-merge(): AABB;
+merge(_with: AABB): AABB;
 
   connect<T extends SignalsOf<AABB>>(signal: T, method: SignalFunction<AABB[T]>): number;
 

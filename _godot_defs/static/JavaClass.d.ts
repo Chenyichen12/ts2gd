@@ -33,7 +33,7 @@ get_java_method_list(): Dictionary[];
 get_java_parent_class(): JavaClass;
 
 /** Returns [code]true[/code] if the given [param method] name exists in the object's Java methods. */
-has_java_method(): boolean;
+has_java_method(method: StringName): boolean;
 
   connect<T extends SignalsOf<JavaClass>>(signal: T, method: SignalFunction<JavaClass[T]>): number;
 

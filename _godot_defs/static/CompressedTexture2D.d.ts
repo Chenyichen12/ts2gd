@@ -47,7 +47,7 @@ load_path: string;
 
 
 /** Loads the texture from the specified [param path]. */
-load(): int;
+load(path: string): int;
 
   connect<T extends SignalsOf<CompressedTexture2D>>(signal: T, method: SignalFunction<CompressedTexture2D[T]>): number;
 

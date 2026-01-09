@@ -72,7 +72,7 @@ skew: float;
 transform: Transform2D;
 
 /** Multiplies the current scale by the [param ratio] vector. */
-apply_scale(): void;
+apply_scale(ratio: Vector2): void;
 
 /**
  * Returns the angle between the node and the [param point] in radians. See also [method look_at].
@@ -80,13 +80,13 @@ apply_scale(): void;
  * [url=https://raw.githubusercontent.com/godotengine/godot-docs/master/img/node2d_get_angle_to.png]Illustration of the returned angle.[/url]
  *
 */
-get_angle_to(): float;
+get_angle_to(point: Vector2): float;
 
 /** Returns the [Transform2D] relative to this node's parent. */
-get_relative_transform_to_parent(): Transform2D;
+get_relative_transform_to_parent(parent: Node): Transform2D;
 
 /** Adds the [param offset] vector to the node's global position. */
-global_translate(): void;
+global_translate(offset: Vector2): void;
 
 /**
  * Rotates the node so that its local +X axis points towards the [param point], which is expected to use global coordinates. This method is a combination of both [method rotate] and [method get_angle_to].
@@ -94,25 +94,25 @@ global_translate(): void;
  * [param point] should not be the same as the node's position, otherwise the node always looks to the right.
  *
 */
-look_at(): void;
+look_at(point: Vector2): void;
 
 /** Applies a local translation on the node's X axis with the amount specified in [param delta]. If [param scaled] is [code]false[/code], normalizes the movement to occur independently of the node's [member scale]. */
-move_local_x(): void;
+move_local_x(delta: float, scaled?: boolean): void;
 
 /** Applies a local translation on the node's Y axis with the amount specified in [param delta]. If [param scaled] is [code]false[/code], normalizes the movement to occur independently of the node's [member scale]. */
-move_local_y(): void;
+move_local_y(delta: float, scaled?: boolean): void;
 
 /** Applies a rotation to the node, in radians, starting from its current rotation. This is equivalent to [code]rotation += radians[/code]. */
-rotate(): void;
+rotate(radians: float): void;
 
 /** Transforms the provided local position into a position in global coordinate space. The input is expected to be local relative to the [Node2D] it is called on. e.g. Applying this method to the positions of child nodes will correctly transform their positions into the global coordinate space, but applying it to a node's own position will give an incorrect result, as it will incorporate the node's own transformation into its global position. */
-to_global(): Vector2;
+to_global(local_point: Vector2): Vector2;
 
 /** Transforms the provided global position into a position in local coordinate space. The output will be local relative to the [Node2D] it is called on. e.g. It is appropriate for determining the positions of child nodes, but it is not appropriate for determining its own position relative to its parent. */
-to_local(): Vector2;
+to_local(global_point: Vector2): Vector2;
 
 /** Translates the node by the given [param offset] in local coordinates. This is equivalent to [code]position += offset[/code]. */
-translate(): void;
+translate(offset: Vector2): void;
 
   connect<T extends SignalsOf<Node2D>>(signal: T, method: SignalFunction<Node2D[T]>): number;
 

@@ -166,7 +166,7 @@ visible_ratio: float;
  * If [param height_in_percent] is set, [param height] values are percentages of the control width instead of pixels.
  *
 */
-add_hr(): void;
+add_hr(width?: int, height?: int, color?: Color, alignment?: int, width_in_percent?: boolean, height_in_percent?: boolean): void;
 
 /**
  * Adds an image's opening and closing tags to the tag stack, optionally providing a [param width] and [param height] to resize the image, a [param color] to tint the image and a [param region] to only use parts of the image.
@@ -186,10 +186,10 @@ add_hr(): void;
  * [param alt_text] is used as the image description for assistive apps.
  *
 */
-add_image(): void;
+add_image(image: Texture2D, width?: int, height?: int, color?: Color, inline_align?: int, region?: Rect2, key?: any, pad?: boolean, tooltip?: string, width_in_percent?: boolean, height_in_percent?: boolean, alt_text?: string): void;
 
 /** Adds raw non-BBCode-parsed text to the tag stack. */
-add_text(): void;
+add_text(text: string): void;
 
 /**
  * Parses [param bbcode] and adds tags to the tag stack as needed.
@@ -197,7 +197,7 @@ add_text(): void;
  * **Note:** Using this method, you can't close a tag that was opened in a previous [method append_text] call. This is done to improve performance, especially when updating large RichTextLabels since rebuilding the whole BBCode every time would be slower. If you absolutely need to close a tag in a future method call, append the [member text] instead of using [method append_text].
  *
 */
-append_text(): void;
+append_text(bbcode: string): void;
 
 /**
  * Clears the tag stack, causing the label to display nothing.
@@ -216,7 +216,7 @@ deselect(): void;
  * **Note:** If [member threaded] is enabled, this method returns a value for the loaded part of the document. Use [method is_finished] or [signal finished] to determine whether document is fully loaded.
  *
 */
-get_character_line(): int;
+get_character_line(character: int): int;
 
 /**
  * Returns the paragraph number of the character position provided. Paragraph and character numbers are both zero-indexed.
@@ -224,7 +224,7 @@ get_character_line(): int;
  * **Note:** If [member threaded] is enabled, this method returns a value for the loaded part of the document. Use [method is_finished] or [signal finished] to determine whether document is fully loaded.
  *
 */
-get_character_paragraph(): int;
+get_character_paragraph(character: int): int;
 
 /**
  * Returns the height of the content.
@@ -260,7 +260,7 @@ get_line_count(): int;
  * **Note:** If [member threaded] is enabled, this method returns a value for the loaded part of the document. Use [method is_finished] or [signal finished] to determine whether the document is fully loaded.
  *
 */
-get_line_height(): int;
+get_line_height(line: int): int;
 
 /**
  * Returns the vertical offset of the line found at the provided index.
@@ -268,7 +268,7 @@ get_line_height(): int;
  * **Note:** If [member threaded] is enabled, this method returns a value for the loaded part of the document. Use [method is_finished] or [signal finished] to determine whether document is fully loaded.
  *
 */
-get_line_offset(): float;
+get_line_offset(line: int): float;
 
 /**
  * Returns the indexes of the first and last visible characters for the given [param line], as a [Vector2i].
@@ -278,7 +278,7 @@ get_line_offset(): float;
  * **Note:** If [member threaded] is enabled, this method returns a value for the loaded part of the document. Use [method is_finished] or [signal finished] to determine whether document is fully loaded.
  *
 */
-get_line_range(): Vector2i;
+get_line_range(line: int): Vector2i;
 
 /**
  * Returns the width of the line found at the provided index.
@@ -286,7 +286,7 @@ get_line_range(): Vector2i;
  * **Note:** If [member threaded] is enabled, this method returns a value for the loaded part of the document. Use [method is_finished] or [signal finished] to determine whether the document is fully loaded.
  *
 */
-get_line_width(): int;
+get_line_width(line: int): int;
 
 /**
  * Returns the [PopupMenu] of this [RichTextLabel]. By default, this menu is displayed when right-clicking on the [RichTextLabel].
@@ -346,7 +346,7 @@ get_paragraph_count(): int;
  * **Note:** If [member threaded] is enabled, this method returns a value for the loaded part of the document. Use [method is_finished] or [signal finished] to determine whether document is fully loaded.
  *
 */
-get_paragraph_offset(): float;
+get_paragraph_offset(paragraph: int): float;
 
 /** Returns the text without BBCode mark-up. */
 get_parsed_text(): string;
@@ -457,10 +457,10 @@ get_visible_paragraph_count(): int;
  * 
  *
 */
-install_effect(): void;
+install_effect(effect: any): void;
 
 /** Invalidates [param paragraph] and all subsequent paragraphs cache. */
-invalidate_paragraph(): boolean;
+invalidate_paragraph(paragraph: int): boolean;
 
 /** If [member threaded] is enabled, returns [code]true[/code] if the background thread has finished text processing, otherwise always return [code]true[/code]. */
 is_finished(): boolean;
@@ -472,16 +472,16 @@ is_menu_visible(): boolean;
 is_ready(): boolean;
 
 /** Executes a given action as defined in the [enum MenuItems] enum. */
-menu_option(): void;
+menu_option(option: int): void;
 
 /** Adds a newline tag to the tag stack. */
 newline(): void;
 
 /** The assignment version of [method append_text]. Clears the tag stack and inserts the new content. */
-parse_bbcode(): void;
+parse_bbcode(bbcode: string): void;
 
 /** Parses BBCode parameter [param expressions] into a dictionary. */
-parse_expressions_for_values(): Dictionary<any, any>;
+parse_expressions_for_values(expressions: PackedStringArray): Dictionary<any, any>;
 
 /** Terminates the current tag. Use after [code]push_*[/code] methods to close BBCodes manually. Does not need to follow [code]add_*[/code] methods. */
 pop(): void;
@@ -498,7 +498,7 @@ pop_context(): void;
  * **Note:** The background color has padding applied by default, which is controlled using [theme_item text_highlight_h_padding] and [theme_item text_highlight_v_padding]. This can lead to overlapping highlights if background colors are placed on neighboring lines/columns, so consider setting those theme items to `0` if you want to avoid this.
  *
 */
-push_bgcolor(): void;
+push_bgcolor(bgcolor: Color): void;
 
 /** Adds a [code skip-lint][font][/code] tag with a bold font to the tag stack. This is the same as adding a [code skip-lint][b][/code] tag if not currently in a [code skip-lint][i][/code] tag. */
 push_bold(): void;
@@ -510,16 +510,16 @@ push_bold_italics(): void;
 push_cell(): void;
 
 /** Adds a [code skip-lint][color][/code] tag to the tag stack. */
-push_color(): void;
+push_color(color: Color): void;
 
 /** Adds a context marker to the tag stack. See [method pop_context]. */
 push_context(): void;
 
 /** Adds a custom effect tag to the tag stack. The effect does not need to be in [member custom_effects]. The environment is directly passed to the effect. */
-push_customfx(): void;
+push_customfx(effect: RichTextEffect, env: Dictionary<any, any>): void;
 
 /** Adds a [code skip-lint][dropcap][/code] tag to the tag stack. Drop cap (dropped capital) is a decorative element at the beginning of a paragraph that is larger than the rest of the text. */
-push_dropcap(): void;
+push_dropcap(string: string, font: Font, size: int, dropcap_margins?: Rect2, color?: Color, outline_size?: int, outline_color?: Color): void;
 
 /**
  * Adds a [code skip-lint][fgcolor]` tag to the tag stack.
@@ -527,7 +527,7 @@ push_dropcap(): void;
  * **Note:** The foreground color has padding applied by default, which is controlled using [theme_item text_highlight_h_padding] and [theme_item text_highlight_v_padding]. This can lead to overlapping highlights if foreground colors are placed on neighboring lines/columns, so consider setting those theme items to `0` if you want to avoid this.
  *
 */
-push_fgcolor(): void;
+push_fgcolor(fgcolor: Color): void;
 
 /**
  * Adds a [code skip-lint][font]` tag to the tag stack. Overrides default fonts for its duration.
@@ -535,25 +535,25 @@ push_fgcolor(): void;
  * Passing `0` to [param font_size] will use the existing default font size.
  *
 */
-push_font(): void;
+push_font(font: Font, font_size?: int): void;
 
 /** Adds a [code skip-lint][font_size][/code] tag to the tag stack. Overrides default font size for its duration. */
-push_font_size(): void;
+push_font_size(font_size: int): void;
 
 /** Adds a [code skip-lint][hint][/code] tag to the tag stack. Same as BBCode [code skip-lint][hint=something]{text}[/hint][/code]. */
-push_hint(): void;
+push_hint(description: string): void;
 
 /** Adds an [code skip-lint][indent][/code] tag to the tag stack. Multiplies [param level] by current [member tab_size] to determine new margin length. */
-push_indent(): void;
+push_indent(level: int): void;
 
 /** Adds a [code skip-lint][font][/code] tag with an italics font to the tag stack. This is the same as adding an [code skip-lint][i][/code] tag if not currently in a [code skip-lint][b][/code] tag. */
 push_italics(): void;
 
 /** Adds language code used for text shaping algorithm and Open-Type font features. */
-push_language(): void;
+push_language(language: string): void;
 
 /** Adds [code skip-lint][ol][/code] or [code skip-lint][ul][/code] tag to the tag stack. Multiplies [param level] by current [member tab_size] to determine new margin length. */
-push_list(): void;
+push_list(level: int, type: int, capitalize: boolean, bullet?: string): void;
 
 /**
  * Adds a meta tag to the tag stack. Similar to the BBCode [code skip-lint][url=something]{text}[/url]`, but supports non-[String] metadata types.
@@ -563,7 +563,7 @@ push_list(): void;
  * **Note:** Meta tags do nothing by default when clicked. To assign behavior when clicked, connect [signal meta_clicked] to a function that is called when the meta tag is clicked.
  *
 */
-push_meta(): void;
+push_meta(data: any, underline_mode?: int, tooltip?: string): void;
 
 /** Adds a [code skip-lint][font][/code] tag with a monospace font to the tag stack. */
 push_mono(): void;
@@ -572,22 +572,22 @@ push_mono(): void;
 push_normal(): void;
 
 /** Adds a [code skip-lint][outline_color][/code] tag to the tag stack. Adds text outline for its duration. */
-push_outline_color(): void;
+push_outline_color(color: Color): void;
 
 /** Adds a [code skip-lint][outline_size][/code] tag to the tag stack. Overrides default text outline size for its duration. */
-push_outline_size(): void;
+push_outline_size(outline_size: int): void;
 
 /** Adds a [code skip-lint][p][/code] tag to the tag stack. */
-push_paragraph(): void;
+push_paragraph(alignment: int, base_direction?: int, language?: string, st_parser?: int, justification_flags?: int, tab_stops?: PackedFloat32Array): void;
 
 /** Adds a [code skip-lint][s][/code] tag to the tag stack. If [param color]'s alpha value is [code]0.0[/code], the current font's color with its alpha multiplied by [theme_item strikethrough_alpha] is used. */
-push_strikethrough(): void;
+push_strikethrough(color?: Color): void;
 
 /** Adds a [code skip-lint][table=columns,inline_align][/code] tag to the tag stack. Use [method set_table_column_expand] to set column expansion ratio. Use [method push_cell] to add cells. [param name] is used as the table name for assistive apps. */
-push_table(): void;
+push_table(columns: int, inline_align?: int, align_to_row?: int, name?: string): void;
 
 /** Adds a [code skip-lint][u][/code] tag to the tag stack. If [param color]'s alpha value is [code]0.0[/code], the current font's color with its alpha multiplied by [theme_item underline_alpha] is used. */
-push_underline(): void;
+push_underline(color?: Color): void;
 
 /** Reloads custom effects. Useful when [member custom_effects] is modified manually. */
 reload_effects(): void;
@@ -600,13 +600,13 @@ reload_effects(): void;
  * If [param no_invalidate] is set to `true`, cache for the subsequent paragraphs is not invalidated. Use it for faster updates if deleted paragraph is fully self-contained (have no unclosed tags), or this call is part of the complex edit operation and [method invalidate_paragraph] will be called at the end of operation.
  *
 */
-remove_paragraph(): boolean;
+remove_paragraph(paragraph: int, no_invalidate?: boolean): boolean;
 
 /** Scrolls the window's top line to match [param line]. */
-scroll_to_line(): void;
+scroll_to_line(line: int): void;
 
 /** Scrolls the window's top line to match first line of the [param paragraph]. */
-scroll_to_paragraph(): void;
+scroll_to_paragraph(paragraph: int): void;
 
 /** Scrolls to the beginning of the current selection. */
 scroll_to_selection(): void;
@@ -620,16 +620,16 @@ scroll_to_selection(): void;
 select_all(): void;
 
 /** Sets color of a table cell border. */
-set_cell_border_color(): void;
+set_cell_border_color(color: Color): void;
 
 /** Sets inner padding of a table cell. */
-set_cell_padding(): void;
+set_cell_padding(padding: Rect2): void;
 
 /** Sets color of a table cell. Separate colors for alternating rows can be specified. */
-set_cell_row_background_color(): void;
+set_cell_row_background_color(odd_row_bg: Color, even_row_bg: Color): void;
 
 /** Sets minimum and maximum size overrides for a table cell. */
-set_cell_size_override(): void;
+set_cell_size_override(min_size: Vector2, max_size: Vector2): void;
 
 /**
  * Edits the selected column's expansion options. If [param expand] is `true`, the column expands in proportion to its expansion ratio versus the other columns' ratios.
@@ -639,13 +639,13 @@ set_cell_size_override(): void;
  * If [param expand] is `false`, the column will not contribute to the total ratio.
  *
 */
-set_table_column_expand(): void;
+set_table_column_expand(column: int, expand: boolean, ratio?: int, shrink?: boolean): void;
 
 /** Sets table column name for assistive apps. */
-set_table_column_name(): void;
+set_table_column_name(column: int, name: string): void;
 
 /** Updates the existing images with the key [param key]. Only properties specified by [param mask] bits are updated. See [method add_image]. */
-update_image(): void;
+update_image(key: any, mask: int, image: Texture2D, width?: int, height?: int, color?: Color, inline_align?: int, region?: Rect2, pad?: boolean, tooltip?: string, width_in_percent?: boolean, height_in_percent?: boolean): void;
 
   connect<T extends SignalsOf<RichTextLabel>>(signal: T, method: SignalFunction<RichTextLabel[T]>): number;
 

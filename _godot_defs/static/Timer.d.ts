@@ -91,7 +91,7 @@ is_stopped(): boolean;
  * **Note:** This method does not resume a paused timer. See [member paused].
  *
 */
-start(): void;
+start(time_sec?: float): void;
 
 /**
  * Stops the timer. See also [member paused]. Unlike [method start], this can safely be called if the timer is not inside the scene tree.

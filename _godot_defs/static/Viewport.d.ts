@@ -369,7 +369,7 @@ get_camera_2d(): Camera2D;
 get_camera_3d(): Camera3D;
 
 /** Returns an individual bit on the rendering layer mask. */
-get_canvas_cull_mask_bit(): boolean;
+get_canvas_cull_mask_bit(layer: int): boolean;
 
 /**
  * Returns a list of the visible embedded [Window]s inside the viewport.
@@ -389,10 +389,10 @@ get_mouse_position(): Vector2;
 get_oversampling(): float;
 
 /** Returns the positional shadow atlas quadrant subdivision of the specified quadrant. */
-get_positional_shadow_atlas_quadrant_subdiv(): int;
+get_positional_shadow_atlas_quadrant_subdiv(quadrant: int): int;
 
 /** Returns rendering statistics of the given type. */
-get_render_info(): int;
+get_render_info(type: int, info: int): int;
 
 /** Returns the transform from the Viewport's coordinates to the screen coordinates of the containing window manager window. */
 get_screen_transform(): Transform2D;
@@ -474,7 +474,7 @@ gui_is_dragging(): boolean;
 gui_release_focus(): void;
 
 /** Sets the human-readable description of the drag data to [param description], used for assistive apps. */
-gui_set_drag_description(): void;
+gui_set_drag_description(description: string): void;
 
 /**
  * Returns whether the current [InputEvent] has been handled. Input events are not handled until [method set_input_as_handled] has been called during the lifetime of an [InputEvent].
@@ -526,10 +526,10 @@ notify_mouse_exited(): void;
  * If none of the methods handle the event and [member physics_object_picking] is `true`, the event is used for physics object picking.
  *
 */
-push_input(): void;
+push_input(event: InputEvent, in_local_coords?: boolean): void;
 
 /** Helper method which calls the [code]set_text()[/code] method on the currently focused [Control], provided that it is defined (e.g. if the focused Control is [Button] or [LineEdit]). */
-push_text_input(): void;
+push_text_input(text: string): void;
 
 /**
  * Triggers the given [param event] in this [Viewport]. This can be used to pass an [InputEvent] between viewports, or to locally apply inputs that were sent over the network or saved to a file.
@@ -551,10 +551,10 @@ push_text_input(): void;
  * **Note:** This method doesn't propagate input events to embedded [Window]s or [SubViewport]s.
  *
 */
-push_unhandled_input(): void;
+push_unhandled_input(event: InputEvent, in_local_coords?: boolean): void;
 
 /** Set/clear individual bits on the rendering layer mask. This simplifies editing this [Viewport]'s layers. */
-set_canvas_cull_mask_bit(): void;
+set_canvas_cull_mask_bit(layer: int, enable: boolean): void;
 
 /**
  * Stops the input from propagating further up the [SceneTree].
@@ -565,7 +565,7 @@ set_canvas_cull_mask_bit(): void;
 set_input_as_handled(): void;
 
 /** Sets the number of subdivisions to use in the specified quadrant. A higher number of subdivisions allows you to have more shadows in the scene at once, but reduces the quality of the shadows. A good practice is to have quadrants with a varying number of subdivisions and to have as few subdivisions as possible. */
-set_positional_shadow_atlas_quadrant_subdiv(): void;
+set_positional_shadow_atlas_quadrant_subdiv(quadrant: int, subdiv: int): void;
 
 /** Force instantly updating the display based on the current mouse cursor position. This includes updating the mouse cursor shape and sending necessary [signal Control.mouse_entered], [signal CollisionObject2D.mouse_entered], [signal CollisionObject3D.mouse_entered] and [signal Window.mouse_entered] signals and their respective [code]mouse_exited[/code] counterparts. */
 update_mouse_cursor_state(): void;
@@ -576,7 +576,7 @@ update_mouse_cursor_state(): void;
  * **Note:** [method warp_mouse] is only supported on Windows, macOS and Linux. It has no effect on Android, iOS and Web.
  *
 */
-warp_mouse(): void;
+warp_mouse(position: Vector2): void;
 
   connect<T extends SignalsOf<Viewport>>(signal: T, method: SignalFunction<Viewport[T]>): number;
 

@@ -46,19 +46,19 @@ interpolation_mode: int;
 offsets: PackedFloat32Array;
 
 /** Adds the specified color to the gradient, with the specified offset. */
-add_point(): void;
+add_point(offset: float, color: Color): void;
 
 /** Returns the color of the gradient color at index [param point]. */
-get_color(): Color;
+get_color(point: int): Color;
 
 /** Returns the offset of the gradient color at index [param point]. */
-get_offset(): float;
+get_offset(point: int): float;
 
 /** Returns the number of colors in the gradient. */
 get_point_count(): int;
 
 /** Removes the color at index [param point]. */
-remove_point(): void;
+remove_point(point: int): void;
 
 /**
  * Reverses/mirrors the gradient.
@@ -69,13 +69,13 @@ remove_point(): void;
 reverse(): void;
 
 /** Returns the interpolated color specified by [param offset]. [param offset] should be between [code]0.0[/code] and [code]1.0[/code] (inclusive). Using a value lower than [code]0.0[/code] will return the same color as [code]0.0[/code], and using a value higher than [code]1.0[/code] will return the same color as [code]1.0[/code]. If your input value is not within this range, consider using [method @GlobalScope.remap] on the input value with output values set to [code]0.0[/code] and [code]1.0[/code]. */
-sample(): Color;
+sample(offset: float): Color;
 
 /** Sets the color of the gradient color at index [param point]. */
-set_color(): void;
+set_color(point: int, color: Color): void;
 
 /** Sets the offset for the gradient color at index [param point]. */
-set_offset(): void;
+set_offset(point: int, offset: float): void;
 
   connect<T extends SignalsOf<Gradient>>(signal: T, method: SignalFunction<Gradient[T]>): number;
 

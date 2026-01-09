@@ -59,16 +59,16 @@ clear_tiles_outside_texture(): void;
  * Returns the new alternative identifier, or -1 if the alternative could not be created with a provided [param alternative_id_override].
  *
 */
-create_alternative_tile(): int;
+create_alternative_tile(atlas_coords: Vector2i, alternative_id_override?: int): int;
 
 /** Creates a new tile at coordinates [param atlas_coords] with the given [param size]. */
-create_tile(): void;
+create_tile(atlas_coords: Vector2i, size?: Vector2i): void;
 
 /** Returns the atlas grid size, which depends on how many tiles can fit in the texture. It thus depends on the [member texture]'s size, the atlas [member margins], and the tiles' [member texture_region_size]. */
 get_atlas_grid_size(): Vector2i;
 
 /** Returns the alternative ID a following call to [method create_alternative_tile] would return. */
-get_next_alternative_tile_id(): int;
+get_next_alternative_tile_id(atlas_coords: Vector2i): int;
 
 /** If [member use_texture_padding] is [code]false[/code], returns [member texture]. Otherwise, returns an internal [ImageTexture] created that includes the padding. */
 get_runtime_texture(): Texture2D;
@@ -79,46 +79,46 @@ get_runtime_texture(): Texture2D;
  * **Note:** If [member use_texture_padding] is `false`, returns the same as [method get_tile_texture_region].
  *
 */
-get_runtime_tile_texture_region(): Rect2i;
+get_runtime_tile_texture_region(atlas_coords: Vector2i, frame: int): Rect2i;
 
 /** Returns how many columns the tile at [param atlas_coords] has in its animation layout. */
-get_tile_animation_columns(): int;
+get_tile_animation_columns(atlas_coords: Vector2i): int;
 
 /** Returns the animation frame duration of frame [param frame_index] for the tile at coordinates [param atlas_coords]. */
-get_tile_animation_frame_duration(): float;
+get_tile_animation_frame_duration(atlas_coords: Vector2i, frame_index: int): float;
 
 /** Returns how many animation frames has the tile at coordinates [param atlas_coords]. */
-get_tile_animation_frames_count(): int;
+get_tile_animation_frames_count(atlas_coords: Vector2i): int;
 
 /** Returns the tile animation mode of the tile at [param atlas_coords]. See also [method set_tile_animation_mode]. */
-get_tile_animation_mode(): int;
+get_tile_animation_mode(atlas_coords: Vector2i): int;
 
 /** Returns the separation (as in the atlas grid) between each frame of an animated tile at coordinates [param atlas_coords]. */
-get_tile_animation_separation(): Vector2i;
+get_tile_animation_separation(atlas_coords: Vector2i): Vector2i;
 
 /** Returns the animation speed of the tile at coordinates [param atlas_coords]. */
-get_tile_animation_speed(): float;
+get_tile_animation_speed(atlas_coords: Vector2i): float;
 
 /** Returns the sum of the sum of the frame durations of the tile at coordinates [param atlas_coords]. This value needs to be divided by the animation speed to get the actual animation loop duration. */
-get_tile_animation_total_duration(): float;
+get_tile_animation_total_duration(atlas_coords: Vector2i): float;
 
 /** If there is a tile covering the [param atlas_coords] coordinates, returns the top-left coordinates of the tile (thus its coordinate ID). Returns [code]Vector2i(-1, -1)[/code] otherwise. */
-get_tile_at_coords(): Vector2i;
+get_tile_at_coords(atlas_coords: Vector2i): Vector2i;
 
 /** Returns the [TileData] object for the given atlas coordinates and alternative ID. */
-get_tile_data(): TileData;
+get_tile_data(atlas_coords: Vector2i, alternative_tile: int): TileData;
 
 /** Returns the size of the tile (in the grid coordinates system) at coordinates [param atlas_coords]. */
-get_tile_size_in_atlas(): Vector2i;
+get_tile_size_in_atlas(atlas_coords: Vector2i): Vector2i;
 
 /** Returns a tile's texture region in the atlas texture. For animated tiles, a [param frame] argument might be provided for the different frames of the animation. */
-get_tile_texture_region(): Rect2i;
+get_tile_texture_region(atlas_coords: Vector2i, frame?: int): Rect2i;
 
 /** Returns an array of tiles coordinates ID that will be automatically removed when modifying one or several of those properties: [param texture], [param margins], [param separation] or [param texture_region_size]. This can be used to undo changes that would have caused tiles data loss. */
-get_tiles_to_be_removed_on_change(): PackedVector2Array;
+get_tiles_to_be_removed_on_change(texture: Texture2D, margins: Vector2i, separation: Vector2i, texture_region_size: Vector2i): PackedVector2Array;
 
 /** Returns whether there is enough room in an atlas to create/modify a tile with the given properties. If [param ignored_tile] is provided, act as is the given tile was not present in the atlas. This may be used when you want to modify a tile's properties. */
-has_room_for_tile(): boolean;
+has_room_for_tile(atlas_coords: Vector2i, size: Vector2i, animation_columns: int, animation_separation: Vector2i, frames_count: int, ignored_tile?: Vector2i): boolean;
 
 /** Checks if the source has any tiles that don't fit the texture area (either partially or completely). */
 has_tiles_outside_texture(): boolean;
@@ -131,7 +131,7 @@ has_tiles_outside_texture(): boolean;
  * To avoid an error, first check if a move is possible using [method has_room_for_tile].
  *
 */
-move_tile_in_atlas(): void;
+move_tile_in_atlas(atlas_coords: Vector2i, new_atlas_coords?: Vector2i, new_size?: Vector2i): void;
 
 /**
  * Remove a tile's alternative with alternative ID [param alternative_tile].
@@ -139,10 +139,10 @@ move_tile_in_atlas(): void;
  * Calling this function with [param alternative_tile] equals to 0 will fail, as the base tile alternative cannot be removed.
  *
 */
-remove_alternative_tile(): void;
+remove_alternative_tile(atlas_coords: Vector2i, alternative_tile: int): void;
 
 /** Remove a tile and its alternative at coordinates [param atlas_coords]. */
-remove_tile(): void;
+remove_tile(atlas_coords: Vector2i): void;
 
 /**
  * Change a tile's alternative ID from [param alternative_tile] to [param new_id].
@@ -150,25 +150,25 @@ remove_tile(): void;
  * Calling this function with [param new_id] of 0 will fail, as the base tile alternative cannot be moved.
  *
 */
-set_alternative_tile_id(): void;
+set_alternative_tile_id(atlas_coords: Vector2i, alternative_tile: int, new_id: int): void;
 
 /** Sets the number of columns in the animation layout of the tile at coordinates [param atlas_coords]. If set to 0, then the different frames of the animation are laid out as a single horizontal line in the atlas. */
-set_tile_animation_columns(): void;
+set_tile_animation_columns(atlas_coords: Vector2i, frame_columns: int): void;
 
 /** Sets the animation frame [param duration] of frame [param frame_index] for the tile at coordinates [param atlas_coords]. */
-set_tile_animation_frame_duration(): void;
+set_tile_animation_frame_duration(atlas_coords: Vector2i, frame_index: int, duration: float): void;
 
 /** Sets how many animation frames the tile at coordinates [param atlas_coords] has. */
-set_tile_animation_frames_count(): void;
+set_tile_animation_frames_count(atlas_coords: Vector2i, frames_count: int): void;
 
 /** Sets the tile animation mode of the tile at [param atlas_coords] to [param mode]. See also [method get_tile_animation_mode]. */
-set_tile_animation_mode(): void;
+set_tile_animation_mode(atlas_coords: Vector2i, mode: int): void;
 
 /** Sets the margin (in grid tiles) between each tile in the animation layout of the tile at coordinates [param atlas_coords] has. */
-set_tile_animation_separation(): void;
+set_tile_animation_separation(atlas_coords: Vector2i, separation: Vector2i): void;
 
 /** Sets the animation speed of the tile at coordinates [param atlas_coords] has. */
-set_tile_animation_speed(): void;
+set_tile_animation_speed(atlas_coords: Vector2i, speed: float): void;
 
   connect<T extends SignalsOf<TileSetAtlasSource>>(signal: T, method: SignalFunction<TileSetAtlasSource[T]>): number;
 

@@ -79,7 +79,7 @@ pause(): void;
  * If this method is called with that same animation [param name], or with no [param name] parameter, the assigned animation will resume playing if it was paused.
  *
 */
-play(): void;
+play(name?: StringName, custom_speed?: float, from_end?: boolean): void;
 
 /**
  * Plays the animation with key [param name] in reverse.
@@ -87,7 +87,7 @@ play(): void;
  * This method is a shorthand for [method play] with `custom_speed = -1.0` and `from_end = true`, so see its description for more information.
  *
 */
-play_backwards(): void;
+play_backwards(name?: StringName): void;
 
 /**
  * Sets [member frame] and [member frame_progress] to the given values. Unlike setting [member frame], this method does not reset the [member frame_progress] to `0.0` implicitly.
@@ -106,7 +106,7 @@ play_backwards(): void;
  * 
  *
 */
-set_frame_and_progress(): void;
+set_frame_and_progress(frame: int, progress: float): void;
 
 /** Stops the currently playing animation. The animation position is reset to [code]0[/code] and the [code]custom_speed[/code] is reset to [code]1.0[/code]. See also [method pause]. */
 stop(): void;

@@ -20,7 +20,7 @@ declare class SubtweenTweener extends Tweener  {
 
 
 /** Sets the time in seconds after which the [SubtweenTweener] will start running the subtween. By default there's no delay. */
-set_delay(): SubtweenTweener;
+set_delay(delay: float): SubtweenTweener;
 
   connect<T extends SignalsOf<SubtweenTweener>>(signal: T, method: SignalFunction<SubtweenTweener[T]>): number;
 

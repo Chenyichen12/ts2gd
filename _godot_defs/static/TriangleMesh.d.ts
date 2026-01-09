@@ -33,7 +33,7 @@ declare class TriangleMesh extends RefCounted  {
  * Returns `true` if the tree is successfully built, `false` otherwise.
  *
 */
-create_from_faces(): boolean;
+create_from_faces(faces: PackedVector3Array): boolean;
 
 /** Returns a copy of the geometry faces. Each 3 vertices of the array represent one triangle (face). */
 get_faces(): PackedVector3Array;
@@ -54,7 +54,7 @@ get_faces(): PackedVector3Array;
  * See also [method intersect_segment], which is similar but uses a finite-length segment.
  *
 */
-intersect_ray(): Dictionary<any, any>;
+intersect_ray(begin: Vector3, dir: Vector3): Dictionary<any, any>;
 
 /**
  * Tests for intersection with a segment going from [param begin] to [param end].
@@ -72,7 +72,7 @@ intersect_ray(): Dictionary<any, any>;
  * See also [method intersect_ray], which is similar but uses an infinite-length ray.
  *
 */
-intersect_segment(): Dictionary<any, any>;
+intersect_segment(begin: Vector3, end: Vector3): Dictionary<any, any>;
 
   connect<T extends SignalsOf<TriangleMesh>>(signal: T, method: SignalFunction<TriangleMesh[T]>): number;
 

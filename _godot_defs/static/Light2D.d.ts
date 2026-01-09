@@ -68,7 +68,7 @@ shadow_item_cull_mask: int;
 get_height(): float;
 
 /** Sets the light's height, which is used in 2D normal mapping. See [member PointLight2D.height] and [member DirectionalLight2D.height]. */
-set_height(): void;
+set_height(height: float): void;
 
   connect<T extends SignalsOf<Light2D>>(signal: T, method: SignalFunction<Light2D[T]>): number;
 

@@ -24,10 +24,10 @@ declare class PinJoint3D extends Joint3D  {
 "params/impulse_clamp": float;
 
 /** Returns the value of the specified parameter. */
-get_param(): float;
+get_param(param: int): float;
 
 /** Sets the value of the specified parameter. */
-set_param(): void;
+set_param(param: int, value: float): void;
 
   connect<T extends SignalsOf<PinJoint3D>>(signal: T, method: SignalFunction<PinJoint3D[T]>): number;
 

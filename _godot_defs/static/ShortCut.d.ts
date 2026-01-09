@@ -129,7 +129,7 @@ get_as_text(): string;
 has_valid_event(): boolean;
 
 /** Returns whether any [InputEvent] in [member events] equals [param event]. This uses [method InputEvent.is_match] to compare events. */
-matches_event(): boolean;
+matches_event(event: InputEvent): boolean;
 
   connect<T extends SignalsOf<Shortcut>>(signal: T, method: SignalFunction<Shortcut[T]>): number;
 

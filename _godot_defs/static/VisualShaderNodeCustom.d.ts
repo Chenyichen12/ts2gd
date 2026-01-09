@@ -55,7 +55,7 @@ protected _get_category(): string;
  * Defining this method is **required**.
  *
 */
-protected _get_code(): string;
+protected _get_code(input_vars: String[], output_vars: String[], mode: int, type: int): string;
 
 /**
  * Override this method to define the input port which should be connected by default when this node is created as a result of dragging a connection from an existing node to the empty space on the graph.
@@ -63,7 +63,7 @@ protected _get_code(): string;
  * Defining this method is **optional**. If not overridden, the connection will be created to the first valid port.
  *
 */
-protected _get_default_input_port(): int;
+protected _get_default_input_port(type: int): int;
 
 /**
  * Override this method to define the description of the associated custom node in the Visual Shader Editor's members dialog.
@@ -83,7 +83,7 @@ protected _get_description(): string;
  * Defining this method is **optional**.
  *
 */
-protected _get_func_code(): string;
+protected _get_func_code(mode: int, type: int): string;
 
 /**
  * Override this method to add shader code on top of the global shader, to define your own standard library of reusable methods, varyings, constants, uniforms, etc. The shader code should be returned as a string, which can have multiple lines (the `"""` multiline string construct can be used for convenience).
@@ -95,7 +95,7 @@ protected _get_func_code(): string;
  * Defining this method is **optional**.
  *
 */
-protected _get_global_code(): string;
+protected _get_global_code(mode: int): string;
 
 /**
  * Override this method to define the number of input ports of the associated custom node.
@@ -111,7 +111,7 @@ protected _get_input_port_count(): int;
  * Defining this method is **required**. If not overridden, the node has no default values for their input ports.
  *
 */
-protected _get_input_port_default_value(): any;
+protected _get_input_port_default_value(port: int): any;
 
 /**
  * Override this method to define the names of input ports of the associated custom node. The names are used both for the input slots in the editor and as identifiers in the shader code, and are passed in the `input_vars` array in [method _get_code].
@@ -119,7 +119,7 @@ protected _get_input_port_default_value(): any;
  * Defining this method is **optional**, but recommended. If not overridden, input ports are named as `"in" + str(port)`.
  *
 */
-protected _get_input_port_name(): string;
+protected _get_input_port_name(port: int): string;
 
 /**
  * Override this method to define the returned type of each input port of the associated custom node.
@@ -127,7 +127,7 @@ protected _get_input_port_name(): string;
  * Defining this method is **optional**, but recommended. If not overridden, input ports will return the [constant VisualShaderNode.PORT_TYPE_SCALAR] type.
  *
 */
-protected _get_input_port_type(): int;
+protected _get_input_port_type(port: int): int;
 
 /**
  * Override this method to define the name of the associated custom node in the Visual Shader Editor's members dialog and graph.
@@ -151,7 +151,7 @@ protected _get_output_port_count(): int;
  * Defining this method is **optional**, but recommended. If not overridden, output ports are named as `"out" + str(port)`.
  *
 */
-protected _get_output_port_name(): string;
+protected _get_output_port_name(port: int): string;
 
 /**
  * Override this method to define the returned type of each output port of the associated custom node.
@@ -159,7 +159,7 @@ protected _get_output_port_name(): string;
  * Defining this method is **optional**, but recommended. If not overridden, output ports will return the [constant VisualShaderNode.PORT_TYPE_SCALAR] type.
  *
 */
-protected _get_output_port_type(): int;
+protected _get_output_port_type(port: int): int;
 
 /**
  * Override this method to define the number of the properties.
@@ -175,7 +175,7 @@ protected _get_property_count(): int;
  * Defining this method is **optional**.
  *
 */
-protected _get_property_default_index(): int;
+protected _get_property_default_index(index: int): int;
 
 /**
  * Override this method to define the names of the property of the associated custom node.
@@ -183,7 +183,7 @@ protected _get_property_default_index(): int;
  * Defining this method is **optional**.
  *
 */
-protected _get_property_name(): string;
+protected _get_property_name(index: int): string;
 
 /**
  * Override this method to define the options inside the drop-down list property of the associated custom node.
@@ -191,7 +191,7 @@ protected _get_property_name(): string;
  * Defining this method is **optional**.
  *
 */
-protected _get_property_options(): PackedStringArray;
+protected _get_property_options(index: int): PackedStringArray;
 
 /**
  * Override this method to define the return icon of the associated custom node in the Visual Shader Editor's members dialog.
@@ -207,7 +207,7 @@ protected _get_return_icon_type(): int;
  * Defining this method is **optional**. If not overridden, it's `true`.
  *
 */
-protected _is_available(): boolean;
+protected _is_available(mode: int, type: int): boolean;
 
 /**
  * Override this method to enable the high-end mark in the Visual Shader Editor's members dialog. This should return `true` for nodes that only work when using the Forward+ and Mobile renderers.
@@ -218,7 +218,7 @@ protected _is_available(): boolean;
 protected _is_highend(): boolean;
 
 /** Returns the selected index of the drop-down list option within a graph. You may use this function to define the specific behavior in the [method _get_code] or [method _get_global_code]. */
-get_option_index(): int;
+get_option_index(option: int): int;
 
   connect<T extends SignalsOf<VisualShaderNodeCustom>>(signal: T, method: SignalFunction<VisualShaderNodeCustom[T]>): number;
 

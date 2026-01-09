@@ -58,7 +58,7 @@ use_model_front: boolean;
 v_offset: float;
 
 /** Correct the [param transform]. [param rotation_mode] implicitly specifies how posture (forward, up and sideway direction) is calculated. */
-correct_posture(): Transform3D;
+correct_posture(transform: Transform3D, rotation_mode: int): Transform3D;
 
   connect<T extends SignalsOf<PathFollow3D>>(signal: T, method: SignalFunction<PathFollow3D[T]>): number;
 

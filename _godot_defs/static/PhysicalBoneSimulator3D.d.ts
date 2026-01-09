@@ -24,7 +24,7 @@ is_simulating_physics(): boolean;
  * Works just like the [RigidBody3D] node.
  *
 */
-physical_bones_add_collision_exception(): void;
+physical_bones_add_collision_exception(exception: RID): void;
 
 /**
  * Removes a collision exception to the physical bone.
@@ -32,7 +32,7 @@ physical_bones_add_collision_exception(): void;
  * Works just like the [RigidBody3D] node.
  *
 */
-physical_bones_remove_collision_exception(): void;
+physical_bones_remove_collision_exception(exception: RID): void;
 
 /**
  * Tells the [PhysicalBone3D] nodes in the Skeleton to start simulating and reacting to the physics world.
@@ -40,7 +40,7 @@ physical_bones_remove_collision_exception(): void;
  * Optionally, a list of bone names can be passed-in, allowing only the passed-in bones to be simulated.
  *
 */
-physical_bones_start_simulation(): void;
+physical_bones_start_simulation(bones?: StringName[]): void;
 
 /** Tells the [PhysicalBone3D] nodes in the Skeleton to stop simulating. */
 physical_bones_stop_simulation(): void;

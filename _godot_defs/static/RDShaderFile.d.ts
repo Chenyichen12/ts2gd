@@ -22,13 +22,13 @@ declare class RDShaderFile extends Resource  {
 base_error: string;
 
 /** Returns the SPIR-V intermediate representation for the specified shader [param version]. */
-get_spirv(): RDShaderSPIRV;
+get_spirv(version?: StringName): RDShaderSPIRV;
 
 /** Returns the list of compiled versions for this shader. */
 get_version_list(): StringName[];
 
 /** Sets the SPIR-V [param bytecode] that will be compiled for the specified [param version]. */
-set_bytecode(): void;
+set_bytecode(bytecode: RDShaderSPIRV, version?: StringName): void;
 
   connect<T extends SignalsOf<RDShaderFile>>(signal: T, method: SignalFunction<RDShaderFile[T]>): number;
 

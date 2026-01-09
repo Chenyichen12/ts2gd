@@ -40,25 +40,25 @@ random_volume_offset_db: float;
 streams_count: int;
 
 /** Insert a stream at the specified index. If the index is less than zero, the insertion occurs at the end of the underlying pool. */
-add_stream(): void;
+add_stream(index: int, stream: AudioStream, weight?: float): void;
 
 /** Returns the stream at the specified index. */
-get_stream(): AudioStream;
+get_stream(index: int): AudioStream;
 
 /** Returns the probability weight associated with the stream at the given index. */
-get_stream_probability_weight(): float;
+get_stream_probability_weight(index: int): float;
 
 /** Move a stream from one index to another. */
-move_stream(): void;
+move_stream(index_from: int, index_to: int): void;
 
 /** Remove the stream at the specified index. */
-remove_stream(): void;
+remove_stream(index: int): void;
 
 /** Set the AudioStream at the specified index. */
-set_stream(): void;
+set_stream(index: int, stream: AudioStream): void;
 
 /** Set the probability weight of the stream at the specified index. The higher this value, the more likely that the randomizer will choose this stream during random playback modes. */
-set_stream_probability_weight(): void;
+set_stream_probability_weight(index: int, weight: float): void;
 
   connect<T extends SignalsOf<AudioStreamRandomizer>>(signal: T, method: SignalFunction<AudioStreamRandomizer[T]>): number;
 

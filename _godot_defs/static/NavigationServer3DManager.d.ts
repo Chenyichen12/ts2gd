@@ -20,10 +20,10 @@ declare class NavigationServer3DManagerClass extends Object  {
 
 
 /** Registers a [NavigationServer3D] implementation by passing a [param name] and a [Callable] that returns a [NavigationServer3D] object. */
-register_server(): void;
+register_server(name: string, create_callback: Callable): void;
 
 /** Sets the default [NavigationServer3D] implementation to the one identified by [param name], if [param priority] is greater than the priority of the current default implementation. */
-set_default_server(): void;
+set_default_server(name: string, priority: int): void;
 
   connect<T extends SignalsOf<NavigationServer3DManagerClass>>(signal: T, method: SignalFunction<NavigationServer3DManagerClass[T]>): number;
 

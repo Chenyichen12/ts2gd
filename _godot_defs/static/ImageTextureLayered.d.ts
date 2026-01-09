@@ -54,7 +54,7 @@ declare class ImageTextureLayered extends TextureLayered  {
  * 
  *
 */
-create_from_images(): int;
+create_from_images(images: Image[]): int;
 
 /**
  * Replaces the existing [Image] data at the given [param layer] with this new image.
@@ -66,7 +66,7 @@ create_from_images(): int;
  * The update is immediate: it's synchronized with drawing.
  *
 */
-update_layer(): void;
+update_layer(image: Image, layer: int): void;
 
   connect<T extends SignalsOf<ImageTextureLayered>>(signal: T, method: SignalFunction<ImageTextureLayered[T]>): number;
 

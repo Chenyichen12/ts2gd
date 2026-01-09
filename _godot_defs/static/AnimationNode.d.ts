@@ -49,13 +49,13 @@ filter_enabled: boolean;
 protected _get_caption(): string;
 
 /** When inheriting from [AnimationRootNode], implement this virtual method to return a child animation node by its [param name]. */
-protected _get_child_by_name(): AnimationNode;
+protected _get_child_by_name(name: StringName): AnimationNode;
 
 /** When inheriting from [AnimationRootNode], implement this virtual method to return all child animation nodes in order as a [code]name: node[/code] dictionary. */
 protected _get_child_nodes(): Dictionary<any, any>;
 
 /** When inheriting from [AnimationRootNode], implement this virtual method to return the default value of a [param parameter]. Parameters are custom local memory used for your animation nodes, given a resource can be reused in multiple trees. */
-protected _get_parameter_default_value(): any;
+protected _get_parameter_default_value(parameter: StringName): any;
 
 /** When inheriting from [AnimationRootNode], implement this virtual method to return a list of the properties on this animation node. Parameters are custom local memory used for your animation nodes, given a resource can be reused in multiple trees. Format is similar to [method Object.get_property_list]. */
 protected _get_parameter_list(): any[];
@@ -64,7 +64,7 @@ protected _get_parameter_list(): any[];
 protected _has_filter(): boolean;
 
 /** When inheriting from [AnimationRootNode], implement this virtual method to return whether the [param parameter] is read-only. Parameters are custom local memory used for your animation nodes, given a resource can be reused in multiple trees. */
-protected _is_parameter_read_only(): boolean;
+protected _is_parameter_read_only(parameter: StringName): boolean;
 
 /**
  * When inheriting from [AnimationRootNode], implement this virtual method to run some code when this animation node is processed. The [param time] parameter is a relative delta, unless [param seek] is `true`, in which case it is absolute.
@@ -74,10 +74,10 @@ protected _is_parameter_read_only(): boolean;
  * This function should return the delta.
  *
 */
-protected _process(): float;
+protected _process(time: float, seek: boolean, is_external_seeking: boolean, test_only: boolean): float;
 
 /** Adds an input to the animation node. This is only useful for animation nodes created for use in an [AnimationNodeBlendTree]. If the addition fails, returns [code]false[/code]. */
-add_input(): boolean;
+add_input(name: string): boolean;
 
 /**
  * Blends an animation by [param blend] amount (name must be valid in the linked [AnimationPlayer]). A [param time] and [param delta] may be passed, as well as whether [param seeked] happened.
@@ -85,25 +85,25 @@ add_input(): boolean;
  * A [param looped_flag] is used by internal processing immediately after the loop.
  *
 */
-blend_animation(): void;
+blend_animation(animation: StringName, time: float, delta: float, seeked: boolean, is_external_seeking: boolean, blend: float, looped_flag?: int): void;
 
 /** Blends an input. This is only useful for animation nodes created for an [AnimationNodeBlendTree]. The [param time] parameter is a relative delta, unless [param seek] is [code]true[/code], in which case it is absolute. A filter mode may be optionally passed. */
-blend_input(): float;
+blend_input(input_index: int, time: float, seek: boolean, is_external_seeking: boolean, blend: float, filter?: int, sync?: boolean, test_only?: boolean): float;
 
 /** Blend another animation node (in case this animation node contains child animation nodes). This function is only useful if you inherit from [AnimationRootNode] instead, otherwise editors will not display your animation node for addition. */
-blend_node(): float;
+blend_node(name: StringName, node: AnimationNode, time: float, seek: boolean, is_external_seeking: boolean, blend: float, filter?: int, sync?: boolean, test_only?: boolean): float;
 
 /** Returns the input index which corresponds to [param name]. If not found, returns [code]-1[/code]. */
-find_input(): int;
+find_input(name: string): int;
 
 /** Amount of inputs in this animation node, only useful for animation nodes that go into [AnimationNodeBlendTree]. */
 get_input_count(): int;
 
 /** Gets the name of an input by index. */
-get_input_name(): string;
+get_input_name(input: int): string;
 
 /** Gets the value of a parameter. Parameters are custom local memory used for your animation nodes, given a resource can be reused in multiple trees. */
-get_parameter(): any;
+get_parameter(name: StringName): any;
 
 /**
  * Returns the object id of the [AnimationTree] that owns this node.
@@ -114,22 +114,22 @@ get_parameter(): any;
 get_processing_animation_tree_instance_id(): int;
 
 /** Returns [code]true[/code] if the given path is filtered. */
-is_path_filtered(): boolean;
+is_path_filtered(path: NodePathType): boolean;
 
 /** Returns [code]true[/code] if this animation node is being processed in test-only mode. */
 is_process_testing(): boolean;
 
 /** Removes an input, call this only when inactive. */
-remove_input(): void;
+remove_input(index: int): void;
 
 /** Adds or removes a path for the filter. */
-set_filter_path(): void;
+set_filter_path(path: NodePathType, enable: boolean): void;
 
 /** Sets the name of the input at the given [param input] index. If the setting fails, returns [code]false[/code]. */
-set_input_name(): boolean;
+set_input_name(input: int, name: string): boolean;
 
 /** Sets a custom parameter. These are used as local memory, because resources can be reused across the tree or scenes. */
-set_parameter(): void;
+set_parameter(name: StringName, value: any): void;
 
   connect<T extends SignalsOf<AnimationNode>>(signal: T, method: SignalFunction<AnimationNode[T]>): number;
 

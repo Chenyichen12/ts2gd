@@ -117,7 +117,7 @@ declare class MeshDataTool extends RefCounted  {
 clear(): void;
 
 /** Adds a new surface to specified [Mesh] with edited data. */
-commit_to_surface(): int;
+commit_to_surface(mesh: ArrayMesh, compression_flags?: int): int;
 
 /**
  * Uses specified surface of given [Mesh] to populate data for MeshDataTool.
@@ -125,16 +125,16 @@ commit_to_surface(): int;
  * Requires [Mesh] with primitive type [constant Mesh.PRIMITIVE_TRIANGLES].
  *
 */
-create_from_surface(): int;
+create_from_surface(mesh: ArrayMesh, surface: int): int;
 
 /** Returns the number of edges in this [Mesh]. */
 get_edge_count(): int;
 
 /** Returns array of faces that touch given edge. */
-get_edge_faces(): PackedInt32Array;
+get_edge_faces(idx: int): PackedInt32Array;
 
 /** Returns meta information assigned to given edge. */
-get_edge_meta(): any;
+get_edge_meta(idx: int): any;
 
 /**
  * Returns the index of the specified [param vertex] connected to the edge at index [param idx].
@@ -142,7 +142,7 @@ get_edge_meta(): any;
  * [param vertex] can only be `0` or `1`, as edges are composed of two vertices.
  *
 */
-get_edge_vertex(): int;
+get_edge_vertex(idx: int, vertex: int): int;
 
 /** Returns the number of faces in this [Mesh]. */
 get_face_count(): int;
@@ -153,13 +153,13 @@ get_face_count(): int;
  * [param edge] argument must be either `0`, `1`, or `2` because a face only has three edges.
  *
 */
-get_face_edge(): int;
+get_face_edge(idx: int, edge: int): int;
 
 /** Returns the metadata associated with the given face. */
-get_face_meta(): any;
+get_face_meta(idx: int): any;
 
 /** Calculates and returns the face normal of the given face. */
-get_face_normal(): Vector3;
+get_face_normal(idx: int): Vector3;
 
 /**
  * Returns the specified vertex index of the given face.
@@ -182,7 +182,7 @@ get_face_normal(): Vector3;
  * 
  *
 */
-get_face_vertex(): int;
+get_face_vertex(idx: int, vertex: int): int;
 
 /** Returns the [Mesh]'s format as a combination of the [enum Mesh.ArrayFormat] flags. For example, a mesh containing both vertices and normals would return a format of [code]3[/code] because [constant Mesh.ARRAY_FORMAT_VERTEX] is [code]1[/code] and [constant Mesh.ARRAY_FORMAT_NORMAL] is [code]2[/code]. */
 get_format(): int;
@@ -191,64 +191,64 @@ get_format(): int;
 get_material(): Material;
 
 /** Returns the position of the given vertex. */
-get_vertex(): Vector3;
+get_vertex(idx: int): Vector3;
 
 /** Returns the bones of the given vertex. */
-get_vertex_bones(): PackedInt32Array;
+get_vertex_bones(idx: int): PackedInt32Array;
 
 /** Returns the color of the given vertex. */
-get_vertex_color(): Color;
+get_vertex_color(idx: int): Color;
 
 /** Returns the total number of vertices in [Mesh]. */
 get_vertex_count(): int;
 
 /** Returns an array of edges that share the given vertex. */
-get_vertex_edges(): PackedInt32Array;
+get_vertex_edges(idx: int): PackedInt32Array;
 
 /** Returns an array of faces that share the given vertex. */
-get_vertex_faces(): PackedInt32Array;
+get_vertex_faces(idx: int): PackedInt32Array;
 
 /** Returns the metadata associated with the given vertex. */
-get_vertex_meta(): any;
+get_vertex_meta(idx: int): any;
 
 /** Returns the normal of the given vertex. */
-get_vertex_normal(): Vector3;
+get_vertex_normal(idx: int): Vector3;
 
 /** Returns the tangent of the given vertex. */
-get_vertex_tangent(): Plane;
+get_vertex_tangent(idx: int): Plane;
 
 /** Returns the UV of the given vertex. */
-get_vertex_uv(): Vector2;
+get_vertex_uv(idx: int): Vector2;
 
 /** Returns the UV2 of the given vertex. */
-get_vertex_uv2(): Vector2;
+get_vertex_uv2(idx: int): Vector2;
 
 /** Returns bone weights of the given vertex. */
-get_vertex_weights(): PackedFloat32Array;
+get_vertex_weights(idx: int): PackedFloat32Array;
 
 /** Sets the metadata of the given edge. */
-set_edge_meta(): void;
+set_edge_meta(idx: int, meta: any): void;
 
 /** Sets the metadata of the given face. */
-set_face_meta(): void;
+set_face_meta(idx: int, meta: any): void;
 
 /** Sets the material to be used by newly-constructed [Mesh]. */
-set_material(): void;
+set_material(material: Material): void;
 
 /** Sets the position of the given vertex. */
-set_vertex(): void;
+set_vertex(idx: int, vertex: Vector3): void;
 
 /** Sets the bones of the given vertex. */
-set_vertex_bones(): void;
+set_vertex_bones(idx: int, bones: PackedInt32Array): void;
 
 /** Sets the color of the given vertex. */
-set_vertex_color(): void;
+set_vertex_color(idx: int, color: Color): void;
 
 /** Sets the metadata associated with the given vertex. */
-set_vertex_meta(): void;
+set_vertex_meta(idx: int, meta: any): void;
 
 /** Sets the normal of the given vertex. */
-set_vertex_normal(): void;
+set_vertex_normal(idx: int, normal: Vector3): void;
 
 /**
  * Sets the tangent of the given vertex.
@@ -256,16 +256,16 @@ set_vertex_normal(): void;
  * **Note:** Even though [param tangent] is a [Plane], it does not directly represent the tangent plane. Its [member Plane.x], [member Plane.y], and [member Plane.z] represent the tangent vector and [member Plane.d] should be either `-1` or `1`. See also [constant Mesh.ARRAY_TANGENT].
  *
 */
-set_vertex_tangent(): void;
+set_vertex_tangent(idx: int, tangent: Plane): void;
 
 /** Sets the UV of the given vertex. */
-set_vertex_uv(): void;
+set_vertex_uv(idx: int, uv: Vector2): void;
 
 /** Sets the UV2 of the given vertex. */
-set_vertex_uv2(): void;
+set_vertex_uv2(idx: int, uv2: Vector2): void;
 
 /** Sets the bone weights of the given vertex. */
-set_vertex_weights(): void;
+set_vertex_weights(idx: int, weights: PackedFloat32Array): void;
 
   connect<T extends SignalsOf<MeshDataTool>>(signal: T, method: SignalFunction<MeshDataTool[T]>): number;
 

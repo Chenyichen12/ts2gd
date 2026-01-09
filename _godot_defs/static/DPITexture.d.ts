@@ -25,7 +25,7 @@ color_map: Dictionary<any, any>;
 saturation: float;
 
 /** Creates a new [DPITexture] and initializes it by allocating and setting the SVG data to [param source]. */
-create_from_string(): DPITexture;
+create_from_string(source: string, scale?: float, saturation?: float, color_map?: Dictionary<any, any>): DPITexture;
 
 /** Returns the [RID] of the texture rasterized to match the oversampling of the currently drawn canvas item. */
 get_scaled_rid(): RID;
@@ -34,10 +34,10 @@ get_scaled_rid(): RID;
 get_source(): string;
 
 /** Resizes the texture to the specified dimensions. */
-set_size_override(): void;
+set_size_override(size: Vector2i): void;
 
 /** Sets this SVG texture's source code. */
-set_source(): void;
+set_source(source: string): void;
 
   connect<T extends SignalsOf<DPITexture>>(signal: T, method: SignalFunction<DPITexture[T]>): number;
 

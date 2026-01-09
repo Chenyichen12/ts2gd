@@ -16,7 +16,7 @@ declare class FramebufferCacheRD extends Object  {
 
 
 /** Creates, or obtains a cached, framebuffer. [param textures] lists textures accessed. [param passes] defines the subpasses and texture allocation, if left empty a single pass is created and textures are allocated depending on their usage flags. [param views] defines the number of views used when rendering. */
-get_cache_multipass(): RID;
+get_cache_multipass(textures: RID[], passes: RDFramebufferPass[], views: int): RID;
 
   connect<T extends SignalsOf<FramebufferCacheRD>>(signal: T, method: SignalFunction<FramebufferCacheRD[T]>): number;
 

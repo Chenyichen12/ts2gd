@@ -52,13 +52,13 @@ get_base(): RID;
 get_instance(): RID;
 
 /** Returns whether or not the specified layer of the [member layers] is enabled, given a [param layer_number] between 1 and 20. */
-get_layer_mask_value(): boolean;
+get_layer_mask_value(layer_number: int): boolean;
 
 /** Sets the resource that is instantiated by this [VisualInstance3D], which changes how the engine handles the [VisualInstance3D] under the hood. Equivalent to [method RenderingServer.instance_set_base]. */
-set_base(): void;
+set_base(base: RID): void;
 
 /** Based on [param value], enables or disables the specified layer in the [member layers], given a [param layer_number] between 1 and 20. */
-set_layer_mask_value(): void;
+set_layer_mask_value(layer_number: int, value: boolean): void;
 
   connect<T extends SignalsOf<VisualInstance3D>>(signal: T, method: SignalFunction<VisualInstance3D[T]>): number;
 

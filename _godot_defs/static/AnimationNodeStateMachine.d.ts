@@ -55,10 +55,10 @@ reset_ends: boolean;
 state_machine_type: int;
 
 /** Adds a new animation node to the graph. The [param position] is used for display in the editor. */
-add_node(): void;
+add_node(name: StringName, node: AnimationNode, position?: Vector2): void;
 
 /** Adds a transition between the given animation nodes. */
-add_transition(): void;
+add_transition(from: StringName, to: StringName, transition: AnimationNodeStateMachineTransition): void;
 
 /** Returns the draw offset of the graph. Used for display in the editor. */
 get_graph_offset(): Vector2;
@@ -67,6 +67,7 @@ get_graph_offset(): Vector2;
 get_node(path: NodePathType): Node;
 
 /** Returns the animation node with the given name. */
+get_node<T extends Node>(path: NodePathType): T;
 get_node_unsafe<T extends Node>(path: NodePathType): T;
 
 
@@ -74,49 +75,49 @@ get_node_unsafe<T extends Node>(path: NodePathType): T;
 get_node_list(): StringName[];
 
 /** Returns the given animation node's name. */
-get_node_name(): StringName;
+get_node_name(node: AnimationNode): StringName;
 
 /** Returns the given animation node's coordinates. Used for display in the editor. */
-get_node_position(): Vector2;
+get_node_position(name: StringName): Vector2;
 
 /** Returns the given transition. */
-get_transition(): AnimationNodeStateMachineTransition;
+get_transition(idx: int): AnimationNodeStateMachineTransition;
 
 /** Returns the number of connections in the graph. */
 get_transition_count(): int;
 
 /** Returns the given transition's start node. */
-get_transition_from(): StringName;
+get_transition_from(idx: int): StringName;
 
 /** Returns the given transition's end node. */
-get_transition_to(): StringName;
+get_transition_to(idx: int): StringName;
 
 /** Returns [code]true[/code] if the graph contains the given animation node. */
-has_node(): boolean;
+has_node(name: StringName): boolean;
 
 /** Returns [code]true[/code] if there is a transition between the given animation nodes. */
-has_transition(): boolean;
+has_transition(from: StringName, to: StringName): boolean;
 
 /** Deletes the given animation node from the graph. */
-remove_node(): void;
+remove_node(name: StringName): void;
 
 /** Deletes the transition between the two specified animation nodes. */
-remove_transition(): void;
+remove_transition(from: StringName, to: StringName): void;
 
 /** Deletes the given transition by index. */
-remove_transition_by_index(): void;
+remove_transition_by_index(idx: int): void;
 
 /** Renames the given animation node. */
-rename_node(): void;
+rename_node(name: StringName, new_name: StringName): void;
 
 /** Replaces the given animation node with a new animation node. */
-replace_node(): void;
+replace_node(name: StringName, node: AnimationNode): void;
 
 /** Sets the draw offset of the graph. Used for display in the editor. */
-set_graph_offset(): void;
+set_graph_offset(offset: Vector2): void;
 
 /** Sets the animation node's coordinates. Used for display in the editor. */
-set_node_position(): void;
+set_node_position(name: StringName, position: Vector2): void;
 
   connect<T extends SignalsOf<AnimationNodeStateMachine>>(signal: T, method: SignalFunction<AnimationNodeStateMachine[T]>): number;
 

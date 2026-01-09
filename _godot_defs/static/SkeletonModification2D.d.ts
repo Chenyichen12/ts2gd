@@ -33,13 +33,13 @@ execution_mode: int;
 protected _draw_editor_gizmo(): void;
 
 /** Executes the given modification. This is where the modification performs whatever function it is designed to do. */
-protected _execute(): void;
+protected _execute(delta: float): void;
 
 /** Called when the modification is setup. This is where the modification performs initialization. */
-protected _setup_modification(): void;
+protected _setup_modification(modification_stack: SkeletonModificationStack2D): void;
 
 /** Takes an angle and clamps it so it is within the passed-in [param min] and [param max] range. [param invert] will inversely clamp the angle, clamping it to the range outside of the given bounds. */
-clamp_angle(): float;
+clamp_angle(angle: float, min: float, max: float, invert: boolean): float;
 
 /** Returns whether this modification will call [method _draw_editor_gizmo] in the Godot editor to draw modification-specific gizmos. */
 get_editor_draw_gizmo(): boolean;
@@ -51,10 +51,10 @@ get_is_setup(): boolean;
 get_modification_stack(): SkeletonModificationStack2D;
 
 /** Sets whether this modification will call [method _draw_editor_gizmo] in the Godot editor to draw modification-specific gizmos. */
-set_editor_draw_gizmo(): void;
+set_editor_draw_gizmo(draw_gizmo: boolean): void;
 
 /** Manually allows you to set the setup state of the modification. This function should only rarely be used, as the [SkeletonModificationStack2D] the modification is bound to should handle setting the modification up. */
-set_is_setup(): void;
+set_is_setup(is_setup: boolean): void;
 
   connect<T extends SignalsOf<SkeletonModification2D>>(signal: T, method: SignalFunction<SkeletonModification2D[T]>): number;
 

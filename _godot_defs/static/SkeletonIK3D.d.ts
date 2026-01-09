@@ -85,7 +85,7 @@ get_parent_skeleton(): Skeleton3D;
 is_running(): boolean;
 
 /** Starts applying IK effects on each frame to the [Skeleton3D] bones but will only take effect starting on the next frame. If [param one_time] is [code]true[/code], this will take effect immediately but also reset on the next frame. */
-start(): void;
+start(one_time?: boolean): void;
 
 /** Stops applying IK effects on each frame to the [Skeleton3D] bones and also calls [method Skeleton3D.clear_bones_global_pose_override] to remove existing overrides on all bones. */
 stop(): void;

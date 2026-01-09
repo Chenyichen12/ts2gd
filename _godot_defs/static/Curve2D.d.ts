@@ -30,7 +30,7 @@ point_count: int;
  * If [param index] is given, the new point is inserted before the existing point identified by index [param index]. Every existing point starting from [param index] is shifted further down the list of points. The index must be greater than or equal to `0` and must not exceed the number of existing points in the line. See [member point_count].
  *
 */
-add_point(): void;
+add_point(position: Vector2, _in?: Vector2, out?: Vector2, index?: int): void;
 
 /** Removes all points from the curve. */
 clear_points(): void;
@@ -47,7 +47,7 @@ get_baked_points(): PackedVector2Array;
  * [param to_point] must be in this curve's local space.
  *
 */
-get_closest_offset(): float;
+get_closest_offset(to_point: Vector2): float;
 
 /**
  * Returns the closest point on baked segments (in curve's local space) to [param to_point].
@@ -55,19 +55,19 @@ get_closest_offset(): float;
  * [param to_point] must be in this curve's local space.
  *
 */
-get_closest_point(): Vector2;
+get_closest_point(to_point: Vector2): Vector2;
 
 /** Returns the position of the control point leading to the vertex [param idx]. The returned position is relative to the vertex [param idx]. If the index is out of bounds, the function sends an error to the console, and returns [code](0, 0)[/code]. */
-get_point_in(): Vector2;
+get_point_in(idx: int): Vector2;
 
 /** Returns the position of the control point leading out of the vertex [param idx]. The returned position is relative to the vertex [param idx]. If the index is out of bounds, the function sends an error to the console, and returns [code](0, 0)[/code]. */
-get_point_out(): Vector2;
+get_point_out(idx: int): Vector2;
 
 /** Returns the position of the vertex [param idx]. If the index is out of bounds, the function sends an error to the console, and returns [code](0, 0)[/code]. */
-get_point_position(): Vector2;
+get_point_position(idx: int): Vector2;
 
 /** Deletes the point [param idx] from the curve. Sends an error to the console if [param idx] is out of bounds. */
-remove_point(): void;
+remove_point(idx: int): void;
 
 /**
  * Returns the position between the vertex [param idx] and the vertex `idx + 1`, where [param t] controls if the point is the first vertex (`t = 0.0`), the last vertex (`t = 1.0`), or in between. Values of [param t] outside the range (`0.0 <= t <= 1.0`) give strange, but predictable results.
@@ -75,7 +75,7 @@ remove_point(): void;
  * If [param idx] is out of bounds it is truncated to the first or last vertex, and [param t] is ignored. If the curve has no points, the function sends an error to the console, and returns `(0, 0)`.
  *
 */
-sample(): Vector2;
+sample(idx: int, t: float): Vector2;
 
 /**
  * Returns a point within the curve at position [param offset], where [param offset] is measured as a pixel distance along the curve.
@@ -85,7 +85,7 @@ sample(): Vector2;
  * Cubic interpolation tends to follow the curves better, but linear is faster (and often, precise enough).
  *
 */
-sample_baked(): Vector2;
+sample_baked(offset?: float, cubic?: boolean): Vector2;
 
 /**
  * Similar to [method sample_baked], but returns [Transform2D] that includes a rotation along the curve, with [member Transform2D.origin] as the point position and the [member Transform2D.x] vector pointing in the direction of the path at that point. Returns an empty transform if the length of the curve is `0`.
@@ -102,19 +102,19 @@ sample_baked(): Vector2;
  * 
  *
 */
-sample_baked_with_rotation(): Transform2D;
+sample_baked_with_rotation(offset?: float, cubic?: boolean): Transform2D;
 
 /** Returns the position at the vertex [param fofs]. It calls [method sample] using the integer part of [param fofs] as [code]idx[/code], and its fractional part as [code]t[/code]. */
-samplef(): Vector2;
+samplef(fofs: float): Vector2;
 
 /** Sets the position of the control point leading to the vertex [param idx]. If the index is out of bounds, the function sends an error to the console. The position is relative to the vertex. */
-set_point_in(): void;
+set_point_in(idx: int, position: Vector2): void;
 
 /** Sets the position of the control point leading out of the vertex [param idx]. If the index is out of bounds, the function sends an error to the console. The position is relative to the vertex. */
-set_point_out(): void;
+set_point_out(idx: int, position: Vector2): void;
 
 /** Sets the position for the vertex [param idx]. If the index is out of bounds, the function sends an error to the console. */
-set_point_position(): void;
+set_point_position(idx: int, position: Vector2): void;
 
 /**
  * Returns a list of points along the curve, with a curvature controlled point density. That is, the curvier parts will have more points than the straighter parts.
@@ -126,7 +126,7 @@ set_point_position(): void;
  * [param tolerance_degrees] controls how many degrees the midpoint of a segment may deviate from the real curve, before the segment has to be subdivided.
  *
 */
-tessellate(): PackedVector2Array;
+tessellate(max_stages?: int, tolerance_degrees?: float): PackedVector2Array;
 
 /**
  * Returns a list of points along the curve, with almost uniform density. [param max_stages] controls how many subdivisions a curve segment may face before it is considered approximate enough. Each subdivision splits the segment in half, so the default 5 stages may mean up to 32 subdivisions per curve segment. Increase with care!
@@ -134,7 +134,7 @@ tessellate(): PackedVector2Array;
  * [param tolerance_length] controls the maximal distance between two neighboring points, before the segment has to be subdivided.
  *
 */
-tessellate_even_length(): PackedVector2Array;
+tessellate_even_length(max_stages?: int, tolerance_length?: float): PackedVector2Array;
 
   connect<T extends SignalsOf<Curve2D>>(signal: T, method: SignalFunction<Curve2D[T]>): number;
 

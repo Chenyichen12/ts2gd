@@ -53,7 +53,7 @@ get_length(): float;
 get_skeleton_rest(): Transform2D;
 
 /** When set to [code]true[/code], the [Bone2D] node will attempt to automatically calculate the bone angle and length using the first child [Bone2D] node, if one exists. If none exist, the [Bone2D] cannot automatically calculate these values and will print a warning. */
-set_autocalculate_length_and_angle(): void;
+set_autocalculate_length_and_angle(auto_calculate: boolean): void;
 
 /**
  * Sets the bone angle for the [Bone2D]. This is typically set to the rotation from the [Bone2D] to a child [Bone2D] node.
@@ -61,10 +61,10 @@ set_autocalculate_length_and_angle(): void;
  * **Note:** This is different from the [Bone2D]'s rotation. The bone's angle is the rotation of the bone shown by the gizmo, which is unaffected by the [Bone2D]'s [member Node2D.transform].
  *
 */
-set_bone_angle(): void;
+set_bone_angle(angle: float): void;
 
 /** Sets the length of the bone in the [Bone2D]. */
-set_length(): void;
+set_length(length: float): void;
 
   connect<T extends SignalsOf<Bone2D>>(signal: T, method: SignalFunction<Bone2D[T]>): number;
 

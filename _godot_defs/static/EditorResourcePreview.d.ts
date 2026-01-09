@@ -20,10 +20,10 @@ declare class EditorResourcePreview extends Node  {
 
 
 /** Create an own, custom preview generator. */
-add_preview_generator(): void;
+add_preview_generator(generator: EditorResourcePreviewGenerator): void;
 
 /** Check if the resource changed, if so, it will be invalidated and the corresponding signal emitted. */
-check_for_invalidation(): void;
+check_for_invalidation(path: string): void;
 
 /**
  * Queue the [param resource] being edited for preview. Once the preview is ready, the [param receiver]'s [param receiver_func] will be called. The [param receiver_func] must take the following four arguments: [String] path, [Texture2D] preview, [Texture2D] thumbnail_preview, [Variant] userdata. [param userdata] can be anything, and will be returned when [param receiver_func] is called.
@@ -31,7 +31,7 @@ check_for_invalidation(): void;
  * **Note:** If it was not possible to create the preview the [param receiver_func] will still be called, but the preview will be `null`.
  *
 */
-queue_edited_resource_preview(): void;
+queue_edited_resource_preview(resource: Resource, receiver: Object, receiver_func: StringName, userdata: any): void;
 
 /**
  * Queue a resource file located at [param path] for preview. Once the preview is ready, the [param receiver]'s [param receiver_func] will be called. The [param receiver_func] must take the following four arguments: [String] path, [Texture2D] preview, [Texture2D] thumbnail_preview, [Variant] userdata. [param userdata] can be anything, and will be returned when [param receiver_func] is called.
@@ -39,10 +39,10 @@ queue_edited_resource_preview(): void;
  * **Note:** If it was not possible to create the preview the [param receiver_func] will still be called, but the preview will be `null`.
  *
 */
-queue_resource_preview(): void;
+queue_resource_preview(path: string, receiver: Object, receiver_func: StringName, userdata: any): void;
 
 /** Removes a custom preview generator. */
-remove_preview_generator(): void;
+remove_preview_generator(generator: EditorResourcePreviewGenerator): void;
 
   connect<T extends SignalsOf<EditorResourcePreview>>(signal: T, method: SignalFunction<EditorResourcePreview[T]>): number;
 

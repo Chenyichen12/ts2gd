@@ -18,7 +18,7 @@ declare class CompressedTextureLayered extends TextureLayered  {
 load_path: string;
 
 /** Loads the texture at [param path]. */
-load(): int;
+load(path: string): int;
 
   connect<T extends SignalsOf<CompressedTextureLayered>>(signal: T, method: SignalFunction<CompressedTextureLayered[T]>): number;
 

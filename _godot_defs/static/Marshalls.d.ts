@@ -16,10 +16,10 @@ declare class MarshallsClass extends Object  {
 
 
 /** Returns a decoded [PackedByteArray] corresponding to the Base64-encoded string [param base64_str]. */
-base64_to_raw(): PackedByteArray;
+base64_to_raw(base64_str: string): PackedByteArray;
 
 /** Returns a decoded string corresponding to the Base64-encoded string [param base64_str]. */
-base64_to_utf8(): string;
+base64_to_utf8(base64_str: string): string;
 
 /**
  * Returns a decoded [Variant] corresponding to the Base64-encoded string [param base64_str]. If [param allow_objects] is `true`, decoding objects is allowed.
@@ -29,13 +29,13 @@ base64_to_utf8(): string;
  * **Warning:** Deserialized objects can contain code which gets executed. Do not use this option if the serialized object comes from untrusted sources to avoid potential security threats such as remote code execution.
  *
 */
-base64_to_variant(): any;
+base64_to_variant(base64_str: string, allow_objects?: boolean): any;
 
 /** Returns a Base64-encoded string of a given [PackedByteArray]. */
-raw_to_base64(): string;
+raw_to_base64(array: PackedByteArray): string;
 
 /** Returns a Base64-encoded string of the UTF-8 string [param utf8_str]. */
-utf8_to_base64(): string;
+utf8_to_base64(utf8_str: string): string;
 
 /**
  * Returns a Base64-encoded string of the [Variant] [param variant]. If [param full_objects] is `true`, encoding objects is allowed (and can potentially include code).
@@ -43,7 +43,7 @@ utf8_to_base64(): string;
  * Internally, this uses the same encoding mechanism as the [method @GlobalScope.var_to_bytes] method.
  *
 */
-variant_to_base64(): string;
+variant_to_base64(variant: any, full_objects?: boolean): string;
 
   connect<T extends SignalsOf<MarshallsClass>>(signal: T, method: SignalFunction<MarshallsClass[T]>): number;
 

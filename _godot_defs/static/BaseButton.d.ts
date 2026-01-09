@@ -79,7 +79,7 @@ toggle_mode: boolean;
 protected _pressed(): void;
 
 /** Called when the button is toggled (only if [member toggle_mode] is active). */
-protected _toggled(): void;
+protected _toggled(toggled_on: boolean): void;
 
 /** Returns the visual state used to draw the button. This is useful mainly when implementing your own draw code by either overriding _draw() or connecting to "draw" signal. The visual state of the button is defined by the [enum DrawMode] enum. */
 get_draw_mode(): int;
@@ -93,7 +93,7 @@ is_hovered(): boolean;
  * **Note:** This method doesn't unpress other buttons in [member button_group].
  *
 */
-set_pressed_no_signal(): void;
+set_pressed_no_signal(pressed: boolean): void;
 
   connect<T extends SignalsOf<BaseButton>>(signal: T, method: SignalFunction<BaseButton[T]>): number;
 

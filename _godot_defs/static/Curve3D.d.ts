@@ -36,7 +36,7 @@ up_vector_enabled: boolean;
  * If [param index] is given, the new point is inserted before the existing point identified by index [param index]. Every existing point starting from [param index] is shifted further down the list of points. The index must be greater than or equal to `0` and must not exceed the number of existing points in the line. See [member point_count].
  *
 */
-add_point(): void;
+add_point(position: Vector3, _in?: Vector3, out?: Vector3, index?: int): void;
 
 /** Removes all points from the curve. */
 clear_points(): void;
@@ -64,7 +64,7 @@ get_baked_up_vectors(): PackedVector3Array;
  * [param to_point] must be in this curve's local space.
  *
 */
-get_closest_offset(): float;
+get_closest_offset(to_point: Vector3): float;
 
 /**
  * Returns the closest point on baked segments (in curve's local space) to [param to_point].
@@ -72,22 +72,22 @@ get_closest_offset(): float;
  * [param to_point] must be in this curve's local space.
  *
 */
-get_closest_point(): Vector3;
+get_closest_point(to_point: Vector3): Vector3;
 
 /** Returns the position of the control point leading to the vertex [param idx]. The returned position is relative to the vertex [param idx]. If the index is out of bounds, the function sends an error to the console, and returns [code](0, 0, 0)[/code]. */
-get_point_in(): Vector3;
+get_point_in(idx: int): Vector3;
 
 /** Returns the position of the control point leading out of the vertex [param idx]. The returned position is relative to the vertex [param idx]. If the index is out of bounds, the function sends an error to the console, and returns [code](0, 0, 0)[/code]. */
-get_point_out(): Vector3;
+get_point_out(idx: int): Vector3;
 
 /** Returns the position of the vertex [param idx]. If the index is out of bounds, the function sends an error to the console, and returns [code](0, 0, 0)[/code]. */
-get_point_position(): Vector3;
+get_point_position(idx: int): Vector3;
 
 /** Returns the tilt angle in radians for the point [param idx]. If the index is out of bounds, the function sends an error to the console, and returns [code]0[/code]. */
-get_point_tilt(): float;
+get_point_tilt(idx: int): float;
 
 /** Deletes the point [param idx] from the curve. Sends an error to the console if [param idx] is out of bounds. */
-remove_point(): void;
+remove_point(idx: int): void;
 
 /**
  * Returns the position between the vertex [param idx] and the vertex `idx + 1`, where [param t] controls if the point is the first vertex (`t = 0.0`), the last vertex (`t = 1.0`), or in between. Values of [param t] outside the range (`0.0 >= t <=1`) give strange, but predictable results.
@@ -95,7 +95,7 @@ remove_point(): void;
  * If [param idx] is out of bounds it is truncated to the first or last vertex, and [param t] is ignored. If the curve has no points, the function sends an error to the console, and returns `(0, 0, 0)`.
  *
 */
-sample(): Vector3;
+sample(idx: int, t: float): Vector3;
 
 /**
  * Returns a point within the curve at position [param offset], where [param offset] is measured as a distance in 3D units along the curve. To do that, it finds the two cached points where the [param offset] lies between, then interpolates the values. This interpolation is cubic if [param cubic] is set to `true`, or linear if set to `false`.
@@ -103,7 +103,7 @@ sample(): Vector3;
  * Cubic interpolation tends to follow the curves better, but linear is faster (and often, precise enough).
  *
 */
-sample_baked(): Vector3;
+sample_baked(offset?: float, cubic?: boolean): Vector3;
 
 /**
  * Returns an up vector within the curve at position [param offset], where [param offset] is measured as a distance in 3D units along the curve. To do that, it finds the two cached up vectors where the [param offset] lies between, then interpolates the values. If [param apply_tilt] is `true`, an interpolated tilt is applied to the interpolated up vector.
@@ -111,22 +111,22 @@ sample_baked(): Vector3;
  * If the curve has no up vectors, the function sends an error to the console, and returns `(0, 1, 0)`.
  *
 */
-sample_baked_up_vector(): Vector3;
+sample_baked_up_vector(offset: float, apply_tilt?: boolean): Vector3;
 
 /** Returns a [Transform3D] with [code]origin[/code] as point position, [code]basis.x[/code] as sideway vector, [code]basis.y[/code] as up vector, [code]basis.z[/code] as forward vector. When the curve length is 0, there is no reasonable way to calculate the rotation, all vectors aligned with global space axes. See also [method sample_baked]. */
-sample_baked_with_rotation(): Transform3D;
+sample_baked_with_rotation(offset?: float, cubic?: boolean, apply_tilt?: boolean): Transform3D;
 
 /** Returns the position at the vertex [param fofs]. It calls [method sample] using the integer part of [param fofs] as [code]idx[/code], and its fractional part as [code]t[/code]. */
-samplef(): Vector3;
+samplef(fofs: float): Vector3;
 
 /** Sets the position of the control point leading to the vertex [param idx]. If the index is out of bounds, the function sends an error to the console. The position is relative to the vertex. */
-set_point_in(): void;
+set_point_in(idx: int, position: Vector3): void;
 
 /** Sets the position of the control point leading out of the vertex [param idx]. If the index is out of bounds, the function sends an error to the console. The position is relative to the vertex. */
-set_point_out(): void;
+set_point_out(idx: int, position: Vector3): void;
 
 /** Sets the position for the vertex [param idx]. If the index is out of bounds, the function sends an error to the console. */
-set_point_position(): void;
+set_point_position(idx: int, position: Vector3): void;
 
 /**
  * Sets the tilt angle in radians for the point [param idx]. If the index is out of bounds, the function sends an error to the console.
@@ -134,7 +134,7 @@ set_point_position(): void;
  * The tilt controls the rotation along the look-at axis an object traveling the path would have. In the case of a curve controlling a [PathFollow3D], this tilt is an offset over the natural tilt the [PathFollow3D] calculates.
  *
 */
-set_point_tilt(): void;
+set_point_tilt(idx: int, tilt: float): void;
 
 /**
  * Returns a list of points along the curve, with a curvature controlled point density. That is, the curvier parts will have more points than the straighter parts.
@@ -146,7 +146,7 @@ set_point_tilt(): void;
  * [param tolerance_degrees] controls how many degrees the midpoint of a segment may deviate from the real curve, before the segment has to be subdivided.
  *
 */
-tessellate(): PackedVector3Array;
+tessellate(max_stages?: int, tolerance_degrees?: float): PackedVector3Array;
 
 /**
  * Returns a list of points along the curve, with almost uniform density. [param max_stages] controls how many subdivisions a curve segment may face before it is considered approximate enough. Each subdivision splits the segment in half, so the default 5 stages may mean up to 32 subdivisions per curve segment. Increase with care!
@@ -154,7 +154,7 @@ tessellate(): PackedVector3Array;
  * [param tolerance_length] controls the maximal distance between two neighboring points, before the segment has to be subdivided.
  *
 */
-tessellate_even_length(): PackedVector3Array;
+tessellate_even_length(max_stages?: int, tolerance_length?: float): PackedVector3Array;
 
   connect<T extends SignalsOf<Curve3D>>(signal: T, method: SignalFunction<Curve3D[T]>): number;
 

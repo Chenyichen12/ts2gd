@@ -33,7 +33,7 @@ tree_root: AnimationRootNode;
 get_process_callback(): int;
 
 /** Sets the process notification in which to update animations. */
-set_process_callback(): void;
+set_process_callback(mode: int): void;
 
   connect<T extends SignalsOf<AnimationTree>>(signal: T, method: SignalFunction<AnimationTree[T]>): number;
 

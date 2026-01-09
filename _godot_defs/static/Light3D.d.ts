@@ -175,10 +175,10 @@ shadow_reverse_cull_face: boolean;
 get_correlated_color(): Color;
 
 /** Returns the value of the specified [enum Light3D.Param] parameter. */
-get_param(): float;
+get_param(param: int): float;
 
 /** Sets the value of the specified [enum Light3D.Param] parameter. */
-set_param(): void;
+set_param(param: int, value: float): void;
 
   connect<T extends SignalsOf<Light3D>>(signal: T, method: SignalFunction<Light3D[T]>): number;
 

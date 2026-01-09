@@ -70,10 +70,10 @@ protected _get_audio_speaker_mode(): int;
  * 
  *
 */
-protected _handles_file(): boolean;
+protected _handles_file(path: string): boolean;
 
 /** Called once before the engine starts writing video and audio data. [param movie_size] is the width and height of the video to save. [param fps] is the number of frames per second specified in the project settings or using the [code]--fixed-fps <fps>[/code] [url=$DOCS_URL/tutorials/editor/command_line_tutorial.html]command line argument[/url]. */
-protected _write_begin(): int;
+protected _write_begin(movie_size: Vector2i, fps: int, base_path: string): int;
 
 /**
  * Called when the engine finishes writing. This occurs when the engine quits by pressing the window manager's close button, or when [method SceneTree.quit] is called.
@@ -84,7 +84,7 @@ protected _write_begin(): int;
 protected _write_end(): void;
 
 /** Called at the end of every rendered frame. The [param frame_image] and [param audio_frame_block] function arguments should be written to. */
-protected _write_frame(): int;
+protected _write_frame(frame_image: Image, audio_frame_block: const void*): int;
 
 /**
  * Adds a writer to be usable by the engine. The supported file extensions can be set by overriding [method _handles_file].
@@ -92,7 +92,7 @@ protected _write_frame(): int;
  * **Note:** [method add_writer] must be called early enough in the engine initialization to work, as movie writing is designed to start at the same time as the rest of the engine.
  *
 */
-add_writer(): void;
+add_writer(writer: MovieWriter): void;
 
   connect<T extends SignalsOf<MovieWriter>>(signal: T, method: SignalFunction<MovieWriter[T]>): number;
 

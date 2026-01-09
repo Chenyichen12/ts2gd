@@ -226,7 +226,7 @@ protected _can_import_threaded(): boolean;
 protected _get_format_version(): int;
 
 /** Gets the options and default values for the preset at this index. Returns an Array of Dictionaries with the following keys: [code]name[/code], [code]default_value[/code], [code]property_hint[/code] (optional), [code]hint_string[/code] (optional), [code]usage[/code] (optional). */
-protected _get_import_options(): Dictionary[];
+protected _get_import_options(path: string, preset_index: int): Dictionary[];
 
 /** Gets the order of this importer to be run when importing resources. Importers with [i]lower[/i] import orders will be called first, and higher values will be called later. Use this to ensure the importer runs after the dependencies are already imported. The default import order is [code]0[/code] unless overridden by a specific importer. See [enum ResourceImporter.ImportOrder] for some predefined values. */
 protected _get_import_order(): int;
@@ -261,7 +261,7 @@ protected _get_importer_name(): string;
  * 
  *
 */
-protected _get_option_visibility(): boolean;
+protected _get_option_visibility(path: string, option_name: StringName, options: Dictionary<any, any>): boolean;
 
 /**
  * Gets the number of initial presets defined by the plugin. Use [method _get_import_options] to get the default options for the preset and [method _get_preset_name] to get the name of the preset.
@@ -272,7 +272,7 @@ protected _get_option_visibility(): boolean;
 protected _get_preset_count(): int;
 
 /** Gets the name of the options preset at this index. */
-protected _get_preset_name(): string;
+protected _get_preset_name(preset_index: int): string;
 
 /** Gets the priority of this plugin for the recognized extension. Higher priority plugins will be preferred. The default priority is [code]1.0[/code]. */
 protected _get_priority(): float;
@@ -299,10 +299,10 @@ protected _get_visible_name(): string;
  * This method must be overridden to do the actual importing work. See this class' description for an example of overriding this method.
  *
 */
-protected _import(): int;
+protected _import(source_file: string, save_path: string, options: Dictionary<any, any>, platform_variants: String[], gen_files: String[]): int;
 
 /** This function can only be called during the [method _import] callback and it allows manually importing resources from it. This is useful when the imported file generates external resources that require importing (as example, images). Custom parameters for the ".import" file can be passed via the [param custom_options]. Additionally, in cases where multiple importers can handle a file, the [param custom_importer] can be specified to force a specific one. This function performs a resource import and returns immediately with a success or error code. [param generator_parameters] defines optional extra metadata which will be stored as [code skip-lint]generator_parameters[/code] in the [code]remap[/code] section of the [code].import[/code] file, for example to store a md5 hash of the source data. */
-append_import_external_resource(): int;
+append_import_external_resource(path: string, custom_options?: Dictionary<any, any>, custom_importer?: string, generator_parameters?: any): int;
 
   connect<T extends SignalsOf<EditorImportPlugin>>(signal: T, method: SignalFunction<EditorImportPlugin[T]>): number;
 

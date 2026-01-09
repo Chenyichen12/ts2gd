@@ -40,7 +40,7 @@ get_external_texture_id(): int;
  * Depending on your use case, you may need to call this with data received from a platform API, for example, `SurfaceTexture.getHardwareBuffer()` on Android.
  *
 */
-set_external_buffer_id(): void;
+set_external_buffer_id(external_buffer_id: int): void;
 
   connect<T extends SignalsOf<ExternalTexture>>(signal: T, method: SignalFunction<ExternalTexture[T]>): number;
 

@@ -56,13 +56,13 @@ declare class EditorResourceConversionPlugin extends RefCounted  {
 
 
 /** Takes an input [Resource] and converts it to the type given in [method _converts_to]. The returned [Resource] is the result of the conversion, and the input [Resource] remains unchanged. */
-protected _convert(): Resource;
+protected _convert(resource: Resource): Resource;
 
 /** Returns the class name of the target type of [Resource] that this plugin converts source resources to. */
 protected _converts_to(): string;
 
 /** Called to determine whether a particular [Resource] can be converted to the target resource type by this plugin. */
-protected _handles(): boolean;
+protected _handles(resource: Resource): boolean;
 
   connect<T extends SignalsOf<EditorResourceConversionPlugin>>(signal: T, method: SignalFunction<EditorResourceConversionPlugin[T]>): number;
 

@@ -136,7 +136,7 @@ sample_partition_type: int;
 vertices_per_polygon: float;
 
 /** Adds a polygon using the indices of the vertices you get when calling [method get_vertices]. */
-add_polygon(): void;
+add_polygon(polygon: PackedInt32Array): void;
 
 /** Clears the internal arrays for vertices and polygon indices. */
 clear(): void;
@@ -150,13 +150,13 @@ clear_polygons(): void;
  * **Note:** The given [param mesh] must be of type [constant Mesh.PRIMITIVE_TRIANGLES] and have an index array.
  *
 */
-create_from_mesh(): void;
+create_from_mesh(mesh: Mesh): void;
 
 /** Returns whether or not the specified layer of the [member geometry_collision_mask] is enabled, given a [param layer_number] between 1 and 32. */
-get_collision_mask_value(): boolean;
+get_collision_mask_value(layer_number: int): boolean;
 
 /** Returns a [PackedInt32Array] containing the indices of the vertices of a created polygon. */
-get_polygon(): PackedInt32Array;
+get_polygon(idx: int): PackedInt32Array;
 
 /** Returns the number of polygons in the navigation mesh. */
 get_polygon_count(): int;
@@ -165,10 +165,10 @@ get_polygon_count(): int;
 get_vertices(): PackedVector3Array;
 
 /** Based on [param value], enables or disables the specified layer in the [member geometry_collision_mask], given a [param layer_number] between 1 and 32. */
-set_collision_mask_value(): void;
+set_collision_mask_value(layer_number: int, value: boolean): void;
 
 /** Sets the vertices that can be then indexed to create polygons with the [method add_polygon] method. */
-set_vertices(): void;
+set_vertices(vertices: PackedVector3Array): void;
 
   connect<T extends SignalsOf<NavigationMesh>>(signal: T, method: SignalFunction<NavigationMesh[T]>): number;
 

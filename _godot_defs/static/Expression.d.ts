@@ -107,7 +107,7 @@ declare class Expression extends RefCounted  {
  * If you defined input variables in [method parse], you can specify their values in the inputs array, in the same order.
  *
 */
-execute(): any;
+execute(inputs?: any[], base_instance?: Object, show_error?: boolean, const_calls_only?: boolean): any;
 
 /** Returns the error text if [method parse] or [method execute] has failed. */
 get_error_text(): string;
@@ -121,7 +121,7 @@ has_execute_failed(): boolean;
  * You can optionally specify names of variables that may appear in the expression with [param input_names], so that you can bind them when it gets executed.
  *
 */
-parse(): int;
+parse(expression: string, input_names?: PackedStringArray): int;
 
   connect<T extends SignalsOf<Expression>>(signal: T, method: SignalFunction<Expression[T]>): number;
 

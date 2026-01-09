@@ -20,10 +20,10 @@ declare class ResourceFormatSaver extends RefCounted  {
 
 
 /** Returns the list of extensions available for saving the resource object, provided it is recognized (see [method _recognize]). */
-protected _get_recognized_extensions(): PackedStringArray;
+protected _get_recognized_extensions(resource: Resource): PackedStringArray;
 
 /** Returns whether the given resource object can be saved by this saver. */
-protected _recognize(): boolean;
+protected _recognize(resource: Resource): boolean;
 
 /**
  * Returns `true` if this saver handles a given save path and `false` otherwise.
@@ -31,7 +31,7 @@ protected _recognize(): boolean;
  * If this method is not implemented, the default behavior returns whether the path's extension is within the ones provided by [method _get_recognized_extensions].
  *
 */
-protected _recognize_path(): boolean;
+protected _recognize_path(resource: Resource, path: string): boolean;
 
 /**
  * Saves the given resource object to a file at the target [param path]. [param flags] is a bitmask composed with [enum ResourceSaver.SaverFlags] constants.
@@ -39,10 +39,10 @@ protected _recognize_path(): boolean;
  * Returns [constant OK] on success, or an [enum Error] constant in case of failure.
  *
 */
-protected _save(): int;
+protected _save(resource: Resource, path: string, flags: int): int;
 
 /** Sets a new UID for the resource at the given [param path]. Returns [constant OK] on success, or an [enum Error] constant in case of failure. */
-protected _set_uid(): int;
+protected _set_uid(path: string, uid: int): int;
 
   connect<T extends SignalsOf<ResourceFormatSaver>>(signal: T, method: SignalFunction<ResourceFormatSaver[T]>): number;
 

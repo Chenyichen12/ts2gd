@@ -16,19 +16,19 @@ declare class NavigationMeshSourceGeometryData2D extends Resource  {
 
 
 /** Adds the outline points of a shape as obstructed area. */
-add_obstruction_outline(): void;
+add_obstruction_outline(shape_outline: PackedVector2Array): void;
 
 /** Adds a projected obstruction shape to the source geometry. If [param carve] is [code]true[/code] the carved shape will not be affected by additional offsets (e.g. agent radius) of the navigation mesh baking process. */
-add_projected_obstruction(): void;
+add_projected_obstruction(vertices: PackedVector2Array, carve: boolean): void;
 
 /** Adds the outline points of a shape as traversable area. */
-add_traversable_outline(): void;
+add_traversable_outline(shape_outline: PackedVector2Array): void;
 
 /** Appends another array of [param obstruction_outlines] at the end of the existing obstruction outlines array. */
-append_obstruction_outlines(): void;
+append_obstruction_outlines(obstruction_outlines: PackedVector2Array[]): void;
 
 /** Appends another array of [param traversable_outlines] at the end of the existing traversable outlines array. */
-append_traversable_outlines(): void;
+append_traversable_outlines(traversable_outlines: PackedVector2Array[]): void;
 
 /** Clears the internal data. */
 clear(): void;
@@ -59,10 +59,10 @@ get_traversable_outlines(): PackedVector2Array[];
 has_data(): boolean;
 
 /** Adds the geometry data of another [NavigationMeshSourceGeometryData2D] to the navigation mesh baking data. */
-merge(): void;
+merge(other_geometry: NavigationMeshSourceGeometryData2D): void;
 
 /** Sets all the obstructed area outlines arrays. */
-set_obstruction_outlines(): void;
+set_obstruction_outlines(obstruction_outlines: PackedVector2Array[]): void;
 
 /**
  * Sets the projected obstructions with an Array of Dictionaries with the following key value pairs:
@@ -77,10 +77,10 @@ set_obstruction_outlines(): void;
  * 
  *
 */
-set_projected_obstructions(): void;
+set_projected_obstructions(projected_obstructions: any[]): void;
 
 /** Sets all the traversable area outlines arrays. */
-set_traversable_outlines(): void;
+set_traversable_outlines(traversable_outlines: PackedVector2Array[]): void;
 
   connect<T extends SignalsOf<NavigationMeshSourceGeometryData2D>>(signal: T, method: SignalFunction<NavigationMeshSourceGeometryData2D[T]>): number;
 

@@ -63,7 +63,7 @@ tile_set: TileSet;
  * **Note:** If the properties of [param tile_data] object should change over time, use [method notify_runtime_tile_data_update] to notify the TileMap it needs an update.
  *
 */
-protected _tile_data_runtime_update(): void;
+protected _tile_data_runtime_update(layer: int, coords: Vector2i, tile_data: TileData): void;
 
 /**
  * Should return `true` if the tile at coordinates [param coords] on layer [param layer] requires a runtime update.
@@ -73,10 +73,10 @@ protected _tile_data_runtime_update(): void;
  * **Note:** If the result of this function should changed, use [method notify_runtime_tile_data_update] to notify the TileMap it needs an update.
  *
 */
-protected _use_tile_data_runtime_update(): boolean;
+protected _use_tile_data_runtime_update(layer: int, coords: Vector2i): boolean;
 
 /** Adds a layer at the given position [param to_position] in the array. If [param to_position] is negative, the position is counted from the end, with [code]-1[/code] adding the layer at the end of the array. */
-add_layer(): void;
+add_layer(to_position: int): void;
 
 /** Clears all cells. */
 clear(): void;
@@ -87,7 +87,7 @@ clear(): void;
  * If [param layer] is negative, the layers are accessed from the last one.
  *
 */
-clear_layer(): void;
+clear_layer(layer: int): void;
 
 /**
  * Erases the cell on layer [param layer] at coordinates [param coords].
@@ -95,13 +95,13 @@ clear_layer(): void;
  * If [param layer] is negative, the layers are accessed from the last one.
  *
 */
-erase_cell(): void;
+erase_cell(layer: int, coords: Vector2i): void;
 
 /** Clears cells that do not exist in the tileset. */
 fix_invalid_tiles(): void;
 
 /** Forces the TileMap and the layer [param layer] to update. */
-force_update(): void;
+force_update(layer?: int): void;
 
 /**
  * Returns the tile alternative ID of the cell on layer [param layer] at [param coords].
@@ -111,7 +111,7 @@ force_update(): void;
  * If [param layer] is negative, the layers are accessed from the last one.
  *
 */
-get_cell_alternative_tile(): int;
+get_cell_alternative_tile(layer: int, coords: Vector2i, use_proxies?: boolean): int;
 
 /**
  * Returns the tile atlas coordinates ID of the cell on layer [param layer] at coordinates [param coords]. Returns `Vector2i(-1, -1)` if the cell does not exist.
@@ -121,7 +121,7 @@ get_cell_alternative_tile(): int;
  * If [param layer] is negative, the layers are accessed from the last one.
  *
 */
-get_cell_atlas_coords(): Vector2i;
+get_cell_atlas_coords(layer: int, coords: Vector2i, use_proxies?: boolean): Vector2i;
 
 /**
  * Returns the tile source ID of the cell on layer [param layer] at coordinates [param coords]. Returns `-1` if the cell does not exist.
@@ -131,7 +131,7 @@ get_cell_atlas_coords(): Vector2i;
  * If [param layer] is negative, the layers are accessed from the last one.
  *
 */
-get_cell_source_id(): int;
+get_cell_source_id(layer: int, coords: Vector2i, use_proxies?: boolean): int;
 
 /**
  * Returns the [TileData] object associated with the given cell, or `null` if the cell does not exist or is not a [TileSetAtlasSource].
@@ -153,13 +153,13 @@ get_cell_source_id(): int;
  * If [param use_proxies] is `false`, ignores the [TileSet]'s tile proxies. See [method TileSet.map_tile_proxy].
  *
 */
-get_cell_tile_data(): TileData;
+get_cell_tile_data(layer: int, coords: Vector2i, use_proxies?: boolean): TileData;
 
 /** Returns the coordinates of the tile for given physics body RID. Such RID can be retrieved from [method KinematicCollision2D.get_collider_rid], when colliding with a tile. */
-get_coords_for_body_rid(): Vector2i;
+get_coords_for_body_rid(body: RID): Vector2i;
 
 /** Returns the tilemap layer of the tile for given physics body RID. Such RID can be retrieved from [method KinematicCollision2D.get_collider_rid], when colliding with a tile. */
-get_layer_for_body_rid(): int;
+get_layer_for_body_rid(body: RID): int;
 
 /**
  * Returns a TileMap layer's modulate.
@@ -167,7 +167,7 @@ get_layer_for_body_rid(): int;
  * If [param layer] is negative, the layers are accessed from the last one.
  *
 */
-get_layer_modulate(): Color;
+get_layer_modulate(layer: int): Color;
 
 /**
  * Returns a TileMap layer's name.
@@ -175,7 +175,7 @@ get_layer_modulate(): Color;
  * If [param layer] is negative, the layers are accessed from the last one.
  *
 */
-get_layer_name(): string;
+get_layer_name(layer: int): string;
 
 /**
  * Returns the [RID] of the [NavigationServer2D] navigation map assigned to the specified TileMap layer [param layer].
@@ -187,7 +187,7 @@ get_layer_name(): string;
  * If [param layer] is negative, the layers are accessed from the last one.
  *
 */
-get_layer_navigation_map(): RID;
+get_layer_navigation_map(layer: int): RID;
 
 /**
  * Returns a TileMap layer's Y sort origin.
@@ -195,7 +195,7 @@ get_layer_navigation_map(): RID;
  * If [param layer] is negative, the layers are accessed from the last one.
  *
 */
-get_layer_y_sort_origin(): int;
+get_layer_y_sort_origin(layer: int): int;
 
 /**
  * Returns a TileMap layer's Z-index value.
@@ -203,16 +203,16 @@ get_layer_y_sort_origin(): int;
  * If [param layer] is negative, the layers are accessed from the last one.
  *
 */
-get_layer_z_index(): int;
+get_layer_z_index(layer: int): int;
 
 /** Returns the number of layers in the TileMap. */
 get_layers_count(): int;
 
 /** Returns the [RID] of the [NavigationServer2D] navigation map assigned to the specified TileMap layer [param layer]. */
-get_navigation_map(): RID;
+get_navigation_map(layer: int): RID;
 
 /** Returns the neighboring cell to the one at coordinates [param coords], identified by the [param neighbor] direction. This method takes into account the different layouts a TileMap can take. */
-get_neighbor_cell(): Vector2i;
+get_neighbor_cell(coords: Vector2i, neighbor: int): Vector2i;
 
 /**
  * Creates a new [TileMapPattern] from the given layer and set of cells.
@@ -220,10 +220,10 @@ get_neighbor_cell(): Vector2i;
  * If [param layer] is negative, the layers are accessed from the last one.
  *
 */
-get_pattern(): TileMapPattern;
+get_pattern(layer: int, coords_array: Vector2i[]): TileMapPattern;
 
 /** Returns the list of all neighbourings cells to the one at [param coords]. */
-get_surrounding_cells(): Vector2i[];
+get_surrounding_cells(coords: Vector2i): Vector2i[];
 
 /**
  * Returns a [Vector2i] array with the positions of all cells containing a tile in the given layer. A cell is considered empty if its source identifier equals -1, its atlas coordinates identifiers is `Vector2(-1, -1)` and its alternative identifier is -1.
@@ -231,7 +231,7 @@ get_surrounding_cells(): Vector2i[];
  * If [param layer] is negative, the layers are accessed from the last one.
  *
 */
-get_used_cells(): Vector2i[];
+get_used_cells(layer: int): Vector2i[];
 
 /**
  * Returns a [Vector2i] array with the positions of all cells containing a tile in the given layer. Tiles may be filtered according to their source ([param source_id]), their atlas coordinates ([param atlas_coords]) or alternative id ([param alternative_tile]).
@@ -243,19 +243,19 @@ get_used_cells(): Vector2i[];
  * If [param layer] is negative, the layers are accessed from the last one.
  *
 */
-get_used_cells_by_id(): Vector2i[];
+get_used_cells_by_id(layer: int, source_id?: int, atlas_coords?: Vector2i, alternative_tile?: int): Vector2i[];
 
 /** Returns a rectangle enclosing the used (non-empty) tiles of the map, including all layers. */
 get_used_rect(): Rect2i;
 
 /** Returns [code]true[/code] if the cell on layer [param layer] at coordinates [param coords] is flipped horizontally. The result is valid only for atlas sources. */
-is_cell_flipped_h(): boolean;
+is_cell_flipped_h(layer: int, coords: Vector2i, use_proxies?: boolean): boolean;
 
 /** Returns [code]true[/code] if the cell on layer [param layer] at coordinates [param coords] is flipped vertically. The result is valid only for atlas sources. */
-is_cell_flipped_v(): boolean;
+is_cell_flipped_v(layer: int, coords: Vector2i, use_proxies?: boolean): boolean;
 
 /** Returns [code]true[/code] if the cell on layer [param layer] at coordinates [param coords] is transposed. The result is valid only for atlas sources. */
-is_cell_transposed(): boolean;
+is_cell_transposed(layer: int, coords: Vector2i, use_proxies?: boolean): boolean;
 
 /**
  * Returns if a layer is enabled.
@@ -263,10 +263,10 @@ is_cell_transposed(): boolean;
  * If [param layer] is negative, the layers are accessed from the last one.
  *
 */
-is_layer_enabled(): boolean;
+is_layer_enabled(layer: int): boolean;
 
 /** Returns if a layer's built-in navigation regions generation is enabled. */
-is_layer_navigation_enabled(): boolean;
+is_layer_navigation_enabled(layer: int): boolean;
 
 /**
  * Returns if a layer Y-sorts its tiles.
@@ -274,13 +274,13 @@ is_layer_navigation_enabled(): boolean;
  * If [param layer] is negative, the layers are accessed from the last one.
  *
 */
-is_layer_y_sort_enabled(): boolean;
+is_layer_y_sort_enabled(layer: int): boolean;
 
 /** Returns the map coordinates of the cell containing the given [param local_position]. If [param local_position] is in global coordinates, consider using [method Node2D.to_local] before passing it to this method. See also [method map_to_local]. */
-local_to_map(): Vector2i;
+local_to_map(local_position: Vector2): Vector2i;
 
 /** Returns for the given coordinate [param coords_in_pattern] in a [TileMapPattern] the corresponding cell coordinates if the pattern was pasted at the [param position_in_tilemap] coordinates (see [method set_pattern]). This mapping is required as in half-offset tile shapes, the mapping might not work by calculating [code]position_in_tile_map + coords_in_pattern[/code]. */
-map_pattern(): Vector2i;
+map_pattern(position_in_tilemap: Vector2i, coords_in_pattern: Vector2i, pattern: TileMapPattern): Vector2i;
 
 /**
  * Returns the centered position of a cell in the TileMap's local coordinate space. To convert the returned value into global coordinates, use [method Node2D.to_global]. See also [method local_to_map].
@@ -288,10 +288,10 @@ map_pattern(): Vector2i;
  * **Note:** This may not correspond to the visual position of the tile, i.e. it ignores the [member TileData.texture_origin] property of individual tiles.
  *
 */
-map_to_local(): Vector2;
+map_to_local(map_position: Vector2i): Vector2;
 
 /** Moves the layer at index [param layer] to the given position [param to_position] in the array. */
-move_layer(): void;
+move_layer(layer: int, to_position: int): void;
 
 /**
  * Notifies the TileMap node that calls to [method _use_tile_data_runtime_update] or [method _tile_data_runtime_update] will lead to different results. This will thus trigger a TileMap update.
@@ -303,10 +303,10 @@ move_layer(): void;
  * **Note:** This does not trigger a direct update of the TileMap, the update will be done at the end of the frame as usual (unless you call [method update_internals]).
  *
 */
-notify_runtime_tile_data_update(): void;
+notify_runtime_tile_data_update(layer?: int): void;
 
 /** Removes the layer at index [param layer]. */
-remove_layer(): void;
+remove_layer(layer: int): void;
 
 /**
  * Sets the tile identifiers for the cell on layer [param layer] at coordinates [param coords]. Each tile of the [TileSet] is identified using three parts:
@@ -322,7 +322,7 @@ remove_layer(): void;
  * If [param layer] is negative, the layers are accessed from the last one.
  *
 */
-set_cell(): void;
+set_cell(layer: int, coords: Vector2i, source_id?: int, atlas_coords?: Vector2i, alternative_tile?: int): void;
 
 /**
  * Update all the cells in the [param cells] coordinates array so that they use the given [param terrain] for the given [param terrain_set]. If an updated cell has the same terrain as one of its neighboring cells, this function tries to join the two. This function might update neighboring tiles if needed to create correct terrain transitions.
@@ -334,7 +334,7 @@ set_cell(): void;
  * **Note:** To work correctly, this method requires the TileMap's TileSet to have terrains set up with all required terrain combinations. Otherwise, it may produce unexpected results.
  *
 */
-set_cells_terrain_connect(): void;
+set_cells_terrain_connect(layer: int, cells: Vector2i[], terrain_set: int, terrain: int, ignore_empty_terrains?: boolean): void;
 
 /**
  * Update all the cells in the [param path] coordinates array so that they use the given [param terrain] for the given [param terrain_set]. The function will also connect two successive cell in the path with the same terrain. This function might update neighboring tiles if needed to create correct terrain transitions.
@@ -346,7 +346,7 @@ set_cells_terrain_connect(): void;
  * **Note:** To work correctly, this method requires the TileMap's TileSet to have terrains set up with all required terrain combinations. Otherwise, it may produce unexpected results.
  *
 */
-set_cells_terrain_path(): void;
+set_cells_terrain_path(layer: int, path: Vector2i[], terrain_set: int, terrain: int, ignore_empty_terrains?: boolean): void;
 
 /**
  * Enables or disables the layer [param layer]. A disabled layer is not processed at all (no rendering, no physics, etc.).
@@ -354,7 +354,7 @@ set_cells_terrain_path(): void;
  * If [param layer] is negative, the layers are accessed from the last one.
  *
 */
-set_layer_enabled(): void;
+set_layer_enabled(layer: int, enabled: boolean): void;
 
 /**
  * Sets a layer's color. It will be multiplied by tile's color and TileMap's modulate.
@@ -362,7 +362,7 @@ set_layer_enabled(): void;
  * If [param layer] is negative, the layers are accessed from the last one.
  *
 */
-set_layer_modulate(): void;
+set_layer_modulate(layer: int, modulate: Color): void;
 
 /**
  * Sets a layer's name. This is mostly useful in the editor.
@@ -370,10 +370,10 @@ set_layer_modulate(): void;
  * If [param layer] is negative, the layers are accessed from the last one.
  *
 */
-set_layer_name(): void;
+set_layer_name(layer: int, name: string): void;
 
 /** Enables or disables a layer's built-in navigation regions generation. Disable this if you need to bake navigation regions from a TileMap using a [NavigationRegion2D] node. */
-set_layer_navigation_enabled(): void;
+set_layer_navigation_enabled(layer: int, enabled: boolean): void;
 
 /**
  * Assigns [param map] as a [NavigationServer2D] navigation map for the specified TileMap layer [param layer].
@@ -385,7 +385,7 @@ set_layer_navigation_enabled(): void;
  * If [param layer] is negative, the layers are accessed from the last one.
  *
 */
-set_layer_navigation_map(): void;
+set_layer_navigation_map(layer: int, map: RID): void;
 
 /**
  * Enables or disables a layer's Y-sorting. If a layer is Y-sorted, the layer will behave as a CanvasItem node where each of its tile gets Y-sorted.
@@ -395,7 +395,7 @@ set_layer_navigation_map(): void;
  * If [param layer] is negative, the layers are accessed from the last one.
  *
 */
-set_layer_y_sort_enabled(): void;
+set_layer_y_sort_enabled(layer: int, y_sort_enabled: boolean): void;
 
 /**
  * Sets a layer's Y-sort origin value. This Y-sort origin value is added to each tile's Y-sort origin value.
@@ -405,7 +405,7 @@ set_layer_y_sort_enabled(): void;
  * If [param layer] is negative, the layers are accessed from the last one.
  *
 */
-set_layer_y_sort_origin(): void;
+set_layer_y_sort_origin(layer: int, y_sort_origin: int): void;
 
 /**
  * Sets a layers Z-index value. This Z-index is added to each tile's Z-index value.
@@ -413,10 +413,10 @@ set_layer_y_sort_origin(): void;
  * If [param layer] is negative, the layers are accessed from the last one.
  *
 */
-set_layer_z_index(): void;
+set_layer_z_index(layer: int, z_index: int): void;
 
 /** Assigns [param map] as a [NavigationServer2D] navigation map for the specified TileMap layer [param layer]. */
-set_navigation_map(): void;
+set_navigation_map(layer: int, map: RID): void;
 
 /**
  * Paste the given [TileMapPattern] at the given [param position] and [param layer] in the tile map.
@@ -424,7 +424,7 @@ set_navigation_map(): void;
  * If [param layer] is negative, the layers are accessed from the last one.
  *
 */
-set_pattern(): void;
+set_pattern(layer: int, position: Vector2i, pattern: TileMapPattern): void;
 
 /**
  * Triggers a direct update of the TileMap. Usually, calling this function is not needed, as TileMap node updates automatically when one of its properties or cells is modified.

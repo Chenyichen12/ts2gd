@@ -23,7 +23,7 @@ declare class SkeletonModification2DStackHolder extends SkeletonModification2D  
 get_held_modification_stack(): SkeletonModificationStack2D;
 
 /** Sets the [SkeletonModificationStack2D] that this modification is holding. This modification stack will then be executed when this modification is executed. */
-set_held_modification_stack(): void;
+set_held_modification_stack(held_modification_stack: SkeletonModificationStack2D): void;
 
   connect<T extends SignalsOf<SkeletonModification2DStackHolder>>(signal: T, method: SignalFunction<SkeletonModification2DStackHolder[T]>): number;
 

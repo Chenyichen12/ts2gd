@@ -208,25 +208,25 @@ clear(): void;
 encode_to_text(): string;
 
 /** Deletes the specified section along with all the key-value pairs inside. Raises an error if the section does not exist. */
-erase_section(): void;
+erase_section(section: string): void;
 
 /** Deletes the specified key in a section. Raises an error if either the section or the key do not exist. */
-erase_section_key(): void;
+erase_section_key(section: string, key: string): void;
 
 /** Returns an array of all defined key identifiers in the specified section. Raises an error and returns an empty array if the section does not exist. */
-get_section_keys(): PackedStringArray;
+get_section_keys(section: string): PackedStringArray;
 
 /** Returns an array of all defined section identifiers. */
 get_sections(): PackedStringArray;
 
 /** Returns the current value for the specified section and key. If either the section or the key do not exist, the method returns the fallback [param default] value. If [param default] is not specified or set to [code]null[/code], an error is also raised. */
-get_value(): any;
+get_value(section: string, key: string, _default?: any): any;
 
 /** Returns [code]true[/code] if the specified section exists. */
-has_section(): boolean;
+has_section(section: string): boolean;
 
 /** Returns [code]true[/code] if the specified section-key pair exists. */
-has_section_key(): boolean;
+has_section_key(section: string, key: string): boolean;
 
 /**
  * Loads the config file specified as a parameter. The file's contents are parsed and loaded in the [ConfigFile] object which the method was called on.
@@ -234,7 +234,7 @@ has_section_key(): boolean;
  * Returns [constant OK] on success, or one of the other [enum Error] values if the operation failed.
  *
 */
-load(): int;
+load(path: string): int;
 
 /**
  * Loads the encrypted config file specified as a parameter, using the provided [param key] to decrypt it. The file's contents are parsed and loaded in the [ConfigFile] object which the method was called on.
@@ -242,7 +242,7 @@ load(): int;
  * Returns [constant OK] on success, or one of the other [enum Error] values if the operation failed.
  *
 */
-load_encrypted(): int;
+load_encrypted(path: string, key: PackedByteArray): int;
 
 /**
  * Loads the encrypted config file specified as a parameter, using the provided [param password] to decrypt it. The file's contents are parsed and loaded in the [ConfigFile] object which the method was called on.
@@ -250,7 +250,7 @@ load_encrypted(): int;
  * Returns [constant OK] on success, or one of the other [enum Error] values if the operation failed.
  *
 */
-load_encrypted_pass(): int;
+load_encrypted_pass(path: string, password: string): int;
 
 /**
  * Parses the passed string as the contents of a config file. The string is parsed and loaded in the ConfigFile object which the method was called on.
@@ -258,7 +258,7 @@ load_encrypted_pass(): int;
  * Returns [constant OK] on success, or one of the other [enum Error] values if the operation failed.
  *
 */
-parse(): int;
+parse(data: string): int;
 
 /**
  * Saves the contents of the [ConfigFile] object to the file specified as a parameter. The output file uses an INI-style structure.
@@ -266,7 +266,7 @@ parse(): int;
  * Returns [constant OK] on success, or one of the other [enum Error] values if the operation failed.
  *
 */
-save(): int;
+save(path: string): int;
 
 /**
  * Saves the contents of the [ConfigFile] object to the AES-256 encrypted file specified as a parameter, using the provided [param key] to encrypt it. The output file uses an INI-style structure.
@@ -274,7 +274,7 @@ save(): int;
  * Returns [constant OK] on success, or one of the other [enum Error] values if the operation failed.
  *
 */
-save_encrypted(): int;
+save_encrypted(path: string, key: PackedByteArray): int;
 
 /**
  * Saves the contents of the [ConfigFile] object to the AES-256 encrypted file specified as a parameter, using the provided [param password] to encrypt it. The output file uses an INI-style structure.
@@ -282,10 +282,10 @@ save_encrypted(): int;
  * Returns [constant OK] on success, or one of the other [enum Error] values if the operation failed.
  *
 */
-save_encrypted_pass(): int;
+save_encrypted_pass(path: string, password: string): int;
 
 /** Assigns a value to the specified key of the specified section. If either the section or the key do not exist, they are created. Passing a [code]null[/code] value deletes the specified key if it exists, and deletes the section if it ends up empty once the key has been removed. */
-set_value(): void;
+set_value(section: string, key: string, value: any): void;
 
   connect<T extends SignalsOf<ConfigFile>>(signal: T, method: SignalFunction<ConfigFile[T]>): number;
 

@@ -24,13 +24,13 @@ declare class MethodTweener extends Tweener  {
 
 
 /** Sets the time in seconds after which the [MethodTweener] will start interpolating. By default there's no delay. */
-set_delay(): MethodTweener;
+set_delay(delay: float): MethodTweener;
 
 /** Sets the type of used easing from [enum Tween.EaseType]. If not set, the default easing is used from the [Tween] that contains this Tweener. */
-set_ease(): MethodTweener;
+set_ease(ease: int): MethodTweener;
 
 /** Sets the type of used transition from [enum Tween.TransitionType]. If not set, the default transition is used from the [Tween] that contains this Tweener. */
-set_trans(): MethodTweener;
+set_trans(trans: int): MethodTweener;
 
   connect<T extends SignalsOf<MethodTweener>>(signal: T, method: SignalFunction<MethodTweener[T]>): number;
 

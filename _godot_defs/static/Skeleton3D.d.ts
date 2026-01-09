@@ -50,7 +50,7 @@ show_rest_only: boolean;
  * **Note:** Bone names should be unique, non empty, and cannot include the `:` and `/` characters.
  *
 */
-add_bone(): int;
+add_bone(name: string): int;
 
 /**
  * Manually advance the child [SkeletonModifier3D]s by the specified time (in seconds).
@@ -58,7 +58,7 @@ add_bone(): int;
  * **Note:** The [param delta] is temporarily accumulated in the [Skeleton3D], and the deferred process uses the accumulated value to process the modification.
  *
 */
-advance(): void;
+advance(delta: float): void;
 
 /** Clear all the bones in this skeleton. */
 clear_bones(): void;
@@ -70,16 +70,16 @@ clear_bones_global_pose_override(): void;
 create_skin_from_rest_transforms(): Skin;
 
 /** Returns the bone index that matches [param name] as its name. Returns [code]-1[/code] if no bone with this name exists. */
-find_bone(): int;
+find_bone(name: string): int;
 
 /** Force updates the bone transforms/poses for all bones in the skeleton. */
 force_update_all_bone_transforms(): void;
 
 /** Force updates the bone transform for the bone at [param bone_idx] and all of its children. */
-force_update_bone_child_transform(): void;
+force_update_bone_child_transform(bone_idx: int): void;
 
 /** Returns an array containing the bone indexes of all the child node of the passed in bone, [param bone_idx]. */
-get_bone_children(): PackedInt32Array;
+get_bone_children(bone_idx: int): PackedInt32Array;
 
 /** Returns the number of bones in the skeleton. */
 get_bone_count(): int;
@@ -90,25 +90,25 @@ get_bone_count(): int;
  * **Note:** This is the global pose you set to the skeleton in the process, the final global pose can get overridden by modifiers in the deferred process, if you want to access the final global pose, use [signal SkeletonModifier3D.modification_processed].
  *
 */
-get_bone_global_pose(): Transform3D;
+get_bone_global_pose(bone_idx: int): Transform3D;
 
 /** Returns the overall transform of the specified bone, with respect to the skeleton, but without any global pose overrides. Being relative to the skeleton frame, this is not the actual "global" transform of the bone. */
-get_bone_global_pose_no_override(): Transform3D;
+get_bone_global_pose_no_override(bone_idx: int): Transform3D;
 
 /** Returns the global pose override transform for [param bone_idx]. */
-get_bone_global_pose_override(): Transform3D;
+get_bone_global_pose_override(bone_idx: int): Transform3D;
 
 /** Returns the global rest transform for [param bone_idx]. */
-get_bone_global_rest(): Transform3D;
+get_bone_global_rest(bone_idx: int): Transform3D;
 
 /** Returns the metadata with the given [param key] for the bone at index [param bone_idx]. */
-get_bone_meta(): any;
+get_bone_meta(bone_idx: int, key: StringName): any;
 
 /** Returns the list of all metadata keys for the bone at index [param bone_idx]. */
-get_bone_meta_list(): StringName[];
+get_bone_meta_list(bone_idx: int): StringName[];
 
 /** Returns the name of the bone at index [param bone_idx]. */
-get_bone_name(): string;
+get_bone_name(bone_idx: int): string;
 
 /**
  * Returns the bone index which is the parent of the bone at [param bone_idx]. If -1, then bone has no parent.
@@ -116,7 +116,7 @@ get_bone_name(): string;
  * **Note:** The parent bone returned will always be less than [param bone_idx].
  *
 */
-get_bone_parent(): int;
+get_bone_parent(bone_idx: int): int;
 
 /**
  * Returns the pose transform of the specified bone.
@@ -124,19 +124,19 @@ get_bone_parent(): int;
  * **Note:** This is the pose you set to the skeleton in the process, the final pose can get overridden by modifiers in the deferred process, if you want to access the final pose, use [signal SkeletonModifier3D.modification_processed].
  *
 */
-get_bone_pose(): Transform3D;
+get_bone_pose(bone_idx: int): Transform3D;
 
 /** Returns the pose position of the bone at [param bone_idx]. The returned [Vector3] is in the local coordinate space of the [Skeleton3D] node. */
-get_bone_pose_position(): Vector3;
+get_bone_pose_position(bone_idx: int): Vector3;
 
 /** Returns the pose rotation of the bone at [param bone_idx]. The returned [Quaternion] is local to the bone with respect to the rotation of any parent bones. */
-get_bone_pose_rotation(): Quaternion;
+get_bone_pose_rotation(bone_idx: int): Quaternion;
 
 /** Returns the pose scale of the bone at [param bone_idx]. */
-get_bone_pose_scale(): Vector3;
+get_bone_pose_scale(bone_idx: int): Vector3;
 
 /** Returns the rest transform for a bone [param bone_idx]. */
-get_bone_rest(): Transform3D;
+get_bone_rest(bone_idx: int): Transform3D;
 
 /**
  * Returns all bone names concatenated with commas (`,`) as a single [StringName].
@@ -160,10 +160,10 @@ get_parentless_bones(): PackedInt32Array;
 get_version(): int;
 
 /** Returns [code]true[/code] if the bone at index [param bone_idx] has metadata with the given [param key]. */
-has_bone_meta(): boolean;
+has_bone_meta(bone_idx: int, key: StringName): boolean;
 
 /** Returns whether the bone pose for the bone at [param bone_idx] is enabled. */
-is_bone_enabled(): boolean;
+is_bone_enabled(bone_idx: int): boolean;
 
 /** Returns all bones in the skeleton to their rest poses. */
 localize_rests(): void;
@@ -174,7 +174,7 @@ localize_rests(): void;
  * Works just like the [RigidBody3D] node.
  *
 */
-physical_bones_add_collision_exception(): void;
+physical_bones_add_collision_exception(exception: RID): void;
 
 /**
  * Removes a collision exception to the physical bone.
@@ -182,7 +182,7 @@ physical_bones_add_collision_exception(): void;
  * Works just like the [RigidBody3D] node.
  *
 */
-physical_bones_remove_collision_exception(): void;
+physical_bones_remove_collision_exception(exception: RID): void;
 
 /**
  * Tells the [PhysicalBone3D] nodes in the Skeleton to start simulating and reacting to the physics world.
@@ -190,22 +190,22 @@ physical_bones_remove_collision_exception(): void;
  * Optionally, a list of bone names can be passed-in, allowing only the passed-in bones to be simulated.
  *
 */
-physical_bones_start_simulation(): void;
+physical_bones_start_simulation(bones?: StringName[]): void;
 
 /** Tells the [PhysicalBone3D] nodes in the Skeleton to stop simulating. */
 physical_bones_stop_simulation(): void;
 
 /** Binds the given Skin to the Skeleton. */
-register_skin(): SkinReference;
+register_skin(skin: Skin): SkinReference;
 
 /** Sets the bone pose to rest for [param bone_idx]. */
-reset_bone_pose(): void;
+reset_bone_pose(bone_idx: int): void;
 
 /** Sets all bone poses to rests. */
 reset_bone_poses(): void;
 
 /** Disables the pose for the bone at [param bone_idx] if [code]false[/code], enables the bone pose if [code]true[/code]. */
-set_bone_enabled(): void;
+set_bone_enabled(bone_idx: int, enabled?: boolean): void;
 
 /**
  * Sets the global pose transform, [param pose], for the bone at [param bone_idx].
@@ -213,7 +213,7 @@ set_bone_enabled(): void;
  * **Note:** If other bone poses have been changed, this method executes a dirty poses recalculation and will cause performance to deteriorate. If you know that multiple global poses will be applied, consider using [method set_bone_pose] with precalculation.
  *
 */
-set_bone_global_pose(): void;
+set_bone_global_pose(bone_idx: int, pose: Transform3D): void;
 
 /**
  * Sets the global pose transform, [param pose], for the bone at [param bone_idx].
@@ -223,13 +223,13 @@ set_bone_global_pose(): void;
  * **Note:** The pose transform needs to be a global pose! To convert a world transform from a [Node3D] to a global bone pose, multiply the [method Transform3D.affine_inverse] of the node's [member Node3D.global_transform] by the desired world transform.
  *
 */
-set_bone_global_pose_override(): void;
+set_bone_global_pose_override(bone_idx: int, pose: Transform3D, amount: float, persistent?: boolean): void;
 
 /** Sets the metadata with the given [param key] to [param value] for the bone at index [param bone_idx]. */
-set_bone_meta(): void;
+set_bone_meta(bone_idx: int, key: StringName, value: any): void;
 
 /** Sets the bone name, [param name], for the bone at [param bone_idx]. */
-set_bone_name(): void;
+set_bone_name(bone_idx: int, name: string): void;
 
 /**
  * Sets the bone index [param parent_idx] as the parent of the bone at [param bone_idx]. If -1, then bone has no parent.
@@ -237,25 +237,25 @@ set_bone_name(): void;
  * **Note:** [param parent_idx] must be less than [param bone_idx].
  *
 */
-set_bone_parent(): void;
+set_bone_parent(bone_idx: int, parent_idx: int): void;
 
 /** Sets the pose transform, [param pose], for the bone at [param bone_idx]. */
-set_bone_pose(): void;
+set_bone_pose(bone_idx: int, pose: Transform3D): void;
 
 /** Sets the pose position of the bone at [param bone_idx] to [param position]. [param position] is a [Vector3] describing a position local to the [Skeleton3D] node. */
-set_bone_pose_position(): void;
+set_bone_pose_position(bone_idx: int, position: Vector3): void;
 
 /** Sets the pose rotation of the bone at [param bone_idx] to [param rotation]. [param rotation] is a [Quaternion] describing a rotation in the bone's local coordinate space with respect to the rotation of any parent bones. */
-set_bone_pose_rotation(): void;
+set_bone_pose_rotation(bone_idx: int, rotation: Quaternion): void;
 
 /** Sets the pose scale of the bone at [param bone_idx] to [param scale]. */
-set_bone_pose_scale(): void;
+set_bone_pose_scale(bone_idx: int, scale: Vector3): void;
 
 /** Sets the rest transform for bone [param bone_idx]. */
-set_bone_rest(): void;
+set_bone_rest(bone_idx: int, rest: Transform3D): void;
 
 /** Unparents the bone at [param bone_idx] and sets its rest position to that of its parent prior to being reset. */
-unparent_bone_and_rest(): void;
+unparent_bone_and_rest(bone_idx: int): void;
 
   connect<T extends SignalsOf<Skeleton3D>>(signal: T, method: SignalFunction<Skeleton3D[T]>): number;
 

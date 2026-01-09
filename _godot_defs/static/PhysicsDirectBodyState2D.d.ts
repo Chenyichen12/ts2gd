@@ -62,7 +62,7 @@ transform: Transform2D;
  * This is equivalent to using [method add_constant_force] at the body's center of mass.
  *
 */
-add_constant_central_force(): void;
+add_constant_central_force(force?: Vector2): void;
 
 /**
  * Adds a constant positioned force to the body that keeps being applied over time until cleared with `constant_force = Vector2(0, 0)`.
@@ -70,10 +70,10 @@ add_constant_central_force(): void;
  * [param position] is the offset from the body origin in global coordinates.
  *
 */
-add_constant_force(): void;
+add_constant_force(force: Vector2, position?: Vector2): void;
 
 /** Adds a constant rotational force without affecting position that keeps being applied over time until cleared with [code]constant_torque = 0[/code]. */
-add_constant_torque(): void;
+add_constant_torque(torque: float): void;
 
 /**
  * Applies a directional force without affecting rotation. A force is time dependent and meant to be applied every physics update.
@@ -81,7 +81,7 @@ add_constant_torque(): void;
  * This is equivalent to using [method apply_force] at the body's center of mass.
  *
 */
-apply_central_force(): void;
+apply_central_force(force?: Vector2): void;
 
 /**
  * Applies a directional impulse without affecting rotation.
@@ -91,7 +91,7 @@ apply_central_force(): void;
  * This is equivalent to using [method apply_impulse] at the body's center of mass.
  *
 */
-apply_central_impulse(): void;
+apply_central_impulse(impulse: Vector2): void;
 
 /**
  * Applies a positioned force to the body. A force is time dependent and meant to be applied every physics update.
@@ -99,7 +99,7 @@ apply_central_impulse(): void;
  * [param position] is the offset from the body origin in global coordinates.
  *
 */
-apply_force(): void;
+apply_force(force: Vector2, position?: Vector2): void;
 
 /**
  * Applies a positioned impulse to the body.
@@ -109,7 +109,7 @@ apply_force(): void;
  * [param position] is the offset from the body origin in global coordinates.
  *
 */
-apply_impulse(): void;
+apply_impulse(impulse: Vector2, position?: Vector2): void;
 
 /**
  * Applies a rotational force without affecting position. A force is time dependent and meant to be applied every physics update.
@@ -117,7 +117,7 @@ apply_impulse(): void;
  * **Note:** [member inverse_inertia] is required for this to work. To have [member inverse_inertia], an active [CollisionShape2D] must be a child of the node, or you can manually set [member inverse_inertia].
  *
 */
-apply_torque(): void;
+apply_torque(torque: float): void;
 
 /**
  * Applies a rotational impulse to the body without affecting the position.
@@ -127,7 +127,7 @@ apply_torque(): void;
  * **Note:** [member inverse_inertia] is required for this to work. To have [member inverse_inertia], an active [CollisionShape2D] must be a child of the node, or you can manually set [member inverse_inertia].
  *
 */
-apply_torque_impulse(): void;
+apply_torque_impulse(impulse: float): void;
 
 /**
  * Returns the body's total constant positional forces applied during each physics update.
@@ -146,22 +146,22 @@ get_constant_force(): Vector2;
 get_constant_torque(): float;
 
 /** Returns the collider's [RID]. */
-get_contact_collider(): RID;
+get_contact_collider(contact_idx: int): RID;
 
 /** Returns the collider's object id. */
-get_contact_collider_id(): int;
+get_contact_collider_id(contact_idx: int): int;
 
 /** Returns the collider object. This depends on how it was created (will return a scene node if such was used to create it). */
-get_contact_collider_object(): Object;
+get_contact_collider_object(contact_idx: int): Object;
 
 /** Returns the position of the contact point on the collider in the global coordinate system. */
-get_contact_collider_position(): Vector2;
+get_contact_collider_position(contact_idx: int): Vector2;
 
 /** Returns the collider's shape index. */
-get_contact_collider_shape(): int;
+get_contact_collider_shape(contact_idx: int): int;
 
 /** Returns the velocity vector at the collider's contact point. */
-get_contact_collider_velocity_at_position(): Vector2;
+get_contact_collider_velocity_at_position(contact_idx: int): Vector2;
 
 /**
  * Returns the number of contacts this body has with other bodies.
@@ -172,25 +172,25 @@ get_contact_collider_velocity_at_position(): Vector2;
 get_contact_count(): int;
 
 /** Returns the impulse created by the contact. */
-get_contact_impulse(): Vector2;
+get_contact_impulse(contact_idx: int): Vector2;
 
 /** Returns the local normal at the contact point. */
-get_contact_local_normal(): Vector2;
+get_contact_local_normal(contact_idx: int): Vector2;
 
 /** Returns the position of the contact point on the body in the global coordinate system. */
-get_contact_local_position(): Vector2;
+get_contact_local_position(contact_idx: int): Vector2;
 
 /** Returns the local shape index of the collision. */
-get_contact_local_shape(): int;
+get_contact_local_shape(contact_idx: int): int;
 
 /** Returns the velocity vector at the body's contact point. */
-get_contact_local_velocity_at_position(): Vector2;
+get_contact_local_velocity_at_position(contact_idx: int): Vector2;
 
 /** Returns the current state of the space, useful for queries. */
 get_space_state(): PhysicsDirectSpaceState2D;
 
 /** Returns the body's velocity at the given relative position, including both translation and rotation. */
-get_velocity_at_local_position(): Vector2;
+get_velocity_at_local_position(local_position: Vector2): Vector2;
 
 /** Updates the body's linear and angular velocity by applying gravity and damping for the equivalent of one physics tick. */
 integrate_forces(): void;
@@ -201,7 +201,7 @@ integrate_forces(): void;
  * See [method add_constant_force] and [method add_constant_central_force].
  *
 */
-set_constant_force(): void;
+set_constant_force(force: Vector2): void;
 
 /**
  * Sets the body's total constant rotational forces applied during each physics update.
@@ -209,7 +209,7 @@ set_constant_force(): void;
  * See [method add_constant_torque].
  *
 */
-set_constant_torque(): void;
+set_constant_torque(torque: float): void;
 
   connect<T extends SignalsOf<PhysicsDirectBodyState2D>>(signal: T, method: SignalFunction<PhysicsDirectBodyState2D[T]>): number;
 

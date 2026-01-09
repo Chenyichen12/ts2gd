@@ -37,25 +37,25 @@ fabrik_data_chain_length: int;
 target_nodepath: NodePathType;
 
 /** Returns the [Bone2D] node assigned to the FABRIK joint at [param joint_idx]. */
-get_fabrik_joint_bone2d_node(): NodePathType;
+get_fabrik_joint_bone2d_node(joint_idx: int): NodePathType;
 
 /** Returns the index of the [Bone2D] node assigned to the FABRIK joint at [param joint_idx]. */
-get_fabrik_joint_bone_index(): int;
+get_fabrik_joint_bone_index(joint_idx: int): int;
 
 /** Returns the magnet position vector for the joint at [param joint_idx]. */
-get_fabrik_joint_magnet_position(): Vector2;
+get_fabrik_joint_magnet_position(joint_idx: int): Vector2;
 
 /** Returns whether the joint is using the target's rotation rather than allowing FABRIK to rotate the joint. This option only applies to the tip/final joint in the chain. */
-get_fabrik_joint_use_target_rotation(): boolean;
+get_fabrik_joint_use_target_rotation(joint_idx: int): boolean;
 
 /** Sets the [Bone2D] node assigned to the FABRIK joint at [param joint_idx]. */
-set_fabrik_joint_bone2d_node(): void;
+set_fabrik_joint_bone2d_node(joint_idx: int, bone2d_nodepath: NodePathType): void;
 
 /** Sets the bone index, [param bone_idx], of the FABRIK joint at [param joint_idx]. When possible, this will also update the [code]bone2d_node[/code] of the FABRIK joint based on data provided by the linked skeleton. */
-set_fabrik_joint_bone_index(): void;
+set_fabrik_joint_bone_index(joint_idx: int, bone_idx: int): void;
 
 /** Sets the magnet position vector for the joint at [param joint_idx]. */
-set_fabrik_joint_magnet_position(): void;
+set_fabrik_joint_magnet_position(joint_idx: int, magnet_position: Vector2): void;
 
 /**
  * Sets whether the joint at [param joint_idx] will use the target node's rotation rather than letting FABRIK rotate the node.
@@ -63,7 +63,7 @@ set_fabrik_joint_magnet_position(): void;
  * **Note:** This option only works for the tip/final joint in the chain. For all other nodes, this option will be ignored.
  *
 */
-set_fabrik_joint_use_target_rotation(): void;
+set_fabrik_joint_use_target_rotation(joint_idx: int, use_target_rotation: boolean): void;
 
   connect<T extends SignalsOf<SkeletonModification2DFABRIK>>(signal: T, method: SignalFunction<SkeletonModification2DFABRIK[T]>): number;
 

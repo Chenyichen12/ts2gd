@@ -49,16 +49,16 @@ compile_error_tesselation_evaluation: string;
 compile_error_vertex: string;
 
 /** Equivalent to getting one of [member bytecode_compute], [member bytecode_fragment], [member bytecode_tesselation_control], [member bytecode_tesselation_evaluation], [member bytecode_vertex]. */
-get_stage_bytecode(): PackedByteArray;
+get_stage_bytecode(stage: int): PackedByteArray;
 
 /** Returns the compilation error message for the given shader [param stage]. Equivalent to getting one of [member compile_error_compute], [member compile_error_fragment], [member compile_error_tesselation_control], [member compile_error_tesselation_evaluation], [member compile_error_vertex]. */
-get_stage_compile_error(): string;
+get_stage_compile_error(stage: int): string;
 
 /** Sets the SPIR-V [param bytecode] for the given shader [param stage]. Equivalent to setting one of [member bytecode_compute], [member bytecode_fragment], [member bytecode_tesselation_control], [member bytecode_tesselation_evaluation], [member bytecode_vertex]. */
-set_stage_bytecode(): void;
+set_stage_bytecode(stage: int, bytecode: PackedByteArray): void;
 
 /** Sets the compilation error message for the given shader [param stage] to [param compile_error]. Equivalent to setting one of [member compile_error_compute], [member compile_error_fragment], [member compile_error_tesselation_control], [member compile_error_tesselation_evaluation], [member compile_error_vertex]. */
-set_stage_compile_error(): void;
+set_stage_compile_error(stage: int, compile_error: string): void;
 
   connect<T extends SignalsOf<RDShaderSPIRV>>(signal: T, method: SignalFunction<RDShaderSPIRV[T]>): number;
 

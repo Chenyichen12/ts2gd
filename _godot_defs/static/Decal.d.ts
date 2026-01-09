@@ -136,7 +136,7 @@ upper_fade: float;
  * 
  *
 */
-get_texture(): Texture2D;
+get_texture(type: int): Texture2D;
 
 /**
  * Sets the [Texture2D] associated with the specified [enum DecalTexture]. This is a convenience method, in most cases you should access the texture directly.
@@ -161,7 +161,7 @@ get_texture(): Texture2D;
  * 
  *
 */
-set_texture(): void;
+set_texture(type: int, texture: Texture2D): void;
 
   connect<T extends SignalsOf<Decal>>(signal: T, method: SignalFunction<Decal[T]>): number;
 

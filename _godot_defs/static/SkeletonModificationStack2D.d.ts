@@ -32,13 +32,13 @@ modification_count: int;
 strength: float;
 
 /** Adds the passed-in [SkeletonModification2D] to the stack. */
-add_modification(): void;
+add_modification(modification: SkeletonModification2D): void;
 
 /** Deletes the [SkeletonModification2D] at the index position [param mod_idx], if it exists. */
-delete_modification(): void;
+delete_modification(mod_idx: int): void;
 
 /** Enables all [SkeletonModification2D]s in the stack. */
-enable_all_modifications(): void;
+enable_all_modifications(enabled: boolean): void;
 
 /**
  * Executes all of the [SkeletonModification2D]s in the stack that use the same execution mode as the passed-in [param execution_mode], starting from index `0` to [member modification_count].
@@ -46,19 +46,19 @@ enable_all_modifications(): void;
  * **Note:** The order of the modifications can matter depending on the modifications. For example, modifications on a spine should operate before modifications on the arms in order to get proper results.
  *
 */
-execute(): void;
+execute(delta: float, execution_mode: int): void;
 
 /** Returns a boolean that indicates whether the modification stack is setup and can execute. */
 get_is_setup(): boolean;
 
 /** Returns the [SkeletonModification2D] at the passed-in index, [param mod_idx]. */
-get_modification(): SkeletonModification2D;
+get_modification(mod_idx: int): SkeletonModification2D;
 
 /** Returns the [Skeleton2D] node that the SkeletonModificationStack2D is bound to. */
 get_skeleton(): Skeleton2D;
 
 /** Sets the modification at [param mod_idx] to the passed-in modification, [param modification]. */
-set_modification(): void;
+set_modification(mod_idx: int, modification: SkeletonModification2D): void;
 
 /** Sets up the modification stack so it can execute. This function should be called by [Skeleton2D] and shouldn't be manually called unless you know what you are doing. */
 setup(): void;

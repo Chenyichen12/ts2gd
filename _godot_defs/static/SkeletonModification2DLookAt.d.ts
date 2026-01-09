@@ -39,7 +39,7 @@ get_constraint_angle_min(): float;
 get_enable_constraint(): boolean;
 
 /** Sets the amount of additional rotation that is to be applied after executing the modification. This allows for offsetting the results by the inputted rotation amount. */
-set_additional_rotation(): void;
+set_additional_rotation(rotation: float): void;
 
 /**
  * When `true`, the modification will use an inverted joint constraint.
@@ -47,16 +47,16 @@ set_additional_rotation(): void;
  * An inverted joint constraint only constraints the [Bone2D] to the angles **outside of** the inputted minimum and maximum angles. For this reason, it is referred to as an inverted joint constraint, as it constraints the joint to the outside of the inputted values.
  *
 */
-set_constraint_angle_invert(): void;
+set_constraint_angle_invert(invert: boolean): void;
 
 /** Sets the constraint's maximum allowed angle. */
-set_constraint_angle_max(): void;
+set_constraint_angle_max(angle_max: float): void;
 
 /** Sets the constraint's minimum allowed angle. */
-set_constraint_angle_min(): void;
+set_constraint_angle_min(angle_min: float): void;
 
 /** Sets whether this modification will use constraints or not. When [code]true[/code], constraints will be applied when solving the LookAt modification. */
-set_enable_constraint(): void;
+set_enable_constraint(enable_constraint: boolean): void;
 
   connect<T extends SignalsOf<SkeletonModification2DLookAt>>(signal: T, method: SignalFunction<SkeletonModification2DLookAt[T]>): number;
 

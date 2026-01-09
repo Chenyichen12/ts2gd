@@ -37,7 +37,7 @@ backface_collision: boolean;
 get_faces(): PackedVector3Array;
 
 /** Sets the faces of the trimesh shape from an array of vertices. The [param faces] array should be composed of triples such that each triple of vertices defines a triangle. */
-set_faces(): void;
+set_faces(faces: PackedVector3Array): void;
 
   connect<T extends SignalsOf<ConcavePolygonShape3D>>(signal: T, method: SignalFunction<ConcavePolygonShape3D[T]>): number;
 

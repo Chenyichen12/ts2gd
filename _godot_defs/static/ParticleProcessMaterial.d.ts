@@ -487,19 +487,19 @@ velocity_pivot: Vector3;
  * The `x` component of the returned vector corresponds to minimum and the `y` component corresponds to maximum.
  *
 */
-get_param(): Vector2;
+get_param(param: int): Vector2;
 
 /** Returns the maximum value range for the given parameter. */
-get_param_max(): float;
+get_param_max(param: int): float;
 
 /** Returns the minimum value range for the given parameter. */
-get_param_min(): float;
+get_param_min(param: int): float;
 
 /** Returns the [Texture2D] used by the specified parameter. */
-get_param_texture(): Texture2D;
+get_param_texture(param: int): Texture2D;
 
 /** Returns [code]true[/code] if the specified particle flag is enabled. */
-get_particle_flag(): boolean;
+get_particle_flag(particle_flag: int): boolean;
 
 /**
  * Sets the minimum and maximum values of the given [param param].
@@ -507,19 +507,19 @@ get_particle_flag(): boolean;
  * The `x` component of the argument vector corresponds to minimum and the `y` component corresponds to maximum.
  *
 */
-set_param(): void;
+set_param(param: int, value: Vector2): void;
 
 /** Sets the maximum value range for the given parameter. */
-set_param_max(): void;
+set_param_max(param: int, value: float): void;
 
 /** Sets the minimum value range for the given parameter. */
-set_param_min(): void;
+set_param_min(param: int, value: float): void;
 
 /** Sets the [Texture2D] for the specified [enum Parameter]. */
-set_param_texture(): void;
+set_param_texture(param: int, texture: Texture2D): void;
 
 /** Sets the [param particle_flag] to [param enable]. */
-set_particle_flag(): void;
+set_particle_flag(particle_flag: int, enable: boolean): void;
 
   connect<T extends SignalsOf<ParticleProcessMaterial>>(signal: T, method: SignalFunction<ParticleProcessMaterial[T]>): number;
 

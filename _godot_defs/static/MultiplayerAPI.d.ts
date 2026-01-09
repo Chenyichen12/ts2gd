@@ -61,7 +61,7 @@ is_server(): boolean;
  * **Note:** This method is mostly relevant when extending or overriding the MultiplayerAPI behavior via [MultiplayerAPIExtension].
  *
 */
-object_configuration_add(): int;
+object_configuration_add(object: Object, configuration: any): int;
 
 /**
  * Notifies the MultiplayerAPI to remove a [param configuration] for the given [param object]. This method is used internally by [SceneTree] to configure the root path for this MultiplayerAPI (passing `null` and an empty [NodePath] as [param configuration]). This method can be further used by MultiplayerAPI implementations to provide additional features, refer to specific implementation (e.g. [SceneMultiplayer]) for details on how they use it.
@@ -69,7 +69,7 @@ object_configuration_add(): int;
  * **Note:** This method is mostly relevant when extending or overriding the MultiplayerAPI behavior via [MultiplayerAPIExtension].
  *
 */
-object_configuration_remove(): int;
+object_configuration_remove(object: Object, configuration: any): int;
 
 /**
  * Method used for polling the MultiplayerAPI. You only need to worry about this if you set [member SceneTree.multiplayer_poll] to `false`. By default, [SceneTree] will poll its MultiplayerAPI(s) for you.
@@ -82,7 +82,7 @@ poll(): int;
 
 
 /** Sets the default MultiplayerAPI implementation class. This method can be used by modules and extensions to configure which implementation will be used by [SceneTree] when the engine starts. */
-set_default_interface(): void;
+set_default_interface(interface_name: StringName): void;
 
   connect<T extends SignalsOf<MultiplayerAPI>>(signal: T, method: SignalFunction<MultiplayerAPI[T]>): number;
 

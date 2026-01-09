@@ -125,10 +125,10 @@ declare class HashingContext extends RefCounted  {
 finish(): PackedByteArray;
 
 /** Starts a new hash computation of the given [param type] (e.g. [constant HASH_SHA256] to start computation of an SHA-256). */
-start(): int;
+start(type: int): int;
 
 /** Updates the computation with the given [param chunk] of data. */
-update(): int;
+update(chunk: PackedByteArray): int;
 
   connect<T extends SignalsOf<HashingContext>>(signal: T, method: SignalFunction<HashingContext[T]>): number;
 

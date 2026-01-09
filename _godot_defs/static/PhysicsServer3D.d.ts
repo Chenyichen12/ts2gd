@@ -44,13 +44,13 @@ declare class PhysicsServer3DClass extends Object  {
 
 
 /** Adds a shape to the area, along with a transform matrix. Shapes are usually referenced by their index, so you should track which shape has a given index. */
-area_add_shape(): void;
+area_add_shape(area: RID, shape: RID, transform?: Transform3D, disabled?: boolean): void;
 
 /** Assigns the area to a descendant of [Object], so it can exist in the node tree. */
-area_attach_object_instance_id(): void;
+area_attach_object_instance_id(area: RID, id: int): void;
 
 /** Removes all shapes from an area. It does not delete the shapes, so they can be reassigned later. */
-area_clear_shapes(): void;
+area_clear_shapes(area: RID): void;
 
 /**
  * Creates a 3D area object in the physics server, and returns the [RID] that identifies it. The default settings for the created area include a collision layer and mask set to `1`, and `monitorable` set to `false`.
@@ -61,34 +61,34 @@ area_clear_shapes(): void;
 area_create(): RID;
 
 /** Returns the physics layer or layers an area belongs to. */
-area_get_collision_layer(): int;
+area_get_collision_layer(area: RID): int;
 
 /** Returns the physics layer or layers an area can contact with. */
-area_get_collision_mask(): int;
+area_get_collision_mask(area: RID): int;
 
 /** Gets the instance ID of the object the area is assigned to. */
-area_get_object_instance_id(): int;
+area_get_object_instance_id(area: RID): int;
 
 /** Returns an area parameter value. A list of available parameters is on the [enum AreaParameter] constants. */
-area_get_param(): any;
+area_get_param(area: RID, param: int): any;
 
 /** Returns the [RID] of the nth shape of an area. */
-area_get_shape(): RID;
+area_get_shape(area: RID, shape_idx: int): RID;
 
 /** Returns the number of shapes assigned to an area. */
-area_get_shape_count(): int;
+area_get_shape_count(area: RID): int;
 
 /** Returns the transform matrix of a shape within an area. */
-area_get_shape_transform(): Transform3D;
+area_get_shape_transform(area: RID, shape_idx: int): Transform3D;
 
 /** Returns the space assigned to the area. */
-area_get_space(): RID;
+area_get_space(area: RID): RID;
 
 /** Returns the transform matrix for an area. */
-area_get_transform(): Transform3D;
+area_get_transform(area: RID): Transform3D;
 
 /** Removes a shape from an area. It does not delete the shape, so it can be reassigned later. */
-area_remove_shape(): void;
+area_remove_shape(area: RID, shape_idx: int): void;
 
 /**
  * Sets the area's area monitor callback. This callback will be called when any other (shape of an) area enters or exits (a shape of) the given area, and must take the following five parameters:
@@ -106,13 +106,13 @@ area_remove_shape(): void;
  * By counting (or keeping track of) the shapes that enter and exit, it can be determined if an area (with all its shapes) is entering for the first time or exiting for the last time.
  *
 */
-area_set_area_monitor_callback(): void;
+area_set_area_monitor_callback(area: RID, callback: Callable): void;
 
 /** Assigns the area to one or many physics layers. */
-area_set_collision_layer(): void;
+area_set_collision_layer(area: RID, layer: int): void;
 
 /** Sets which physics layers the area will monitor. */
-area_set_collision_mask(): void;
+area_set_collision_mask(area: RID, mask: int): void;
 
 /**
  * Sets the area's body monitor callback. This callback will be called when any other (shape of a) body enters or exits (a shape of) the given area, and must take the following five parameters:
@@ -130,34 +130,34 @@ area_set_collision_mask(): void;
  * By counting (or keeping track of) the shapes that enter and exit, it can be determined if a body (with all its shapes) is entering for the first time or exiting for the last time.
  *
 */
-area_set_monitor_callback(): void;
+area_set_monitor_callback(area: RID, callback: Callable): void;
 
 /** No documentation provided. */
-area_set_monitorable(): void;
+area_set_monitorable(area: RID, monitorable: boolean): void;
 
 /** Sets the value for an area parameter. A list of available parameters is on the [enum AreaParameter] constants. */
-area_set_param(): void;
+area_set_param(area: RID, param: int, value: any): void;
 
 /** Sets object pickable with rays. */
-area_set_ray_pickable(): void;
+area_set_ray_pickable(area: RID, enable: boolean): void;
 
 /** Substitutes a given area shape by another. The old shape is selected by its index, the new one by its [RID]. */
-area_set_shape(): void;
+area_set_shape(area: RID, shape_idx: int, shape: RID): void;
 
 /** No documentation provided. */
-area_set_shape_disabled(): void;
+area_set_shape_disabled(area: RID, shape_idx: int, disabled: boolean): void;
 
 /** Sets the transform matrix for an area shape. */
-area_set_shape_transform(): void;
+area_set_shape_transform(area: RID, shape_idx: int, transform: Transform3D): void;
 
 /** Assigns a space to the area. */
-area_set_space(): void;
+area_set_space(area: RID, space: RID): void;
 
 /** Sets the transform matrix for an area. */
-area_set_transform(): void;
+area_set_transform(area: RID, transform: Transform3D): void;
 
 /** Adds a body to the list of bodies exempt from collisions. */
-body_add_collision_exception(): void;
+body_add_collision_exception(body: RID, excepted_body: RID): void;
 
 /**
  * Adds a constant directional force without affecting rotation that keeps being applied over time until cleared with `body_set_constant_force(body, Vector3(0, 0, 0))`.
@@ -165,7 +165,7 @@ body_add_collision_exception(): void;
  * This is equivalent to using [method body_add_constant_force] at the body's center of mass.
  *
 */
-body_add_constant_central_force(): void;
+body_add_constant_central_force(body: RID, force: Vector3): void;
 
 /**
  * Adds a constant positioned force to the body that keeps being applied over time until cleared with `body_set_constant_force(body, Vector3(0, 0, 0))`.
@@ -173,13 +173,13 @@ body_add_constant_central_force(): void;
  * [param position] is the offset from the body origin in global coordinates.
  *
 */
-body_add_constant_force(): void;
+body_add_constant_force(body: RID, force: Vector3, position?: Vector3): void;
 
 /** Adds a constant rotational force without affecting position that keeps being applied over time until cleared with [code]body_set_constant_torque(body, Vector3(0, 0, 0))[/code]. */
-body_add_constant_torque(): void;
+body_add_constant_torque(body: RID, torque: Vector3): void;
 
 /** Adds a shape to the body, along with a transform matrix. Shapes are usually referenced by their index, so you should track which shape has a given index. */
-body_add_shape(): void;
+body_add_shape(body: RID, shape: RID, transform?: Transform3D, disabled?: boolean): void;
 
 /**
  * Applies a directional force without affecting rotation. A force is time dependent and meant to be applied every physics update.
@@ -187,7 +187,7 @@ body_add_shape(): void;
  * This is equivalent to using [method body_apply_force] at the body's center of mass.
  *
 */
-body_apply_central_force(): void;
+body_apply_central_force(body: RID, force: Vector3): void;
 
 /**
  * Applies a directional impulse without affecting rotation.
@@ -197,7 +197,7 @@ body_apply_central_force(): void;
  * This is equivalent to using [method body_apply_impulse] at the body's center of mass.
  *
 */
-body_apply_central_impulse(): void;
+body_apply_central_impulse(body: RID, impulse: Vector3): void;
 
 /**
  * Applies a positioned force to the body. A force is time dependent and meant to be applied every physics update.
@@ -205,7 +205,7 @@ body_apply_central_impulse(): void;
  * [param position] is the offset from the body origin in global coordinates.
  *
 */
-body_apply_force(): void;
+body_apply_force(body: RID, force: Vector3, position?: Vector3): void;
 
 /**
  * Applies a positioned impulse to the body.
@@ -215,10 +215,10 @@ body_apply_force(): void;
  * [param position] is the offset from the body origin in global coordinates.
  *
 */
-body_apply_impulse(): void;
+body_apply_impulse(body: RID, impulse: Vector3, position?: Vector3): void;
 
 /** Applies a rotational force without affecting position. A force is time dependent and meant to be applied every physics update. */
-body_apply_torque(): void;
+body_apply_torque(body: RID, torque: Vector3): void;
 
 /**
  * Applies a rotational impulse to the body without affecting the position.
@@ -226,13 +226,13 @@ body_apply_torque(): void;
  * An impulse is time-independent! Applying an impulse every frame would result in a framerate-dependent force. For this reason, it should only be used when simulating one-time impacts (use the "_force" functions otherwise).
  *
 */
-body_apply_torque_impulse(): void;
+body_apply_torque_impulse(body: RID, impulse: Vector3): void;
 
 /** Assigns the area to a descendant of [Object], so it can exist in the node tree. */
-body_attach_object_instance_id(): void;
+body_attach_object_instance_id(body: RID, id: int): void;
 
 /** Removes all shapes from a body. */
-body_clear_shapes(): void;
+body_clear_shapes(body: RID): void;
 
 /**
  * Creates a 3D body object in the physics server, and returns the [RID] that identifies it. The default settings for the created area include a collision layer and mask set to `1`, and body mode set to [constant BODY_MODE_RIGID].
@@ -243,13 +243,13 @@ body_clear_shapes(): void;
 body_create(): RID;
 
 /** Returns the physics layer or layers a body belongs to. */
-body_get_collision_layer(): int;
+body_get_collision_layer(body: RID): int;
 
 /** Returns the physics layer or layers a body can collide with. */
-body_get_collision_mask(): int;
+body_get_collision_mask(body: RID): int;
 
 /** Returns the body's collision priority. */
-body_get_collision_priority(): float;
+body_get_collision_priority(body: RID): float;
 
 /**
  * Returns the body's total constant positional forces applied during each physics update.
@@ -257,7 +257,7 @@ body_get_collision_priority(): float;
  * See [method body_add_constant_force] and [method body_add_constant_central_force].
  *
 */
-body_get_constant_force(): Vector3;
+body_get_constant_force(body: RID): Vector3;
 
 /**
  * Returns the body's total constant rotational forces applied during each physics update.
@@ -265,46 +265,46 @@ body_get_constant_force(): Vector3;
  * See [method body_add_constant_torque].
  *
 */
-body_get_constant_torque(): Vector3;
+body_get_constant_torque(body: RID): Vector3;
 
 /** Returns the [PhysicsDirectBodyState3D] of the body. Returns [code]null[/code] if the body is destroyed or removed from the physics space. */
-body_get_direct_state(): PhysicsDirectBodyState3D;
+body_get_direct_state(body: RID): PhysicsDirectBodyState3D;
 
 /** Returns the maximum contacts that can be reported. See [method body_set_max_contacts_reported]. */
-body_get_max_contacts_reported(): int;
+body_get_max_contacts_reported(body: RID): int;
 
 /** Returns the body mode. */
-body_get_mode(): int;
+body_get_mode(body: RID): int;
 
 /** Gets the instance ID of the object the area is assigned to. */
-body_get_object_instance_id(): int;
+body_get_object_instance_id(body: RID): int;
 
 /** Returns the value of a body parameter. A list of available parameters is on the [enum BodyParameter] constants. */
-body_get_param(): any;
+body_get_param(body: RID, param: int): any;
 
 /** Returns the [RID] of the nth shape of a body. */
-body_get_shape(): RID;
+body_get_shape(body: RID, shape_idx: int): RID;
 
 /** Returns the number of shapes assigned to a body. */
-body_get_shape_count(): int;
+body_get_shape_count(body: RID): int;
 
 /** Returns the transform matrix of a body shape. */
-body_get_shape_transform(): Transform3D;
+body_get_shape_transform(body: RID, shape_idx: int): Transform3D;
 
 /** Returns the [RID] of the space assigned to a body. */
-body_get_space(): RID;
+body_get_space(body: RID): RID;
 
 /** Returns a body state. */
-body_get_state(): any;
+body_get_state(body: RID, state: int): any;
 
 /** No documentation provided. */
-body_is_axis_locked(): boolean;
+body_is_axis_locked(body: RID, axis: int): boolean;
 
 /** If [code]true[/code], the continuous collision detection mode is enabled. */
-body_is_continuous_collision_detection_enabled(): boolean;
+body_is_continuous_collision_detection_enabled(body: RID): boolean;
 
 /** Returns [code]true[/code] if the body is omitting the standard force integration. See [method body_set_omit_force_integration]. */
-body_is_omitting_force_integration(): boolean;
+body_is_omitting_force_integration(body: RID): boolean;
 
 /**
  * Removes a body from the list of bodies exempt from collisions.
@@ -312,28 +312,28 @@ body_is_omitting_force_integration(): boolean;
  * Continuous collision detection tries to predict where a moving body will collide, instead of moving it and correcting its movement if it collided.
  *
 */
-body_remove_collision_exception(): void;
+body_remove_collision_exception(body: RID, excepted_body: RID): void;
 
 /** Removes a shape from a body. The shape is not deleted, so it can be reused afterwards. */
-body_remove_shape(): void;
+body_remove_shape(body: RID, shape_idx: int): void;
 
 /** Restores the default inertia and center of mass based on shapes to cancel any custom values previously set using [method body_set_param]. */
-body_reset_mass_properties(): void;
+body_reset_mass_properties(body: RID): void;
 
 /** No documentation provided. */
-body_set_axis_lock(): void;
+body_set_axis_lock(body: RID, axis: int, lock: boolean): void;
 
 /** Sets an axis velocity. The velocity in the given vector axis will be set as the given vector length. This is useful for jumping behavior. */
-body_set_axis_velocity(): void;
+body_set_axis_velocity(body: RID, axis_velocity: Vector3): void;
 
 /** Sets the physics layer or layers a body belongs to. */
-body_set_collision_layer(): void;
+body_set_collision_layer(body: RID, layer: int): void;
 
 /** Sets the physics layer or layers a body can collide with. */
-body_set_collision_mask(): void;
+body_set_collision_mask(body: RID, mask: int): void;
 
 /** Sets the body's collision priority. */
-body_set_collision_priority(): void;
+body_set_collision_priority(body: RID, priority: float): void;
 
 /**
  * Sets the body's total constant positional forces applied during each physics update.
@@ -341,7 +341,7 @@ body_set_collision_priority(): void;
  * See [method body_add_constant_force] and [method body_add_constant_central_force].
  *
 */
-body_set_constant_force(): void;
+body_set_constant_force(body: RID, force: Vector3): void;
 
 /**
  * Sets the body's total constant rotational forces applied during each physics update.
@@ -349,7 +349,7 @@ body_set_constant_force(): void;
  * See [method body_add_constant_torque].
  *
 */
-body_set_constant_torque(): void;
+body_set_constant_torque(body: RID, torque: Vector3): void;
 
 /**
  * If `true`, the continuous collision detection mode is enabled.
@@ -357,7 +357,7 @@ body_set_constant_torque(): void;
  * Continuous collision detection tries to predict where a moving body will collide, instead of moving it and correcting its movement if it collided.
  *
 */
-body_set_enable_continuous_collision_detection(): void;
+body_set_enable_continuous_collision_detection(body: RID, enable: boolean): void;
 
 /**
  * Sets the body's custom force integration callback function to [param callable]. Use an empty [Callable] ([code skip-lint]Callable()`) to clear the custom callback.
@@ -373,13 +373,13 @@ body_set_enable_continuous_collision_detection(): void;
  * If [param userdata] is `null`, then [param callable] must take only the `state` parameter.
  *
 */
-body_set_force_integration_callback(): void;
+body_set_force_integration_callback(body: RID, callable: Callable, userdata?: any): void;
 
 /** Sets the maximum contacts to report. Bodies can keep a log of the contacts with other bodies. This is enabled by setting the maximum number of contacts reported to a number greater than 0. */
-body_set_max_contacts_reported(): void;
+body_set_max_contacts_reported(body: RID, amount: int): void;
 
 /** Sets the body mode. */
-body_set_mode(): void;
+body_set_mode(body: RID, mode: int): void;
 
 /**
  * Sets whether the body omits the standard force integration. If [param enable] is `true`, the body will not automatically use applied forces, torques, and damping to update the body's linear and angular velocity. In this case, [method body_set_force_integration_callback] can be used to manually update the linear and angular velocity instead.
@@ -387,28 +387,28 @@ body_set_mode(): void;
  * This method is called when the property [member RigidBody3D.custom_integrator] is set.
  *
 */
-body_set_omit_force_integration(): void;
+body_set_omit_force_integration(body: RID, enable: boolean): void;
 
 /** Sets a body parameter. A list of available parameters is on the [enum BodyParameter] constants. */
-body_set_param(): void;
+body_set_param(body: RID, param: int, value: any): void;
 
 /** Sets the body pickable with rays if [param enable] is set. */
-body_set_ray_pickable(): void;
+body_set_ray_pickable(body: RID, enable: boolean): void;
 
 /** Substitutes a given body shape by another. The old shape is selected by its index, the new one by its [RID]. */
-body_set_shape(): void;
+body_set_shape(body: RID, shape_idx: int, shape: RID): void;
 
 /** No documentation provided. */
-body_set_shape_disabled(): void;
+body_set_shape_disabled(body: RID, shape_idx: int, disabled: boolean): void;
 
 /** Sets the transform matrix for a body shape. */
-body_set_shape_transform(): void;
+body_set_shape_transform(body: RID, shape_idx: int, transform: Transform3D): void;
 
 /** Assigns a space to the body (see [method space_create]). */
-body_set_space(): void;
+body_set_space(body: RID, space: RID): void;
 
 /** Sets a body state. */
-body_set_state(): void;
+body_set_state(body: RID, state: int, value: any): void;
 
 /**
  * Sets the body's state synchronization callback function to [param callable]. Use an empty [Callable] ([code skip-lint]Callable()`) to clear the callback.
@@ -420,10 +420,10 @@ body_set_state(): void;
  * 1. `state`: a [PhysicsDirectBodyState3D], used to retrieve the body's state.
  *
 */
-body_set_state_sync_callback(): void;
+body_set_state_sync_callback(body: RID, callable: Callable): void;
 
 /** Returns [code]true[/code] if a collision would result from moving along a motion vector from a given point in space. [PhysicsTestMotionParameters3D] is passed to set motion parameters. [PhysicsTestMotionResult3D] can be passed to return additional information. */
-body_test_motion(): boolean;
+body_test_motion(body: RID, parameters: PhysicsTestMotionParameters3D, result?: PhysicsTestMotionResult3D): boolean;
 
 /** Creates a 3D box shape in the physics server, and returns the [RID] that identifies it. Use [method shape_set_data] to set the box's half-extents. */
 box_shape_create(): RID;
@@ -435,10 +435,10 @@ capsule_shape_create(): RID;
 concave_polygon_shape_create(): RID;
 
 /** Gets a cone twist joint parameter. */
-cone_twist_joint_get_param(): float;
+cone_twist_joint_get_param(joint: RID, param: int): float;
 
 /** Sets a cone twist joint parameter. */
-cone_twist_joint_set_param(): void;
+cone_twist_joint_set_param(joint: RID, param: int, value: float): void;
 
 /** Creates a 3D convex polygon shape in the physics server, and returns the [RID] that identifies it. Use [method shape_set_data] to set the convex polygon's points. */
 convex_polygon_shape_create(): RID;
@@ -455,100 +455,100 @@ custom_shape_create(): RID;
 cylinder_shape_create(): RID;
 
 /** Destroys any of the objects created by PhysicsServer3D. If the [RID] passed is not one of the objects that can be created by PhysicsServer3D, an error will be sent to the console. */
-free_rid(): void;
+free_rid(rid: RID): void;
 
 /** Returns the value of a generic 6DOF joint flag. */
-generic_6dof_joint_get_flag(): boolean;
+generic_6dof_joint_get_flag(joint: RID, axis: int, flag: int): boolean;
 
 /** Returns the value of a generic 6DOF joint parameter. */
-generic_6dof_joint_get_param(): float;
+generic_6dof_joint_get_param(joint: RID, axis: int, param: int): float;
 
 /** Sets the value of a given generic 6DOF joint flag. */
-generic_6dof_joint_set_flag(): void;
+generic_6dof_joint_set_flag(joint: RID, axis: int, flag: int, enable: boolean): void;
 
 /** Sets the value of a given generic 6DOF joint parameter. */
-generic_6dof_joint_set_param(): void;
+generic_6dof_joint_set_param(joint: RID, axis: int, param: int, value: float): void;
 
 /** Returns the value of a physics engine state specified by [param process_info]. */
-get_process_info(): int;
+get_process_info(process_info: int): int;
 
 /** Creates a 3D heightmap shape in the physics server, and returns the [RID] that identifies it. Use [method shape_set_data] to set the heightmap's data. */
 heightmap_shape_create(): RID;
 
 /** Gets a hinge joint flag. */
-hinge_joint_get_flag(): boolean;
+hinge_joint_get_flag(joint: RID, flag: int): boolean;
 
 /** Gets a hinge joint parameter. */
-hinge_joint_get_param(): float;
+hinge_joint_get_param(joint: RID, param: int): float;
 
 /** Sets a hinge joint flag. */
-hinge_joint_set_flag(): void;
+hinge_joint_set_flag(joint: RID, flag: int, enabled: boolean): void;
 
 /** Sets a hinge joint parameter. */
-hinge_joint_set_param(): void;
+hinge_joint_set_param(joint: RID, param: int, value: float): void;
 
 /** No documentation provided. */
-joint_clear(): void;
+joint_clear(joint: RID): void;
 
 /** No documentation provided. */
 joint_create(): RID;
 
 /** Sets whether the bodies attached to the [Joint3D] will collide with each other. */
-joint_disable_collisions_between_bodies(): void;
+joint_disable_collisions_between_bodies(joint: RID, disable: boolean): void;
 
 /** Gets the priority value of the Joint3D. */
-joint_get_solver_priority(): int;
+joint_get_solver_priority(joint: RID): int;
 
 /** Returns the type of the Joint3D. */
-joint_get_type(): int;
+joint_get_type(joint: RID): int;
 
 /** Returns whether the bodies attached to the [Joint3D] will collide with each other. */
-joint_is_disabled_collisions_between_bodies(): boolean;
+joint_is_disabled_collisions_between_bodies(joint: RID): boolean;
 
 /** No documentation provided. */
-joint_make_cone_twist(): void;
+joint_make_cone_twist(joint: RID, body_A: RID, local_ref_A: Transform3D, body_B: RID, local_ref_B: Transform3D): void;
 
 /** Make the joint a generic six degrees of freedom (6DOF) joint. Use [method generic_6dof_joint_set_flag] and [method generic_6dof_joint_set_param] to set the joint's flags and parameters respectively. */
-joint_make_generic_6dof(): void;
+joint_make_generic_6dof(joint: RID, body_A: RID, local_ref_A: Transform3D, body_B: RID, local_ref_B: Transform3D): void;
 
 /** No documentation provided. */
-joint_make_hinge(): void;
+joint_make_hinge(joint: RID, body_A: RID, hinge_A: Transform3D, body_B: RID, hinge_B: Transform3D): void;
 
 /** No documentation provided. */
-joint_make_pin(): void;
+joint_make_pin(joint: RID, body_A: RID, local_A: Vector3, body_B: RID, local_B: Vector3): void;
 
 /** No documentation provided. */
-joint_make_slider(): void;
+joint_make_slider(joint: RID, body_A: RID, local_ref_A: Transform3D, body_B: RID, local_ref_B: Transform3D): void;
 
 /** Sets the priority value of the Joint3D. */
-joint_set_solver_priority(): void;
+joint_set_solver_priority(joint: RID, priority: int): void;
 
 /** Returns position of the joint in the local space of body a of the joint. */
-pin_joint_get_local_a(): Vector3;
+pin_joint_get_local_a(joint: RID): Vector3;
 
 /** Returns position of the joint in the local space of body b of the joint. */
-pin_joint_get_local_b(): Vector3;
+pin_joint_get_local_b(joint: RID): Vector3;
 
 /** Gets a pin joint parameter. */
-pin_joint_get_param(): float;
+pin_joint_get_param(joint: RID, param: int): float;
 
 /** Sets position of the joint in the local space of body a of the joint. */
-pin_joint_set_local_a(): void;
+pin_joint_set_local_a(joint: RID, local_A: Vector3): void;
 
 /** Sets position of the joint in the local space of body b of the joint. */
-pin_joint_set_local_b(): void;
+pin_joint_set_local_b(joint: RID, local_B: Vector3): void;
 
 /** Sets a pin joint parameter. */
-pin_joint_set_param(): void;
+pin_joint_set_param(joint: RID, param: int, value: float): void;
 
 /** Creates a 3D separation ray shape in the physics server, and returns the [RID] that identifies it. Use [method shape_set_data] to set the shape's [code]length[/code] and [code]slide_on_slope[/code] properties. */
 separation_ray_shape_create(): RID;
 
 /** Activates or deactivates the 3D physics engine. */
-set_active(): void;
+set_active(active: boolean): void;
 
 /** Returns the shape data that configures the shape, such as the half-extents of a box or the triangles of a concave (trimesh) shape. See [method shape_set_data] for the precise format of this data in each case. */
-shape_get_data(): any;
+shape_get_data(shape: RID): any;
 
 /**
  * Returns the collision margin for the shape.
@@ -556,10 +556,10 @@ shape_get_data(): any;
  * **Note:** This is not used in Godot Physics, so will always return `0`.
  *
 */
-shape_get_margin(): float;
+shape_get_margin(shape: RID): float;
 
 /** Returns the shape's type. */
-shape_get_type(): int;
+shape_get_type(shape: RID): int;
 
 /**
  * Sets the shape data that configures the shape. The [param data] to be passed depends on the shape's type (see [method shape_get_type]):
@@ -587,7 +587,7 @@ shape_get_type(): int;
  * - [constant SHAPE_CUSTOM]: the input [param data] is interpreted by a custom physics server, if it supports custom shapes.
  *
 */
-shape_set_data(): void;
+shape_set_data(shape: RID, data: any): void;
 
 /**
  * Sets the collision margin for the shape.
@@ -595,19 +595,19 @@ shape_set_data(): void;
  * **Note:** This is not used in Godot Physics.
  *
 */
-shape_set_margin(): void;
+shape_set_margin(shape: RID, margin: float): void;
 
 /** Gets a slider joint parameter. */
-slider_joint_get_param(): float;
+slider_joint_get_param(joint: RID, param: int): float;
 
 /** Gets a slider joint parameter. */
-slider_joint_set_param(): void;
+slider_joint_set_param(joint: RID, param: int, value: float): void;
 
 /** Adds the given body to the list of bodies exempt from collisions. */
-soft_body_add_collision_exception(): void;
+soft_body_add_collision_exception(body: RID, body_b: RID): void;
 
 /** Distributes and applies a force to all points. A force is time dependent and meant to be applied every physics update. */
-soft_body_apply_central_force(): void;
+soft_body_apply_central_force(body: RID, force: Vector3): void;
 
 /**
  * Distributes and applies an impulse to all points.
@@ -615,10 +615,10 @@ soft_body_apply_central_force(): void;
  * An impulse is time-independent! Applying an impulse every frame would result in a framerate-dependent force. For this reason, it should only be used when simulating one-time impacts (use the "_force" functions otherwise).
  *
 */
-soft_body_apply_central_impulse(): void;
+soft_body_apply_central_impulse(body: RID, impulse: Vector3): void;
 
 /** Applies a force to a point. A force is time dependent and meant to be applied every physics update. */
-soft_body_apply_point_force(): void;
+soft_body_apply_point_force(body: RID, point_index: int, force: Vector3): void;
 
 /**
  * Applies an impulse to a point.
@@ -626,43 +626,43 @@ soft_body_apply_point_force(): void;
  * An impulse is time-independent! Applying an impulse every frame would result in a framerate-dependent force. For this reason, it should only be used when simulating one-time impacts (use the "_force" functions otherwise).
  *
 */
-soft_body_apply_point_impulse(): void;
+soft_body_apply_point_impulse(body: RID, point_index: int, impulse: Vector3): void;
 
 /** Creates a new soft body and returns its internal [RID]. */
 soft_body_create(): RID;
 
 /** Returns the bounds of the given soft body in global coordinates. */
-soft_body_get_bounds(): AABB;
+soft_body_get_bounds(body: RID): AABB;
 
 /** Returns the physics layer or layers that the given soft body belongs to. */
-soft_body_get_collision_layer(): int;
+soft_body_get_collision_layer(body: RID): int;
 
 /** Returns the physics layer or layers that the given soft body can collide with. */
-soft_body_get_collision_mask(): int;
+soft_body_get_collision_mask(body: RID): int;
 
 /** Returns the damping coefficient of the given soft body. */
-soft_body_get_damping_coefficient(): float;
+soft_body_get_damping_coefficient(body: RID): float;
 
 /** Returns the drag coefficient of the given soft body. */
-soft_body_get_drag_coefficient(): float;
+soft_body_get_drag_coefficient(body: RID): float;
 
 /** Returns the linear stiffness of the given soft body. */
-soft_body_get_linear_stiffness(): float;
+soft_body_get_linear_stiffness(body: RID): float;
 
 /** Returns the current position of the given soft body point in global coordinates. */
-soft_body_get_point_global_position(): Vector3;
+soft_body_get_point_global_position(body: RID, point_index: int): Vector3;
 
 /** Returns the pressure coefficient of the given soft body. */
-soft_body_get_pressure_coefficient(): float;
+soft_body_get_pressure_coefficient(body: RID): float;
 
 /** Returns the shrinking factor of the given soft body. */
-soft_body_get_shrinking_factor(): float;
+soft_body_get_shrinking_factor(body: RID): float;
 
 /** Returns the simulation precision of the given soft body. */
-soft_body_get_simulation_precision(): int;
+soft_body_get_simulation_precision(body: RID): int;
 
 /** Returns the [RID] of the space assigned to the given soft body. */
-soft_body_get_space(): RID;
+soft_body_get_space(body: RID): RID;
 
 /**
  * Returns the given soft body state.
@@ -670,16 +670,16 @@ soft_body_get_space(): RID;
  * **Note:** Godot's default physics implementation does not support [constant BODY_STATE_LINEAR_VELOCITY], [constant BODY_STATE_ANGULAR_VELOCITY], [constant BODY_STATE_SLEEPING], or [constant BODY_STATE_CAN_SLEEP].
  *
 */
-soft_body_get_state(): any;
+soft_body_get_state(body: RID, state: int): any;
 
 /** Returns the total mass assigned to the given soft body. */
-soft_body_get_total_mass(): float;
+soft_body_get_total_mass(body: RID): float;
 
 /** Returns whether the given soft body point is pinned. */
-soft_body_is_point_pinned(): boolean;
+soft_body_is_point_pinned(body: RID, point_index: int): boolean;
 
 /** Moves the given soft body point to a position in global coordinates. */
-soft_body_move_point(): void;
+soft_body_move_point(body: RID, point_index: int, global_position: Vector3): void;
 
 /**
  * Pins or unpins the given soft body point based on the value of [param pin].
@@ -687,22 +687,22 @@ soft_body_move_point(): void;
  * **Note:** Pinning a point effectively makes it kinematic, preventing it from being affected by forces, but you can still move it using [method soft_body_move_point].
  *
 */
-soft_body_pin_point(): void;
+soft_body_pin_point(body: RID, point_index: int, pin: boolean): void;
 
 /** Unpins all points of the given soft body. */
-soft_body_remove_all_pinned_points(): void;
+soft_body_remove_all_pinned_points(body: RID): void;
 
 /** Removes the given body from the list of bodies exempt from collisions. */
-soft_body_remove_collision_exception(): void;
+soft_body_remove_collision_exception(body: RID, body_b: RID): void;
 
 /** Sets the physics layer or layers the given soft body belongs to. */
-soft_body_set_collision_layer(): void;
+soft_body_set_collision_layer(body: RID, layer: int): void;
 
 /** Sets the physics layer or layers the given soft body can collide with. */
-soft_body_set_collision_mask(): void;
+soft_body_set_collision_mask(body: RID, mask: int): void;
 
 /** Sets the damping coefficient of the given soft body. Higher values will slow down the body more noticeably when forces are applied. */
-soft_body_set_damping_coefficient(): void;
+soft_body_set_damping_coefficient(body: RID, damping_coefficient: float): void;
 
 /**
  * Sets the drag coefficient of the given soft body. Higher values increase this body's air resistance.
@@ -710,28 +710,28 @@ soft_body_set_damping_coefficient(): void;
  * **Note:** This value is currently unused by Godot's default physics implementation.
  *
 */
-soft_body_set_drag_coefficient(): void;
+soft_body_set_drag_coefficient(body: RID, drag_coefficient: float): void;
 
 /** Sets the linear stiffness of the given soft body. Higher values will result in a stiffer body, while lower values will increase the body's ability to bend. The value can be between [code]0.0[/code] and [code]1.0[/code] (inclusive). */
-soft_body_set_linear_stiffness(): void;
+soft_body_set_linear_stiffness(body: RID, stiffness: float): void;
 
 /** Sets the mesh of the given soft body. */
-soft_body_set_mesh(): void;
+soft_body_set_mesh(body: RID, mesh: RID): void;
 
 /** Sets the pressure coefficient of the given soft body. Simulates pressure build-up from inside this body. Higher values increase the strength of this effect. */
-soft_body_set_pressure_coefficient(): void;
+soft_body_set_pressure_coefficient(body: RID, pressure_coefficient: float): void;
 
 /** Sets whether the given soft body will be pickable when using object picking. */
-soft_body_set_ray_pickable(): void;
+soft_body_set_ray_pickable(body: RID, enable: boolean): void;
 
 /** Sets the shrinking factor of the given soft body. */
-soft_body_set_shrinking_factor(): void;
+soft_body_set_shrinking_factor(body: RID, shrinking_factor: float): void;
 
 /** Sets the simulation precision of the given soft body. Increasing this value will improve the resulting simulation, but can affect performance. Use with care. */
-soft_body_set_simulation_precision(): void;
+soft_body_set_simulation_precision(body: RID, simulation_precision: int): void;
 
 /** Assigns a space to the given soft body (see [method space_create]). */
-soft_body_set_space(): void;
+soft_body_set_space(body: RID, space: RID): void;
 
 /**
  * Sets the given body state for the given body.
@@ -739,34 +739,34 @@ soft_body_set_space(): void;
  * **Note:** Godot's default physics implementation does not support [constant BODY_STATE_LINEAR_VELOCITY], [constant BODY_STATE_ANGULAR_VELOCITY], [constant BODY_STATE_SLEEPING], or [constant BODY_STATE_CAN_SLEEP].
  *
 */
-soft_body_set_state(): void;
+soft_body_set_state(body: RID, state: int, variant: any): void;
 
 /** Sets the total mass for the given soft body. */
-soft_body_set_total_mass(): void;
+soft_body_set_total_mass(body: RID, total_mass: float): void;
 
 /** Sets the global transform of the given soft body. */
-soft_body_set_transform(): void;
+soft_body_set_transform(body: RID, transform: Transform3D): void;
 
 /** Requests that the physics server updates the rendering server with the latest positions of the given soft body's points through the [param rendering_server_handler] interface. */
-soft_body_update_rendering_server(): void;
+soft_body_update_rendering_server(body: RID, rendering_server_handler: PhysicsServer3DRenderingServerHandler): void;
 
 /** Creates a space. A space is a collection of parameters for the physics engine that can be assigned to an area or a body. It can be assigned to an area with [method area_set_space], or to a body with [method body_set_space]. */
 space_create(): RID;
 
 /** Returns the state of a space, a [PhysicsDirectSpaceState3D]. This object can be used to make collision/intersection queries. */
-space_get_direct_state(): PhysicsDirectSpaceState3D;
+space_get_direct_state(space: RID): PhysicsDirectSpaceState3D;
 
 /** Returns the value of a space parameter. */
-space_get_param(): float;
+space_get_param(space: RID, param: int): float;
 
 /** Returns whether the space is active. */
-space_is_active(): boolean;
+space_is_active(space: RID): boolean;
 
 /** Marks a space as active. It will not have an effect, unless it is assigned to an area or body. */
-space_set_active(): void;
+space_set_active(space: RID, active: boolean): void;
 
 /** Sets the value for a space parameter. A list of available parameters is on the [enum SpaceParameter] constants. */
-space_set_param(): void;
+space_set_param(space: RID, param: int, value: float): void;
 
 /** Creates a 3D sphere shape in the physics server, and returns the [RID] that identifies it. Use [method shape_set_data] to set the sphere's radius. */
 sphere_shape_create(): RID;

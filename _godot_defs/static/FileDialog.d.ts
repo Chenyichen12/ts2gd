@@ -140,7 +140,7 @@ use_native_dialog: boolean;
  * **Note:** Embedded file dialogs and Windows file dialogs support only file extensions, while Android, Linux, and macOS file dialogs also support MIME types.
  *
 */
-add_filter(): void;
+add_filter(filter: string, description?: string, mime_type?: string): void;
 
 /**
  * Adds an additional [OptionButton] to the file dialog. If [param values] is empty, a [CheckBox] is added instead.
@@ -148,7 +148,7 @@ add_filter(): void;
  * [param default_value_index] should be an index of the value in the [param values]. If [param values] is empty it should be either `1` (checked), or `0` (unchecked).
  *
 */
-add_option(): void;
+add_option(name: string, values: PackedStringArray, default_value_index: int): void;
 
 /** Clear the filter for file names. */
 clear_filename_filter(): void;
@@ -171,13 +171,13 @@ get_favorite_list(): PackedStringArray;
 get_line_edit(): LineEdit;
 
 /** Returns the default value index of the [OptionButton] or [CheckBox] with index [param option]. */
-get_option_default(): int;
+get_option_default(option: int): int;
 
 /** Returns the name of the [OptionButton] or [CheckBox] with index [param option]. */
-get_option_name(): string;
+get_option_name(option: int): string;
 
 /** Returns an array of values of the [OptionButton] with index [param option]. */
-get_option_values(): PackedStringArray;
+get_option_values(option: int): PackedStringArray;
 
 /** Returns the list of recent directories, which is shared by all [FileDialog] nodes. Useful to store the list of recents between project sessions. This method can be called only from the main thread. */
 get_recent_list(): PackedStringArray;
@@ -204,13 +204,13 @@ get_vbox(): VBoxContainer;
 invalidate(): void;
 
 /** Returns [code]true[/code] if the provided [param flag] is enabled. */
-is_customization_flag_enabled(): boolean;
+is_customization_flag_enabled(flag: int): boolean;
 
 /** Shows the [FileDialog] using the default size and position for file dialogs, and selects the file name if there is a current file. */
 popup_file_dialog(): void;
 
 /** Sets the specified customization [param flag], allowing to customize the features available in this [FileDialog]. */
-set_customization_flag_enabled(): void;
+set_customization_flag_enabled(flag: int, enabled: boolean): void;
 
 /**
  * Sets the list of favorite directories, which is shared by all [FileDialog] nodes. Useful to restore the list of favorites saved with [method get_favorite_list]. This method can be called only from the main thread.
@@ -218,10 +218,10 @@ set_customization_flag_enabled(): void;
  * **Note:** [FileDialog] will update its internal [ItemList] of favorites when its visibility changes. Be sure to call this method earlier if you want your changes to have effect.
  *
 */
-set_favorite_list(): void;
+set_favorite_list(favorites: PackedStringArray): void;
 
 /** Sets the callback used by the [FileDialog] nodes to get a file icon, when [constant DISPLAY_LIST] mode is used. The callback should take a single [String] argument (file path), and return a [Texture2D]. If an invalid texture is returned, the [theme_item file] icon will be used instead. */
-set_get_icon_callback(): void;
+set_get_icon_callback(callback: Callable): void;
 
 /**
  * Sets the callback used by the [FileDialog] nodes to get a file icon, when [constant DISPLAY_THUMBNAILS] mode is used. The callback should take a single [String] argument (file path), and return a [Texture2D]. If an invalid texture is returned, the [theme_item file_thumbnail] icon will be used instead.
@@ -243,16 +243,16 @@ set_get_icon_callback(): void;
  * 
  *
 */
-set_get_thumbnail_callback(): void;
+set_get_thumbnail_callback(callback: Callable): void;
 
 /** Sets the default value index of the [OptionButton] or [CheckBox] with index [param option]. */
-set_option_default(): void;
+set_option_default(option: int, default_value_index: int): void;
 
 /** Sets the name of the [OptionButton] or [CheckBox] with index [param option]. */
-set_option_name(): void;
+set_option_name(option: int, name: string): void;
 
 /** Sets the option values of the [OptionButton] with index [param option]. */
-set_option_values(): void;
+set_option_values(option: int, values: PackedStringArray): void;
 
 /**
  * Sets the list of recent directories, which is shared by all [FileDialog] nodes. Useful to restore the list of recents saved with [method set_recent_list]. This method can be called only from the main thread.
@@ -260,7 +260,7 @@ set_option_values(): void;
  * **Note:** [FileDialog] will update its internal [ItemList] of recent directories when its visibility changes. Be sure to call this method earlier if you want your changes to have effect.
  *
 */
-set_recent_list(): void;
+set_recent_list(recents: PackedStringArray): void;
 
   connect<T extends SignalsOf<FileDialog>>(signal: T, method: SignalFunction<FileDialog[T]>): number;
 

@@ -37,7 +37,7 @@ get_64(): int;
 get_available_bytes(): int;
 
 /** Returns a chunk data with the received bytes, as an [Array] containing two elements: an [enum Error] constant and a [PackedByteArray]. [param bytes] is the number of bytes to be received. If not enough bytes are available, the function will block until the desired amount is received. */
-get_data(): any[];
+get_data(bytes: int): any[];
 
 /** Gets a double-precision float from the stream. */
 get_double(): float;
@@ -49,10 +49,10 @@ get_float(): float;
 get_half(): float;
 
 /** Returns a chunk data with the received bytes, as an [Array] containing two elements: an [enum Error] constant and a [PackedByteArray]. [param bytes] is the number of bytes to be received. If not enough bytes are available, the function will return how many were actually received. */
-get_partial_data(): any[];
+get_partial_data(bytes: int): any[];
 
 /** Gets an ASCII string with byte-length [param bytes] from the stream. If [param bytes] is negative (default) the length will be read from the stream using the reverse process of [method put_string]. */
-get_string(): string;
+get_string(bytes?: int): string;
 
 /** Gets an unsigned byte from the stream. */
 get_u8(): int;
@@ -67,7 +67,7 @@ get_u32(): int;
 get_u64(): int;
 
 /** Gets a UTF-8 string with byte-length [param bytes] from the stream (this decodes the string sent as UTF-8). If [param bytes] is negative (default) the length will be read from the stream using the reverse process of [method put_utf8_string]. */
-get_utf8_string(): string;
+get_utf8_string(bytes?: int): string;
 
 /**
  * Gets a Variant from the stream. If [param allow_objects] is `true`, decoding objects is allowed.
@@ -77,34 +77,34 @@ get_utf8_string(): string;
  * **Warning:** Deserialized objects can contain code which gets executed. Do not use this option if the serialized object comes from untrusted sources to avoid potential security threats such as remote code execution.
  *
 */
-get_var(): any;
+get_var(allow_objects?: boolean): any;
 
 /** Puts a signed byte into the stream. */
-put_8(): void;
+put_8(value: int): void;
 
 /** Puts a signed 16-bit value into the stream. */
-put_16(): void;
+put_16(value: int): void;
 
 /** Puts a signed 32-bit value into the stream. */
-put_32(): void;
+put_32(value: int): void;
 
 /** Puts a signed 64-bit value into the stream. */
-put_64(): void;
+put_64(value: int): void;
 
 /** Sends a chunk of data through the connection, blocking if necessary until the data is done sending. This function returns an [enum Error] code. */
-put_data(): int;
+put_data(data: PackedByteArray): int;
 
 /** Puts a double-precision float into the stream. */
-put_double(): void;
+put_double(value: float): void;
 
 /** Puts a single-precision float into the stream. */
-put_float(): void;
+put_float(value: float): void;
 
 /** Puts a half-precision float into the stream. */
-put_half(): void;
+put_half(value: float): void;
 
 /** Sends a chunk of data through the connection. If all the data could not be sent at once, only part of it will. This function returns two values, an [enum Error] code and an integer, describing how much data was actually sent. */
-put_partial_data(): any[];
+put_partial_data(data: PackedByteArray): any[];
 
 /**
  * Puts a zero-terminated ASCII string into the stream prepended by a 32-bit unsigned integer representing its size.
@@ -123,19 +123,19 @@ put_partial_data(): any[];
  * 
  *
 */
-put_string(): void;
+put_string(value: string): void;
 
 /** Puts an unsigned byte into the stream. */
-put_u8(): void;
+put_u8(value: int): void;
 
 /** Puts an unsigned 16-bit value into the stream. */
-put_u16(): void;
+put_u16(value: int): void;
 
 /** Puts an unsigned 32-bit value into the stream. */
-put_u32(): void;
+put_u32(value: int): void;
 
 /** Puts an unsigned 64-bit value into the stream. */
-put_u64(): void;
+put_u64(value: int): void;
 
 /**
  * Puts a zero-terminated UTF-8 string into the stream prepended by a 32 bits unsigned integer representing its size.
@@ -154,7 +154,7 @@ put_u64(): void;
  * 
  *
 */
-put_utf8_string(): void;
+put_utf8_string(value: string): void;
 
 /**
  * Puts a Variant into the stream. If [param full_objects] is `true` encoding objects is allowed (and can potentially include code).
@@ -162,7 +162,7 @@ put_utf8_string(): void;
  * Internally, this uses the same encoding mechanism as the [method @GlobalScope.var_to_bytes] method.
  *
 */
-put_var(): void;
+put_var(value: any, full_objects?: boolean): void;
 
   connect<T extends SignalsOf<StreamPeer>>(signal: T, method: SignalFunction<StreamPeer[T]>): number;
 

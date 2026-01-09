@@ -45,13 +45,13 @@ use_accumulated_input: boolean;
  * **Note:** This method will not cause any [method Node._input] calls. It is intended to be used with [method is_action_pressed] and [method is_action_just_pressed]. If you want to simulate `_input`, use [method parse_input_event] instead.
  *
 */
-action_press(): void;
+action_press(action: Action, strength?: float): void;
 
 /** If the specified action is already pressed, this will release it. */
-action_release(): void;
+action_release(action: Action): void;
 
 /** Adds a new mapping entry (in SDL2 format) to the mapping database. Optionally update already connected devices. */
-add_joy_mapping(): void;
+add_joy_mapping(mapping: string, update_existing?: boolean): void;
 
 /**
  * Sends all input events which are in the current buffer to the game loop. These events may have been buffered as a result of accumulated input ([member use_accumulated_input]) or agile input flushing ([member ProjectSettings.input_devices/buffering/agile_event_flushing]).
@@ -79,7 +79,7 @@ get_accelerometer(): Vector3;
  * If [param exact_match] is `false`, it ignores additional input modifiers for [InputEventKey] and [InputEventMouseButton] events, and the direction for [InputEventJoypadMotion] events.
  *
 */
-get_action_raw_strength(): float;
+get_action_raw_strength(action: Action, exact_match?: boolean): float;
 
 /**
  * Returns a value between 0 and 1 representing the intensity of the given action. In a joypad, for example, the further away the axis (analog sticks or L2, R2 triggers) is from the dead zone, the closer the value will be to 1. If the action is mapped to a control that has no axis such as the keyboard, the value returned will be 0 or 1.
@@ -87,7 +87,7 @@ get_action_raw_strength(): float;
  * If [param exact_match] is `false`, it ignores additional input modifiers for [InputEventKey] and [InputEventMouseButton] events, and the direction for [InputEventJoypadMotion] events.
  *
 */
-get_action_strength(): float;
+get_action_strength(action: Action, exact_match?: boolean): float;
 
 /**
  * Get axis input by specifying two actions, one negative and one positive.
@@ -95,7 +95,7 @@ get_action_strength(): float;
  * This is a shorthand for writing `Input.get_action_strength("positive_action") - Input.get_action_strength("negative_action")`.
  *
 */
-get_axis(): float;
+get_axis(negative_action: StringName, positive_action: StringName): float;
 
 /** Returns an [Array] containing the device IDs of all currently connected joypads. */
 get_connected_joypads(): int[];
@@ -124,7 +124,7 @@ get_gravity(): Vector3;
 get_gyroscope(): Vector3;
 
 /** Returns the current value of the joypad axis at index [param axis]. */
-get_joy_axis(): float;
+get_joy_axis(device: int, axis: int): float;
 
 /**
  * Returns an SDL2-compatible device GUID on platforms that use gamepad remapping, e.g. `030000004c050000c405000000010000`. Returns an empty string if it cannot be found. Godot uses the [url=https://github.com/gabomdq/SDL_GameControllerDB]SDL2 game controller database[/url] to determine gamepad names and mappings based on this GUID.
@@ -132,7 +132,7 @@ get_joy_axis(): float;
  * On Windows, all XInput joypad GUIDs will be overridden by Godot to `__XINPUT_DEVICE__`, because their mappings are the same.
  *
 */
-get_joy_guid(): string;
+get_joy_guid(device: int): string;
 
 /**
  * Returns a dictionary with extra platform-specific information about the device, e.g. the raw gamepad name from the OS or the Steam Input index.
@@ -154,16 +154,16 @@ get_joy_guid(): string;
  * **Note:** The returned dictionary is always empty on Android, iOS, visionOS, and Web.
  *
 */
-get_joy_info(): Dictionary<any, any>;
+get_joy_info(device: int): Dictionary<any, any>;
 
 /** Returns the name of the joypad at the specified device index, e.g. [code]PS4 Controller[/code]. Godot uses the [url=https://github.com/gabomdq/SDL_GameControllerDB]SDL2 game controller database[/url] to determine gamepad names. */
-get_joy_name(): string;
+get_joy_name(device: int): string;
 
 /** Returns the duration of the current vibration effect in seconds. */
-get_joy_vibration_duration(): float;
+get_joy_vibration_duration(device: int): float;
 
 /** Returns the strength of the joypad vibration: x is the strength of the weak motor, and y is the strength of the strong motor. */
-get_joy_vibration_strength(): Vector2;
+get_joy_vibration_strength(device: int): Vector2;
 
 /** Returns the last mouse velocity in screen coordinates. To provide a precise and jitter-free velocity, mouse velocity is only calculated every 0.1s. Therefore, mouse velocity will lag mouse movements. */
 get_last_mouse_screen_velocity(): Vector2;
@@ -192,7 +192,7 @@ get_mouse_button_mask(): int;
  * By default, the deadzone is automatically calculated from the average of the action deadzones. However, you can override the deadzone to be whatever you want (on the range of 0 to 1).
  *
 */
-get_vector(): Vector2;
+get_vector(negative_x: StringName, positive_x: StringName, negative_y: StringName, positive_y: StringName, deadzone?: float): Vector2;
 
 /**
  * Returns `true` if the joypad has an LED light that can change colors and/or brightness. See also [method set_joy_light].
@@ -200,7 +200,7 @@ get_vector(): Vector2;
  * **Note:** This feature is only supported on Windows, Linux, and macOS.
  *
 */
-has_joy_light(): boolean;
+has_joy_light(device: int): boolean;
 
 /**
  * Returns `true` when the user has **started** pressing the action event in the current frame or physics tick. It will only return `true` on the frame or tick that the user pressed down the button.
@@ -231,7 +231,7 @@ is_action_just_pressed(action: Action): boolean;
  * **Note:** Due to keyboard ghosting, [method is_action_just_pressed] may return `false` even if one of the action's keys is pressed. See [url=$DOCS_URL/tutorials/inputs/input_examples.html#keyboard-events]Input examples[/url] in the documentation for more information.
  *
 */
-is_action_just_pressed_by_event(): boolean;
+is_action_just_pressed_by_event(action: Action, event: InputEvent, exact_match?: boolean): boolean;
 
 /**
  * Returns `true` when the user **stops** pressing the action event in the current frame or physics tick. It will only return `true` on the frame or tick that the user releases the button.
@@ -256,7 +256,7 @@ is_action_just_released(action: Action): boolean;
  * If [param exact_match] is `false`, it ignores additional input modifiers for [InputEventKey] and [InputEventMouseButton] events, and the direction for [InputEventJoypadMotion] events.
  *
 */
-is_action_just_released_by_event(): boolean;
+is_action_just_released_by_event(action: Action, event: InputEvent, exact_match?: boolean): boolean;
 
 /**
  * Returns `true` if you are pressing the action event.
@@ -273,13 +273,13 @@ is_action_pressed(action: Action): boolean;
 is_anything_pressed(): boolean;
 
 /** Returns [code]true[/code] if you are pressing the joypad button at index [param button]. */
-is_joy_button_pressed(): boolean;
+is_joy_button_pressed(device: int, button: int): boolean;
 
 /** Returns [code]true[/code] if the system knows the specified device. This means that it sets all button and axis indices. Unknown joypads are not expected to match these constants, but you can still retrieve events from them. */
-is_joy_known(): boolean;
+is_joy_known(device: int): boolean;
 
 /** Returns [code]true[/code] if you are pressing the key with the [param keycode] printed on it. You can pass a [enum Key] constant or any Unicode character code. */
-is_key_label_pressed(): boolean;
+is_key_label_pressed(keycode: int): boolean;
 
 /**
  * Returns `true` if you are pressing the Latin key in the current keyboard layout. You can pass a [enum Key] constant.
@@ -289,10 +289,10 @@ is_key_label_pressed(): boolean;
  * **Note:** Due to keyboard ghosting, [method is_key_pressed] may return `false` even if one of the action's keys is pressed. See [url=$DOCS_URL/tutorials/inputs/input_examples.html#keyboard-events]Input examples[/url] in the documentation for more information.
  *
 */
-is_key_pressed(): boolean;
+is_key_pressed(keycode: int): boolean;
 
 /** Returns [code]true[/code] if you are pressing the mouse button specified with [enum MouseButton]. */
-is_mouse_button_pressed(): boolean;
+is_mouse_button_pressed(button: int): boolean;
 
 /**
  * Returns `true` if you are pressing the key in the physical location on the 101/102-key US QWERTY keyboard. You can pass a [enum Key] constant.
@@ -302,7 +302,7 @@ is_mouse_button_pressed(): boolean;
  * **Note:** Due to keyboard ghosting, [method is_physical_key_pressed] may return `false` even if one of the action's keys is pressed. See [url=$DOCS_URL/tutorials/inputs/input_examples.html#keyboard-events]Input examples[/url] in the documentation for more information.
  *
 */
-is_physical_key_pressed(): boolean;
+is_physical_key_pressed(keycode: int): boolean;
 
 /**
  * Feeds an [InputEvent] to the game. Can be used to artificially trigger input events from code. Also generates [method Node._input] calls.
@@ -327,7 +327,7 @@ is_physical_key_pressed(): boolean;
  * **Note:** Calling this function has no influence on the operating system. So for example sending an [InputEventMouseMotion] will not move the OS mouse cursor to the specified position (use [method warp_mouse] instead) and sending [kbd]Alt/Cmd + Tab[/kbd] as [InputEventKey] won't toggle between active windows.
  *
 */
-parse_input_event(): void;
+parse_input_event(event: InputEvent): void;
 
 /**
  * Removes all mappings from the internal database that match the given GUID. All currently connected joypads that use this GUID will become unmapped.
@@ -335,7 +335,7 @@ parse_input_event(): void;
  * On Android, Godot will map to an internal fallback mapping.
  *
 */
-remove_joy_mapping(): void;
+remove_joy_mapping(guid: string): void;
 
 /**
  * Sets the acceleration value of the accelerometer sensor. Can be used for debugging on devices without a hardware sensor, for example in an editor on a PC.
@@ -343,7 +343,7 @@ remove_joy_mapping(): void;
  * **Note:** This value can be immediately overwritten by the hardware sensor value on Android and iOS.
  *
 */
-set_accelerometer(): void;
+set_accelerometer(value: Vector3): void;
 
 /**
  * Sets a custom mouse cursor image, which is only visible inside the game window, for the given mouse [param shape]. The hotspot can also be specified. Passing `null` to the image parameter resets to the system cursor.
@@ -359,7 +359,7 @@ set_accelerometer(): void;
  * **Note:** On the web platform, the maximum allowed cursor image size is 128×128. Cursor images larger than 32×32 will also only be displayed if the mouse cursor image is entirely located within the page for [url=https://chromestatus.com/feature/5825971391299584]security reasons[/url].
  *
 */
-set_custom_mouse_cursor(): void;
+set_custom_mouse_cursor(image: Resource, shape?: int, hotspot?: Vector2): void;
 
 /**
  * Sets the default cursor shape to be used in the viewport instead of [constant CURSOR_ARROW].
@@ -369,7 +369,7 @@ set_custom_mouse_cursor(): void;
  * **Note:** This method generates an [InputEventMouseMotion] to update cursor immediately.
  *
 */
-set_default_cursor_shape(): void;
+set_default_cursor_shape(shape?: int): void;
 
 /**
  * Sets the gravity value of the accelerometer sensor. Can be used for debugging on devices without a hardware sensor, for example in an editor on a PC.
@@ -377,7 +377,7 @@ set_default_cursor_shape(): void;
  * **Note:** This value can be immediately overwritten by the hardware sensor value on Android and iOS.
  *
 */
-set_gravity(): void;
+set_gravity(value: Vector3): void;
 
 /**
  * Sets the value of the rotation rate of the gyroscope sensor. Can be used for debugging on devices without a hardware sensor, for example in an editor on a PC.
@@ -385,7 +385,7 @@ set_gravity(): void;
  * **Note:** This value can be immediately overwritten by the hardware sensor value on Android and iOS.
  *
 */
-set_gyroscope(): void;
+set_gyroscope(value: Vector3): void;
 
 /**
  * Sets the joypad's LED light, if available, to the specified color. Returns `true` if the operation was successful. See also [method has_joy_light].
@@ -395,7 +395,7 @@ set_gyroscope(): void;
  * **Note:** This feature is only supported on Windows, Linux, and macOS.
  *
 */
-set_joy_light(): boolean;
+set_joy_light(device: int, color: Color): boolean;
 
 /**
  * Sets the value of the magnetic field of the magnetometer sensor. Can be used for debugging on devices without a hardware sensor, for example in an editor on a PC.
@@ -403,7 +403,7 @@ set_joy_light(): boolean;
  * **Note:** This value can be immediately overwritten by the hardware sensor value on Android and iOS.
  *
 */
-set_magnetometer(): void;
+set_magnetometer(value: Vector3): void;
 
 /**
  * Queries whether an input device should be ignored or not. Devices can be ignored by setting the environment variable `SDL_GAMECONTROLLER_IGNORE_DEVICES`. Read the [url=https://wiki.libsdl.org/SDL2]SDL documentation[/url] for more information.
@@ -411,7 +411,7 @@ set_magnetometer(): void;
  * **Note:** Some 3rd party tools can contribute to the list of ignored devices. For example, **SteamInput** creates virtual devices from physical devices for remapping purposes. To avoid handling the same input device twice, the original device is added to the ignore list.
  *
 */
-should_ignore_device(): boolean;
+should_ignore_device(vendor_id: int, product_id: int): boolean;
 
 /**
  * Starts to vibrate the joypad. Joypads usually come with two rumble motors, a strong and a weak one. [param weak_magnitude] is the strength of the weak motor (between 0 and 1) and [param strong_magnitude] is the strength of the strong motor (between 0 and 1). [param duration] is the duration of the effect in seconds (a duration of 0 will try to play the vibration indefinitely). The vibration can be stopped early by calling [method stop_joy_vibration].
@@ -421,10 +421,10 @@ should_ignore_device(): boolean;
  * **Note:** For macOS, vibration is only supported in macOS 11 and later.
  *
 */
-start_joy_vibration(): void;
+start_joy_vibration(device: int, weak_magnitude: float, strong_magnitude: float, duration?: float): void;
 
 /** Stops the vibration of the joypad started with [method start_joy_vibration]. */
-stop_joy_vibration(): void;
+stop_joy_vibration(device: int): void;
 
 /**
  * Vibrate the handheld device for the specified duration in milliseconds.
@@ -442,7 +442,7 @@ stop_joy_vibration(): void;
  * **Note:** Some web browsers such as Safari and Firefox for Android do not support [method vibrate_handheld].
  *
 */
-vibrate_handheld(): void;
+vibrate_handheld(duration_ms?: int, amplitude?: float): void;
 
 /**
  * Sets the mouse position to the specified vector, provided in pixels and relative to an origin at the upper left corner of the currently focused Window Manager game window.
@@ -452,7 +452,7 @@ vibrate_handheld(): void;
  * **Note:** [method warp_mouse] is only supported on Windows, macOS and Linux. It has no effect on Android, iOS and Web.
  *
 */
-warp_mouse(): void;
+warp_mouse(position: Vector2): void;
 
   connect<T extends SignalsOf<InputClass>>(signal: T, method: SignalFunction<InputClass[T]>): number;
 

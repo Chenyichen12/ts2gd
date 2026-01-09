@@ -98,19 +98,19 @@ declare class XMLParser extends RefCounted  {
 get_attribute_count(): int;
 
 /** Returns the name of an attribute of the currently parsed element, specified by the [param idx] index. */
-get_attribute_name(): string;
+get_attribute_name(idx: int): string;
 
 /** Returns the value of an attribute of the currently parsed element, specified by the [param idx] index. */
-get_attribute_value(): string;
+get_attribute_value(idx: int): string;
 
 /** Returns the current line in the parsed file, counting from 0. */
 get_current_line(): int;
 
 /** Returns the value of an attribute of the currently parsed element, specified by its [param name]. This method will raise an error if the element has no such attribute. */
-get_named_attribute_value(): string;
+get_named_attribute_value(name: string): string;
 
 /** Returns the value of an attribute of the currently parsed element, specified by its [param name]. This method will return an empty string if the element has no such attribute. */
-get_named_attribute_value_safe(): string;
+get_named_attribute_value_safe(name: string): string;
 
 /** Returns the contents of a text node. This method will raise an error if the current parsed node is of any other type. */
 get_node_data(): string;
@@ -130,22 +130,22 @@ get_node_offset(): int;
 get_node_type(): int;
 
 /** Returns [code]true[/code] if the currently parsed element has an attribute with the [param name]. */
-has_attribute(): boolean;
+has_attribute(name: string): boolean;
 
 /** Returns [code]true[/code] if the currently parsed element is empty, e.g. [code]<element />[/code]. */
 is_empty(): boolean;
 
 /** Opens an XML [param file] for parsing. This method returns an error code. */
-open(): int;
+open(file: string): int;
 
 /** Opens an XML raw [param buffer] for parsing. This method returns an error code. */
-open_buffer(): int;
+open_buffer(buffer: PackedByteArray): int;
 
 /** Parses the next node in the file. This method returns an error code. */
 read(): int;
 
 /** Moves the buffer cursor to a certain offset (since the beginning) and reads the next node there. This method returns an error code. */
-seek(): int;
+seek(position: int): int;
 
 /** Skips the current section. If the currently parsed node contains more inner nodes, they will be ignored and the cursor will go to the closing of the current element. */
 skip_section(): void;

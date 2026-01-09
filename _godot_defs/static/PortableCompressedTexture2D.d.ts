@@ -50,7 +50,7 @@ size_override: Vector2;
  * If lossy compression is requested, the quality setting can optionally be provided. This maps to Lossy WebP compression quality.
  *
 */
-create_from_image(): void;
+create_from_image(image: Image, compression_mode: int, normal_map?: boolean, lossy_quality?: float): void;
 
 /** Return the compression mode used (valid after initialized). */
 get_compression_mode(): int;
@@ -67,10 +67,10 @@ is_keeping_all_compressed_buffers(): boolean;
  * **Note:** This method must be called before [method create_from_image] for this to work.
  *
 */
-set_basisu_compressor_params(): void;
+set_basisu_compressor_params(uastc_level: int, rdo_quality_loss: float): void;
 
 /** If [param keep] is [code]true[/code], overrides the flag globally for all textures of this type. This is used primarily by the editor. */
-set_keep_all_compressed_buffers(): void;
+set_keep_all_compressed_buffers(keep: boolean): void;
 
   connect<T extends SignalsOf<PortableCompressedTexture2D>>(signal: T, method: SignalFunction<PortableCompressedTexture2D[T]>): number;
 

@@ -194,7 +194,7 @@ physics_material_override: PhysicsMaterial;
 sleeping: boolean;
 
 /** Called during physics processing, allowing you to read and safely modify the simulation state for the object. By default, it is called before the standard force integration, but the [member custom_integrator] property allows you to disable the standard force integration and do fully custom force integration for a body. */
-protected _integrate_forces(): void;
+protected _integrate_forces(state: PhysicsDirectBodyState3D): void;
 
 /**
  * Adds a constant directional force without affecting rotation that keeps being applied over time until cleared with `constant_force = Vector3(0, 0, 0)`.
@@ -202,7 +202,7 @@ protected _integrate_forces(): void;
  * This is equivalent to using [method add_constant_force] at the body's center of mass.
  *
 */
-add_constant_central_force(): void;
+add_constant_central_force(force: Vector3): void;
 
 /**
  * Adds a constant positioned force to the body that keeps being applied over time until cleared with `constant_force = Vector3(0, 0, 0)`.
@@ -210,10 +210,10 @@ add_constant_central_force(): void;
  * [param position] is the offset from the body origin in global coordinates.
  *
 */
-add_constant_force(): void;
+add_constant_force(force: Vector3, position?: Vector3): void;
 
 /** Adds a constant rotational force without affecting position that keeps being applied over time until cleared with [code]constant_torque = Vector3(0, 0, 0)[/code]. */
-add_constant_torque(): void;
+add_constant_torque(torque: Vector3): void;
 
 /**
  * Applies a directional force without affecting rotation. A force is time dependent and meant to be applied every physics update.
@@ -221,7 +221,7 @@ add_constant_torque(): void;
  * This is equivalent to using [method apply_force] at the body's center of mass.
  *
 */
-apply_central_force(): void;
+apply_central_force(force: Vector3): void;
 
 /**
  * Applies a directional impulse without affecting rotation.
@@ -231,7 +231,7 @@ apply_central_force(): void;
  * This is equivalent to using [method apply_impulse] at the body's center of mass.
  *
 */
-apply_central_impulse(): void;
+apply_central_impulse(impulse: Vector3): void;
 
 /**
  * Applies a positioned force to the body. A force is time dependent and meant to be applied every physics update.
@@ -239,7 +239,7 @@ apply_central_impulse(): void;
  * [param position] is the offset from the body origin in global coordinates.
  *
 */
-apply_force(): void;
+apply_force(force: Vector3, position?: Vector3): void;
 
 /**
  * Applies a positioned impulse to the body.
@@ -249,7 +249,7 @@ apply_force(): void;
  * [param position] is the offset from the body origin in global coordinates.
  *
 */
-apply_impulse(): void;
+apply_impulse(impulse: Vector3, position?: Vector3): void;
 
 /**
  * Applies a rotational force without affecting position. A force is time dependent and meant to be applied every physics update.
@@ -257,7 +257,7 @@ apply_impulse(): void;
  * **Note:** [member inertia] is required for this to work. To have [member inertia], an active [CollisionShape3D] must be a child of the node, or you can manually set [member inertia].
  *
 */
-apply_torque(): void;
+apply_torque(torque: Vector3): void;
 
 /**
  * Applies a rotational impulse to the body without affecting the position.
@@ -267,7 +267,7 @@ apply_torque(): void;
  * **Note:** [member inertia] is required for this to work. To have [member inertia], an active [CollisionShape3D] must be a child of the node, or you can manually set [member inertia].
  *
 */
-apply_torque_impulse(): void;
+apply_torque_impulse(impulse: Vector3): void;
 
 /**
  * Returns a list of the bodies colliding with this one. Requires [member contact_monitor] to be set to `true` and [member max_contacts_reported] to be set high enough to detect all the collisions.
@@ -289,7 +289,7 @@ get_contact_count(): int;
 get_inverse_inertia_tensor(): Basis;
 
 /** Sets an axis velocity. The velocity in the given vector axis will be set as the given vector length. This is useful for jumping behavior. */
-set_axis_velocity(): void;
+set_axis_velocity(axis_velocity: Vector3): void;
 
   connect<T extends SignalsOf<RigidBody3D>>(signal: T, method: SignalFunction<RigidBody3D[T]>): number;
 

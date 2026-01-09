@@ -90,7 +90,7 @@ next(): void;
  * If [param reset] is `true`, the animation is played from the beginning.
  *
 */
-start(): void;
+start(node: StringName, reset?: boolean): void;
 
 /** Stops the currently playing animation. */
 stop(): void;
@@ -103,7 +103,7 @@ stop(): void;
  * If [param reset_on_teleport] is `true`, the animation is played from the beginning when the travel cause a teleportation.
  *
 */
-travel(): void;
+travel(to_node: StringName, reset_on_teleport?: boolean): void;
 
   connect<T extends SignalsOf<AnimationNodeStateMachinePlayback>>(signal: T, method: SignalFunction<AnimationNodeStateMachinePlayback[T]>): number;
 

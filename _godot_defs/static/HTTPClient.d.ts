@@ -68,7 +68,7 @@ close(): void;
  * If no [param port] is specified (or `-1` is used), it is automatically set to 80 for HTTP and 443 for HTTPS. You can pass the optional [param tls_options] parameter to customize the trusted certification authorities, or the common name verification when using HTTPS. See [method TLSOptions.client] and [method TLSOptions.client_unsafe].
  *
 */
-connect_to_host(): int;
+connect_to_host(host: string, port?: int, tls_options?: TLSOptions): int;
 
 /**
  * Returns the response's body length.
@@ -154,7 +154,7 @@ poll(): int;
  * 
  *
 */
-query_string_from_dict(): string;
+query_string_from_dict(fields: Dictionary<any, any>): string;
 
 /** Reads one chunk from the response. */
 read_response_body_chunk(): PackedByteArray;
@@ -188,7 +188,7 @@ read_response_body_chunk(): PackedByteArray;
  * **Note:** The [param body] parameter is ignored if [param method] is [constant HTTPClient.METHOD_GET]. This is because GET methods can't contain request data. As a workaround, you can pass request data as a query string in the URL. See [method String.uri_encode] for an example.
  *
 */
-request(): int;
+request(method: int, url: string, headers: PackedStringArray, body?: string): int;
 
 /**
  * Sends a raw HTTP request to the connected host with the given [param method].
@@ -200,7 +200,7 @@ request(): int;
  * Sends the body data raw, as a byte array and does not encode it in any way.
  *
 */
-request_raw(): int;
+request_raw(method: int, url: string, headers: PackedStringArray, body: PackedByteArray): int;
 
 /**
  * Sets the proxy server for HTTP requests.
@@ -208,7 +208,7 @@ request_raw(): int;
  * The proxy server is unset if [param host] is empty or [param port] is -1.
  *
 */
-set_http_proxy(): void;
+set_http_proxy(host: string, port: int): void;
 
 /**
  * Sets the proxy server for HTTPS requests.
@@ -216,7 +216,7 @@ set_http_proxy(): void;
  * The proxy server is unset if [param host] is empty or [param port] is -1.
  *
 */
-set_https_proxy(): void;
+set_https_proxy(host: string, port: int): void;
 
   connect<T extends SignalsOf<HTTPClient>>(signal: T, method: SignalFunction<HTTPClient[T]>): number;
 

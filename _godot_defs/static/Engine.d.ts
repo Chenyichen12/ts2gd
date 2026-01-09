@@ -104,7 +104,7 @@ time_scale: float;
  * **Warning:** When [param include_variables] is `true`, any captured variables can potentially (e.g. with GDScript backtraces) be their actual values, including any object references. This means that storing such a [ScriptBacktrace] will prevent those objects from being deallocated, so it's generally recommended not to do so.
  *
 */
-capture_script_backtraces(): ScriptBacktrace[];
+capture_script_backtraces(include_variables?: boolean): ScriptBacktrace[];
 
 /**
  * Returns the name of the CPU architecture the Godot binary was built for. Possible return values include `"x86_64"`, `"x86_32"`, `"arm64"`, `"arm32"`, `"rv64"`, `"ppc64"`, `"loongarch64"`, `"wasm64"`, and `"wasm32"`.
@@ -226,7 +226,7 @@ get_physics_interpolation_fraction(): float;
 get_process_frames(): int;
 
 /** Returns an instance of a [ScriptLanguage] with the given [param index]. */
-get_script_language(): ScriptLanguage;
+get_script_language(index: int): ScriptLanguage;
 
 /** Returns the number of available script languages. Use with [method get_script_language]. */
 get_script_language_count(): int;
@@ -237,7 +237,7 @@ get_script_language_count(): int;
  * **Note:** Global singletons are not the same as autoloaded nodes, which are configurable in the project settings.
  *
 */
-get_singleton(): Object;
+get_singleton(name: StringName): Object;
 
 /** Returns a list of names of all available global singletons. See also [method get_singleton]. */
 get_singleton_list(): PackedStringArray;
@@ -317,7 +317,7 @@ get_write_movie_path(): string;
  * **Note:** Global singletons are not the same as autoloaded nodes, which are configurable in the project settings.
  *
 */
-has_singleton(): boolean;
+has_singleton(name: StringName): boolean;
 
 /**
  * Returns `true` if the script is currently running inside the editor, otherwise returns `false`. This is useful for `@tool` scripts to conditionally draw editor helpers, or prevent accidentally running "game" code that would affect the scene state while in the editor:
@@ -380,10 +380,10 @@ is_in_physics_frame(): boolean;
  * - [constant ERR_ALREADY_EXISTS] if `ScriptServer` already contains a language with similar extension/name/type.
  *
 */
-register_script_language(): int;
+register_script_language(language: ScriptLanguage): int;
 
 /** Registers the given [Object] [param instance] as a singleton, available globally under [param name]. Useful for plugins. */
-register_singleton(): void;
+register_singleton(name: StringName, instance: Object): void;
 
 /**
  * Unregisters the [ScriptLanguage] instance from `ScriptServer`.
@@ -395,10 +395,10 @@ register_singleton(): void;
  * - [constant ERR_DOES_NOT_EXIST] if the language is not registered in `ScriptServer`.
  *
 */
-unregister_script_language(): int;
+unregister_script_language(language: ScriptLanguage): int;
 
 /** Removes the singleton registered under [param name]. The singleton object is [i]not[/i] freed. Only works with user-defined singletons registered with [method register_singleton]. */
-unregister_singleton(): void;
+unregister_singleton(name: StringName): void;
 
   connect<T extends SignalsOf<EngineClass>>(signal: T, method: SignalFunction<EngineClass[T]>): number;
 

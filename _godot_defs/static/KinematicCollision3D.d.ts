@@ -20,25 +20,25 @@ declare class KinematicCollision3D extends RefCounted  {
 
 
 /** Returns the collision angle according to [param up_direction], which is [constant Vector3.UP] by default. This value is always positive. */
-get_angle(): float;
+get_angle(collision_index?: int, up_direction?: Vector3): float;
 
 /** Returns the colliding body's attached [Object] given a collision index (the deepest collision by default). */
-get_collider(): Object;
+get_collider(collision_index?: int): Object;
 
 /** Returns the unique instance ID of the colliding body's attached [Object] given a collision index (the deepest collision by default). See [method Object.get_instance_id]. */
-get_collider_id(): int;
+get_collider_id(collision_index?: int): int;
 
 /** Returns the colliding body's [RID] used by the [PhysicsServer3D] given a collision index (the deepest collision by default). */
-get_collider_rid(): RID;
+get_collider_rid(collision_index?: int): RID;
 
 /** Returns the colliding body's shape given a collision index (the deepest collision by default). */
-get_collider_shape(): Object;
+get_collider_shape(collision_index?: int): Object;
 
 /** Returns the colliding body's shape index given a collision index (the deepest collision by default). See [CollisionObject3D]. */
-get_collider_shape_index(): int;
+get_collider_shape_index(collision_index?: int): int;
 
 /** Returns the colliding body's velocity given a collision index (the deepest collision by default). */
-get_collider_velocity(): Vector3;
+get_collider_velocity(collision_index?: int): Vector3;
 
 /** Returns the number of detected collisions. */
 get_collision_count(): int;
@@ -47,13 +47,13 @@ get_collision_count(): int;
 get_depth(): float;
 
 /** Returns the moving object's colliding shape given a collision index (the deepest collision by default). */
-get_local_shape(): Object;
+get_local_shape(collision_index?: int): Object;
 
 /** Returns the colliding body's shape's normal at the point of collision given a collision index (the deepest collision by default). */
-get_normal(): Vector3;
+get_normal(collision_index?: int): Vector3;
 
 /** Returns the point of collision in global coordinates given a collision index (the deepest collision by default). */
-get_position(): Vector3;
+get_position(collision_index?: int): Vector3;
 
 /** Returns the moving object's remaining movement vector. */
 get_remainder(): Vector3;

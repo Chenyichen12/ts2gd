@@ -119,7 +119,7 @@ custom_aabb: AABB;
 shadow_mesh: ArrayMesh;
 
 /** Adds name for a blend shape that will be added with [method add_surface_from_arrays]. Must be called before surface is added. */
-add_blend_shape(): void;
+add_blend_shape(name: StringName): void;
 
 /**
  * Creates a new surface. [method Mesh.get_surface_count] will become the `surf_idx` for this new surface.
@@ -137,7 +137,7 @@ add_blend_shape(): void;
  * **Note:** When using indices, it is recommended to only use points, lines, or triangles.
  *
 */
-add_surface_from_arrays(): void;
+add_surface_from_arrays(primitive: int, arrays: any[], blend_shapes?: Array[], lods?: Dictionary<any, any>, flags?: int): void;
 
 /** Removes all blend shapes from this [ArrayMesh]. */
 clear_blend_shapes(): void;
@@ -149,49 +149,49 @@ clear_surfaces(): void;
 get_blend_shape_count(): int;
 
 /** Returns the name of the blend shape at this index. */
-get_blend_shape_name(): StringName;
+get_blend_shape_name(index: int): StringName;
 
 /** Performs a UV unwrap on the [ArrayMesh] to prepare the mesh for lightmapping. */
-lightmap_unwrap(): int;
+lightmap_unwrap(transform: Transform3D, texel_size: float): int;
 
 /** Regenerates tangents for each of the [ArrayMesh]'s surfaces. */
 regen_normal_maps(): void;
 
 /** Sets the name of the blend shape at this index. */
-set_blend_shape_name(): void;
+set_blend_shape_name(index: int, name: StringName): void;
 
 /** Returns the index of the first surface with this name held within this [ArrayMesh]. If none are found, -1 is returned. */
-surface_find_by_name(): int;
+surface_find_by_name(name: string): int;
 
 /** Returns the length in indices of the index array in the requested surface (see [method add_surface_from_arrays]). */
-surface_get_array_index_len(): int;
+surface_get_array_index_len(surf_idx: int): int;
 
 /** Returns the length in vertices of the vertex array in the requested surface (see [method add_surface_from_arrays]). */
-surface_get_array_len(): int;
+surface_get_array_len(surf_idx: int): int;
 
 /** Returns the format mask of the requested surface (see [method add_surface_from_arrays]). */
-surface_get_format(): int;
+surface_get_format(surf_idx: int): int;
 
 /** Gets the name assigned to this surface. */
-surface_get_name(): string;
+surface_get_name(surf_idx: int): string;
 
 /** Returns the primitive type of the requested surface (see [method add_surface_from_arrays]). */
-surface_get_primitive_type(): int;
+surface_get_primitive_type(surf_idx: int): int;
 
 /** Removes the surface at the given index from the Mesh, shifting surfaces with higher index down by one. */
-surface_remove(): void;
+surface_remove(surf_idx: int): void;
 
 /** Sets a name for a given surface. */
-surface_set_name(): void;
+surface_set_name(surf_idx: int, name: string): void;
 
 /** No documentation provided. */
-surface_update_attribute_region(): void;
+surface_update_attribute_region(surf_idx: int, offset: int, data: PackedByteArray): void;
 
 /** No documentation provided. */
-surface_update_skin_region(): void;
+surface_update_skin_region(surf_idx: int, offset: int, data: PackedByteArray): void;
 
 /** No documentation provided. */
-surface_update_vertex_region(): void;
+surface_update_vertex_region(surf_idx: int, offset: int, data: PackedByteArray): void;
 
   connect<T extends SignalsOf<ArrayMesh>>(signal: T, method: SignalFunction<ArrayMesh[T]>): number;
 

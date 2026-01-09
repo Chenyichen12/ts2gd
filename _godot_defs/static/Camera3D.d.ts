@@ -97,7 +97,7 @@ size: float;
 v_offset: float;
 
 /** If this is the current camera, remove it from being current. If [param enable_next] is [code]true[/code], request to make the next camera current, if any. */
-clear_current(): void;
+clear_current(enable_next?: boolean): void;
 
 /** Returns the projection matrix that this camera uses to render to its associated viewport. The camera must be part of the scene tree to function. */
 get_camera_projection(): Projection;
@@ -109,7 +109,7 @@ get_camera_rid(): RID;
 get_camera_transform(): Transform3D;
 
 /** Returns whether or not the specified layer of the [member cull_mask] is enabled, given a [param layer_number] between 1 and 20. */
-get_cull_mask_value(): boolean;
+get_cull_mask_value(layer_number: int): boolean;
 
 /** Returns the camera's frustum planes in world space units as an array of [Plane]s in the following order: near, far, left, top, right, bottom. Not to be confused with [member frustum_offset]. */
 get_frustum(): Plane[];
@@ -123,31 +123,31 @@ get_pyramid_shape_rid(): RID;
  * **Note:** A position which returns `false` may still be outside the camera's field of view.
  *
 */
-is_position_behind(): boolean;
+is_position_behind(world_point: Vector3): boolean;
 
 /** Returns [code]true[/code] if the given position is inside the camera's frustum (the green part of the linked diagram). [url=https://raw.githubusercontent.com/godotengine/godot-docs/master/img/camera3d_position_frustum.png]See this diagram[/url] for an overview of position query methods. */
-is_position_in_frustum(): boolean;
+is_position_in_frustum(world_point: Vector3): boolean;
 
 /** Makes this camera the current camera for the [Viewport] (see class description). If the camera node is outside the scene tree, it will attempt to become current once it's added. */
 make_current(): void;
 
 /** Returns a normal vector from the screen point location directed along the camera. Orthogonal cameras are normalized. Perspective cameras account for perspective, screen width/height, etc. */
-project_local_ray_normal(): Vector3;
+project_local_ray_normal(screen_point: Vector2): Vector3;
 
 /** Returns the 3D point in world space that maps to the given 2D coordinate in the [Viewport] rectangle on a plane that is the given [param z_depth] distance into the scene away from the camera. */
-project_position(): Vector3;
+project_position(screen_point: Vector2, z_depth: float): Vector3;
 
 /** Returns a normal vector in world space, that is the result of projecting a point on the [Viewport] rectangle by the inverse camera projection. This is useful for casting rays in the form of (origin, normal) for object intersection or picking. */
-project_ray_normal(): Vector3;
+project_ray_normal(screen_point: Vector2): Vector3;
 
 /** Returns a 3D position in world space, that is the result of projecting a point on the [Viewport] rectangle by the inverse camera projection. This is useful for casting rays in the form of (origin, normal) for object intersection or picking. */
-project_ray_origin(): Vector3;
+project_ray_origin(screen_point: Vector2): Vector3;
 
 /** Based on [param value], enables or disables the specified layer in the [member cull_mask], given a [param layer_number] between 1 and 20. */
-set_cull_mask_value(): void;
+set_cull_mask_value(layer_number: int, value: boolean): void;
 
 /** Sets the camera projection to frustum mode (see [constant PROJECTION_FRUSTUM]), by specifying a [param size], an [param offset], and the [param z_near] and [param z_far] clip planes in world space units. See also [member frustum_offset]. */
-set_frustum(): void;
+set_frustum(size: float, offset: Vector2, z_near: float, z_far: float): void;
 
 /**
  * Sets the camera projection to orthogonal mode (see [constant PROJECTION_ORTHOGONAL]), by specifying a [param size], and the [param z_near] and [param z_far] clip planes in world space units.
@@ -155,10 +155,10 @@ set_frustum(): void;
  * As a hint, 3D games that look 2D often use this projection, with [param size] specified in pixels.
  *
 */
-set_orthogonal(): void;
+set_orthogonal(size: float, z_near: float, z_far: float): void;
 
 /** Sets the camera projection to perspective mode (see [constant PROJECTION_PERSPECTIVE]), by specifying a [param fov] (field of view) angle in degrees, and the [param z_near] and [param z_far] clip planes in world space units. */
-set_perspective(): void;
+set_perspective(fov: float, z_near: float, z_far: float): void;
 
 /**
  * Returns the 2D coordinate in the [Viewport] rectangle that maps to the given 3D point in world space.
@@ -175,7 +175,7 @@ set_perspective(): void;
  * 
  *
 */
-unproject_position(): Vector2;
+unproject_position(world_point: Vector3): Vector2;
 
   connect<T extends SignalsOf<Camera3D>>(signal: T, method: SignalFunction<Camera3D[T]>): number;
 

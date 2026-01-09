@@ -56,7 +56,7 @@ get_global_end_position(): Vector2;
 get_global_start_position(): Vector2;
 
 /** Returns whether or not the specified layer of the [member navigation_layers] bitmask is enabled, given a [param layer_number] between 1 and 32. */
-get_navigation_layer_value(): boolean;
+get_navigation_layer_value(layer_number: int): boolean;
 
 /** Returns the current navigation map [RID] used by this link. */
 get_navigation_map(): RID;
@@ -65,16 +65,16 @@ get_navigation_map(): RID;
 get_rid(): RID;
 
 /** Sets the [member end_position] that is relative to the link from a global [param position]. */
-set_global_end_position(): void;
+set_global_end_position(position: Vector2): void;
 
 /** Sets the [member start_position] that is relative to the link from a global [param position]. */
-set_global_start_position(): void;
+set_global_start_position(position: Vector2): void;
 
 /** Based on [param value], enables or disables the specified layer in the [member navigation_layers] bitmask, given a [param layer_number] between 1 and 32. */
-set_navigation_layer_value(): void;
+set_navigation_layer_value(layer_number: int, value: boolean): void;
 
 /** Sets the [RID] of the navigation map this link should use. By default the link will automatically join the [World2D] default navigation map so this function is only required to override the default map. */
-set_navigation_map(): void;
+set_navigation_map(navigation_map: RID): void;
 
   connect<T extends SignalsOf<NavigationLink2D>>(signal: T, method: SignalFunction<NavigationLink2D[T]>): number;
 

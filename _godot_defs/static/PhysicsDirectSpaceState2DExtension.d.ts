@@ -20,25 +20,25 @@ declare class PhysicsDirectSpaceState2DExtension extends PhysicsDirectSpaceState
 
 
 /** No documentation provided. */
-protected _cast_motion(): boolean;
+protected _cast_motion(shape_rid: RID, transform: Transform2D, motion: Vector2, margin: float, collision_mask: int, collide_with_bodies: boolean, collide_with_areas: boolean, closest_safe: float*, closest_unsafe: float*): boolean;
 
 /** No documentation provided. */
-protected _collide_shape(): boolean;
+protected _collide_shape(shape_rid: RID, transform: Transform2D, motion: Vector2, margin: float, collision_mask: int, collide_with_bodies: boolean, collide_with_areas: boolean, results: void*, max_results: int, result_count: int32_t*): boolean;
 
 /** No documentation provided. */
-protected _intersect_point(): int;
+protected _intersect_point(position: Vector2, canvas_instance_id: int, collision_mask: int, collide_with_bodies: boolean, collide_with_areas: boolean, results: PhysicsServer2DExtensionShapeResult*, max_results: int): int;
 
 /** No documentation provided. */
-protected _intersect_ray(): boolean;
+protected _intersect_ray(from: Vector2, to: Vector2, collision_mask: int, collide_with_bodies: boolean, collide_with_areas: boolean, hit_from_inside: boolean, result: PhysicsServer2DExtensionRayResult*): boolean;
 
 /** No documentation provided. */
-protected _intersect_shape(): int;
+protected _intersect_shape(shape_rid: RID, transform: Transform2D, motion: Vector2, margin: float, collision_mask: int, collide_with_bodies: boolean, collide_with_areas: boolean, result: PhysicsServer2DExtensionShapeResult*, max_results: int): int;
 
 /** No documentation provided. */
-protected _rest_info(): boolean;
+protected _rest_info(shape_rid: RID, transform: Transform2D, motion: Vector2, margin: float, collision_mask: int, collide_with_bodies: boolean, collide_with_areas: boolean, rest_info: PhysicsServer2DExtensionShapeRestInfo*): boolean;
 
 /** No documentation provided. */
-is_body_excluded_from_query(): boolean;
+is_body_excluded_from_query(body: RID): boolean;
 
   connect<T extends SignalsOf<PhysicsDirectSpaceState2DExtension>>(signal: T, method: SignalFunction<PhysicsDirectSpaceState2DExtension[T]>): number;
 

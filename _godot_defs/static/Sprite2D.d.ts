@@ -100,7 +100,7 @@ vframes: int;
 get_rect(): Rect2;
 
 /** Returns [code]true[/code] if the pixel at the given position is opaque, [code]false[/code] otherwise. Also returns [code]false[/code] if the given position is out of bounds or this sprite's [member texture] is [code]null[/code]. [param pos] is in local coordinates. */
-is_pixel_opaque(): boolean;
+is_pixel_opaque(pos: Vector2): boolean;
 
   connect<T extends SignalsOf<Sprite2D>>(signal: T, method: SignalFunction<Sprite2D[T]>): number;
 

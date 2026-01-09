@@ -39,22 +39,22 @@ max_angular_velocity: float;
 clear_chains(): void;
 
 /** Returns the end bone index of the bone chain. */
-get_end_bone(): int;
+get_end_bone(index: int): int;
 
 /** Returns the end bone name of the bone chain. */
-get_end_bone_name(): string;
+get_end_bone_name(index: int): string;
 
 /** Returns the root bone index of the bone chain. */
-get_root_bone(): int;
+get_root_bone(index: int): int;
 
 /** Returns the root bone name of the bone chain. */
-get_root_bone_name(): string;
+get_root_bone_name(index: int): string;
 
 /** Sets the reference pose for angle comparison to the current pose with the influence of constraints removed. This function is automatically triggered when joints change or upon activation. */
 reset(): void;
 
 /** Sets the end bone index of the bone chain. */
-set_end_bone(): void;
+set_end_bone(index: int, bone: int): void;
 
 /**
  * Sets the end bone name of the bone chain.
@@ -62,13 +62,13 @@ set_end_bone(): void;
  * **Note:** End bone must be the root bone or a child of the root bone.
  *
 */
-set_end_bone_name(): void;
+set_end_bone_name(index: int, bone_name: string): void;
 
 /** Sets the root bone index of the bone chain. */
-set_root_bone(): void;
+set_root_bone(index: int, bone: int): void;
 
 /** Sets the root bone name of the bone chain. */
-set_root_bone_name(): void;
+set_root_bone_name(index: int, bone_name: string): void;
 
   connect<T extends SignalsOf<LimitAngularVelocityModifier3D>>(signal: T, method: SignalFunction<LimitAngularVelocityModifier3D[T]>): number;
 

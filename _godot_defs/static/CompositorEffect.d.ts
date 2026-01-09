@@ -99,7 +99,7 @@ needs_normal_roughness: boolean;
 needs_separate_specular: boolean;
 
 /** Implement this function with your custom rendering code. [param effect_callback_type] should always match the effect callback type you've specified in [member effect_callback_type]. [param render_data] provides access to the rendering state, it is only valid during rendering and should not be stored. */
-protected _render_callback(): void;
+protected _render_callback(effect_callback_type: int, render_data: RenderData): void;
 
   connect<T extends SignalsOf<CompositorEffect>>(signal: T, method: SignalFunction<CompositorEffect[T]>): number;
 

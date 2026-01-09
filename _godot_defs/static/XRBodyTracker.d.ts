@@ -26,16 +26,16 @@ has_tracking_data: boolean;
 
 
 /** Returns flags about the validity of the tracking data for the given body joint. */
-get_joint_flags(): int;
+get_joint_flags(joint: int): int;
 
 /** Returns the transform for the given body joint. */
-get_joint_transform(): Transform3D;
+get_joint_transform(joint: int): Transform3D;
 
 /** Sets flags about the validity of the tracking data for the given body joint. */
-set_joint_flags(): void;
+set_joint_flags(joint: int, flags: int): void;
 
 /** Sets the transform for the given body joint. */
-set_joint_transform(): void;
+set_joint_transform(joint: int, transform: Transform3D): void;
 
   connect<T extends SignalsOf<XRBodyTracker>>(signal: T, method: SignalFunction<XRBodyTracker[T]>): number;
 

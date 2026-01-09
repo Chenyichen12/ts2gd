@@ -127,7 +127,7 @@ protected _initialize(): void;
  * **Note:** Accumulated [param delta] may diverge from real world seconds.
  *
 */
-protected _physics_process(): boolean;
+protected _physics_process(delta: float): boolean;
 
 /**
  * Called on each idle frame, prior to rendering, and after physics ticks have been processed. [param delta] is the time between frames in seconds. Equivalent to [method Node._process].
@@ -141,7 +141,7 @@ protected _physics_process(): boolean;
  * **Note:** Frame delta may be post-processed by [member OS.delta_smoothing] if this is enabled for the project.
  *
 */
-protected _process(): boolean;
+protected _process(delta: float): boolean;
 
   connect<T extends SignalsOf<MainLoop>>(signal: T, method: SignalFunction<MainLoop[T]>): number;
 

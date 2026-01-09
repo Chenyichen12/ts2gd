@@ -69,7 +69,7 @@ declare class EditorCommandPalette extends ConfirmationDialog  {
  * - [param shortcut_text]: [String] (Shortcut text of the **Command** if available.)
  *
 */
-add_command(): void;
+add_command(command_name: string, key_name: string, binded_callable: Callable, shortcut_text?: string): void;
 
 /**
  * Removes the custom command from EditorCommandPalette.
@@ -77,7 +77,7 @@ add_command(): void;
  * - [param key_name]: [String] (Name of the key for a particular **Command**.)
  *
 */
-remove_command(): void;
+remove_command(key_name: string): void;
 
   connect<T extends SignalsOf<EditorCommandPalette>>(signal: T, method: SignalFunction<EditorCommandPalette[T]>): number;
 

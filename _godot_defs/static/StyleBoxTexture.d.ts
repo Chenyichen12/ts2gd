@@ -92,22 +92,22 @@ texture_margin_right: float;
 texture_margin_top: float;
 
 /** Returns the expand margin size of the specified [enum Side]. */
-get_expand_margin(): float;
+get_expand_margin(margin: int): float;
 
 /** Returns the margin size of the specified [enum Side]. */
-get_texture_margin(): float;
+get_texture_margin(margin: int): float;
 
 /** Sets the expand margin to [param size] pixels for the specified [enum Side]. */
-set_expand_margin(): void;
+set_expand_margin(margin: int, size: float): void;
 
 /** Sets the expand margin to [param size] pixels for all sides. */
-set_expand_margin_all(): void;
+set_expand_margin_all(size: float): void;
 
 /** Sets the margin to [param size] pixels for the specified [enum Side]. */
-set_texture_margin(): void;
+set_texture_margin(margin: int, size: float): void;
 
 /** Sets the margin to [param size] pixels for all sides. */
-set_texture_margin_all(): void;
+set_texture_margin_all(size: float): void;
 
   connect<T extends SignalsOf<StyleBoxTexture>>(signal: T, method: SignalFunction<StyleBoxTexture[T]>): number;
 

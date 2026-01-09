@@ -63,7 +63,7 @@ as_relative(): PropertyTweener;
  * 
  *
 */
-from(): PropertyTweener;
+from(value: any): PropertyTweener;
 
 /**
  * Makes the [PropertyTweener] use the current property value (i.e. at the time of creating this [PropertyTweener]) as a starting point. This is equivalent of using [method from] with the current value. These two calls will do the same:
@@ -117,16 +117,16 @@ from_current(): PropertyTweener;
  * 
  *
 */
-set_custom_interpolator(): PropertyTweener;
+set_custom_interpolator(interpolator_method: Callable): PropertyTweener;
 
 /** Sets the time in seconds after which the [PropertyTweener] will start interpolating. By default there's no delay. */
-set_delay(): PropertyTweener;
+set_delay(delay: float): PropertyTweener;
 
 /** Sets the type of used easing from [enum Tween.EaseType]. If not set, the default easing is used from the [Tween] that contains this Tweener. */
-set_ease(): PropertyTweener;
+set_ease(ease: int): PropertyTweener;
 
 /** Sets the type of used transition from [enum Tween.TransitionType]. If not set, the default transition is used from the [Tween] that contains this Tweener. */
-set_trans(): PropertyTweener;
+set_trans(trans: int): PropertyTweener;
 
   connect<T extends SignalsOf<PropertyTweener>>(signal: T, method: SignalFunction<PropertyTweener[T]>): number;
 

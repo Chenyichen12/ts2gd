@@ -28,7 +28,7 @@ fallbacks: Font[];
  * **Note:** Do not use this function to draw strings character by character, use [method draw_string] or [TextLine] instead.
  *
 */
-draw_char(): float;
+draw_char(canvas_item: RID, pos: Vector2, char: int, font_size: int, modulate?: Color, oversampling?: float): float;
 
 /**
  * Draw a single Unicode character [param char] outline into a canvas item using the font, at a given position, with [param modulate] color and [param size] outline size. [param pos] specifies the baseline, not the top. To draw from the top, **ascent** must be added to the Y axis. If [param oversampling] is greater than zero, it is used as font oversampling factor, otherwise viewport oversampling settings are used.
@@ -36,7 +36,7 @@ draw_char(): float;
  * **Note:** Do not use this function to draw strings character by character, use [method draw_string] or [TextLine] instead.
  *
 */
-draw_char_outline(): float;
+draw_char_outline(canvas_item: RID, pos: Vector2, char: int, font_size: int, size?: int, modulate?: Color, oversampling?: float): float;
 
 /**
  * Breaks [param text] into lines using rules specified by [param brk_flags] and draws it into a canvas item using the font, at a given position, with [param modulate] color, optionally clipping the width and aligning horizontally. [param pos] specifies the baseline of the first line, not the top. To draw from the top, **ascent** must be added to the Y axis. If [param oversampling] is greater than zero, it is used as font oversampling factor, otherwise viewport oversampling settings are used.
@@ -44,7 +44,7 @@ draw_char_outline(): float;
  * See also [method CanvasItem.draw_multiline_string].
  *
 */
-draw_multiline_string(): void;
+draw_multiline_string(canvas_item: RID, pos: Vector2, text: string, alignment?: int, width?: float, font_size?: int, max_lines?: int, modulate?: Color, brk_flags?: int, justification_flags?: int, direction?: int, orientation?: int, oversampling?: float): void;
 
 /**
  * Breaks [param text] to the lines using rules specified by [param brk_flags] and draws text outline into a canvas item using the font, at a given position, with [param modulate] color and [param size] outline size, optionally clipping the width and aligning horizontally. [param pos] specifies the baseline of the first line, not the top. To draw from the top, **ascent** must be added to the Y axis. If [param oversampling] is greater than zero, it is used as font oversampling factor, otherwise viewport oversampling settings are used.
@@ -52,7 +52,7 @@ draw_multiline_string(): void;
  * See also [method CanvasItem.draw_multiline_string_outline].
  *
 */
-draw_multiline_string_outline(): void;
+draw_multiline_string_outline(canvas_item: RID, pos: Vector2, text: string, alignment?: int, width?: float, font_size?: int, max_lines?: int, size?: int, modulate?: Color, brk_flags?: int, justification_flags?: int, direction?: int, orientation?: int, oversampling?: float): void;
 
 /**
  * Draw [param text] into a canvas item using the font, at a given position, with [param modulate] color, optionally clipping the width and aligning horizontally. [param pos] specifies the baseline, not the top. To draw from the top, **ascent** must be added to the Y axis. If [param oversampling] is greater than zero, it is used as font oversampling factor, otherwise viewport oversampling settings are used.
@@ -60,7 +60,7 @@ draw_multiline_string_outline(): void;
  * See also [method CanvasItem.draw_string].
  *
 */
-draw_string(): void;
+draw_string(canvas_item: RID, pos: Vector2, text: string, alignment?: int, width?: float, font_size?: int, modulate?: Color, justification_flags?: int, direction?: int, orientation?: int, oversampling?: float): void;
 
 /**
  * Draw [param text] outline into a canvas item using the font, at a given position, with [param modulate] color and [param size] outline size, optionally clipping the width and aligning horizontally. [param pos] specifies the baseline, not the top. To draw from the top, **ascent** must be added to the Y axis. If [param oversampling] is greater than zero, it is used as font oversampling factor, otherwise viewport oversampling settings are used.
@@ -68,10 +68,10 @@ draw_string(): void;
  * See also [method CanvasItem.draw_string_outline].
  *
 */
-draw_string_outline(): void;
+draw_string_outline(canvas_item: RID, pos: Vector2, text: string, alignment?: int, width?: float, font_size?: int, size?: int, modulate?: Color, justification_flags?: int, direction?: int, orientation?: int, oversampling?: float): void;
 
 /** Returns [TextServer] RID of the font cache for specific variation. */
-find_variation(): RID;
+find_variation(variation_coordinates: Dictionary<any, any>, face_index?: int, strength?: float, transform?: Transform2D, spacing_top?: int, spacing_bottom?: int, spacing_space?: int, spacing_glyph?: int, baseline_offset?: float): RID;
 
 /**
  * Returns the average font ascent (number of pixels above the baseline).
@@ -79,7 +79,7 @@ find_variation(): RID;
  * **Note:** Real ascent of the string is context-dependent and can be significantly different from the value returned by this function. Use it only as rough estimate (e.g. as the ascent of empty line).
  *
 */
-get_ascent(): float;
+get_ascent(font_size?: int): float;
 
 /**
  * Returns the size of a character. Does not take kerning into account.
@@ -87,7 +87,7 @@ get_ascent(): float;
  * **Note:** Do not use this function to calculate width of the string character by character, use [method get_string_size] or [TextLine] instead. The height returned is the font height (see also [method get_height]) and has no relation to the glyph height.
  *
 */
-get_char_size(): Vector2;
+get_char_size(char: int, font_size: int): Vector2;
 
 /**
  * Returns the average font descent (number of pixels below the baseline).
@@ -95,7 +95,7 @@ get_char_size(): Vector2;
  * **Note:** Real descent of the string is context-dependent and can be significantly different from the value returned by this function. Use it only as rough estimate (e.g. as the descent of empty line).
  *
 */
-get_descent(): float;
+get_descent(font_size?: int): float;
 
 /** Returns number of faces in the TrueType / OpenType collection. */
 get_face_count(): int;
@@ -121,7 +121,7 @@ get_font_weight(): int;
  * **Note:** Real height of the string is context-dependent and can be significantly different from the value returned by this function. Use it only as rough estimate (e.g. as the height of empty line).
  *
 */
-get_height(): float;
+get_height(font_size?: int): float;
 
 /**
  * Returns the size of a bounding box of a string broken into the lines, taking kerning and advance into account.
@@ -129,7 +129,7 @@ get_height(): float;
  * See also [method draw_multiline_string].
  *
 */
-get_multiline_string_size(): Vector2;
+get_multiline_string_size(text: string, alignment?: int, width?: float, font_size?: int, max_lines?: int, brk_flags?: int, justification_flags?: int, direction?: int, orientation?: int): Vector2;
 
 /** Returns a set of OpenType feature tags. More info: [url=https://docs.microsoft.com/en-us/typography/opentype/spec/featuretags]OpenType feature tags[/url]. */
 get_opentype_features(): Dictionary<any, any>;
@@ -141,7 +141,7 @@ get_ot_name_strings(): Dictionary<any, any>;
 get_rids(): RID[];
 
 /** Returns the amount of spacing for the given [param spacing] type. */
-get_spacing(): int;
+get_spacing(spacing: int): int;
 
 /**
  * Returns the size of a bounding box of a single-line string, taking kerning, advance and subpixel positioning into account. See also [method get_multiline_string_size] and [method draw_string].
@@ -165,7 +165,7 @@ get_spacing(): int;
  * **Note:** Real height of the string is context-dependent and can be significantly different from the value returned by [method get_height].
  *
 */
-get_string_size(): Vector2;
+get_string_size(text: string, alignment?: int, width?: float, font_size?: int, justification_flags?: int, direction?: int, orientation?: int): Vector2;
 
 /**
  * Returns a string containing all the characters available in the font.
@@ -208,7 +208,7 @@ get_supported_variation_list(): Dictionary<any, any>;
  * **Note:** Real underline position of the string is context-dependent and can be significantly different from the value returned by this function. Use it only as rough estimate.
  *
 */
-get_underline_position(): float;
+get_underline_position(font_size?: int): float;
 
 /**
  * Returns average thickness of the underline.
@@ -216,19 +216,19 @@ get_underline_position(): float;
  * **Note:** Real underline thickness of the string is context-dependent and can be significantly different from the value returned by this function. Use it only as rough estimate.
  *
 */
-get_underline_thickness(): float;
+get_underline_thickness(font_size?: int): float;
 
 /** Returns [code]true[/code] if a Unicode [param char] is available in the font. */
-has_char(): boolean;
+has_char(char: int): boolean;
 
 /** Returns [code]true[/code] if the font supports the given language (as a [url=https://en.wikipedia.org/wiki/ISO_639-1]ISO 639[/url] code). */
-is_language_supported(): boolean;
+is_language_supported(language: string): boolean;
 
 /** Returns [code]true[/code] if the font supports the given script (as a [url=https://en.wikipedia.org/wiki/ISO_15924]ISO 15924[/url] code). */
-is_script_supported(): boolean;
+is_script_supported(script: string): boolean;
 
 /** Sets LRU cache capacity for [code]draw_*[/code] methods. */
-set_cache_capacity(): void;
+set_cache_capacity(single_line: int, multi_line: int): void;
 
   connect<T extends SignalsOf<Font>>(signal: T, method: SignalFunction<Font[T]>): number;
 

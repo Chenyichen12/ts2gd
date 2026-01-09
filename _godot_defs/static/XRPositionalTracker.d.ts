@@ -29,22 +29,22 @@ hand: int;
 profile: string;
 
 /** Returns an input for this tracker. It can return a boolean, float or [Vector2] value depending on whether the input is a button, trigger or thumbstick/thumbpad. */
-get_input(): any;
+get_input(name: StringName): any;
 
 /** Returns the current [XRPose] state object for the bound [param name] pose. */
-get_pose(): XRPose;
+get_pose(name: StringName): XRPose;
 
 /** Returns [code]true[/code] if the tracker is available and is currently tracking the bound [param name] pose. */
-has_pose(): boolean;
+has_pose(name: StringName): boolean;
 
 /** Marks this pose as invalid, we don't clear the last reported state but it allows users to decide if trackers need to be hidden if we lose tracking or just remain at their last known position. */
-invalidate_pose(): void;
+invalidate_pose(name: StringName): void;
 
 /** Changes the value for the given input. This method is called by an [XRInterface] implementation and should not be used directly. */
-set_input(): void;
+set_input(name: StringName, value: any): void;
 
 /** Sets the transform, linear velocity, angular velocity and tracking confidence for the given pose. This method is called by an [XRInterface] implementation and should not be used directly. */
-set_pose(): void;
+set_pose(name: StringName, transform: Transform3D, linear_velocity: Vector3, angular_velocity: Vector3, tracking_confidence: int): void;
 
   connect<T extends SignalsOf<XRPositionalTracker>>(signal: T, method: SignalFunction<XRPositionalTracker[T]>): number;
 

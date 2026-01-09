@@ -28,10 +28,10 @@ is_public_only(): boolean;
  * **Note:** [param path] should be a "*.pub" file if [param public_only] is `true`, a "*.key" file otherwise.
  *
 */
-load(): int;
+load(path: string, public_only?: boolean): int;
 
 /** Loads a key from the given [param string_key]. If [param public_only] is [code]true[/code], only the public key will be loaded. */
-load_from_string(): int;
+load_from_string(string_key: string, public_only?: boolean): int;
 
 /**
  * Saves a key to the given [param path]. If [param public_only] is `true`, only the public key will be saved.
@@ -39,10 +39,10 @@ load_from_string(): int;
  * **Note:** [param path] should be a "*.pub" file if [param public_only] is `true`, a "*.key" file otherwise.
  *
 */
-save(): int;
+save(path: string, public_only?: boolean): int;
 
 /** Returns a string containing the key in PEM format. If [param public_only] is [code]true[/code], only the public key will be included. */
-save_to_string(): string;
+save_to_string(public_only?: boolean): string;
 
   connect<T extends SignalsOf<CryptoKey>>(signal: T, method: SignalFunction<CryptoKey[T]>): number;
 

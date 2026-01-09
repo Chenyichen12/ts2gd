@@ -16,7 +16,7 @@ declare class PhysicsBody2D extends CollisionObject2D  {
 
 
 /** Adds a body to the list of bodies that this body can't collide with. */
-add_collision_exception_with(): void;
+add_collision_exception_with(body: Node): void;
 
 /** Returns an array of nodes that were added as collision exceptions for this body. */
 get_collision_exceptions(): PhysicsBody2D[];
@@ -36,10 +36,10 @@ get_gravity(): Vector2;
  * If [param recovery_as_collision] is `true`, any depenetration from the recovery phase is also reported as a collision; this is used e.g. by [CharacterBody2D] for improving floor detection during floor snapping.
  *
 */
-move_and_collide(): KinematicCollision2D;
+move_and_collide(motion: Vector2, test_only?: boolean, safe_margin?: float, recovery_as_collision?: boolean): KinematicCollision2D;
 
 /** Removes a body from the list of bodies that this body can't collide with. */
-remove_collision_exception_with(): void;
+remove_collision_exception_with(body: Node): void;
 
 /**
  * Checks for collisions without moving the body. In order to be frame rate independent in [method Node._physics_process] or [method Node._process], [param motion] should be computed using `delta`.
@@ -53,7 +53,7 @@ remove_collision_exception_with(): void;
  * If [param recovery_as_collision] is `true`, any depenetration from the recovery phase is also reported as a collision; this is useful for checking whether the body would **touch** any other bodies.
  *
 */
-test_move(): boolean;
+test_move(from: Transform2D, motion: Vector2, collision?: KinematicCollision2D, safe_margin?: float, recovery_as_collision?: boolean): boolean;
 
   connect<T extends SignalsOf<PhysicsBody2D>>(signal: T, method: SignalFunction<PhysicsBody2D[T]>): number;
 

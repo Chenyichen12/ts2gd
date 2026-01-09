@@ -62,10 +62,10 @@ hit_from_inside: boolean;
 target_position: Vector3;
 
 /** Adds a collision exception so the ray does not report collisions with the specified [param node]. */
-add_exception(): void;
+add_exception(node: CollisionObject3D): void;
 
 /** Adds a collision exception so the ray does not report collisions with the specified [RID]. */
-add_exception_rid(): void;
+add_exception_rid(rid: RID): void;
 
 /** Removes all collision exceptions for this ray. */
 clear_exceptions(): void;
@@ -118,7 +118,7 @@ get_collider_shape(): int;
 get_collision_face_index(): int;
 
 /** Returns whether or not the specified layer of the [member collision_mask] is enabled, given a [param layer_number] between 1 and 32. */
-get_collision_mask_value(): boolean;
+get_collision_mask_value(layer_number: int): boolean;
 
 /**
  * Returns the normal of the intersecting object's shape at the collision point, or `Vector3(0, 0, 0)` if the ray starts inside the shape and [member hit_from_inside] is `true`.
@@ -140,13 +140,13 @@ get_collision_point(): Vector3;
 is_colliding(): boolean;
 
 /** Removes a collision exception so the ray can report collisions with the specified [param node]. */
-remove_exception(): void;
+remove_exception(node: CollisionObject3D): void;
 
 /** Removes a collision exception so the ray can report collisions with the specified [RID]. */
-remove_exception_rid(): void;
+remove_exception_rid(rid: RID): void;
 
 /** Based on [param value], enables or disables the specified layer in the [member collision_mask], given a [param layer_number] between 1 and 32. */
-set_collision_mask_value(): void;
+set_collision_mask_value(layer_number: int, value: boolean): void;
 
   connect<T extends SignalsOf<RayCast3D>>(signal: T, method: SignalFunction<RayCast3D[T]>): number;
 

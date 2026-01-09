@@ -20,13 +20,13 @@ declare class TextServerManagerClass extends Object  {
 
 
 /** Registers a [TextServer] interface. */
-add_interface(): void;
+add_interface(interface: TextServer): void;
 
 /** Finds an interface by its [param name]. */
-find_interface(): TextServer;
+find_interface(name: string): TextServer;
 
 /** Returns the interface registered at a given index. */
-get_interface(): TextServer;
+get_interface(idx: int): TextServer;
 
 /** Returns the number of interfaces currently registered. */
 get_interface_count(): int;
@@ -38,10 +38,10 @@ get_interfaces(): Dictionary[];
 get_primary_interface(): TextServer;
 
 /** Removes an interface. All fonts and shaped text caches should be freed before removing an interface. */
-remove_interface(): void;
+remove_interface(interface: TextServer): void;
 
 /** Sets the primary [TextServer] interface. */
-set_primary_interface(): void;
+set_primary_interface(index: TextServer): void;
 
   connect<T extends SignalsOf<TextServerManagerClass>>(signal: T, method: SignalFunction<TextServerManagerClass[T]>): number;
 

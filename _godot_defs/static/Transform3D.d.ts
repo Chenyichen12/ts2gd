@@ -42,7 +42,7 @@ affine_inverse(): Transform3D;
  * The [param weight] should be between `0.0` and `1.0` (inclusive). Values outside this range are allowed and can be used to perform **extrapolation** instead.
  *
 */
-interpolate_with(): Transform3D;
+interpolate_with(xform: Transform3D, weight: float): Transform3D;
 
 /**
  * Returns the [url=https://en.wikipedia.org/wiki/Invertible_matrix]inverted version of this transform[/url]. See also [method Basis.inverse].
@@ -53,7 +53,7 @@ interpolate_with(): Transform3D;
 inverse(): Transform3D;
 
 /** Returns [code]true[/code] if this transform and [param xform] are approximately equal, by running [method @GlobalScope.is_equal_approx] on each component. */
-is_equal_approx(): boolean;
+is_equal_approx(xform: Transform3D): boolean;
 
 /** Returns [code]true[/code] if this transform is finite, by calling [method @GlobalScope.is_finite] on each component. */
 is_finite(): boolean;
@@ -66,7 +66,7 @@ is_finite(): boolean;
  * If [param use_model_front] is `true`, the +Z axis (asset front) is treated as forward (implies +X is left) and points toward the [param target] position. By default, the -Z axis (camera forward) is treated as forward (implies +X is right).
  *
 */
-looking_at(): Transform3D;
+looking_at(target: Vector3, up?: Vector3, use_model_front?: boolean): Transform3D;
 
 /** Returns a copy of this transform with its [member basis] orthonormalized. An orthonormal basis is both [i]orthogonal[/i] (the axes are perpendicular to each other) and [i]normalized[/i] (the axes have a length of [code]1.0[/code]), which also means it can only represent a rotation. See also [method Basis.orthonormalized]. */
 orthonormalized(): Transform3D;
@@ -81,7 +81,7 @@ orthonormalized(): Transform3D;
  * This can be seen as transforming with respect to the global/parent frame.
  *
 */
-rotated(): Transform3D;
+rotated(axis: Vector3, angle: float): Transform3D;
 
 /**
  * Returns a copy of this transform rotated around the given [param axis] by the given [param angle] (in radians).
@@ -93,7 +93,7 @@ rotated(): Transform3D;
  * This can be seen as transforming with respect to the local frame.
  *
 */
-rotated_local(): Transform3D;
+rotated_local(axis: Vector3, angle: float): Transform3D;
 
 /**
  * Returns a copy of this transform scaled by the given [param scale] factor.
@@ -103,7 +103,7 @@ rotated_local(): Transform3D;
  * This can be seen as transforming with respect to the global/parent frame.
  *
 */
-scaled(): Transform3D;
+scaled(scale: Vector3): Transform3D;
 
 /**
  * Returns a copy of this transform scaled by the given [param scale] factor.
@@ -113,7 +113,7 @@ scaled(): Transform3D;
  * This can be seen as transforming with respect to the local frame.
  *
 */
-scaled_local(): Transform3D;
+scaled_local(scale: Vector3): Transform3D;
 
 /**
  * Returns a copy of this transform translated by the given [param offset].
@@ -123,7 +123,7 @@ scaled_local(): Transform3D;
  * This can be seen as transforming with respect to the global/parent frame.
  *
 */
-translated(): Transform3D;
+translated(offset: Vector3): Transform3D;
 
 /**
  * Returns a copy of this transform translated by the given [param offset].
@@ -133,7 +133,7 @@ translated(): Transform3D;
  * This can be seen as transforming with respect to the local frame.
  *
 */
-translated_local(): Transform3D;
+translated_local(offset: Vector3): Transform3D;
 
   connect<T extends SignalsOf<Transform3D>>(signal: T, method: SignalFunction<Transform3D[T]>): number;
 

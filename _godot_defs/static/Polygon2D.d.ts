@@ -60,28 +60,28 @@ uv: PackedVector2Array;
 vertex_colors: PackedColorArray;
 
 /** Adds a bone with the specified [param path] and [param weights]. */
-add_bone(): void;
+add_bone(path: NodePathType, weights: PackedFloat32Array): void;
 
 /** Removes all bones from this [Polygon2D]. */
 clear_bones(): void;
 
 /** Removes the specified bone from this [Polygon2D]. */
-erase_bone(): void;
+erase_bone(index: int): void;
 
 /** Returns the number of bones in this [Polygon2D]. */
 get_bone_count(): int;
 
 /** Returns the path to the node associated with the specified bone. */
-get_bone_path(): NodePathType;
+get_bone_path(index: int): NodePathType;
 
 /** Returns the weight values of the specified bone. */
-get_bone_weights(): PackedFloat32Array;
+get_bone_weights(index: int): PackedFloat32Array;
 
 /** Sets the path to the node associated with the specified bone. */
-set_bone_path(): void;
+set_bone_path(index: int, path: NodePathType): void;
 
 /** Sets the weight values for the specified bone. */
-set_bone_weights(): void;
+set_bone_weights(index: int, weights: PackedFloat32Array): void;
 
   connect<T extends SignalsOf<Polygon2D>>(signal: T, method: SignalFunction<Polygon2D[T]>): number;
 

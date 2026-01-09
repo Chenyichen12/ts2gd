@@ -52,7 +52,7 @@ default_font_size: int;
  * **Note:** Empty types are not saved with the theme. This method only exists to perform in-memory changes to the resource. Use available `set_*` methods to add theme items.
  *
 */
-add_type(): void;
+add_type(theme_type: StringName): void;
 
 /** Removes all the theme properties defined on the theme resource. */
 clear(): void;
@@ -63,7 +63,7 @@ clear(): void;
  * Fails if it doesn't exist. Use [method has_color] to check for existence.
  *
 */
-clear_color(): void;
+clear_color(name: StringName, theme_type: StringName): void;
 
 /**
  * Removes the constant property defined by [param name] and [param theme_type], if it exists.
@@ -71,7 +71,7 @@ clear_color(): void;
  * Fails if it doesn't exist. Use [method has_constant] to check for existence.
  *
 */
-clear_constant(): void;
+clear_constant(name: StringName, theme_type: StringName): void;
 
 /**
  * Removes the [Font] property defined by [param name] and [param theme_type], if it exists.
@@ -79,7 +79,7 @@ clear_constant(): void;
  * Fails if it doesn't exist. Use [method has_font] to check for existence.
  *
 */
-clear_font(): void;
+clear_font(name: StringName, theme_type: StringName): void;
 
 /**
  * Removes the font size property defined by [param name] and [param theme_type], if it exists.
@@ -87,7 +87,7 @@ clear_font(): void;
  * Fails if it doesn't exist. Use [method has_font_size] to check for existence.
  *
 */
-clear_font_size(): void;
+clear_font_size(name: StringName, theme_type: StringName): void;
 
 /**
  * Removes the icon property defined by [param name] and [param theme_type], if it exists.
@@ -95,7 +95,7 @@ clear_font_size(): void;
  * Fails if it doesn't exist. Use [method has_icon] to check for existence.
  *
 */
-clear_icon(): void;
+clear_icon(name: StringName, theme_type: StringName): void;
 
 /**
  * Removes the [StyleBox] property defined by [param name] and [param theme_type], if it exists.
@@ -103,7 +103,7 @@ clear_icon(): void;
  * Fails if it doesn't exist. Use [method has_stylebox] to check for existence.
  *
 */
-clear_stylebox(): void;
+clear_stylebox(name: StringName, theme_type: StringName): void;
 
 /**
  * Removes the theme property of [param data_type] defined by [param name] and [param theme_type], if it exists.
@@ -113,10 +113,10 @@ clear_stylebox(): void;
  * **Note:** This method is analogous to calling the corresponding data type specific method, but can be used for more generalized logic.
  *
 */
-clear_theme_item(): void;
+clear_theme_item(data_type: int, name: StringName, theme_type: StringName): void;
 
 /** Unmarks [param theme_type] as being a variation of another theme type. See [method set_type_variation]. */
-clear_type_variation(): void;
+clear_type_variation(theme_type: StringName): void;
 
 /**
  * Returns the [Color] property defined by [param name] and [param theme_type], if it exists.
@@ -124,10 +124,10 @@ clear_type_variation(): void;
  * Returns the default color value if the property doesn't exist. Use [method has_color] to check for existence.
  *
 */
-get_color(): Color;
+get_color(name: StringName, theme_type: StringName): Color;
 
 /** Returns a list of names for [Color] properties defined with [param theme_type]. Use [method get_color_type_list] to get a list of possible theme type names. */
-get_color_list(): PackedStringArray;
+get_color_list(theme_type: string): PackedStringArray;
 
 /** Returns a list of all unique theme type names for [Color] properties. Use [method get_type_list] to get a list of all unique theme types. */
 get_color_type_list(): PackedStringArray;
@@ -138,10 +138,10 @@ get_color_type_list(): PackedStringArray;
  * Returns `0` if the property doesn't exist. Use [method has_constant] to check for existence.
  *
 */
-get_constant(): int;
+get_constant(name: StringName, theme_type: StringName): int;
 
 /** Returns a list of names for constant properties defined with [param theme_type]. Use [method get_constant_type_list] to get a list of possible theme type names. */
-get_constant_list(): PackedStringArray;
+get_constant_list(theme_type: string): PackedStringArray;
 
 /** Returns a list of all unique theme type names for constant properties. Use [method get_type_list] to get a list of all unique theme types. */
 get_constant_type_list(): PackedStringArray;
@@ -154,10 +154,10 @@ get_constant_type_list(): PackedStringArray;
  * Returns the engine fallback font value, if neither exist (see [member ThemeDB.fallback_font]).
  *
 */
-get_font(): Font;
+get_font(name: StringName, theme_type: StringName): Font;
 
 /** Returns a list of names for [Font] properties defined with [param theme_type]. Use [method get_font_type_list] to get a list of possible theme type names. */
-get_font_list(): PackedStringArray;
+get_font_list(theme_type: string): PackedStringArray;
 
 /**
  * Returns the font size property defined by [param name] and [param theme_type], if it exists.
@@ -167,10 +167,10 @@ get_font_list(): PackedStringArray;
  * Returns the engine fallback font size value, if neither exist (see [member ThemeDB.fallback_font_size]).
  *
 */
-get_font_size(): int;
+get_font_size(name: StringName, theme_type: StringName): int;
 
 /** Returns a list of names for font size properties defined with [param theme_type]. Use [method get_font_size_type_list] to get a list of possible theme type names. */
-get_font_size_list(): PackedStringArray;
+get_font_size_list(theme_type: string): PackedStringArray;
 
 /** Returns a list of all unique theme type names for font size properties. Use [method get_type_list] to get a list of all unique theme types. */
 get_font_size_type_list(): PackedStringArray;
@@ -184,10 +184,10 @@ get_font_type_list(): PackedStringArray;
  * Returns the engine fallback icon value if the property doesn't exist (see [member ThemeDB.fallback_icon]). Use [method has_icon] to check for existence.
  *
 */
-get_icon(): Texture2D;
+get_icon(name: StringName, theme_type: StringName): Texture2D;
 
 /** Returns a list of names for icon properties defined with [param theme_type]. Use [method get_icon_type_list] to get a list of possible theme type names. */
-get_icon_list(): PackedStringArray;
+get_icon_list(theme_type: string): PackedStringArray;
 
 /** Returns a list of all unique theme type names for icon properties. Use [method get_type_list] to get a list of all unique theme types. */
 get_icon_type_list(): PackedStringArray;
@@ -198,10 +198,10 @@ get_icon_type_list(): PackedStringArray;
  * Returns the engine fallback stylebox value if the property doesn't exist (see [member ThemeDB.fallback_stylebox]). Use [method has_stylebox] to check for existence.
  *
 */
-get_stylebox(): StyleBox;
+get_stylebox(name: StringName, theme_type: StringName): StyleBox;
 
 /** Returns a list of names for [StyleBox] properties defined with [param theme_type]. Use [method get_stylebox_type_list] to get a list of possible theme type names. */
-get_stylebox_list(): PackedStringArray;
+get_stylebox_list(theme_type: string): PackedStringArray;
 
 /** Returns a list of all unique theme type names for [StyleBox] properties. Use [method get_type_list] to get a list of all unique theme types. */
 get_stylebox_type_list(): PackedStringArray;
@@ -214,7 +214,7 @@ get_stylebox_type_list(): PackedStringArray;
  * **Note:** This method is analogous to calling the corresponding data type specific method, but can be used for more generalized logic.
  *
 */
-get_theme_item(): any;
+get_theme_item(data_type: int, name: StringName, theme_type: StringName): any;
 
 /**
  * Returns a list of names for properties of [param data_type] defined with [param theme_type]. Use [method get_theme_item_type_list] to get a list of possible theme type names.
@@ -222,7 +222,7 @@ get_theme_item(): any;
  * **Note:** This method is analogous to calling the corresponding data type specific method, but can be used for more generalized logic.
  *
 */
-get_theme_item_list(): PackedStringArray;
+get_theme_item_list(data_type: int, theme_type: string): PackedStringArray;
 
 /**
  * Returns a list of all unique theme type names for [param data_type] properties. Use [method get_type_list] to get a list of all unique theme types.
@@ -230,16 +230,16 @@ get_theme_item_list(): PackedStringArray;
  * **Note:** This method is analogous to calling the corresponding data type specific method, but can be used for more generalized logic.
  *
 */
-get_theme_item_type_list(): PackedStringArray;
+get_theme_item_type_list(data_type: int): PackedStringArray;
 
 /** Returns a list of all unique theme type names. Use the appropriate [code]get_*_type_list[/code] method to get a list of unique theme types for a single data type. */
 get_type_list(): PackedStringArray;
 
 /** Returns the name of the base theme type if [param theme_type] is a valid variation type. Returns an empty string otherwise. */
-get_type_variation_base(): StringName;
+get_type_variation_base(theme_type: StringName): StringName;
 
 /** Returns a list of all type variations for the given [param base_type]. */
-get_type_variation_list(): PackedStringArray;
+get_type_variation_list(base_type: StringName): PackedStringArray;
 
 /**
  * Returns `true` if the [Color] property defined by [param name] and [param theme_type] exists.
@@ -247,7 +247,7 @@ get_type_variation_list(): PackedStringArray;
  * Returns `false` if it doesn't exist. Use [method set_color] to define it.
  *
 */
-has_color(): boolean;
+has_color(name: StringName, theme_type: StringName): boolean;
 
 /**
  * Returns `true` if the constant property defined by [param name] and [param theme_type] exists.
@@ -255,7 +255,7 @@ has_color(): boolean;
  * Returns `false` if it doesn't exist. Use [method set_constant] to define it.
  *
 */
-has_constant(): boolean;
+has_constant(name: StringName, theme_type: StringName): boolean;
 
 /**
  * Returns `true` if [member default_base_scale] has a valid value.
@@ -287,7 +287,7 @@ has_default_font_size(): boolean;
  * Returns `false` if neither exist. Use [method set_font] to define the property.
  *
 */
-has_font(): boolean;
+has_font(name: StringName, theme_type: StringName): boolean;
 
 /**
  * Returns `true` if the font size property defined by [param name] and [param theme_type] exists, or if the default theme font size is set up (see [method has_default_font_size]).
@@ -295,7 +295,7 @@ has_font(): boolean;
  * Returns `false` if neither exist. Use [method set_font_size] to define the property.
  *
 */
-has_font_size(): boolean;
+has_font_size(name: StringName, theme_type: StringName): boolean;
 
 /**
  * Returns `true` if the icon property defined by [param name] and [param theme_type] exists.
@@ -303,7 +303,7 @@ has_font_size(): boolean;
  * Returns `false` if it doesn't exist. Use [method set_icon] to define it.
  *
 */
-has_icon(): boolean;
+has_icon(name: StringName, theme_type: StringName): boolean;
 
 /**
  * Returns `true` if the [StyleBox] property defined by [param name] and [param theme_type] exists.
@@ -311,7 +311,7 @@ has_icon(): boolean;
  * Returns `false` if it doesn't exist. Use [method set_stylebox] to define it.
  *
 */
-has_stylebox(): boolean;
+has_stylebox(name: StringName, theme_type: StringName): boolean;
 
 /**
  * Returns `true` if the theme property of [param data_type] defined by [param name] and [param theme_type] exists.
@@ -321,10 +321,10 @@ has_stylebox(): boolean;
  * **Note:** This method is analogous to calling the corresponding data type specific method, but can be used for more generalized logic.
  *
 */
-has_theme_item(): boolean;
+has_theme_item(data_type: int, name: StringName, theme_type: StringName): boolean;
 
 /** Returns [code]true[/code] if [param theme_type] is marked as a variation of [param base_type]. */
-is_type_variation(): boolean;
+is_type_variation(theme_type: StringName, base_type: StringName): boolean;
 
 /**
  * Adds missing and overrides existing definitions with values from the [param other] theme resource.
@@ -332,10 +332,10 @@ is_type_variation(): boolean;
  * **Note:** This modifies the current theme. If you want to merge two themes together without modifying either one, create a new empty theme and merge the other two into it one after another.
  *
 */
-merge_with(): void;
+merge_with(other: Theme): void;
 
 /** Removes the theme type, gracefully discarding defined theme items. If the type is a variation, this information is also erased. If the type is a base for type variations, those variations lose their base. */
-remove_type(): void;
+remove_type(theme_type: StringName): void;
 
 /**
  * Renames the [Color] property defined by [param old_name] and [param theme_type] to [param name], if it exists.
@@ -343,7 +343,7 @@ remove_type(): void;
  * Fails if it doesn't exist, or if a similar property with the new name already exists. Use [method has_color] to check for existence, and [method clear_color] to remove the existing property.
  *
 */
-rename_color(): void;
+rename_color(old_name: StringName, name: StringName, theme_type: StringName): void;
 
 /**
  * Renames the constant property defined by [param old_name] and [param theme_type] to [param name], if it exists.
@@ -351,7 +351,7 @@ rename_color(): void;
  * Fails if it doesn't exist, or if a similar property with the new name already exists. Use [method has_constant] to check for existence, and [method clear_constant] to remove the existing property.
  *
 */
-rename_constant(): void;
+rename_constant(old_name: StringName, name: StringName, theme_type: StringName): void;
 
 /**
  * Renames the [Font] property defined by [param old_name] and [param theme_type] to [param name], if it exists.
@@ -359,7 +359,7 @@ rename_constant(): void;
  * Fails if it doesn't exist, or if a similar property with the new name already exists. Use [method has_font] to check for existence, and [method clear_font] to remove the existing property.
  *
 */
-rename_font(): void;
+rename_font(old_name: StringName, name: StringName, theme_type: StringName): void;
 
 /**
  * Renames the font size property defined by [param old_name] and [param theme_type] to [param name], if it exists.
@@ -367,7 +367,7 @@ rename_font(): void;
  * Fails if it doesn't exist, or if a similar property with the new name already exists. Use [method has_font_size] to check for existence, and [method clear_font_size] to remove the existing property.
  *
 */
-rename_font_size(): void;
+rename_font_size(old_name: StringName, name: StringName, theme_type: StringName): void;
 
 /**
  * Renames the icon property defined by [param old_name] and [param theme_type] to [param name], if it exists.
@@ -375,7 +375,7 @@ rename_font_size(): void;
  * Fails if it doesn't exist, or if a similar property with the new name already exists. Use [method has_icon] to check for existence, and [method clear_icon] to remove the existing property.
  *
 */
-rename_icon(): void;
+rename_icon(old_name: StringName, name: StringName, theme_type: StringName): void;
 
 /**
  * Renames the [StyleBox] property defined by [param old_name] and [param theme_type] to [param name], if it exists.
@@ -383,7 +383,7 @@ rename_icon(): void;
  * Fails if it doesn't exist, or if a similar property with the new name already exists. Use [method has_stylebox] to check for existence, and [method clear_stylebox] to remove the existing property.
  *
 */
-rename_stylebox(): void;
+rename_stylebox(old_name: StringName, name: StringName, theme_type: StringName): void;
 
 /**
  * Renames the theme property of [param data_type] defined by [param old_name] and [param theme_type] to [param name], if it exists.
@@ -393,7 +393,7 @@ rename_stylebox(): void;
  * **Note:** This method is analogous to calling the corresponding data type specific method, but can be used for more generalized logic.
  *
 */
-rename_theme_item(): void;
+rename_theme_item(data_type: int, old_name: StringName, name: StringName, theme_type: StringName): void;
 
 /**
  * Renames the theme type [param old_theme_type] to [param theme_type], if the old type exists and the new one doesn't exist.
@@ -401,25 +401,25 @@ rename_theme_item(): void;
  * **Note:** Renaming a theme type to an empty name or a variation to a type associated with a built-in class removes type variation connections in a way that cannot be undone by reversing the rename alone.
  *
 */
-rename_type(): void;
+rename_type(old_theme_type: StringName, theme_type: StringName): void;
 
 /** Creates or changes the value of the [Color] property defined by [param name] and [param theme_type]. Use [method clear_color] to remove the property. */
-set_color(): void;
+set_color(name: StringName, theme_type: StringName, color: Color): void;
 
 /** Creates or changes the value of the constant property defined by [param name] and [param theme_type]. Use [method clear_constant] to remove the property. */
-set_constant(): void;
+set_constant(name: StringName, theme_type: StringName, constant: int): void;
 
 /** Creates or changes the value of the [Font] property defined by [param name] and [param theme_type]. Use [method clear_font] to remove the property. */
-set_font(): void;
+set_font(name: StringName, theme_type: StringName, font: Font): void;
 
 /** Creates or changes the value of the font size property defined by [param name] and [param theme_type]. Use [method clear_font_size] to remove the property. */
-set_font_size(): void;
+set_font_size(name: StringName, theme_type: StringName, font_size: int): void;
 
 /** Creates or changes the value of the icon property defined by [param name] and [param theme_type]. Use [method clear_icon] to remove the property. */
-set_icon(): void;
+set_icon(name: StringName, theme_type: StringName, texture: Texture2D): void;
 
 /** Creates or changes the value of the [StyleBox] property defined by [param name] and [param theme_type]. Use [method clear_stylebox] to remove the property. */
-set_stylebox(): void;
+set_stylebox(name: StringName, theme_type: StringName, texture: StyleBox): void;
 
 /**
  * Creates or changes the value of the theme property of [param data_type] defined by [param name] and [param theme_type]. Use [method clear_theme_item] to remove the property.
@@ -429,7 +429,7 @@ set_stylebox(): void;
  * **Note:** This method is analogous to calling the corresponding data type specific method, but can be used for more generalized logic.
  *
 */
-set_theme_item(): void;
+set_theme_item(data_type: int, name: StringName, theme_type: StringName, value: any): void;
 
 /**
  * Marks [param theme_type] as a variation of [param base_type].
@@ -441,7 +441,7 @@ set_theme_item(): void;
  * **Note:** Suggestions only show up if this theme resource is set as the project default theme. See [member ProjectSettings.gui/theme/custom].
  *
 */
-set_type_variation(): void;
+set_type_variation(theme_type: StringName, base_type: StringName): void;
 
   connect<T extends SignalsOf<Theme>>(signal: T, method: SignalFunction<Theme[T]>): number;
 

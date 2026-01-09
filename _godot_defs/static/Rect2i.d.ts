@@ -62,7 +62,7 @@ size: Vector2i;
 abs(): Rect2i;
 
 /** Returns [code]true[/code] if this [Rect2i] completely encloses another one. */
-encloses(): boolean;
+encloses(b: Rect2i): boolean;
 
 /**
  * Returns a copy of this rectangle expanded to align the edges with the given [param to] point, if necessary.
@@ -83,7 +83,7 @@ encloses(): boolean;
  * 
  *
 */
-expand(): Rect2i;
+expand(to: Vector2i): Rect2i;
 
 /** Returns the rectangle's area. This is equivalent to [code]size.x * size.y[/code]. See also [method has_area]. */
 get_area(): int;
@@ -113,13 +113,13 @@ get_center(): Vector2i;
  * 
  *
 */
-grow(): Rect2i;
+grow(amount: int): Rect2i;
 
 /** Returns a copy of this rectangle with its [param left], [param top], [param right], and [param bottom] sides extended by the given amounts. Negative values shrink the sides, instead. See also [method grow] and [method grow_side]. */
-grow_individual(): Rect2i;
+grow_individual(left: int, top: int, right: int, bottom: int): Rect2i;
 
 /** Returns a copy of this rectangle with its [param side] extended by the given [param amount] (see [enum Side] constants). A negative [param amount] shrinks the rectangle, instead. See also [method grow] and [method grow_individual]. */
-grow_side(): Rect2i;
+grow_side(side: int, amount: int): Rect2i;
 
 /** Returns [code]true[/code] if this rectangle has positive width and height. See also [method get_area]. */
 has_area(): boolean;
@@ -130,7 +130,7 @@ has_area(): boolean;
  * **Note:** This method is not reliable for [Rect2i] with a **negative** [member size]. Use [method abs] first to get a valid rectangle.
  *
 */
-has_point(): boolean;
+has_point(point: Vector2i): boolean;
 
 /**
  * Returns the intersection between this rectangle and [param b]. If the rectangles do not intersect, returns an empty [Rect2i].
@@ -153,13 +153,13 @@ has_point(): boolean;
  * **Note:** If you only need to know whether two rectangles are overlapping, use [method intersects], instead.
  *
 */
-intersection(): Rect2i;
+intersection(b: Rect2i): Rect2i;
 
 /** Returns [code]true[/code] if this rectangle overlaps with the [param b] rectangle. The edges of both rectangles are excluded. */
-intersects(): boolean;
+intersects(b: Rect2i): boolean;
 
 /** Returns a [Rect2i] that encloses both this rectangle and [param b] around the edges. See also [method encloses]. */
-merge(): Rect2i;
+merge(b: Rect2i): Rect2i;
 
   connect<T extends SignalsOf<Rect2i>>(signal: T, method: SignalFunction<Rect2i[T]>): number;
 

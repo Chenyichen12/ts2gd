@@ -87,7 +87,7 @@ symbol_tooltip_on_hover: boolean;
 
 
 /** Override this method to define how the selected entry should be inserted. If [param replace] is [code]true[/code], any existing text should be replaced. */
-protected _confirm_code_completion(): void;
+protected _confirm_code_completion(replace: boolean): void;
 
 /**
  * Override this method to define what items in [param candidates] should be displayed.
@@ -95,10 +95,10 @@ protected _confirm_code_completion(): void;
  * Both [param candidates] and the return is an [Array] of [Dictionary], see [method get_code_completion_option] for [Dictionary] content.
  *
 */
-protected _filter_code_completion_candidates(): Dictionary[];
+protected _filter_code_completion_candidates(candidates: Dictionary[]): Dictionary[];
 
 /** Override this method to define what happens when the user requests code completion. If [param force] is [code]true[/code], any checks should be bypassed. */
-protected _request_code_completion(): void;
+protected _request_code_completion(force: boolean): void;
 
 /**
  * Adds a brace pair.
@@ -106,7 +106,7 @@ protected _request_code_completion(): void;
  * Both the start and end keys must be symbols. Only the start key has to be unique.
  *
 */
-add_auto_brace_completion_pair(): void;
+add_auto_brace_completion_pair(start_key: string, end_key: string): void;
 
 /**
  * Submits an item to the queue of potential candidates for the autocomplete menu. Call [method update_code_completion_options] to update the list.
@@ -116,7 +116,7 @@ add_auto_brace_completion_pair(): void;
  * **Note:** This list will replace all current candidates.
  *
 */
-add_code_completion_option(): void;
+add_code_completion_option(type: int, display_text: string, insert_text: string, text_color?: Color, icon?: Resource, value?: any, location?: int): void;
 
 /**
  * Adds a comment delimiter from [param start_key] to [param end_key]. Both keys should be symbols, and [param start_key] must not be shared with other delimiters.
@@ -124,7 +124,7 @@ add_code_completion_option(): void;
  * If [param line_only] is `true` or [param end_key] is an empty [String], the region does not carry over to the next line.
  *
 */
-add_comment_delimiter(): void;
+add_comment_delimiter(start_key: string, end_key: string, line_only?: boolean): void;
 
 /**
  * Defines a string delimiter from [param start_key] to [param end_key]. Both keys should be symbols, and [param start_key] must not be shared with other delimiters.
@@ -132,10 +132,10 @@ add_comment_delimiter(): void;
  * If [param line_only] is `true` or [param end_key] is an empty [String], the region does not carry over to the next line.
  *
 */
-add_string_delimiter(): void;
+add_string_delimiter(start_key: string, end_key: string, line_only?: boolean): void;
 
 /** Returns [code]true[/code] if the given line is foldable. A line is foldable if it is the start of a valid code region (see [method get_code_region_start_tag]), if it is the start of a comment or string block, or if the next non-empty line is more indented (see [method TextEdit.get_indent_level]). */
-can_fold_line(): boolean;
+can_fold_line(line: int): boolean;
 
 /** Cancels the autocomplete menu. */
 cancel_code_completion(): void;
@@ -156,7 +156,7 @@ clear_executing_lines(): void;
 clear_string_delimiters(): void;
 
 /** Inserts the selected entry into the text. If [param replace] is [code]true[/code], any existing text is replaced rather than merged. */
-confirm_code_completion(): void;
+confirm_code_completion(replace?: boolean): void;
 
 /**
  * Converts the indents of lines between [param from_line] and [param to_line] to tabs or spaces as set by [member indent_use_spaces].
@@ -164,7 +164,7 @@ confirm_code_completion(): void;
  * Values of `-1` convert the entire text.
  *
 */
-convert_indent(): void;
+convert_indent(from_line?: int, to_line?: int): void;
 
 /**
  * Creates a new code region with the selection. At least one single line comment delimiter have to be defined (see [method add_comment_delimiter]).
@@ -194,10 +194,10 @@ duplicate_selection(): void;
 fold_all_lines(): void;
 
 /** Folds the given line, if possible (see [method can_fold_line]). */
-fold_line(): void;
+fold_line(line: int): void;
 
 /** Gets the matching auto brace close key for [param open_key]. */
-get_auto_brace_completion_close_key(): string;
+get_auto_brace_completion_close_key(open_key: string): string;
 
 /** Gets all bookmarked lines. */
 get_bookmarked_lines(): PackedInt32Array;
@@ -221,7 +221,7 @@ get_breakpointed_lines(): PackedInt32Array;
  * `default_value`: Value of the symbol.
  *
 */
-get_code_completion_option(): Dictionary<any, any>;
+get_code_completion_option(index: int): Dictionary<any, any>;
 
 /** Gets all completion options, see [method get_code_completion_option] for return content. */
 get_code_completion_options(): Dictionary[];
@@ -236,16 +236,16 @@ get_code_region_end_tag(): string;
 get_code_region_start_tag(): string;
 
 /** Gets the end key for a string or comment region index. */
-get_delimiter_end_key(): string;
+get_delimiter_end_key(delimiter_index: int): string;
 
 /** If [param line] [param column] is in a string or comment, returns the end position of the region. If not or no end could be found, both [Vector2] values will be [code]-1[/code]. */
-get_delimiter_end_position(): Vector2;
+get_delimiter_end_position(line: int, column: int): Vector2;
 
 /** Gets the start key for a string or comment region index. */
-get_delimiter_start_key(): string;
+get_delimiter_start_key(delimiter_index: int): string;
 
 /** If [param line] [param column] is in a string or comment, returns the start position of the region. If not or no start could be found, both [Vector2] values will be [code]-1[/code]. */
-get_delimiter_start_position(): Vector2;
+get_delimiter_start_position(line: int, column: int): Vector2;
 
 /** Gets all executing lines. */
 get_executing_lines(): PackedInt32Array;
@@ -260,46 +260,46 @@ get_text_for_code_completion(): string;
 get_text_for_symbol_lookup(): string;
 
 /** Returns the full text with char [code]0xFFFF[/code] at the specified location. */
-get_text_with_cursor_char(): string;
+get_text_with_cursor_char(line: int, column: int): string;
 
 /** Returns [code]true[/code] if close key [param close_key] exists. */
-has_auto_brace_completion_close_key(): boolean;
+has_auto_brace_completion_close_key(close_key: string): boolean;
 
 /** Returns [code]true[/code] if open key [param open_key] exists. */
-has_auto_brace_completion_open_key(): boolean;
+has_auto_brace_completion_open_key(open_key: string): boolean;
 
 /** Returns [code]true[/code] if comment [param start_key] exists. */
-has_comment_delimiter(): boolean;
+has_comment_delimiter(start_key: string): boolean;
 
 /** Returns [code]true[/code] if string [param start_key] exists. */
-has_string_delimiter(): boolean;
+has_string_delimiter(start_key: string): boolean;
 
 /** Indents all lines that are selected or have a caret on them. Uses spaces or a tab depending on [member indent_use_spaces]. See [method unindent_lines]. */
 indent_lines(): void;
 
 /** Returns delimiter index if [param line] [param column] is in a comment. If [param column] is not provided, will return delimiter index if the entire [param line] is a comment. Otherwise [code]-1[/code]. */
-is_in_comment(): int;
+is_in_comment(line: int, column?: int): int;
 
 /** Returns the delimiter index if [param line] [param column] is in a string. If [param column] is not provided, will return the delimiter index if the entire [param line] is a string. Otherwise [code]-1[/code]. */
-is_in_string(): int;
+is_in_string(line: int, column?: int): int;
 
 /** Returns [code]true[/code] if the given line is bookmarked. See [method set_line_as_bookmarked]. */
-is_line_bookmarked(): boolean;
+is_line_bookmarked(line: int): boolean;
 
 /** Returns [code]true[/code] if the given line is breakpointed. See [method set_line_as_breakpoint]. */
-is_line_breakpointed(): boolean;
+is_line_breakpointed(line: int): boolean;
 
 /** Returns [code]true[/code] if the given line is a code region end. See [method set_code_region_tags]. */
-is_line_code_region_end(): boolean;
+is_line_code_region_end(line: int): boolean;
 
 /** Returns [code]true[/code] if the given line is a code region start. See [method set_code_region_tags]. */
-is_line_code_region_start(): boolean;
+is_line_code_region_start(line: int): boolean;
 
 /** Returns [code]true[/code] if the given line is marked as executing. See [method set_line_as_executing]. */
-is_line_executing(): boolean;
+is_line_executing(line: int): boolean;
 
 /** Returns [code]true[/code] if the given line is folded. See [method fold_line]. */
-is_line_folded(): boolean;
+is_line_folded(line: int): boolean;
 
 /** Moves all lines down that are selected or have a caret on them. */
 move_lines_down(): void;
@@ -308,40 +308,40 @@ move_lines_down(): void;
 move_lines_up(): void;
 
 /** Removes the comment delimiter with [param start_key]. */
-remove_comment_delimiter(): void;
+remove_comment_delimiter(start_key: string): void;
 
 /** Removes the string delimiter with [param start_key]. */
-remove_string_delimiter(): void;
+remove_string_delimiter(start_key: string): void;
 
 /** Emits [signal code_completion_requested], if [param force] is [code]true[/code] will bypass all checks. Otherwise will check that the caret is in a word or in front of a prefix. Will ignore the request if all current options are of type file path, node path, or signal. */
-request_code_completion(): void;
+request_code_completion(force?: boolean): void;
 
 /** Sets the current selected completion option. */
-set_code_completion_selected_index(): void;
+set_code_completion_selected_index(index: int): void;
 
 /** Sets the code hint text. Pass an empty string to clear. */
-set_code_hint(): void;
+set_code_hint(code_hint: string): void;
 
 /** If [code]true[/code], the code hint will draw below the main caret. If [code]false[/code], the code hint will draw above the main caret. See [method set_code_hint]. */
-set_code_hint_draw_below(): void;
+set_code_hint_draw_below(draw_below: boolean): void;
 
 /** Sets the code region start and end tags (without comment delimiter). */
-set_code_region_tags(): void;
+set_code_region_tags(start?: string, end?: string): void;
 
 /** Sets the given line as bookmarked. If [code]true[/code] and [member gutters_draw_bookmarks] is [code]true[/code], draws the [theme_item bookmark] icon in the gutter for this line. See [method get_bookmarked_lines] and [method is_line_bookmarked]. */
-set_line_as_bookmarked(): void;
+set_line_as_bookmarked(line: int, bookmarked: boolean): void;
 
 /** Sets the given line as a breakpoint. If [code]true[/code] and [member gutters_draw_breakpoints_gutter] is [code]true[/code], draws the [theme_item breakpoint] icon in the gutter for this line. See [method get_breakpointed_lines] and [method is_line_breakpointed]. */
-set_line_as_breakpoint(): void;
+set_line_as_breakpoint(line: int, breakpointed: boolean): void;
 
 /** Sets the given line as executing. If [code]true[/code] and [member gutters_draw_executing_lines] is [code]true[/code], draws the [theme_item executing_line] icon in the gutter for this line. See [method get_executing_lines] and [method is_line_executing]. */
-set_line_as_executing(): void;
+set_line_as_executing(line: int, executing: boolean): void;
 
 /** Sets the symbol emitted by [signal symbol_validate] as a valid lookup. */
-set_symbol_lookup_word_as_valid(): void;
+set_symbol_lookup_word_as_valid(valid: boolean): void;
 
 /** Toggle the folding of the code block at the given line. */
-toggle_foldable_line(): void;
+toggle_foldable_line(line: int): void;
 
 /** Toggle the folding of the code block on all lines with a caret on them. */
 toggle_foldable_lines_at_carets(): void;
@@ -350,7 +350,7 @@ toggle_foldable_lines_at_carets(): void;
 unfold_all_lines(): void;
 
 /** Unfolds the given line if it is folded or if it is hidden under a folded line. */
-unfold_line(): void;
+unfold_line(line: int): void;
 
 /** Unindents all lines that are selected or have a caret on them. Uses spaces or a tab depending on [member indent_use_spaces]. Equivalent to the [member ProjectSettings.input/ui_text_dedent] action. See [method indent_lines]. */
 unindent_lines(): void;
@@ -361,7 +361,7 @@ unindent_lines(): void;
  * **Note:** This will replace all current candidates.
  *
 */
-update_code_completion_options(): void;
+update_code_completion_options(force: boolean): void;
 
   connect<T extends SignalsOf<CodeEdit>>(signal: T, method: SignalFunction<CodeEdit[T]>): number;
 

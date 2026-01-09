@@ -89,7 +89,7 @@ declare class PackedDataContainer extends Resource  {
  * **Note:** Subsequent calls to this method will overwrite the existing data.
  *
 */
-pack(): int;
+pack(value: any): int;
 
 /** Returns the size of the packed container (see [method Array.size] and [method Dictionary.size]). */
 size(): int;

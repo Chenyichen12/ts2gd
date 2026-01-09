@@ -40,25 +40,25 @@ declare class EditorInspectorPlugin extends RefCounted  {
 
 
 /** Returns [code]true[/code] if this object can be handled by this plugin. */
-protected _can_handle(): boolean;
+protected _can_handle(object: Object): boolean;
 
 /** Called to allow adding controls at the beginning of the property list for [param object]. */
-protected _parse_begin(): void;
+protected _parse_begin(object: Object): void;
 
 /** Called to allow adding controls at the beginning of a category in the property list for [param object]. */
-protected _parse_category(): void;
+protected _parse_category(object: Object, category: string): void;
 
 /** Called to allow adding controls at the end of the property list for [param object]. */
-protected _parse_end(): void;
+protected _parse_end(object: Object): void;
 
 /** Called to allow adding controls at the beginning of a group or a sub-group in the property list for [param object]. */
-protected _parse_group(): void;
+protected _parse_group(object: Object, group: string): void;
 
 /** Called to allow adding property-specific editors to the property list for [param object]. The added editor control must extend [EditorProperty]. Returning [code]true[/code] removes the built-in editor for this property, otherwise allows to insert a custom editor before the built-in one. */
-protected _parse_property(): boolean;
+protected _parse_property(object: Object, type: int, name: string, hint_type: int, hint_string: string, usage_flags: int, wide: boolean): boolean;
 
 /** Adds a custom control, which is not necessarily a property editor. */
-add_custom_control(): void;
+add_custom_control(control: Control): void;
 
 /**
  * Adds a property editor for an individual property. The [param editor] control must extend [EditorProperty].
@@ -68,10 +68,10 @@ add_custom_control(): void;
  * [param label] can be used to choose a custom label for the property editor in the inspector. If left empty, the label is computed from the name of the property instead.
  *
 */
-add_property_editor(): void;
+add_property_editor(property: string, editor: Control, add_to_end?: boolean, label?: string): void;
 
 /** Adds an editor that allows modifying multiple properties. The [param editor] control must extend [EditorProperty]. */
-add_property_editor_for_multiple_properties(): void;
+add_property_editor_for_multiple_properties(label: string, properties: PackedStringArray, editor: Control): void;
 
   connect<T extends SignalsOf<EditorInspectorPlugin>>(signal: T, method: SignalFunction<EditorInspectorPlugin[T]>): number;
 

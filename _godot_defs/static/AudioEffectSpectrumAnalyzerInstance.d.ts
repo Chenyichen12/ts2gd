@@ -25,7 +25,7 @@ declare class AudioEffectSpectrumAnalyzerInstance extends AudioEffectInstance  {
  * [param mode] determines how the frequency range will be processed.
  *
 */
-get_magnitude_for_frequency_range(): Vector2;
+get_magnitude_for_frequency_range(from_hz: float, to_hz: float, mode?: int): Vector2;
 
   connect<T extends SignalsOf<AudioEffectSpectrumAnalyzerInstance>>(signal: T, method: SignalFunction<AudioEffectSpectrumAnalyzerInstance[T]>): number;
 

@@ -20,7 +20,7 @@ declare class EditorToaster extends HBoxContainer  {
 
 
 /** Pushes a toast notification to the editor for display. */
-push_toast(): void;
+push_toast(message: string, severity?: int, tooltip?: string): void;
 
   connect<T extends SignalsOf<EditorToaster>>(signal: T, method: SignalFunction<EditorToaster[T]>): number;
 

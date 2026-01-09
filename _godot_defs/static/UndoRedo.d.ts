@@ -182,10 +182,10 @@ declare class UndoRedo extends Object  {
 max_steps: int;
 
 /** Register a [Callable] that will be called when the action is committed. */
-add_do_method(): void;
+add_do_method(callable: Callable): void;
 
 /** Register a [param property] that would change its value to [param value] when the action is committed. */
-add_do_property(): void;
+add_do_property(object: Object, property: StringName, value: any): void;
 
 /**
  * Register a reference to an object that will be erased if the "do" history is deleted. This is useful for objects added by the "do" action and removed by the "undo" action.
@@ -204,13 +204,13 @@ add_do_property(): void;
  * 
  *
 */
-add_do_reference(): void;
+add_do_reference(object: Object): void;
 
 /** Register a [Callable] that will be called when the action is undone. */
-add_undo_method(): void;
+add_undo_method(callable: Callable): void;
 
 /** Register a [param property] that would change its value to [param value] when the action is undone. */
-add_undo_property(): void;
+add_undo_property(object: Object, property: StringName, value: any): void;
 
 /**
  * Register a reference to an object that will be erased if the "undo" history is deleted. This is useful for objects added by the "undo" action and removed by the "do" action.
@@ -229,7 +229,7 @@ add_undo_property(): void;
  * 
  *
 */
-add_undo_reference(): void;
+add_undo_reference(object: Object): void;
 
 /**
  * Clear the undo/redo history and associated references.
@@ -237,10 +237,10 @@ add_undo_reference(): void;
  * Passing `false` to [param increase_version] will prevent the version number from increasing when the history is cleared.
  *
 */
-clear_history(): void;
+clear_history(increase_version?: boolean): void;
 
 /** Commit the action. If [param execute] is [code]true[/code] (which it is by default), all "do" methods/properties are called/set when this function is called. */
-commit_action(): void;
+commit_action(execute?: boolean): void;
 
 /**
  * Create a new action. After this is called, do all your calls to [method add_do_method], [method add_undo_method], [method add_do_property], and [method add_undo_property], then commit the action with [method commit_action].
@@ -250,13 +250,13 @@ commit_action(): void;
  * The way undo operation are ordered in actions is dictated by [param backward_undo_ops]. When [param backward_undo_ops] is `false` undo option are ordered in the same order they were added. Which means the first operation to be added will be the first to be undone.
  *
 */
-create_action(): void;
+create_action(name: string, merge_mode?: int, backward_undo_ops?: boolean): void;
 
 /** Stops marking operations as to be processed even if the action gets merged with another in the [constant MERGE_ENDS] mode. See [method start_force_keep_in_merge_ends]. */
 end_force_keep_in_merge_ends(): void;
 
 /** Gets the action name from its index. */
-get_action_name(): string;
+get_action_name(id: int): string;
 
 /** Gets the index of the current action. */
 get_current_action(): int;

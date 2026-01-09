@@ -107,13 +107,13 @@ transparent: boolean;
 generate_triangle_mesh(): TriangleMesh;
 
 /** Returns the value of the specified flag. */
-get_draw_flag(): boolean;
+get_draw_flag(flag: int): boolean;
 
 /** Returns the rectangle representing this sprite. */
 get_item_rect(): Rect2;
 
 /** If [code]true[/code], the specified flag will be enabled. */
-set_draw_flag(): void;
+set_draw_flag(flag: int, enabled: boolean): void;
 
   connect<T extends SignalsOf<SpriteBase3D>>(signal: T, method: SignalFunction<SpriteBase3D[T]>): number;
 

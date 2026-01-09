@@ -55,16 +55,16 @@ content_margin_right: float;
 content_margin_top: float;
 
 /** No documentation provided. */
-protected _draw(): void;
+protected _draw(to_canvas_item: RID, rect: Rect2): void;
 
 /** No documentation provided. */
-protected _get_draw_rect(): Rect2;
+protected _get_draw_rect(rect: Rect2): Rect2;
 
 /** Virtual method to be implemented by the user. Returns a custom minimum size that the stylebox must respect when drawing. By default [method get_minimum_size] only takes content margins into account. This method can be overridden to add another size restriction. A combination of the default behavior and the output of this method will be used, to account for both sizes. */
 protected _get_minimum_size(): Vector2;
 
 /** No documentation provided. */
-protected _test_mask(): boolean;
+protected _test_mask(point: Vector2, rect: Rect2): boolean;
 
 /**
  * Draws this stylebox using a canvas item identified by the given [RID].
@@ -72,10 +72,10 @@ protected _test_mask(): boolean;
  * The [RID] value can either be the result of [method CanvasItem.get_canvas_item] called on an existing [CanvasItem]-derived node, or directly from creating a canvas item in the [RenderingServer] with [method RenderingServer.canvas_item_create].
  *
 */
-draw(): void;
+draw(canvas_item: RID, rect: Rect2): void;
 
 /** Returns the default margin of the specified [enum Side]. */
-get_content_margin(): float;
+get_content_margin(margin: int): float;
 
 /** Returns the [CanvasItem] that handles its [constant CanvasItem.NOTIFICATION_DRAW] or [method CanvasItem._draw] callback at this moment. */
 get_current_item_drawn(): CanvasItem;
@@ -86,7 +86,7 @@ get_current_item_drawn(): CanvasItem;
  * Positive values reduce size inwards, unlike [Control]'s margin values.
  *
 */
-get_margin(): float;
+get_margin(margin: int): float;
 
 /** Returns the minimum size that this stylebox can be shrunk to. */
 get_minimum_size(): Vector2;
@@ -95,13 +95,13 @@ get_minimum_size(): Vector2;
 get_offset(): Vector2;
 
 /** Sets the default value of the specified [enum Side] to [param offset] pixels. */
-set_content_margin(): void;
+set_content_margin(margin: int, offset: float): void;
 
 /** Sets the default margin to [param offset] pixels for all sides. */
-set_content_margin_all(): void;
+set_content_margin_all(offset: float): void;
 
 /** Test a position in a rectangle, return whether it passes the mask test. */
-test_mask(): boolean;
+test_mask(point: Vector2, rect: Rect2): boolean;
 
   connect<T extends SignalsOf<StyleBox>>(signal: T, method: SignalFunction<StyleBox[T]>): number;
 

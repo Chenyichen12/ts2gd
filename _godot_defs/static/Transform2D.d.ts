@@ -54,7 +54,7 @@ y: Vector2;
 affine_inverse(): Transform2D;
 
 /** Returns a copy of the [param v] vector, transformed (multiplied) by the transform basis's matrix. Unlike the multiplication operator ([code]*[/code]), this method ignores the [member origin]. */
-basis_xform(): Vector2;
+basis_xform(v: Vector2): Vector2;
 
 /**
  * Returns a copy of the [param v] vector, transformed (multiplied) by the inverse transform basis's matrix (see [method inverse]). This method ignores the [member origin].
@@ -62,7 +62,7 @@ basis_xform(): Vector2;
  * **Note:** This method assumes that this transform's basis is **orthonormal** (see [method orthonormalized]). If the basis is not orthonormal, `transform.affine_inverse().basis_xform(vector)` should be used instead (see [method affine_inverse]).
  *
 */
-basis_xform_inv(): Vector2;
+basis_xform_inv(v: Vector2): Vector2;
 
 /**
  * Returns the [url=https://en.wikipedia.org/wiki/Determinant]determinant[/url] of this transform basis's matrix. For advanced math, this number can be used to determine a few attributes:
@@ -124,7 +124,7 @@ get_skew(): float;
  * The [param weight] should be between `0.0` and `1.0` (inclusive). Values outside this range are allowed and can be used to perform **extrapolation** instead.
  *
 */
-interpolate_with(): Transform2D;
+interpolate_with(xform: Transform2D, weight: float): Transform2D;
 
 /**
  * Returns the [url=https://en.wikipedia.org/wiki/Invertible_matrix]inverted version of this transform[/url].
@@ -138,13 +138,13 @@ inverse(): Transform2D;
 is_conformal(): boolean;
 
 /** Returns [code]true[/code] if this transform and [param xform] are approximately equal, by running [method @GlobalScope.is_equal_approx] on each component. */
-is_equal_approx(): boolean;
+is_equal_approx(xform: Transform2D): boolean;
 
 /** Returns [code]true[/code] if this transform is finite, by calling [method @GlobalScope.is_finite] on each component. */
 is_finite(): boolean;
 
 /** Returns a copy of the transform rotated such that the rotated X-axis points towards the [param target] position, in global space. */
-looking_at(): Transform2D;
+looking_at(target?: Vector2): Transform2D;
 
 /** Returns a copy of this transform with its basis orthonormalized. An orthonormal basis is both [i]orthogonal[/i] (the axes are perpendicular to each other) and [i]normalized[/i] (the axes have a length of [code]1.0[/code]), which also means it can only represent a rotation. */
 orthonormalized(): Transform2D;
@@ -159,7 +159,7 @@ orthonormalized(): Transform2D;
  * This can be seen as transforming with respect to the global/parent frame.
  *
 */
-rotated(): Transform2D;
+rotated(angle: float): Transform2D;
 
 /**
  * Returns a copy of the transform rotated by the given [param angle] (in radians).
@@ -169,7 +169,7 @@ rotated(): Transform2D;
  * This can be seen as transforming with respect to the local frame.
  *
 */
-rotated_local(): Transform2D;
+rotated_local(angle: float): Transform2D;
 
 /**
  * Returns a copy of the transform scaled by the given [param scale] factor.
@@ -179,7 +179,7 @@ rotated_local(): Transform2D;
  * This can be seen as transforming with respect to the global/parent frame.
  *
 */
-scaled(): Transform2D;
+scaled(scale: Vector2): Transform2D;
 
 /**
  * Returns a copy of the transform scaled by the given [param scale] factor.
@@ -189,7 +189,7 @@ scaled(): Transform2D;
  * This can be seen as transforming with respect to the local frame.
  *
 */
-scaled_local(): Transform2D;
+scaled_local(scale: Vector2): Transform2D;
 
 /**
  * Returns a copy of the transform translated by the given [param offset].
@@ -199,7 +199,7 @@ scaled_local(): Transform2D;
  * This can be seen as transforming with respect to the global/parent frame.
  *
 */
-translated(): Transform2D;
+translated(offset: Vector2): Transform2D;
 
 /**
  * Returns a copy of the transform translated by the given [param offset].
@@ -209,7 +209,7 @@ translated(): Transform2D;
  * This can be seen as transforming with respect to the local frame.
  *
 */
-translated_local(): Transform2D;
+translated_local(offset: Vector2): Transform2D;
 
   connect<T extends SignalsOf<Transform2D>>(signal: T, method: SignalFunction<Transform2D[T]>): number;
 

@@ -103,7 +103,7 @@ declare class WorkerThreadPoolClass extends Object  {
  * **Warning:** Every task must be waited for completion using [method wait_for_task_completion] or [method wait_for_group_task_completion] at some point so that any allocated resources inside the task can be cleaned up.
  *
 */
-add_group_task(): int;
+add_group_task(action: Callable, elements: int, tasks_needed?: int, high_priority?: boolean, description?: string): int;
 
 /**
  * Adds [param action] as a task to be executed by a worker thread. [param high_priority] determines if the task has a high priority or a low priority (default). You can optionally provide a [param description] to help with debugging.
@@ -113,7 +113,7 @@ add_group_task(): int;
  * **Warning:** Every task must be waited for completion using [method wait_for_task_completion] or [method wait_for_group_task_completion] at some point so that any allocated resources inside the task can be cleaned up.
  *
 */
-add_task(): int;
+add_task(action: Callable, high_priority?: boolean, description?: string): int;
 
 /** Returns the task group ID of the current thread calling this method, or [code]-1[/code] if invalid or the current thread is not part of a task group. */
 get_caller_group_id(): int;
@@ -134,7 +134,7 @@ get_caller_task_id(): int;
  * **Note:** If a thread has started executing the [Callable] but is yet to finish, it won't be counted.
  *
 */
-get_group_processed_element_count(): int;
+get_group_processed_element_count(group_id: int): int;
 
 /**
  * Returns `true` if the group task with the given ID is completed.
@@ -142,7 +142,7 @@ get_group_processed_element_count(): int;
  * **Note:** You should only call this method between adding the group task and awaiting its completion.
  *
 */
-is_group_task_completed(): boolean;
+is_group_task_completed(group_id: int): boolean;
 
 /**
  * Returns `true` if the task with the given ID is completed.
@@ -150,10 +150,10 @@ is_group_task_completed(): boolean;
  * **Note:** You should only call this method between adding the task and awaiting its completion.
  *
 */
-is_task_completed(): boolean;
+is_task_completed(task_id: int): boolean;
 
 /** Pauses the thread that calls this method until the group task with the given ID is completed. */
-wait_for_group_task_completion(): void;
+wait_for_group_task_completion(group_id: int): void;
 
 /**
  * Pauses the thread that calls this method until the task with the given ID is completed.
@@ -165,7 +165,7 @@ wait_for_group_task_completion(): void;
  * Returns [constant @GlobalScope.ERR_BUSY] if the call is made from another running task and, due to task scheduling, there's potential for deadlocking (e.g., the task to await may be at a lower level in the call stack and therefore can't progress). This is an advanced situation that should only matter when some tasks depend on others (in the current implementation, the tricky case is a task trying to wait on an older one).
  *
 */
-wait_for_task_completion(): int;
+wait_for_task_completion(task_id: int): int;
 
   connect<T extends SignalsOf<WorkerThreadPoolClass>>(signal: T, method: SignalFunction<WorkerThreadPoolClass[T]>): number;
 

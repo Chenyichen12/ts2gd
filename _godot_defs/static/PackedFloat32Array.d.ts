@@ -24,10 +24,10 @@ declare class PackedFloat32Array {
 
 
 /** Appends an element at the end of the array (alias of [method push_back]). */
-append(): boolean;
+append(value: float): boolean;
 
 /** Appends a [PackedFloat32Array] at the end of this array. */
-append_array(): void;
+append_array(array: PackedFloat32Array): void;
 
 /**
  * Finds the index of an existing value (or the insertion index that maintains sorting order, if the value is not yet present in the array) using binary search. Optionally, a [param before] specifier can be passed. If `false`, the returned index comes after all existing entries of the value in the array.
@@ -37,7 +37,7 @@ append_array(): void;
  * **Note:** [constant @GDScript.NAN] doesn't behave the same as other numbers. Therefore, the results from this method may not be accurate if NaNs are included.
  *
 */
-bsearch(): int;
+bsearch(value: float, before?: boolean): int;
 
 /** Clears the array. This is equivalent to using [method resize] with a size of [code]0[/code]. */
 clear(): void;
@@ -48,7 +48,7 @@ clear(): void;
  * **Note:** [constant @GDScript.NAN] doesn't behave the same as other numbers. Therefore, the results from this method may not be accurate if NaNs are included.
  *
 */
-count(): int;
+count(value: float): int;
 
 /** Creates a copy of the array, and returns it. */
 duplicate(): PackedFloat32Array;
@@ -59,10 +59,10 @@ duplicate(): PackedFloat32Array;
  * **Note:** [constant @GDScript.NAN] doesn't behave the same as other numbers. Therefore, the results from this method may not be accurate if NaNs are included.
  *
 */
-erase(): boolean;
+erase(value: float): boolean;
 
 /** Assigns the given value to all elements in the array. This can typically be used together with [method resize] to create an array with a given size and initialized elements. */
-fill(): void;
+fill(value: float): void;
 
 /**
  * Searches the array for a value and returns its index or `-1` if not found. Optionally, the initial search index can be passed.
@@ -70,7 +70,7 @@ fill(): void;
  * **Note:** [constant @GDScript.NAN] doesn't behave the same as other numbers. Therefore, the results from this method may not be accurate if NaNs are included.
  *
 */
-find(): int;
+find(value: float, from?: int): int;
 
 /**
  * Returns the 32-bit float at the given [param index] in the array. If [param index] is out-of-bounds or negative, this method fails and returns `0.0`.
@@ -78,7 +78,7 @@ find(): int;
  * This method is similar (but not identical) to the `[]` operator. Most notably, when this method fails, it doesn't pause project execution if run from the editor.
  *
 */
-get(): float;
+get(index: int): float;
 
 /**
  * Returns `true` if the array contains [param value].
@@ -86,19 +86,19 @@ get(): float;
  * **Note:** [constant @GDScript.NAN] doesn't behave the same as other numbers. Therefore, the results from this method may not be accurate if NaNs are included.
  *
 */
-has(): boolean;
+has(value: float): boolean;
 
 /** Inserts a new element at a given position in the array. The position must be valid, or at the end of the array ([code]idx == size()[/code]). */
-insert(): int;
+insert(at_index: int, value: float): int;
 
 /** Returns [code]true[/code] if the array is empty. */
 is_empty(): boolean;
 
 /** Appends an element at the end of the array. */
-push_back(): boolean;
+push_back(value: float): boolean;
 
 /** Removes an element from the array by index. */
-remove_at(): void;
+remove_at(index: int): void;
 
 /**
  * Sets the size of the array. If the array is grown, reserves elements at the end of the array. If the array is shrunk, truncates the array to the new size. Calling [method resize] once and assigning the new values is faster than adding new elements one by one.
@@ -106,7 +106,7 @@ remove_at(): void;
  * Returns [constant OK] on success, or one of the following [enum Error] constants if this method fails: [constant ERR_INVALID_PARAMETER] if the size is negative, or [constant ERR_OUT_OF_MEMORY] if allocations fail. Use [method size] to find the actual size of the array after resize.
  *
 */
-resize(): int;
+resize(new_size: int): int;
 
 /** Reverses the order of the elements in the array. */
 reverse(): void;
@@ -117,10 +117,10 @@ reverse(): void;
  * **Note:** [constant @GDScript.NAN] doesn't behave the same as other numbers. Therefore, the results from this method may not be accurate if NaNs are included.
  *
 */
-rfind(): int;
+rfind(value: float, from?: int): int;
 
 /** Changes the float at the given index. */
-set(): void;
+set(index: int, value: float): void;
 
 /** Returns the number of elements in the array. */
 size(): int;
@@ -133,7 +133,7 @@ size(): int;
  * If either [param begin] or [param end] are negative, they will be relative to the end of the array (i.e. `arr.slice(0, -2)` is a shorthand for `arr.slice(0, arr.size() - 2)`).
  *
 */
-slice(): PackedFloat32Array;
+slice(begin: int, end?: int): PackedFloat32Array;
 
 /**
  * Sorts the elements of the array in ascending order.

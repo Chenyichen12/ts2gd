@@ -52,13 +52,13 @@ is_rotation_enabled(): boolean;
 is_scale_enabled(): boolean;
 
 /** Sets [constant TRANSFORM_FLAG_POSITION] into [member enable]. */
-set_position_enabled(): void;
+set_position_enabled(enabled: boolean): void;
 
 /** Sets [constant TRANSFORM_FLAG_ROTATION] into [member enable]. */
-set_rotation_enabled(): void;
+set_rotation_enabled(enabled: boolean): void;
 
 /** Sets [constant TRANSFORM_FLAG_SCALE] into [member enable]. */
-set_scale_enabled(): void;
+set_scale_enabled(enabled: boolean): void;
 
   connect<T extends SignalsOf<RetargetModifier3D>>(signal: T, method: SignalFunction<RetargetModifier3D[T]>): number;
 

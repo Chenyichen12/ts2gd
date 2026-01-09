@@ -112,7 +112,7 @@ visibility_range_end_margin: float;
 visibility_range_fade_mode: int;
 
 /** Get the value of a shader parameter as set on this instance. */
-get_instance_shader_parameter(): any;
+get_instance_shader_parameter(name: StringName): any;
 
 /**
  * Set the value of a shader uniform for this instance only ([url=$DOCS_URL/tutorials/shaders/shader_reference/shading_language.html#per-instance-uniforms]per-instance uniform[/url]). See also [method ShaderMaterial.set_shader_parameter] to assign a uniform on all instances using the same [ShaderMaterial].
@@ -124,7 +124,7 @@ get_instance_shader_parameter(): any;
  * **Note:** Per-instance shader uniforms are only available in Spatial and CanvasItem shaders, but not for Fog, Sky, or Particles shaders.
  *
 */
-set_instance_shader_parameter(): void;
+set_instance_shader_parameter(name: StringName, value: any): void;
 
   connect<T extends SignalsOf<GeometryInstance3D>>(signal: T, method: SignalFunction<GeometryInstance3D[T]>): number;
 

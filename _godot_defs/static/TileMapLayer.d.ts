@@ -89,7 +89,7 @@ y_sort_origin: int;
  * **Note:** If the properties of [param tile_data] object should change over time, use [method notify_runtime_tile_data_update] to notify the [TileMapLayer] it needs an update.
  *
 */
-protected _tile_data_runtime_update(): void;
+protected _tile_data_runtime_update(coords: Vector2i, tile_data: TileData): void;
 
 /**
  * Called when this [TileMapLayer]'s cells need an internal update. This update may be caused from individual cells being modified or by a change in the [member tile_set] (causing all cells to be queued for an update). The first call to this function is always for initializing all the [TileMapLayer]'s cells. [param coords] contains the coordinates of all modified cells, roughly in the order they were modified. [param forced_cleanup] is `true` when the [TileMapLayer]'s internals should be fully cleaned up. This is the case when:
@@ -109,7 +109,7 @@ protected _tile_data_runtime_update(): void;
  * **Warning:** Implementing this method may degrade the [TileMapLayer]'s performance.
  *
 */
-protected _update_cells(): void;
+protected _update_cells(coords: Vector2i[], forced_cleanup: boolean): void;
 
 /**
  * Should return `true` if the tile at coordinates [param coords] requires a runtime update.
@@ -119,25 +119,25 @@ protected _update_cells(): void;
  * **Note:** If the result of this function should change, use [method notify_runtime_tile_data_update] to notify the [TileMapLayer] it needs an update.
  *
 */
-protected _use_tile_data_runtime_update(): boolean;
+protected _use_tile_data_runtime_update(coords: Vector2i): boolean;
 
 /** Clears all cells. */
 clear(): void;
 
 /** Erases the cell at coordinates [param coords]. */
-erase_cell(): void;
+erase_cell(coords: Vector2i): void;
 
 /** Clears cells containing tiles that do not exist in the [member tile_set]. */
 fix_invalid_tiles(): void;
 
 /** Returns the tile alternative ID of the cell at coordinates [param coords]. */
-get_cell_alternative_tile(): int;
+get_cell_alternative_tile(coords: Vector2i): int;
 
 /** Returns the tile atlas coordinates ID of the cell at coordinates [param coords]. Returns [code]Vector2i(-1, -1)[/code] if the cell does not exist. */
-get_cell_atlas_coords(): Vector2i;
+get_cell_atlas_coords(coords: Vector2i): Vector2i;
 
 /** Returns the tile source ID of the cell at coordinates [param coords]. Returns [code]-1[/code] if the cell does not exist. */
-get_cell_source_id(): int;
+get_cell_source_id(coords: Vector2i): int;
 
 /**
  * Returns the [TileData] object associated with the given cell, or `null` if the cell does not exist or is not a [TileSetAtlasSource].
@@ -155,7 +155,7 @@ get_cell_source_id(): int;
  * 
  *
 */
-get_cell_tile_data(): TileData;
+get_cell_tile_data(coords: Vector2i): TileData;
 
 /**
  * Returns the coordinates of the physics quadrant (see [member physics_quadrant_size]) for given physics body [RID]. Such an [RID] can be retrieved from [method KinematicCollision2D.get_collider_rid], when colliding with a tile.
@@ -163,7 +163,7 @@ get_cell_tile_data(): TileData;
  * **Note:** Higher values of [member physics_quadrant_size] will make this function less precise. To get the exact cell coordinates, you need to set [member physics_quadrant_size] to `1`, which disables physics chunking.
  *
 */
-get_coords_for_body_rid(): Vector2i;
+get_coords_for_body_rid(body: RID): Vector2i;
 
 /**
  * Returns the [RID] of the [NavigationServer2D] navigation used by this [TileMapLayer].
@@ -174,13 +174,13 @@ get_coords_for_body_rid(): Vector2i;
 get_navigation_map(): RID;
 
 /** Returns the neighboring cell to the one at coordinates [param coords], identified by the [param neighbor] direction. This method takes into account the different layouts a TileMap can take. */
-get_neighbor_cell(): Vector2i;
+get_neighbor_cell(coords: Vector2i, neighbor: int): Vector2i;
 
 /** Creates and returns a new [TileMapPattern] from the given array of cells. See also [method set_pattern]. */
-get_pattern(): TileMapPattern;
+get_pattern(coords_array: Vector2i[]): TileMapPattern;
 
 /** Returns the list of all neighboring cells to the one at [param coords]. Any neighboring cell is one that is touching edges, so for a square cell 4 cells would be returned, for a hexagon 6 cells are returned. */
-get_surrounding_cells(): Vector2i[];
+get_surrounding_cells(coords: Vector2i): Vector2i[];
 
 /** Returns a [Vector2i] array with the positions of all cells containing a tile. A cell is considered empty if its source identifier equals [code]-1[/code], its atlas coordinate identifier is [code]Vector2(-1, -1)[/code] and its alternative identifier is [code]-1[/code]. */
 get_used_cells(): Vector2i[];
@@ -193,28 +193,28 @@ get_used_cells(): Vector2i[];
  * A cell is considered empty if its source identifier equals `-1`, its atlas coordinate identifier is `Vector2(-1, -1)` and its alternative identifier is `-1`.
  *
 */
-get_used_cells_by_id(): Vector2i[];
+get_used_cells_by_id(source_id?: int, atlas_coords?: Vector2i, alternative_tile?: int): Vector2i[];
 
 /** Returns a rectangle enclosing the used (non-empty) tiles of the map. */
 get_used_rect(): Rect2i;
 
 /** Returns whether the provided [param body] [RID] belongs to one of this [TileMapLayer]'s cells. */
-has_body_rid(): boolean;
+has_body_rid(body: RID): boolean;
 
 /** Returns [code]true[/code] if the cell at coordinates [param coords] is flipped horizontally. The result is valid only for atlas sources. */
-is_cell_flipped_h(): boolean;
+is_cell_flipped_h(coords: Vector2i): boolean;
 
 /** Returns [code]true[/code] if the cell at coordinates [param coords] is flipped vertically. The result is valid only for atlas sources. */
-is_cell_flipped_v(): boolean;
+is_cell_flipped_v(coords: Vector2i): boolean;
 
 /** Returns [code]true[/code] if the cell at coordinates [param coords] is transposed. The result is valid only for atlas sources. */
-is_cell_transposed(): boolean;
+is_cell_transposed(coords: Vector2i): boolean;
 
 /** Returns the map coordinates of the cell containing the given [param local_position]. If [param local_position] is in global coordinates, consider using [method Node2D.to_local] before passing it to this method. See also [method map_to_local]. */
-local_to_map(): Vector2i;
+local_to_map(local_position: Vector2): Vector2i;
 
 /** Returns for the given coordinates [param coords_in_pattern] in a [TileMapPattern] the corresponding cell coordinates if the pattern was pasted at the [param position_in_tilemap] coordinates (see [method set_pattern]). This mapping is required as in half-offset tile shapes, the mapping might not work by calculating [code]position_in_tile_map + coords_in_pattern[/code]. */
-map_pattern(): Vector2i;
+map_pattern(position_in_tilemap: Vector2i, coords_in_pattern: Vector2i, pattern: TileMapPattern): Vector2i;
 
 /**
  * Returns the centered position of a cell in the [TileMapLayer]'s local coordinate space. To convert the returned value into global coordinates, use [method Node2D.to_global]. See also [method local_to_map].
@@ -222,7 +222,7 @@ map_pattern(): Vector2i;
  * **Note:** This may not correspond to the visual position of the tile, i.e. it ignores the [member TileData.texture_origin] property of individual tiles.
  *
 */
-map_to_local(): Vector2;
+map_to_local(map_position: Vector2i): Vector2;
 
 /**
  * Notifies the [TileMapLayer] node that calls to [method _use_tile_data_runtime_update] or [method _tile_data_runtime_update] will lead to different results. This will thus trigger a [TileMapLayer] update.
@@ -246,7 +246,7 @@ notify_runtime_tile_data_update(): void;
  * If [param source_id] is set to `-1`, [param atlas_coords] to `Vector2i(-1, -1)`, or [param alternative_tile] to `-1`, the cell will be erased. An erased cell gets **all** its identifiers automatically set to their respective invalid values, namely `-1`, `Vector2i(-1, -1)` and `-1`.
  *
 */
-set_cell(): void;
+set_cell(coords: Vector2i, source_id?: int, atlas_coords?: Vector2i, alternative_tile?: int): void;
 
 /**
  * Update all the cells in the [param cells] coordinates array so that they use the given [param terrain] for the given [param terrain_set]. If an updated cell has the same terrain as one of its neighboring cells, this function tries to join the two. This function might update neighboring tiles if needed to create correct terrain transitions.
@@ -256,7 +256,7 @@ set_cell(): void;
  * **Note:** To work correctly, this method requires the [TileMapLayer]'s TileSet to have terrains set up with all required terrain combinations. Otherwise, it may produce unexpected results.
  *
 */
-set_cells_terrain_connect(): void;
+set_cells_terrain_connect(cells: Vector2i[], terrain_set: int, terrain: int, ignore_empty_terrains?: boolean): void;
 
 /**
  * Update all the cells in the [param path] coordinates array so that they use the given [param terrain] for the given [param terrain_set]. The function will also connect two successive cell in the path with the same terrain. This function might update neighboring tiles if needed to create correct terrain transitions.
@@ -266,13 +266,13 @@ set_cells_terrain_connect(): void;
  * **Note:** To work correctly, this method requires the [TileMapLayer]'s TileSet to have terrains set up with all required terrain combinations. Otherwise, it may produce unexpected results.
  *
 */
-set_cells_terrain_path(): void;
+set_cells_terrain_path(path: Vector2i[], terrain_set: int, terrain: int, ignore_empty_terrains?: boolean): void;
 
 /** Sets a custom [param map] as a [NavigationServer2D] navigation map. If not set, uses the default [World2D] navigation map instead. */
-set_navigation_map(): void;
+set_navigation_map(map: RID): void;
 
 /** Pastes the [TileMapPattern] at the given [param position] in the tile map. See also [method get_pattern]. */
-set_pattern(): void;
+set_pattern(position: Vector2i, pattern: TileMapPattern): void;
 
 /**
  * Triggers a direct update of the [TileMapLayer]. Usually, calling this function is not needed, as [TileMapLayer] node updates automatically when one of its properties or cells is modified.

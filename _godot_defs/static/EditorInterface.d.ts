@@ -49,19 +49,19 @@ distraction_free_mode: boolean;
 movie_maker_enabled: boolean;
 
 /** Makes [param node] root of the currently opened scene. Only works if the scene is empty. If the [param node] is a scene instance, an inheriting scene will be created. */
-add_root_node(): void;
+add_root_node(node: Node): void;
 
 /** Closes the currently active scene, discarding any pending changes in the process. Returns [constant OK] on success or [constant ERR_DOES_NOT_EXIST] if there is no scene to close. */
 close_scene(): int;
 
 /** Edits the given [Node]. The node will be also selected if it's inside the scene tree. */
-edit_node(): void;
+edit_node(node: Node): void;
 
 /** Edits the given [Resource]. If the resource is a [Script] you can also edit it with [method edit_script] to specify the line and column position. */
-edit_resource(): void;
+edit_resource(resource: Resource): void;
 
 /** Edits the given [Script]. The line and column on which to open the script can also be specified. The script will be open with the user-configured editor for the script's language which may be an external editor. */
-edit_script(): void;
+edit_script(script: Script, line?: int, column?: int, grab_focus?: boolean): void;
 
 /**
  * Returns the main container of Godot editor's window. For example, you can use it to retrieve the size of the container and place your controls accordingly.
@@ -143,7 +143,7 @@ get_editor_undo_redo(): EditorUndoRedoManager;
 get_editor_viewport_2d(): SubViewport;
 
 /** Returns the specified 3D editor [SubViewport], from [code]0[/code] to [code]3[/code]. The viewport can be used to access the active editor cameras with [method Viewport.get_camera_3d]. */
-get_editor_viewport_3d(): SubViewport;
+get_editor_viewport_3d(idx?: int): SubViewport;
 
 /**
  * Returns the editor's [FileSystemDock] instance.
@@ -200,7 +200,7 @@ get_selected_paths(): PackedStringArray;
 get_selection(): EditorSelection;
 
 /** Shows the given property on the given [param object] in the editor's Inspector dock. If [param inspector_only] is [code]true[/code], plugins will not attempt to edit [param object]. */
-inspect_object(): void;
+inspect_object(object: Object, for_property?: string, inspector_only?: boolean): void;
 
 /**
  * Returns `true` if multiple window support is enabled in the editor. Multiple window support is enabled if **all** of these statements are true:
@@ -218,28 +218,28 @@ is_multi_window_enabled(): boolean;
 is_node_3d_snap_enabled(): boolean;
 
 /** Returns [code]true[/code] if the object has been marked as edited through [method set_object_edited]. */
-is_object_edited(): boolean;
+is_object_edited(object: Object): boolean;
 
 /** Returns [code]true[/code] if a scene is currently being played, [code]false[/code] otherwise. Paused scenes are considered as being played. */
 is_playing_scene(): boolean;
 
 /** Returns [code]true[/code] if the specified [param plugin] is enabled. The plugin name is the same as its directory name. */
-is_plugin_enabled(): boolean;
+is_plugin_enabled(plugin: string): boolean;
 
 /** Returns mesh previews rendered at the given size as an [Array] of [Texture2D]s. */
-make_mesh_previews(): Texture2D[];
+make_mesh_previews(meshes: Mesh[], preview_size: int): Texture2D[];
 
 /** Marks the current scene tab as unsaved. */
 mark_scene_as_unsaved(): void;
 
 /** Opens the scene at the given path. If [param set_inherited] is [code]true[/code], creates a new inherited scene. */
-open_scene_from_path(): void;
+open_scene_from_path(scene_filepath: string, set_inherited?: boolean): void;
 
 /** Plays the currently active scene. */
 play_current_scene(): void;
 
 /** Plays the scene specified by its filepath. */
-play_custom_scene(): void;
+play_custom_scene(scene_filepath: string): void;
 
 /** Plays the main scene. */
 play_main_scene(): void;
@@ -260,7 +260,7 @@ play_main_scene(): void;
  * **Note:** Trying to list the base type in the [param type_blocklist] will hide all types derived from the base type from the create dialog.
  *
 */
-popup_create_dialog(): void;
+popup_create_dialog(callback: Callable, base_type?: StringName, current_type?: string, dialog_title?: string, type_blocklist?: StringName[]): void;
 
 /**
  * Pops up the [param dialog] in the editor UI with [method Window.popup_exclusive]. The dialog must have no current parent, otherwise the method fails.
@@ -268,7 +268,7 @@ popup_create_dialog(): void;
  * See also [method Window.set_unparent_when_invisible].
  *
 */
-popup_dialog(): void;
+popup_dialog(dialog: Window, rect?: Rect2i): void;
 
 /**
  * Pops up the [param dialog] in the editor UI with [method Window.popup_exclusive_centered]. The dialog must have no current parent, otherwise the method fails.
@@ -276,7 +276,7 @@ popup_dialog(): void;
  * See also [method Window.set_unparent_when_invisible].
  *
 */
-popup_dialog_centered(): void;
+popup_dialog_centered(dialog: Window, minsize?: Vector2i): void;
 
 /**
  * Pops up the [param dialog] in the editor UI with [method Window.popup_exclusive_centered_clamped]. The dialog must have no current parent, otherwise the method fails.
@@ -284,7 +284,7 @@ popup_dialog_centered(): void;
  * See also [method Window.set_unparent_when_invisible].
  *
 */
-popup_dialog_centered_clamped(): void;
+popup_dialog_centered_clamped(dialog: Window, minsize?: Vector2i, fallback_ratio?: float): void;
 
 /**
  * Pops up the [param dialog] in the editor UI with [method Window.popup_exclusive_centered_ratio]. The dialog must have no current parent, otherwise the method fails.
@@ -292,10 +292,10 @@ popup_dialog_centered_clamped(): void;
  * See also [method Window.set_unparent_when_invisible].
  *
 */
-popup_dialog_centered_ratio(): void;
+popup_dialog_centered_ratio(dialog: Window, ratio?: float): void;
 
 /** Pops up an editor dialog for selecting a method from [param object]. The [param callback] must take a single argument of type [String] which will contain the name of the selected method or be empty if the dialog is canceled. If [param current_value] is provided, the method will be selected automatically in the method list, if it exists. */
-popup_method_selector(): void;
+popup_method_selector(object: Object, callback: Callable, current_value?: string): void;
 
 /**
  * Pops up an editor dialog for selecting a [Node] from the edited scene. The [param callback] must take a single argument of type [NodePath]. It is called on the selected [NodePath] or the empty path `^""` if the dialog is canceled. If [param valid_types] is provided, the dialog will only show Nodes that match one of the listed Node types. If [param current_value] is provided, the Node will be automatically selected in the tree, if it exists.
@@ -316,7 +316,7 @@ popup_method_selector(): void;
  * 
  *
 */
-popup_node_selector(): void;
+popup_node_selector(callback: Callable, valid_types?: StringName[], current_value?: Node): void;
 
 /**
  * Pops up an editor dialog for selecting properties from [param object]. The [param callback] must take a single argument of type [NodePath]. It is called on the selected property path (see [method NodePath.get_as_property_path]) or the empty path `^""` if the dialog is canceled. If [param type_filter] is provided, the dialog will only show properties that match one of the listed [enum Variant.Type] values. If [param current_value] is provided, the property will be selected automatically in the property list, if it exists.
@@ -335,16 +335,16 @@ popup_node_selector(): void;
  * 
  *
 */
-popup_property_selector(): void;
+popup_property_selector(object: Object, callback: Callable, type_filter?: PackedInt32Array, current_value?: string): void;
 
 /** Pops up an editor dialog for quick selecting a resource file. The [param callback] must take a single argument of type [String] which will contain the path of the selected resource or be empty if the dialog is canceled. If [param base_types] is provided, the dialog will only show resources that match these types. Only types deriving from [Resource] are supported. */
-popup_quick_open(): void;
+popup_quick_open(callback: Callable, base_types?: StringName[]): void;
 
 /** Reloads the scene at the given path. */
-reload_scene_from_path(): void;
+reload_scene_from_path(scene_filepath: string): void;
 
 /** Restarts the editor. This closes the editor and then opens the same project. If [param save] is [code]true[/code], the project will be saved before restarting. */
-restart_editor(): void;
+restart_editor(save?: boolean): void;
 
 /** Saves all opened scenes in the editor. */
 save_all_scenes(): void;
@@ -353,10 +353,10 @@ save_all_scenes(): void;
 save_scene(): int;
 
 /** Saves the currently active scene as a file at [param path]. */
-save_scene_as(): void;
+save_scene_as(path: string, with_preview?: boolean): void;
 
 /** Selects the file, with the path provided by [param file], in the FileSystem dock. */
-select_file(): void;
+select_file(file: string): void;
 
 /**
  * Selects and activates the specified feature profile with the given [param profile_name]. Set [param profile_name] to an empty string to reset to the default feature profile.
@@ -366,10 +366,10 @@ select_file(): void;
  * **Note:** The feature profile that gets activated must be located in the `feature_profiles` directory, as a file with the `.profile` extension. If a profile could not be found, an error occurs. The editor configuration folder can be found by using [method EditorPaths.get_config_dir].
  *
 */
-set_current_feature_profile(): void;
+set_current_feature_profile(profile_name: string): void;
 
 /** Sets the editor's current main screen to the one specified in [param name]. [param name] must match the title of the tab in question exactly (e.g. [code]2D[/code], [code]3D[/code], [code skip-lint]Script[/code], [code]Game[/code], or [code]AssetLib[/code] for default tabs). */
-set_main_screen_editor(): void;
+set_main_screen_editor(name: string): void;
 
 /**
  * If [param edited] is `true`, the object is marked as edited.
@@ -379,10 +379,10 @@ set_main_screen_editor(): void;
  * **Note:** Each call to this method increments the object's edited version. This is used to track changes in the editor and to trigger when thumbnails should be regenerated for resources.
  *
 */
-set_object_edited(): void;
+set_object_edited(object: Object, edited: boolean): void;
 
 /** Sets the enabled status of a plugin. The plugin name is the same as its directory name. */
-set_plugin_enabled(): void;
+set_plugin_enabled(plugin: string, enabled: boolean): void;
 
 /** Stops the scene that is currently playing. */
 stop_playing_scene(): void;

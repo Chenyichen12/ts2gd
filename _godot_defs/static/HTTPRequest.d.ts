@@ -363,7 +363,7 @@ get_http_client_status(): int;
  * **Note:** It's recommended to use transport encryption (TLS) and to avoid sending sensitive information (such as login credentials) in HTTP GET URL parameters. Consider using HTTP POST requests or HTTP headers for such information instead.
  *
 */
-request(): int;
+request(url: string, custom_headers?: PackedStringArray, method?: int, request_data?: string): int;
 
 /**
  * Creates request on the underlying [HTTPClient] using a raw array of bytes for the request body. If there is no configuration errors, it tries to connect using [method HTTPClient.connect_to_host] and passes parameters onto [method HTTPClient.request].
@@ -371,7 +371,7 @@ request(): int;
  * Returns [constant OK] if request is successfully created. (Does not imply that the server has responded), [constant ERR_UNCONFIGURED] if not in the tree, [constant ERR_BUSY] if still processing previous request, [constant ERR_INVALID_PARAMETER] if given string is not a valid URL format, or [constant ERR_CANT_CONNECT] if not using thread and the [HTTPClient] cannot connect to host.
  *
 */
-request_raw(): int;
+request_raw(url: string, custom_headers?: PackedStringArray, method?: int, request_data_raw?: PackedByteArray): int;
 
 /**
  * Sets the proxy server for HTTP requests.
@@ -379,7 +379,7 @@ request_raw(): int;
  * The proxy server is unset if [param host] is empty or [param port] is -1.
  *
 */
-set_http_proxy(): void;
+set_http_proxy(host: string, port: int): void;
 
 /**
  * Sets the proxy server for HTTPS requests.
@@ -387,10 +387,10 @@ set_http_proxy(): void;
  * The proxy server is unset if [param host] is empty or [param port] is -1.
  *
 */
-set_https_proxy(): void;
+set_https_proxy(host: string, port: int): void;
 
 /** Sets the [TLSOptions] to be used when connecting to an HTTPS server. See [method TLSOptions.client]. */
-set_tls_options(): void;
+set_tls_options(client_options: TLSOptions): void;
 
   connect<T extends SignalsOf<HTTPRequest>>(signal: T, method: SignalFunction<HTTPRequest[T]>): number;
 

@@ -62,7 +62,7 @@ velocity: Vector3;
 vertices: PackedVector3Array;
 
 /** Returns whether or not the specified layer of the [member avoidance_layers] bitmask is enabled, given a [param layer_number] between 1 and 32. */
-get_avoidance_layer_value(): boolean;
+get_avoidance_layer_value(layer_number: int): boolean;
 
 /** Returns the [RID] of the navigation map for this NavigationObstacle node. This function returns always the map set on the NavigationObstacle node and not the map of the abstract obstacle on the NavigationServer. If the obstacle map is changed directly with the NavigationServer API the NavigationObstacle node will not be aware of the map change. Use [method set_navigation_map] to change the navigation map for the NavigationObstacle and also update the obstacle on the NavigationServer. */
 get_navigation_map(): RID;
@@ -71,10 +71,10 @@ get_navigation_map(): RID;
 get_rid(): RID;
 
 /** Based on [param value], enables or disables the specified layer in the [member avoidance_layers] bitmask, given a [param layer_number] between 1 and 32. */
-set_avoidance_layer_value(): void;
+set_avoidance_layer_value(layer_number: int, value: boolean): void;
 
 /** Sets the [RID] of the navigation map this NavigationObstacle node should use and also updates the [code]obstacle[/code] on the NavigationServer. */
-set_navigation_map(): void;
+set_navigation_map(navigation_map: RID): void;
 
   connect<T extends SignalsOf<NavigationObstacle3D>>(signal: T, method: SignalFunction<NavigationObstacle3D[T]>): number;
 

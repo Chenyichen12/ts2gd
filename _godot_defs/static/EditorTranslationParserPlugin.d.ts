@@ -223,7 +223,7 @@ declare class EditorTranslationParserPlugin extends RefCounted  {
 protected _get_recognized_extensions(): PackedStringArray;
 
 /** Override this method to define a custom parsing logic to extract the translatable strings. */
-protected _parse_file(): PackedStringArray[];
+protected _parse_file(path: string): PackedStringArray[];
 
   connect<T extends SignalsOf<EditorTranslationParserPlugin>>(signal: T, method: SignalFunction<EditorTranslationParserPlugin[T]>): number;
 

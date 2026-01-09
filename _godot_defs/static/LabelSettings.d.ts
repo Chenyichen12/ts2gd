@@ -51,52 +51,52 @@ stacked_outline_count: int;
 stacked_shadow_count: int;
 
 /** Adds a new stacked outline to the label at the given [param index]. If [param index] is [code]-1[/code], the new stacked outline will be added at the end of the list. */
-add_stacked_outline(): void;
+add_stacked_outline(index?: int): void;
 
 /** Adds a new stacked shadow to the label at the given [param index]. If [param index] is [code]-1[/code], the new stacked shadow will be added at the end of the list. */
-add_stacked_shadow(): void;
+add_stacked_shadow(index?: int): void;
 
 /** Returns the color of the stacked outline at [param index]. */
-get_stacked_outline_color(): Color;
+get_stacked_outline_color(index: int): Color;
 
 /** Returns the size of the stacked outline at [param index]. */
-get_stacked_outline_size(): int;
+get_stacked_outline_size(index: int): int;
 
 /** Returns the color of the stacked shadow at [param index]. */
-get_stacked_shadow_color(): Color;
+get_stacked_shadow_color(index: int): Color;
 
 /** Returns the offset of the stacked shadow at [param index]. */
-get_stacked_shadow_offset(): Vector2;
+get_stacked_shadow_offset(index: int): Vector2;
 
 /** Returns the outline size of the stacked shadow at [param index]. */
-get_stacked_shadow_outline_size(): int;
+get_stacked_shadow_outline_size(index: int): int;
 
 /** Moves the stacked outline at index [param from_index] to the given position [param to_position] in the array. */
-move_stacked_outline(): void;
+move_stacked_outline(from_index: int, to_position: int): void;
 
 /** Moves the stacked shadow at index [param from_index] to the given position [param to_position] in the array. */
-move_stacked_shadow(): void;
+move_stacked_shadow(from_index: int, to_position: int): void;
 
 /** Removes the stacked outline at index [param index]. */
-remove_stacked_outline(): void;
+remove_stacked_outline(index: int): void;
 
 /** Removes the stacked shadow at index [param index]. */
-remove_stacked_shadow(): void;
+remove_stacked_shadow(index: int): void;
 
 /** Sets the color of the stacked outline identified by the given [param index] to [param color]. */
-set_stacked_outline_color(): void;
+set_stacked_outline_color(index: int, color: Color): void;
 
 /** Sets the size of the stacked outline identified by the given [param index] to [param size]. */
-set_stacked_outline_size(): void;
+set_stacked_outline_size(index: int, size: int): void;
 
 /** Sets the color of the stacked shadow identified by the given [param index] to [param color]. */
-set_stacked_shadow_color(): void;
+set_stacked_shadow_color(index: int, color: Color): void;
 
 /** Sets the offset of the stacked shadow identified by the given [param index] to [param offset]. */
-set_stacked_shadow_offset(): void;
+set_stacked_shadow_offset(index: int, offset: Vector2): void;
 
 /** Sets the outline size of the stacked shadow identified by the given [param index] to [param size]. */
-set_stacked_shadow_outline_size(): void;
+set_stacked_shadow_outline_size(index: int, size: int): void;
 
   connect<T extends SignalsOf<LabelSettings>>(signal: T, method: SignalFunction<LabelSettings[T]>): number;
 

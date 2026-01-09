@@ -20,22 +20,22 @@ declare class ResourcePreloader extends Node  {
 
 
 /** Adds a resource to the preloader with the given [param name]. If a resource with the given [param name] already exists, the new resource will be renamed to "[param name] N" where N is an incrementing number starting from 2. */
-add_resource(): void;
+add_resource(name: StringName, resource: Resource): void;
 
 /** Returns the resource associated to [param name]. */
-get_resource(): Resource;
+get_resource(name: StringName): Resource;
 
 /** Returns the list of resources inside the preloader. */
 get_resource_list(): PackedStringArray;
 
 /** Returns [code]true[/code] if the preloader contains a resource associated to [param name]. */
-has_resource(): boolean;
+has_resource(name: StringName): boolean;
 
 /** Removes the resource associated to [param name] from the preloader. */
-remove_resource(): void;
+remove_resource(name: StringName): void;
 
 /** Renames a resource inside the preloader from [param name] to [param newname]. */
-rename_resource(): void;
+rename_resource(name: StringName, newname: StringName): void;
 
   connect<T extends SignalsOf<ResourcePreloader>>(signal: T, method: SignalFunction<ResourcePreloader[T]>): number;
 

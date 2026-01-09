@@ -58,10 +58,10 @@ size: Vector3;
 update_mode: int;
 
 /** Returns [code]true[/code] if the specified layer of the [member heightfield_mask] is enabled, given a [param layer_number] between [code]1[/code] and [code]20[/code], inclusive. */
-get_heightfield_mask_value(): boolean;
+get_heightfield_mask_value(layer_number: int): boolean;
 
 /** Based on [param value], enables or disables the specified layer in the [member heightfield_mask], given a [param layer_number] between [code]1[/code] and [code]20[/code], inclusive. */
-set_heightfield_mask_value(): void;
+set_heightfield_mask_value(layer_number: int, value: boolean): void;
 
   connect<T extends SignalsOf<GPUParticlesCollisionHeightField3D>>(signal: T, method: SignalFunction<GPUParticlesCollisionHeightField3D[T]>): number;
 

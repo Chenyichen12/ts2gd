@@ -18,68 +18,69 @@ declare class VisualShader extends Shader  {
 graph_offset: Vector2;
 
 /** Adds the specified [param node] to the shader. */
-add_node(): void;
+add_node(type: int, node: VisualShaderNode, position: Vector2, id: int): void;
 
 /** Adds a new varying value node to the shader. */
-add_varying(): void;
+add_varying(name: string, mode: int, type: int): void;
 
 /** Attaches the given node to the given frame. */
-attach_node_to_frame(): void;
+attach_node_to_frame(type: int, id: int, frame: int): void;
 
 /** Returns [code]true[/code] if the specified nodes and ports can be connected together. */
-can_connect_nodes(): boolean;
+can_connect_nodes(type: int, from_node: int, from_port: int, to_node: int, to_port: int): boolean;
 
 /** Connects the specified nodes and ports. */
-connect_nodes(): int;
+connect_nodes(type: int, from_node: int, from_port: int, to_node: int, to_port: int): int;
 
 /** Connects the specified nodes and ports, even if they can't be connected. Such connection is invalid and will not function properly. */
-connect_nodes_forced(): void;
+connect_nodes_forced(type: int, from_node: int, from_port: int, to_node: int, to_port: int): void;
 
 /** Detaches the given node from the frame it is attached to. */
-detach_node_from_frame(): void;
+detach_node_from_frame(type: int, id: int): void;
 
 /** Connects the specified nodes and ports. */
-disconnect_nodes(): void;
+disconnect_nodes(type: int, from_node: int, from_port: int, to_node: int, to_port: int): void;
 
 /** Returns the shader node instance with specified [param type] and [param id]. */
 get_node(path: NodePathType): Node;
 
 /** Returns the shader node instance with specified [param type] and [param id]. */
+get_node<T extends Node>(path: NodePathType): T;
 get_node_unsafe<T extends Node>(path: NodePathType): T;
 
 
 /** Returns the list of connected nodes with the specified type. */
-get_node_connections(): Dictionary[];
+get_node_connections(type: int): Dictionary[];
 
 /** Returns the list of all nodes in the shader with the specified type. */
-get_node_list(): PackedInt32Array;
+get_node_list(type: int): PackedInt32Array;
 
 /** Returns the position of the specified node within the shader graph. */
-get_node_position(): Vector2;
+get_node_position(type: int, id: int): Vector2;
 
 /** Returns next valid node ID that can be added to the shader graph. */
-get_valid_node_id(): int;
+get_valid_node_id(type: int): int;
 
 /** Returns [code]true[/code] if the shader has a varying with the given [param name]. */
-has_varying(): boolean;
+has_varying(name: string): boolean;
 
 /** Returns [code]true[/code] if the specified node and port connection exist. */
-is_node_connection(): boolean;
+is_node_connection(type: int, from_node: int, from_port: int, to_node: int, to_port: int): boolean;
 
 /** Removes the specified node from the shader. */
-remove_node(): void;
+remove_node(type: int, id: int): void;
 
 /** Removes a varying value node with the given [param name]. Prints an error if a node with this name is not found. */
-remove_varying(): void;
+remove_varying(name: string): void;
 
 /** Replaces the specified node with a node of new class type. */
-replace_node(): void;
+replace_node(type: int, id: int, new_class: StringName): void;
 
 /** Sets the mode of this shader. */
-set_mode(): void;
+set_mode(mode: int): void;
 
 /** Sets the position of the specified node. */
-set_node_position(): void;
+set_node_position(type: int, id: int, position: Vector2): void;
 
   connect<T extends SignalsOf<VisualShader>>(signal: T, method: SignalFunction<VisualShader[T]>): number;
 

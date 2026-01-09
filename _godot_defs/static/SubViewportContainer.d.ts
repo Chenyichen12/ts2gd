@@ -52,7 +52,7 @@ stretch: boolean;
 stretch_shrink: int;
 
 /** Virtual method to be implemented by the user. If it returns [code]true[/code], the [param event] is propagated to [SubViewport] children. Propagation doesn't happen if it returns [code]false[/code]. If the function is not implemented, all events are propagated to SubViewports. */
-protected _propagate_input_event(): boolean;
+protected _propagate_input_event(event: InputEvent): boolean;
 
   connect<T extends SignalsOf<SubViewportContainer>>(signal: T, method: SignalFunction<SubViewportContainer[T]>): number;
 

@@ -28,7 +28,7 @@ declare class String {
 
 
 /** Returns [code]true[/code] if the string begins with the given [param text]. See also [method ends_with]. */
-begins_with(): boolean;
+begins_with(text: string): boolean;
 
 /**
  * Returns an array containing the bigrams (pairs of consecutive characters) of this string.
@@ -103,7 +103,7 @@ capitalize(): string;
  * To get a [bool] result from a string comparison, use the `==` operator instead. See also [method nocasecmp_to], [method filecasecmp_to], and [method naturalcasecmp_to].
  *
 */
-casecmp_to(): int;
+casecmp_to(to: string): int;
 
 /**
  * Returns a single Unicode character from the integer [param code]. You may use [url=https://unicodelookup.com/]unicodelookup.com[/url] or [url=https://www.unicode.org/charts/]unicode.org[/url] as points of reference.
@@ -118,7 +118,7 @@ casecmp_to(): int;
  * See also [method unicode_at], [method @GDScript.char], and [method @GDScript.ord].
  *
 */
-chr(): string;
+chr(code: int): string;
 
 /**
  * Returns `true` if the string contains [param what]. In GDScript, this corresponds to the `in` operator.
@@ -140,7 +140,7 @@ chr(): string;
  * If you need to know where [param what] is within the string, use [method find]. See also [method containsn].
  *
 */
-contains(): boolean;
+contains(what: string): boolean;
 
 /**
  * Returns `true` if the string contains [param what], **ignoring case**.
@@ -148,22 +148,22 @@ contains(): boolean;
  * If you need to know where [param what] is within the string, use [method findn]. See also [method contains].
  *
 */
-containsn(): boolean;
+containsn(what: string): boolean;
 
 /** Returns the number of occurrences of the substring [param what] between [param from] and [param to] positions. If [param to] is 0, the search continues until the end of the string. */
-count(): int;
+count(what: string, from?: int, to?: int): int;
 
 /** Returns the number of occurrences of the substring [param what] between [param from] and [param to] positions, [b]ignoring case[/b]. If [param to] is 0, the search continues until the end of the string. */
-countn(): int;
+countn(what: string, from?: int, to?: int): int;
 
 /** Returns a copy of the string with indentation (leading tabs and spaces) removed. See also [method indent] to add indentation. */
 dedent(): string;
 
 /** Returns [code]true[/code] if the string ends with the given [param text]. See also [method begins_with]. */
-ends_with(): boolean;
+ends_with(text: string): boolean;
 
 /** Returns a string with [param chars] characters erased starting from [param position]. If [param chars] goes beyond the string's length given the specified [param position], fewer characters will be erased from the returned string. Returns an empty string if either [param position] or [param chars] is negative. Returns the original string unmodified if [param chars] is [code]0[/code]. */
-erase(): string;
+erase(position: int, chars?: int): string;
 
 /**
  * Like [method naturalcasecmp_to] but prioritizes strings that begin with periods (`.`) and underscores (`_`) before any other character. Useful when sorting folders or file names.
@@ -171,7 +171,7 @@ erase(): string;
  * To get a [bool] result from a string comparison, use the `==` operator instead. See also [method filenocasecmp_to], [method naturalcasecmp_to], and [method casecmp_to].
  *
 */
-filecasecmp_to(): int;
+filecasecmp_to(to: string): int;
 
 /**
  * Like [method naturalnocasecmp_to] but prioritizes strings that begin with periods (`.`) and underscores (`_`) before any other character. Useful when sorting folders or file names.
@@ -179,7 +179,7 @@ filecasecmp_to(): int;
  * To get a [bool] result from a string comparison, use the `==` operator instead. See also [method filecasecmp_to], [method naturalnocasecmp_to], and [method nocasecmp_to].
  *
 */
-filenocasecmp_to(): int;
+filenocasecmp_to(to: string): int;
 
 /**
  * Returns the index of the **first** occurrence of [param what] in this string, or `-1` if there are none. The search's start can be specified with [param from], continuing to the end of the string.
@@ -206,10 +206,10 @@ filenocasecmp_to(): int;
  * **Note:** A negative value of [param from] is converted to a starting index by counting back from the last possible index with enough space to find [param what].
  *
 */
-find(): int;
+find(what: string, from?: int): int;
 
 /** Returns the index of the [b]first[/b] [b]case-insensitive[/b] occurrence of [param what] in this string, or [code]-1[/code] if there are none. The starting search index can be specified with [param from], continuing to the end of the string. */
-findn(): int;
+findn(what: string, from?: int): int;
 
 /**
  * Formats the string by replacing all occurrences of [param placeholder] with the elements of [param values].
@@ -262,7 +262,7 @@ findn(): int;
  * **Note:** In C#, it's recommended to [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]interpolate strings with "$"[/url], instead.
  *
 */
-format(): string;
+format(values: any, placeholder?: string): string;
 
 /**
  * If the string is a valid file path, returns the base directory name.
@@ -331,7 +331,7 @@ get_file(): string;
  * 
  *
 */
-get_slice(): string;
+get_slice(delimiter: string, slice: int): string;
 
 /**
  * Returns the total number of slices when the string is split with the given [param delimiter] (see [method split]).
@@ -346,7 +346,7 @@ get_slice(): string;
  * 
  *
 */
-get_slice_count(): int;
+get_slice_count(delimiter: string): int;
 
 /**
  * Splits the string using a Unicode character with code [param delimiter] and returns the substring at index [param slice]. Returns an empty string if the [param slice] does not exist.
@@ -356,7 +356,7 @@ get_slice_count(): int;
  * This is a Unicode version of [method get_slice].
  *
 */
-get_slicec(): string;
+get_slicec(delimiter: int, slice: int): string;
 
 /**
  * Returns the 32-bit hash value representing the string's contents.
@@ -412,7 +412,7 @@ hex_to_int(): int;
  * The result is in [url=https://en.wikipedia.org/wiki/Binary_prefix#IEC_prefixes]IEC prefix format[/url], which may end in either `"B"`, `"KiB"`, `"MiB"`, `"GiB"`, `"TiB"`, `"PiB"`, or `"EiB"`.
  *
 */
-humanize_size(): string;
+humanize_size(size: int): string;
 
 /**
  * Indents every line of the string with the given [param prefix]. Empty lines are not indented. See also [method dedent] to remove indentation.
@@ -420,10 +420,10 @@ humanize_size(): string;
  * For example, the string can be indented with two tabulations using `"\t\t"`, or four spaces using `"    "`.
  *
 */
-indent(): string;
+indent(prefix: string): string;
 
 /** Inserts [param what] at the given [param position] in the string. */
-insert(): string;
+insert(position: int, what: string): string;
 
 /**
  * Returns `true` if the string is a path to a file or directory, and its starting point is explicitly defined. This method is the opposite of [method is_relative_path].
@@ -453,10 +453,10 @@ is_relative_path(): boolean;
  * 
  *
 */
-is_subsequence_of(): boolean;
+is_subsequence_of(text: string): boolean;
 
 /** Returns [code]true[/code] if all characters of this string can be found in [param text] in their original order, [b]ignoring case[/b]. This is not the same as [method containsn]. */
-is_subsequence_ofn(): boolean;
+is_subsequence_ofn(text: string): boolean;
 
 /**
  * Returns `true` if this string is a valid ASCII identifier. A valid ASCII identifier may contain only letters, digits, and underscores (`_`), and the first character may not be a digit.
@@ -508,7 +508,7 @@ is_valid_float(): boolean;
  * 
  *
 */
-is_valid_hex_number(): boolean;
+is_valid_hex_number(with_prefix?: boolean): boolean;
 
 /** Returns [code]true[/code] if this string is a valid color in hexadecimal HTML notation. The string must be a hexadecimal value (see [method is_valid_hex_number]) of either 3, 4, 6 or 8 digits, and may be prefixed by a hash sign ([code]#[/code]). Other HTML notations for colors, such as names or [code]hsl()[/code], are not considered valid. See also [method Color.html]. */
 is_valid_html_color(): boolean;
@@ -590,7 +590,7 @@ is_valid_unicode_identifier(): boolean;
  * 
  *
 */
-join(): string;
+join(parts: PackedStringArray): string;
 
 /** Returns a copy of the string with special characters escaped using the JSON standard. Because it closely matches the C standard, it is possible to use [method c_unescape] to unescape the string, if necessary. */
 json_escape(): string;
@@ -606,13 +606,13 @@ json_escape(): string;
  * 
  *
 */
-left(): string;
+left(length: int): string;
 
 /** Returns the number of characters in the string. Empty strings ([code]""[/code]) always return [code]0[/code]. See also [method is_empty]. */
 length(): int;
 
 /** Formats the string to be at least [param min_length] long by adding [param character]s to the left of the string, if necessary. See also [method rpad]. */
-lpad(): string;
+lpad(min_length: int, character?: string): string;
 
 /**
  * Removes a set of characters defined in [param chars] from the string's beginning. See also [method rstrip].
@@ -620,13 +620,13 @@ lpad(): string;
  * **Note:** [param chars] is not a prefix. Use [method trim_prefix] to remove a single prefix, rather than a set of characters.
  *
 */
-lstrip(): string;
+lstrip(chars: string): string;
 
 /** Does a simple expression match (also called "glob" or "globbing"), where [code]*[/code] matches zero or more arbitrary characters and [code]?[/code] matches any single character except a period ([code].[/code]). An empty string or empty expression always evaluates to [code]false[/code]. */
-match(): boolean;
+match(expr: string): boolean;
 
 /** Does a simple [b]case-insensitive[/b] expression match, where [code]*[/code] matches zero or more arbitrary characters and [code]?[/code] matches any single character except a period ([code].[/code]). An empty string or empty expression always evaluates to [code]false[/code]. */
-matchn(): boolean;
+matchn(expr: string): boolean;
 
 /** Returns the [url=https://en.wikipedia.org/wiki/MD5]MD5 hash[/url] of the string as a [PackedByteArray]. */
 md5_buffer(): PackedByteArray;
@@ -644,7 +644,7 @@ md5_text(): string;
  * To get a [bool] result from a string comparison, use the `==` operator instead. See also [method naturalnocasecmp_to], [method filecasecmp_to], and [method nocasecmp_to].
  *
 */
-naturalcasecmp_to(): int;
+naturalcasecmp_to(to: string): int;
 
 /**
  * Performs a **case-insensitive**, **natural order** comparison to another string. Returns `-1` if less than, `1` if greater than, or `0` if equal. "Less than" or "greater than" are determined by the [url=https://en.wikipedia.org/wiki/List_of_Unicode_characters]Unicode code points[/url] of each string, which roughly matches the alphabetical order. Internally, lowercase characters are converted to uppercase for the comparison.
@@ -656,7 +656,7 @@ naturalcasecmp_to(): int;
  * To get a [bool] result from a string comparison, use the `==` operator instead. See also [method naturalcasecmp_to], [method filenocasecmp_to], and [method casecmp_to].
  *
 */
-naturalnocasecmp_to(): int;
+naturalnocasecmp_to(to: string): int;
 
 /**
  * Performs a **case-insensitive** comparison to another string. Returns `-1` if less than, `1` if greater than, or `0` if equal. "Less than" or "greater than" are determined by the [url=https://en.wikipedia.org/wiki/List_of_Unicode_characters]Unicode code points[/url] of each string, which roughly matches the alphabetical order. Internally, lowercase characters are converted to uppercase for the comparison.
@@ -666,7 +666,7 @@ naturalnocasecmp_to(): int;
  * To get a [bool] result from a string comparison, use the `==` operator instead. See also [method casecmp_to], [method filenocasecmp_to], and [method naturalnocasecmp_to].
  *
 */
-nocasecmp_to(): int;
+nocasecmp_to(to: string): int;
 
 /**
  * Converts a [float] to a string representation of a decimal number, with the number of decimal places specified in [param decimals].
@@ -690,7 +690,7 @@ nocasecmp_to(): int;
  * 
  *
 */
-num(): string;
+num(number: float, decimals?: int): string;
 
 /**
  * Converts the given [param number] to a string representation, with the given [param base].
@@ -700,7 +700,7 @@ num(): string;
  * If [param capitalize_hex] is `true`, digits higher than 9 are represented in uppercase.
  *
 */
-num_int64(): string;
+num_int64(number: int, base?: int, capitalize_hex?: boolean): string;
 
 /**
  * Converts the given [param number] to a string representation, in scientific notation.
@@ -725,7 +725,7 @@ num_int64(): string;
  * **Note:** In C#, this method is not implemented. To achieve similar results, see C#'s [url=https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings]Standard numeric format strings[/url].
  *
 */
-num_scientific(): string;
+num_scientific(number: float): string;
 
 /**
  * Converts the given unsigned [int] to a string representation, with the given [param base].
@@ -735,13 +735,13 @@ num_scientific(): string;
  * If [param capitalize_hex] is `true`, digits higher than 9 are represented in uppercase.
  *
 */
-num_uint64(): string;
+num_uint64(number: int, base?: int, capitalize_hex?: boolean): string;
 
 /** Formats the string representing a number to have an exact number of [param digits] [i]after[/i] the decimal point. */
-pad_decimals(): string;
+pad_decimals(digits: int): string;
 
 /** Formats the string representing a number to have an exact number of [param digits] [i]before[/i] the decimal point. */
-pad_zeros(): string;
+pad_zeros(digits: int): string;
 
 /**
  * Concatenates [param path] at the end of the string as a subpath, adding `/` if necessary.
@@ -749,28 +749,28 @@ pad_zeros(): string;
  * **Example:** `"this/is".path_join("path") == "this/is/path"`.
  *
 */
-path_join(): string;
+path_join(path: string): string;
 
 /** Removes all occurrences of the Unicode character with code [param what]. Faster version of [method replace] when the key is only one character long and the replacement is [code]""[/code]. */
-remove_char(): string;
+remove_char(what: int): string;
 
 /** Removes all occurrences of the characters in [param chars]. See also [method remove_char]. */
-remove_chars(): string;
+remove_chars(chars: string): string;
 
 /** Repeats this string a number of times. [param count] needs to be greater than [code]0[/code]. Otherwise, returns an empty string. */
-repeat(): string;
+repeat(count: int): string;
 
 /** Replaces all occurrences of [param what] inside the string with the given [param forwhat]. */
-replace(): string;
+replace(what: string, forwhat: string): string;
 
 /** Replaces all occurrences of the Unicode character with code [param key] with the Unicode character with code [param with]. Faster version of [method replace] when the key is only one character long. To get a single character use [code]"X".unicode_at(0)[/code] (note that some strings, like compound letters and emoji, can be composed of multiple unicode codepoints, and will not work with this method, use [method length] to make sure). */
-replace_char(): string;
+replace_char(key: int, _with: int): string;
 
 /** Replaces any occurrence of the characters in [param keys] with the Unicode character with code [param with]. See also [method replace_char]. */
-replace_chars(): string;
+replace_chars(keys: string, _with: int): string;
 
 /** Replaces all [b]case-insensitive[/b] occurrences of [param what] inside the string with the given [param forwhat]. */
-replacen(): string;
+replacen(what: string, forwhat: string): string;
 
 /** Returns the copy of this string in reverse order. This operation works on unicode codepoints, rather than sequences of codepoints, and may break things like compound letters or emojis. */
 reverse(): string;
@@ -783,10 +783,10 @@ reverse(): string;
  * **Note:** A value of [param from] that is greater than the last possible index with enough space to find [param what] is considered out-of-bounds, and returns `-1`.
  *
 */
-rfind(): int;
+rfind(what: string, from?: int): int;
 
 /** Returns the index of the [b]last[/b] [b]case-insensitive[/b] occurrence of [param what] in this string, or [code]-1[/code] if there are none. The starting search index can be specified with [param from], continuing to the beginning of the string. This method is the reverse of [method findn]. */
-rfindn(): int;
+rfindn(what: string, from?: int): int;
 
 /**
  * Returns the last [param length] characters from the end of the string. If [param length] is negative, strips the first [param length] characters from the string's beginning.
@@ -799,10 +799,10 @@ rfindn(): int;
  * 
  *
 */
-right(): string;
+right(length: int): string;
 
 /** Formats the string to be at least [param min_length] long, by adding [param character]s to the right of the string, if necessary. See also [method lpad]. */
-rpad(): string;
+rpad(min_length: int, character?: string): string;
 
 /**
  * Splits the string using a [param delimiter] and returns an array of the substrings, starting from the end of the string. The splits in the returned array appear in the same order as the original string. If [param delimiter] is an empty string, each substring will be a single character.
@@ -827,7 +827,7 @@ rpad(): string;
  * 
  *
 */
-rsplit(): PackedStringArray;
+rsplit(delimiter?: string, allow_empty?: boolean, maxsplit?: int): PackedStringArray;
 
 /**
  * Removes a set of characters defined in [param chars] from the string's end. See also [method lstrip].
@@ -835,7 +835,7 @@ rsplit(): PackedStringArray;
  * **Note:** [param chars] is not a suffix. Use [method trim_suffix] to remove a single suffix, rather than a set of characters.
  *
 */
-rstrip(): string;
+rstrip(chars: string): string;
 
 /** Returns the [url=https://en.wikipedia.org/wiki/SHA-1]SHA-1[/url] hash of the string as a [PackedByteArray]. */
 sha1_buffer(): PackedByteArray;
@@ -862,7 +862,7 @@ sha256_text(): string;
  * 
  *
 */
-similarity(): float;
+similarity(text: string): float;
 
 /**
  * If the string is a valid file path, converts the string into a canonical path. This is the shortest possible path, without `"./"`, and all the unnecessary `".."` and `"/"`.
@@ -906,7 +906,7 @@ simplify_path(): string;
  * **Note:** If you only need one substring from the array, consider using [method get_slice] which is faster. If you need to split strings with more complex rules, use the [RegEx] class instead.
  *
 */
-split(): PackedStringArray;
+split(delimiter?: string, allow_empty?: boolean, maxsplit?: int): PackedStringArray;
 
 /**
  * Splits the string into floats by using a [param delimiter] and returns a [PackedFloat64Array].
@@ -922,7 +922,7 @@ split(): PackedStringArray;
  * 
  *
 */
-split_floats(): PackedFloat64Array;
+split_floats(delimiter: string, allow_empty?: boolean): PackedFloat64Array;
 
 /**
  * Strips all non-printable characters from the beginning and the end of the string. These include spaces, tabulations (`\t`), and newlines (`\n` `\r`).
@@ -930,13 +930,13 @@ split_floats(): PackedFloat64Array;
  * If [param left] is `false`, ignores the string's beginning. Likewise, if [param right] is `false`, ignores the string's end.
  *
 */
-strip_edges(): string;
+strip_edges(left?: boolean, right?: boolean): string;
 
 /** Strips all escape characters from the string. These include all non-printable control characters of the first page of the ASCII table (values from 0 to 31), such as tabulation ([code]\t[/code]) and newline ([code]\n[/code], [code]\r[/code]) characters, but [i]not[/i] spaces. */
 strip_escapes(): string;
 
 /** Returns part of the string from the position [param from] with length [param len]. If [param len] is [code]-1[/code] (as by default), returns the rest of the string starting from the given position. */
-substr(): string;
+substr(from: int, len?: int): string;
 
 /** Converts the string to an [url=https://en.wikipedia.org/wiki/ASCII]ASCII[/url]/Latin-1 encoded [PackedByteArray]. This method is slightly faster than [method to_utf8_buffer], but replaces all unsupported characters with spaces. This is the inverse of [method PackedByteArray.get_string_from_ascii]. */
 to_ascii_buffer(): PackedByteArray;
@@ -1011,7 +1011,7 @@ to_lower(): string;
  * - For macOS and Linux/BSD, see `libiconv` library documentation and `iconv --list` for a list of supported encodings.
  *
 */
-to_multibyte_char_buffer(): PackedByteArray;
+to_multibyte_char_buffer(encoding?: string): PackedByteArray;
 
 /** Returns the string converted to [code]PascalCase[/code]. */
 to_pascal_case(): string;
@@ -1055,10 +1055,10 @@ to_utf32_buffer(): PackedByteArray;
 to_wchar_buffer(): PackedByteArray;
 
 /** Removes the given [param prefix] from the start of the string, or returns the string unchanged. */
-trim_prefix(): string;
+trim_prefix(prefix: string): string;
 
 /** Removes the given [param suffix] from the end of the string, or returns the string unchanged. */
-trim_suffix(): string;
+trim_suffix(suffix: string): string;
 
 /**
  * Returns the character code at position [param at].
@@ -1066,7 +1066,7 @@ trim_suffix(): string;
  * See also [method chr], [method @GDScript.char], and [method @GDScript.ord].
  *
 */
-unicode_at(): int;
+unicode_at(at: int): int;
 
 /**
  * Decodes the string from its URL-encoded format. This method is meant to properly decode the parameters in a URL when receiving an HTTP request. See also [method uri_encode].
@@ -1120,7 +1120,7 @@ validate_filename(): string;
 validate_node_name(): string;
 
 /** Returns a copy of the string with special characters escaped using the XML standard. If [param escape_quotes] is [code]true[/code], the single quote ([code]'[/code]) and double quote ([code]"[/code]) characters are also escaped. */
-xml_escape(): string;
+xml_escape(escape_quotes?: boolean): string;
 
 /** Returns a copy of the string with escaped characters replaced by their meanings according to the XML standard. */
 xml_unescape(): string;

@@ -162,13 +162,13 @@ clear_cache(): void;
  * **Note:** This function will not remove textures associated with the glyphs, use [method remove_texture] to remove them manually.
  *
 */
-clear_glyphs(): void;
+clear_glyphs(cache_index: int, size: Vector2i): void;
 
 /** Removes all kerning overrides. */
-clear_kerning_map(): void;
+clear_kerning_map(cache_index: int, size: int): void;
 
 /** Removes all font sizes from the cache entry. */
-clear_size_cache(): void;
+clear_size_cache(cache_index: int): void;
 
 /**
  * Removes all textures from font cache entry.
@@ -176,40 +176,40 @@ clear_size_cache(): void;
  * **Note:** This function will not remove glyphs associated with the texture, use [method remove_glyph] to remove them manually.
  *
 */
-clear_textures(): void;
+clear_textures(cache_index: int, size: Vector2i): void;
 
 /** Returns the font ascent (number of pixels above the baseline). */
-get_cache_ascent(): float;
+get_cache_ascent(cache_index: int, size: int): float;
 
 /** Returns number of the font cache entries. */
 get_cache_count(): int;
 
 /** Returns the font descent (number of pixels below the baseline). */
-get_cache_descent(): float;
+get_cache_descent(cache_index: int, size: int): float;
 
 /** Returns scaling factor of the color bitmap font. */
-get_cache_scale(): float;
+get_cache_scale(cache_index: int, size: int): float;
 
 /** Returns pixel offset of the underline below the baseline. */
-get_cache_underline_position(): float;
+get_cache_underline_position(cache_index: int, size: int): float;
 
 /** Returns thickness of the underline in pixels. */
-get_cache_underline_thickness(): float;
+get_cache_underline_thickness(cache_index: int, size: int): float;
 
 /** Returns character code associated with [param glyph_index], or [code]0[/code] if [param glyph_index] is invalid. See [method get_glyph_index]. */
-get_char_from_glyph_index(): int;
+get_char_from_glyph_index(size: int, glyph_index: int): int;
 
 /** Returns embolden strength, if is not equal to zero, emboldens the font outlines. Negative values reduce the outline thickness. */
-get_embolden(): float;
+get_embolden(cache_index: int): float;
 
 /** Returns extra baseline offset (as a fraction of font height). */
-get_extra_baseline_offset(): float;
+get_extra_baseline_offset(cache_index: int): float;
 
 /** Returns spacing for [param spacing] in pixels (not relative to the font size). */
-get_extra_spacing(): int;
+get_extra_spacing(cache_index: int, spacing: int): int;
 
 /** Returns an active face index in the TrueType / OpenType collection. */
-get_face_index(): int;
+get_face_index(cache_index: int): int;
 
 /**
  * Returns glyph advance (offset of the next glyph).
@@ -217,61 +217,61 @@ get_face_index(): int;
  * **Note:** Advance for glyphs outlines is the same as the base glyph advance and is not saved.
  *
 */
-get_glyph_advance(): Vector2;
+get_glyph_advance(cache_index: int, size: int, glyph: int): Vector2;
 
 /** Returns the glyph index of a [param char], optionally modified by the [param variation_selector]. */
-get_glyph_index(): int;
+get_glyph_index(size: int, char: int, variation_selector: int): int;
 
 /** Returns list of rendered glyphs in the cache entry. */
-get_glyph_list(): PackedInt32Array;
+get_glyph_list(cache_index: int, size: Vector2i): PackedInt32Array;
 
 /** Returns glyph offset from the baseline. */
-get_glyph_offset(): Vector2;
+get_glyph_offset(cache_index: int, size: Vector2i, glyph: int): Vector2;
 
 /** Returns glyph size. */
-get_glyph_size(): Vector2;
+get_glyph_size(cache_index: int, size: Vector2i, glyph: int): Vector2;
 
 /** Returns index of the cache texture containing the glyph. */
-get_glyph_texture_idx(): int;
+get_glyph_texture_idx(cache_index: int, size: Vector2i, glyph: int): int;
 
 /** Returns rectangle in the cache texture containing the glyph. */
-get_glyph_uv_rect(): Rect2;
+get_glyph_uv_rect(cache_index: int, size: Vector2i, glyph: int): Rect2;
 
 /** Returns kerning for the pair of glyphs. */
-get_kerning(): Vector2;
+get_kerning(cache_index: int, size: int, glyph_pair: Vector2i): Vector2;
 
 /** Returns list of the kerning overrides. */
-get_kerning_list(): Vector2i[];
+get_kerning_list(cache_index: int, size: int): Vector2i[];
 
 /** Returns [code]true[/code] if support override is enabled for the [param language]. */
-get_language_support_override(): boolean;
+get_language_support_override(language: string): boolean;
 
 /** Returns list of language support overrides. */
 get_language_support_overrides(): PackedStringArray;
 
 /** Returns [code]true[/code] if support override is enabled for the [param script]. */
-get_script_support_override(): boolean;
+get_script_support_override(script: string): boolean;
 
 /** Returns list of script support overrides. */
 get_script_support_overrides(): PackedStringArray;
 
 /** Returns list of the font sizes in the cache. Each size is [Vector2i] with font size and outline size. */
-get_size_cache_list(): Vector2i[];
+get_size_cache_list(cache_index: int): Vector2i[];
 
 /** Returns number of textures used by font cache entry. */
-get_texture_count(): int;
+get_texture_count(cache_index: int, size: Vector2i): int;
 
 /** Returns a copy of the font cache texture image. */
-get_texture_image(): Image;
+get_texture_image(cache_index: int, size: Vector2i, texture_index: int): Image;
 
 /** Returns a copy of the array containing glyph packing data. */
-get_texture_offsets(): PackedInt32Array;
+get_texture_offsets(cache_index: int, size: Vector2i, texture_index: int): PackedInt32Array;
 
 /** Returns 2D transform, applied to the font outlines, can be used for slanting, flipping and rotating glyphs. */
-get_transform(): Transform2D;
+get_transform(cache_index: int): Transform2D;
 
 /** Returns variation coordinates for the specified font cache entry. See [method Font.get_supported_variation_list] for more info. */
-get_variation_coordinates(): Dictionary<any, any>;
+get_variation_coordinates(cache_index: int): Dictionary<any, any>;
 
 /**
  * Loads an AngelCode BMFont (.fnt, .font) bitmap font from file [param path].
@@ -279,7 +279,7 @@ get_variation_coordinates(): Dictionary<any, any>;
  * **Warning:** This method should only be used in the editor or in cases when you need to load external fonts at run-time, such as fonts located at the `user://` directory.
  *
 */
-load_bitmap_font(): int;
+load_bitmap_font(path: string): int;
 
 /**
  * Loads a TrueType (.ttf), OpenType (.otf), WOFF (.woff), WOFF2 (.woff2) or Type 1 (.pfb, .pfm) dynamic font from file [param path].
@@ -287,10 +287,10 @@ load_bitmap_font(): int;
  * **Warning:** This method should only be used in the editor or in cases when you need to load external fonts at run-time, such as fonts located at the `user://` directory.
  *
 */
-load_dynamic_font(): int;
+load_dynamic_font(path: string): int;
 
 /** Removes specified font cache entry. */
-remove_cache(): void;
+remove_cache(cache_index: int): void;
 
 /**
  * Removes specified rendered glyph information from the cache entry.
@@ -298,19 +298,19 @@ remove_cache(): void;
  * **Note:** This function will not remove textures associated with the glyphs, use [method remove_texture] to remove them manually.
  *
 */
-remove_glyph(): void;
+remove_glyph(cache_index: int, size: Vector2i, glyph: int): void;
 
 /** Removes kerning override for the pair of glyphs. */
-remove_kerning(): void;
+remove_kerning(cache_index: int, size: int, glyph_pair: Vector2i): void;
 
 /** Remove language support override. */
-remove_language_support_override(): void;
+remove_language_support_override(language: string): void;
 
 /** Removes script support override. */
-remove_script_support_override(): void;
+remove_script_support_override(script: string): void;
 
 /** Removes specified font size from the cache entry. */
-remove_size_cache(): void;
+remove_size_cache(cache_index: int, size: Vector2i): void;
 
 /**
  * Removes specified texture from the cache entry.
@@ -318,40 +318,40 @@ remove_size_cache(): void;
  * **Note:** This function will not remove glyphs associated with the texture. Remove them manually using [method remove_glyph].
  *
 */
-remove_texture(): void;
+remove_texture(cache_index: int, size: Vector2i, texture_index: int): void;
 
 /** Renders specified glyph to the font cache texture. */
-render_glyph(): void;
+render_glyph(cache_index: int, size: Vector2i, index: int): void;
 
 /** Renders the range of characters to the font cache texture. */
-render_range(): void;
+render_range(cache_index: int, size: Vector2i, start: int, end: int): void;
 
 /** Sets the font ascent (number of pixels above the baseline). */
-set_cache_ascent(): void;
+set_cache_ascent(cache_index: int, size: int, ascent: float): void;
 
 /** Sets the font descent (number of pixels below the baseline). */
-set_cache_descent(): void;
+set_cache_descent(cache_index: int, size: int, descent: float): void;
 
 /** Sets scaling factor of the color bitmap font. */
-set_cache_scale(): void;
+set_cache_scale(cache_index: int, size: int, scale: float): void;
 
 /** Sets pixel offset of the underline below the baseline. */
-set_cache_underline_position(): void;
+set_cache_underline_position(cache_index: int, size: int, underline_position: float): void;
 
 /** Sets thickness of the underline in pixels. */
-set_cache_underline_thickness(): void;
+set_cache_underline_thickness(cache_index: int, size: int, underline_thickness: float): void;
 
 /** Sets embolden strength, if is not equal to zero, emboldens the font outlines. Negative values reduce the outline thickness. */
-set_embolden(): void;
+set_embolden(cache_index: int, strength: float): void;
 
 /** Sets extra baseline offset (as a fraction of font height). */
-set_extra_baseline_offset(): void;
+set_extra_baseline_offset(cache_index: int, baseline_offset: float): void;
 
 /** Sets the spacing for [param spacing] to [param value] in pixels (not relative to the font size). */
-set_extra_spacing(): void;
+set_extra_spacing(cache_index: int, spacing: int, value: int): void;
 
 /** Sets an active face index in the TrueType / OpenType collection. */
-set_face_index(): void;
+set_face_index(cache_index: int, face_index: int): void;
 
 /**
  * Sets glyph advance (offset of the next glyph).
@@ -359,40 +359,40 @@ set_face_index(): void;
  * **Note:** Advance for glyphs outlines is the same as the base glyph advance and is not saved.
  *
 */
-set_glyph_advance(): void;
+set_glyph_advance(cache_index: int, size: int, glyph: int, advance: Vector2): void;
 
 /** Sets glyph offset from the baseline. */
-set_glyph_offset(): void;
+set_glyph_offset(cache_index: int, size: Vector2i, glyph: int, offset: Vector2): void;
 
 /** Sets glyph size. */
-set_glyph_size(): void;
+set_glyph_size(cache_index: int, size: Vector2i, glyph: int, gl_size: Vector2): void;
 
 /** Sets index of the cache texture containing the glyph. */
-set_glyph_texture_idx(): void;
+set_glyph_texture_idx(cache_index: int, size: Vector2i, glyph: int, texture_idx: int): void;
 
 /** Sets rectangle in the cache texture containing the glyph. */
-set_glyph_uv_rect(): void;
+set_glyph_uv_rect(cache_index: int, size: Vector2i, glyph: int, uv_rect: Rect2): void;
 
 /** Sets kerning for the pair of glyphs. */
-set_kerning(): void;
+set_kerning(cache_index: int, size: int, glyph_pair: Vector2i, kerning: Vector2): void;
 
 /** Adds override for [method Font.is_language_supported]. */
-set_language_support_override(): void;
+set_language_support_override(language: string, supported: boolean): void;
 
 /** Adds override for [method Font.is_script_supported]. */
-set_script_support_override(): void;
+set_script_support_override(script: string, supported: boolean): void;
 
 /** Sets font cache texture image. */
-set_texture_image(): void;
+set_texture_image(cache_index: int, size: Vector2i, texture_index: int, image: Image): void;
 
 /** Sets array containing glyph packing data. */
-set_texture_offsets(): void;
+set_texture_offsets(cache_index: int, size: Vector2i, texture_index: int, offset: PackedInt32Array): void;
 
 /** Sets 2D transform, applied to the font outlines, can be used for slanting, flipping, and rotating glyphs. */
-set_transform(): void;
+set_transform(cache_index: int, transform: Transform2D): void;
 
 /** Sets variation coordinates for the specified font cache entry. See [method Font.get_supported_variation_list] for more info. */
-set_variation_coordinates(): void;
+set_variation_coordinates(cache_index: int, variation_coordinates: Dictionary<any, any>): void;
 
   connect<T extends SignalsOf<FontFile>>(signal: T, method: SignalFunction<FontFile[T]>): number;
 

@@ -58,46 +58,46 @@ declare class CopyTransformModifier3D extends BoneConstraint3D  {
 setting_count: int;
 
 /** Returns the axis flags of the setting at [param index]. */
-get_axis_flags(): int;
+get_axis_flags(index: int): int;
 
 /** Returns the copy flags of the setting at [param index]. */
-get_copy_flags(): int;
+get_copy_flags(index: int): int;
 
 /** Returns the invert flags of the setting at [param index]. */
-get_invert_flags(): int;
+get_invert_flags(index: int): int;
 
 /** Returns [code]true[/code] if the additive option is enabled in the setting at [param index]. */
-is_additive(): boolean;
+is_additive(index: int): boolean;
 
 /** Returns [code]true[/code] if the enable flags has the flag for the X-axis in the setting at [param index]. See also [method set_axis_flags]. */
-is_axis_x_enabled(): boolean;
+is_axis_x_enabled(index: int): boolean;
 
 /** Returns [code]true[/code] if the invert flags has the flag for the X-axis in the setting at [param index]. See also [method set_invert_flags]. */
-is_axis_x_inverted(): boolean;
+is_axis_x_inverted(index: int): boolean;
 
 /** Returns [code]true[/code] if the enable flags has the flag for the Y-axis in the setting at [param index]. See also [method set_axis_flags]. */
-is_axis_y_enabled(): boolean;
+is_axis_y_enabled(index: int): boolean;
 
 /** Returns [code]true[/code] if the invert flags has the flag for the Y-axis in the setting at [param index]. See also [method set_invert_flags]. */
-is_axis_y_inverted(): boolean;
+is_axis_y_inverted(index: int): boolean;
 
 /** Returns [code]true[/code] if the enable flags has the flag for the Z-axis in the setting at [param index]. See also [method set_axis_flags]. */
-is_axis_z_enabled(): boolean;
+is_axis_z_enabled(index: int): boolean;
 
 /** Returns [code]true[/code] if the invert flags has the flag for the Z-axis in the setting at [param index]. See also [method set_invert_flags]. */
-is_axis_z_inverted(): boolean;
+is_axis_z_inverted(index: int): boolean;
 
 /** Returns [code]true[/code] if the copy flags has the flag for the position in the setting at [param index]. See also [method set_copy_flags]. */
-is_position_copying(): boolean;
+is_position_copying(index: int): boolean;
 
 /** Returns [code]true[/code] if the relative option is enabled in the setting at [param index]. */
-is_relative(): boolean;
+is_relative(index: int): boolean;
 
 /** Returns [code]true[/code] if the copy flags has the flag for the rotation in the setting at [param index]. See also [method set_copy_flags]. */
-is_rotation_copying(): boolean;
+is_rotation_copying(index: int): boolean;
 
 /** Returns [code]true[/code] if the copy flags has the flag for the scale in the setting at [param index]. See also [method set_copy_flags]. */
-is_scale_copying(): boolean;
+is_scale_copying(index: int): boolean;
 
 /**
  * Sets additive option in the setting at [param index] to [param enabled]. This mainly affects the process of applying transform to the [method BoneConstraint3D.set_apply_bone].
@@ -107,28 +107,28 @@ is_scale_copying(): boolean;
  * If sets [param enabled] to `false`, the pose of the current apply bone is replaced with the processed transform. However, if set [method set_relative] to `true`, the transform is relative to rest.
  *
 */
-set_additive(): void;
+set_additive(index: int, enabled: boolean): void;
 
 /** Sets the flags to copy axes. If the flag is valid, the axis is copied. */
-set_axis_flags(): void;
+set_axis_flags(index: int, axis_flags: int): void;
 
 /** If sets [param enabled] to [code]true[/code], the X-axis will be copied. */
-set_axis_x_enabled(): void;
+set_axis_x_enabled(index: int, enabled: boolean): void;
 
 /** If sets [param enabled] to [code]true[/code], the X-axis will be inverted. */
-set_axis_x_inverted(): void;
+set_axis_x_inverted(index: int, enabled: boolean): void;
 
 /** If sets [param enabled] to [code]true[/code], the Y-axis will be copied. */
-set_axis_y_enabled(): void;
+set_axis_y_enabled(index: int, enabled: boolean): void;
 
 /** If sets [param enabled] to [code]true[/code], the Y-axis will be inverted. */
-set_axis_y_inverted(): void;
+set_axis_y_inverted(index: int, enabled: boolean): void;
 
 /** If sets [param enabled] to [code]true[/code], the Z-axis will be copied. */
-set_axis_z_enabled(): void;
+set_axis_z_enabled(index: int, enabled: boolean): void;
 
 /** If sets [param enabled] to [code]true[/code], the Z-axis will be inverted. */
-set_axis_z_inverted(): void;
+set_axis_z_inverted(index: int, enabled: boolean): void;
 
 /**
  * Sets the flags to process the transform operations. If the flag is valid, the transform operation is processed.
@@ -136,16 +136,16 @@ set_axis_z_inverted(): void;
  * **Note:** If the rotation is valid for only one axis, it respects the roll of the valid axis. If the rotation is valid for two axes, it discards the roll of the invalid axis.
  *
 */
-set_copy_flags(): void;
+set_copy_flags(index: int, copy_flags: int): void;
 
 /** If sets [param enabled] to [code]true[/code], the position will be copied. */
-set_copy_position(): void;
+set_copy_position(index: int, enabled: boolean): void;
 
 /** If sets [param enabled] to [code]true[/code], the rotation will be copied. */
-set_copy_rotation(): void;
+set_copy_rotation(index: int, enabled: boolean): void;
 
 /** If sets [param enabled] to [code]true[/code], the scale will be copied. */
-set_copy_scale(): void;
+set_copy_scale(index: int, enabled: boolean): void;
 
 /**
  * Sets the flags to inverte axes. If the flag is valid, the axis is copied.
@@ -155,7 +155,7 @@ set_copy_scale(): void;
  * **Note:** An inverted rotation flips the elements of the quaternion. For example, a two-axis inversion will flip the roll of each axis, and a three-axis inversion will flip the final orientation. However, be aware that flipping only one axis may cause unintended rotation by the unflipped axes, due to the characteristics of the quaternion.
  *
 */
-set_invert_flags(): void;
+set_invert_flags(index: int, axis_flags: int): void;
 
 /**
  * Sets relative option in the setting at [param index] to [param enabled].
@@ -165,7 +165,7 @@ set_invert_flags(): void;
  * If sets [param enabled] to `false`, the extracted transform is absolute.
  *
 */
-set_relative(): void;
+set_relative(index: int, enabled: boolean): void;
 
   connect<T extends SignalsOf<CopyTransformModifier3D>>(signal: T, method: SignalFunction<CopyTransformModifier3D[T]>): number;
 

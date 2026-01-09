@@ -207,19 +207,19 @@ virtual_keyboard_show_on_focus: boolean;
 wrap_mode: int;
 
 /** Override this method to define what happens when the user presses the backspace key. */
-protected _backspace(): void;
+protected _backspace(caret_index: int): void;
 
 /** Override this method to define what happens when the user performs a copy operation. */
-protected _copy(): void;
+protected _copy(caret_index: int): void;
 
 /** Override this method to define what happens when the user performs a cut operation. */
-protected _cut(): void;
+protected _cut(caret_index: int): void;
 
 /** Override this method to define what happens when the user types in the provided key [param unicode_char]. */
-protected _handle_unicode_input(): void;
+protected _handle_unicode_input(unicode_char: int, caret_index: int): void;
 
 /** Override this method to define what happens when the user performs a paste operation. */
-protected _paste(): void;
+protected _paste(caret_index: int): void;
 
 /**
  * Override this method to define what happens when the user performs a paste operation with middle mouse button.
@@ -227,31 +227,31 @@ protected _paste(): void;
  * **Note:** This method is only implemented on Linux.
  *
 */
-protected _paste_primary_clipboard(): void;
+protected _paste_primary_clipboard(caret_index: int): void;
 
 /** Adds a new caret at the given location. Returns the index of the new caret, or [code]-1[/code] if the location is invalid. */
-add_caret(): int;
+add_caret(line: int, column: int): int;
 
 /** Adds an additional caret above or below every caret. If [param below] is [code]true[/code] the new caret will be added below and above otherwise. */
-add_caret_at_carets(): void;
+add_caret_at_carets(below: boolean): void;
 
 /** Register a new gutter to this [TextEdit]. Use [param at] to have a specific gutter order. A value of [code]-1[/code] appends the gutter to the right. */
-add_gutter(): void;
+add_gutter(at?: int): void;
 
 /** Adds a selection and a caret for the next occurrence of the current selection. If there is no active selection, selects word under caret. */
 add_selection_for_next_occurrence(): void;
 
 /** This method does nothing. */
-adjust_carets_after_edit(): void;
+adjust_carets_after_edit(caret: int, from_line: int, from_col: int, to_line: int, to_col: int): void;
 
 /** Adjust the viewport so the caret is visible. */
-adjust_viewport_to_caret(): void;
+adjust_viewport_to_caret(caret_index?: int): void;
 
 /** Applies text from the [url=https://en.wikipedia.org/wiki/Input_method]Input Method Editor[/url] (IME) to each caret and closes the IME if it is open. */
 apply_ime(): void;
 
 /** Called when the user presses the backspace key. Can be overridden with [method _backspace]. */
-backspace(): void;
+backspace(caret_index?: int): void;
 
 /** Starts a multipart edit. All edits will be treated as one action until [method end_complex_operation] is called. */
 begin_complex_operation(): void;
@@ -279,7 +279,7 @@ begin_multicaret_edit(): void;
 cancel_ime(): void;
 
 /** Centers the viewport on the line the editing caret is at. This also resets the [member scroll_horizontal] value to [code]0[/code]. */
-center_viewport_to_caret(): void;
+center_viewport_to_caret(caret_index?: int): void;
 
 /** Performs a full reset of [TextEdit], including undo history. */
 clear(): void;
@@ -297,19 +297,19 @@ clear_undo_history(): void;
  * [method merge_overlapping_carets] will be called if any carets were collapsed.
  *
 */
-collapse_carets(): void;
+collapse_carets(from_line: int, from_column: int, to_line: int, to_column: int, inclusive?: boolean): void;
 
 /** Copies the current text selection. Can be overridden with [method _copy]. */
-copy(): void;
+copy(caret_index?: int): void;
 
 /** Cut's the current selection. Can be overridden with [method _cut]. */
-cut(): void;
+cut(caret_index?: int): void;
 
 /** Deletes the selected text. */
-delete_selection(): void;
+delete_selection(caret_index?: int): void;
 
 /** Deselects the current selection. */
-deselect(): void;
+deselect(caret_index?: int): void;
 
 /** Marks the end of steps in the current action started with [method start_action]. */
 end_action(): void;
@@ -321,25 +321,25 @@ end_complex_operation(): void;
 end_multicaret_edit(): void;
 
 /** Returns the column the editing caret is at. */
-get_caret_column(): int;
+get_caret_column(caret_index?: int): int;
 
 /** Returns the number of carets in this [TextEdit]. */
 get_caret_count(): int;
 
 /** Returns the caret pixel draw position. */
-get_caret_draw_pos(): Vector2;
+get_caret_draw_pos(caret_index?: int): Vector2;
 
 /** Returns a list of caret indexes in their edit order, this done from bottom to top. Edit order refers to the way actions such as [method insert_text_at_caret] are applied. */
 get_caret_index_edit_order(): PackedInt32Array;
 
 /** Returns the line the editing caret is on. */
-get_caret_line(): int;
+get_caret_line(caret_index?: int): int;
 
 /** Returns the wrap index the editing caret is on. */
-get_caret_wrap_index(): int;
+get_caret_wrap_index(caret_index?: int): int;
 
 /** Returns the first column containing a non-whitespace character on the given line. If there is only whitespace, returns the number of characters. */
-get_first_non_whitespace_column(): int;
+get_first_non_whitespace_column(line: int): int;
 
 /** Returns the first visible line. */
 get_first_visible_line(): int;
@@ -348,19 +348,19 @@ get_first_visible_line(): int;
 get_gutter_count(): int;
 
 /** Returns the name of the gutter at the given index. */
-get_gutter_name(): string;
+get_gutter_name(gutter: int): string;
 
 /** Returns the type of the gutter at the given index. Gutters can contain icons, text, or custom visuals. */
-get_gutter_type(): int;
+get_gutter_type(gutter: int): int;
 
 /** Returns the width of the gutter at the given index. */
-get_gutter_width(): int;
+get_gutter_width(gutter: int): int;
 
 /** Returns the [HScrollBar] used by [TextEdit]. */
 get_h_scroll_bar(): HScrollBar;
 
 /** Returns the indent level of the given line. This is the number of spaces and tabs at the beginning of the line, with the tabs taking the tab size into account (see [method get_tab_size]). */
-get_indent_level(): int;
+get_indent_level(line: int): int;
 
 /** Returns the last visible line. Use [method get_last_full_visible_line_wrap_index] for the wrap index. */
 get_last_full_visible_line(): int;
@@ -372,10 +372,10 @@ get_last_full_visible_line_wrap_index(): int;
 get_last_unhidden_line(): int;
 
 /** Returns the text of a specific line. */
-get_line(): string;
+get_line(line: int): string;
 
 /** Returns the custom background color of the given line. If no color is set, returns [code]Color(0, 0, 0, 0)[/code]. */
-get_line_background_color(): Color;
+get_line_background_color(line: int): Color;
 
 /**
  * Returns the line and column at the given position. In the returned vector, `x` is the column and `y` is the line.
@@ -385,22 +385,22 @@ get_line_background_color(): Color;
  * If [param clamp_column] is `false` and [param position] is outside the column range of the line, `Vector2i(-1, -1)` is returned.
  *
 */
-get_line_column_at_pos(): Vector2i;
+get_line_column_at_pos(position: Vector2i, clamp_line?: boolean, clamp_column?: boolean): Vector2i;
 
 /** Returns the number of lines in the text. */
 get_line_count(): int;
 
 /** Returns the icon currently in [param gutter] at [param line]. This only works when the gutter type is [constant GUTTER_TYPE_ICON] (see [method set_gutter_type]). */
-get_line_gutter_icon(): Texture2D;
+get_line_gutter_icon(line: int, gutter: int): Texture2D;
 
 /** Returns the color currently in [param gutter] at [param line]. */
-get_line_gutter_item_color(): Color;
+get_line_gutter_item_color(line: int, gutter: int): Color;
 
 /** Returns the metadata currently in [param gutter] at [param line]. */
-get_line_gutter_metadata(): any;
+get_line_gutter_metadata(line: int, gutter: int): any;
 
 /** Returns the text currently in [param gutter] at [param line]. This only works when the gutter type is [constant GUTTER_TYPE_STRING] (see [method set_gutter_type]). */
-get_line_gutter_text(): string;
+get_line_gutter_text(line: int, gutter: int): string;
 
 /**
  * Returns the maximum value of the line height among all lines.
@@ -416,22 +416,22 @@ get_line_height(): int;
  * If a selection's end column ([method get_selection_to_column]) is at column `0`, that line will not be included. If a selection begins on the line after another selection ends and [param merge_adjacent] is `true`, or they begin and end on the same line, one line range will include both selections.
  *
 */
-get_line_ranges_from_carets(): Vector2i[];
+get_line_ranges_from_carets(only_selections?: boolean, merge_adjacent?: boolean): Vector2i[];
 
 /** Returns the width in pixels of the [param wrap_index] on [param line]. */
-get_line_width(): int;
+get_line_width(line: int, wrap_index?: int): int;
 
 /** Returns line text as it is currently displayed, including IME composition string. */
-get_line_with_ime(): string;
+get_line_with_ime(line: int): string;
 
 /** Returns the number of times the given line is wrapped. */
-get_line_wrap_count(): int;
+get_line_wrap_count(line: int): int;
 
 /** Returns the wrap index of the given column on the given line. This ranges from [code]0[/code] to [method get_line_wrap_count]. */
-get_line_wrap_index_at_column(): int;
+get_line_wrap_index_at_column(line: int, column: int): int;
 
 /** Returns an array of [String]s representing each wrapped index. */
-get_line_wrapped_text(): PackedStringArray;
+get_line_wrapped_text(line: int): PackedStringArray;
 
 /** Returns the local mouse position adjusted for the text direction. */
 get_local_mouse_pos(): Vector2;
@@ -486,7 +486,7 @@ get_local_mouse_pos(): Vector2;
 get_menu(): PopupMenu;
 
 /** Returns the equivalent minimap line at [param position]. */
-get_minimap_line_at_pos(): int;
+get_minimap_line_at_pos(position: Vector2i): int;
 
 /** Returns the number of lines that may be drawn on the minimap. */
 get_minimap_visible_lines(): int;
@@ -497,13 +497,13 @@ get_minimap_visible_lines(): int;
  * **Note:** To check at caret location use `get_next_composite_character_column(get_caret_line(), get_caret_column())`
  *
 */
-get_next_composite_character_column(): int;
+get_next_composite_character_column(line: int, column: int): int;
 
 /** Similar to [method get_next_visible_line_offset_from], but takes into account the line wrap indexes. In the returned vector, [code]x[/code] is the line, [code]y[/code] is the wrap index. */
-get_next_visible_line_index_offset_from(): Vector2i;
+get_next_visible_line_index_offset_from(line: int, wrap_index: int, visible_amount: int): Vector2i;
 
 /** Returns the count to the next visible line from [param line] to [code]line + visible_amount[/code]. Can also count backwards. For example if a [TextEdit] has 5 lines with lines 2 and 3 hidden, calling this with [code]line = 1, visible_amount = 1[/code] would return 3. */
-get_next_visible_line_offset_from(): int;
+get_next_visible_line_offset_from(line: int, visible_amount: int): int;
 
 /**
  * Returns the local position for the given [param line] and [param column]. If `x` or `y` of the returned vector equal `-1`, the position is outside of the viewable area of the control.
@@ -511,7 +511,7 @@ get_next_visible_line_offset_from(): int;
  * **Note:** The Y position corresponds to the bottom side of the line. Use [method get_rect_at_line_column] to get the top side position.
  *
 */
-get_pos_at_line_column(): Vector2i;
+get_pos_at_line_column(line: int, column: int): Vector2i;
 
 /**
  * Returns the correct column at the start of a composite character like ❤️‍🩹 (mending heart; Unicode: `U+2764 U+FE0F U+200D U+1FA79`) which is comprised of more than one Unicode code point, if the caret is at the end of the composite character. Also returns the correct column with the caret at mid grapheme and for non-composite characters.
@@ -519,7 +519,7 @@ get_pos_at_line_column(): Vector2i;
  * **Note:** To check at caret location use `get_previous_composite_character_column(get_caret_line(), get_caret_column())`
  *
 */
-get_previous_composite_character_column(): int;
+get_previous_composite_character_column(line: int, column: int): int;
 
 /**
  * Returns the local position and size for the grapheme at the given [param line] and [param column]. If `x` or `y` position of the returned rect equal `-1`, the position is outside of the viewable area of the control.
@@ -527,16 +527,16 @@ get_previous_composite_character_column(): int;
  * **Note:** The Y position of the returned rect corresponds to the top side of the line, unlike [method get_pos_at_line_column] which returns the bottom side.
  *
 */
-get_rect_at_line_column(): Rect2i;
+get_rect_at_line_column(line: int, column: int): Rect2i;
 
 /** Returns the last tagged saved version from [method tag_saved_version]. */
 get_saved_version(): int;
 
 /** Returns the scroll position for [param wrap_index] of [param line]. */
-get_scroll_pos_for_line(): float;
+get_scroll_pos_for_line(line: int, wrap_index?: int): float;
 
 /** Returns the text inside the selection of a caret, or all the carets if [param caret_index] is its default value [code]-1[/code]. */
-get_selected_text(): string;
+get_selected_text(caret_index?: int): string;
 
 /**
  * Returns the caret index of the selection at the given [param line] and [param column], or `-1` if there is none.
@@ -544,34 +544,34 @@ get_selected_text(): string;
  * If [param include_edges] is `false`, the position must be inside the selection and not at either end. If [param only_selections] is `false`, carets without a selection will also be considered.
  *
 */
-get_selection_at_line_column(): int;
+get_selection_at_line_column(line: int, column: int, include_edges?: boolean, only_selections?: boolean): int;
 
 /** Returns the original start column of the selection. */
-get_selection_column(): int;
+get_selection_column(caret_index?: int): int;
 
 /** Returns the selection begin column. Returns the caret column if there is no selection. */
-get_selection_from_column(): int;
+get_selection_from_column(caret_index?: int): int;
 
 /** Returns the selection begin line. Returns the caret line if there is no selection. */
-get_selection_from_line(): int;
+get_selection_from_line(caret_index?: int): int;
 
 /** Returns the original start line of the selection. */
-get_selection_line(): int;
+get_selection_line(caret_index?: int): int;
 
 /** Returns the current selection mode. */
 get_selection_mode(): int;
 
 /** Returns the origin column of the selection. This is the opposite end from the caret. */
-get_selection_origin_column(): int;
+get_selection_origin_column(caret_index?: int): int;
 
 /** Returns the origin line of the selection. This is the opposite end from the caret. */
-get_selection_origin_line(): int;
+get_selection_origin_line(caret_index?: int): int;
 
 /** Returns the selection end column. Returns the caret column if there is no selection. */
-get_selection_to_column(): int;
+get_selection_to_column(caret_index?: int): int;
 
 /** Returns the selection end line. Returns the caret line if there is no selection. */
-get_selection_to_line(): int;
+get_selection_to_line(caret_index?: int): int;
 
 /**
  * Returns the carets sorted by selection beginning from lowest line and column to highest (from top to bottom of text).
@@ -579,7 +579,7 @@ get_selection_to_line(): int;
  * If [param include_ignored_carets] is `false`, carets from [method multicaret_edit_ignore_caret] will be ignored.
  *
 */
-get_sorted_carets(): PackedInt32Array;
+get_sorted_carets(include_ignored_carets?: boolean): PackedInt32Array;
 
 /** Returns the [TextEdit]'s' tab size. */
 get_tab_size(): int;
@@ -600,13 +600,13 @@ get_version(): int;
 get_visible_line_count(): int;
 
 /** Returns the total number of lines between [param from_line] and [param to_line] (inclusive) in the text. This includes wrapped lines and excludes folded lines. If the range covers all lines it is equivalent to [method get_total_visible_line_count]. */
-get_visible_line_count_in_range(): int;
+get_visible_line_count_in_range(from_line: int, to_line: int): int;
 
 /** Returns the word at [param position]. */
-get_word_at_pos(): string;
+get_word_at_pos(position: Vector2): string;
 
 /** Returns a [String] text with the word under the caret's location. */
-get_word_under_caret(): string;
+get_word_under_caret(caret_index?: int): string;
 
 /** Returns [code]true[/code] if the user has text in the [url=https://en.wikipedia.org/wiki/Input_method]Input Method Editor[/url] (IME). */
 has_ime_text(): boolean;
@@ -615,13 +615,13 @@ has_ime_text(): boolean;
 has_redo(): boolean;
 
 /** Returns [code]true[/code] if the user has selected text. */
-has_selection(): boolean;
+has_selection(caret_index?: int): boolean;
 
 /** Returns [code]true[/code] if an "undo" action is available. */
 has_undo(): boolean;
 
 /** Inserts a new line with [param text] at [param line]. */
-insert_line_at(): void;
+insert_line_at(line: int, text: string): void;
 
 /**
  * Inserts the [param text] at [param line] and [param column].
@@ -631,13 +631,13 @@ insert_line_at(): void;
  * If [param before_selection_end] is `true`, selections that end at [param line] and [param column] will be extended to the end of the inserted text. These parameters can be used to insert text inside of or outside of selections.
  *
 */
-insert_text(): void;
+insert_text(text: string, line: int, column: int, before_selection_begin?: boolean, before_selection_end?: boolean): void;
 
 /** Insert the specified text at the caret position. */
-insert_text_at_caret(): void;
+insert_text_at_caret(text: string, caret_index?: int): void;
 
 /** Returns [code]true[/code] if the caret of the selection is after the selection origin. This can be used to determine the direction of the selection. */
-is_caret_after_selection_origin(): boolean;
+is_caret_after_selection_origin(caret_index?: int): boolean;
 
 /**
  * Returns `true` if the caret is visible, `false` otherwise. A caret will be considered hidden if it is outside the scrollable area when scrolling is enabled.
@@ -645,43 +645,43 @@ is_caret_after_selection_origin(): boolean;
  * **Note:** [method is_caret_visible] does not account for a caret being off-screen if it is still within the scrollable area. It will return `true` even if the caret is off-screen as long as it meets [TextEdit]'s own conditions for being visible. This includes uses of [member scroll_fit_content_width] and [member scroll_fit_content_height] that cause the [TextEdit] to expand beyond the viewport's bounds.
  *
 */
-is_caret_visible(): boolean;
+is_caret_visible(caret_index?: int): boolean;
 
 /** Returns [code]true[/code] if the user is dragging their mouse for scrolling, selecting, or text dragging. */
 is_dragging_cursor(): boolean;
 
 /** Returns [code]true[/code] if the gutter at the given index is clickable. See [method set_gutter_clickable]. */
-is_gutter_clickable(): boolean;
+is_gutter_clickable(gutter: int): boolean;
 
 /** Returns [code]true[/code] if the gutter at the given index is currently drawn. See [method set_gutter_draw]. */
-is_gutter_drawn(): boolean;
+is_gutter_drawn(gutter: int): boolean;
 
 /** Returns [code]true[/code] if the gutter at the given index is overwritable. See [method set_gutter_overwritable]. */
-is_gutter_overwritable(): boolean;
+is_gutter_overwritable(gutter: int): boolean;
 
 /** Returns [code]true[/code] if a [method begin_multicaret_edit] has been called and [method end_multicaret_edit] has not yet been called. */
 is_in_mulitcaret_edit(): boolean;
 
 /** Returns [code]true[/code] if the gutter at the given index on the given line is clickable. See [method set_line_gutter_clickable]. */
-is_line_gutter_clickable(): boolean;
+is_line_gutter_clickable(line: int, gutter: int): boolean;
 
 /** Returns if the given line is wrapped. */
-is_line_wrapped(): boolean;
+is_line_wrapped(line: int): boolean;
 
 /** Returns [code]true[/code] if the menu is visible. Use this instead of [code]get_menu().visible[/code] to improve performance (so the creation of the menu is avoided). See [method get_menu]. */
 is_menu_visible(): boolean;
 
 /** Returns [code]true[/code] if the mouse is over a selection. If [param edges] is [code]true[/code], the edges are considered part of the selection. */
-is_mouse_over_selection(): boolean;
+is_mouse_over_selection(edges: boolean, caret_index?: int): boolean;
 
 /** Returns [code]true[/code] if overtype mode is enabled. See [method set_overtype_mode_enabled]. */
 is_overtype_mode_enabled(): boolean;
 
 /** Executes a given action as defined in the [enum MenuItems] enum. */
-menu_option(): void;
+menu_option(option: int): void;
 
 /** Merge the gutters from [param from_line] into [param to_line]. Only overwritable gutters will be copied. See [method set_gutter_overwritable]. */
-merge_gutters(): void;
+merge_gutters(from_line: int, to_line: int): void;
 
 /**
  * Merges any overlapping carets. Will favor the newest caret, or the caret with a selection.
@@ -699,13 +699,13 @@ merge_overlapping_carets(): void;
  * It is recommended to `continue` within a loop iterating on multiple carets if a caret should be ignored.
  *
 */
-multicaret_edit_ignore_caret(): boolean;
+multicaret_edit_ignore_caret(caret_index: int): boolean;
 
 /** Paste at the current location. Can be overridden with [method _paste]. */
-paste(): void;
+paste(caret_index?: int): void;
 
 /** Pastes the primary clipboard. */
-paste_primary_clipboard(): void;
+paste_primary_clipboard(caret_index?: int): void;
 
 /** Perform redo operation. */
 redo(): void;
@@ -716,10 +716,10 @@ redo(): void;
  * **Note:** This can result in adjustment of all other caret indices.
  *
 */
-remove_caret(): void;
+remove_caret(caret: int): void;
 
 /** Removes the gutter at the given index. */
-remove_gutter(): void;
+remove_gutter(gutter: int): void;
 
 /**
  * Removes the line of text at [param line]. Carets on this line will attempt to match their previous visual x position.
@@ -727,13 +727,13 @@ remove_gutter(): void;
  * If [param move_carets_down] is `true` carets will move to the next line down, otherwise carets will move up.
  *
 */
-remove_line_at(): void;
+remove_line_at(line: int, move_carets_down?: boolean): void;
 
 /** Removes all additional carets. */
 remove_secondary_carets(): void;
 
 /** Removes text between the given positions. */
-remove_text(): void;
+remove_text(from_line: int, from_column: int, to_line: int, to_column: int): void;
 
 /**
  * Perform a search inside the text. Search flags can be specified in the [enum SearchFlags] enum.
@@ -762,7 +762,7 @@ remove_text(): void;
  * 
  *
 */
-search(): Vector2i;
+search(text: string, flags: int, from_line: int, from_column: int): Vector2i;
 
 /**
  * Selects text from [param origin_line] and [param origin_column] to [param caret_line] and [param caret_column] for the given [param caret_index]. This moves the selection origin and the caret. If the positions are the same, the selection will be deselected.
@@ -772,7 +772,7 @@ search(): Vector2i;
  * **Note:** If supporting multiple carets this will not check for any overlap. See [method merge_overlapping_carets].
  *
 */
-select(): void;
+select(origin_line: int, origin_column: int, caret_line: int, caret_column: int, caret_index?: int): void;
 
 /**
  * Select all the text.
@@ -783,7 +783,7 @@ select(): void;
 select_all(): void;
 
 /** Selects the word under the caret. */
-select_word_under_caret(): void;
+select_word_under_caret(caret_index?: int): void;
 
 /**
  * Moves the caret to the specified [param column] index.
@@ -793,7 +793,7 @@ select_word_under_caret(): void;
  * **Note:** If supporting multiple carets this will not check for any overlap. See [method merge_overlapping_carets].
  *
 */
-set_caret_column(): void;
+set_caret_column(column: int, adjust_viewport?: boolean, caret_index?: int): void;
 
 /**
  * Moves the caret to the specified [param line] index. The caret column will be moved to the same visual position it was at the last time [method set_caret_column] was called, or clamped to the end of the line.
@@ -807,28 +807,28 @@ set_caret_column(): void;
  * **Note:** If supporting multiple carets this will not check for any overlap. See [method merge_overlapping_carets].
  *
 */
-set_caret_line(): void;
+set_caret_line(line: int, adjust_viewport?: boolean, can_be_hidden?: boolean, wrap_index?: int, caret_index?: int): void;
 
 /** If [code]true[/code], the mouse cursor will change to a pointing hand ([constant Control.CURSOR_POINTING_HAND]) when hovering over the gutter at the given index. See [method is_gutter_clickable] and [method set_line_gutter_clickable]. */
-set_gutter_clickable(): void;
+set_gutter_clickable(gutter: int, clickable: boolean): void;
 
 /** Set a custom draw callback for the gutter at the given index. [param draw_callback] must take the following arguments: A line index [int], a gutter index [int], and an area [Rect2]. This callback only works when the gutter type is [constant GUTTER_TYPE_CUSTOM] (see [method set_gutter_type]). */
-set_gutter_custom_draw(): void;
+set_gutter_custom_draw(column: int, draw_callback: Callable): void;
 
 /** If [code]true[/code], the gutter at the given index is drawn. The gutter type ([method set_gutter_type]) determines how it is drawn. See [method is_gutter_drawn]. */
-set_gutter_draw(): void;
+set_gutter_draw(gutter: int, draw: boolean): void;
 
 /** Sets the name of the gutter at the given index. */
-set_gutter_name(): void;
+set_gutter_name(gutter: int, name: string): void;
 
 /** If [code]true[/code], the line data of the gutter at the given index can be overridden when using [method merge_gutters]. See [method is_gutter_overwritable]. */
-set_gutter_overwritable(): void;
+set_gutter_overwritable(gutter: int, overwritable: boolean): void;
 
 /** Sets the type of gutter at the given index. Gutters can contain icons, text, or custom visuals. */
-set_gutter_type(): void;
+set_gutter_type(gutter: int, type: int): void;
 
 /** Set the width of the gutter at the given index. */
-set_gutter_width(): void;
+set_gutter_width(gutter: int, width: int): void;
 
 /**
  * Sets the text for a specific [param line].
@@ -836,49 +836,49 @@ set_gutter_width(): void;
  * Carets on the line will attempt to keep their visual x position.
  *
 */
-set_line(): void;
+set_line(line: int, new_text: string): void;
 
 /** Positions the [param wrap_index] of [param line] at the center of the viewport. */
-set_line_as_center_visible(): void;
+set_line_as_center_visible(line: int, wrap_index?: int): void;
 
 /** Positions the [param wrap_index] of [param line] at the top of the viewport. */
-set_line_as_first_visible(): void;
+set_line_as_first_visible(line: int, wrap_index?: int): void;
 
 /** Positions the [param wrap_index] of [param line] at the bottom of the viewport. */
-set_line_as_last_visible(): void;
+set_line_as_last_visible(line: int, wrap_index?: int): void;
 
 /** Sets the custom background color of the given line. If transparent, this color is applied on top of the default background color (See [theme_item background_color]). If set to [code]Color(0, 0, 0, 0)[/code], no additional color is applied. */
-set_line_background_color(): void;
+set_line_background_color(line: int, color: Color): void;
 
 /** If [param clickable] is [code]true[/code], makes the [param gutter] on the given [param line] clickable. This is like [method set_gutter_clickable], but for a single line. If [method is_gutter_clickable] is [code]true[/code], this will not have any effect. See [method is_line_gutter_clickable] and [signal gutter_clicked]. */
-set_line_gutter_clickable(): void;
+set_line_gutter_clickable(line: int, gutter: int, clickable: boolean): void;
 
 /** Sets the icon for [param gutter] on [param line] to [param icon]. This only works when the gutter type is [constant GUTTER_TYPE_ICON] (see [method set_gutter_type]). */
-set_line_gutter_icon(): void;
+set_line_gutter_icon(line: int, gutter: int, icon: Texture2D): void;
 
 /** Sets the color for [param gutter] on [param line] to [param color]. */
-set_line_gutter_item_color(): void;
+set_line_gutter_item_color(line: int, gutter: int, color: Color): void;
 
 /** Sets the metadata for [param gutter] on [param line] to [param metadata]. */
-set_line_gutter_metadata(): void;
+set_line_gutter_metadata(line: int, gutter: int, metadata: any): void;
 
 /** Sets the text for [param gutter] on [param line] to [param text]. This only works when the gutter type is [constant GUTTER_TYPE_STRING] (see [method set_gutter_type]). */
-set_line_gutter_text(): void;
+set_line_gutter_text(line: int, gutter: int, text: string): void;
 
 /** If [code]true[/code], enables overtype mode. In this mode, typing overrides existing text instead of inserting text. The [member ProjectSettings.input/ui_text_toggle_insert_mode] action toggles overtype mode. See [method is_overtype_mode_enabled]. */
-set_overtype_mode_enabled(): void;
+set_overtype_mode_enabled(enabled: boolean): void;
 
 /** Sets the search [param flags]. This is used with [method set_search_text] to highlight occurrences of the searched text. Search flags can be specified from the [enum SearchFlags] enum. */
-set_search_flags(): void;
+set_search_flags(flags: int): void;
 
 /** Sets the search text. See [method set_search_flags]. */
-set_search_text(): void;
+set_search_text(search_text: string): void;
 
 /** Sets the current selection mode. */
-set_selection_mode(): void;
+set_selection_mode(mode: int): void;
 
 /** Sets the selection origin column to the [param column] for the given [param caret_index]. If the selection origin is moved to the caret position, the selection will deselect. */
-set_selection_origin_column(): void;
+set_selection_origin_column(column: int, caret_index?: int): void;
 
 /**
  * Sets the selection origin line to the [param line] for the given [param caret_index]. If the selection origin is moved to the caret position, the selection will deselect.
@@ -888,13 +888,13 @@ set_selection_origin_column(): void;
  * If [param wrap_index] is `-1`, the selection origin column will be clamped to the [param line]'s length. If [param wrap_index] is greater than `-1`, the column will be moved to attempt to match the visual x position on the line's [param wrap_index] to the position from the last time [method set_selection_origin_column] or [method select] was called.
  *
 */
-set_selection_origin_line(): void;
+set_selection_origin_line(line: int, can_be_hidden?: boolean, wrap_index?: int, caret_index?: int): void;
 
 /** Sets the tab size for the [TextEdit] to use. */
-set_tab_size(): void;
+set_tab_size(size: int): void;
 
 /** Provide custom tooltip text. The callback method must take the following args: [code]hovered_word: String[/code]. */
-set_tooltip_request_func(): void;
+set_tooltip_request_func(callback: Callable): void;
 
 /** Moves a selection and a caret for the next occurrence of the current selection. If there is no active selection, moves to the next occurrence of the word under caret. */
 skip_selection_for_next_occurrence(): void;
@@ -905,10 +905,10 @@ skip_selection_for_next_occurrence(): void;
  * An action will also end after a call to [method end_action], after [member ProjectSettings.gui/timers/text_edit_idle_detect_sec] is triggered or a new undoable step outside the [method start_action] and [method end_action] calls.
  *
 */
-start_action(): void;
+start_action(action: int): void;
 
 /** Swaps the two lines. Carets will be swapped with the lines. */
-swap_lines(): void;
+swap_lines(from_line: int, to_line: int): void;
 
 /** Tag the current version as saved. */
 tag_saved_version(): void;

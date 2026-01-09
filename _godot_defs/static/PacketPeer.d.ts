@@ -43,10 +43,10 @@ get_packet_error(): int;
  * **Warning:** Deserialized objects can contain code which gets executed. Do not use this option if the serialized object comes from untrusted sources to avoid potential security threats such as remote code execution.
  *
 */
-get_var(): any;
+get_var(allow_objects?: boolean): any;
 
 /** Sends a raw packet. */
-put_packet(): int;
+put_packet(buffer: PackedByteArray): int;
 
 /**
  * Sends a [Variant] as a packet. If [param full_objects] is `true`, encoding objects is allowed (and can potentially include code).
@@ -54,7 +54,7 @@ put_packet(): int;
  * Internally, this uses the same encoding mechanism as the [method @GlobalScope.var_to_bytes] method.
  *
 */
-put_var(): int;
+put_var(_var: any, full_objects?: boolean): int;
 
   connect<T extends SignalsOf<PacketPeer>>(signal: T, method: SignalFunction<PacketPeer[T]>): number;
 

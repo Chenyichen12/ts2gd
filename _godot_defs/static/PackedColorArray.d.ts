@@ -24,10 +24,10 @@ declare class PackedColorArray {
 
 
 /** Appends an element at the end of the array (alias of [method push_back]). */
-append(): boolean;
+append(value: Color): boolean;
 
 /** Appends a [PackedColorArray] at the end of this array. */
-append_array(): void;
+append_array(array: PackedColorArray): void;
 
 /**
  * Finds the index of an existing value (or the insertion index that maintains sorting order, if the value is not yet present in the array) using binary search. Optionally, a [param before] specifier can be passed. If `false`, the returned index comes after all existing entries of the value in the array.
@@ -35,25 +35,25 @@ append_array(): void;
  * **Note:** Calling [method bsearch] on an unsorted array results in unexpected behavior.
  *
 */
-bsearch(): int;
+bsearch(value: Color, before?: boolean): int;
 
 /** Clears the array. This is equivalent to using [method resize] with a size of [code]0[/code]. */
 clear(): void;
 
 /** Returns the number of times an element is in the array. */
-count(): int;
+count(value: Color): int;
 
 /** Creates a copy of the array, and returns it. */
 duplicate(): PackedColorArray;
 
 /** Removes the first occurrence of a value from the array and returns [code]true[/code]. If the value does not exist in the array, nothing happens and [code]false[/code] is returned. To remove an element by index, use [method remove_at] instead. */
-erase(): boolean;
+erase(value: Color): boolean;
 
 /** Assigns the given value to all elements in the array. This can typically be used together with [method resize] to create an array with a given size and initialized elements. */
-fill(): void;
+fill(value: Color): void;
 
 /** Searches the array for a value and returns its index or [code]-1[/code] if not found. Optionally, the initial search index can be passed. */
-find(): int;
+find(value: Color, from?: int): int;
 
 /**
  * Returns the [Color] at the given [param index] in the array. If [param index] is out-of-bounds or negative, this method fails and returns `Color(0, 0, 0, 1)`.
@@ -61,22 +61,22 @@ find(): int;
  * This method is similar (but not identical) to the `[]` operator. Most notably, when this method fails, it doesn't pause project execution if run from the editor.
  *
 */
-get(): Color;
+get(index: int): Color;
 
 /** Returns [code]true[/code] if the array contains [param value]. */
-has(): boolean;
+has(value: Color): boolean;
 
 /** Inserts a new element at a given position in the array. The position must be valid, or at the end of the array ([code]idx == size()[/code]). */
-insert(): int;
+insert(at_index: int, value: Color): int;
 
 /** Returns [code]true[/code] if the array is empty. */
 is_empty(): boolean;
 
 /** Appends a value to the array. */
-push_back(): boolean;
+push_back(value: Color): boolean;
 
 /** Removes an element from the array by index. */
-remove_at(): void;
+remove_at(index: int): void;
 
 /**
  * Sets the size of the array. If the array is grown, reserves elements at the end of the array. If the array is shrunk, truncates the array to the new size. Calling [method resize] once and assigning the new values is faster than adding new elements one by one.
@@ -84,16 +84,16 @@ remove_at(): void;
  * Returns [constant OK] on success, or one of the following [enum Error] constants if this method fails: [constant ERR_INVALID_PARAMETER] if the size is negative, or [constant ERR_OUT_OF_MEMORY] if allocations fail. Use [method size] to find the actual size of the array after resize.
  *
 */
-resize(): int;
+resize(new_size: int): int;
 
 /** Reverses the order of the elements in the array. */
 reverse(): void;
 
 /** Searches the array in reverse order. Optionally, a start search index can be passed. If negative, the start index is considered relative to the end of the array. */
-rfind(): int;
+rfind(value: Color, from?: int): int;
 
 /** Changes the [Color] at the given index. */
-set(): void;
+set(index: int, value: Color): void;
 
 /** Returns the number of elements in the array. */
 size(): int;
@@ -106,7 +106,7 @@ size(): int;
  * If either [param begin] or [param end] are negative, they will be relative to the end of the array (i.e. `arr.slice(0, -2)` is a shorthand for `arr.slice(0, arr.size() - 2)`).
  *
 */
-slice(): PackedColorArray;
+slice(begin: int, end?: int): PackedColorArray;
 
 /** Sorts the elements of the array in ascending order. */
 sort(): void;

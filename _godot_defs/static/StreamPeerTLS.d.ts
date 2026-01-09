@@ -20,10 +20,10 @@ declare class StreamPeerTLS extends StreamPeer  {
 
 
 /** Accepts a peer connection as a server using the given [param server_options]. See [method TLSOptions.server]. */
-accept_stream(): int;
+accept_stream(stream: StreamPeer, server_options: TLSOptions): int;
 
 /** Connects to a peer using an underlying [StreamPeer] [param stream] and verifying the remote certificate is correctly signed for the given [param common_name]. You can pass the optional [param client_options] parameter to customize the trusted certification authorities, or disable the common name verification. See [method TLSOptions.client] and [method TLSOptions.client_unsafe]. */
-connect_to_stream(): int;
+connect_to_stream(stream: StreamPeer, common_name: string, client_options?: TLSOptions): int;
 
 /** Disconnects from host. */
 disconnect_from_stream(): void;

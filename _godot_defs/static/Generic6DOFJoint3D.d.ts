@@ -228,40 +228,40 @@ declare class Generic6DOFJoint3D extends Joint3D  {
 
 
 /** No documentation provided. */
-get_flag_x(): boolean;
+get_flag_x(flag: int): boolean;
 
 /** No documentation provided. */
-get_flag_y(): boolean;
+get_flag_y(flag: int): boolean;
 
 /** No documentation provided. */
-get_flag_z(): boolean;
+get_flag_z(flag: int): boolean;
 
 /** No documentation provided. */
-get_param_x(): float;
+get_param_x(param: int): float;
 
 /** No documentation provided. */
-get_param_y(): float;
+get_param_y(param: int): float;
 
 /** No documentation provided. */
-get_param_z(): float;
+get_param_z(param: int): float;
 
 /** No documentation provided. */
-set_flag_x(): void;
+set_flag_x(flag: int, value: boolean): void;
 
 /** No documentation provided. */
-set_flag_y(): void;
+set_flag_y(flag: int, value: boolean): void;
 
 /** No documentation provided. */
-set_flag_z(): void;
+set_flag_z(flag: int, value: boolean): void;
 
 /** No documentation provided. */
-set_param_x(): void;
+set_param_x(param: int, value: float): void;
 
 /** No documentation provided. */
-set_param_y(): void;
+set_param_y(param: int, value: float): void;
 
 /** No documentation provided. */
-set_param_z(): void;
+set_param_z(param: int, value: float): void;
 
   connect<T extends SignalsOf<Generic6DOFJoint3D>>(signal: T, method: SignalFunction<Generic6DOFJoint3D[T]>): number;
 

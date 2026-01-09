@@ -24,10 +24,10 @@ declare class ResourceFormatLoader extends RefCounted  {
 
 
 /** No documentation provided. */
-protected _exists(): boolean;
+protected _exists(path: string): boolean;
 
 /** No documentation provided. */
-protected _get_classes_used(): PackedStringArray;
+protected _get_classes_used(path: string): PackedStringArray;
 
 /**
  * Should return the dependencies for the resource at the given [param path]. Each dependency is a string composed of one to three sections separated by `::`, with trailing empty sections omitted:
@@ -53,13 +53,13 @@ protected _get_classes_used(): PackedStringArray;
  * **Note:** Custom resource types defined by scripts aren't known by the [ClassDB], so `"Resource"` can be used for the class name.
  *
 */
-protected _get_dependencies(): PackedStringArray;
+protected _get_dependencies(path: string, add_types: boolean): PackedStringArray;
 
 /** Gets the list of extensions for files this loader is able to read. */
 protected _get_recognized_extensions(): PackedStringArray;
 
 /** Returns the script class name associated with the [Resource] under the given [param path]. If the resource has no script or the script isn't a named class, it should return [code]""[/code]. */
-protected _get_resource_script_class(): string;
+protected _get_resource_script_class(path: string): string;
 
 /**
  * Gets the class name of the resource associated with the given path. If the loader cannot handle it, it should return `""`.
@@ -67,10 +67,10 @@ protected _get_resource_script_class(): string;
  * **Note:** Custom resource types defined by scripts aren't known by the [ClassDB], so you might just return `"Resource"` for them.
  *
 */
-protected _get_resource_type(): string;
+protected _get_resource_type(path: string): string;
 
 /** Should return the unique ID for the resource associated with the given path. If this method is not overridden, a [code].uid[/code] file is generated along with the resource file, containing the unique ID. */
-protected _get_resource_uid(): int;
+protected _get_resource_uid(path: string): int;
 
 /**
  * Tells which resource class this loader can load.
@@ -78,7 +78,7 @@ protected _get_resource_uid(): int;
  * **Note:** Custom resource types defined by scripts aren't known by the [ClassDB], so you might just handle `"Resource"` for them.
  *
 */
-protected _handles_type(): boolean;
+protected _handles_type(type: StringName): boolean;
 
 /**
  * Loads a resource when the engine finds this loader to be compatible. If the loaded resource is the result of an import, [param original_path] will target the source file. Returns a [Resource] object on success, or an [enum Error] constant in case of failure.
@@ -86,7 +86,7 @@ protected _handles_type(): boolean;
  * The [param cache_mode] property defines whether and how the cache should be used or updated when loading the resource. See [enum CacheMode] for details.
  *
 */
-protected _load(): any;
+protected _load(path: string, original_path: string, use_sub_threads: boolean, cache_mode: int): any;
 
 /**
  * Tells whether or not this loader should load a resource from its resource path for a given type.
@@ -94,7 +94,7 @@ protected _load(): any;
  * If it is not implemented, the default behavior returns whether the path's extension is within the ones provided by [method _get_recognized_extensions], and if the type is within the ones provided by [method _get_resource_type].
  *
 */
-protected _recognize_path(): boolean;
+protected _recognize_path(path: string, type: StringName): boolean;
 
 /**
  * If implemented, renames dependencies within the given resource and saves it. [param renames] is a dictionary `{ String => String }` mapping old dependency paths to new paths.
@@ -102,7 +102,7 @@ protected _recognize_path(): boolean;
  * Returns [constant OK] on success, or an [enum Error] constant in case of failure.
  *
 */
-protected _rename_dependencies(): int;
+protected _rename_dependencies(path: string, renames: Dictionary<any, any>): int;
 
   connect<T extends SignalsOf<ResourceFormatLoader>>(signal: T, method: SignalFunction<ResourceFormatLoader[T]>): number;
 

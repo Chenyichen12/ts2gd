@@ -28,7 +28,7 @@ protected _clear_highlighting_cache(): void;
  * See [method get_line_syntax_highlighting] for more details.
  *
 */
-protected _get_line_syntax_highlighting(): Dictionary<any, any>;
+protected _get_line_syntax_highlighting(line: int): Dictionary<any, any>;
 
 /** Virtual method which can be overridden to update any local caches. */
 protected _update_cache(): void;
@@ -62,7 +62,7 @@ clear_highlighting_cache(): void;
  * 
  *
 */
-get_line_syntax_highlighting(): Dictionary<any, any>;
+get_line_syntax_highlighting(line: int): Dictionary<any, any>;
 
 /** Returns the associated [TextEdit] node. */
 get_text_edit(): TextEdit;

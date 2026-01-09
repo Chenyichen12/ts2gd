@@ -25,7 +25,7 @@ declare class EditorSelection extends Object  {
  * **Note:** The newly selected node will not be automatically edited in the inspector. If you want to edit a node, use [method EditorInterface.edit_node].
  *
 */
-add_node(): void;
+add_node(node: Node): void;
 
 /** Clear the selection. */
 clear(): void;
@@ -45,7 +45,7 @@ get_top_selected_nodes(): Node[];
 get_transformable_selected_nodes(): Node[];
 
 /** Removes a node from the selection. */
-remove_node(): void;
+remove_node(node: Node): void;
 
   connect<T extends SignalsOf<EditorSelection>>(signal: T, method: SignalFunction<EditorSelection[T]>): number;
 

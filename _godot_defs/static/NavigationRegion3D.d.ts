@@ -57,13 +57,13 @@ travel_cost: float;
 use_edge_connections: boolean;
 
 /** Bakes the [NavigationMesh]. If [param on_thread] is set to [code]true[/code] (default), the baking is done on a separate thread. Baking on separate thread is useful because navigation baking is not a cheap operation. When it is completed, it automatically sets the new [NavigationMesh]. Please note that baking on separate thread may be very slow if geometry is parsed from meshes as async access to each mesh involves heavy synchronization. Also, please note that baking on a separate thread is automatically disabled on operating systems that cannot use threads (such as Web with threads disabled). */
-bake_navigation_mesh(): void;
+bake_navigation_mesh(on_thread?: boolean): void;
 
 /** Returns the axis-aligned bounding box for the region's transformed navigation mesh. */
 get_bounds(): AABB;
 
 /** Returns whether or not the specified layer of the [member navigation_layers] bitmask is enabled, given a [param layer_number] between 1 and 32. */
-get_navigation_layer_value(): boolean;
+get_navigation_layer_value(layer_number: int): boolean;
 
 /** Returns the current navigation map [RID] used by this region. */
 get_navigation_map(): RID;
@@ -78,10 +78,10 @@ get_rid(): RID;
 is_baking(): boolean;
 
 /** Based on [param value], enables or disables the specified layer in the [member navigation_layers] bitmask, given a [param layer_number] between 1 and 32. */
-set_navigation_layer_value(): void;
+set_navigation_layer_value(layer_number: int, value: boolean): void;
 
 /** Sets the [RID] of the navigation map this region should use. By default the region will automatically join the [World3D] default navigation map so this function is only required to override the default map. */
-set_navigation_map(): void;
+set_navigation_map(navigation_map: RID): void;
 
   connect<T extends SignalsOf<NavigationRegion3D>>(signal: T, method: SignalFunction<NavigationRegion3D[T]>): number;
 

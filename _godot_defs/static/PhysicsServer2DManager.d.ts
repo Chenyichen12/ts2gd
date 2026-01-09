@@ -20,10 +20,10 @@ declare class PhysicsServer2DManagerClass extends Object  {
 
 
 /** Register a [PhysicsServer2D] implementation by passing a [param name] and a [Callable] that returns a [PhysicsServer2D] object. */
-register_server(): void;
+register_server(name: string, create_callback: Callable): void;
 
 /** Set the default [PhysicsServer2D] implementation to the one identified by [param name], if [param priority] is greater than the priority of the current default implementation. */
-set_default_server(): void;
+set_default_server(name: string, priority: int): void;
 
   connect<T extends SignalsOf<PhysicsServer2DManagerClass>>(signal: T, method: SignalFunction<PhysicsServer2DManagerClass[T]>): number;
 

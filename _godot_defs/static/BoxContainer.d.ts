@@ -26,7 +26,7 @@ alignment: int;
 vertical: boolean;
 
 /** Adds a [Control] node to the box as a spacer. If [param begin] is [code]true[/code], it will insert the [Control] node in front of all other children. */
-add_spacer(): Control;
+add_spacer(begin: boolean): Control;
 
   connect<T extends SignalsOf<BoxContainer>>(signal: T, method: SignalFunction<BoxContainer[T]>): number;
 

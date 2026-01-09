@@ -28,10 +28,10 @@ protected _get_uniform_buffer(): RID;
 protected _get_view_count(): int;
 
 /** Implement this in GDExtension to return the eye offset for the given [param view]. */
-protected _get_view_eye_offset(): Vector3;
+protected _get_view_eye_offset(view: int): Vector3;
 
 /** Implement this in GDExtension to return the view [Projection] for the given [param view]. */
-protected _get_view_projection(): Projection;
+protected _get_view_projection(view: int): Projection;
 
   connect<T extends SignalsOf<RenderSceneDataExtension>>(signal: T, method: SignalFunction<RenderSceneDataExtension[T]>): number;
 

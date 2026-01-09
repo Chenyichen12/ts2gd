@@ -46,13 +46,13 @@ step: float;
 value: float;
 
 /** Called when the [Range]'s value is changed (following the same conditions as [signal value_changed]). */
-protected _value_changed(): void;
+protected _value_changed(new_value: float): void;
 
 /** Sets the [Range]'s current value to the specified [param value], without emitting the [signal value_changed] signal. */
-set_value_no_signal(): void;
+set_value_no_signal(value: float): void;
 
 /** Binds two [Range]s together along with any ranges previously grouped with either of them. When any of range's member variables change, it will share the new value with all other ranges in its group. */
-share(): void;
+share(_with: Node): void;
 
 /** Stops the [Range] from sharing its member variables with any other. */
 unshare(): void;

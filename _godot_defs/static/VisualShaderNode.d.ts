@@ -24,22 +24,22 @@ output_port_for_preview: int;
 clear_default_input_values(): void;
 
 /** Returns the input port which should be connected by default when this node is created as a result of dragging a connection from an existing node to the empty space on the graph. */
-get_default_input_port(): int;
+get_default_input_port(type: int): int;
 
 /** Returns an [Array] containing default values for all of the input ports of the node in the form [code][index0, value0, index1, value1, ...][/code]. */
 get_default_input_values(): any[];
 
 /** Returns the default value of the input [param port]. */
-get_input_port_default_value(): any;
+get_input_port_default_value(port: int): any;
 
 /** Removes the default value of the input [param port]. */
-remove_input_port_default_value(): void;
+remove_input_port_default_value(port: int): void;
 
 /** Sets the default input ports values using an [Array] of the form [code][index0, value0, index1, value1, ...][/code]. For example: [code][0, Vector3(0, 0, 0), 1, Vector3(0, 0, 0)][/code]. */
-set_default_input_values(): void;
+set_default_input_values(values: any[]): void;
 
 /** Sets the default [param value] for the selected input [param port]. */
-set_input_port_default_value(): void;
+set_input_port_default_value(port: int, value: any, prev_value?: any): void;
 
   connect<T extends SignalsOf<VisualShaderNode>>(signal: T, method: SignalFunction<VisualShaderNode[T]>): number;
 

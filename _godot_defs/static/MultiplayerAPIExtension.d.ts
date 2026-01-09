@@ -170,19 +170,19 @@ protected _get_remote_sender_id(): int;
 protected _get_unique_id(): int;
 
 /** Callback for [method MultiplayerAPI.object_configuration_add]. */
-protected _object_configuration_add(): int;
+protected _object_configuration_add(object: Object, configuration: any): int;
 
 /** Callback for [method MultiplayerAPI.object_configuration_remove]. */
-protected _object_configuration_remove(): int;
+protected _object_configuration_remove(object: Object, configuration: any): int;
 
 /** Callback for [method MultiplayerAPI.poll]. */
 protected _poll(): int;
 
 /** Callback for [method MultiplayerAPI.rpc]. */
-protected _rpc(): int;
+protected _rpc(peer: int, object: Object, method: StringName, args: any[]): int;
 
 /** Called when the [member MultiplayerAPI.multiplayer_peer] is set. */
-protected _set_multiplayer_peer(): void;
+protected _set_multiplayer_peer(multiplayer_peer: MultiplayerPeer): void;
 
   connect<T extends SignalsOf<MultiplayerAPIExtension>>(signal: T, method: SignalFunction<MultiplayerAPIExtension[T]>): number;
 

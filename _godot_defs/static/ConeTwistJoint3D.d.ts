@@ -49,10 +49,10 @@ swing_span: float;
 twist_span: float;
 
 /** Returns the value of the specified parameter. */
-get_param(): float;
+get_param(param: int): float;
 
 /** Sets the value of the specified parameter. */
-set_param(): void;
+set_param(param: int, value: float): void;
 
   connect<T extends SignalsOf<ConeTwistJoint3D>>(signal: T, method: SignalFunction<ConeTwistJoint3D[T]>): number;
 

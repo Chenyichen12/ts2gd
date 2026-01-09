@@ -16,7 +16,7 @@ declare class AudioStreamPlaybackPolyphonic extends AudioStreamPlayback  {
 
 
 /** Returns [code]true[/code] if the stream associated with the given integer ID is still playing. Check [method play_stream] for information on when this ID becomes invalid. */
-is_stream_playing(): boolean;
+is_stream_playing(stream: int): boolean;
 
 /**
  * Play an [AudioStream] at a given offset, volume, pitch scale, playback type, and bus. Playback starts immediately.
@@ -28,16 +28,16 @@ is_stream_playing(): boolean;
  * This function returns [constant INVALID_ID] if the amount of streams currently playing equals [member AudioStreamPolyphonic.polyphony]. If you need a higher amount of maximum polyphony, raise this value.
  *
 */
-play_stream(): int;
+play_stream(stream: AudioStream, from_offset?: float, volume_db?: float, pitch_scale?: float, playback_type?: int, bus?: StringName): int;
 
 /** Change the stream pitch scale. The [param stream] argument is an integer ID returned by [method play_stream]. */
-set_stream_pitch_scale(): void;
+set_stream_pitch_scale(stream: int, pitch_scale: float): void;
 
 /** Change the stream volume (in db). The [param stream] argument is an integer ID returned by [method play_stream]. */
-set_stream_volume(): void;
+set_stream_volume(stream: int, volume_db: float): void;
 
 /** Stop a stream. The [param stream] argument is an integer ID returned by [method play_stream], which becomes invalid after calling this function. */
-stop_stream(): void;
+stop_stream(stream: int): void;
 
   connect<T extends SignalsOf<AudioStreamPlaybackPolyphonic>>(signal: T, method: SignalFunction<AudioStreamPlaybackPolyphonic[T]>): number;
 

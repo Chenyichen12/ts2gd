@@ -96,7 +96,7 @@ wall_min_slide_angle: float;
 apply_floor_snap(): void;
 
 /** Returns the floor's collision angle at the last collision point according to [param up_direction], which is [constant Vector3.UP] by default. This value is always positive and only valid after calling [method move_and_slide] and when [method is_on_floor] returns [code]true[/code]. */
-get_floor_angle(): float;
+get_floor_angle(up_direction?: Vector3): float;
 
 /**
  * Returns the collision normal of the floor at the last collision point. Only valid after calling [method move_and_slide] and when [method is_on_floor] returns `true`.
@@ -125,7 +125,7 @@ get_position_delta(): Vector3;
 get_real_velocity(): Vector3;
 
 /** Returns a [KinematicCollision3D], which contains information about a collision that occurred during the last call to [method move_and_slide]. Since the body can collide several times in a single call to [method move_and_slide], you must specify the index of the collision in the range 0 to ([method get_slide_collision_count] - 1). See also [method get_last_slide_collision]. */
-get_slide_collision(): KinematicCollision3D;
+get_slide_collision(slide_idx: int): KinematicCollision3D;
 
 /** Returns the number of times the body collided and changed direction during the last call to [method move_and_slide]. */
 get_slide_collision_count(): int;

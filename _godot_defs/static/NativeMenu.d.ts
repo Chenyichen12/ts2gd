@@ -89,7 +89,7 @@ declare class NativeMenuClass extends Object  {
  * **Note:** On Windows, [param accelerator] and [param key_callback] are ignored.
  *
 */
-add_check_item(): int;
+add_check_item(rid: RID, label: string, callback?: Callable, key_callback?: Callable, tag?: any, accelerator?: int, index?: int): int;
 
 /**
  * Adds a new checkable item with text [param label] and icon [param icon] to the global menu [param rid].
@@ -105,7 +105,7 @@ add_check_item(): int;
  * **Note:** On Windows, [param accelerator] and [param key_callback] are ignored.
  *
 */
-add_icon_check_item(): int;
+add_icon_check_item(rid: RID, icon: Texture2D, label: string, callback?: Callable, key_callback?: Callable, tag?: any, accelerator?: int, index?: int): int;
 
 /**
  * Adds a new item with text [param label] and icon [param icon] to the global menu [param rid].
@@ -121,7 +121,7 @@ add_icon_check_item(): int;
  * **Note:** On Windows, [param accelerator] and [param key_callback] are ignored.
  *
 */
-add_icon_item(): int;
+add_icon_item(rid: RID, icon: Texture2D, label: string, callback?: Callable, key_callback?: Callable, tag?: any, accelerator?: int, index?: int): int;
 
 /**
  * Adds a new radio-checkable item with text [param label] and icon [param icon] to the global menu [param rid].
@@ -139,7 +139,7 @@ add_icon_item(): int;
  * **Note:** On Windows, [param accelerator] and [param key_callback] are ignored.
  *
 */
-add_icon_radio_check_item(): int;
+add_icon_radio_check_item(rid: RID, icon: Texture2D, label: string, callback?: Callable, key_callback?: Callable, tag?: any, accelerator?: int, index?: int): int;
 
 /**
  * Adds a new item with text [param label] to the global menu [param rid].
@@ -155,7 +155,7 @@ add_icon_radio_check_item(): int;
  * **Note:** On Windows, [param accelerator] and [param key_callback] are ignored.
  *
 */
-add_item(): int;
+add_item(rid: RID, label: string, callback?: Callable, key_callback?: Callable, tag?: any, accelerator?: int, index?: int): int;
 
 /**
  * Adds a new item with text [param label] to the global menu [param rid].
@@ -175,7 +175,7 @@ add_item(): int;
  * **Note:** On Windows, [param accelerator] and [param key_callback] are ignored.
  *
 */
-add_multistate_item(): int;
+add_multistate_item(rid: RID, label: string, max_states: int, default_state: int, callback?: Callable, key_callback?: Callable, tag?: any, accelerator?: int, index?: int): int;
 
 /**
  * Adds a new radio-checkable item with text [param label] to the global menu [param rid].
@@ -193,7 +193,7 @@ add_multistate_item(): int;
  * **Note:** On Windows, [param accelerator] and [param key_callback] are ignored.
  *
 */
-add_radio_check_item(): int;
+add_radio_check_item(rid: RID, label: string, callback?: Callable, key_callback?: Callable, tag?: any, accelerator?: int, index?: int): int;
 
 /**
  * Adds a separator between items to the global menu [param rid]. Separators also occupy an index.
@@ -203,7 +203,7 @@ add_radio_check_item(): int;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-add_separator(): int;
+add_separator(rid: RID, index?: int): int;
 
 /**
  * Adds an item that will act as a submenu of the global menu [param rid]. The [param submenu_rid] argument is the RID of the global menu that will be shown when the item is clicked.
@@ -213,7 +213,7 @@ add_separator(): int;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-add_submenu_item(): int;
+add_submenu_item(rid: RID, label: string, submenu_rid: RID, tag?: any, index?: int): int;
 
 /**
  * Removes all items from the global menu [param rid].
@@ -221,7 +221,7 @@ add_submenu_item(): int;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-clear(): void;
+clear(rid: RID): void;
 
 /**
  * Creates a new global menu object.
@@ -237,7 +237,7 @@ create_menu(): RID;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-find_item_index_with_submenu(): int;
+find_item_index_with_submenu(rid: RID, submenu_rid: RID): int;
 
 /**
  * Returns the index of the item with the specified [param tag]. Indices are automatically assigned to each item by the engine, and cannot be set manually.
@@ -245,7 +245,7 @@ find_item_index_with_submenu(): int;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-find_item_index_with_tag(): int;
+find_item_index_with_tag(rid: RID, tag: any): int;
 
 /**
  * Returns the index of the item with the specified [param text]. Indices are automatically assigned to each item by the engine, and cannot be set manually.
@@ -253,7 +253,7 @@ find_item_index_with_tag(): int;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-find_item_index_with_text(): int;
+find_item_index_with_text(rid: RID, text: string): int;
 
 /**
  * Frees a global menu object created by this [NativeMenu].
@@ -261,7 +261,7 @@ find_item_index_with_text(): int;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-free_menu(): void;
+free_menu(rid: RID): void;
 
 /**
  * Returns the accelerator of the item at index [param idx]. Accelerators are special combinations of keys that activate the item, no matter which control is focused.
@@ -269,7 +269,7 @@ free_menu(): void;
  * **Note:** This method is implemented only on macOS.
  *
 */
-get_item_accelerator(): int;
+get_item_accelerator(rid: RID, idx: int): int;
 
 /**
  * Returns the callback of the item at index [param idx].
@@ -277,7 +277,7 @@ get_item_accelerator(): int;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-get_item_callback(): Callable;
+get_item_callback(rid: RID, idx: int): Callable;
 
 /**
  * Returns number of items in the global menu [param rid].
@@ -285,7 +285,7 @@ get_item_callback(): Callable;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-get_item_count(): int;
+get_item_count(rid: RID): int;
 
 /**
  * Returns the icon of the item at index [param idx].
@@ -293,7 +293,7 @@ get_item_count(): int;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-get_item_icon(): Texture2D;
+get_item_icon(rid: RID, idx: int): Texture2D;
 
 /**
  * Returns the horizontal offset of the item at the given [param idx].
@@ -301,7 +301,7 @@ get_item_icon(): Texture2D;
  * **Note:** This method is implemented only on macOS.
  *
 */
-get_item_indentation_level(): int;
+get_item_indentation_level(rid: RID, idx: int): int;
 
 /**
  * Returns the callback of the item accelerator at index [param idx].
@@ -309,7 +309,7 @@ get_item_indentation_level(): int;
  * **Note:** This method is implemented only on macOS.
  *
 */
-get_item_key_callback(): Callable;
+get_item_key_callback(rid: RID, idx: int): Callable;
 
 /**
  * Returns number of states of a multistate item. See [method add_multistate_item] for details.
@@ -317,7 +317,7 @@ get_item_key_callback(): Callable;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-get_item_max_states(): int;
+get_item_max_states(rid: RID, idx: int): int;
 
 /**
  * Returns the state of a multistate item. See [method add_multistate_item] for details.
@@ -325,7 +325,7 @@ get_item_max_states(): int;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-get_item_state(): int;
+get_item_state(rid: RID, idx: int): int;
 
 /**
  * Returns the submenu ID of the item at index [param idx]. See [method add_submenu_item] for more info on how to add a submenu.
@@ -333,7 +333,7 @@ get_item_state(): int;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-get_item_submenu(): RID;
+get_item_submenu(rid: RID, idx: int): RID;
 
 /**
  * Returns the metadata of the specified item, which might be of any type. You can set it with [method set_item_tag], which provides a simple way of assigning context data to items.
@@ -341,7 +341,7 @@ get_item_submenu(): RID;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-get_item_tag(): any;
+get_item_tag(rid: RID, idx: int): any;
 
 /**
  * Returns the text of the item at index [param idx].
@@ -349,7 +349,7 @@ get_item_tag(): any;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-get_item_text(): string;
+get_item_text(rid: RID, idx: int): string;
 
 /**
  * Returns the tooltip associated with the specified index [param idx].
@@ -357,7 +357,7 @@ get_item_text(): string;
  * **Note:** This method is implemented only on macOS.
  *
 */
-get_item_tooltip(): string;
+get_item_tooltip(rid: RID, idx: int): string;
 
 /**
  * Returns global menu minimum width.
@@ -365,7 +365,7 @@ get_item_tooltip(): string;
  * **Note:** This method is implemented only on macOS.
  *
 */
-get_minimum_width(): float;
+get_minimum_width(rid: RID): float;
 
 /**
  * Returns global menu close callback.
@@ -373,7 +373,7 @@ get_minimum_width(): float;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-get_popup_close_callback(): Callable;
+get_popup_close_callback(rid: RID): Callable;
 
 /**
  * Returns global menu open callback.
@@ -381,7 +381,7 @@ get_popup_close_callback(): Callable;
  * **Note:** This method is implemented only on macOS.
  *
 */
-get_popup_open_callback(): Callable;
+get_popup_open_callback(rid: RID): Callable;
 
 /**
  * Returns global menu size.
@@ -389,7 +389,7 @@ get_popup_open_callback(): Callable;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-get_size(): Vector2;
+get_size(rid: RID): Vector2;
 
 /**
  * Returns RID of a special system menu.
@@ -397,7 +397,7 @@ get_size(): Vector2;
  * **Note:** This method is implemented only on macOS.
  *
 */
-get_system_menu(): RID;
+get_system_menu(menu_id: int): RID;
 
 /**
  * Returns readable name of a special system menu.
@@ -405,7 +405,7 @@ get_system_menu(): RID;
  * **Note:** This method is implemented only on macOS.
  *
 */
-get_system_menu_name(): string;
+get_system_menu_name(menu_id: int): string;
 
 /**
  * Returns the text of the system menu item.
@@ -413,7 +413,7 @@ get_system_menu_name(): string;
  * **Note:** This method is implemented on macOS.
  *
 */
-get_system_menu_text(): string;
+get_system_menu_text(menu_id: int): string;
 
 /**
  * Returns `true` if the specified [param feature] is supported by the current [NativeMenu], `false` otherwise.
@@ -421,7 +421,7 @@ get_system_menu_text(): string;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-has_feature(): boolean;
+has_feature(feature: int): boolean;
 
 /**
  * Returns `true` if [param rid] is valid global menu.
@@ -429,7 +429,7 @@ has_feature(): boolean;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-has_menu(): boolean;
+has_menu(rid: RID): boolean;
 
 /**
  * Returns `true` if a special system menu is supported.
@@ -437,7 +437,7 @@ has_menu(): boolean;
  * **Note:** This method is implemented only on macOS.
  *
 */
-has_system_menu(): boolean;
+has_system_menu(menu_id: int): boolean;
 
 /**
  * Returns `true` if the item at index [param idx] is checkable in some way, i.e. if it has a checkbox or radio button.
@@ -445,7 +445,7 @@ has_system_menu(): boolean;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-is_item_checkable(): boolean;
+is_item_checkable(rid: RID, idx: int): boolean;
 
 /**
  * Returns `true` if the item at index [param idx] is checked.
@@ -453,7 +453,7 @@ is_item_checkable(): boolean;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-is_item_checked(): boolean;
+is_item_checked(rid: RID, idx: int): boolean;
 
 /**
  * Returns `true` if the item at index [param idx] is disabled. When it is disabled it can't be selected, or its action invoked.
@@ -463,7 +463,7 @@ is_item_checked(): boolean;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-is_item_disabled(): boolean;
+is_item_disabled(rid: RID, idx: int): boolean;
 
 /**
  * Returns `true` if the item at index [param idx] is hidden.
@@ -473,7 +473,7 @@ is_item_disabled(): boolean;
  * **Note:** This method is implemented only on macOS.
  *
 */
-is_item_hidden(): boolean;
+is_item_hidden(rid: RID, idx: int): boolean;
 
 /**
  * Returns `true` if the item at index [param idx] has radio button-style checkability.
@@ -483,7 +483,7 @@ is_item_hidden(): boolean;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-is_item_radio_checkable(): boolean;
+is_item_radio_checkable(rid: RID, idx: int): boolean;
 
 /**
  * Returns `true` if the menu is currently opened.
@@ -491,7 +491,7 @@ is_item_radio_checkable(): boolean;
  * **Note:** This method is implemented only on macOS.
  *
 */
-is_opened(): boolean;
+is_opened(rid: RID): boolean;
 
 /**
  * Return `true` is global menu is a special system menu.
@@ -499,7 +499,7 @@ is_opened(): boolean;
  * **Note:** This method is implemented only on macOS.
  *
 */
-is_system_menu(): boolean;
+is_system_menu(rid: RID): boolean;
 
 /**
  * Shows the global menu at [param position] in the screen coordinates.
@@ -507,7 +507,7 @@ is_system_menu(): boolean;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-popup(): void;
+popup(rid: RID, position: Vector2i): void;
 
 /**
  * Removes the item at index [param idx] from the global menu [param rid].
@@ -517,7 +517,7 @@ popup(): void;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-remove_item(): void;
+remove_item(rid: RID, idx: int): void;
 
 /**
  * Sets the menu text layout direction from right-to-left if [param is_rtl] is `true`.
@@ -525,7 +525,7 @@ remove_item(): void;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-set_interface_direction(): void;
+set_interface_direction(rid: RID, is_rtl: boolean): void;
 
 /**
  * Sets the accelerator of the item at index [param idx]. [param keycode] can be a single [enum Key], or a combination of [enum KeyModifierMask]s and [enum Key]s using bitwise OR such as `KEY_MASK_CTRL | KEY_A` ([kbd]Ctrl + A[/kbd]).
@@ -533,7 +533,7 @@ set_interface_direction(): void;
  * **Note:** This method is implemented only on macOS.
  *
 */
-set_item_accelerator(): void;
+set_item_accelerator(rid: RID, idx: int, keycode: int): void;
 
 /**
  * Sets the callback of the item at index [param idx]. Callback is emitted when an item is pressed.
@@ -543,7 +543,7 @@ set_item_accelerator(): void;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-set_item_callback(): void;
+set_item_callback(rid: RID, idx: int, callback: Callable): void;
 
 /**
  * Sets whether the item at index [param idx] has a checkbox. If `false`, sets the type of the item to plain text.
@@ -551,7 +551,7 @@ set_item_callback(): void;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-set_item_checkable(): void;
+set_item_checkable(rid: RID, idx: int, checkable: boolean): void;
 
 /**
  * Sets the checkstate status of the item at index [param idx].
@@ -559,7 +559,7 @@ set_item_checkable(): void;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-set_item_checked(): void;
+set_item_checked(rid: RID, idx: int, checked: boolean): void;
 
 /**
  * Enables/disables the item at index [param idx]. When it is disabled, it can't be selected and its action can't be invoked.
@@ -567,7 +567,7 @@ set_item_checked(): void;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-set_item_disabled(): void;
+set_item_disabled(rid: RID, idx: int, disabled: boolean): void;
 
 /**
  * Hides/shows the item at index [param idx]. When it is hidden, an item does not appear in a menu and its action cannot be invoked.
@@ -575,7 +575,7 @@ set_item_disabled(): void;
  * **Note:** This method is implemented only on macOS.
  *
 */
-set_item_hidden(): void;
+set_item_hidden(rid: RID, idx: int, hidden: boolean): void;
 
 /**
  * Sets the callback of the item at index [param idx]. The callback is emitted when an item is hovered.
@@ -585,7 +585,7 @@ set_item_hidden(): void;
  * **Note:** This method is implemented only on macOS.
  *
 */
-set_item_hover_callbacks(): void;
+set_item_hover_callbacks(rid: RID, idx: int, callback: Callable): void;
 
 /**
  * Replaces the [Texture2D] icon of the specified [param idx].
@@ -595,7 +595,7 @@ set_item_hover_callbacks(): void;
  * **Note:** This method is not supported by macOS Dock menu items.
  *
 */
-set_item_icon(): void;
+set_item_icon(rid: RID, idx: int, icon: Texture2D): void;
 
 /**
  * Sets the horizontal offset of the item at the given [param idx].
@@ -603,7 +603,7 @@ set_item_icon(): void;
  * **Note:** This method is implemented only on macOS.
  *
 */
-set_item_indentation_level(): void;
+set_item_indentation_level(rid: RID, idx: int, level: int): void;
 
 /**
  * Sets the callback of the item at index [param idx]. Callback is emitted when its accelerator is activated.
@@ -613,7 +613,7 @@ set_item_indentation_level(): void;
  * **Note:** This method is implemented only on macOS.
  *
 */
-set_item_key_callback(): void;
+set_item_key_callback(rid: RID, idx: int, key_callback: Callable): void;
 
 /**
  * Sets number of state of a multistate item. See [method add_multistate_item] for details.
@@ -621,7 +621,7 @@ set_item_key_callback(): void;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-set_item_max_states(): void;
+set_item_max_states(rid: RID, idx: int, max_states: int): void;
 
 /**
  * Sets the type of the item at the specified index [param idx] to radio button. If `false`, sets the type of the item to plain text.
@@ -631,7 +631,7 @@ set_item_max_states(): void;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-set_item_radio_checkable(): void;
+set_item_radio_checkable(rid: RID, idx: int, checkable: boolean): void;
 
 /**
  * Sets the state of a multistate item. See [method add_multistate_item] for details.
@@ -639,7 +639,7 @@ set_item_radio_checkable(): void;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-set_item_state(): void;
+set_item_state(rid: RID, idx: int, state: int): void;
 
 /**
  * Sets the submenu RID of the item at index [param idx]. The submenu is a global menu that would be shown when the item is clicked.
@@ -647,7 +647,7 @@ set_item_state(): void;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-set_item_submenu(): void;
+set_item_submenu(rid: RID, idx: int, submenu_rid: RID): void;
 
 /**
  * Sets the metadata of an item, which may be of any type. You can later get it with [method get_item_tag], which provides a simple way of assigning context data to items.
@@ -655,7 +655,7 @@ set_item_submenu(): void;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-set_item_tag(): void;
+set_item_tag(rid: RID, idx: int, tag: any): void;
 
 /**
  * Sets the text of the item at index [param idx].
@@ -663,7 +663,7 @@ set_item_tag(): void;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-set_item_text(): void;
+set_item_text(rid: RID, idx: int, text: string): void;
 
 /**
  * Sets the [String] tooltip of the item at the specified index [param idx].
@@ -671,7 +671,7 @@ set_item_text(): void;
  * **Note:** This method is implemented only on macOS.
  *
 */
-set_item_tooltip(): void;
+set_item_tooltip(rid: RID, idx: int, tooltip: string): void;
 
 /**
  * Sets the minimum width of the global menu.
@@ -679,7 +679,7 @@ set_item_tooltip(): void;
  * **Note:** This method is implemented only on macOS.
  *
 */
-set_minimum_width(): void;
+set_minimum_width(rid: RID, width: float): void;
 
 /**
  * Registers callable to emit when the menu is about to show.
@@ -689,7 +689,7 @@ set_minimum_width(): void;
  * **Note:** This method is implemented on macOS and Windows.
  *
 */
-set_popup_close_callback(): void;
+set_popup_close_callback(rid: RID, callback: Callable): void;
 
 /**
  * Registers callable to emit after the menu is closed.
@@ -697,7 +697,7 @@ set_popup_close_callback(): void;
  * **Note:** This method is implemented only on macOS.
  *
 */
-set_popup_open_callback(): void;
+set_popup_open_callback(rid: RID, callback: Callable): void;
 
 /**
  * Sets the text of the system menu item.
@@ -705,7 +705,7 @@ set_popup_open_callback(): void;
  * **Note:** This method is implemented on macOS.
  *
 */
-set_system_menu_text(): void;
+set_system_menu_text(menu_id: int, name: string): void;
 
   connect<T extends SignalsOf<NativeMenuClass>>(signal: T, method: SignalFunction<NativeMenuClass[T]>): number;
 

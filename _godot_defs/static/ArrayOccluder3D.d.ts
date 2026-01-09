@@ -35,7 +35,7 @@ indices: PackedInt32Array;
 vertices: PackedVector3Array;
 
 /** Sets [member indices] and [member vertices], while updating the final occluder only once after both values are set. */
-set_arrays(): void;
+set_arrays(vertices: PackedVector3Array, indices: PackedInt32Array): void;
 
   connect<T extends SignalsOf<ArrayOccluder3D>>(signal: T, method: SignalFunction<ArrayOccluder3D[T]>): number;
 

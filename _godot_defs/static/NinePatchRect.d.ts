@@ -43,10 +43,10 @@ region_rect: Rect2;
 texture: Texture2D;
 
 /** Returns the size of the margin on the specified [enum Side]. */
-get_patch_margin(): int;
+get_patch_margin(margin: int): int;
 
 /** Sets the size of the margin on the specified [enum Side] to [param value] pixels. */
-set_patch_margin(): void;
+set_patch_margin(margin: int, value: int): void;
 
   connect<T extends SignalsOf<NinePatchRect>>(signal: T, method: SignalFunction<NinePatchRect[T]>): number;
 

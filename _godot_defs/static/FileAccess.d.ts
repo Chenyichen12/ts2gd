@@ -116,7 +116,7 @@ close(): void;
  * Returns `null` if opening the file failed. You can use [method get_open_error] to check the error that occurred.
  *
 */
-create_temp(): FileAccess;
+create_temp(mode_flags: int, prefix?: string, extension?: string, keep?: boolean): FileAccess;
 
 /**
  * Returns `true` if the file cursor has already read past the end of the file.
@@ -149,7 +149,7 @@ eof_reached(): boolean;
  * For a non-static, relative equivalent, use [method DirAccess.file_exists].
  *
 */
-file_exists(): boolean;
+file_exists(path: string): boolean;
 
 /**
  * Writes the file's buffer to disk. Flushing is automatically performed when the file is closed. This means you don't need to call [method flush] manually before closing a file. Still, calling [method flush] can be used to ensure the data is safe even if the project crashes instead of being closed gracefully.
@@ -172,13 +172,13 @@ get_32(): int;
 get_64(): int;
 
 /** Returns the last time the [param file] was accessed in Unix timestamp format, or [code]0[/code] on error. This Unix timestamp can be converted to another format using the [Time] singleton. */
-get_access_time(): int;
+get_access_time(file: string): int;
 
 /** Returns the whole file as a [String]. Text is interpreted as being UTF-8 encoded. This ignores the file cursor and does not affect it. */
 get_as_text(): string;
 
 /** Returns next [param length] bytes of the file as a [PackedByteArray]. This advances the file cursor by [param length] bytes. */
-get_buffer(): PackedByteArray;
+get_buffer(length: int): PackedByteArray;
 
 /**
  * Returns the next value of the file in CSV (Comma-Separated Values) format. You can pass a different delimiter [param delim] to use other than the default `","` (comma). This delimiter must be one-character long, and cannot be a double quotation mark.
@@ -201,7 +201,7 @@ get_buffer(): PackedByteArray;
  * Note how the second line can omit the enclosing quotes as it does not include the delimiter. However it **could** very well use quotes, it was only written without for demonstration purposes. The third line must use `""` for each quotation mark that needs to be interpreted as such instead of the end of a text value.
  *
 */
-get_csv_line(): PackedStringArray;
+get_csv_line(delim?: string): PackedStringArray;
 
 /** Returns the next 64 bits from the file as a floating-point number. This advances the file cursor by 8 bytes. */
 get_double(): float;
@@ -221,7 +221,7 @@ get_error(): int;
  * **Note:** On Windows, alternate data streams are used to store extended attributes.
  *
 */
-get_extended_attribute(): PackedByteArray;
+get_extended_attribute(file: string, attribute_name: string): PackedByteArray;
 
 /**
  * Reads the file extended attribute with name [param attribute_name] as a UTF-8 encoded string.
@@ -235,7 +235,7 @@ get_extended_attribute(): PackedByteArray;
  * **Note:** On Windows, alternate data streams are used to store extended attributes.
  *
 */
-get_extended_attribute_string(): string;
+get_extended_attribute_string(file: string, attribute_name: string): string;
 
 /**
  * Returns a list of file extended attributes.
@@ -249,7 +249,7 @@ get_extended_attribute_string(): string;
  * **Note:** On Windows, alternate data streams are used to store extended attributes.
  *
 */
-get_extended_attributes_list(): PackedStringArray;
+get_extended_attributes_list(file: string): PackedStringArray;
 
 /**
  * Returns the whole [param path] file contents as a [PackedByteArray] without any decoding.
@@ -257,7 +257,7 @@ get_extended_attributes_list(): PackedStringArray;
  * Returns an empty [PackedByteArray] if an error occurred while opening the file. You can use [method get_open_error] to check the error that occurred.
  *
 */
-get_file_as_bytes(): PackedByteArray;
+get_file_as_bytes(path: string): PackedByteArray;
 
 /**
  * Returns the whole [param path] file contents as a [String]. Text is interpreted as being UTF-8 encoded.
@@ -265,7 +265,7 @@ get_file_as_bytes(): PackedByteArray;
  * Returns an empty [String] if an error occurred while opening the file. You can use [method get_open_error] to check the error that occurred.
  *
 */
-get_file_as_string(): string;
+get_file_as_string(path: string): string;
 
 /** Returns the next 32 bits from the file as a floating-point number. This advances the file cursor by 4 bytes. */
 get_float(): float;
@@ -279,7 +279,7 @@ get_half(): float;
  * **Note:** This method is implemented on iOS, BSD, macOS, and Windows.
  *
 */
-get_hidden_attribute(): boolean;
+get_hidden_attribute(file: string): boolean;
 
 /** Returns the size of the file in bytes. For a pipe, returns the number of bytes available for reading from the pipe. */
 get_length(): int;
@@ -293,10 +293,10 @@ get_length(): int;
 get_line(): string;
 
 /** Returns an MD5 String representing the file at the given path or an empty [String] on failure. */
-get_md5(): string;
+get_md5(path: string): string;
 
 /** Returns the last time the [param file] was modified in Unix timestamp format, or [code]0[/code] on error. This Unix timestamp can be converted to another format using the [Time] singleton. */
-get_modified_time(): int;
+get_modified_time(file: string): int;
 
 /** Returns the result of the last [method open] call in the current thread. */
 get_open_error(): int;
@@ -324,7 +324,7 @@ get_position(): int;
  * **Note:** This method is implemented on iOS, BSD, macOS, and Windows.
  *
 */
-get_read_only_attribute(): boolean;
+get_read_only_attribute(file: string): boolean;
 
 /**
  * Returns the next bits from the file as a floating-point number. This advances the file cursor by either 4 or 8 bytes, depending on the precision used by the Godot build that saved the file.
@@ -335,10 +335,10 @@ get_read_only_attribute(): boolean;
 get_real(): float;
 
 /** Returns an SHA-256 [String] representing the file at the given path or an empty [String] on failure. */
-get_sha256(): string;
+get_sha256(path: string): string;
 
 /** Returns the size of the file at the given path, in bytes, or [code]-1[/code] on error. */
-get_size(): int;
+get_size(file: string): int;
 
 /**
  * Returns the UNIX permissions of the file at the given path.
@@ -346,7 +346,7 @@ get_size(): int;
  * **Note:** This method is implemented on iOS, Linux/BSD, and macOS.
  *
 */
-get_unix_permissions(): int;
+get_unix_permissions(file: string): int;
 
 /**
  * Returns the next [Variant] value from the file. If [param allow_objects] is `true`, decoding objects is allowed. This advances the file cursor by the number of bytes read.
@@ -356,7 +356,7 @@ get_unix_permissions(): int;
  * **Warning:** Deserialized objects can contain code which gets executed. Do not use this option if the serialized object comes from untrusted sources to avoid potential security threats such as remote code execution.
  *
 */
-get_var(): any;
+get_var(allow_objects?: boolean): any;
 
 /** Returns [code]true[/code] if the file is currently opened. */
 is_open(): boolean;
@@ -367,7 +367,7 @@ is_open(): boolean;
  * Returns `null` if opening the file failed. You can use [method get_open_error] to check the error that occurred.
  *
 */
-open(): FileAccess;
+open(path: string, flags: int): FileAccess;
 
 /**
  * Creates a new [FileAccess] object and opens a compressed file for reading or writing.
@@ -377,7 +377,7 @@ open(): FileAccess;
  * Returns `null` if opening the file failed. You can use [method get_open_error] to check the error that occurred.
  *
 */
-open_compressed(): FileAccess;
+open_compressed(path: string, mode_flags: int, compression_mode?: int): FileAccess;
 
 /**
  * Creates a new [FileAccess] object and opens an encrypted file in write or read mode. You need to pass a binary key to encrypt/decrypt it.
@@ -387,7 +387,7 @@ open_compressed(): FileAccess;
  * Returns `null` if opening the file failed. You can use [method get_open_error] to check the error that occurred.
  *
 */
-open_encrypted(): FileAccess;
+open_encrypted(path: string, mode_flags: int, key: PackedByteArray, iv?: PackedByteArray): FileAccess;
 
 /**
  * Creates a new [FileAccess] object and opens an encrypted file in write or read mode. You need to pass a password to encrypt/decrypt it.
@@ -395,7 +395,7 @@ open_encrypted(): FileAccess;
  * Returns `null` if opening the file failed. You can use [method get_open_error] to check the error that occurred.
  *
 */
-open_encrypted_with_pass(): FileAccess;
+open_encrypted_with_pass(path: string, mode_flags: int, pass: string): FileAccess;
 
 /**
  * Removes file extended attribute with name [param attribute_name].
@@ -409,13 +409,13 @@ open_encrypted_with_pass(): FileAccess;
  * **Note:** On Windows, alternate data streams are used to store extended attributes.
  *
 */
-remove_extended_attribute(): int;
+remove_extended_attribute(file: string, attribute_name: string): int;
 
 /** Resizes the file to a specified length. The file must be open in a mode that permits writing. If the file is extended, NUL characters are appended. If the file is truncated, all data from the end file to the original length of the file is lost. */
-resize(): int;
+resize(length: int): int;
 
 /** Sets the file cursor to the specified position in bytes, from the beginning of the file. This changes the value returned by [method get_position]. */
-seek(): void;
+seek(position: int): void;
 
 /**
  * Sets the file cursor to the specified position in bytes, from the end of the file. This changes the value returned by [method get_position].
@@ -423,7 +423,7 @@ seek(): void;
  * **Note:** This is an offset, so you should use negative numbers otherwise the file cursor will be at the end of the file.
  *
 */
-seek_end(): void;
+seek_end(position?: int): void;
 
 /**
  * Writes file extended attribute with name [param attribute_name] as a byte array.
@@ -437,7 +437,7 @@ seek_end(): void;
  * **Note:** On Windows, alternate data streams are used to store extended attributes.
  *
 */
-set_extended_attribute(): int;
+set_extended_attribute(file: string, attribute_name: string, data: PackedByteArray): int;
 
 /**
  * Writes file extended attribute with name [param attribute_name] as a UTF-8 encoded string.
@@ -451,7 +451,7 @@ set_extended_attribute(): int;
  * **Note:** On Windows, alternate data streams are used to store extended attributes.
  *
 */
-set_extended_attribute_string(): int;
+set_extended_attribute_string(file: string, attribute_name: string, data: string): int;
 
 /**
  * Sets file **hidden** attribute.
@@ -459,7 +459,7 @@ set_extended_attribute_string(): int;
  * **Note:** This method is implemented on iOS, BSD, macOS, and Windows.
  *
 */
-set_hidden_attribute(): int;
+set_hidden_attribute(file: string, hidden: boolean): int;
 
 /**
  * Sets file **read only** attribute.
@@ -467,7 +467,7 @@ set_hidden_attribute(): int;
  * **Note:** This method is implemented on iOS, BSD, macOS, and Windows.
  *
 */
-set_read_only_attribute(): int;
+set_read_only_attribute(file: string, ro: boolean): int;
 
 /**
  * Sets file UNIX permissions.
@@ -475,7 +475,7 @@ set_read_only_attribute(): int;
  * **Note:** This method is implemented on iOS, Linux/BSD, and macOS.
  *
 */
-set_unix_permissions(): int;
+set_unix_permissions(file: string, permissions: int): int;
 
 /**
  * Stores an integer as 8 bits in the file. This advances the file cursor by 1 byte. Returns `true` if the operation is successful.
@@ -487,7 +487,7 @@ set_unix_permissions(): int;
  * To store a signed integer, use [method store_64], or convert it manually (see [method store_16] for an example).
  *
 */
-store_8(): boolean;
+store_8(value: int): boolean;
 
 /**
  * Stores an integer as 16 bits in the file. This advances the file cursor by 2 bytes. Returns `true` if the operation is successful.
@@ -532,7 +532,7 @@ store_8(): boolean;
  * 
  *
 */
-store_16(): boolean;
+store_16(value: int): boolean;
 
 /**
  * Stores an integer as 32 bits in the file. This advances the file cursor by 4 bytes. Returns `true` if the operation is successful.
@@ -544,7 +544,7 @@ store_16(): boolean;
  * To store a signed integer, use [method store_64], or convert it manually (see [method store_16] for an example).
  *
 */
-store_32(): boolean;
+store_32(value: int): boolean;
 
 /**
  * Stores an integer as 64 bits in the file. This advances the file cursor by 8 bytes. Returns `true` if the operation is successful.
@@ -554,7 +554,7 @@ store_32(): boolean;
  * **Note:** If an error occurs, the resulting value of the file position indicator is indeterminate.
  *
 */
-store_64(): boolean;
+store_64(value: int): boolean;
 
 /**
  * Stores the given array of bytes in the file. This advances the file cursor by the number of bytes written. Returns `true` if the operation is successful.
@@ -562,7 +562,7 @@ store_64(): boolean;
  * **Note:** If an error occurs, the resulting value of the file position indicator is indeterminate.
  *
 */
-store_buffer(): boolean;
+store_buffer(buffer: PackedByteArray): boolean;
 
 /**
  * Stores the given [PackedStringArray] in the file as a line formatted in the CSV (Comma-Separated Values) format. You can pass a different delimiter [param delim] to use other than the default `","` (comma). This delimiter must be one-character long.
@@ -572,7 +572,7 @@ store_buffer(): boolean;
  * **Note:** If an error occurs, the resulting value of the file position indicator is indeterminate.
  *
 */
-store_csv_line(): boolean;
+store_csv_line(values: PackedStringArray, delim?: string): boolean;
 
 /**
  * Stores a floating-point number as 64 bits in the file. This advances the file cursor by 8 bytes. Returns `true` if the operation is successful.
@@ -580,7 +580,7 @@ store_csv_line(): boolean;
  * **Note:** If an error occurs, the resulting value of the file position indicator is indeterminate.
  *
 */
-store_double(): boolean;
+store_double(value: float): boolean;
 
 /**
  * Stores a floating-point number as 32 bits in the file. This advances the file cursor by 4 bytes. Returns `true` if the operation is successful.
@@ -588,7 +588,7 @@ store_double(): boolean;
  * **Note:** If an error occurs, the resulting value of the file position indicator is indeterminate.
  *
 */
-store_float(): boolean;
+store_float(value: float): boolean;
 
 /**
  * Stores a half-precision floating-point number as 16 bits in the file. This advances the file cursor by 2 bytes. Returns `true` if the operation is successful.
@@ -596,7 +596,7 @@ store_float(): boolean;
  * **Note:** If an error occurs, the resulting value of the file position indicator is indeterminate.
  *
 */
-store_half(): boolean;
+store_half(value: float): boolean;
 
 /**
  * Stores [param line] in the file followed by a newline character (`\n`), encoding the text as UTF-8. This advances the file cursor by the length of the line, after the newline character. The amount of bytes written depends on the UTF-8 encoded bytes, which may be different from [method String.length] which counts the number of UTF-32 codepoints. Returns `true` if the operation is successful.
@@ -604,7 +604,7 @@ store_half(): boolean;
  * **Note:** If an error occurs, the resulting value of the file position indicator is indeterminate.
  *
 */
-store_line(): boolean;
+store_line(line: string): boolean;
 
 /**
  * Stores the given [String] as a line in the file in Pascal format (i.e. also store the length of the string). Text will be encoded as UTF-8. This advances the file cursor by the number of bytes written depending on the UTF-8 encoded bytes, which may be different from [method String.length] which counts the number of UTF-32 codepoints. Returns `true` if the operation is successful.
@@ -612,7 +612,7 @@ store_line(): boolean;
  * **Note:** If an error occurs, the resulting value of the file position indicator is indeterminate.
  *
 */
-store_pascal_string(): boolean;
+store_pascal_string(string: string): boolean;
 
 /**
  * Stores a floating-point number in the file. This advances the file cursor by either 4 or 8 bytes, depending on the precision used by the current Godot build.
@@ -622,7 +622,7 @@ store_pascal_string(): boolean;
  * **Note:** If an error occurs, the resulting value of the file position indicator is indeterminate.
  *
 */
-store_real(): boolean;
+store_real(value: float): boolean;
 
 /**
  * Stores [param string] in the file without a newline character (`\n`), encoding the text as UTF-8. This advances the file cursor by the length of the string in UTF-8 encoded bytes, which may be different from [method String.length] which counts the number of UTF-32 codepoints. Returns `true` if the operation is successful.
@@ -632,7 +632,7 @@ store_real(): boolean;
  * **Note:** If an error occurs, the resulting value of the file position indicator is indeterminate.
  *
 */
-store_string(): boolean;
+store_string(string: string): boolean;
 
 /**
  * Stores any Variant value in the file. If [param full_objects] is `true`, encoding objects is allowed (and can potentially include code). This advances the file cursor by the number of bytes written. Returns `true` if the operation is successful.
@@ -644,7 +644,7 @@ store_string(): boolean;
  * **Note:** If an error occurs, the resulting value of the file position indicator is indeterminate.
  *
 */
-store_var(): boolean;
+store_var(value: any, full_objects?: boolean): boolean;
 
   connect<T extends SignalsOf<FileAccess>>(signal: T, method: SignalFunction<FileAccess[T]>): number;
 

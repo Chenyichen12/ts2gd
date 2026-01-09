@@ -84,7 +84,7 @@ declare class ImageTexture extends Texture2D  {
 
 
 /** Creates a new [ImageTexture] and initializes it by allocating and setting the data from an [Image]. */
-create_from_image(): ImageTexture;
+create_from_image(image: Image): ImageTexture;
 
 /** Returns the format of the texture. */
 get_format(): int;
@@ -95,10 +95,10 @@ get_format(): int;
  * If you want to update the image, but don't need to change its parameters (format, size), use [method update] instead for better performance.
  *
 */
-set_image(): void;
+set_image(image: Image): void;
 
 /** Resizes the texture to the specified dimensions. */
-set_size_override(): void;
+set_size_override(size: Vector2i): void;
 
 /**
  * Replaces the texture's data with a new [Image].
@@ -108,7 +108,7 @@ set_size_override(): void;
  * Use this method over [method set_image] if you need to update the texture frequently, which is faster than allocating additional memory for a new texture each time.
  *
 */
-update(): void;
+update(image: Image): void;
 
   connect<T extends SignalsOf<ImageTexture>>(signal: T, method: SignalFunction<ImageTexture[T]>): number;
 

@@ -77,10 +77,10 @@ bake_collision_shape(): ConcavePolygonShape3D;
 bake_static_mesh(): ArrayMesh;
 
 /** Returns whether or not the specified layer of the [member collision_layer] is enabled, given a [param layer_number] between 1 and 32. */
-get_collision_layer_value(): boolean;
+get_collision_layer_value(layer_number: int): boolean;
 
 /** Returns whether or not the specified layer of the [member collision_mask] is enabled, given a [param layer_number] between 1 and 32. */
-get_collision_mask_value(): boolean;
+get_collision_mask_value(layer_number: int): boolean;
 
 /**
  * Returns an [Array] with two elements, the first is the [Transform3D] of this node and the second is the root [Mesh] of this node. Only works when this node is the root shape.
@@ -94,10 +94,10 @@ get_meshes(): any[];
 is_root_shape(): boolean;
 
 /** Based on [param value], enables or disables the specified layer in the [member collision_layer], given a [param layer_number] between 1 and 32. */
-set_collision_layer_value(): void;
+set_collision_layer_value(layer_number: int, value: boolean): void;
 
 /** Based on [param value], enables or disables the specified layer in the [member collision_mask], given a [param layer_number] between 1 and 32. */
-set_collision_mask_value(): void;
+set_collision_mask_value(layer_number: int, value: boolean): void;
 
   connect<T extends SignalsOf<CSGShape3D>>(signal: T, method: SignalFunction<CSGShape3D[T]>): number;
 

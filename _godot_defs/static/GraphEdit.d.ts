@@ -123,7 +123,7 @@ zoom_min: float;
 zoom_step: float;
 
 /** Virtual method which can be overridden to customize how connections are drawn. */
-protected _get_connection_line(): PackedVector2Array;
+protected _get_connection_line(from_position: Vector2, to_position: Vector2): PackedVector2Array;
 
 /**
  * Returns whether the [param mouse_position] is in the input hot zone.
@@ -143,7 +143,7 @@ protected _get_connection_line(): PackedVector2Array;
  * 
  *
 */
-protected _is_in_input_hotzone(): boolean;
+protected _is_in_input_hotzone(in_node: Object, in_port: int, mouse_position: Vector2): boolean;
 
 /**
  * Returns whether the [param mouse_position] is in the output hot zone. For more information on hot zones, see [method _is_in_input_hotzone].
@@ -161,7 +161,7 @@ protected _is_in_input_hotzone(): boolean;
  * 
  *
 */
-protected _is_in_output_hotzone(): boolean;
+protected _is_in_output_hotzone(in_node: Object, in_port: int, mouse_position: Vector2): boolean;
 
 /**
  * This virtual method can be used to insert additional error detection while the user is dragging a connection over a valid port.
@@ -186,7 +186,7 @@ protected _is_in_output_hotzone(): boolean;
  * 
  *
 */
-protected _is_node_hover_valid(): boolean;
+protected _is_node_hover_valid(from_node: StringName, from_port: int, to_node: StringName, to_port: int): boolean;
 
 /**
  * Allows the connection between two different port types. The port type is defined individually for the left and the right port of each slot with the [method GraphNode.set_slot] method.
@@ -194,19 +194,19 @@ protected _is_node_hover_valid(): boolean;
  * See also [method is_valid_connection_type] and [method remove_valid_connection_type].
  *
 */
-add_valid_connection_type(): void;
+add_valid_connection_type(from_type: int, to_type: int): void;
 
 /** Allows to disconnect nodes when dragging from the left port of the [GraphNode]'s slot if it has the specified type. See also [method remove_valid_left_disconnect_type]. */
-add_valid_left_disconnect_type(): void;
+add_valid_left_disconnect_type(type: int): void;
 
 /** Allows to disconnect nodes when dragging from the right port of the [GraphNode]'s slot if it has the specified type. See also [method remove_valid_right_disconnect_type]. */
-add_valid_right_disconnect_type(): void;
+add_valid_right_disconnect_type(type: int): void;
 
 /** Rearranges selected nodes in a layout with minimum crossings between connections and uniform horizontal and vertical gap between nodes. */
 arrange_nodes(): void;
 
 /** Attaches the [param element] [GraphElement] to the [param frame] [GraphFrame]. */
-attach_graph_element_to_frame(): void;
+attach_graph_element_to_frame(element: StringName, frame: StringName): void;
 
 /** Removes all connections between nodes. */
 clear_connections(): void;
@@ -217,13 +217,13 @@ clear_connections(): void;
  * Connections with [param keep_alive] set to `false` may be deleted automatically if invalid during a redraw.
  *
 */
-connect_node(): int;
+connect_node(from_node: StringName, from_port: int, to_node: StringName, to_port: int, keep_alive?: boolean): int;
 
 /** Detaches the [param element] [GraphElement] from the [GraphFrame] it is currently attached to. */
-detach_graph_element_from_frame(): void;
+detach_graph_element_from_frame(element: StringName): void;
 
 /** Removes the connection between the [param from_port] of the [param from_node] [GraphNode] and the [param to_port] of the [param to_node] [GraphNode]. If the connection does not exist, no connection is removed. */
-disconnect_node(): void;
+disconnect_node(from_node: StringName, from_port: int, to_node: StringName, to_port: int): void;
 
 /**
  * Ends the creation of the current connection. In other words, if you are dragging a connection you can use this method to abort the process and remove the line that followed your cursor.
@@ -236,7 +236,7 @@ disconnect_node(): void;
 force_connection_drag_end(): void;
 
 /** Returns an array of node names that are attached to the [GraphFrame] with the given name. */
-get_attached_nodes_of_frame(): StringName[];
+get_attached_nodes_of_frame(frame: StringName): StringName[];
 
 /**
  * Returns the closest connection to the given point in screen space. If no connection is found within [param max_distance] pixels, an empty [Dictionary] is returned.
@@ -266,13 +266,13 @@ get_attached_nodes_of_frame(): StringName[];
  * 
  *
 */
-get_closest_connection_at_point(): Dictionary<any, any>;
+get_closest_connection_at_point(point: Vector2, max_distance?: float): Dictionary<any, any>;
 
 /** Returns the number of connections from [param from_port] of [param from_node]. */
-get_connection_count(): int;
+get_connection_count(from_node: StringName, from_port: int): int;
 
 /** Returns the points which would make up a connection between [param from_node] and [param to_node]. */
-get_connection_line(): PackedVector2Array;
+get_connection_line(from_node: Vector2, to_node: Vector2): PackedVector2Array;
 
 /**
  * Returns an [Array] containing a list of all connections for [param node].
@@ -315,7 +315,7 @@ get_connection_line(): PackedVector2Array;
  * 
  *
 */
-get_connection_list_from_node(): Dictionary[];
+get_connection_list_from_node(node: StringName): Dictionary[];
 
 /**
  * Returns an [Array] containing the list of connections that intersect with the given [Rect2].
@@ -335,10 +335,10 @@ get_connection_list_from_node(): Dictionary[];
  * 
  *
 */
-get_connections_intersecting_with_rect(): Dictionary[];
+get_connections_intersecting_with_rect(rect: Rect2): Dictionary[];
 
 /** Returns the [GraphFrame] that contains the [GraphElement] with the given name. */
-get_element_frame(): GraphFrame;
+get_element_frame(element: StringName): GraphFrame;
 
 /**
  * Gets the [HBoxContainer] that contains the zooming and grid snap controls in the top left of the graph. You can use this method to reposition the toolbar or to add your own custom controls to it.
@@ -349,7 +349,7 @@ get_element_frame(): GraphFrame;
 get_menu_hbox(): HBoxContainer;
 
 /** Returns [code]true[/code] if the [param from_port] of the [param from_node] [GraphNode] is connected to the [param to_port] of the [param to_node] [GraphNode]. */
-is_node_connected(): boolean;
+is_node_connected(from_node: StringName, from_port: int, to_node: StringName, to_port: int): boolean;
 
 /**
  * Returns whether it's possible to make a connection between two different port types. The port type is defined individually for the left and the right port of each slot with the [method GraphNode.set_slot] method.
@@ -357,7 +357,7 @@ is_node_connected(): boolean;
  * See also [method add_valid_connection_type] and [method remove_valid_connection_type].
  *
 */
-is_valid_connection_type(): boolean;
+is_valid_connection_type(from_type: int, to_type: int): boolean;
 
 /**
  * Disallows the connection between two different port types previously allowed by [method add_valid_connection_type]. The port type is defined individually for the left and the right port of each slot with the [method GraphNode.set_slot] method.
@@ -365,19 +365,19 @@ is_valid_connection_type(): boolean;
  * See also [method is_valid_connection_type].
  *
 */
-remove_valid_connection_type(): void;
+remove_valid_connection_type(from_type: int, to_type: int): void;
 
 /** Disallows to disconnect nodes when dragging from the left port of the [GraphNode]'s slot if it has the specified type. Use this to disable a disconnection previously allowed with [method add_valid_left_disconnect_type]. */
-remove_valid_left_disconnect_type(): void;
+remove_valid_left_disconnect_type(type: int): void;
 
 /** Disallows to disconnect nodes when dragging from the right port of the [GraphNode]'s slot if it has the specified type. Use this to disable a disconnection previously allowed with [method add_valid_right_disconnect_type]. */
-remove_valid_right_disconnect_type(): void;
+remove_valid_right_disconnect_type(type: int): void;
 
 /** Sets the coloration of the connection between [param from_node]'s [param from_port] and [param to_node]'s [param to_port] with the color provided in the [theme_item activity] theme property. The color is linearly interpolated between the connection color and the activity color using [param amount] as weight. */
-set_connection_activity(): void;
+set_connection_activity(from_node: StringName, from_port: int, to_node: StringName, to_port: int, amount: float): void;
 
 /** Sets the specified [param node] as the one selected. */
-set_selected(): void;
+set_selected(node: Node): void;
 
   connect<T extends SignalsOf<GraphEdit>>(signal: T, method: SignalFunction<GraphEdit[T]>): number;
 

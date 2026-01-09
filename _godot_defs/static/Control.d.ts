@@ -353,7 +353,7 @@ protected _accessibility_get_contextual_info(): string;
  * 
  *
 */
-protected _can_drop_data(): boolean;
+protected _can_drop_data(at_position: Vector2, data: any): boolean;
 
 /**
  * Godot calls this method to pass you the [param data] from a control's [method _get_drag_data] result. Godot first calls [method _can_drop_data] to test if [param data] is allowed to drop at [param at_position] where [param at_position] is local to this control.
@@ -382,10 +382,10 @@ protected _can_drop_data(): boolean;
  * 
  *
 */
-protected _drop_data(): void;
+protected _drop_data(at_position: Vector2, data: any): void;
 
 /** Override this method to return a human-readable description of the position of the child [param node] in the custom container, added to the [member accessibility_name]. */
-protected _get_accessibility_container_name(): string;
+protected _get_accessibility_container_name(node: Node): string;
 
 /**
  * Godot calls this method to get data that can be dragged and dropped onto controls that expect drop data. Returns `null` if there is no data to drag. Controls that want to receive drop data should implement [method _can_drop_data] and [method _drop_data]. [param at_position] is local to this control. Drag may be forced with [method force_drag].
@@ -414,7 +414,7 @@ protected _get_accessibility_container_name(): string;
  * 
  *
 */
-protected _get_drag_data(): any;
+protected _get_drag_data(at_position: Vector2): any;
 
 /**
  * Virtual method to be implemented by the user. Returns the minimum size for this control. Alternative to [member custom_minimum_size] for controlling minimum size via code. The actual minimum size will be the max value of these two (in each axis separately).
@@ -432,7 +432,7 @@ protected _get_minimum_size(): Vector2;
  * **Note:** If this method returns an empty [String] and [method _make_custom_tooltip] is not overridden, no tooltip is displayed.
  *
 */
-protected _get_tooltip(): string;
+protected _get_tooltip(at_position: Vector2): string;
 
 /**
  * Virtual method to be implemented by the user. Override this method to handle and accept inputs on UI elements. See also [method accept_event].
@@ -477,7 +477,7 @@ protected _get_tooltip(): string;
  * **Note:** The [param event]'s position is relative to this control's origin.
  *
 */
-protected _gui_input(): void;
+protected _gui_input(event: InputEvent): void;
 
 /**
  * Virtual method to be implemented by the user. Returns whether the given [param point] is inside this control.
@@ -487,7 +487,7 @@ protected _gui_input(): void;
  * **Note:** If you want to check if a point is inside the control, you can use `Rect2(Vector2.ZERO, size).has_point(point)`.
  *
 */
-protected _has_point(): boolean;
+protected _has_point(point: Vector2): boolean;
 
 /**
  * Virtual method to be implemented by the user. Returns a [Control] node that should be used as a tooltip instead of the default one. [param for_text] is the return value of [method get_tooltip].
@@ -545,7 +545,7 @@ protected _has_point(): boolean;
  * 
  *
 */
-protected _make_custom_tooltip(): Object;
+protected _make_custom_tooltip(for_text: string): Object;
 
 /**
  * User defined BiDi algorithm override function.
@@ -553,7 +553,7 @@ protected _make_custom_tooltip(): Object;
  * Returns an [Array] of [Vector3i] text ranges and text base directions, in the left-to-right order. Ranges should cover full source [param text] without overlaps. BiDi algorithm will be used on each range separately.
  *
 */
-protected _structured_text_parser(): Vector3i[];
+protected _structured_text_parser(args: any[], text: string): Vector3i[];
 
 /**
  * Marks an input event as handled. Once you accept an input event, it stops propagating, even to nodes listening to [method Node._unhandled_input] or [method Node._unhandled_key_input].
@@ -598,7 +598,7 @@ accessibility_drop(): void;
  * 
  *
 */
-add_theme_color_override(): void;
+add_theme_color_override(name: StringName, color: Color): void;
 
 /**
  * Creates a local override for a theme constant with the specified [param name]. Local overrides always take precedence when fetching theme items for the control. An override can be removed with [method remove_theme_constant_override].
@@ -606,7 +606,7 @@ add_theme_color_override(): void;
  * See also [method get_theme_constant].
  *
 */
-add_theme_constant_override(): void;
+add_theme_constant_override(name: StringName, constant: int): void;
 
 /**
  * Creates a local override for a theme [Font] with the specified [param name]. Local overrides always take precedence when fetching theme items for the control. An override can be removed with [method remove_theme_font_override].
@@ -614,7 +614,7 @@ add_theme_constant_override(): void;
  * See also [method get_theme_font].
  *
 */
-add_theme_font_override(): void;
+add_theme_font_override(name: StringName, font: Font): void;
 
 /**
  * Creates a local override for a theme font size with the specified [param name]. Local overrides always take precedence when fetching theme items for the control. An override can be removed with [method remove_theme_font_size_override].
@@ -622,7 +622,7 @@ add_theme_font_override(): void;
  * See also [method get_theme_font_size].
  *
 */
-add_theme_font_size_override(): void;
+add_theme_font_size_override(name: StringName, font_size: int): void;
 
 /**
  * Creates a local override for a theme icon with the specified [param name]. Local overrides always take precedence when fetching theme items for the control. An override can be removed with [method remove_theme_icon_override].
@@ -630,7 +630,7 @@ add_theme_font_size_override(): void;
  * See also [method get_theme_icon].
  *
 */
-add_theme_icon_override(): void;
+add_theme_icon_override(name: StringName, texture: Texture2D): void;
 
 /**
  * Creates a local override for a theme [StyleBox] with the specified [param name]. Local overrides always take precedence when fetching theme items for the control. An override can be removed with [method remove_theme_stylebox_override].
@@ -667,7 +667,7 @@ add_theme_icon_override(): void;
  * 
  *
 */
-add_theme_stylebox_override(): void;
+add_theme_stylebox_override(name: StringName, stylebox: StyleBox): void;
 
 /** Prevents [code]*_theme_*_override[/code] methods from emitting [constant NOTIFICATION_THEME_CHANGED] until [method end_bulk_theme_override] is called. */
 begin_bulk_theme_override(): void;
@@ -687,7 +687,7 @@ find_prev_valid_focus(): Control;
  * **Note:** This is different from [method get_focus_neighbor], which returns the path of a specified focus neighbor.
  *
 */
-find_valid_focus_neighbor(): Control;
+find_valid_focus_neighbor(side: int): Control;
 
 /**
  * Forces drag and bypasses [method _get_drag_data] and [method set_drag_preview] by passing [param data] and [param preview]. Drag will start even if the mouse is neither over nor pressed on this control.
@@ -695,10 +695,10 @@ find_valid_focus_neighbor(): Control;
  * The methods [method _can_drop_data] and [method _drop_data] must be implemented on controls that want to receive drop data.
  *
 */
-force_drag(): void;
+force_drag(data: any, preview: Control): void;
 
 /** Returns the anchor for the specified [enum Side]. A getter method for [member anchor_bottom], [member anchor_left], [member anchor_right] and [member anchor_top]. */
-get_anchor(): float;
+get_anchor(side: int): float;
 
 /** Returns [member offset_left] and [member offset_top]. See also [member position]. */
 get_begin(): Vector2;
@@ -710,7 +710,7 @@ get_combined_minimum_size(): Vector2;
 get_combined_pivot_offset(): Vector2;
 
 /** Returns the mouse cursor shape for this control when hovered over [param position] in local coordinates. For most controls, this is the same as [member mouse_default_cursor_shape], but some built-in controls implement more complex logic. */
-get_cursor_shape(): int;
+get_cursor_shape(position?: Vector2): int;
 
 /** Returns [member offset_right] and [member offset_bottom]. */
 get_end(): Vector2;
@@ -724,7 +724,7 @@ get_focus_mode_with_override(): int;
  * **Note:** To find the next [Control] on the specific [enum Side], even if a neighbor is not assigned, use [method find_valid_focus_neighbor].
  *
 */
-get_focus_neighbor(): NodePathType;
+get_focus_neighbor(side: int): NodePathType;
 
 /**
  * Returns the position and size of the control relative to the containing canvas. See [member global_position] and [member size].
@@ -743,7 +743,7 @@ get_minimum_size(): Vector2;
 get_mouse_filter_with_override(): int;
 
 /** Returns the offset for the specified [enum Side]. A getter method for [member offset_bottom], [member offset_left], [member offset_right] and [member offset_top]. */
-get_offset(): float;
+get_offset(offset: int): float;
 
 /** Returns the width/height occupied in the parent control. */
 get_parent_area_size(): Vector2;
@@ -808,7 +808,7 @@ get_screen_position(): Vector2;
  * 
  *
 */
-get_theme_color(): Color;
+get_theme_color(name: StringName, theme_type?: StringName): Color;
 
 /**
  * Returns a constant from the first matching [Theme] in the tree if that [Theme] has a constant item with the specified [param name] and [param theme_type].
@@ -816,7 +816,7 @@ get_theme_color(): Color;
  * See [method get_theme_color] for details.
  *
 */
-get_theme_constant(): int;
+get_theme_constant(name: StringName, theme_type?: StringName): int;
 
 /**
  * Returns the default base scale value from the first matching [Theme] in the tree if that [Theme] has a valid [member Theme.default_base_scale] value.
@@ -848,7 +848,7 @@ get_theme_default_font_size(): int;
  * See [method get_theme_color] for details.
  *
 */
-get_theme_font(): Font;
+get_theme_font(name: StringName, theme_type?: StringName): Font;
 
 /**
  * Returns a font size from the first matching [Theme] in the tree if that [Theme] has a font size item with the specified [param name] and [param theme_type].
@@ -856,7 +856,7 @@ get_theme_font(): Font;
  * See [method get_theme_color] for details.
  *
 */
-get_theme_font_size(): int;
+get_theme_font_size(name: StringName, theme_type?: StringName): int;
 
 /**
  * Returns an icon from the first matching [Theme] in the tree if that [Theme] has an icon item with the specified [param name] and [param theme_type].
@@ -864,7 +864,7 @@ get_theme_font_size(): int;
  * See [method get_theme_color] for details.
  *
 */
-get_theme_icon(): Texture2D;
+get_theme_icon(name: StringName, theme_type?: StringName): Texture2D;
 
 /**
  * Returns a [StyleBox] from the first matching [Theme] in the tree if that [Theme] has a stylebox item with the specified [param name] and [param theme_type].
@@ -872,7 +872,7 @@ get_theme_icon(): Texture2D;
  * See [method get_theme_color] for details.
  *
 */
-get_theme_stylebox(): StyleBox;
+get_theme_stylebox(name: StringName, theme_type?: StringName): StyleBox;
 
 /**
  * Returns the tooltip text for the position [param at_position] in control's local coordinates, which will typically appear when the cursor is resting over this control. By default, it returns [member tooltip_text].
@@ -882,7 +882,7 @@ get_theme_stylebox(): StyleBox;
  * **Note:** If this method returns an empty [String] and [method _make_custom_tooltip] is not overridden, no tooltip is displayed.
  *
 */
-get_tooltip(): string;
+get_tooltip(at_position?: Vector2): string;
 
 /**
  * Creates an [InputEventMouseButton] that attempts to click the control. If the event is received, the control gains focus.
@@ -913,7 +913,7 @@ grab_click_focus(): void;
  * **Note:** Using this method together with [method Callable.call_deferred] makes it more reliable, especially when called inside [method Node._ready].
  *
 */
-grab_focus(): void;
+grab_focus(hide_focus?: boolean): void;
 
 /**
  * Returns `true` if this is the current focused control. See [member focus_mode].
@@ -921,7 +921,7 @@ grab_focus(): void;
  * If [param ignore_hidden_focus] is `true`, controls that have their focus hidden will always return `false`. Hidden focus happens automatically when controls gain focus via mouse input, or manually using [method grab_focus] with `hide_focus` set to `true`.
  *
 */
-has_focus(): boolean;
+has_focus(ignore_hidden_focus?: boolean): boolean;
 
 /**
  * Returns `true` if there is a matching [Theme] in the tree that has a color item with the specified [param name] and [param theme_type].
@@ -929,7 +929,7 @@ has_focus(): boolean;
  * See [method get_theme_color] for details.
  *
 */
-has_theme_color(): boolean;
+has_theme_color(name: StringName, theme_type?: StringName): boolean;
 
 /**
  * Returns `true` if there is a local override for a theme [Color] with the specified [param name] in this [Control] node.
@@ -937,7 +937,7 @@ has_theme_color(): boolean;
  * See [method add_theme_color_override].
  *
 */
-has_theme_color_override(): boolean;
+has_theme_color_override(name: StringName): boolean;
 
 /**
  * Returns `true` if there is a matching [Theme] in the tree that has a constant item with the specified [param name] and [param theme_type].
@@ -945,7 +945,7 @@ has_theme_color_override(): boolean;
  * See [method get_theme_color] for details.
  *
 */
-has_theme_constant(): boolean;
+has_theme_constant(name: StringName, theme_type?: StringName): boolean;
 
 /**
  * Returns `true` if there is a local override for a theme constant with the specified [param name] in this [Control] node.
@@ -953,7 +953,7 @@ has_theme_constant(): boolean;
  * See [method add_theme_constant_override].
  *
 */
-has_theme_constant_override(): boolean;
+has_theme_constant_override(name: StringName): boolean;
 
 /**
  * Returns `true` if there is a matching [Theme] in the tree that has a font item with the specified [param name] and [param theme_type].
@@ -961,7 +961,7 @@ has_theme_constant_override(): boolean;
  * See [method get_theme_color] for details.
  *
 */
-has_theme_font(): boolean;
+has_theme_font(name: StringName, theme_type?: StringName): boolean;
 
 /**
  * Returns `true` if there is a local override for a theme [Font] with the specified [param name] in this [Control] node.
@@ -969,7 +969,7 @@ has_theme_font(): boolean;
  * See [method add_theme_font_override].
  *
 */
-has_theme_font_override(): boolean;
+has_theme_font_override(name: StringName): boolean;
 
 /**
  * Returns `true` if there is a matching [Theme] in the tree that has a font size item with the specified [param name] and [param theme_type].
@@ -977,7 +977,7 @@ has_theme_font_override(): boolean;
  * See [method get_theme_color] for details.
  *
 */
-has_theme_font_size(): boolean;
+has_theme_font_size(name: StringName, theme_type?: StringName): boolean;
 
 /**
  * Returns `true` if there is a local override for a theme font size with the specified [param name] in this [Control] node.
@@ -985,7 +985,7 @@ has_theme_font_size(): boolean;
  * See [method add_theme_font_size_override].
  *
 */
-has_theme_font_size_override(): boolean;
+has_theme_font_size_override(name: StringName): boolean;
 
 /**
  * Returns `true` if there is a matching [Theme] in the tree that has an icon item with the specified [param name] and [param theme_type].
@@ -993,7 +993,7 @@ has_theme_font_size_override(): boolean;
  * See [method get_theme_color] for details.
  *
 */
-has_theme_icon(): boolean;
+has_theme_icon(name: StringName, theme_type?: StringName): boolean;
 
 /**
  * Returns `true` if there is a local override for a theme icon with the specified [param name] in this [Control] node.
@@ -1001,7 +1001,7 @@ has_theme_icon(): boolean;
  * See [method add_theme_icon_override].
  *
 */
-has_theme_icon_override(): boolean;
+has_theme_icon_override(name: StringName): boolean;
 
 /**
  * Returns `true` if there is a matching [Theme] in the tree that has a stylebox item with the specified [param name] and [param theme_type].
@@ -1009,7 +1009,7 @@ has_theme_icon_override(): boolean;
  * See [method get_theme_color] for details.
  *
 */
-has_theme_stylebox(): boolean;
+has_theme_stylebox(name: StringName, theme_type?: StringName): boolean;
 
 /**
  * Returns `true` if there is a local override for a theme [StyleBox] with the specified [param name] in this [Control] node.
@@ -1017,7 +1017,7 @@ has_theme_stylebox(): boolean;
  * See [method add_theme_stylebox_override].
  *
 */
-has_theme_stylebox_override(): boolean;
+has_theme_stylebox_override(name: StringName): boolean;
 
 /**
  * Returns `true` if a drag operation is successful. Alternative to [method Viewport.gui_is_drag_successful].
@@ -1034,22 +1034,22 @@ is_layout_rtl(): boolean;
 release_focus(): void;
 
 /** Removes a local override for a theme [Color] with the specified [param name] previously added by [method add_theme_color_override] or via the Inspector dock. */
-remove_theme_color_override(): void;
+remove_theme_color_override(name: StringName): void;
 
 /** Removes a local override for a theme constant with the specified [param name] previously added by [method add_theme_constant_override] or via the Inspector dock. */
-remove_theme_constant_override(): void;
+remove_theme_constant_override(name: StringName): void;
 
 /** Removes a local override for a theme [Font] with the specified [param name] previously added by [method add_theme_font_override] or via the Inspector dock. */
-remove_theme_font_override(): void;
+remove_theme_font_override(name: StringName): void;
 
 /** Removes a local override for a theme font size with the specified [param name] previously added by [method add_theme_font_size_override] or via the Inspector dock. */
-remove_theme_font_size_override(): void;
+remove_theme_font_size_override(name: StringName): void;
 
 /** Removes a local override for a theme icon with the specified [param name] previously added by [method add_theme_icon_override] or via the Inspector dock. */
-remove_theme_icon_override(): void;
+remove_theme_icon_override(name: StringName): void;
 
 /** Removes a local override for a theme [StyleBox] with the specified [param name] previously added by [method add_theme_stylebox_override] or via the Inspector dock. */
-remove_theme_stylebox_override(): void;
+remove_theme_stylebox_override(name: StringName): void;
 
 /** Resets the size to [method get_combined_minimum_size]. This is equivalent to calling [code]set_size(Vector2())[/code] (or any size below the minimum). */
 reset_size(): void;
@@ -1062,13 +1062,13 @@ reset_size(): void;
  * If [param push_opposite_anchor] is `true` and the opposite anchor overlaps this anchor, the opposite one will have its value overridden. For example, when setting left anchor to 1 and the right anchor has value of 0.5, the right anchor will also get value of 1. If [param push_opposite_anchor] was `false`, the left anchor would get value 0.5.
  *
 */
-set_anchor(): void;
+set_anchor(side: int, anchor: float, keep_offset?: boolean, push_opposite_anchor?: boolean): void;
 
 /** Works the same as [method set_anchor], but instead of [code]keep_offset[/code] argument and automatic update of offset, it allows to set the offset yourself (see [method set_offset]). */
-set_anchor_and_offset(): void;
+set_anchor_and_offset(side: int, anchor: float, offset: float, push_opposite_anchor?: boolean): void;
 
 /** Sets both anchor preset and offset preset. See [method set_anchors_preset] and [method set_offsets_preset]. */
-set_anchors_and_offsets_preset(): void;
+set_anchors_and_offsets_preset(preset: int, resize_mode?: int, margin?: int): void;
 
 /**
  * Sets the anchors to a [param preset] from [enum Control.LayoutPreset] enum. This is the code equivalent to using the Layout menu in the 2D editor.
@@ -1076,10 +1076,10 @@ set_anchors_and_offsets_preset(): void;
  * If [param keep_offsets] is `true`, control's position will also be updated.
  *
 */
-set_anchors_preset(): void;
+set_anchors_preset(preset: int, keep_offsets?: boolean): void;
 
 /** Sets [member offset_left] and [member offset_top] at the same time. Equivalent of changing [member position]. */
-set_begin(): void;
+set_begin(position: Vector2): void;
 
 /**
  * Sets the given callables to be used instead of the control's own drag-and-drop virtual methods. If a callable is empty, its respective virtual method is used as normal.
@@ -1093,7 +1093,7 @@ set_begin(): void;
  * - [param drop_func] corresponds to [method _drop_data] and requires both a [Vector2] and a [Variant].
  *
 */
-set_drag_forwarding(): void;
+set_drag_forwarding(drag_func: Callable, can_drop_func: Callable, drop_func: Callable): void;
 
 /**
  * Shows the given control at the mouse pointer. A good time to call this method is in [method _get_drag_data]. The control must not be in the scene tree. You should not free the control, and you should not keep a reference to the control beyond the duration of the drag. It will be deleted automatically after the drag has ended.
@@ -1127,13 +1127,13 @@ set_drag_forwarding(): void;
  * 
  *
 */
-set_drag_preview(): void;
+set_drag_preview(control: Control): void;
 
 /** Sets [member offset_right] and [member offset_bottom] at the same time. */
-set_end(): void;
+set_end(position: Vector2): void;
 
 /** Sets the focus neighbor for the specified [enum Side] to the [Control] at [param neighbor] node path. A setter method for [member focus_neighbor_bottom], [member focus_neighbor_left], [member focus_neighbor_right] and [member focus_neighbor_top]. */
-set_focus_neighbor(): void;
+set_focus_neighbor(side: int, neighbor: NodePathType): void;
 
 /**
  * Sets the [member global_position] to given [param position].
@@ -1141,10 +1141,10 @@ set_focus_neighbor(): void;
  * If [param keep_offsets] is `true`, control's anchors will be updated instead of offsets.
  *
 */
-set_global_position(): void;
+set_global_position(position: Vector2, keep_offsets?: boolean): void;
 
 /** Sets the offset for the specified [enum Side] to [param offset]. A setter method for [member offset_bottom], [member offset_left], [member offset_right] and [member offset_top]. */
-set_offset(): void;
+set_offset(side: int, offset: float): void;
 
 /**
  * Sets the offsets to a [param preset] from [enum Control.LayoutPreset] enum. This is the code equivalent to using the Layout menu in the 2D editor.
@@ -1154,7 +1154,7 @@ set_offset(): void;
  * Use parameter [param margin] to determine the gap between the [Control] and the edges.
  *
 */
-set_offsets_preset(): void;
+set_offsets_preset(preset: int, resize_mode?: int, margin?: int): void;
 
 /**
  * Sets the [member position] to given [param position].
@@ -1162,7 +1162,7 @@ set_offsets_preset(): void;
  * If [param keep_offsets] is `true`, control's anchors will be updated instead of offsets.
  *
 */
-set_position(): void;
+set_position(position: Vector2, keep_offsets?: boolean): void;
 
 /**
  * Sets the size (see [member size]).
@@ -1170,7 +1170,7 @@ set_position(): void;
  * If [param keep_offsets] is `true`, control's anchors will be updated instead of offsets.
  *
 */
-set_size(): void;
+set_size(size: Vector2, keep_offsets?: boolean): void;
 
 /** Invalidates the size cache in this node and in parent nodes up to top level. Intended to be used with [method get_minimum_size] when the return value is changed. Setting [member custom_minimum_size] directly calls this method automatically. */
 update_minimum_size(): void;
@@ -1181,7 +1181,7 @@ update_minimum_size(): void;
  * **Note:** [method warp_mouse] is only supported on Windows, macOS and Linux. It has no effect on Android, iOS and Web.
  *
 */
-warp_mouse(): void;
+warp_mouse(position: Vector2): void;
 
   connect<T extends SignalsOf<Control>>(signal: T, method: SignalFunction<Control[T]>): number;
 

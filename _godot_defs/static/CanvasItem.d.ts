@@ -126,7 +126,7 @@ z_index: int;
 protected _draw(): void;
 
 /** Subsequent drawing commands will be ignored unless they fall within the specified animation slice. This is a faster way to implement animations that loop on background rather than redrawing constantly. */
-draw_animation_slice(): void;
+draw_animation_slice(animation_length: float, slice_begin: float, slice_end: float, offset?: float): void;
 
 /**
  * Draws an unfilled arc between the given angles with a uniform [param color] and [param width] and optional antialiasing (supported only for positive [param width]). The larger the value of [param point_count], the smoother the curve. [param center] is defined in local space. For elliptical arcs, see [method draw_ellipse_arc]. See also [method draw_circle].
@@ -136,13 +136,13 @@ draw_animation_slice(): void;
  * The arc is drawn from [param start_angle] towards the value of [param end_angle] so in clockwise direction if `start_angle < end_angle` and counter-clockwise otherwise. Passing the same angles but in reversed order will produce the same arc. If absolute difference of [param start_angle] and [param end_angle] is greater than [constant @GDScript.TAU] radians, then a full circle arc is drawn (i.e. arc will not overlap itself).
  *
 */
-draw_arc(): void;
+draw_arc(center: Vector2, radius: float, start_angle: float, end_angle: float, point_count: int, color: Color, width?: float, antialiased?: boolean): void;
 
 /** Draws a string first character using a custom font. If [param oversampling] is greater than zero, it is used as font oversampling factor, otherwise viewport oversampling settings are used. [param pos] is defined in local space. */
-draw_char(): void;
+draw_char(font: Font, pos: Vector2, char: string, font_size?: int, modulate?: Color, oversampling?: float): void;
 
 /** Draws a string first character outline using a custom font. If [param oversampling] is greater than zero, it is used as font oversampling factor, otherwise viewport oversampling settings are used. [param pos] is defined in local space. */
-draw_char_outline(): void;
+draw_char_outline(font: Font, pos: Vector2, char: string, font_size?: int, size?: int, modulate?: Color, oversampling?: float): void;
 
 /**
  * Draws a circle, with [param position] defined in local space. See also [method draw_ellipse], [method draw_arc], [method draw_polyline], and [method draw_polygon].
@@ -156,7 +156,7 @@ draw_char_outline(): void;
  * **Note:** [param width] is only effective if [param filled] is `false`.
  *
 */
-draw_circle(): void;
+draw_circle(position: Vector2, radius: float, color: Color, filled?: boolean, width?: float, antialiased?: boolean): void;
 
 /**
  * Draws a colored polygon of any number of points, convex or concave. The points in the [param points] array are defined in local space. Unlike [method draw_polygon], a single color must be specified for the whole polygon.
@@ -164,7 +164,7 @@ draw_circle(): void;
  * **Note:** If you frequently redraw the same polygon with a large number of vertices, consider pre-calculating the triangulation with [method Geometry2D.triangulate_polygon] and using [method draw_mesh], [method draw_multimesh], or [method RenderingServer.canvas_item_add_triangle_array].
  *
 */
-draw_colored_polygon(): void;
+draw_colored_polygon(points: PackedVector2Array, color: Color, uvs?: PackedVector2Array, texture?: Texture2D): void;
 
 /**
  * Draws a dashed line from a 2D point to another, with a given color and width. The [param from] and [param to] positions are defined in local space. See also [method draw_line], [method draw_multiline], and [method draw_polyline].
@@ -178,7 +178,7 @@ draw_colored_polygon(): void;
  * **Note:** [param antialiased] is only effective if [param width] is greater than `0.0`.
  *
 */
-draw_dashed_line(): void;
+draw_dashed_line(from: Vector2, to: Vector2, color: Color, width?: float, dash?: float, aligned?: boolean, antialiased?: boolean): void;
 
 /**
  * Draws an ellipse with semi-major axis [param major] and semi-minor axis [param minor]. See also [method draw_circle], [method draw_ellipse_arc], [method draw_polyline], and [method draw_polygon].
@@ -192,7 +192,7 @@ draw_dashed_line(): void;
  * **Note:** [param width] is only effective if [param filled] is `false`.
  *
 */
-draw_ellipse(): void;
+draw_ellipse(position: Vector2, major: float, minor: float, color: Color, filled?: boolean, width?: float, antialiased?: boolean): void;
 
 /**
  * Draws an unfilled elliptical arc between the given angles with a uniform [param color] and [param width] and optional antialiasing (supported only for positive [param width]). The larger the value of [param point_count], the smoother the curve. For circular arcs, see [method draw_arc]. See also [method draw_ellipse].
@@ -202,7 +202,7 @@ draw_ellipse(): void;
  * The arc is drawn from [param start_angle] towards the value of [param end_angle] so in clockwise direction if `start_angle < end_angle` and counter-clockwise otherwise. Passing the same angles but in reversed order will produce the same arc. If absolute difference of [param start_angle] and [param end_angle] is greater than [constant @GDScript.TAU] radians, then a full ellipse is drawn (i.e. arc will not overlap itself).
  *
 */
-draw_ellipse_arc(): void;
+draw_ellipse_arc(center: Vector2, major: float, minor: float, start_angle: float, end_angle: float, point_count: int, color: Color, width?: float, antialiased?: boolean): void;
 
 /** After submitting all animations slices via [method draw_animation_slice], this function can be used to revert drawing to its default state (all subsequent drawing commands will be visible). If you don't care about this particular use case, usage of this function after submitting the slices is not required. */
 draw_end_animation(): void;
@@ -222,7 +222,7 @@ draw_end_animation(): void;
  * 
  *
 */
-draw_lcd_texture_rect_region(): void;
+draw_lcd_texture_rect_region(texture: Texture2D, rect: Rect2, src_rect: Rect2, modulate?: Color): void;
 
 /**
  * Draws a line from a 2D point to another, with a given color and width. It can be optionally antialiased. The [param from] and [param to] positions are defined in local space. See also [method draw_dashed_line], [method draw_multiline], and [method draw_polyline].
@@ -230,10 +230,10 @@ draw_lcd_texture_rect_region(): void;
  * If [param width] is negative, then a two-point primitive will be drawn instead of a four-point one. This means that when the CanvasItem is scaled, the line will remain thin. If this behavior is not desired, then pass a positive [param width] like `1.0`.
  *
 */
-draw_line(): void;
+draw_line(from: Vector2, to: Vector2, color: Color, width?: float, antialiased?: boolean): void;
 
 /** Draws a [Mesh] in 2D, using the provided texture. See [MeshInstance2D] for related documentation. The [param transform] is defined in local space. */
-draw_mesh(): void;
+draw_mesh(mesh: Mesh, texture: Texture2D, transform?: Transform2D, modulate?: Color): void;
 
 /**
  * Draws a textured rectangle region of the multichannel signed distance field texture at a given position, optionally modulated by a color. The [param rect] is defined in local space. See [member FontFile.multichannel_signed_distance_field] for more information and caveats about MSDF font rendering.
@@ -243,7 +243,7 @@ draw_mesh(): void;
  * Value of the [param pixel_range] should the same that was used during distance field texture generation.
  *
 */
-draw_msdf_texture_rect_region(): void;
+draw_msdf_texture_rect_region(texture: Texture2D, rect: Rect2, src_rect: Rect2, modulate?: Color, outline?: float, pixel_range?: float, scale?: float): void;
 
 /**
  * Draws multiple disconnected lines with a uniform [param width] and [param color]. Each line is defined by two consecutive points from [param points] array in local space, i.e. i-th segment consists of `points[2 * i]`, `points[2 * i + 1]` endpoints. When drawing large amounts of lines, this is faster than using individual [method draw_line] calls. To draw interconnected lines, use [method draw_polyline] instead.
@@ -253,7 +253,7 @@ draw_msdf_texture_rect_region(): void;
  * **Note:** [param antialiased] is only effective if [param width] is greater than `0.0`.
  *
 */
-draw_multiline(): void;
+draw_multiline(points: PackedVector2Array, color: Color, width?: float, antialiased?: boolean): void;
 
 /**
  * Draws multiple disconnected lines with a uniform [param width] and segment-by-segment coloring. Each segment is defined by two consecutive points from [param points] array in local space and a corresponding color from [param colors] array, i.e. i-th segment consists of `points[2 * i]`, `points[2 * i + 1]` endpoints and has `colors**` color. When drawing large amounts of lines, this is faster than using individual [method draw_line] calls. To draw interconnected lines, use [method draw_polyline_colors] instead.
@@ -263,16 +263,16 @@ draw_multiline(): void;
  * **Note:** [param antialiased] is only effective if [param width] is greater than `0.0`.
  *
 */
-draw_multiline_colors(): void;
+draw_multiline_colors(points: PackedVector2Array, colors: PackedColorArray, width?: float, antialiased?: boolean): void;
 
 /** Breaks [param text] into lines and draws it using the specified [param font] at the [param pos] in local space (top-left corner). The text will have its color multiplied by [param modulate]. If [param width] is greater than or equal to 0, the text will be clipped if it exceeds the specified width. If [param oversampling] is greater than zero, it is used as font oversampling factor, otherwise viewport oversampling settings are used. */
-draw_multiline_string(): void;
+draw_multiline_string(font: Font, pos: Vector2, text: string, alignment?: int, width?: float, font_size?: int, max_lines?: int, modulate?: Color, brk_flags?: int, justification_flags?: int, direction?: int, orientation?: int, oversampling?: float): void;
 
 /** Breaks [param text] to the lines and draws text outline using the specified [param font] at the [param pos] in local space (top-left corner). The text will have its color multiplied by [param modulate]. If [param width] is greater than or equal to 0, the text will be clipped if it exceeds the specified width. If [param oversampling] is greater than zero, it is used as font oversampling factor, otherwise viewport oversampling settings are used. */
-draw_multiline_string_outline(): void;
+draw_multiline_string_outline(font: Font, pos: Vector2, text: string, alignment?: int, width?: float, font_size?: int, max_lines?: int, size?: int, modulate?: Color, brk_flags?: int, justification_flags?: int, direction?: int, orientation?: int, oversampling?: float): void;
 
 /** Draws a [MultiMesh] in 2D with the provided texture. See [MultiMeshInstance2D] for related documentation. */
-draw_multimesh(): void;
+draw_multimesh(multimesh: MultiMesh, texture: Texture2D): void;
 
 /**
  * Draws a solid polygon of any number of points, convex or concave. Unlike [method draw_colored_polygon], each point's color can be changed individually. The [param points] array is defined in local space. See also [method draw_polyline] and [method draw_polyline_colors]. If you need more flexibility (such as being able to use bones), use [method RenderingServer.canvas_item_add_triangle_array] instead.
@@ -280,7 +280,7 @@ draw_multimesh(): void;
  * **Note:** If you frequently redraw the same polygon with a large number of vertices, consider pre-calculating the triangulation with [method Geometry2D.triangulate_polygon] and using [method draw_mesh], [method draw_multimesh], or [method RenderingServer.canvas_item_add_triangle_array].
  *
 */
-draw_polygon(): void;
+draw_polygon(points: PackedVector2Array, colors: PackedColorArray, uvs?: PackedVector2Array, texture?: Texture2D): void;
 
 /**
  * Draws interconnected line segments with a uniform [param color] and [param width] and optional antialiasing (supported only for positive [param width]). The [param points] array is defined in local space. When drawing large amounts of lines, this is faster than using individual [method draw_line] calls. To draw disconnected lines, use [method draw_multiline] instead. See also [method draw_polygon].
@@ -288,7 +288,7 @@ draw_polygon(): void;
  * If [param width] is negative, it will be ignored and the polyline will be drawn using [constant RenderingServer.PRIMITIVE_LINE_STRIP]. This means that when the CanvasItem is scaled, the polyline will remain thin. If this behavior is not desired, then pass a positive [param width] like `1.0`.
  *
 */
-draw_polyline(): void;
+draw_polyline(points: PackedVector2Array, color: Color, width?: float, antialiased?: boolean): void;
 
 /**
  * Draws interconnected line segments with a uniform [param width], point-by-point coloring, and optional antialiasing (supported only for positive [param width]). Colors assigned to line points match by index between [param points] and [param colors], i.e. each line segment is filled with a gradient between the colors of the endpoints. The [param points] array is defined in local space. When drawing large amounts of lines, this is faster than using individual [method draw_line] calls. To draw disconnected lines, use [method draw_multiline_colors] instead. See also [method draw_polygon].
@@ -296,10 +296,10 @@ draw_polyline(): void;
  * If [param width] is negative, it will be ignored and the polyline will be drawn using [constant RenderingServer.PRIMITIVE_LINE_STRIP]. This means that when the CanvasItem is scaled, the polyline will remain thin. If this behavior is not desired, then pass a positive [param width] like `1.0`.
  *
 */
-draw_polyline_colors(): void;
+draw_polyline_colors(points: PackedVector2Array, colors: PackedColorArray, width?: float, antialiased?: boolean): void;
 
 /** Draws a custom primitive. 1 point for a point, 2 points for a line, 3 points for a triangle, and 4 points for a quad. If 0 points or more than 4 points are specified, nothing will be drawn and an error message will be printed. The [param points] array is defined in local space. See also [method draw_line], [method draw_polyline], [method draw_polygon], and [method draw_rect]. */
-draw_primitive(): void;
+draw_primitive(points: PackedVector2Array, colors: PackedColorArray, uvs: PackedVector2Array, texture?: Texture2D): void;
 
 /**
  * Draws a rectangle. If [param filled] is `true`, the rectangle will be filled with the [param color] specified. If [param filled] is `false`, the rectangle will be drawn as a stroke with the [param color] and [param width] specified. The [param rect] is specified in local space. See also [method draw_texture_rect].
@@ -313,7 +313,7 @@ draw_primitive(): void;
  * **Note:** Unfilled rectangles drawn with a negative [param width] may not display perfectly. For example, corners may be missing or brighter due to overlapping lines (for a translucent [param color]).
  *
 */
-draw_rect(): void;
+draw_rect(rect: Rect2, color: Color, filled?: boolean, width?: float, antialiased?: boolean): void;
 
 /**
  * Sets a custom local transform for drawing via components. Anything drawn afterwards will be transformed by this.
@@ -321,10 +321,10 @@ draw_rect(): void;
  * **Note:** [member FontFile.oversampling] does **not** take [param scale] into account. This means that scaling up/down will cause bitmap fonts and rasterized (non-MSDF) dynamic fonts to appear blurry or pixelated. To ensure text remains crisp regardless of scale, you can enable MSDF font rendering by enabling [member ProjectSettings.gui/theme/default_font_multichannel_signed_distance_field] (applies to the default project font only), or enabling **Multichannel Signed Distance Field** in the import options of a DynamicFont for custom fonts. On system fonts, [member SystemFont.multichannel_signed_distance_field] can be enabled in the inspector.
  *
 */
-draw_set_transform(): void;
+draw_set_transform(position: Vector2, rotation?: float, scale?: Vector2): void;
 
 /** Sets a custom local transform for drawing via matrix. Anything drawn afterwards will be transformed by this. */
-draw_set_transform_matrix(): void;
+draw_set_transform_matrix(xform: Transform2D): void;
 
 /**
  * Draws [param text] using the specified [param font] at the [param pos] in local space (bottom-left corner using the baseline of the font). The text will have its color multiplied by [param modulate]. If [param width] is greater than or equal to 0, the text will be clipped if it exceeds the specified width. If [param oversampling] is greater than zero, it is used as font oversampling factor, otherwise viewport oversampling settings are used.
@@ -345,22 +345,22 @@ draw_set_transform_matrix(): void;
  * See also [method Font.draw_string].
  *
 */
-draw_string(): void;
+draw_string(font: Font, pos: Vector2, text: string, alignment?: int, width?: float, font_size?: int, modulate?: Color, justification_flags?: int, direction?: int, orientation?: int, oversampling?: float): void;
 
 /** Draws [param text] outline using the specified [param font] at the [param pos] in local space (bottom-left corner using the baseline of the font). The text will have its color multiplied by [param modulate]. If [param width] is greater than or equal to 0, the text will be clipped if it exceeds the specified width. If [param oversampling] is greater than zero, it is used as font oversampling factor, otherwise viewport oversampling settings are used. */
-draw_string_outline(): void;
+draw_string_outline(font: Font, pos: Vector2, text: string, alignment?: int, width?: float, font_size?: int, size?: int, modulate?: Color, justification_flags?: int, direction?: int, orientation?: int, oversampling?: float): void;
 
 /** Draws a styled rectangle. The [param rect] is defined in local space. */
-draw_style_box(): void;
+draw_style_box(style_box: StyleBox, rect: Rect2): void;
 
 /** Draws a texture at a given position. The [param position] is defined in local space. */
-draw_texture(): void;
+draw_texture(texture: Texture2D, position: Vector2, modulate?: Color): void;
 
 /** Draws a textured rectangle at a given position, optionally modulated by a color. The [param rect] is defined in local space. If [param transpose] is [code]true[/code], the texture will have its X and Y coordinates swapped. See also [method draw_rect] and [method draw_texture_rect_region]. */
-draw_texture_rect(): void;
+draw_texture_rect(texture: Texture2D, rect: Rect2, tile: boolean, modulate?: Color, transpose?: boolean): void;
 
 /** Draws a textured rectangle from a texture's region (specified by [param src_rect]) at a given position in local space, optionally modulated by a color. If [param transpose] is [code]true[/code], the texture will have its X and Y coordinates swapped. See also [method draw_texture_rect]. */
-draw_texture_rect_region(): void;
+draw_texture_rect_region(texture: Texture2D, rect: Rect2, src_rect: Rect2, modulate?: Color, transpose?: boolean, clip_uv?: boolean): void;
 
 /**
  * Forces the node's transform to update. Fails if the node is not inside the tree. See also [method get_transform].
@@ -397,7 +397,7 @@ get_global_transform(): Transform2D;
 get_global_transform_with_canvas(): Transform2D;
 
 /** Get the value of a shader parameter as set on this instance. */
-get_instance_shader_parameter(): any;
+get_instance_shader_parameter(name: StringName): any;
 
 /** Returns the mouse's position in this [CanvasItem] using the local coordinate system of this [CanvasItem]. */
 get_local_mouse_position(): Vector2;
@@ -420,7 +420,7 @@ get_viewport_rect(): Rect2;
 get_viewport_transform(): Transform2D;
 
 /** Returns [code]true[/code] if the layer at the given index is set in [member visibility_layer]. */
-get_visibility_layer_bit(): boolean;
+get_visibility_layer_bit(layer: int): boolean;
 
 /**
  * Returns the [World2D] this node is registered to.
@@ -461,7 +461,7 @@ is_visible_in_tree(): boolean;
  * 
  *
 */
-make_canvas_position_local(): Vector2;
+make_canvas_position_local(viewport_point: Vector2): Vector2;
 
 make_input_local<T extends InputEvent>(event: T): T
 
@@ -479,7 +479,7 @@ queue_redraw(): void;
  * **Note:** [param name] is case-sensitive and must match the name of the uniform in the code exactly (not the capitalized name in the inspector).
  *
 */
-set_instance_shader_parameter(): void;
+set_instance_shader_parameter(name: StringName, value: any): void;
 
 /**
  * If `true`, the node will receive [constant NOTIFICATION_LOCAL_TRANSFORM_CHANGED] whenever its local transform changes.
@@ -487,7 +487,7 @@ set_instance_shader_parameter(): void;
  * **Note:** Many canvas items such as [Bone2D] or [CollisionShape2D] automatically enable this in order to function correctly.
  *
 */
-set_notify_local_transform(): void;
+set_notify_local_transform(enable: boolean): void;
 
 /**
  * If `true`, the node will receive [constant NOTIFICATION_TRANSFORM_CHANGED] whenever its global transform changes.
@@ -495,10 +495,10 @@ set_notify_local_transform(): void;
  * **Note:** Many canvas items such as [Camera2D] or [Light2D] automatically enable this in order to function correctly.
  *
 */
-set_notify_transform(): void;
+set_notify_transform(enable: boolean): void;
 
 /** Set/clear individual bits on the rendering visibility layer. This simplifies editing this [CanvasItem]'s visibility layer. */
-set_visibility_layer_bit(): void;
+set_visibility_layer_bit(layer: int, enabled: boolean): void;
 
 /**
  * Show the [CanvasItem] if it's currently hidden. This is equivalent to setting [member visible] to `true`.

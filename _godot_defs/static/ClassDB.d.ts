@@ -20,34 +20,34 @@ declare class ClassDBClass extends Object  {
 
 
 /** Returns [code]true[/code] if objects can be instantiated from the specified [param class], otherwise returns [code]false[/code]. */
-can_instantiate(): boolean;
+can_instantiate(_class: StringName): boolean;
 
 /** Calls a static method on a class. */
 class_call_static(...args: any[]): any;
 
 /** Returns whether the specified [param class] is available or not. */
-class_exists(): boolean;
+class_exists(_class: StringName): boolean;
 
 /** Returns the API type of the specified [param class]. */
-class_get_api_type(): int;
+class_get_api_type(_class: StringName): int;
 
 /** Returns an array with all the keys in [param enum] of [param class] or its ancestry. */
-class_get_enum_constants(): PackedStringArray;
+class_get_enum_constants(_class: StringName, _enum: StringName, no_inheritance?: boolean): PackedStringArray;
 
 /** Returns an array with all the enums of [param class] or its ancestry. */
-class_get_enum_list(): PackedStringArray;
+class_get_enum_list(_class: StringName, no_inheritance?: boolean): PackedStringArray;
 
 /** Returns the value of the integer constant [param name] of [param class] or its ancestry. Always returns 0 when the constant could not be found. */
-class_get_integer_constant(): int;
+class_get_integer_constant(_class: StringName, name: StringName): int;
 
 /** Returns which enum the integer constant [param name] of [param class] or its ancestry belongs to. */
-class_get_integer_constant_enum(): StringName;
+class_get_integer_constant_enum(_class: StringName, name: StringName, no_inheritance?: boolean): StringName;
 
 /** Returns an array with the names all the integer constants of [param class] or its ancestry. */
-class_get_integer_constant_list(): PackedStringArray;
+class_get_integer_constant_list(_class: StringName, no_inheritance?: boolean): PackedStringArray;
 
 /** Returns the number of arguments of the method [param method] of [param class] or its ancestry if [param no_inheritance] is [code]false[/code]. */
-class_get_method_argument_count(): int;
+class_get_method_argument_count(_class: StringName, method: StringName, no_inheritance?: boolean): int;
 
 /**
  * Returns an array with all the methods of [param class] or its ancestry if [param no_inheritance] is `false`. Every element of the array is a [Dictionary] with the following keys: `args`, `default_args`, `flags`, `id`, `name`, `return: (class_name, hint, hint_string, name, type, usage)`.
@@ -55,43 +55,43 @@ class_get_method_argument_count(): int;
  * **Note:** In exported release builds the debug info is not available, so the returned dictionaries will contain only method names.
  *
 */
-class_get_method_list(): Dictionary[];
+class_get_method_list(_class: StringName, no_inheritance?: boolean): Dictionary[];
 
 /** Returns the value of [param property] of [param object] or its ancestry. */
-class_get_property(): any;
+class_get_property(object: Object, property: StringName): any;
 
 /** Returns the default value of [param property] of [param class] or its ancestor classes. */
-class_get_property_default_value(): any;
+class_get_property_default_value(_class: StringName, property: StringName): any;
 
 /** Returns the getter method name of [param property] of [param class]. */
-class_get_property_getter(): StringName;
+class_get_property_getter(_class: StringName, property: StringName): StringName;
 
 /** Returns an array with all the properties of [param class] or its ancestry if [param no_inheritance] is [code]false[/code]. */
-class_get_property_list(): Dictionary[];
+class_get_property_list(_class: StringName, no_inheritance?: boolean): Dictionary[];
 
 /** Returns the setter method name of [param property] of [param class]. */
-class_get_property_setter(): StringName;
+class_get_property_setter(_class: StringName, property: StringName): StringName;
 
 /** Returns the [param signal] data of [param class] or its ancestry. The returned value is a [Dictionary] with the following keys: [code]args[/code], [code]default_args[/code], [code]flags[/code], [code]id[/code], [code]name[/code], [code]return: (class_name, hint, hint_string, name, type, usage)[/code]. */
-class_get_signal(): Dictionary<any, any>;
+class_get_signal(_class: StringName, signal: StringName): Dictionary<any, any>;
 
 /** Returns an array with all the signals of [param class] or its ancestry if [param no_inheritance] is [code]false[/code]. Every element of the array is a [Dictionary] as described in [method class_get_signal]. */
-class_get_signal_list(): Dictionary[];
+class_get_signal_list(_class: StringName, no_inheritance?: boolean): Dictionary[];
 
 /** Returns whether [param class] or its ancestry has an enum called [param name] or not. */
-class_has_enum(): boolean;
+class_has_enum(_class: StringName, name: StringName, no_inheritance?: boolean): boolean;
 
 /** Returns whether [param class] or its ancestry has an integer constant called [param name] or not. */
-class_has_integer_constant(): boolean;
+class_has_integer_constant(_class: StringName, name: StringName): boolean;
 
 /** Returns whether [param class] (or its ancestry if [param no_inheritance] is [code]false[/code]) has a method called [param method] or not. */
-class_has_method(): boolean;
+class_has_method(_class: StringName, method: StringName, no_inheritance?: boolean): boolean;
 
 /** Returns whether [param class] or its ancestry has a signal called [param signal] or not. */
-class_has_signal(): boolean;
+class_has_signal(_class: StringName, signal: StringName): boolean;
 
 /** Sets [param property] value of [param object] to [param value]. */
-class_set_property(): int;
+class_set_property(object: Object, property: StringName, value: any): int;
 
 /**
  * Returns the names of all engine classes available.
@@ -102,22 +102,22 @@ class_set_property(): int;
 get_class_list(): PackedStringArray;
 
 /** Returns the names of all engine classes that directly or indirectly inherit from [param class]. */
-get_inheriters_from_class(): PackedStringArray;
+get_inheriters_from_class(_class: StringName): PackedStringArray;
 
 /** Returns the parent class of [param class]. */
-get_parent_class(): StringName;
+get_parent_class(_class: StringName): StringName;
 
 /** Creates an instance of [param class]. */
-instantiate(): any;
+instantiate(_class: StringName): any;
 
 /** Returns whether this [param class] is enabled or not. */
-is_class_enabled(): boolean;
+is_class_enabled(_class: StringName): boolean;
 
 /** Returns whether [param class] (or its ancestor classes if [param no_inheritance] is [code]false[/code]) has an enum called [param enum] that is a bitfield. */
-is_class_enum_bitfield(): boolean;
+is_class_enum_bitfield(_class: StringName, _enum: StringName, no_inheritance?: boolean): boolean;
 
 /** Returns whether [param inherits] is an ancestor of [param class] or not. */
-is_parent_class(): boolean;
+is_parent_class(_class: StringName, inherits: StringName): boolean;
 
   connect<T extends SignalsOf<ClassDBClass>>(signal: T, method: SignalFunction<ClassDBClass[T]>): number;
 

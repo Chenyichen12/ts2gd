@@ -84,7 +84,7 @@ root_motion_track: NodePathType;
 root_node: NodePathType;
 
 /** A virtual function for processing after getting a key during playback. */
-protected _post_process_key_value(): any;
+protected _post_process_key_value(animation: Animation, track: int, value: any, object_id: int, object_sub_idx: int): any;
 
 /**
  * Adds [param library] to the animation player, under the key [param name].
@@ -101,10 +101,10 @@ protected _post_process_key_value(): any;
  * 
  *
 */
-add_animation_library(): int;
+add_animation_library(name: StringName, library: AnimationLibrary): int;
 
 /** Manually advance the animations by the specified time (in seconds). */
-advance(): void;
+advance(delta: float): void;
 
 /**
  * If the animation track specified by [param name] has an option [constant Animation.UPDATE_CAPTURE], stores current values of the objects indicated by the track path as a cache. If there is already a captured cache, the old cache is discarded.
@@ -114,19 +114,19 @@ advance(): void;
  * You can specify [param trans_type] as the curve for the interpolation. For better results, it may be appropriate to specify [constant Tween.TRANS_LINEAR] for cases where the first key of the track begins with a non-zero value or where the key value does not change, and [constant Tween.TRANS_QUAD] for cases where the key value changes linearly.
  *
 */
-capture(): void;
+capture(name: StringName, duration: float, trans_type?: int, ease_type?: int): void;
 
 /** [AnimationMixer] caches animated nodes. It may not notice if a node disappears; [method clear_caches] forces it to update the cache again. */
 clear_caches(): void;
 
 /** Returns the key of [param animation] or an empty [StringName] if not found. */
-find_animation(): StringName;
+find_animation(animation: Animation): StringName;
 
 /** Returns the key for the [AnimationLibrary] that contains [param animation] or an empty [StringName] if not found. */
-find_animation_library(): StringName;
+find_animation_library(animation: Animation): StringName;
 
 /** Returns the [Animation] with the key [param name]. If the animation does not exist, [code]null[/code] is returned and an error is logged. */
-get_animation(): Animation;
+get_animation(name: StringName): Animation;
 
 /**
  * Returns the first [AnimationLibrary] with key [param name] or `null` if not found.
@@ -134,7 +134,7 @@ get_animation(): Animation;
  * To get the [AnimationMixer]'s global animation library, use `get_animation_library("")`.
  *
 */
-get_animation_library(): AnimationLibrary;
+get_animation_library(name: StringName): AnimationLibrary;
 
 /** Returns the list of stored library keys. */
 get_animation_library_list(): StringName[];
@@ -336,16 +336,16 @@ get_root_motion_scale(): Vector3;
 get_root_motion_scale_accumulator(): Vector3;
 
 /** Returns [code]true[/code] if the [AnimationMixer] stores an [Animation] with key [param name]. */
-has_animation(): boolean;
+has_animation(name: StringName): boolean;
 
 /** Returns [code]true[/code] if the [AnimationMixer] stores an [AnimationLibrary] with key [param name]. */
-has_animation_library(): boolean;
+has_animation_library(name: StringName): boolean;
 
 /** Removes the [AnimationLibrary] associated with the key [param name]. */
-remove_animation_library(): void;
+remove_animation_library(name: StringName): void;
 
 /** Moves the [AnimationLibrary] associated with the key [param name] to the key [param newname]. */
-rename_animation_library(): void;
+rename_animation_library(name: StringName, newname: StringName): void;
 
   connect<T extends SignalsOf<AnimationMixer>>(signal: T, method: SignalFunction<AnimationMixer[T]>): number;
 

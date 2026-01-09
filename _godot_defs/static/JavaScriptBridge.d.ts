@@ -25,7 +25,7 @@ declare class JavaScriptBridgeClass extends Object  {
  * **Note:** The callback function must take exactly one [Array] argument, which is going to be the JavaScript [url=https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments]arguments object[/url] converted to an array.
  *
 */
-create_callback(): JavaScriptObject;
+create_callback(callable: Callable): JavaScriptObject;
 
 /** Creates a new JavaScript object using the [code]new[/code] constructor. The [param object] must a valid property of the JavaScript [code]window[/code]. See [JavaScriptObject] for usage. */
 create_object(...args: any[]): any;
@@ -40,7 +40,7 @@ create_object(...args: any[]): any;
  * **Note:** Browsers might ask the user for permission or block the download if multiple download requests are made in a quick succession.
  *
 */
-download_buffer(): void;
+download_buffer(buffer: PackedByteArray, name: string, mime?: string): void;
 
 /**
  * Execute the string [param code] as JavaScript code within the browser window. This is a call to the actual global JavaScript function [code skip-lint]eval()`.
@@ -48,7 +48,7 @@ download_buffer(): void;
  * If [param use_global_execution_context] is `true`, the code will be evaluated in the global execution context. Otherwise, it is evaluated in the execution context of a function within the engine's runtime environment.
  *
 */
-eval(): any;
+eval(code: string, use_global_execution_context?: boolean): any;
 
 /**
  * Force synchronization of the persistent file system (when enabled).
@@ -59,13 +59,13 @@ eval(): any;
 force_fs_sync(): void;
 
 /** Returns an interface to a JavaScript object that can be used by scripts. The [param interface] must be a valid property of the JavaScript [code]window[/code]. The callback must accept a single [Array] argument, which will contain the JavaScript [code]arguments[/code]. See [JavaScriptObject] for usage. */
-get_interface(): JavaScriptObject;
+get_interface(interface: string): JavaScriptObject;
 
 /** Returns [code]true[/code] if the given [param javascript_object] is of type [url=https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer][code]ArrayBuffer[/code][/url], [url=https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView][code]DataView[/code][/url], or one of the many [url=https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray]typed array objects[/url]. */
-is_js_buffer(): boolean;
+is_js_buffer(javascript_object: JavaScriptObject): boolean;
 
 /** Returns a copy of [param javascript_buffer]'s contents as a [PackedByteArray]. See also [method is_js_buffer]. */
-js_buffer_to_packed_byte_array(): PackedByteArray;
+js_buffer_to_packed_byte_array(javascript_buffer: JavaScriptObject): PackedByteArray;
 
 /**
  * Returns `true` if a new version of the progressive web app is waiting to be activated.

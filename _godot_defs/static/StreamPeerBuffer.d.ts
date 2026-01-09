@@ -34,10 +34,10 @@ get_position(): int;
 get_size(): int;
 
 /** Resizes the [member data_array]. This [i]doesn't[/i] update the cursor. */
-resize(): void;
+resize(size: int): void;
 
 /** Moves the cursor to the specified position. [param position] must be a valid index of [member data_array]. */
-seek(): void;
+seek(position: int): void;
 
   connect<T extends SignalsOf<StreamPeerBuffer>>(signal: T, method: SignalFunction<StreamPeerBuffer[T]>): number;
 

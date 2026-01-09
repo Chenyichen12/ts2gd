@@ -68,7 +68,7 @@ get_exception(): JavaObject;
  * **Note:** This method only works on Android. On every other platform, this method does nothing and returns an empty [JavaClass].
  *
 */
-wrap(): JavaClass;
+wrap(name: string): JavaClass;
 
   connect<T extends SignalsOf<JavaClassWrapperClass>>(signal: T, method: SignalFunction<JavaClassWrapperClass[T]>): number;
 

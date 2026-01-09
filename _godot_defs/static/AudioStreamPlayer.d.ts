@@ -92,10 +92,10 @@ get_stream_playback(): AudioStreamPlayback;
 has_stream_playback(): boolean;
 
 /** Plays a sound from the beginning, or the given [param from_position] in seconds. */
-play(): void;
+play(from_position?: float): void;
 
 /** Restarts all sounds to be played from the given [param to_position], in seconds. Does nothing if no sounds are playing. */
-seek(): void;
+seek(to_position: float): void;
 
 /** Stops all sounds from this node. */
 stop(): void;

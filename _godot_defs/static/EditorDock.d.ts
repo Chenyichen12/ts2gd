@@ -106,10 +106,10 @@ title_color: Color;
 transient: boolean;
 
 /** Implement this method to handle loading this dock's layout. It's equivalent to [method EditorPlugin._set_window_layout]. [param section] is a unique section based on [member layout_key]. */
-protected _load_layout_from_config(): void;
+protected _load_layout_from_config(config: ConfigFile, section: string): void;
 
 /** Implement this method to handle saving this dock's layout. It's equivalent to [method EditorPlugin._get_window_layout]. [param section] is a unique section based on [member layout_key]. */
-protected _save_layout_to_config(): void;
+protected _save_layout_to_config(config: ConfigFile, section: string): void;
 
 /**
  * Implement this method to handle the layout switching for this dock. [param layout] is one of the [enum DockLayout] constants.
@@ -122,7 +122,7 @@ protected _save_layout_to_config(): void;
  * 
  *
 */
-protected _update_layout(): void;
+protected _update_layout(layout: int): void;
 
 /** Closes the dock, making its tab hidden. */
 close(): void;

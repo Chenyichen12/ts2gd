@@ -43,16 +43,16 @@ declare class HingeJoint3D extends Joint3D  {
 "params/bias": float;
 
 /** Returns the value of the specified flag. */
-get_flag(): boolean;
+get_flag(flag: int): boolean;
 
 /** Returns the value of the specified parameter. */
-get_param(): float;
+get_param(param: int): float;
 
 /** If [code]true[/code], enables the specified flag. */
-set_flag(): void;
+set_flag(flag: int, enabled: boolean): void;
 
 /** Sets the value of the specified parameter. */
-set_param(): void;
+set_param(param: int, value: float): void;
 
   connect<T extends SignalsOf<HingeJoint3D>>(signal: T, method: SignalFunction<HingeJoint3D[T]>): number;
 

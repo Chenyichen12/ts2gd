@@ -25,7 +25,7 @@ declare class InstancePlaceholder extends Node  {
  * **Note:** [method create_instance] is not thread-safe. Use [method Object.call_deferred] if calling from a thread.
  *
 */
-create_instance(): Node;
+create_instance(replace?: boolean, custom_scene?: PackedScene<any>): Node;
 
 /** Gets the path to the [PackedScene] resource file that is loaded by default when calling [method create_instance]. Not thread-safe. Use [method Object.call_deferred] if calling from a thread. */
 get_instance_path(): string;
@@ -36,7 +36,7 @@ get_instance_path(): string;
  * If [param with_order] is `true`, a key named `.order` (note the leading period) is added to the dictionary. This `.order` key is an [Array] of [String] property names specifying the order in which properties will be applied (with index 0 being the first).
  *
 */
-get_stored_values(): Dictionary<any, any>;
+get_stored_values(with_order?: boolean): Dictionary<any, any>;
 
   connect<T extends SignalsOf<InstancePlaceholder>>(signal: T, method: SignalFunction<InstancePlaceholder[T]>): number;
 

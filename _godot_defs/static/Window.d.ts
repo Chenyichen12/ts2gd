@@ -279,7 +279,7 @@ protected _get_contents_minimum_size(): Vector2;
  * See also [method get_theme_color] and [method Control.add_theme_color_override] for more details.
  *
 */
-add_theme_color_override(): void;
+add_theme_color_override(name: StringName, color: Color): void;
 
 /**
  * Creates a local override for a theme constant with the specified [param name]. Local overrides always take precedence when fetching theme items for the control. An override can be removed with [method remove_theme_constant_override].
@@ -287,7 +287,7 @@ add_theme_color_override(): void;
  * See also [method get_theme_constant].
  *
 */
-add_theme_constant_override(): void;
+add_theme_constant_override(name: StringName, constant: int): void;
 
 /**
  * Creates a local override for a theme [Font] with the specified [param name]. Local overrides always take precedence when fetching theme items for the control. An override can be removed with [method remove_theme_font_override].
@@ -295,7 +295,7 @@ add_theme_constant_override(): void;
  * See also [method get_theme_font].
  *
 */
-add_theme_font_override(): void;
+add_theme_font_override(name: StringName, font: Font): void;
 
 /**
  * Creates a local override for a theme font size with the specified [param name]. Local overrides always take precedence when fetching theme items for the control. An override can be removed with [method remove_theme_font_size_override].
@@ -303,7 +303,7 @@ add_theme_font_override(): void;
  * See also [method get_theme_font_size].
  *
 */
-add_theme_font_size_override(): void;
+add_theme_font_size_override(name: StringName, font_size: int): void;
 
 /**
  * Creates a local override for a theme icon with the specified [param name]. Local overrides always take precedence when fetching theme items for the control. An override can be removed with [method remove_theme_icon_override].
@@ -311,7 +311,7 @@ add_theme_font_size_override(): void;
  * See also [method get_theme_icon].
  *
 */
-add_theme_icon_override(): void;
+add_theme_icon_override(name: StringName, texture: Texture2D): void;
 
 /**
  * Creates a local override for a theme [StyleBox] with the specified [param name]. Local overrides always take precedence when fetching theme items for the control. An override can be removed with [method remove_theme_stylebox_override].
@@ -319,7 +319,7 @@ add_theme_icon_override(): void;
  * See also [method get_theme_stylebox] and [method Control.add_theme_stylebox_override] for more details.
  *
 */
-add_theme_stylebox_override(): void;
+add_theme_stylebox_override(name: StringName, stylebox: StyleBox): void;
 
 /** Prevents [code]*_theme_*_override[/code] methods from emitting [constant NOTIFICATION_THEME_CHANGED] until [method end_bulk_theme_override] is called. */
 begin_bulk_theme_override(): void;
@@ -342,7 +342,7 @@ end_bulk_theme_override(): void;
 get_contents_minimum_size(): Vector2;
 
 /** Returns [code]true[/code] if the [param flag] is set. */
-get_flag(): boolean;
+get_flag(flag: int): boolean;
 
 /** Returns the focused window. */
 get_focused_window(): Window;
@@ -372,7 +372,7 @@ get_size_with_decorations(): Vector2i;
  * See [method Control.get_theme_color] for more details.
  *
 */
-get_theme_color(): Color;
+get_theme_color(name: StringName, theme_type?: StringName): Color;
 
 /**
  * Returns a constant from the first matching [Theme] in the tree if that [Theme] has a constant item with the specified [param name] and [param theme_type].
@@ -380,7 +380,7 @@ get_theme_color(): Color;
  * See [method Control.get_theme_color] for more details.
  *
 */
-get_theme_constant(): int;
+get_theme_constant(name: StringName, theme_type?: StringName): int;
 
 /**
  * Returns the default base scale value from the first matching [Theme] in the tree if that [Theme] has a valid [member Theme.default_base_scale] value.
@@ -412,7 +412,7 @@ get_theme_default_font_size(): int;
  * See [method Control.get_theme_color] for details.
  *
 */
-get_theme_font(): Font;
+get_theme_font(name: StringName, theme_type?: StringName): Font;
 
 /**
  * Returns a font size from the first matching [Theme] in the tree if that [Theme] has a font size item with the specified [param name] and [param theme_type].
@@ -420,7 +420,7 @@ get_theme_font(): Font;
  * See [method Control.get_theme_color] for details.
  *
 */
-get_theme_font_size(): int;
+get_theme_font_size(name: StringName, theme_type?: StringName): int;
 
 /**
  * Returns an icon from the first matching [Theme] in the tree if that [Theme] has an icon item with the specified [param name] and [param theme_type].
@@ -428,7 +428,7 @@ get_theme_font_size(): int;
  * See [method Control.get_theme_color] for details.
  *
 */
-get_theme_icon(): Texture2D;
+get_theme_icon(name: StringName, theme_type?: StringName): Texture2D;
 
 /**
  * Returns a [StyleBox] from the first matching [Theme] in the tree if that [Theme] has a stylebox item with the specified [param name] and [param theme_type].
@@ -436,7 +436,7 @@ get_theme_icon(): Texture2D;
  * See [method Control.get_theme_color] for details.
  *
 */
-get_theme_stylebox(): StyleBox;
+get_theme_stylebox(name: StringName, theme_type?: StringName): StyleBox;
 
 /** Returns the ID of the window. */
 get_window_id(): int;
@@ -453,7 +453,7 @@ has_focus(): boolean;
  * See [method Control.get_theme_color] for details.
  *
 */
-has_theme_color(): boolean;
+has_theme_color(name: StringName, theme_type?: StringName): boolean;
 
 /**
  * Returns `true` if there is a local override for a theme [Color] with the specified [param name] in this [Control] node.
@@ -461,7 +461,7 @@ has_theme_color(): boolean;
  * See [method add_theme_color_override].
  *
 */
-has_theme_color_override(): boolean;
+has_theme_color_override(name: StringName): boolean;
 
 /**
  * Returns `true` if there is a matching [Theme] in the tree that has a constant item with the specified [param name] and [param theme_type].
@@ -469,7 +469,7 @@ has_theme_color_override(): boolean;
  * See [method Control.get_theme_color] for details.
  *
 */
-has_theme_constant(): boolean;
+has_theme_constant(name: StringName, theme_type?: StringName): boolean;
 
 /**
  * Returns `true` if there is a local override for a theme constant with the specified [param name] in this [Control] node.
@@ -477,7 +477,7 @@ has_theme_constant(): boolean;
  * See [method add_theme_constant_override].
  *
 */
-has_theme_constant_override(): boolean;
+has_theme_constant_override(name: StringName): boolean;
 
 /**
  * Returns `true` if there is a matching [Theme] in the tree that has a font item with the specified [param name] and [param theme_type].
@@ -485,7 +485,7 @@ has_theme_constant_override(): boolean;
  * See [method Control.get_theme_color] for details.
  *
 */
-has_theme_font(): boolean;
+has_theme_font(name: StringName, theme_type?: StringName): boolean;
 
 /**
  * Returns `true` if there is a local override for a theme [Font] with the specified [param name] in this [Control] node.
@@ -493,7 +493,7 @@ has_theme_font(): boolean;
  * See [method add_theme_font_override].
  *
 */
-has_theme_font_override(): boolean;
+has_theme_font_override(name: StringName): boolean;
 
 /**
  * Returns `true` if there is a matching [Theme] in the tree that has a font size item with the specified [param name] and [param theme_type].
@@ -501,7 +501,7 @@ has_theme_font_override(): boolean;
  * See [method Control.get_theme_color] for details.
  *
 */
-has_theme_font_size(): boolean;
+has_theme_font_size(name: StringName, theme_type?: StringName): boolean;
 
 /**
  * Returns `true` if there is a local override for a theme font size with the specified [param name] in this [Control] node.
@@ -509,7 +509,7 @@ has_theme_font_size(): boolean;
  * See [method add_theme_font_size_override].
  *
 */
-has_theme_font_size_override(): boolean;
+has_theme_font_size_override(name: StringName): boolean;
 
 /**
  * Returns `true` if there is a matching [Theme] in the tree that has an icon item with the specified [param name] and [param theme_type].
@@ -517,7 +517,7 @@ has_theme_font_size_override(): boolean;
  * See [method Control.get_theme_color] for details.
  *
 */
-has_theme_icon(): boolean;
+has_theme_icon(name: StringName, theme_type?: StringName): boolean;
 
 /**
  * Returns `true` if there is a local override for a theme icon with the specified [param name] in this [Control] node.
@@ -525,7 +525,7 @@ has_theme_icon(): boolean;
  * See [method add_theme_icon_override].
  *
 */
-has_theme_icon_override(): boolean;
+has_theme_icon_override(name: StringName): boolean;
 
 /**
  * Returns `true` if there is a matching [Theme] in the tree that has a stylebox item with the specified [param name] and [param theme_type].
@@ -533,7 +533,7 @@ has_theme_icon_override(): boolean;
  * See [method Control.get_theme_color] for details.
  *
 */
-has_theme_stylebox(): boolean;
+has_theme_stylebox(name: StringName, theme_type?: StringName): boolean;
 
 /**
  * Returns `true` if there is a local override for a theme [StyleBox] with the specified [param name] in this [Control] node.
@@ -541,7 +541,7 @@ has_theme_stylebox(): boolean;
  * See [method add_theme_stylebox_override].
  *
 */
-has_theme_stylebox_override(): boolean;
+has_theme_stylebox_override(name: StringName): boolean;
 
 /** Hides the window. This is not the same as minimized state. Hidden window can't be interacted with and needs to be made visible with [method show]. */
 hide(): void;
@@ -574,7 +574,7 @@ move_to_foreground(): void;
  * **Note:** [param rect] must be in global coordinates if specified.
  *
 */
-popup(): void;
+popup(rect?: Rect2i): void;
 
 /**
  * Popups the [Window] at the center of the current screen, with optionally given minimum size. If the [Window] is embedded, it will be centered in the parent [Viewport] instead.
@@ -582,7 +582,7 @@ popup(): void;
  * **Note:** Calling it with the default value of [param minsize] is equivalent to calling it with [member size].
  *
 */
-popup_centered(): void;
+popup_centered(minsize?: Vector2i): void;
 
 /**
  * Popups the [Window] centered inside its parent [Window]. [param fallback_ratio] determines the maximum size of the [Window], in relation to its parent.
@@ -590,7 +590,7 @@ popup_centered(): void;
  * **Note:** Calling it with the default value of [param minsize] is equivalent to calling it with [member size].
  *
 */
-popup_centered_clamped(): void;
+popup_centered_clamped(minsize?: Vector2i, fallback_ratio?: float): void;
 
 /**
  * If [Window] is embedded, popups the [Window] centered inside its embedder and sets its size as a [param ratio] of embedder's size.
@@ -598,7 +598,7 @@ popup_centered_clamped(): void;
  * If [Window] is a native window, popups the [Window] centered inside the screen of its parent [Window] and sets its size as a [param ratio] of the screen size.
  *
 */
-popup_centered_ratio(): void;
+popup_centered_ratio(ratio?: float): void;
 
 /**
  * Attempts to parent this dialog to the last exclusive window relative to [param from_node], and then calls [method Window.popup] on it. The dialog must have no current parent, otherwise the method fails.
@@ -606,7 +606,7 @@ popup_centered_ratio(): void;
  * See also [method set_unparent_when_invisible] and [method Node.get_last_exclusive_window].
  *
 */
-popup_exclusive(): void;
+popup_exclusive(from_node: Node, rect?: Rect2i): void;
 
 /**
  * Attempts to parent this dialog to the last exclusive window relative to [param from_node], and then calls [method Window.popup_centered] on it. The dialog must have no current parent, otherwise the method fails.
@@ -614,7 +614,7 @@ popup_exclusive(): void;
  * See also [method set_unparent_when_invisible] and [method Node.get_last_exclusive_window].
  *
 */
-popup_exclusive_centered(): void;
+popup_exclusive_centered(from_node: Node, minsize?: Vector2i): void;
 
 /**
  * Attempts to parent this dialog to the last exclusive window relative to [param from_node], and then calls [method Window.popup_centered_clamped] on it. The dialog must have no current parent, otherwise the method fails.
@@ -622,7 +622,7 @@ popup_exclusive_centered(): void;
  * See also [method set_unparent_when_invisible] and [method Node.get_last_exclusive_window].
  *
 */
-popup_exclusive_centered_clamped(): void;
+popup_exclusive_centered_clamped(from_node: Node, minsize?: Vector2i, fallback_ratio?: float): void;
 
 /**
  * Attempts to parent this dialog to the last exclusive window relative to [param from_node], and then calls [method Window.popup_centered_ratio] on it. The dialog must have no current parent, otherwise the method fails.
@@ -630,7 +630,7 @@ popup_exclusive_centered_clamped(): void;
  * See also [method set_unparent_when_invisible] and [method Node.get_last_exclusive_window].
  *
 */
-popup_exclusive_centered_ratio(): void;
+popup_exclusive_centered_ratio(from_node: Node, ratio?: float): void;
 
 /**
  * Attempts to parent this dialog to the last exclusive window relative to [param from_node], and then calls [method Window.popup_on_parent] on it. The dialog must have no current parent, otherwise the method fails.
@@ -638,28 +638,28 @@ popup_exclusive_centered_ratio(): void;
  * See also [method set_unparent_when_invisible] and [method Node.get_last_exclusive_window].
  *
 */
-popup_exclusive_on_parent(): void;
+popup_exclusive_on_parent(from_node: Node, parent_rect: Rect2i): void;
 
 /** Popups the [Window] with a position shifted by parent [Window]'s position. If the [Window] is embedded, has the same effect as [method popup]. */
-popup_on_parent(): void;
+popup_on_parent(parent_rect: Rect2i): void;
 
 /** Removes a local override for a theme [Color] with the specified [param name] previously added by [method add_theme_color_override] or via the Inspector dock. */
-remove_theme_color_override(): void;
+remove_theme_color_override(name: StringName): void;
 
 /** Removes a local override for a theme constant with the specified [param name] previously added by [method add_theme_constant_override] or via the Inspector dock. */
-remove_theme_constant_override(): void;
+remove_theme_constant_override(name: StringName): void;
 
 /** Removes a local override for a theme [Font] with the specified [param name] previously added by [method add_theme_font_override] or via the Inspector dock. */
-remove_theme_font_override(): void;
+remove_theme_font_override(name: StringName): void;
 
 /** Removes a local override for a theme font size with the specified [param name] previously added by [method add_theme_font_size_override] or via the Inspector dock. */
-remove_theme_font_size_override(): void;
+remove_theme_font_size_override(name: StringName): void;
 
 /** Removes a local override for a theme icon with the specified [param name] previously added by [method add_theme_icon_override] or via the Inspector dock. */
-remove_theme_icon_override(): void;
+remove_theme_icon_override(name: StringName): void;
 
 /** Removes a local override for a theme [StyleBox] with the specified [param name] previously added by [method add_theme_stylebox_override] or via the Inspector dock. */
-remove_theme_stylebox_override(): void;
+remove_theme_stylebox_override(name: StringName): void;
 
 /** Tells the OS that the [Window] needs an attention. This makes the window stand out in some way depending on the system, e.g. it might blink on the task bar. */
 request_attention(): void;
@@ -668,16 +668,16 @@ request_attention(): void;
 reset_size(): void;
 
 /** Sets a specified window flag. */
-set_flag(): void;
+set_flag(flag: int, enabled: boolean): void;
 
 /** If [param active] is [code]true[/code], enables system's native IME (Input Method Editor). */
-set_ime_active(): void;
+set_ime_active(active: boolean): void;
 
 /** Moves IME to the given position. */
-set_ime_position(): void;
+set_ime_position(position: Vector2i): void;
 
 /** Sets layout direction and text writing direction. Right-to-left layouts are necessary for certain languages (e.g. Arabic and Hebrew). */
-set_layout_direction(): void;
+set_layout_direction(direction: int): void;
 
 /**
  * If [param unparent] is `true`, the window is automatically unparented when going invisible.
@@ -685,10 +685,10 @@ set_layout_direction(): void;
  * **Note:** Make sure to keep a reference to the node, otherwise it will be orphaned. You also need to manually call [method Node.queue_free] to free the window if it's not parented.
  *
 */
-set_unparent_when_invisible(): void;
+set_unparent_when_invisible(unparent: boolean): void;
 
 /** Enables font oversampling. This makes fonts look better when they are scaled up. */
-set_use_font_oversampling(): void;
+set_use_font_oversampling(enable: boolean): void;
 
 /** Makes the [Window] appear. This enables interactions with the [Window] and doesn't change any of its property other than visibility (unlike e.g. [method popup]). */
 show(): void;
@@ -697,7 +697,7 @@ show(): void;
 start_drag(): void;
 
 /** Starts an interactive resize operation on the window, using the current mouse position. Call this method when handling a mouse button being pressed to simulate a pressed event on the window's edge. */
-start_resize(): void;
+start_resize(edge: int): void;
 
   connect<T extends SignalsOf<Window>>(signal: T, method: SignalFunction<Window[T]>): number;
 

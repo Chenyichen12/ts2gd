@@ -51,7 +51,7 @@ to: Vector2;
  * 
  *
 */
-create(): PhysicsRayQueryParameters2D;
+create(from: Vector2, to: Vector2, collision_mask?: int, exclude?: RID[]): PhysicsRayQueryParameters2D;
 
   connect<T extends SignalsOf<PhysicsRayQueryParameters2D>>(signal: T, method: SignalFunction<PhysicsRayQueryParameters2D[T]>): number;
 

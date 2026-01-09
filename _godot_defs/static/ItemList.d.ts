@@ -119,7 +119,7 @@ tile_scroll_hint: boolean;
 wraparound_items: boolean;
 
 /** Adds an item to the item list with no text, only an icon. Returns the index of an added item. */
-add_icon_item(): int;
+add_icon_item(icon: Texture2D, selectable?: boolean): int;
 
 /**
  * Adds an item to the item list with specified text. Returns the index of an added item.
@@ -129,13 +129,13 @@ add_icon_item(): int;
  * If [param selectable] is `true`, the list item will be selectable.
  *
 */
-add_item(): int;
+add_item(text: string, icon?: Texture2D, selectable?: boolean): int;
 
 /** Removes all items from the list. */
 clear(): void;
 
 /** Ensures the item associated with the specified index is not selected. */
-deselect(): void;
+deselect(idx: int): void;
 
 /** Ensures there are no items selected. */
 deselect_all(): void;
@@ -162,31 +162,31 @@ get_h_scroll_bar(): HScrollBar;
  * **Note:** The returned value is unreliable if called right after modifying the [ItemList], before it redraws in the next frame.
  *
 */
-get_item_at_position(): int;
+get_item_at_position(position: Vector2, exact?: boolean): int;
 
 /** Returns item's auto translate mode. */
-get_item_auto_translate_mode(): int;
+get_item_auto_translate_mode(idx: int): int;
 
 /** Returns the custom background color of the item specified by [param idx] index. */
-get_item_custom_bg_color(): Color;
+get_item_custom_bg_color(idx: int): Color;
 
 /** Returns the custom foreground color of the item specified by [param idx] index. */
-get_item_custom_fg_color(): Color;
+get_item_custom_fg_color(idx: int): Color;
 
 /** Returns the icon associated with the specified index. */
-get_item_icon(): Texture2D;
+get_item_icon(idx: int): Texture2D;
 
 /** Returns a [Color] modulating item's icon at the specified index. */
-get_item_icon_modulate(): Color;
+get_item_icon_modulate(idx: int): Color;
 
 /** Returns the region of item's icon used. The whole icon will be used if the region has no area. */
-get_item_icon_region(): Rect2;
+get_item_icon_region(idx: int): Rect2;
 
 /** Returns item's text language code. */
-get_item_language(): string;
+get_item_language(idx: int): string;
 
 /** Returns the metadata value of the specified index. */
-get_item_metadata(): any;
+get_item_metadata(idx: int): any;
 
 /**
  * Returns the position and size of the item with the specified index, in the coordinate system of the [ItemList] node. If [param expand] is `true` the last column expands to fill the rest of the row.
@@ -194,16 +194,16 @@ get_item_metadata(): any;
  * **Note:** The returned value is unreliable if called right after modifying the [ItemList], before it redraws in the next frame.
  *
 */
-get_item_rect(): Rect2;
+get_item_rect(idx: int, expand?: boolean): Rect2;
 
 /** Returns the text associated with the specified index. */
-get_item_text(): string;
+get_item_text(idx: int): string;
 
 /** Returns item's text base writing direction. */
-get_item_text_direction(): int;
+get_item_text_direction(idx: int): int;
 
 /** Returns the tooltip hint associated with the specified index. */
-get_item_tooltip(): string;
+get_item_tooltip(idx: int): string;
 
 /** Returns an array with the indexes of the selected items. */
 get_selected_items(): PackedInt32Array;
@@ -220,25 +220,25 @@ get_v_scroll_bar(): VScrollBar;
 is_anything_selected(): boolean;
 
 /** Returns [code]true[/code] if the item at the specified index is disabled. */
-is_item_disabled(): boolean;
+is_item_disabled(idx: int): boolean;
 
 /** Returns [code]true[/code] if the item icon will be drawn transposed, i.e. the X and Y axes are swapped. */
-is_item_icon_transposed(): boolean;
+is_item_icon_transposed(idx: int): boolean;
 
 /** Returns [code]true[/code] if the item at the specified index is selectable. */
-is_item_selectable(): boolean;
+is_item_selectable(idx: int): boolean;
 
 /** Returns [code]true[/code] if the tooltip is enabled for specified item index. */
-is_item_tooltip_enabled(): boolean;
+is_item_tooltip_enabled(idx: int): boolean;
 
 /** Returns [code]true[/code] if the item at the specified index is currently selected. */
-is_selected(): boolean;
+is_selected(idx: int): boolean;
 
 /** Moves item from index [param from_idx] to [param to_idx]. */
-move_item(): void;
+move_item(from_idx: int, to_idx: int): void;
 
 /** Removes the item specified by [param idx] index from the list. */
-remove_item(): void;
+remove_item(idx: int): void;
 
 /**
  * Select the item at the specified index.
@@ -246,7 +246,7 @@ remove_item(): void;
  * **Note:** This method does not trigger the item selection signal.
  *
 */
-select(): void;
+select(idx: int, single?: boolean): void;
 
 /**
  * Sets the auto translate mode of the item associated with the specified index.
@@ -254,13 +254,13 @@ select(): void;
  * Items use [constant Node.AUTO_TRANSLATE_MODE_INHERIT] by default, which uses the same auto translate mode as the [ItemList] itself.
  *
 */
-set_item_auto_translate_mode(): void;
+set_item_auto_translate_mode(idx: int, mode: int): void;
 
 /** Sets the background color of the item specified by [param idx] index to the specified [Color]. */
-set_item_custom_bg_color(): void;
+set_item_custom_bg_color(idx: int, custom_bg_color: Color): void;
 
 /** Sets the foreground color of the item specified by [param idx] index to the specified [Color]. */
-set_item_custom_fg_color(): void;
+set_item_custom_fg_color(idx: int, custom_fg_color: Color): void;
 
 /**
  * Disables (or enables) the item at the specified index.
@@ -268,40 +268,40 @@ set_item_custom_fg_color(): void;
  * Disabled items cannot be selected and do not trigger activation signals (when double-clicking or pressing [kbd]Enter[/kbd]).
  *
 */
-set_item_disabled(): void;
+set_item_disabled(idx: int, disabled: boolean): void;
 
 /** Sets (or replaces) the icon's [Texture2D] associated with the specified index. */
-set_item_icon(): void;
+set_item_icon(idx: int, icon: Texture2D): void;
 
 /** Sets a modulating [Color] of the item associated with the specified index. */
-set_item_icon_modulate(): void;
+set_item_icon_modulate(idx: int, modulate: Color): void;
 
 /** Sets the region of item's icon used. The whole icon will be used if the region has no area. */
-set_item_icon_region(): void;
+set_item_icon_region(idx: int, rect: Rect2): void;
 
 /** Sets whether the item icon will be drawn transposed. */
-set_item_icon_transposed(): void;
+set_item_icon_transposed(idx: int, transposed: boolean): void;
 
 /** Sets the language code of the text for the item at the given index to [param language]. This is used for line-breaking and text shaping algorithms. If [param language] is empty, the current locale is used. */
-set_item_language(): void;
+set_item_language(idx: int, language: string): void;
 
 /** Sets a value (of any type) to be stored with the item associated with the specified index. */
-set_item_metadata(): void;
+set_item_metadata(idx: int, metadata: any): void;
 
 /** Allows or disallows selection of the item associated with the specified index. */
-set_item_selectable(): void;
+set_item_selectable(idx: int, selectable: boolean): void;
 
 /** Sets text of the item associated with the specified index. */
-set_item_text(): void;
+set_item_text(idx: int, text: string): void;
 
 /** Sets item's text base writing direction. */
-set_item_text_direction(): void;
+set_item_text_direction(idx: int, direction: int): void;
 
 /** Sets the tooltip hint for the item associated with the specified index. */
-set_item_tooltip(): void;
+set_item_tooltip(idx: int, tooltip: string): void;
 
 /** Sets whether the tooltip hint is enabled for specified item index. */
-set_item_tooltip_enabled(): void;
+set_item_tooltip_enabled(idx: int, enable: boolean): void;
 
 /** Sorts items in the list by their text. */
 sort_items_by_text(): void;

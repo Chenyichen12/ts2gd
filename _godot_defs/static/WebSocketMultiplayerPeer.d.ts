@@ -42,19 +42,19 @@ supported_protocols: PackedStringArray;
  * **Note:** It is recommended to specify the scheme part of the URL, i.e. the [param url] should start with either `ws://` or `wss://`.
  *
 */
-create_client(): int;
+create_client(url: string, tls_client_options?: TLSOptions): int;
 
 /** Starts a new multiplayer server listening on the given [param port]. You can optionally specify a [param bind_address], and provide valid [param tls_server_options] to use TLS. See [method TLSOptions.server]. */
-create_server(): int;
+create_server(port: int, bind_address?: string, tls_server_options?: TLSOptions): int;
 
 /** Returns the [WebSocketPeer] associated to the given [param peer_id]. */
-get_peer(): WebSocketPeer;
+get_peer(peer_id: int): WebSocketPeer;
 
 /** Returns the IP address of the given peer. */
-get_peer_address(): string;
+get_peer_address(id: int): string;
 
 /** Returns the remote port of the given peer. */
-get_peer_port(): int;
+get_peer_port(id: int): int;
 
   connect<T extends SignalsOf<WebSocketMultiplayerPeer>>(signal: T, method: SignalFunction<WebSocketMultiplayerPeer[T]>): number;
 

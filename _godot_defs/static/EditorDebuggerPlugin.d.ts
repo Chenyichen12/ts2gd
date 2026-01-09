@@ -136,25 +136,25 @@ declare class EditorDebuggerPlugin extends RefCounted  {
 
 
 /** Override this method to be notified when a breakpoint is set in the editor. */
-protected _breakpoint_set_in_tree(): void;
+protected _breakpoint_set_in_tree(script: Script, line: int, enabled: boolean): void;
 
 /** Override this method to be notified when all breakpoints are cleared in the editor. */
 protected _breakpoints_cleared_in_tree(): void;
 
 /** Override this method to process incoming messages. The [param session_id] is the ID of the [EditorDebuggerSession] that received the [param message]. Use [method get_session] to retrieve the session. This method should return [code]true[/code] if the message is recognized. */
-protected _capture(): boolean;
+protected _capture(message: string, data: any[], session_id: int): boolean;
 
 /** Override this method to be notified when a breakpoint line has been clicked in the debugger breakpoint panel. */
-protected _goto_script_line(): void;
+protected _goto_script_line(script: Script, line: int): void;
 
 /** Override this method to enable receiving messages from the debugger. If [param capture] is "my_message" then messages starting with "my_message:" will be passed to the [method _capture] method. */
-protected _has_capture(): boolean;
+protected _has_capture(capture: string): boolean;
 
 /** Override this method to be notified whenever a new [EditorDebuggerSession] is created. Note that the session may be inactive during this stage. */
-protected _setup_session(): void;
+protected _setup_session(session_id: int): void;
 
 /** Returns the [EditorDebuggerSession] with the given [param id]. */
-get_session(): EditorDebuggerSession;
+get_session(id: int): EditorDebuggerSession;
 
 /**
  * Returns an array of [EditorDebuggerSession] currently available to this debugger plugin.

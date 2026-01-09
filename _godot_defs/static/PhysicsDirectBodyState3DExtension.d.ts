@@ -20,31 +20,31 @@ declare class PhysicsDirectBodyState3DExtension extends PhysicsDirectBodyState3D
 
 
 /** No documentation provided. */
-protected _add_constant_central_force(): void;
+protected _add_constant_central_force(force: Vector3): void;
 
 /** No documentation provided. */
-protected _add_constant_force(): void;
+protected _add_constant_force(force: Vector3, position: Vector3): void;
 
 /** No documentation provided. */
-protected _add_constant_torque(): void;
+protected _add_constant_torque(torque: Vector3): void;
 
 /** No documentation provided. */
-protected _apply_central_force(): void;
+protected _apply_central_force(force: Vector3): void;
 
 /** No documentation provided. */
-protected _apply_central_impulse(): void;
+protected _apply_central_impulse(impulse: Vector3): void;
 
 /** No documentation provided. */
-protected _apply_force(): void;
+protected _apply_force(force: Vector3, position: Vector3): void;
 
 /** No documentation provided. */
-protected _apply_impulse(): void;
+protected _apply_impulse(impulse: Vector3, position: Vector3): void;
 
 /** No documentation provided. */
-protected _apply_torque(): void;
+protected _apply_torque(torque: Vector3): void;
 
 /** No documentation provided. */
-protected _apply_torque_impulse(): void;
+protected _apply_torque_impulse(impulse: Vector3): void;
 
 /** No documentation provided. */
 protected _get_angular_velocity(): Vector3;
@@ -68,40 +68,40 @@ protected _get_constant_force(): Vector3;
 protected _get_constant_torque(): Vector3;
 
 /** No documentation provided. */
-protected _get_contact_collider(): RID;
+protected _get_contact_collider(contact_idx: int): RID;
 
 /** No documentation provided. */
-protected _get_contact_collider_id(): int;
+protected _get_contact_collider_id(contact_idx: int): int;
 
 /** No documentation provided. */
-protected _get_contact_collider_object(): Object;
+protected _get_contact_collider_object(contact_idx: int): Object;
 
 /** No documentation provided. */
-protected _get_contact_collider_position(): Vector3;
+protected _get_contact_collider_position(contact_idx: int): Vector3;
 
 /** No documentation provided. */
-protected _get_contact_collider_shape(): int;
+protected _get_contact_collider_shape(contact_idx: int): int;
 
 /** No documentation provided. */
-protected _get_contact_collider_velocity_at_position(): Vector3;
+protected _get_contact_collider_velocity_at_position(contact_idx: int): Vector3;
 
 /** No documentation provided. */
 protected _get_contact_count(): int;
 
 /** No documentation provided. */
-protected _get_contact_impulse(): Vector3;
+protected _get_contact_impulse(contact_idx: int): Vector3;
 
 /** No documentation provided. */
-protected _get_contact_local_normal(): Vector3;
+protected _get_contact_local_normal(contact_idx: int): Vector3;
 
 /** No documentation provided. */
-protected _get_contact_local_position(): Vector3;
+protected _get_contact_local_position(contact_idx: int): Vector3;
 
 /** No documentation provided. */
-protected _get_contact_local_shape(): int;
+protected _get_contact_local_shape(contact_idx: int): int;
 
 /** No documentation provided. */
-protected _get_contact_local_velocity_at_position(): Vector3;
+protected _get_contact_local_velocity_at_position(contact_idx: int): Vector3;
 
 /** No documentation provided. */
 protected _get_inverse_inertia(): Vector3;
@@ -137,7 +137,7 @@ protected _get_total_linear_damp(): float;
 protected _get_transform(): Transform3D;
 
 /** No documentation provided. */
-protected _get_velocity_at_local_position(): Vector3;
+protected _get_velocity_at_local_position(local_position: Vector3): Vector3;
 
 /** No documentation provided. */
 protected _integrate_forces(): void;
@@ -146,28 +146,28 @@ protected _integrate_forces(): void;
 protected _is_sleeping(): boolean;
 
 /** No documentation provided. */
-protected _set_angular_velocity(): void;
+protected _set_angular_velocity(velocity: Vector3): void;
 
 /** No documentation provided. */
-protected _set_collision_layer(): void;
+protected _set_collision_layer(layer: int): void;
 
 /** No documentation provided. */
-protected _set_collision_mask(): void;
+protected _set_collision_mask(mask: int): void;
 
 /** No documentation provided. */
-protected _set_constant_force(): void;
+protected _set_constant_force(force: Vector3): void;
 
 /** No documentation provided. */
-protected _set_constant_torque(): void;
+protected _set_constant_torque(torque: Vector3): void;
 
 /** No documentation provided. */
-protected _set_linear_velocity(): void;
+protected _set_linear_velocity(velocity: Vector3): void;
 
 /** No documentation provided. */
-protected _set_sleep_state(): void;
+protected _set_sleep_state(enabled: boolean): void;
 
 /** No documentation provided. */
-protected _set_transform(): void;
+protected _set_transform(transform: Transform3D): void;
 
   connect<T extends SignalsOf<PhysicsDirectBodyState3DExtension>>(signal: T, method: SignalFunction<PhysicsDirectBodyState3DExtension[T]>): number;
 

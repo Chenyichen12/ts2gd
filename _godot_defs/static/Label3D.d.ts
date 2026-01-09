@@ -138,10 +138,10 @@ width: float;
 generate_triangle_mesh(): TriangleMesh;
 
 /** Returns the value of the specified flag. */
-get_draw_flag(): boolean;
+get_draw_flag(flag: int): boolean;
 
 /** If [code]true[/code], the specified [param flag] will be enabled. */
-set_draw_flag(): void;
+set_draw_flag(flag: int, enabled: boolean): void;
 
   connect<T extends SignalsOf<Label3D>>(signal: T, method: SignalFunction<Label3D[T]>): number;
 

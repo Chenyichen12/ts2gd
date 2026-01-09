@@ -110,7 +110,7 @@ supported_protocols: PackedStringArray;
  * **Note:** Not supported in Web exports due to browsers' restrictions.
  *
 */
-accept_stream(): int;
+accept_stream(stream: StreamPeer): int;
 
 /**
  * Closes this WebSocket connection.
@@ -124,7 +124,7 @@ accept_stream(): int;
  * **Note:** The Web export might not support all status codes. Please refer to browser-specific documentation for more details.
  *
 */
-close(): void;
+close(code?: int, reason?: string): void;
 
 /**
  * Connects to the given URL. TLS certificates will be verified against the hostname when connecting using the `wss://` protocol. You can pass the optional [param tls_client_options] parameter to customize the trusted certification authorities, or disable the common name verification. See [method TLSOptions.client] and [method TLSOptions.client_unsafe].
@@ -134,7 +134,7 @@ close(): void;
  * **Note:** To avoid mixed content warnings or errors in Web, you may have to use a [param url] that starts with `wss://` (secure) instead of `ws://`. When doing so, make sure to use the fully qualified domain name that matches the one defined in the server's TLS certificate. Do not connect directly via the IP address for `wss://` connections, as it won't match with the TLS certificate.
  *
 */
-connect_to_url(): int;
+connect_to_url(url: string, tls_client_options?: TLSOptions): int;
 
 /** Returns the received WebSocket close frame status code, or [code]-1[/code] when the connection was not cleanly closed. Only call this method when [method get_ready_state] returns [constant STATE_CLOSED]. */
 get_close_code(): int;
@@ -174,10 +174,10 @@ get_selected_protocol(): string;
 poll(): void;
 
 /** Sends the given [param message] using the desired [param write_mode]. When sending a [String], prefer using [method send_text]. */
-send(): int;
+send(message: PackedByteArray, write_mode?: int): int;
 
 /** Sends the given [param message] using WebSocket text mode. Prefer this method over [method PacketPeer.put_packet] when interacting with third-party text-based API (e.g. when using [JSON] formatted messages). */
-send_text(): int;
+send_text(message: string): int;
 
 /**
  * Disable Nagle's algorithm on the underlying TCP socket (default). See [method StreamPeerTCP.set_no_delay] for more information.
@@ -185,7 +185,7 @@ send_text(): int;
  * **Note:** Not available in the Web export.
  *
 */
-set_no_delay(): void;
+set_no_delay(enabled: boolean): void;
 
 /** Returns [code]true[/code] if the last received packet was sent as a text payload. See [enum WriteMode]. */
 was_string_packet(): boolean;

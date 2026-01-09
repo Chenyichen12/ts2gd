@@ -47,79 +47,79 @@ slots_focus_mode: int;
 title: string;
 
 /** No documentation provided. */
-protected _draw_port(): void;
+protected _draw_port(slot_index: int, position: Vector2i, left: boolean, color: Color): void;
 
 /** Disables all slots of the GraphNode. This will remove all input/output ports from the GraphNode. */
 clear_all_slots(): void;
 
 /** Disables the slot with the given [param slot_index]. This will remove the corresponding input and output port from the GraphNode. */
-clear_slot(): void;
+clear_slot(slot_index: int): void;
 
 /** Returns the [Color] of the input port with the given [param port_idx]. */
-get_input_port_color(): Color;
+get_input_port_color(port_idx: int): Color;
 
 /** Returns the number of slots with an enabled input port. */
 get_input_port_count(): int;
 
 /** Returns the position of the input port with the given [param port_idx]. */
-get_input_port_position(): Vector2;
+get_input_port_position(port_idx: int): Vector2;
 
 /** Returns the corresponding slot index of the input port with the given [param port_idx]. */
-get_input_port_slot(): int;
+get_input_port_slot(port_idx: int): int;
 
 /** Returns the type of the input port with the given [param port_idx]. */
-get_input_port_type(): int;
+get_input_port_type(port_idx: int): int;
 
 /** Returns the [Color] of the output port with the given [param port_idx]. */
-get_output_port_color(): Color;
+get_output_port_color(port_idx: int): Color;
 
 /** Returns the number of slots with an enabled output port. */
 get_output_port_count(): int;
 
 /** Returns the position of the output port with the given [param port_idx]. */
-get_output_port_position(): Vector2;
+get_output_port_position(port_idx: int): Vector2;
 
 /** Returns the corresponding slot index of the output port with the given [param port_idx]. */
-get_output_port_slot(): int;
+get_output_port_slot(port_idx: int): int;
 
 /** Returns the type of the output port with the given [param port_idx]. */
-get_output_port_type(): int;
+get_output_port_type(port_idx: int): int;
 
 /** Returns the left (input) [Color] of the slot with the given [param slot_index]. */
-get_slot_color_left(): Color;
+get_slot_color_left(slot_index: int): Color;
 
 /** Returns the right (output) [Color] of the slot with the given [param slot_index]. */
-get_slot_color_right(): Color;
+get_slot_color_right(slot_index: int): Color;
 
 /** Returns the left (input) custom [Texture2D] of the slot with the given [param slot_index]. */
-get_slot_custom_icon_left(): Texture2D;
+get_slot_custom_icon_left(slot_index: int): Texture2D;
 
 /** Returns the right (output) custom [Texture2D] of the slot with the given [param slot_index]. */
-get_slot_custom_icon_right(): Texture2D;
+get_slot_custom_icon_right(slot_index: int): Texture2D;
 
 /** Returns the left (input) metadata of the slot with the given [param slot_index]. */
-get_slot_metadata_left(): any;
+get_slot_metadata_left(slot_index: int): any;
 
 /** Returns the right (output) metadata of the slot with the given [param slot_index]. */
-get_slot_metadata_right(): any;
+get_slot_metadata_right(slot_index: int): any;
 
 /** Returns the left (input) type of the slot with the given [param slot_index]. */
-get_slot_type_left(): int;
+get_slot_type_left(slot_index: int): int;
 
 /** Returns the right (output) type of the slot with the given [param slot_index]. */
-get_slot_type_right(): int;
+get_slot_type_right(slot_index: int): int;
 
 /** Returns the [HBoxContainer] used for the title bar, only containing a [Label] for displaying the title by default. This can be used to add custom controls to the title bar such as option or close buttons. */
 get_titlebar_hbox(): HBoxContainer;
 
 /** Returns [code]true[/code] if the background [StyleBox] of the slot with the given [param slot_index] is drawn. */
-is_slot_draw_stylebox(): boolean;
+is_slot_draw_stylebox(slot_index: int): boolean;
 
 /** Returns [code]true[/code] if left (input) side of the slot with the given [param slot_index] is enabled. */
-is_slot_enabled_left(): boolean;
+is_slot_enabled_left(slot_index: int): boolean;
 
 /** Returns [code]true[/code] if right (output) side of the slot with the given [param slot_index] is enabled. */
-is_slot_enabled_right(): boolean;
+is_slot_enabled_right(slot_index: int): boolean;
 
 /**
  * Sets properties of the slot with the given [param slot_index].
@@ -137,40 +137,40 @@ is_slot_enabled_right(): boolean;
  * **Note:** This method only sets properties of the slot. To create the slot itself, add a [Control]-derived child to the GraphNode.
  *
 */
-set_slot(): void;
+set_slot(slot_index: int, enable_left_port: boolean, type_left: int, color_left: Color, enable_right_port: boolean, type_right: int, color_right: Color, custom_icon_left?: Texture2D, custom_icon_right?: Texture2D, draw_stylebox?: boolean): void;
 
 /** Sets the [Color] of the left (input) side of the slot with the given [param slot_index] to [param color]. */
-set_slot_color_left(): void;
+set_slot_color_left(slot_index: int, color: Color): void;
 
 /** Sets the [Color] of the right (output) side of the slot with the given [param slot_index] to [param color]. */
-set_slot_color_right(): void;
+set_slot_color_right(slot_index: int, color: Color): void;
 
 /** Sets the custom [Texture2D] of the left (input) side of the slot with the given [param slot_index] to [param custom_icon]. */
-set_slot_custom_icon_left(): void;
+set_slot_custom_icon_left(slot_index: int, custom_icon: Texture2D): void;
 
 /** Sets the custom [Texture2D] of the right (output) side of the slot with the given [param slot_index] to [param custom_icon]. */
-set_slot_custom_icon_right(): void;
+set_slot_custom_icon_right(slot_index: int, custom_icon: Texture2D): void;
 
 /** Toggles the background [StyleBox] of the slot with the given [param slot_index]. */
-set_slot_draw_stylebox(): void;
+set_slot_draw_stylebox(slot_index: int, enable: boolean): void;
 
 /** Toggles the left (input) side of the slot with the given [param slot_index]. If [param enable] is [code]true[/code], a port will appear on the left side and the slot will be able to be connected from this side. */
-set_slot_enabled_left(): void;
+set_slot_enabled_left(slot_index: int, enable: boolean): void;
 
 /** Toggles the right (output) side of the slot with the given [param slot_index]. If [param enable] is [code]true[/code], a port will appear on the right side and the slot will be able to be connected from this side. */
-set_slot_enabled_right(): void;
+set_slot_enabled_right(slot_index: int, enable: boolean): void;
 
 /** Sets the custom metadata for the left (input) side of the slot with the given [param slot_index] to [param value]. */
-set_slot_metadata_left(): void;
+set_slot_metadata_left(slot_index: int, value: any): void;
 
 /** Sets the custom metadata for the right (output) side of the slot with the given [param slot_index] to [param value]. */
-set_slot_metadata_right(): void;
+set_slot_metadata_right(slot_index: int, value: any): void;
 
 /** Sets the left (input) type of the slot with the given [param slot_index] to [param type]. If the value is negative, all connections will be disallowed to be created via user inputs. */
-set_slot_type_left(): void;
+set_slot_type_left(slot_index: int, type: int): void;
 
 /** Sets the right (output) type of the slot with the given [param slot_index] to [param type]. If the value is negative, all connections will be disallowed to be created via user inputs. */
-set_slot_type_right(): void;
+set_slot_type_right(slot_index: int, type: int): void;
 
   connect<T extends SignalsOf<GraphNode>>(signal: T, method: SignalFunction<GraphNode[T]>): number;
 

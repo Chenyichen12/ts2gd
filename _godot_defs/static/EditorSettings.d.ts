@@ -2074,7 +2074,7 @@ declare class EditorSettings extends Resource  {
  * 
  *
 */
-add_property_info(): void;
+add_property_info(info: Dictionary<any, any>): void;
 
 /**
  * Adds a [param shortcut] whose path is specified by [param path].
@@ -2105,13 +2105,13 @@ add_property_info(): void;
  * 
  *
 */
-add_shortcut(): void;
+add_shortcut(path: string, shortcut: Shortcut): void;
 
 /** Checks if any settings with the prefix [param setting_prefix] exist in the set of changed settings. See also [method get_changed_settings]. */
-check_changed_settings_in_group(): boolean;
+check_changed_settings_in_group(setting_prefix: string): boolean;
 
 /** Erases the setting whose name is specified by [param property]. */
-erase(): void;
+erase(property: string): void;
 
 /** Gets an array of the settings which have been changed since the last save. Note that internally [code]changed_settings[/code] is cleared after a successful save, so generally the most appropriate place to use this method is when processing [constant NOTIFICATION_EDITOR_SETTINGS_CHANGED]. */
 get_changed_settings(): PackedStringArray;
@@ -2120,52 +2120,52 @@ get_changed_settings(): PackedStringArray;
 get_favorites(): PackedStringArray;
 
 /** Returns project-specific metadata for the [param section] and [param key] specified. If the metadata doesn't exist, [param default] will be returned instead. See also [method set_project_metadata]. */
-get_project_metadata(): any;
+get_project_metadata(section: string, key: string, _default?: any): any;
 
 /** Returns the list of recently visited folders in the file dialog for this project. */
 get_recent_dirs(): PackedStringArray;
 
 /** Returns the value of the setting specified by [param name]. This is equivalent to using [method Object.get] on the EditorSettings instance. */
-get_setting(): any;
+get_setting(name: string): any;
 
 /** Returns the shortcut specified by [param path]. Tries to find a built-in action if no shortcut with the provided path is found in the shortcut list. If found, adds it to the list and returns it, otherwise returns [code]null[/code]. */
-get_shortcut(): Shortcut;
+get_shortcut(path: string): Shortcut;
 
 /** Returns the list of stored shortcut paths. */
 get_shortcut_list(): PackedStringArray;
 
 /** Returns [code]true[/code] if the setting specified by [param name] exists, [code]false[/code] otherwise. */
-has_setting(): boolean;
+has_setting(name: string): boolean;
 
 /** Returns [code]true[/code] if the shortcut specified by [param path] exists, [code]false[/code] otherwise. */
-has_shortcut(): boolean;
+has_shortcut(path: string): boolean;
 
 /** Returns [code]true[/code] if the shortcut specified by [param path] matches the event specified by [param event], [code]false[/code] otherwise. */
-is_shortcut(): boolean;
+is_shortcut(path: string, event: InputEvent): boolean;
 
 /** Marks the passed editor setting as being changed, see [method get_changed_settings]. Only settings which exist (see [method has_setting]) will be accepted. */
-mark_setting_changed(): void;
+mark_setting_changed(setting: string): void;
 
 /** Removes the shortcut specified by [param path]. */
-remove_shortcut(): void;
+remove_shortcut(path: string): void;
 
 /** Overrides the built-in editor action [param name] with the input actions defined in [param actions_list]. */
-set_builtin_action_override(): void;
+set_builtin_action_override(name: string, actions_list: InputEvent[]): void;
 
 /** Sets the list of favorite files and directories for this project. */
-set_favorites(): void;
+set_favorites(dirs: PackedStringArray): void;
 
 /** Sets the initial value of the setting specified by [param name] to [param value]. This is used to provide a value for the Revert button in the Editor Settings. If [param update_current] is [code]true[/code], the setting is reset to [param value] as well. */
-set_initial_value(): void;
+set_initial_value(name: StringName, value: any, update_current: boolean): void;
 
 /** Sets project-specific metadata with the [param section], [param key] and [param data] specified. This metadata is stored outside the project folder and therefore won't be checked into version control. See also [method get_project_metadata]. */
-set_project_metadata(): void;
+set_project_metadata(section: string, key: string, data: any): void;
 
 /** Sets the list of recently visited folders in the file dialog for this project. */
-set_recent_dirs(): void;
+set_recent_dirs(dirs: PackedStringArray): void;
 
 /** Sets the [param value] of the setting specified by [param name]. This is equivalent to using [method Object.set] on the EditorSettings instance. */
-set_setting(): void;
+set_setting(name: string, value: any): void;
 
   connect<T extends SignalsOf<EditorSettings>>(signal: T, method: SignalFunction<EditorSettings[T]>): number;
 

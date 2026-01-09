@@ -29,7 +29,7 @@ declare class Geometry2DClass extends Object  {
  * 
  *
 */
-bresenham_line(): Vector2i[];
+bresenham_line(from: Vector2i, to: Vector2i): Vector2i[];
 
 /**
  * Clips [param polygon_a] against [param polygon_b] and returns an array of clipped polygons. This performs [constant OPERATION_DIFFERENCE] between polygons. Returns an empty array if [param polygon_b] completely overlaps [param polygon_a].
@@ -37,16 +37,16 @@ bresenham_line(): Vector2i[];
  * If [param polygon_b] is enclosed by [param polygon_a], returns an outer polygon (boundary) and inner polygon (hole) which could be distinguished by calling [method is_polygon_clockwise].
  *
 */
-clip_polygons(): PackedVector2Array[];
+clip_polygons(polygon_a: PackedVector2Array, polygon_b: PackedVector2Array): PackedVector2Array[];
 
 /** Clips [param polyline] against [param polygon] and returns an array of clipped polylines. This performs [constant OPERATION_DIFFERENCE] between the polyline and the polygon. This operation can be thought of as cutting a line with a closed shape. */
-clip_polyline_with_polygon(): PackedVector2Array[];
+clip_polyline_with_polygon(polyline: PackedVector2Array, polygon: PackedVector2Array): PackedVector2Array[];
 
 /** Given an array of [Vector2]s, returns the convex hull as a list of points in counterclockwise order. The last point is the same as the first one. */
-convex_hull(): PackedVector2Array;
+convex_hull(points: PackedVector2Array): PackedVector2Array;
 
 /** Decomposes the [param polygon] into multiple convex hulls and returns an array of [PackedVector2Array]. */
-decompose_polygon_in_convex(): PackedVector2Array[];
+decompose_polygon_in_convex(polygon: PackedVector2Array): PackedVector2Array[];
 
 /**
  * Mutually excludes common area defined by intersection of [param polygon_a] and [param polygon_b] (see [method intersect_polygons]) and returns an array of excluded polygons. This performs [constant OPERATION_XOR] between polygons. In other words, returns all but common area between polygons.
@@ -54,16 +54,16 @@ decompose_polygon_in_convex(): PackedVector2Array[];
  * The operation may result in an outer polygon (boundary) and inner polygon (hole) produced which could be distinguished by calling [method is_polygon_clockwise].
  *
 */
-exclude_polygons(): PackedVector2Array[];
+exclude_polygons(polygon_a: PackedVector2Array, polygon_b: PackedVector2Array): PackedVector2Array[];
 
 /** Returns the 2D point on the 2D segment ([param s1], [param s2]) that is closest to [param point]. The returned point will always be inside the specified segment. */
-get_closest_point_to_segment(): Vector2;
+get_closest_point_to_segment(point: Vector2, s1: Vector2, s2: Vector2): Vector2;
 
 /** Returns the 2D point on the 2D line defined by ([param s1], [param s2]) that is closest to [param point]. The returned point can be inside the segment ([param s1], [param s2]) or outside of it, i.e. somewhere on the line extending from the segment. */
-get_closest_point_to_segment_uncapped(): Vector2;
+get_closest_point_to_segment_uncapped(point: Vector2, s1: Vector2, s2: Vector2): Vector2;
 
 /** Given the two 2D segments ([param p1], [param q1]) and ([param p2], [param q2]), finds those two points on the two segments that are closest to each other. Returns a [PackedVector2Array] that contains this point on ([param p1], [param q1]) as well the accompanying point on ([param p2], [param q2]). */
-get_closest_points_between_segments(): PackedVector2Array;
+get_closest_points_between_segments(p1: Vector2, q1: Vector2, p2: Vector2, q2: Vector2): PackedVector2Array;
 
 /**
  * Intersects [param polygon_a] with [param polygon_b] and returns an array of intersected polygons. This performs [constant OPERATION_INTERSECTION] between polygons. In other words, returns common area shared by polygons. Returns an empty array if no intersection occurs.
@@ -71,16 +71,16 @@ get_closest_points_between_segments(): PackedVector2Array;
  * The operation may result in an outer polygon (boundary) and inner polygon (hole) produced which could be distinguished by calling [method is_polygon_clockwise].
  *
 */
-intersect_polygons(): PackedVector2Array[];
+intersect_polygons(polygon_a: PackedVector2Array, polygon_b: PackedVector2Array): PackedVector2Array[];
 
 /** Intersects [param polyline] with [param polygon] and returns an array of intersected polylines. This performs [constant OPERATION_INTERSECTION] between the polyline and the polygon. This operation can be thought of as chopping a line with a closed shape. */
-intersect_polyline_with_polygon(): PackedVector2Array[];
+intersect_polyline_with_polygon(polyline: PackedVector2Array, polygon: PackedVector2Array): PackedVector2Array[];
 
 /** Returns [code]true[/code] if [param point] is inside the circle or if it's located exactly [i]on[/i] the circle's boundary, otherwise returns [code]false[/code]. */
-is_point_in_circle(): boolean;
+is_point_in_circle(point: Vector2, circle_position: Vector2, circle_radius: float): boolean;
 
 /** Returns [code]true[/code] if [param point] is inside [param polygon] or if it's located exactly [i]on[/i] polygon's boundary, otherwise returns [code]false[/code]. */
-is_point_in_polygon(): boolean;
+is_point_in_polygon(point: Vector2, polygon: PackedVector2Array): boolean;
 
 /**
  * Returns `true` if [param polygon]'s vertices are ordered in clockwise order, otherwise returns `false`.
@@ -88,7 +88,7 @@ is_point_in_polygon(): boolean;
  * **Note:** Assumes a Cartesian coordinate system where `+x` is right and `+y` is up. If using screen coordinates (`+y` is down), the result will need to be flipped (i.e. a `true` result will indicate counter-clockwise).
  *
 */
-is_polygon_clockwise(): boolean;
+is_polygon_clockwise(polygon: PackedVector2Array): boolean;
 
 /**
  * Returns the point of intersection between the two lines ([param from_a], [param dir_a]) and ([param from_b], [param dir_b]). Returns a [Vector2], or `null` if the lines are parallel.
@@ -123,10 +123,10 @@ is_polygon_clockwise(): boolean;
  * 
  *
 */
-line_intersects_line(): any;
+line_intersects_line(from_a: Vector2, dir_a: Vector2, from_b: Vector2, dir_b: Vector2): any;
 
 /** Given an array of [Vector2]s representing tiles, builds an atlas. The returned dictionary has two keys: [code]points[/code] is a [PackedVector2Array] that specifies the positions of each tile, [code]size[/code] contains the overall size of the whole atlas as [Vector2i]. */
-make_atlas(): Dictionary<any, any>;
+make_atlas(sizes: PackedVector2Array): Dictionary<any, any>;
 
 /**
  * Merges (combines) [param polygon_a] and [param polygon_b] and returns an array of merged polygons. This performs [constant OPERATION_UNION] between polygons.
@@ -134,7 +134,7 @@ make_atlas(): Dictionary<any, any>;
  * The operation may result in an outer polygon (boundary) and multiple inner polygons (holes) produced which could be distinguished by calling [method is_polygon_clockwise].
  *
 */
-merge_polygons(): PackedVector2Array[];
+merge_polygons(polygon_a: PackedVector2Array, polygon_b: PackedVector2Array): PackedVector2Array[];
 
 /**
  * Inflates or deflates [param polygon] by [param delta] units (pixels). If [param delta] is positive, makes the polygon grow outward. If [param delta] is negative, shrinks the polygon inward. Returns an array of polygons because inflating/deflating may result in multiple discrete polygons. Returns an empty array if [param delta] is negative and the absolute value of it approximately exceeds the minimum bounding rectangle dimensions of the polygon.
@@ -163,7 +163,7 @@ merge_polygons(): PackedVector2Array[];
  * 
  *
 */
-offset_polygon(): PackedVector2Array[];
+offset_polygon(polygon: PackedVector2Array, delta: float, join_type?: int): PackedVector2Array[];
 
 /**
  * Inflates or deflates [param polyline] by [param delta] units (pixels), producing polygons. If [param delta] is positive, makes the polyline grow outward. Returns an array of polygons because inflating/deflating may result in multiple discrete polygons. If [param delta] is negative, returns an empty array.
@@ -175,22 +175,22 @@ offset_polygon(): PackedVector2Array[];
  * The operation may result in an outer polygon (boundary) and inner polygon (hole) produced which could be distinguished by calling [method is_polygon_clockwise].
  *
 */
-offset_polyline(): PackedVector2Array[];
+offset_polyline(polyline: PackedVector2Array, delta: float, join_type?: int, end_type?: int): PackedVector2Array[];
 
 /** Returns if [param point] is inside the triangle specified by [param a], [param b] and [param c]. */
-point_is_inside_triangle(): boolean;
+point_is_inside_triangle(point: Vector2, a: Vector2, b: Vector2, c: Vector2): boolean;
 
 /** Given the 2D segment ([param segment_from], [param segment_to]), returns the position on the segment (as a number between 0 and 1) at which the segment hits the circle that is located at position [param circle_position] and has radius [param circle_radius]. If the segment does not intersect the circle, -1 is returned (this is also the case if the line extending the segment would intersect the circle, but the segment does not). */
-segment_intersects_circle(): float;
+segment_intersects_circle(segment_from: Vector2, segment_to: Vector2, circle_position: Vector2, circle_radius: float): float;
 
 /** Checks if the two segments ([param from_a], [param to_a]) and ([param from_b], [param to_b]) intersect. If yes, return the point of intersection as [Vector2]. If no intersection takes place, returns [code]null[/code]. */
-segment_intersects_segment(): any;
+segment_intersects_segment(from_a: Vector2, to_a: Vector2, from_b: Vector2, to_b: Vector2): any;
 
 /** Triangulates the area specified by discrete set of [param points] such that no point is inside the circumcircle of any resulting triangle. Returns a [PackedInt32Array] where each triangle consists of three consecutive point indices into [param points] (i.e. the returned array will have [code]n * 3[/code] elements, with [code]n[/code] being the number of found triangles). If the triangulation did not succeed, an empty [PackedInt32Array] is returned. */
-triangulate_delaunay(): PackedInt32Array;
+triangulate_delaunay(points: PackedVector2Array): PackedInt32Array;
 
 /** Triangulates the polygon specified by the points in [param polygon]. Returns a [PackedInt32Array] where each triangle consists of three consecutive point indices into [param polygon] (i.e. the returned array will have [code]n * 3[/code] elements, with [code]n[/code] being the number of found triangles). Output triangles will always be counter clockwise, and the contour will be flipped if it's clockwise. If the triangulation did not succeed, an empty [PackedInt32Array] is returned. */
-triangulate_polygon(): PackedInt32Array;
+triangulate_polygon(polygon: PackedVector2Array): PackedInt32Array;
 
   connect<T extends SignalsOf<Geometry2DClass>>(signal: T, method: SignalFunction<Geometry2DClass[T]>): number;
 

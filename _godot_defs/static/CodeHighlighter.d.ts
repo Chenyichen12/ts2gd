@@ -41,7 +41,7 @@ symbol_color: Color;
  * If [param line_only] is `true` or [param end_key] is an empty [String], the region does not carry over to the next line.
  *
 */
-add_color_region(): void;
+add_color_region(start_key: string, end_key: string, color: Color, line_only?: boolean): void;
 
 /**
  * Sets the color for a keyword.
@@ -49,7 +49,7 @@ add_color_region(): void;
  * The keyword cannot contain any symbols except '_'.
  *
 */
-add_keyword_color(): void;
+add_keyword_color(keyword: string, color: Color): void;
 
 /**
  * Sets the color for a member keyword.
@@ -59,7 +59,7 @@ add_keyword_color(): void;
  * It will not be highlighted if preceded by a '.'.
  *
 */
-add_member_keyword_color(): void;
+add_member_keyword_color(member_keyword: string, color: Color): void;
 
 /** Removes all color regions. */
 clear_color_regions(): void;
@@ -71,28 +71,28 @@ clear_keyword_colors(): void;
 clear_member_keyword_colors(): void;
 
 /** Returns the color for a keyword. */
-get_keyword_color(): Color;
+get_keyword_color(keyword: string): Color;
 
 /** Returns the color for a member keyword. */
-get_member_keyword_color(): Color;
+get_member_keyword_color(member_keyword: string): Color;
 
 /** Returns [code]true[/code] if the start key exists, else [code]false[/code]. */
-has_color_region(): boolean;
+has_color_region(start_key: string): boolean;
 
 /** Returns [code]true[/code] if the keyword exists, else [code]false[/code]. */
-has_keyword_color(): boolean;
+has_keyword_color(keyword: string): boolean;
 
 /** Returns [code]true[/code] if the member keyword exists, else [code]false[/code]. */
-has_member_keyword_color(): boolean;
+has_member_keyword_color(member_keyword: string): boolean;
 
 /** Removes the color region that uses that start key. */
-remove_color_region(): void;
+remove_color_region(start_key: string): void;
 
 /** Removes the keyword. */
-remove_keyword_color(): void;
+remove_keyword_color(keyword: string): void;
 
 /** Removes the member keyword. */
-remove_member_keyword_color(): void;
+remove_member_keyword_color(member_keyword: string): void;
 
   connect<T extends SignalsOf<CodeHighlighter>>(signal: T, method: SignalFunction<CodeHighlighter[T]>): number;
 

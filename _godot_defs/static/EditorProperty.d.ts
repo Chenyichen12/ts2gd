@@ -52,19 +52,19 @@ selectable: boolean;
 use_folding: boolean;
 
 /** Called when the read-only status of the property is changed. It may be used to change custom controls into a read-only or modifiable state. */
-protected _set_read_only(): void;
+protected _set_read_only(read_only: boolean): void;
 
 /** When this virtual function is called, you must update your editor. */
 protected _update_property(): void;
 
 /** If any of the controls added can gain keyboard focus, add it here. This ensures that focus will be restored if the inspector is refreshed. */
-add_focusable(): void;
+add_focusable(control: Control): void;
 
 /** Draw property as not selected. Used by the inspector. */
 deselect(): void;
 
 /** If one or several properties have changed, this must be called. [param field] is used in case your editor can modify fields separately (as an example, Vector3.x). The [param changing] argument avoids the editor requesting this property to be refreshed (leave as [code]false[/code] if unsure). */
-emit_changed(): void;
+emit_changed(property: StringName, value: any, field?: StringName, changing?: boolean): void;
 
 /**
  * Returns the edited object.
@@ -86,16 +86,16 @@ get_edited_property(): StringName;
 is_selected(): boolean;
 
 /** Draw property as selected. Used by the inspector. */
-select(): void;
+select(focusable?: int): void;
 
 /** Puts the [param editor] control below the property label. The control must be previously added using [method Node.add_child]. */
-set_bottom_editor(): void;
+set_bottom_editor(editor: Control): void;
 
 /** Used by the inspector, set to a control that will be used as a reference to calculate the size of the label. */
-set_label_reference(): void;
+set_label_reference(control: Control): void;
 
 /** Assigns object and property to edit. */
-set_object_and_property(): void;
+set_object_and_property(object: Object, property: StringName): void;
 
 /** Forces a refresh of the property display. */
 update_property(): void;

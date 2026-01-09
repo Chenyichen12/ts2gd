@@ -23,13 +23,13 @@ declare class AnimationNodeExtension extends AnimationNode  {
  * The function must return a [PackedFloat32Array] of the node's time info, containing the following values (in order): animation length, time position, delta, [enum Animation.LoopMode] (encoded as a float), whether the animation is about to end (encoded as a float greater than `0`) and whether the animation is infinite (encoded as a float greater than `0`). All values must be included in the returned array.
  *
 */
-protected _process_animation_node(): PackedFloat32Array;
+protected _process_animation_node(playback_info: PackedFloat64Array, test_only: boolean): PackedFloat32Array;
 
 /** Returns the animation's remaining time for the given node info. For looping animations, it will only return the remaining time if [param break_loop] is [code]true[/code], a large integer value will be returned otherwise. */
-get_remaining_time(): float;
+get_remaining_time(node_info: PackedFloat32Array, break_loop: boolean): float;
 
 /** Returns [code]true[/code] if the animation for the given [param node_info] is looping. */
-is_looping(): boolean;
+is_looping(node_info: PackedFloat32Array): boolean;
 
   connect<T extends SignalsOf<AnimationNodeExtension>>(signal: T, method: SignalFunction<AnimationNodeExtension[T]>): number;
 

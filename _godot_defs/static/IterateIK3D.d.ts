@@ -44,10 +44,10 @@ min_distance: float;
 setting_count: int;
 
 /** Returns the joint limitation at [param joint] in the bone chain's joint list. */
-get_joint_limitation(): JointLimitation3D;
+get_joint_limitation(index: int, joint: int): JointLimitation3D;
 
 /** Returns the joint limitation right axis at [param joint] in the bone chain's joint list. */
-get_joint_limitation_right_axis(): int;
+get_joint_limitation_right_axis(index: int, joint: int): int;
 
 /**
  * Returns the joint limitation right axis vector at [param joint] in the bone chain's joint list.
@@ -55,7 +55,7 @@ get_joint_limitation_right_axis(): int;
  * If [method get_joint_limitation_right_axis] is [constant SkeletonModifier3D.SECONDARY_DIRECTION_NONE], this method returns `Vector3(0, 0, 0)`.
  *
 */
-get_joint_limitation_right_axis_vector(): Vector3;
+get_joint_limitation_right_axis_vector(index: int, joint: int): Vector3;
 
 /**
  * Returns the joint limitation rotation offset at [param joint] in the bone chain's joint list.
@@ -67,10 +67,10 @@ get_joint_limitation_right_axis_vector(): Vector3;
  * Also, if the length of [method get_joint_limitation_right_axis_vector] is zero, the space is created by rotating the bone rest using the shortest arc that rotates the +Y axis of the bone rest to match the bone direction.
  *
 */
-get_joint_limitation_rotation_offset(): Quaternion;
+get_joint_limitation_rotation_offset(index: int, joint: int): Quaternion;
 
 /** Returns the rotation axis at [param joint] in the bone chain's joint list. */
-get_joint_rotation_axis(): int;
+get_joint_rotation_axis(index: int, joint: int): int;
 
 /**
  * Returns the rotation axis vector for the specified joint in the bone chain. This vector represents the axis around which the joint can rotate. It is determined based on the rotation axis set for the joint.
@@ -78,19 +78,19 @@ get_joint_rotation_axis(): int;
  * If [method get_joint_rotation_axis] is [constant SkeletonModifier3D.ROTATION_AXIS_ALL], this method returns `Vector3(0, 0, 0)`.
  *
 */
-get_joint_rotation_axis_vector(): Vector3;
+get_joint_rotation_axis_vector(index: int, joint: int): Vector3;
 
 /** Returns the target node that the end bone is trying to reach. */
-get_target_node(): NodePathType;
+get_target_node(index: int): NodePathType;
 
 /** Sets the joint limitation at [param joint] in the bone chain's joint list. */
-set_joint_limitation(): void;
+set_joint_limitation(index: int, joint: int, limitation: JointLimitation3D): void;
 
 /** Sets the joint limitation right axis at [param joint] in the bone chain's joint list. */
-set_joint_limitation_right_axis(): void;
+set_joint_limitation_right_axis(index: int, joint: int, direction: int): void;
 
 /** Sets the optional joint limitation right axis vector at [param joint] in the bone chain's joint list. */
-set_joint_limitation_right_axis_vector(): void;
+set_joint_limitation_right_axis_vector(index: int, joint: int, vector: Vector3): void;
 
 /**
  * Sets the joint limitation rotation offset at [param joint] in the bone chain's joint list.
@@ -102,7 +102,7 @@ set_joint_limitation_right_axis_vector(): void;
  * Also, if the length of [method get_joint_limitation_right_axis_vector] is zero, the space is created by rotating the bone rest using the shortest arc that rotates the +Y axis of the bone rest to match the bone direction.
  *
 */
-set_joint_limitation_rotation_offset(): void;
+set_joint_limitation_rotation_offset(index: int, joint: int, offset: Quaternion): void;
 
 /**
  * Sets the rotation axis at [param joint] in the bone chain's joint list.
@@ -112,7 +112,7 @@ set_joint_limitation_rotation_offset(): void;
  * **Note:** The rotation axis and the forward vector shouldn't be colinear to avoid unintended rotation since [ChainIK3D] does not factor in twisting forces.
  *
 */
-set_joint_rotation_axis(): void;
+set_joint_rotation_axis(index: int, joint: int, axis: int): void;
 
 /**
  * Sets the rotation axis vector for the specified joint in the bone chain.
@@ -122,10 +122,10 @@ set_joint_rotation_axis(): void;
  * If the vector length is `0`, it is considered synonymous with [constant SkeletonModifier3D.ROTATION_AXIS_ALL].
  *
 */
-set_joint_rotation_axis_vector(): void;
+set_joint_rotation_axis_vector(index: int, joint: int, axis_vector: Vector3): void;
 
 /** Sets the target node that the end bone is trying to reach. */
-set_target_node(): void;
+set_target_node(index: int, target_node: NodePathType): void;
 
   connect<T extends SignalsOf<IterateIK3D>>(signal: T, method: SignalFunction<IterateIK3D[T]>): number;
 

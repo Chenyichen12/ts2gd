@@ -522,10 +522,10 @@ volumetric_fog_temporal_reprojection_amount: float;
 volumetric_fog_temporal_reprojection_enabled: boolean;
 
 /** Returns the intensity of the glow level [param idx]. */
-get_glow_level(): float;
+get_glow_level(idx: int): float;
 
 /** Sets the intensity of the glow level [param idx]. A value above [code]0.0[/code] enables the level. Each level relies on the previous level. This means that enabling higher glow levels will slow down the glow effect rendering, even if previous levels aren't enabled. */
-set_glow_level(): void;
+set_glow_level(idx: int, intensity: float): void;
 
   connect<T extends SignalsOf<Environment>>(signal: T, method: SignalFunction<Environment[T]>): number;
 

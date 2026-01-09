@@ -32,7 +32,7 @@ get_setting_count(): int;
 reset(): void;
 
 /** Sets the number of settings. */
-set_setting_count(): void;
+set_setting_count(count: int): void;
 
   connect<T extends SignalsOf<IKModifier3D>>(signal: T, method: SignalFunction<IKModifier3D[T]>): number;
 

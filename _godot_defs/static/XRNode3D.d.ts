@@ -57,7 +57,7 @@ get_pose(): XRPose;
  * [param delay_sec] is a delay in seconds before the pulse is given.
  *
 */
-trigger_haptic_pulse(): void;
+trigger_haptic_pulse(action_name: string, frequency: float, amplitude: float, duration_sec: float, delay_sec: float): void;
 
   connect<T extends SignalsOf<XRNode3D>>(signal: T, method: SignalFunction<XRNode3D[T]>): number;
 

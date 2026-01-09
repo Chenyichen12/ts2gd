@@ -112,7 +112,7 @@ declare class EditorScenePostImport extends RefCounted  {
 
 
 /** Called after the scene was imported. This method must return the modified version of the scene. */
-protected _post_import(): Object;
+protected _post_import(scene: Node): Object;
 
 /** Returns the source file path which got imported (e.g. [code]res://scene.dae[/code]). */
 get_source_file(): string;

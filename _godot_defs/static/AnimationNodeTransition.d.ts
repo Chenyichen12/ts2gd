@@ -94,22 +94,22 @@ xfade_curve: Curve;
 xfade_time: float;
 
 /** Returns whether the animation breaks the loop at the end of the loop cycle for transition. */
-is_input_loop_broken_at_end(): boolean;
+is_input_loop_broken_at_end(input: int): boolean;
 
 /** Returns whether the animation restarts when the animation transitions from the other animation. */
-is_input_reset(): boolean;
+is_input_reset(input: int): boolean;
 
 /** Returns [code]true[/code] if auto-advance is enabled for the given [param input] index. */
-is_input_set_as_auto_advance(): boolean;
+is_input_set_as_auto_advance(input: int): boolean;
 
 /** Enables or disables auto-advance for the given [param input] index. If enabled, state changes to the next input after playing the animation once. If enabled for the last input state, it loops to the first. */
-set_input_as_auto_advance(): void;
+set_input_as_auto_advance(input: int, enable: boolean): void;
 
 /** If [code]true[/code], breaks the loop at the end of the loop cycle for transition, even if the animation is looping. */
-set_input_break_loop_at_end(): void;
+set_input_break_loop_at_end(input: int, enable: boolean): void;
 
 /** If [code]true[/code], the destination animation is restarted when the animation transitions. */
-set_input_reset(): void;
+set_input_reset(input: int, enable: boolean): void;
 
   connect<T extends SignalsOf<AnimationNodeTransition>>(signal: T, method: SignalFunction<AnimationNodeTransition[T]>): number;
 

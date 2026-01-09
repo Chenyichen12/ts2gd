@@ -31,7 +31,7 @@ edited_resource: Resource;
 toggle_mode: boolean;
 
 /** This virtual method can be implemented to handle context menu items not handled by default. See [method _set_create_options]. */
-protected _handle_menu_selected(): boolean;
+protected _handle_menu_selected(id: int): boolean;
 
 /**
  * This virtual method is called when updating the context menu of [EditorResourcePicker]. Implement this method to override the "New ..." items with your own options. [param menu_node] is a reference to the [PopupMenu] node.
@@ -39,13 +39,13 @@ protected _handle_menu_selected(): boolean;
  * **Note:** Implement [method _handle_menu_selected] to handle these custom items.
  *
 */
-protected _set_create_options(): void;
+protected _set_create_options(menu_node: Object): void;
 
 /** Returns a list of all allowed types and subtypes corresponding to the [member base_type]. If the [member base_type] is empty, an empty list is returned. */
 get_allowed_types(): PackedStringArray;
 
 /** Sets the toggle mode state for the main button. Works only if [member toggle_mode] is set to [code]true[/code]. */
-set_toggle_pressed(): void;
+set_toggle_pressed(pressed: boolean): void;
 
   connect<T extends SignalsOf<EditorResourcePicker>>(signal: T, method: SignalFunction<EditorResourcePicker[T]>): number;
 

@@ -74,7 +74,7 @@ declare class SurfaceTool extends RefCounted  {
 
 
 /** Adds a vertex to index array if you are using indexed vertices. Does not need to be called before adding vertices. */
-add_index(): void;
+add_index(index: int): void;
 
 /**
  * Inserts a triangle fan made of array data into [Mesh] being constructed.
@@ -82,16 +82,16 @@ add_index(): void;
  * Requires the primitive type be set to [constant Mesh.PRIMITIVE_TRIANGLES].
  *
 */
-add_triangle_fan(): void;
+add_triangle_fan(vertices: PackedVector3Array, uvs?: PackedVector2Array, colors?: PackedColorArray, uv2s?: PackedVector2Array, normals?: PackedVector3Array, tangents?: Plane[]): void;
 
 /** Specifies the position of current vertex. Should be called after specifying other vertex properties (e.g. Color, UV). */
-add_vertex(): void;
+add_vertex(vertex: Vector3): void;
 
 /** Append vertices from a given [Mesh] surface onto the current vertex array with specified [Transform3D]. */
-append_from(): void;
+append_from(existing: Mesh, surface: int, transform: Transform3D): void;
 
 /** Called before adding any vertices. Takes the primitive type as an argument (e.g. [constant Mesh.PRIMITIVE_TRIANGLES]). */
-begin(): void;
+begin(primitive: int): void;
 
 /** Clear all information passed into the surface tool so far. */
 clear(): void;
@@ -102,25 +102,25 @@ clear(): void;
  * The [param flags] argument can be the bitwise OR of [constant Mesh.ARRAY_FLAG_USE_DYNAMIC_UPDATE], [constant Mesh.ARRAY_FLAG_USE_8_BONE_WEIGHTS], or [constant Mesh.ARRAY_FLAG_USES_EMPTY_VERTEX_ARRAY].
  *
 */
-commit(): ArrayMesh;
+commit(existing?: ArrayMesh, flags?: int): ArrayMesh;
 
 /** Commits the data to the same format used by [method ArrayMesh.add_surface_from_arrays], [method ImporterMesh.add_surface], and [method create_from_arrays]. This way you can further process the mesh data using the [ArrayMesh] or [ImporterMesh] APIs. */
 commit_to_arrays(): any[];
 
 /** Creates a vertex array from an existing [Mesh]. */
-create_from(): void;
+create_from(existing: Mesh, surface: int): void;
 
 /** Creates this SurfaceTool from existing vertex arrays such as returned by [method commit_to_arrays], [method Mesh.surface_get_arrays], [method Mesh.surface_get_blend_shape_arrays], [method ImporterMesh.get_surface_arrays], and [method ImporterMesh.get_surface_blend_shape_arrays]. [param primitive_type] controls the type of mesh data, defaulting to [constant Mesh.PRIMITIVE_TRIANGLES]. */
-create_from_arrays(): void;
+create_from_arrays(arrays: any[], primitive_type?: int): void;
 
 /** Creates a vertex array from the specified blend shape of an existing [Mesh]. This can be used to extract a specific pose from a blend shape. */
-create_from_blend_shape(): void;
+create_from_blend_shape(existing: Mesh, surface: int, blend_shape: string): void;
 
 /** Removes the index array by expanding the vertex array. */
 deindex(): void;
 
 /** Generates an LOD for a given [param nd_threshold] in linear units (square root of quadric error metric), using at most [param target_index_count] indices. */
-generate_lod(): PackedInt32Array;
+generate_lod(nd_threshold: float, target_index_count?: int): PackedInt32Array;
 
 /**
  * Generates normals from vertices so you do not have to do it manually. If [param flip] is `true`, the resulting normals will be inverted. [method generate_normals] should be called **after** generating geometry and **before** committing the mesh using [method commit] or [method commit_to_arrays]. For correct display of normal-mapped surfaces, you will also have to generate tangents using [method generate_tangents].
@@ -130,7 +130,7 @@ generate_lod(): PackedInt32Array;
  * **Note:** [method generate_normals] takes smooth groups into account. To generate smooth normals, set the smooth group to a value greater than or equal to `0` using [method set_smooth_group] or leave the smooth group at the default of `0`. To generate flat normals, set the smooth group to `-1` using [method set_smooth_group] prior to adding vertices.
  *
 */
-generate_normals(): void;
+generate_normals(flip?: boolean): void;
 
 /** Generates a tangent vector for each vertex. Requires that each vertex already has UVs and normals set (see [method generate_normals]). */
 generate_tangents(): void;
@@ -139,7 +139,7 @@ generate_tangents(): void;
 get_aabb(): AABB;
 
 /** Returns the format for custom [param channel_index] (currently up to 4). Returns [constant CUSTOM_MAX] if this custom channel is unused. */
-get_custom_format(): int;
+get_custom_format(channel_index: int): int;
 
 /** Returns the type of mesh geometry, such as [constant Mesh.PRIMITIVE_TRIANGLES]. */
 get_primitive_type(): int;
@@ -161,7 +161,7 @@ index(): void;
 optimize_indices_for_cache(): void;
 
 /** Specifies an array of bones to use for the [i]next[/i] vertex. [param bones] must contain 4 integers. */
-set_bones(): void;
+set_bones(bones: PackedInt32Array): void;
 
 /**
  * Specifies a [Color] to use for the **next** vertex. If every vertex needs to have this information set and you fail to submit it for the first vertex, this information may not be used at all.
@@ -169,7 +169,7 @@ set_bones(): void;
  * **Note:** The material must have [member BaseMaterial3D.vertex_color_use_as_albedo] enabled for the vertex color to be visible.
  *
 */
-set_color(): void;
+set_color(color: Color): void;
 
 /**
  * Sets the custom value on this vertex for [param channel_index].
@@ -177,7 +177,7 @@ set_color(): void;
  * [method set_custom_format] must be called first for this [param channel_index]. Formats which are not RGBA will ignore other color channels.
  *
 */
-set_custom(): void;
+set_custom(channel_index: int, custom_color: Color): void;
 
 /**
  * Sets the color format for this custom [param channel_index]. Use [constant CUSTOM_MAX] to disable.
@@ -185,13 +185,13 @@ set_custom(): void;
  * Must be invoked after [method begin] and should be set before [method commit] or [method commit_to_arrays].
  *
 */
-set_custom_format(): void;
+set_custom_format(channel_index: int, format: int): void;
 
 /** Sets [Material] to be used by the [Mesh] you are constructing. */
-set_material(): void;
+set_material(material: Material): void;
 
 /** Specifies a normal to use for the [i]next[/i] vertex. If every vertex needs to have this information set and you fail to submit it for the first vertex, this information may not be used at all. */
-set_normal(): void;
+set_normal(normal: Vector3): void;
 
 /**
  * Set to [constant SKIN_8_WEIGHTS] to indicate that up to 8 bone influences per vertex may be used.
@@ -201,7 +201,7 @@ set_normal(): void;
  * **Note:** This function takes an enum, not the exact number of weights.
  *
 */
-set_skin_weight_count(): void;
+set_skin_weight_count(count: int): void;
 
 /**
  * Specifies the smooth group to use for the **next** vertex. If this is never called, all vertices will have the default smooth group of `0` and will be smoothed with adjacent vertices of the same group. To produce a mesh with flat normals, set the smooth group to `-1`.
@@ -209,7 +209,7 @@ set_skin_weight_count(): void;
  * **Note:** This function actually takes a `uint32_t`, so C# users should use `uint32.MaxValue` instead of `-1` to produce a mesh with flat normals.
  *
 */
-set_smooth_group(): void;
+set_smooth_group(index: int): void;
 
 /**
  * Specifies a tangent to use for the **next** vertex. If every vertex needs to have this information set and you fail to submit it for the first vertex, this information may not be used at all.
@@ -217,16 +217,16 @@ set_smooth_group(): void;
  * **Note:** Even though [param tangent] is a [Plane], it does not directly represent the tangent plane. Its [member Plane.x], [member Plane.y], and [member Plane.z] represent the tangent vector and [member Plane.d] should be either `-1` or `1`. See also [constant Mesh.ARRAY_TANGENT].
  *
 */
-set_tangent(): void;
+set_tangent(tangent: Plane): void;
 
 /** Specifies a set of UV coordinates to use for the [i]next[/i] vertex. If every vertex needs to have this information set and you fail to submit it for the first vertex, this information may not be used at all. */
-set_uv(): void;
+set_uv(uv: Vector2): void;
 
 /** Specifies an optional second set of UV coordinates to use for the [i]next[/i] vertex. If every vertex needs to have this information set and you fail to submit it for the first vertex, this information may not be used at all. */
-set_uv2(): void;
+set_uv2(uv2: Vector2): void;
 
 /** Specifies weight values to use for the [i]next[/i] vertex. [param weights] must contain 4 values. If every vertex needs to have this information set and you fail to submit it for the first vertex, this information may not be used at all. */
-set_weights(): void;
+set_weights(weights: PackedFloat32Array): void;
 
   connect<T extends SignalsOf<SurfaceTool>>(signal: T, method: SignalFunction<SurfaceTool[T]>): number;
 

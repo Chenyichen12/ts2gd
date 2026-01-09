@@ -16,7 +16,7 @@ declare class AudioStreamGeneratorPlayback extends AudioStreamPlaybackResampled 
 
 
 /** Returns [code]true[/code] if a buffer of the size [param amount] can be pushed to the audio sample data buffer without overflowing it, [code]false[/code] otherwise. */
-can_push_buffer(): boolean;
+can_push_buffer(amount: int): boolean;
 
 /** Clears the audio sample data buffer. */
 clear_buffer(): void;
@@ -28,10 +28,10 @@ get_frames_available(): int;
 get_skips(): int;
 
 /** Pushes several audio data frames to the buffer. This is usually more efficient than [method push_frame] in C# and compiled languages via GDExtension, but [method push_buffer] may be [i]less[/i] efficient in GDScript. */
-push_buffer(): boolean;
+push_buffer(frames: PackedVector2Array): boolean;
 
 /** Pushes a single audio data frame to the buffer. This is usually less efficient than [method push_buffer] in C# and compiled languages via GDExtension, but [method push_frame] may be [i]more[/i] efficient in GDScript. */
-push_frame(): boolean;
+push_frame(frame: Vector2): boolean;
 
   connect<T extends SignalsOf<AudioStreamGeneratorPlayback>>(signal: T, method: SignalFunction<AudioStreamGeneratorPlayback[T]>): number;
 

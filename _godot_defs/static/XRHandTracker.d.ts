@@ -27,34 +27,34 @@ has_tracking_data: boolean;
 
 
 /** Returns the angular velocity for the given hand joint. */
-get_hand_joint_angular_velocity(): Vector3;
+get_hand_joint_angular_velocity(joint: int): Vector3;
 
 /** Returns flags about the validity of the tracking data for the given hand joint. */
-get_hand_joint_flags(): int;
+get_hand_joint_flags(joint: int): int;
 
 /** Returns the linear velocity for the given hand joint. */
-get_hand_joint_linear_velocity(): Vector3;
+get_hand_joint_linear_velocity(joint: int): Vector3;
 
 /** Returns the radius of the given hand joint. */
-get_hand_joint_radius(): float;
+get_hand_joint_radius(joint: int): float;
 
 /** Returns the transform for the given hand joint. */
-get_hand_joint_transform(): Transform3D;
+get_hand_joint_transform(joint: int): Transform3D;
 
 /** Sets the angular velocity for the given hand joint. */
-set_hand_joint_angular_velocity(): void;
+set_hand_joint_angular_velocity(joint: int, angular_velocity: Vector3): void;
 
 /** Sets flags about the validity of the tracking data for the given hand joint. */
-set_hand_joint_flags(): void;
+set_hand_joint_flags(joint: int, flags: int): void;
 
 /** Sets the linear velocity for the given hand joint. */
-set_hand_joint_linear_velocity(): void;
+set_hand_joint_linear_velocity(joint: int, linear_velocity: Vector3): void;
 
 /** Sets the radius of the given hand joint. */
-set_hand_joint_radius(): void;
+set_hand_joint_radius(joint: int, radius: float): void;
 
 /** Sets the transform for the given hand joint. */
-set_hand_joint_transform(): void;
+set_hand_joint_transform(joint: int, transform: Transform3D): void;
 
   connect<T extends SignalsOf<XRHandTracker>>(signal: T, method: SignalFunction<XRHandTracker[T]>): number;
 

@@ -46,25 +46,25 @@ sync: boolean;
 value_label: string;
 
 /** Adds a new point that represents a [param node] on the virtual axis at a given position set by [param pos]. You can insert it at a specific index using the [param at_index] argument. If you use the default value for [param at_index], the point is inserted at the end of the blend points array. */
-add_blend_point(): void;
+add_blend_point(node: AnimationRootNode, pos: float, at_index?: int): void;
 
 /** Returns the number of points on the blend axis. */
 get_blend_point_count(): int;
 
 /** Returns the [AnimationNode] referenced by the point at index [param point]. */
-get_blend_point_node(): AnimationRootNode;
+get_blend_point_node(point: int): AnimationRootNode;
 
 /** Returns the position of the point at index [param point]. */
-get_blend_point_position(): float;
+get_blend_point_position(point: int): float;
 
 /** Removes the point at index [param point] from the blend axis. */
-remove_blend_point(): void;
+remove_blend_point(point: int): void;
 
 /** Changes the [AnimationNode] referenced by the point at index [param point]. */
-set_blend_point_node(): void;
+set_blend_point_node(point: int, node: AnimationRootNode): void;
 
 /** Updates the position of the point at index [param point] on the blend axis. */
-set_blend_point_position(): void;
+set_blend_point_position(point: int, pos: float): void;
 
   connect<T extends SignalsOf<AnimationNodeBlendSpace1D>>(signal: T, method: SignalFunction<AnimationNodeBlendSpace1D[T]>): number;
 

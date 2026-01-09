@@ -40,7 +40,7 @@ transfer_mode: int;
 close(): void;
 
 /** Disconnects the given [param peer] from this host. If [param force] is [code]true[/code] the [signal peer_disconnected] signal will not be emitted for this peer. */
-disconnect_peer(): void;
+disconnect_peer(peer: int, force?: boolean): void;
 
 /** Returns a randomly generated integer that can be used as a network unique ID. */
 generate_unique_id(): int;
@@ -72,7 +72,7 @@ poll(): void;
  * The [param id] can be one of: [constant TARGET_PEER_BROADCAST] to send to all connected peers, [constant TARGET_PEER_SERVER] to send to the peer acting as server, a valid peer ID to send to that specific peer, a negative peer ID to send to all peers except that one. By default, the target peer is [constant TARGET_PEER_BROADCAST].
  *
 */
-set_target_peer(): void;
+set_target_peer(id: int): void;
 
   connect<T extends SignalsOf<MultiplayerPeer>>(signal: T, method: SignalFunction<MultiplayerPeer[T]>): number;
 

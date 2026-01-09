@@ -25,7 +25,7 @@ declare class ResourceUIDClass extends Object  {
  * Fails with an error if the UID already exists, so be sure to check [method has_id] beforehand, or use [method set_id] instead.
  *
 */
-add_id(): void;
+add_id(id: int, path: string): void;
 
 /**
  * Generates a random resource UID which is guaranteed to be unique within the list of currently loaded UIDs.
@@ -36,10 +36,10 @@ add_id(): void;
 create_id(): int;
 
 /** Like [method create_id], but the UID is seeded with the provided [param path] and project name. UIDs generated for that path will be always the same within the current project. */
-create_id_for_path(): int;
+create_id_for_path(path: string): int;
 
 /** Returns a path, converting [param path_or_uid] if necessary. Fails and returns an empty string if an invalid UID is provided. */
-ensure_path(): string;
+ensure_path(path_or_uid: string): string;
 
 /**
  * Returns the path that the given UID value refers to.
@@ -47,16 +47,16 @@ ensure_path(): string;
  * Fails with an error if the UID does not exist, so be sure to check [method has_id] beforehand.
  *
 */
-get_id_path(): string;
+get_id_path(id: int): string;
 
 /** Returns whether the given UID value is known to the cache. */
-has_id(): boolean;
+has_id(id: int): boolean;
 
 /** Converts the given UID to a [code]uid://[/code] string value. */
-id_to_text(): string;
+id_to_text(id: int): string;
 
 /** Converts the provided resource [param path] to a UID. Returns the unchanged path if it has no associated UID. */
-path_to_uid(): string;
+path_to_uid(path: string): string;
 
 /**
  * Removes a loaded UID value from the cache.
@@ -64,7 +64,7 @@ path_to_uid(): string;
  * Fails with an error if the UID does not exist, so be sure to check [method has_id] beforehand.
  *
 */
-remove_id(): void;
+remove_id(id: int): void;
 
 /**
  * Updates the resource path of an existing UID.
@@ -72,13 +72,13 @@ remove_id(): void;
  * Fails with an error if the UID does not exist, so be sure to check [method has_id] beforehand, or use [method add_id] instead.
  *
 */
-set_id(): void;
+set_id(id: int, path: string): void;
 
 /** Extracts the UID value from the given [code]uid://[/code] string. */
-text_to_id(): int;
+text_to_id(text_id: string): int;
 
 /** Converts the provided [param uid] to a path. Prints an error if the UID is invalid. */
-uid_to_path(): string;
+uid_to_path(uid: string): string;
 
   connect<T extends SignalsOf<ResourceUIDClass>>(signal: T, method: SignalFunction<ResourceUIDClass[T]>): number;
 

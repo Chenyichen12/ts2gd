@@ -20,28 +20,28 @@ declare class PhysicsDirectSpaceState3DExtension extends PhysicsDirectSpaceState
 
 
 /** No documentation provided. */
-protected _cast_motion(): boolean;
+protected _cast_motion(shape_rid: RID, transform: Transform3D, motion: Vector3, margin: float, collision_mask: int, collide_with_bodies: boolean, collide_with_areas: boolean, closest_safe: float*, closest_unsafe: float*, info: PhysicsServer3DExtensionShapeRestInfo*): boolean;
 
 /** No documentation provided. */
-protected _collide_shape(): boolean;
+protected _collide_shape(shape_rid: RID, transform: Transform3D, motion: Vector3, margin: float, collision_mask: int, collide_with_bodies: boolean, collide_with_areas: boolean, results: void*, max_results: int, result_count: int32_t*): boolean;
 
 /** No documentation provided. */
-protected _get_closest_point_to_object_volume(): Vector3;
+protected _get_closest_point_to_object_volume(object: RID, point: Vector3): Vector3;
 
 /** No documentation provided. */
-protected _intersect_point(): int;
+protected _intersect_point(position: Vector3, collision_mask: int, collide_with_bodies: boolean, collide_with_areas: boolean, results: PhysicsServer3DExtensionShapeResult*, max_results: int): int;
 
 /** No documentation provided. */
-protected _intersect_ray(): boolean;
+protected _intersect_ray(from: Vector3, to: Vector3, collision_mask: int, collide_with_bodies: boolean, collide_with_areas: boolean, hit_from_inside: boolean, hit_back_faces: boolean, pick_ray: boolean, result: PhysicsServer3DExtensionRayResult*): boolean;
 
 /** No documentation provided. */
-protected _intersect_shape(): int;
+protected _intersect_shape(shape_rid: RID, transform: Transform3D, motion: Vector3, margin: float, collision_mask: int, collide_with_bodies: boolean, collide_with_areas: boolean, result_count: PhysicsServer3DExtensionShapeResult*, max_results: int): int;
 
 /** No documentation provided. */
-protected _rest_info(): boolean;
+protected _rest_info(shape_rid: RID, transform: Transform3D, motion: Vector3, margin: float, collision_mask: int, collide_with_bodies: boolean, collide_with_areas: boolean, rest_info: PhysicsServer3DExtensionShapeRestInfo*): boolean;
 
 /** No documentation provided. */
-is_body_excluded_from_query(): boolean;
+is_body_excluded_from_query(body: RID): boolean;
 
   connect<T extends SignalsOf<PhysicsDirectSpaceState3DExtension>>(signal: T, method: SignalFunction<PhysicsDirectSpaceState3DExtension[T]>): number;
 

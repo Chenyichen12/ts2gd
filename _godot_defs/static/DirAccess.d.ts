@@ -172,7 +172,7 @@ include_navigational: boolean;
  * **Note:** The new directory must be within the same scope, e.g. when you had opened a directory inside `res://`, you can't change it to `user://` directory. If you need to open a directory in another access scope, use [method open] to create a new instance instead.
  *
 */
-change_dir(): int;
+change_dir(to_dir: string): int;
 
 /**
  * Copies the [param from] file to the [param to] destination. Both arguments should be paths to files, either relative or absolute. If the destination file exists and is not access-protected, it will be overwritten.
@@ -182,10 +182,10 @@ change_dir(): int;
  * Returns one of the [enum Error] code constants ([constant OK] on success).
  *
 */
-copy(): int;
+copy(from: string, to: string, chmod_flags?: int): int;
 
 /** Static version of [method copy]. Supports only absolute paths. */
-copy_absolute(): int;
+copy_absolute(from: string, to: string, chmod_flags?: int): int;
 
 /**
  * Creates symbolic link between files or folders.
@@ -195,7 +195,7 @@ copy_absolute(): int;
  * **Note:** This method is implemented on macOS, Linux, and Windows.
  *
 */
-create_link(): int;
+create_link(source: string, target: string): int;
 
 /**
  * Creates a temporary directory. This directory will be freed when the returned [DirAccess] is freed.
@@ -207,7 +207,7 @@ create_link(): int;
  * Returns `null` if opening the directory failed. You can use [method get_open_error] to check the error that occurred.
  *
 */
-create_temp(): DirAccess;
+create_temp(prefix?: string, keep?: boolean): DirAccess;
 
 /** Returns whether the current item processed with the last [method get_next] call is a directory ([code].[/code] and [code]..[/code] are considered directories). */
 current_is_dir(): boolean;
@@ -218,7 +218,7 @@ current_is_dir(): boolean;
  * **Note:** The returned [bool] in the editor and after exporting when used on a path in the `res://` directory may be different. Some files are converted to engine-specific formats when exported, potentially changing the directory structure.
  *
 */
-dir_exists(): boolean;
+dir_exists(path: string): boolean;
 
 /**
  * Static version of [method dir_exists]. Supports only absolute paths.
@@ -226,7 +226,7 @@ dir_exists(): boolean;
  * **Note:** The returned [bool] in the editor and after exporting when used on a path in the `res://` directory may be different. Some files are converted to engine-specific formats when exported, potentially changing the directory structure.
  *
 */
-dir_exists_absolute(): boolean;
+dir_exists_absolute(path: string): boolean;
 
 /**
  * Returns whether the target file exists. The argument can be relative to the current directory, or an absolute path.
@@ -236,10 +236,10 @@ dir_exists_absolute(): boolean;
  * **Note:** Many resources types are imported (e.g. textures or sound files), and their source asset will not be included in the exported game, as only the imported version is used. See [method ResourceLoader.exists] for an alternative approach that takes resource remapping into account.
  *
 */
-file_exists(): boolean;
+file_exists(path: string): boolean;
 
 /** Returns the absolute path to the currently opened directory (e.g. [code]res://folder[/code] or [code]C:\tmp\folder[/code]). */
-get_current_dir(): string;
+get_current_dir(include_drive?: boolean): string;
 
 /** Returns the currently opened directory's drive index. See [method get_drive_name] to convert returned index to the name of the drive. */
 get_current_drive(): int;
@@ -262,7 +262,7 @@ get_directories(): PackedStringArray;
  * **Note:** The returned directories in the editor and after exporting in the `res://` directory may differ as some files are converted to engine-specific formats when exported.
  *
 */
-get_directories_at(): PackedStringArray;
+get_directories_at(path: string): PackedStringArray;
 
 /**
  * On Windows, returns the number of drives (partitions) mounted on the current filesystem.
@@ -288,7 +288,7 @@ get_drive_count(): int;
  * On other platforms, or if the requested drive does not exist, the method returns an empty String.
  *
 */
-get_drive_name(): string;
+get_drive_name(idx: int): string;
 
 /**
  * Returns a [PackedStringArray] containing filenames of the directory contents, excluding directories. The array is sorted alphabetically.
@@ -308,7 +308,7 @@ get_files(): PackedStringArray;
  * **Note:** When used on a `res://` path in an exported project, only the files included in the PCK at the given folder level are returned. In practice, this means that since imported resources are stored in a top-level `.godot/` folder, only paths to `.gd` and `.import` files are returned (plus a few other files, such as `project.godot` or `project.binary` and the project icon). In an exported project, the list of returned files will also vary depending on [member ProjectSettings.editor/export/convert_text_resources_to_binary].
  *
 */
-get_files_at(): PackedStringArray;
+get_files_at(path: string): PackedStringArray;
 
 /**
  * Returns file system type name of the current directory's disk. Returned values are uppercase strings like `NTFS`, `FAT32`, `EXFAT`, `APFS`, `EXT4`, `BTRFS`, and so on.
@@ -338,7 +338,7 @@ get_space_left(): int;
  * **Note:** This method is implemented on macOS.
  *
 */
-is_bundle(): boolean;
+is_bundle(path: string): boolean;
 
 /**
  * Returns `true` if the file system or directory use case sensitive file names.
@@ -346,10 +346,10 @@ is_bundle(): boolean;
  * **Note:** This method is implemented on macOS, Linux (for EXT4 and F2FS filesystems only) and Windows. On other platforms, it always returns `true`.
  *
 */
-is_case_sensitive(): boolean;
+is_case_sensitive(path: string): boolean;
 
 /** Returns [code]true[/code] if paths [param path_a] and [param path_b] resolve to the same file system object. Returns [code]false[/code] otherwise, even if the files are bit-for-bit identical (e.g., identical copies of the file that are not symbolic links). */
-is_equivalent(): boolean;
+is_equivalent(path_a: string, path_b: string): boolean;
 
 /**
  * Returns `true` if the file or directory is a symbolic link, directory junction, or other reparse point.
@@ -357,7 +357,7 @@ is_equivalent(): boolean;
  * **Note:** This method is implemented on macOS, Linux, and Windows.
  *
 */
-is_link(): boolean;
+is_link(path: string): boolean;
 
 /**
  * Initializes the stream used to list all files and directories using the [method get_next] function, closing the currently opened stream if needed. Once the stream has been processed, it should typically be closed with [method list_dir_end].
@@ -378,10 +378,10 @@ list_dir_end(): void;
  * Returns one of the [enum Error] code constants ([constant OK] on success).
  *
 */
-make_dir(): int;
+make_dir(path: string): int;
 
 /** Static version of [method make_dir]. Supports only absolute paths. */
-make_dir_absolute(): int;
+make_dir_absolute(path: string): int;
 
 /**
  * Creates a target directory and all necessary intermediate directories in its path, by calling [method make_dir] recursively. The argument can be relative to the current directory, or an absolute path.
@@ -389,10 +389,10 @@ make_dir_absolute(): int;
  * Returns one of the [enum Error] code constants ([constant OK] on success).
  *
 */
-make_dir_recursive(): int;
+make_dir_recursive(path: string): int;
 
 /** Static version of [method make_dir_recursive]. Supports only absolute paths. */
-make_dir_recursive_absolute(): int;
+make_dir_recursive_absolute(path: string): int;
 
 /**
  * Creates a new [DirAccess] object and opens an existing directory of the filesystem. The [param path] argument can be within the project tree (`res://folder`), the user directory (`user://folder`) or an absolute path of the user filesystem (e.g. `/tmp/folder` or `C:\tmp\folder`).
@@ -400,7 +400,7 @@ make_dir_recursive_absolute(): int;
  * Returns `null` if opening the directory failed. You can use [method get_open_error] to check the error that occurred.
  *
 */
-open(): DirAccess;
+open(path: string): DirAccess;
 
 /**
  * Returns target of the symbolic link.
@@ -408,7 +408,7 @@ open(): DirAccess;
  * **Note:** This method is implemented on macOS, Linux, and Windows.
  *
 */
-read_link(): string;
+read_link(path: string): string;
 
 /**
  * Permanently deletes the target file or an empty directory. The argument can be relative to the current directory, or an absolute path. If the target directory is not empty, the operation will fail.
@@ -418,10 +418,10 @@ read_link(): string;
  * Returns one of the [enum Error] code constants ([constant OK] on success).
  *
 */
-remove(): int;
+remove(path: string): int;
 
 /** Static version of [method remove]. Supports only absolute paths. */
-remove_absolute(): int;
+remove_absolute(path: string): int;
 
 /**
  * Renames (move) the [param from] file or directory to the [param to] destination. Both arguments should be paths to files or directories, either relative or absolute. If the destination file or directory exists and is not access-protected, it will be overwritten.
@@ -429,10 +429,10 @@ remove_absolute(): int;
  * Returns one of the [enum Error] code constants ([constant OK] on success).
  *
 */
-rename(): int;
+rename(from: string, to: string): int;
 
 /** Static version of [method rename]. Supports only absolute paths. */
-rename_absolute(): int;
+rename_absolute(from: string, to: string): int;
 
   connect<T extends SignalsOf<DirAccess>>(signal: T, method: SignalFunction<DirAccess[T]>): number;
 

@@ -71,7 +71,7 @@ tags: Dictionary<any, any>;
  * The keys and values of [param options] match the properties of [ResourceImporterWAV]. The usage of [param options] is identical to [method AudioStreamWAV.load_from_file].
  *
 */
-load_from_buffer(): AudioStreamWAV;
+load_from_buffer(stream_data: PackedByteArray, options?: Dictionary<any, any>): AudioStreamWAV;
 
 /**
  * Creates a new [AudioStreamWAV] instance from the given file path. The file must be in WAV format.
@@ -96,7 +96,7 @@ load_from_buffer(): AudioStreamWAV;
  * 
  *
 */
-load_from_file(): AudioStreamWAV;
+load_from_file(path: string, options?: Dictionary<any, any>): AudioStreamWAV;
 
 /**
  * Saves the AudioStreamWAV as a WAV file to [param path]. Samples with IMA ADPCM or Quite OK Audio formats can't be saved.
@@ -104,7 +104,7 @@ load_from_file(): AudioStreamWAV;
  * **Note:** A `.wav` extension is automatically appended to [param path] if it is missing.
  *
 */
-save_to_wav(): int;
+save_to_wav(path: string): int;
 
   connect<T extends SignalsOf<AudioStreamWAV>>(signal: T, method: SignalFunction<AudioStreamWAV[T]>): number;
 

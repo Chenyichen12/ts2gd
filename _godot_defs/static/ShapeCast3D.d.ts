@@ -61,10 +61,10 @@ shape: Shape3D;
 target_position: Vector3;
 
 /** Adds a collision exception so the shape does not report collisions with the specified node. */
-add_exception(): void;
+add_exception(node: CollisionObject3D): void;
 
 /** Adds a collision exception so the shape does not report collisions with the specified [RID]. */
-add_exception_rid(): void;
+add_exception_rid(rid: RID): void;
 
 /** Removes all collision exceptions for this shape. */
 clear_exceptions(): void;
@@ -89,22 +89,22 @@ get_closest_collision_safe_fraction(): float;
 get_closest_collision_unsafe_fraction(): float;
 
 /** Returns the collided [Object] of one of the multiple collisions at [param index], or [code]null[/code] if no object is intersecting the shape (i.e. [method is_colliding] returns [code]false[/code]). */
-get_collider(): Object;
+get_collider(index: int): Object;
 
 /** Returns the [RID] of the collided object of one of the multiple collisions at [param index]. */
-get_collider_rid(): RID;
+get_collider_rid(index: int): RID;
 
 /** Returns the shape ID of the colliding shape of one of the multiple collisions at [param index], or [code]0[/code] if no object is intersecting the shape (i.e. [method is_colliding] returns [code]false[/code]). */
-get_collider_shape(): int;
+get_collider_shape(index: int): int;
 
 /** The number of collisions detected at the point of impact. Use this to iterate over multiple collisions as provided by [method get_collider], [method get_collider_shape], [method get_collision_point], and [method get_collision_normal] methods. */
 get_collision_count(): int;
 
 /** Returns whether or not the specified layer of the [member collision_mask] is enabled, given a [param layer_number] between 1 and 32. */
-get_collision_mask_value(): boolean;
+get_collision_mask_value(layer_number: int): boolean;
 
 /** Returns the normal of one of the multiple collisions at [param index] of the intersecting object. */
-get_collision_normal(): Vector3;
+get_collision_normal(index: int): Vector3;
 
 /**
  * Returns the collision point of one of the multiple collisions at [param index] where the shape intersects the colliding object.
@@ -112,22 +112,22 @@ get_collision_normal(): Vector3;
  * **Note:** This point is in the **global** coordinate system.
  *
 */
-get_collision_point(): Vector3;
+get_collision_point(index: int): Vector3;
 
 /** Returns whether any object is intersecting with the shape's vector (considering the vector length). */
 is_colliding(): boolean;
 
 /** Removes a collision exception so the shape does report collisions with the specified node. */
-remove_exception(): void;
+remove_exception(node: CollisionObject3D): void;
 
 /** Removes a collision exception so the shape does report collisions with the specified [RID]. */
-remove_exception_rid(): void;
+remove_exception_rid(rid: RID): void;
 
 /** This method does nothing. */
-resource_changed(): void;
+resource_changed(resource: Resource): void;
 
 /** Based on [param value], enables or disables the specified layer in the [member collision_mask], given a [param layer_number] between 1 and 32. */
-set_collision_mask_value(): void;
+set_collision_mask_value(layer_number: int, value: boolean): void;
 
   connect<T extends SignalsOf<ShapeCast3D>>(signal: T, method: SignalFunction<ShapeCast3D[T]>): number;
 

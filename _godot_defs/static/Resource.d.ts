@@ -69,7 +69,7 @@ protected _get_rid(): RID;
 protected _reset_state(): void;
 
 /** Override this method to execute additional logic after [method set_path_cache] is called on this object. */
-protected _set_path_cache(): void;
+protected _set_path_cache(path: string): void;
 
 /**
  * Override this method to customize the newly duplicated resource created from [method PackedScene.instantiate], if the original's [member resource_local_to_scene] is set to `true`.
@@ -106,10 +106,10 @@ protected _setup_local_to_scene(): void;
  * **Note:** When duplicating with [param deep] set to `true`, each resource found, including the one on which this method is called, will be only duplicated once and referenced as many times as needed in the duplicate. For instance, if you are duplicating resource A that happens to have resource B referenced twice, you'll get a new resource A' referencing a new resource B' twice.
  *
 */
-duplicate(): Resource;
+duplicate(deep?: boolean): Resource;
 
 /** Duplicates this resource, deeply, like [method duplicate] when passing [code]true[/code], with extra control over how subresources are handled. */
-duplicate_deep(): Resource;
+duplicate_deep(deep_subresources_mode?: int): Resource;
 
 /**
  * Emits the [signal changed] signal. This method is called automatically for some built-in resources.
@@ -138,7 +138,7 @@ generate_scene_unique_id(): string;
  * **Note:** This method is only implemented when running in an editor context. At runtime, it returns an empty string.
  *
 */
-get_id_for_path(): string;
+get_id_for_path(path: string): string;
 
 /** If [member resource_local_to_scene] is set to [code]true[/code] and the resource has been loaded from a [PackedScene] instantiation, returns the root [Node] of the scene where this resource is used. Otherwise, returns [code]null[/code]. */
 get_local_scene(): Node;
@@ -158,16 +158,16 @@ reset_state(): void;
  * **Note:** This method is only implemented when running in an editor context.
  *
 */
-set_id_for_path(): void;
+set_id_for_path(path: string, id: string): void;
 
 /** Sets the resource's path to [param path] without involving the resource cache. Useful for handling [enum ResourceFormatLoader.CacheMode] values when implementing a custom resource format by extending [ResourceFormatLoader] and [ResourceFormatSaver]. */
-set_path_cache(): void;
+set_path_cache(path: string): void;
 
 /** Calls [method _setup_local_to_scene]. If [member resource_local_to_scene] is set to [code]true[/code], this method is automatically called from [method PackedScene.instantiate] by the newly duplicated resource within the scene instance. */
 setup_local_to_scene(): void;
 
 /** Sets the [member resource_path] to [param path], potentially overriding an existing cache entry for this path. Further attempts to load an overridden resource by path will instead return this resource. */
-take_over_path(): void;
+take_over_path(path: string): void;
 
   connect<T extends SignalsOf<Resource>>(signal: T, method: SignalFunction<Resource[T]>): number;
 

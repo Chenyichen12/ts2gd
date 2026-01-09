@@ -117,7 +117,7 @@ determinant(): float;
  * The order of each consecutive rotation can be changed with [param order] (see [enum EulerOrder] constants). By default, the YXZ convention is used ([constant EULER_ORDER_YXZ]): the basis rotates first around the Y axis (yaw), then X (pitch), and lastly Z (roll). When using the opposite method [method get_euler], this order is reversed.
  *
 */
-from_euler(): Basis;
+from_euler(euler: Vector3, order?: int): Basis;
 
 /**
  * Constructs a new [Basis] that only represents scale, with no rotation or shear, from the given [param scale] vector.
@@ -142,7 +142,7 @@ from_euler(): Basis;
  * **Note:** In linear algebra, the matrix of this basis is also known as a [url=https://en.wikipedia.org/wiki/Diagonal_matrix]diagonal matrix[/url].
  *
 */
-from_scale(): Basis;
+from_scale(scale: Vector3): Basis;
 
 /**
  * Returns this basis's rotation as a [Vector3] of [url=https://en.wikipedia.org/wiki/Euler_angles]Euler angles[/url], in radians. For the returned value:
@@ -162,7 +162,7 @@ from_scale(): Basis;
  * **Note:** In the Inspector dock, a basis's rotation is often displayed in Euler angles (in degrees), as is the case with the [member Node3D.rotation] property.
  *
 */
-get_euler(): Vector3;
+get_euler(order?: int): Vector3;
 
 /**
  * Returns this basis's rotation as a [Quaternion].
@@ -214,7 +214,7 @@ inverse(): Basis;
 is_conformal(): boolean;
 
 /** Returns [code]true[/code] if this basis and [param b] are approximately equal, by calling [method @GlobalScope.is_equal_approx] on all vector components. */
-is_equal_approx(): boolean;
+is_equal_approx(b: Basis): boolean;
 
 /** Returns [code]true[/code] if this basis is finite, by calling [method @GlobalScope.is_finite] on all vector components. */
 is_finite(): boolean;
@@ -229,7 +229,7 @@ is_finite(): boolean;
  * The [param target] and the [param up] cannot be [constant Vector3.ZERO], and shouldn't be colinear to avoid unintended rotation around local Z axis.
  *
 */
-looking_at(): Basis;
+looking_at(target: Vector3, up?: Vector3, use_model_front?: boolean): Basis;
 
 /**
  * Returns the orthonormalized version of this basis. An orthonormal basis is both **orthogonal** (the axes are perpendicular to each other) and **normalized** (the axes have a length of `1.0`), which also means it can only represent a rotation.
@@ -285,7 +285,7 @@ orthonormalized(): Basis;
  * 
  *
 */
-rotated(): Basis;
+rotated(axis: Vector3, angle: float): Basis;
 
 /**
  * Returns this basis with each axis's components scaled by the given [param scale]'s components.
@@ -320,7 +320,7 @@ rotated(): Basis;
  * 
  *
 */
-scaled(): Basis;
+scaled(scale: Vector3): Basis;
 
 /**
  * Returns this basis with each axis scaled by the corresponding component in the given [param scale].
@@ -355,7 +355,7 @@ scaled(): Basis;
  * 
  *
 */
-scaled_local(): Basis;
+scaled_local(scale: Vector3): Basis;
 
 /**
  * Performs a spherical-linear interpolation with the [param to] basis, given a [param weight]. Both this basis and [param to] should represent a rotation.
@@ -374,7 +374,7 @@ scaled_local(): Basis;
  * 
  *
 */
-slerp(): Basis;
+slerp(to: Basis, weight: float): Basis;
 
 /**
  * Returns the transposed dot product between [param with] and the [member x] axis (see [method transposed]).
@@ -382,7 +382,7 @@ slerp(): Basis;
  * This is equivalent to `basis.x.dot(vector)`.
  *
 */
-tdotx(): float;
+tdotx(_with: Vector3): float;
 
 /**
  * Returns the transposed dot product between [param with] and the [member y] axis (see [method transposed]).
@@ -390,7 +390,7 @@ tdotx(): float;
  * This is equivalent to `basis.y.dot(vector)`.
  *
 */
-tdoty(): float;
+tdoty(_with: Vector3): float;
 
 /**
  * Returns the transposed dot product between [param with] and the [member z] axis (see [method transposed]).
@@ -398,7 +398,7 @@ tdoty(): float;
  * This is equivalent to `basis.z.dot(vector)`.
  *
 */
-tdotz(): float;
+tdotz(_with: Vector3): float;
 
 /**
  * Returns the transposed version of this basis. This turns the basis matrix's columns into rows, and its rows into columns.

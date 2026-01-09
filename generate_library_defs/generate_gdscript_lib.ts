@@ -14,7 +14,7 @@ export type GodotXMLMethod = {
     qualifiers?: string
   }
   return?: [{ $: { type: string } }]
-  argument: {
+  param: {
     $: {
       index: string /* e.g. "1" */
       name: string
@@ -72,6 +72,7 @@ is_action_just_released(action: Action): boolean;
 get_node(path: NodePathType): Node;
 
 ${docString}
+get_node<T extends Node>(path: NodePathType): T;
 get_node_unsafe<T extends Node>(path: NodePathType): T;
 `
     case "change_scene":
@@ -148,7 +149,7 @@ export const parseMethod = (
   const containingClassName = props?.containgClassName ?? undefined
   const generateAsGlobal = props?.generateAsGlobals ?? false
   const name = method.$.name
-  const args = method.argument
+  const args = method.param;
   const isVarArgs = method.$.qualifiers === "vararg"
   const isConstructor =
     containingClassName !== undefined && name === containingClassName

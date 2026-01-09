@@ -28,7 +28,7 @@ device: int;
  * The given input event's position, global position and speed will be copied. The resulting `relative` is a sum of both events. Both events' modifiers have to be identical.
  *
 */
-accumulate(): boolean;
+accumulate(with_event: InputEvent): boolean;
 
 /** Returns a [String] representation of the event. */
 as_text(): string;
@@ -39,7 +39,7 @@ as_text(): string;
  * If [param exact_match] is `false`, it ignores additional input modifiers for [InputEventKey] and [InputEventMouseButton] events, and the direction for [InputEventJoypadMotion] events.
  *
 */
-get_action_strength(): float;
+get_action_strength(action: Action, exact_match?: boolean): float;
 
 /**
  * Returns `true` if this input event matches a pre-defined action of any type.
@@ -47,7 +47,7 @@ get_action_strength(): float;
  * If [param exact_match] is `false`, it ignores additional input modifiers for [InputEventKey] and [InputEventMouseButton] events, and the direction for [InputEventJoypadMotion] events.
  *
 */
-is_action(): boolean;
+is_action(action: Action, exact_match?: boolean): boolean;
 
 /**
  * Returns `true` if the given action matches this event and is being pressed (and is not an echo event for [InputEventKey] events, unless [param allow_echo] is `true`). Not relevant for events of type [InputEventMouseMotion] or [InputEventScreenDrag].
@@ -66,7 +66,7 @@ is_action_pressed(action: Action): boolean;
  * If [param exact_match] is `false`, it ignores additional input modifiers for [InputEventKey] and [InputEventMouseButton] events, and the direction for [InputEventJoypadMotion] events.
  *
 */
-is_action_released(): boolean;
+is_action_released(action: Action, exact_match?: boolean): boolean;
 
 /** Returns [code]true[/code] if this input event's type is one that can be assigned to an input action: [InputEventKey], [InputEventMouseButton], [InputEventJoypadButton], [InputEventJoypadMotion], [InputEventAction]. Returns [code]false[/code] for all other input event types. */
 is_action_type(): boolean;
@@ -90,7 +90,7 @@ is_echo(): boolean;
  * **Note:** This method only considers the event configuration (such as the keyboard key or the joypad axis), not state information like [method is_pressed], [method is_released], [method is_echo], or [method is_canceled].
  *
 */
-is_match(): boolean;
+is_match(event: InputEvent, exact_match?: boolean): boolean;
 
 /**
  * Returns `true` if this input event is pressed. Not relevant for events of type [InputEventMouseMotion] or [InputEventScreenDrag].
@@ -104,7 +104,7 @@ is_pressed(): boolean;
 is_released(): boolean;
 
 /** Returns a copy of the given input event which has been offset by [param local_ofs] and transformed by [param xform]. Relevant for events of type [InputEventMouseButton], [InputEventMouseMotion], [InputEventScreenTouch], [InputEventScreenDrag], [InputEventMagnifyGesture] and [InputEventPanGesture]. */
-xformed_by(): InputEvent;
+xformed_by(xform: Transform2D, local_ofs?: Vector2): InputEvent;
 
   connect<T extends SignalsOf<InputEvent>>(signal: T, method: SignalFunction<InputEvent[T]>): number;
 

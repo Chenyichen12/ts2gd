@@ -247,7 +247,7 @@ declare class Tween extends RefCounted  {
  * For a shorter way to create and bind a [Tween], you can use [method Node.create_tween].
  *
 */
-bind_node(): Tween;
+bind_node(node: Node): Tween;
 
 /**
  * Used to chain two [Tweener]s after [method set_parallel] is called with `true`.
@@ -278,7 +278,7 @@ chain(): Tween;
  * Returns `true` if the [Tween] still has [Tweener]s that haven't finished.
  *
 */
-custom_step(): boolean;
+custom_step(delta: float): boolean;
 
 /** Returns the number of remaining loops for this [Tween] (see [method set_loops]). A return value of [code]-1[/code] indicates an infinitely looping [Tween], and a return value of [code]0[/code] indicates that the [Tween] has already finished. */
 get_loops_left(): int;
@@ -305,7 +305,7 @@ get_total_elapsed_time(): float;
  * **Note:** If [param duration] is equal to `0`, the method will always return the final value, regardless of [param elapsed_time] provided.
  *
 */
-interpolate_value(): any;
+interpolate_value(initial_value: any, delta_value: any, elapsed_time: float, duration: float, trans_type: int, ease_type: int): any;
 
 /** Returns whether the [Tween] is currently running, i.e. it wasn't paused and it's not finished. */
 is_running(): boolean;
@@ -369,10 +369,10 @@ play(): void;
  * 
  *
 */
-set_ease(): Tween;
+set_ease(ease: int): Tween;
 
 /** If [param ignore] is [code]true[/code], the tween will ignore [member Engine.time_scale] and update with the real, elapsed time. This affects all [Tweener]s and their delays. Default value is [code]false[/code]. */
-set_ignore_time_scale(): Tween;
+set_ignore_time_scale(ignore?: boolean): Tween;
 
 /**
  * Sets the number of times the tweening sequence will be repeated, i.e. `set_loops(2)` will run the animation twice.
@@ -382,7 +382,7 @@ set_ignore_time_scale(): Tween;
  * **Warning:** Make sure to always add some duration/delay when using infinite loops. To prevent the game freezing, 0-duration looped animations (e.g. a single [CallbackTweener] with no delay) are stopped after a small number of loops, which may produce unexpected results. If a [Tween]'s lifetime depends on some node, always use [method bind_node].
  *
 */
-set_loops(): Tween;
+set_loops(loops?: int): Tween;
 
 /**
  * If [param parallel] is `true`, the [Tweener]s appended after this method will by default run simultaneously, as opposed to sequentially.
@@ -398,7 +398,7 @@ set_loops(): Tween;
  * 
  *
 */
-set_parallel(): Tween;
+set_parallel(parallel?: boolean): Tween;
 
 /**
  * Determines the behavior of the [Tween] when the [SceneTree] is paused.
@@ -406,7 +406,7 @@ set_parallel(): Tween;
  * Default value is [constant TWEEN_PAUSE_BOUND].
  *
 */
-set_pause_mode(): Tween;
+set_pause_mode(mode: int): Tween;
 
 /**
  * Determines whether the [Tween] should run after process frames (see [method Node._process]) or physics frames (see [method Node._physics_process]).
@@ -414,10 +414,10 @@ set_pause_mode(): Tween;
  * Default value is [constant TWEEN_PROCESS_IDLE].
  *
 */
-set_process_mode(): Tween;
+set_process_mode(mode: int): Tween;
 
 /** Scales the speed of tweening. This affects all [Tweener]s and their delays. */
-set_speed_scale(): Tween;
+set_speed_scale(speed: float): Tween;
 
 /**
  * Sets the default transition type for [PropertyTweener]s and [MethodTweener]s appended after this method.
@@ -434,7 +434,7 @@ set_speed_scale(): Tween;
  * 
  *
 */
-set_trans(): Tween;
+set_trans(trans: int): Tween;
 
 /**
  * Stops the tweening and resets the [Tween] to its initial state. This will not remove any appended [Tweener]s.
@@ -498,7 +498,7 @@ stop(): void;
  * 
  *
 */
-tween_callback(): CallbackTweener;
+tween_callback(callback: Callable): CallbackTweener;
 
 /**
  * Creates and appends an [IntervalTweener]. This method can be used to create delays in the tween animation, as an alternative to using the delay in other [Tweener]s, or when there's no animation (in which case the [Tween] acts as a timer). [param time] is the length of the interval, in seconds.
@@ -546,7 +546,7 @@ tween_callback(): CallbackTweener;
  * 
  *
 */
-tween_interval(): IntervalTweener;
+tween_interval(time: float): IntervalTweener;
 
 /**
  * Creates and appends a [MethodTweener]. This method is similar to a combination of [method tween_callback] and [method tween_property]. It calls a method over time with a tweened value provided as an argument. The value is tweened between [param from] and [param to] over the time specified by [param duration], in seconds. Use [method Callable.bind] to bind additional arguments for the call. You can use [method MethodTweener.set_ease] and [method MethodTweener.set_trans] to tweak the easing and transition of the value or [method MethodTweener.set_delay] to delay the tweening.
@@ -593,7 +593,7 @@ tween_interval(): IntervalTweener;
  * 
  *
 */
-tween_method(): MethodTweener;
+tween_method(method: Callable, from: any, to: any, duration: float): MethodTweener;
 
 /**
  * Creates and appends a [PropertyTweener]. This method tweens a [param property] of an [param object] between an initial value and [param final_val] in a span of time equal to [param duration], in seconds. The initial value by default is the property's value at the time the tweening of the [PropertyTweener] starts.
@@ -635,7 +635,7 @@ tween_method(): MethodTweener;
  * 
  *
 */
-tween_property(): PropertyTweener;
+tween_property(object: Object, property: NodePathType, final_val: any, duration: float): PropertyTweener;
 
 /**
  * Creates and appends a [SubtweenTweener]. This method can be used to nest [param subtween] within this [Tween], allowing for the creation of more complex and composable sequences.
@@ -659,7 +659,7 @@ tween_property(): PropertyTweener;
  * **Note:** The pause and process modes set by [method set_pause_mode] and [method set_process_mode] on [param subtween] will be overridden by the parent [Tween]'s settings.
  *
 */
-tween_subtween(): SubtweenTweener;
+tween_subtween(subtween: Tween): SubtweenTweener;
 
   connect<T extends SignalsOf<Tween>>(signal: T, method: SignalFunction<Tween[T]>): number;
 

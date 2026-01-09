@@ -27,7 +27,7 @@ declare class PhysicsDirectSpaceState3D extends Object  {
  * **Note:** Any [Shape3D]s that the shape is already colliding with e.g. inside of, will be ignored. Use [method collide_shape] to determine the [Shape3D]s that the shape is already colliding with.
  *
 */
-cast_motion(): PackedFloat32Array;
+cast_motion(parameters: PhysicsShapeQueryParameters3D): PackedFloat32Array;
 
 /**
  * Checks the intersections of a shape, given through a [PhysicsShapeQueryParameters3D] object, against the space. The resulting array contains a list of points where the shape intersects another. Like with [method intersect_shape], the number of returned results can be limited to save processing time.
@@ -37,7 +37,7 @@ cast_motion(): PackedFloat32Array;
  * **Note:** This method does not take into account the `motion` property of the object.
  *
 */
-collide_shape(): Vector3[];
+collide_shape(parameters: PhysicsShapeQueryParameters3D, max_results?: int): Vector3[];
 
 /**
  * Checks the intersections of a shape, given through a [PhysicsShapeQueryParameters3D] object, against the space. If it collides with more than one shape, the nearest one is selected. The returned object is a dictionary containing the following fields:
@@ -59,7 +59,7 @@ collide_shape(): Vector3[];
  * **Note:** This method does not take into account the `motion` property of the object.
  *
 */
-get_rest_info(): Dictionary<any, any>;
+get_rest_info(parameters: PhysicsShapeQueryParameters3D): Dictionary<any, any>;
 
 /**
  * Checks whether a point is inside any solid shape. Position and other parameters are defined through [PhysicsPointQueryParameters3D]. The shapes the point is inside of are returned in an array containing dictionaries with the following fields:
@@ -75,7 +75,7 @@ get_rest_info(): Dictionary<any, any>;
  * The number of intersections can be limited with the [param max_results] parameter, to reduce the processing time.
  *
 */
-intersect_point(): Dictionary[];
+intersect_point(parameters: PhysicsPointQueryParameters3D, max_results?: int): Dictionary[];
 
 /**
  * Intersects a ray in a given space. Ray position and other parameters are defined through [PhysicsRayQueryParameters3D]. The returned object is a dictionary with the following fields:
@@ -99,7 +99,7 @@ intersect_point(): Dictionary[];
  * If the ray did not intersect anything, then an empty dictionary is returned instead.
  *
 */
-intersect_ray(): Dictionary<any, any>;
+intersect_ray(parameters: PhysicsRayQueryParameters3D): Dictionary<any, any>;
 
 /**
  * Checks the intersections of a shape, given through a [PhysicsShapeQueryParameters3D] object, against the space. The intersected shapes are returned in an array containing dictionaries with the following fields:
@@ -117,7 +117,7 @@ intersect_ray(): Dictionary<any, any>;
  * **Note:** This method does not take into account the `motion` property of the object.
  *
 */
-intersect_shape(): Dictionary[];
+intersect_shape(parameters: PhysicsShapeQueryParameters3D, max_results?: int): Dictionary[];
 
   connect<T extends SignalsOf<PhysicsDirectSpaceState3D>>(signal: T, method: SignalFunction<PhysicsDirectSpaceState3D[T]>): number;
 

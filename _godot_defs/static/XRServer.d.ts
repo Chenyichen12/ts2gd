@@ -37,10 +37,10 @@ world_origin: Transform3D;
 world_scale: float;
 
 /** Registers an [XRInterface] object. */
-add_interface(): void;
+add_interface(interface: XRInterface): void;
 
 /** Registers a new [XRTracker] that tracks a physical object. */
-add_tracker(): void;
+add_tracker(tracker: XRTracker): void;
 
 /**
  * This is an important function to understand correctly. AR and VR platforms all handle positioning slightly differently.
@@ -56,19 +56,19 @@ add_tracker(): void;
  * You should call this method after a few seconds have passed. For example, when the user requests a realignment of the display holding a designated button on a controller for a short period of time, or when implementing a teleport mechanism.
  *
 */
-center_on_hmd(): void;
+center_on_hmd(rotation_mode: int, keep_height: boolean): void;
 
 /** Clears the reference frame that was set by previous calls to [method center_on_hmd]. */
 clear_reference_frame(): void;
 
 /** Finds an interface by its [param name]. For example, if your project uses capabilities of an AR/VR platform, you can find the interface for that platform by name and initialize it. */
-find_interface(): XRInterface;
+find_interface(name: string): XRInterface;
 
 /** Returns the primary interface's transformation. */
 get_hmd_transform(): Transform3D;
 
 /** Returns the interface registered at the given [param idx] index in the list of interfaces. */
-get_interface(): XRInterface;
+get_interface(idx: int): XRInterface;
 
 /** Returns the number of interfaces currently registered with the AR/VR server. If your project supports multiple AR/VR platforms, you can look through the available interface, and either present the user with a selection or simply try to initialize each interface and use the first one that returns [code]true[/code]. */
 get_interface_count(): int;
@@ -80,16 +80,16 @@ get_interfaces(): Dictionary[];
 get_reference_frame(): Transform3D;
 
 /** Returns the positional tracker with the given [param tracker_name]. */
-get_tracker(): XRTracker;
+get_tracker(tracker_name: StringName): XRTracker;
 
 /** Returns a dictionary of trackers for [param tracker_types]. */
-get_trackers(): Dictionary<any, any>;
+get_trackers(tracker_types: int): Dictionary<any, any>;
 
 /** Removes this [param interface]. */
-remove_interface(): void;
+remove_interface(interface: XRInterface): void;
 
 /** Removes this [param tracker]. */
-remove_tracker(): void;
+remove_tracker(tracker: XRTracker): void;
 
   connect<T extends SignalsOf<XRServerClass>>(signal: T, method: SignalFunction<XRServerClass[T]>): number;
 

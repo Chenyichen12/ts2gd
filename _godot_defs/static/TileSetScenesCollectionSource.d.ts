@@ -87,37 +87,37 @@ declare class TileSetScenesCollectionSource extends TileSetSource  {
  * Returns a newly generated unique ID.
  *
 */
-create_scene_tile(): int;
+create_scene_tile(packed_scene: PackedScene<any>, id_override?: int): int;
 
 /** Returns the scene ID a following call to [method create_scene_tile] would return. */
 get_next_scene_tile_id(): int;
 
 /** Returns whether the scene tile with [param id] displays a placeholder in the editor. */
-get_scene_tile_display_placeholder(): boolean;
+get_scene_tile_display_placeholder(id: int): boolean;
 
 /** Returns the scene tile ID of the scene tile at [param index]. */
-get_scene_tile_id(): int;
+get_scene_tile_id(index: int): int;
 
 /** Returns the [PackedScene] resource of scene tile with [param id]. */
-get_scene_tile_scene(): PackedScene<any>;
+get_scene_tile_scene(id: int): PackedScene<any>;
 
 /** Returns the number or scene tiles this TileSet source has. */
 get_scene_tiles_count(): int;
 
 /** Returns whether this TileSet source has a scene tile with [param id]. */
-has_scene_tile_id(): boolean;
+has_scene_tile_id(id: int): boolean;
 
 /** Remove the scene tile with [param id]. */
-remove_scene_tile(): void;
+remove_scene_tile(id: int): void;
 
 /** Sets whether or not the scene tile with [param id] should display a placeholder in the editor. This might be useful for scenes that are not visible. */
-set_scene_tile_display_placeholder(): void;
+set_scene_tile_display_placeholder(id: int, display_placeholder: boolean): void;
 
 /** Changes a scene tile's ID from [param id] to [param new_id]. This will fail if there is already a tile with an ID equal to [param new_id]. */
-set_scene_tile_id(): void;
+set_scene_tile_id(id: int, new_id: int): void;
 
 /** Assigns a [PackedScene] resource to the scene tile with [param id]. This will fail if the scene does not extend [CanvasItem], as positioning properties are needed to place the scene on the [TileMapLayer]. */
-set_scene_tile_scene(): void;
+set_scene_tile_scene(id: int, packed_scene: PackedScene<any>): void;
 
   connect<T extends SignalsOf<TileSetScenesCollectionSource>>(signal: T, method: SignalFunction<TileSetScenesCollectionSource[T]>): number;
 

@@ -249,7 +249,7 @@ is_connection_available(): boolean;
 is_listening(): boolean;
 
 /** Starts the server by opening a UDP socket listening on the given [param port]. You can optionally specify a [param bind_address] to only listen for packets sent to that address. See also [method PacketPeerUDP.bind]. */
-listen(): int;
+listen(port: int, bind_address?: string): int;
 
 /** Call this method at regular intervals (e.g. inside [method Node._process]) to process new packets. Any packet from a known address/port pair will be delivered to the appropriate [PacketPeerUDP], while any packet received from an unknown address/port pair will be added as a pending connection (see [method is_connection_available] and [method take_connection]). The maximum number of pending connections is defined via [member max_pending_connections]. */
 poll(): int;

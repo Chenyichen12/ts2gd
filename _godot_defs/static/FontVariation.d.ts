@@ -129,7 +129,7 @@ variation_opentype: Dictionary<any, any>;
 variation_transform: Transform2D;
 
 /** Sets the spacing for [param spacing] to [param value] in pixels (not relative to the font size). */
-set_spacing(): void;
+set_spacing(spacing: int, value: int): void;
 
   connect<T extends SignalsOf<FontVariation>>(signal: T, method: SignalFunction<FontVariation[T]>): number;
 

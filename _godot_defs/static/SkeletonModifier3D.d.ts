@@ -49,10 +49,10 @@ protected _process_modification(): void;
  * [param delta] is passed from parent [Skeleton3D]. See also [method Skeleton3D.advance].
  *
 */
-protected _process_modification_with_delta(): void;
+protected _process_modification_with_delta(delta: float): void;
 
 /** Called when the skeleton is changed. */
-protected _skeleton_changed(): void;
+protected _skeleton_changed(old_skeleton: Skeleton3D, new_skeleton: Skeleton3D): void;
 
 /** Called when bone names and indices need to be validated, such as when entering the scene tree or changing skeleton. */
 protected _validate_bone_names(): void;

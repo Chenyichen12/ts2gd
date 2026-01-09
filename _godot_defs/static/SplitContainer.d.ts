@@ -60,7 +60,7 @@ touch_dragger_enabled: boolean;
 vertical: boolean;
 
 /** Clamps the [member split_offsets] values to ensure they are within valid ranges and do not overlap with each other. When overlaps occur, this method prioritizes one split offset (at index [param priority_index]) by clamping any overlapping split offsets to it. */
-clamp_split_offset(): void;
+clamp_split_offset(priority_index?: int): void;
 
 /**
  * Returns the drag area [Control]. For example, you can move a pre-configured button into the drag area [Control] so that it rides along with the split bar. Try setting the [Button] anchors to `center` prior to the `reparent()` call.

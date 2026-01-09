@@ -102,7 +102,7 @@ size: Vector2i;
  * Note that this function is hidden in the default [AStarGrid2D] class.
  *
 */
-protected _compute_cost(): float;
+protected _compute_cost(from_id: Vector2i, to_id: Vector2i): float;
 
 /**
  * Called when estimating the cost between a point and the path's ending point.
@@ -110,7 +110,7 @@ protected _compute_cost(): float;
  * Note that this function is hidden in the default [AStarGrid2D] class.
  *
 */
-protected _estimate_cost(): float;
+protected _estimate_cost(from_id: Vector2i, end_id: Vector2i): float;
 
 /** Clears the grid and sets the [member region] to [code]Rect2i(0, 0, 0, 0)[/code]. */
 clear(): void;
@@ -121,7 +121,7 @@ clear(): void;
  * **Note:** Calling [method update] is not needed after the call of this function.
  *
 */
-fill_solid_region(): void;
+fill_solid_region(region: Rect2i, solid?: boolean): void;
 
 /**
  * Fills the given [param region] on the grid with the specified value for the weight scale.
@@ -129,7 +129,7 @@ fill_solid_region(): void;
  * **Note:** Calling [method update] is not needed after the call of this function.
  *
 */
-fill_weight_scale_region(): void;
+fill_weight_scale_region(region: Rect2i, weight_scale: float): void;
 
 /**
  * Returns an array with the IDs of the points that form the path found by AStar2D between the given points. The array is ordered from the starting point to the ending point of the path.
@@ -141,10 +141,10 @@ fill_weight_scale_region(): void;
  * **Note:** When [param allow_partial_path] is `true` and [param to_id] is solid the search may take an unusually long time to finish.
  *
 */
-get_id_path(): Vector2i[];
+get_id_path(from_id: Vector2i, to_id: Vector2i, allow_partial_path?: boolean): Vector2i[];
 
 /** Returns an array of dictionaries with point data ([code]id[/code]: [Vector2i], [code]position[/code]: [Vector2], [code]solid[/code]: [bool], [code]weight_scale[/code]: [float]) within a [param region]. */
-get_point_data_in_region(): Dictionary[];
+get_point_data_in_region(region: Rect2i): Dictionary[];
 
 /**
  * Returns an array with the points that are in the path found by [AStarGrid2D] between the given points. The array is ordered from the starting point to the ending point of the path.
@@ -158,25 +158,25 @@ get_point_data_in_region(): Dictionary[];
  * Additionally, when [param allow_partial_path] is `true` and [param to_id] is solid the search may take an unusually long time to finish.
  *
 */
-get_point_path(): PackedVector2Array;
+get_point_path(from_id: Vector2i, to_id: Vector2i, allow_partial_path?: boolean): PackedVector2Array;
 
 /** Returns the position of the point associated with the given [param id]. */
-get_point_position(): Vector2;
+get_point_position(id: Vector2i): Vector2;
 
 /** Returns the weight scale of the point associated with the given [param id]. */
-get_point_weight_scale(): float;
+get_point_weight_scale(id: Vector2i): float;
 
 /** Indicates that the grid parameters were changed and [method update] needs to be called. */
 is_dirty(): boolean;
 
 /** Returns [code]true[/code] if the [param x] and [param y] is a valid grid coordinate (id), i.e. if it is inside [member region]. Equivalent to [code]region.has_point(Vector2i(x, y))[/code]. */
-is_in_bounds(): boolean;
+is_in_bounds(x: int, y: int): boolean;
 
 /** Returns [code]true[/code] if the [param id] vector is a valid grid coordinate, i.e. if it is inside [member region]. Equivalent to [code]region.has_point(id)[/code]. */
-is_in_boundsv(): boolean;
+is_in_boundsv(id: Vector2i): boolean;
 
 /** Returns [code]true[/code] if a point is disabled for pathfinding. By default, all points are enabled. */
-is_point_solid(): boolean;
+is_point_solid(id: Vector2i): boolean;
 
 /**
  * Disables or enables the specified point for pathfinding. Useful for making an obstacle. By default, all points are enabled.
@@ -184,7 +184,7 @@ is_point_solid(): boolean;
  * **Note:** Calling [method update] is not needed after the call of this function.
  *
 */
-set_point_solid(): void;
+set_point_solid(id: Vector2i, solid?: boolean): void;
 
 /**
  * Sets the [param weight_scale] for the point with the given [param id]. The [param weight_scale] is multiplied by the result of [method _compute_cost] when determining the overall cost of traveling across a segment from a neighboring point to this point.
@@ -192,7 +192,7 @@ set_point_solid(): void;
  * **Note:** Calling [method update] is not needed after the call of this function.
  *
 */
-set_point_weight_scale(): void;
+set_point_weight_scale(id: Vector2i, weight_scale: float): void;
 
 /**
  * Updates the internal state of the grid according to the parameters to prepare it to search the path. Needs to be called if parameters like [member region], [member cell_size] or [member offset] are changed. [method is_dirty] will return `true` if this is the case and this needs to be called.

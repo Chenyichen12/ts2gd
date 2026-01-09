@@ -28,16 +28,16 @@ declare class RenderSceneBuffersRD extends RenderSceneBuffers  {
 
 
 /** Frees all buffers related to this context. */
-clear_context(): void;
+clear_context(context: StringName): void;
 
 /** Create a new texture with the given definition and cache this under the given name. Will return the existing texture if it already exists. */
-create_texture(): RID;
+create_texture(context: StringName, name: StringName, data_format: int, usage_bits: int, texture_samples: int, size: Vector2i, layers: int, mipmaps: int, unique: boolean, discardable: boolean): RID;
 
 /** Create a new texture using the given format and view and cache this under the given name. Will return the existing texture if it already exists. */
-create_texture_from_format(): RID;
+create_texture_from_format(context: StringName, name: StringName, format: RDTextureFormat, view: RDTextureView, unique: boolean): RID;
 
 /** Create a new texture view for an existing texture and cache this under the given [param view_name]. Will return the existing texture view if it already exists. Will error if the source texture doesn't exist. */
-create_texture_view(): RID;
+create_texture_view(context: StringName, name: StringName, view_name: StringName, view: RDTextureView): RID;
 
 /**
  * Returns the specified layer from the color texture we are rendering 3D content to.
@@ -45,7 +45,7 @@ create_texture_view(): RID;
  * If [param msaa] is `true` and MSAA is enabled, this returns the MSAA variant of the buffer.
  *
 */
-get_color_layer(): RID;
+get_color_layer(layer: int, msaa?: boolean): RID;
 
 /**
  * Returns the color texture we are rendering 3D content to. If multiview is used this will be a texture array with all views.
@@ -53,7 +53,7 @@ get_color_layer(): RID;
  * If [param msaa] is `true` and MSAA is enabled, this returns the MSAA variant of the buffer.
  *
 */
-get_color_texture(): RID;
+get_color_texture(msaa?: boolean): RID;
 
 /**
  * Returns the specified layer from the depth texture we are rendering 3D content to.
@@ -61,7 +61,7 @@ get_color_texture(): RID;
  * If [param msaa] is `true` and MSAA is enabled, this returns the MSAA variant of the buffer.
  *
 */
-get_depth_layer(): RID;
+get_depth_layer(layer: int, msaa?: boolean): RID;
 
 /**
  * Returns the depth texture we are rendering 3D content to. If multiview is used this will be a texture array with all views.
@@ -69,7 +69,7 @@ get_depth_layer(): RID;
  * If [param msaa] is `true` and MSAA is enabled, this returns the MSAA variant of the buffer.
  *
 */
-get_depth_texture(): RID;
+get_depth_texture(msaa?: boolean): RID;
 
 /** Returns the FSR sharpness value used while rendering the 3D content (if [method get_scaling_3d_mode] is an FSR mode). */
 get_fsr_sharpness(): float;
@@ -93,22 +93,22 @@ get_screen_space_aa(): int;
 get_target_size(): Vector2i;
 
 /** Returns a cached texture with this name. */
-get_texture(): RID;
+get_texture(context: StringName, name: StringName): RID;
 
 /** Returns the texture format information with which a cached texture was created. */
-get_texture_format(): RDTextureFormat;
+get_texture_format(context: StringName, name: StringName): RDTextureFormat;
 
 /** Returns the number of MSAA samples used. */
 get_texture_samples(): int;
 
 /** Returns a specific slice (layer or mipmap) for a cached texture. */
-get_texture_slice(): RID;
+get_texture_slice(context: StringName, name: StringName, layer: int, mipmap: int, layers: int, mipmaps: int): RID;
 
 /** Returns the texture size of a given slice of a cached texture. */
-get_texture_slice_size(): Vector2i;
+get_texture_slice_size(context: StringName, name: StringName, mipmap: int): Vector2i;
 
 /** Returns a specific view of a slice (layer or mipmap) for a cached texture. */
-get_texture_slice_view(): RID;
+get_texture_slice_view(context: StringName, name: StringName, layer: int, mipmap: int, layers: int, mipmaps: int, view: RDTextureView): RID;
 
 /** Returns [code]true[/code] if debanding is enabled. */
 get_use_debanding(): boolean;
@@ -117,7 +117,7 @@ get_use_debanding(): boolean;
 get_use_taa(): boolean;
 
 /** Returns the specified layer from the velocity texture we are rendering 3D content to. */
-get_velocity_layer(): RID;
+get_velocity_layer(layer: int, msaa?: boolean): RID;
 
 /**
  * Returns the velocity texture we are rendering 3D content to. If multiview is used this will be a texture array with all views.
@@ -125,13 +125,13 @@ get_velocity_layer(): RID;
  * If [param msaa] is **true** and MSAA is enabled, this returns the MSAA variant of the buffer.
  *
 */
-get_velocity_texture(): RID;
+get_velocity_texture(msaa?: boolean): RID;
 
 /** Returns the view count for the associated viewport. */
 get_view_count(): int;
 
 /** Returns [code]true[/code] if a cached texture exists for this name. */
-has_texture(): boolean;
+has_texture(context: StringName, name: StringName): boolean;
 
   connect<T extends SignalsOf<RenderSceneBuffersRD>>(signal: T, method: SignalFunction<RenderSceneBuffersRD[T]>): number;
 

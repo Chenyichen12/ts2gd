@@ -29,7 +29,7 @@ code: string;
  * **Note:** If the sampler array is used use [param index] to access the specified texture.
  *
 */
-get_default_texture_parameter(): Texture;
+get_default_texture_parameter(name: StringName, index?: int): Texture;
 
 /** Returns the shader mode for the shader. */
 get_mode(): int;
@@ -40,7 +40,7 @@ get_mode(): int;
  * If argument [param get_groups] is `true`, parameter grouping hints are also included in the list.
  *
 */
-get_shader_uniform_list(): any[];
+get_shader_uniform_list(get_groups?: boolean): any[];
 
 /** Only available when running in the editor. Opens a popup that visualizes the generated shader code, including all variants and internal shader code. See also [method Material.inspect_native_shader_code]. */
 inspect_native_shader_code(): void;
@@ -53,7 +53,7 @@ inspect_native_shader_code(): void;
  * **Note:** If the sampler array is used use [param index] to access the specified texture.
  *
 */
-set_default_texture_parameter(): void;
+set_default_texture_parameter(name: StringName, texture: Texture, index?: int): void;
 
   connect<T extends SignalsOf<Shader>>(signal: T, method: SignalFunction<Shader[T]>): number;
 

@@ -37,13 +37,13 @@ z: float;
 abs(): Vector3;
 
 /** Returns the unsigned minimum angle to the given vector, in radians. */
-angle_to(): float;
+angle_to(to: Vector3): float;
 
 /** Returns the derivative at the given [param t] on the [url=https://en.wikipedia.org/wiki/B%C3%A9zier_curve]Bézier curve[/url] defined by this vector and the given [param control_1], [param control_2], and [param end] points. */
-bezier_derivative(): Vector3;
+bezier_derivative(control_1: Vector3, control_2: Vector3, end: Vector3, t: float): Vector3;
 
 /** Returns the point at the given [param t] on the [url=https://en.wikipedia.org/wiki/B%C3%A9zier_curve]Bézier curve[/url] defined by this vector and the given [param control_1], [param control_2], and [param end] points. */
-bezier_interpolate(): Vector3;
+bezier_interpolate(control_1: Vector3, control_2: Vector3, end: Vector3, t: float): Vector3;
 
 /**
  * Returns the vector "bounced off" from a plane defined by the given normal [param n].
@@ -51,16 +51,16 @@ bezier_interpolate(): Vector3;
  * **Note:** [method bounce] performs the operation that most engines and frameworks call [code skip-lint]reflect()`.
  *
 */
-bounce(): Vector3;
+bounce(n: Vector3): Vector3;
 
 /** Returns a new vector with all components rounded up (towards positive infinity). */
 ceil(): Vector3;
 
 /** Returns a new vector with all components clamped between the components of [param min] and [param max], by running [method @GlobalScope.clamp] on each component. */
-clamp(): Vector3;
+clamp(min: Vector3, max: Vector3): Vector3;
 
 /** Returns a new vector with all components clamped between [param min] and [param max], by running [method @GlobalScope.clamp] on each component. */
-clampf(): Vector3;
+clampf(min: float, max: float): Vector3;
 
 /**
  * Returns the cross product of this vector and [param with].
@@ -68,10 +68,10 @@ clampf(): Vector3;
  * This returns a vector perpendicular to both this and [param with], which would be the normal vector of the plane defined by the two vectors. As there are two such vectors, in opposite directions, this method returns the vector defined by a right-handed coordinate system. If the two vectors are parallel this returns an empty vector, making it useful for testing if two vectors are parallel.
  *
 */
-cross(): Vector3;
+cross(_with: Vector3): Vector3;
 
 /** Performs a cubic interpolation between this vector and [param b] using [param pre_a] and [param post_b] as handles, and returns the result at position [param weight]. [param weight] is on the range of 0.0 to 1.0, representing the amount of interpolation. */
-cubic_interpolate(): Vector3;
+cubic_interpolate(b: Vector3, pre_a: Vector3, post_b: Vector3, weight: float): Vector3;
 
 /**
  * Performs a cubic interpolation between this vector and [param b] using [param pre_a] and [param post_b] as handles, and returns the result at position [param weight]. [param weight] is on the range of 0.0 to 1.0, representing the amount of interpolation.
@@ -79,10 +79,10 @@ cubic_interpolate(): Vector3;
  * It can perform smoother interpolation than [method cubic_interpolate] by the time values.
  *
 */
-cubic_interpolate_in_time(): Vector3;
+cubic_interpolate_in_time(b: Vector3, pre_a: Vector3, post_b: Vector3, weight: float, b_t: float, pre_a_t: float, post_b_t: float): Vector3;
 
 /** Returns the normalized vector pointing from this vector to [param to]. This is equivalent to using [code](b - a).normalized()[/code]. */
-direction_to(): Vector3;
+direction_to(to: Vector3): Vector3;
 
 /**
  * Returns the squared distance between this vector and [param to].
@@ -90,10 +90,10 @@ direction_to(): Vector3;
  * This method runs faster than [method distance_to], so prefer it if you need to compare vectors or need the squared distance for some formula.
  *
 */
-distance_squared_to(): float;
+distance_squared_to(to: Vector3): float;
 
 /** Returns the distance between this vector and [param to]. */
-distance_to(): float;
+distance_to(to: Vector3): float;
 
 /**
  * Returns the dot product of this vector and [param with]. This can be used to compare the angle between two vectors. For example, this can be used to determine whether an enemy is facing the player.
@@ -105,7 +105,7 @@ distance_to(): float;
  * **Note:** `a.dot(b)` is equivalent to `b.dot(a)`.
  *
 */
-dot(): float;
+dot(_with: Vector3): float;
 
 /** Returns a new vector with all components rounded down (towards negative infinity). */
 floor(): Vector3;
@@ -114,7 +114,7 @@ floor(): Vector3;
 inverse(): Vector3;
 
 /** Returns [code]true[/code] if this vector and [param to] are approximately equal, by running [method @GlobalScope.is_equal_approx] on each component. */
-is_equal_approx(): boolean;
+is_equal_approx(to: Vector3): boolean;
 
 /** Returns [code]true[/code] if this vector is finite, by calling [method @GlobalScope.is_finite] on each component. */
 is_finite(): boolean;
@@ -142,31 +142,31 @@ length(): float;
 length_squared(): float;
 
 /** Returns the result of the linear interpolation between this vector and [param to] by amount [param weight]. [param weight] is on the range of [code]0.0[/code] to [code]1.0[/code], representing the amount of interpolation. */
-lerp(): Vector3;
+lerp(to: Vector3, weight: float): Vector3;
 
 /** Returns the vector with a maximum length by limiting its length to [param length]. If the vector is non-finite, the result is undefined. */
-limit_length(): Vector3;
+limit_length(length?: float): Vector3;
 
 /** Returns the component-wise maximum of this and [param with], equivalent to [code]Vector3(maxf(x, with.x), maxf(y, with.y), maxf(z, with.z))[/code]. */
-max(): Vector3;
+max(_with: Vector3): Vector3;
 
 /** Returns the axis of the vector's highest value. See [code]AXIS_*[/code] constants. If all components are equal, this method returns [constant AXIS_X]. */
 max_axis_index(): int;
 
 /** Returns the component-wise maximum of this and [param with], equivalent to [code]Vector3(maxf(x, with), maxf(y, with), maxf(z, with))[/code]. */
-maxf(): Vector3;
+maxf(_with: float): Vector3;
 
 /** Returns the component-wise minimum of this and [param with], equivalent to [code]Vector3(minf(x, with.x), minf(y, with.y), minf(z, with.z))[/code]. */
-min(): Vector3;
+min(_with: Vector3): Vector3;
 
 /** Returns the axis of the vector's lowest value. See [code]AXIS_*[/code] constants. If all components are equal, this method returns [constant AXIS_Z]. */
 min_axis_index(): int;
 
 /** Returns the component-wise minimum of this and [param with], equivalent to [code]Vector3(minf(x, with), minf(y, with), minf(z, with))[/code]. */
-minf(): Vector3;
+minf(_with: float): Vector3;
 
 /** Returns a new vector moved toward [param to] by the fixed [param delta] amount. Will not go past the final value. */
-move_toward(): Vector3;
+move_toward(to: Vector3, delta: float): Vector3;
 
 /**
  * Returns the result of scaling the vector to unit length. Equivalent to `v / v.length()`. Returns `(0, 0, 0)` if `v.length() == 0`. See also [method is_normalized].
@@ -177,7 +177,7 @@ move_toward(): Vector3;
 normalized(): Vector3;
 
 /** Returns the [Vector3] from an octahedral-compressed form created using [method octahedron_encode] (stored as a [Vector2]). */
-octahedron_decode(): Vector3;
+octahedron_decode(uv: Vector2): Vector3;
 
 /**
  * Returns the octahedral-encoded (oct32) form of this [Vector3] as a [Vector2]. Since a [Vector2] occupies 1/3 less memory compared to [Vector3], this form of compression can be used to pass greater amounts of [method normalized] [Vector3]s without increasing storage or memory requirements. See also [method octahedron_decode].
@@ -190,13 +190,13 @@ octahedron_decode(): Vector3;
 octahedron_encode(): Vector2;
 
 /** Returns the outer product with [param with]. */
-outer(): Basis;
+outer(_with: Vector3): Basis;
 
 /** Returns a vector composed of the [method @GlobalScope.fposmod] of this vector's components and [param mod]. */
-posmod(): Vector3;
+posmod(mod: float): Vector3;
 
 /** Returns a vector composed of the [method @GlobalScope.fposmod] of this vector's components and [param modv]'s components. */
-posmodv(): Vector3;
+posmodv(modv: Vector3): Vector3;
 
 /**
  * Returns a new vector resulting from projecting this vector onto the given vector [param b]. The resulting new vector is parallel to [param b]. See also [method slide].
@@ -204,7 +204,7 @@ posmodv(): Vector3;
  * **Note:** If the vector [param b] is a zero vector, the components of the resulting new vector will be [constant @GDScript.NAN].
  *
 */
-project(): Vector3;
+project(b: Vector3): Vector3;
 
 /**
  * Returns the result of reflecting the vector through a plane defined by the given normal vector [param n].
@@ -212,10 +212,10 @@ project(): Vector3;
  * **Note:** [method reflect] differs from what other engines and frameworks call [code skip-lint]reflect()`. In other engines, [code skip-lint]reflect()` returns the result of the vector reflected by the given plane. The reflection thus passes through the given normal. While in Godot the reflection passes through the plane and can be thought of as bouncing off the normal. See also [method bounce] which does what most engines call [code skip-lint]reflect()`.
  *
 */
-reflect(): Vector3;
+reflect(n: Vector3): Vector3;
 
 /** Returns the result of rotating this vector around a given axis by [param angle] (in radians). The axis must be a normalized vector. See also [method @GlobalScope.deg_to_rad]. */
-rotated(): Vector3;
+rotated(axis: Vector3, angle: float): Vector3;
 
 /** Returns a new vector with all components rounded to the nearest integer, with halfway cases rounded away from zero. */
 round(): Vector3;
@@ -224,7 +224,7 @@ round(): Vector3;
 sign(): Vector3;
 
 /** Returns the signed angle to the given vector, in radians. The sign of the angle is positive in a counter-clockwise direction and negative in a clockwise direction when viewed from the side specified by the [param axis]. */
-signed_angle_to(): float;
+signed_angle_to(to: Vector3, axis: Vector3): float;
 
 /**
  * Returns the result of spherical linear interpolation between this vector and [param to], by amount [param weight]. [param weight] is on the range of 0.0 to 1.0, representing the amount of interpolation.
@@ -232,7 +232,7 @@ signed_angle_to(): float;
  * This method also handles interpolating the lengths if the input vectors have different lengths. For the special case of one or both input vectors having zero length, this method behaves like [method lerp].
  *
 */
-slerp(): Vector3;
+slerp(to: Vector3, weight: float): Vector3;
 
 /**
  * Returns a new vector resulting from sliding this vector along a plane with normal [param n]. The resulting new vector is perpendicular to [param n], and is equivalent to this vector minus its projection on [param n]. See also [method project].
@@ -240,13 +240,13 @@ slerp(): Vector3;
  * **Note:** The vector [param n] must be normalized. See also [method normalized].
  *
 */
-slide(): Vector3;
+slide(n: Vector3): Vector3;
 
 /** Returns a new vector with each component snapped to the nearest multiple of the corresponding component in [param step]. This can also be used to round the components to an arbitrary number of decimals. */
-snapped(): Vector3;
+snapped(step: Vector3): Vector3;
 
 /** Returns a new vector with each component snapped to the nearest multiple of [param step]. This can also be used to round the components to an arbitrary number of decimals. */
-snappedf(): Vector3;
+snappedf(step: float): Vector3;
 
   connect<T extends SignalsOf<Vector3>>(signal: T, method: SignalFunction<Vector3[T]>): number;
 

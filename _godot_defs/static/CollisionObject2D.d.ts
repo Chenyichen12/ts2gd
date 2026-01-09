@@ -49,7 +49,7 @@ input_pickable: boolean;
  * **Note:** [method _input_event] requires [member input_pickable] to be `true` and at least one [member collision_layer] bit to be set.
  *
 */
-protected _input_event(): void;
+protected _input_event(viewport: Viewport, event: InputEvent, shape_idx: int): void;
 
 /** Called when the mouse pointer enters any of this object's shapes. Requires [member input_pickable] to be [code]true[/code] and at least one [member collision_layer] bit to be set. Note that moving between different shapes within a single [CollisionObject2D] won't cause this function to be called. */
 protected _mouse_enter(): void;
@@ -58,82 +58,82 @@ protected _mouse_enter(): void;
 protected _mouse_exit(): void;
 
 /** Called when the mouse pointer enters any of this object's shapes or moves from one shape to another. [param shape_idx] is the child index of the newly entered [Shape2D]. Requires [member input_pickable] to be [code]true[/code] and at least one [member collision_layer] bit to be called. */
-protected _mouse_shape_enter(): void;
+protected _mouse_shape_enter(shape_idx: int): void;
 
 /** Called when the mouse pointer exits any of this object's shapes. [param shape_idx] is the child index of the exited [Shape2D]. Requires [member input_pickable] to be [code]true[/code] and at least one [member collision_layer] bit to be called. */
-protected _mouse_shape_exit(): void;
+protected _mouse_shape_exit(shape_idx: int): void;
 
 /** Creates a new shape owner for the given object. Returns [code]owner_id[/code] of the new owner for future reference. */
-create_shape_owner(): int;
+create_shape_owner(owner: Object): int;
 
 /** Returns whether or not the specified layer of the [member collision_layer] is enabled, given a [param layer_number] between 1 and 32. */
-get_collision_layer_value(): boolean;
+get_collision_layer_value(layer_number: int): boolean;
 
 /** Returns whether or not the specified layer of the [member collision_mask] is enabled, given a [param layer_number] between 1 and 32. */
-get_collision_mask_value(): boolean;
+get_collision_mask_value(layer_number: int): boolean;
 
 /** Returns the object's [RID]. */
 get_rid(): RID;
 
 /** Returns the [code]one_way_collision_margin[/code] of the shape owner identified by given [param owner_id]. */
-get_shape_owner_one_way_collision_margin(): float;
+get_shape_owner_one_way_collision_margin(owner_id: int): float;
 
 /** Returns an [Array] of [code]owner_id[/code] identifiers. You can use these ids in other methods that take [code]owner_id[/code] as an argument. */
 get_shape_owners(): PackedInt32Array;
 
 /** If [code]true[/code], the shape owner and its shapes are disabled. */
-is_shape_owner_disabled(): boolean;
+is_shape_owner_disabled(owner_id: int): boolean;
 
 /** Returns [code]true[/code] if collisions for the shape owner originating from this [CollisionObject2D] will not be reported to collided with [CollisionObject2D]s. */
-is_shape_owner_one_way_collision_enabled(): boolean;
+is_shape_owner_one_way_collision_enabled(owner_id: int): boolean;
 
 /** Removes the given shape owner. */
-remove_shape_owner(): void;
+remove_shape_owner(owner_id: int): void;
 
 /** Based on [param value], enables or disables the specified layer in the [member collision_layer], given a [param layer_number] between 1 and 32. */
-set_collision_layer_value(): void;
+set_collision_layer_value(layer_number: int, value: boolean): void;
 
 /** Based on [param value], enables or disables the specified layer in the [member collision_mask], given a [param layer_number] between 1 and 32. */
-set_collision_mask_value(): void;
+set_collision_mask_value(layer_number: int, value: boolean): void;
 
 /** Returns the [code]owner_id[/code] of the given shape. */
-shape_find_owner(): int;
+shape_find_owner(shape_index: int): int;
 
 /** Adds a [Shape2D] to the shape owner. */
-shape_owner_add_shape(): void;
+shape_owner_add_shape(owner_id: int, shape: Shape2D): void;
 
 /** Removes all shapes from the shape owner. */
-shape_owner_clear_shapes(): void;
+shape_owner_clear_shapes(owner_id: int): void;
 
 /** Returns the parent object of the given shape owner. */
-shape_owner_get_owner(): Object;
+shape_owner_get_owner(owner_id: int): Object;
 
 /** Returns the [Shape2D] with the given ID from the given shape owner. */
-shape_owner_get_shape(): Shape2D;
+shape_owner_get_shape(owner_id: int, shape_id: int): Shape2D;
 
 /** Returns the number of shapes the given shape owner contains. */
-shape_owner_get_shape_count(): int;
+shape_owner_get_shape_count(owner_id: int): int;
 
 /** Returns the child index of the [Shape2D] with the given ID from the given shape owner. */
-shape_owner_get_shape_index(): int;
+shape_owner_get_shape_index(owner_id: int, shape_id: int): int;
 
 /** Returns the shape owner's [Transform2D]. */
-shape_owner_get_transform(): Transform2D;
+shape_owner_get_transform(owner_id: int): Transform2D;
 
 /** Removes a shape from the given shape owner. */
-shape_owner_remove_shape(): void;
+shape_owner_remove_shape(owner_id: int, shape_id: int): void;
 
 /** If [code]true[/code], disables the given shape owner. */
-shape_owner_set_disabled(): void;
+shape_owner_set_disabled(owner_id: int, disabled: boolean): void;
 
 /** If [param enable] is [code]true[/code], collisions for the shape owner originating from this [CollisionObject2D] will not be reported to collided with [CollisionObject2D]s. */
-shape_owner_set_one_way_collision(): void;
+shape_owner_set_one_way_collision(owner_id: int, enable: boolean): void;
 
 /** Sets the [code]one_way_collision_margin[/code] of the shape owner identified by given [param owner_id] to [param margin] pixels. */
-shape_owner_set_one_way_collision_margin(): void;
+shape_owner_set_one_way_collision_margin(owner_id: int, margin: float): void;
 
 /** Sets the [Transform2D] of the given shape owner. */
-shape_owner_set_transform(): void;
+shape_owner_set_transform(owner_id: int, transform: Transform2D): void;
 
   connect<T extends SignalsOf<CollisionObject2D>>(signal: T, method: SignalFunction<CollisionObject2D[T]>): number;
 

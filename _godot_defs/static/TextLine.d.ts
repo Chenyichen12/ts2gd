@@ -42,19 +42,19 @@ text_overrun_behavior: int;
 width: float;
 
 /** Adds inline object to the text buffer, [param key] must be unique. In the text, object is represented as [param length] object replacement characters. */
-add_object(): boolean;
+add_object(key: any, size: Vector2, inline_align?: int, length?: int, baseline?: float): boolean;
 
 /** Adds text span and font to draw it. */
-add_string(): boolean;
+add_string(text: string, font: Font, font_size: int, language?: string, meta?: any): boolean;
 
 /** Clears text line (removes text and inline objects). */
 clear(): void;
 
 /** Draw text into a canvas item at a given position, with [param color]. [param pos] specifies the top left corner of the bounding box. If [param oversampling] is greater than zero, it is used as font oversampling factor, otherwise viewport oversampling settings are used. */
-draw(): void;
+draw(canvas: RID, pos: Vector2, color?: Color, oversampling?: float): void;
 
 /** Draw text into a canvas item at a given position, with [param color]. [param pos] specifies the top left corner of the bounding box. If [param oversampling] is greater than zero, it is used as font oversampling factor, otherwise viewport oversampling settings are used. */
-draw_outline(): void;
+draw_outline(canvas: RID, pos: Vector2, outline_size?: int, color?: Color, oversampling?: float): void;
 
 /** Duplicates this [TextLine]. */
 duplicate(): TextLine;
@@ -78,7 +78,7 @@ get_line_underline_thickness(): float;
 get_line_width(): float;
 
 /** Returns bounding rectangle of the inline object. */
-get_object_rect(): Rect2;
+get_object_rect(key: any): Rect2;
 
 /** Returns array of inline objects. */
 get_objects(): any[];
@@ -90,13 +90,13 @@ get_rid(): RID;
 get_size(): Vector2;
 
 /** Returns [code]true[/code] if an object with [param key] is embedded in this line. */
-has_object(): boolean;
+has_object(key: any): boolean;
 
 /** Returns caret character offset at the specified pixel offset at the baseline. This function always returns a valid position. */
-hit_test(): int;
+hit_test(coords: float): int;
 
 /** Sets new size and alignment of embedded object. */
-resize_object(): boolean;
+resize_object(key: any, size: Vector2, inline_align?: int, baseline?: float): boolean;
 
 /**
  * Overrides BiDi for the structured text.
@@ -104,10 +104,10 @@ resize_object(): boolean;
  * Override ranges should cover full source text without overlaps. BiDi algorithm will be used on each range separately.
  *
 */
-set_bidi_override(): void;
+set_bidi_override(override: any[]): void;
 
 /** Aligns text to the given tab-stops. */
-tab_align(): void;
+tab_align(tab_stops: PackedFloat32Array): void;
 
   connect<T extends SignalsOf<TextLine>>(signal: T, method: SignalFunction<TextLine[T]>): number;
 

@@ -43,10 +43,10 @@ low_processor_usage_mode: boolean;
 low_processor_usage_mode_sleep_usec: int;
 
 /** Add a custom logger to intercept the internal message stream. */
-add_logger(): void;
+add_logger(logger: Logger): void;
 
 /** Displays a modal dialog box using the host platform's implementation. The engine execution is blocked until the dialog is closed. */
-alert(): void;
+alert(text: string, title?: string): void;
 
 /**
  * Shuts down the system MIDI driver. Godot will no longer receive [InputEventMIDI]. See also [method open_midi_inputs] and [method get_connected_midi_inputs].
@@ -62,7 +62,7 @@ close_midi_inputs(): void;
  * **Note:** This method should **only** be used for testing the system's crash handler, not for any other purpose. For general error reporting, use (in order of preference) [method @GDScript.assert], [method @GlobalScope.push_error], or [method alert].
  *
 */
-crash(): void;
+crash(message: string): void;
 
 /**
  * Creates a new instance of Godot that runs independently. The [param arguments] are used in the given order and separated by a space.
@@ -74,7 +74,7 @@ crash(): void;
  * **Note:** This method is implemented on Android, Linux, macOS and Windows.
  *
 */
-create_instance(): int;
+create_instance(arguments: PackedStringArray): int;
 
 /**
  * Creates a new process that runs independently of Godot. It will not terminate when Godot terminates. The path specified in [param path] must exist and be an executable file or macOS `.app` bundle. The path is resolved based on the current platform. The [param arguments] are used in the given order and separated by a space.
@@ -103,7 +103,7 @@ create_instance(): int;
  * **Note:** On macOS, sandboxed applications are limited to run only embedded helper executables, specified during export or system .app bundle, system .app bundles will ignore arguments.
  *
 */
-create_process(): int;
+create_process(path: string, arguments: PackedStringArray, open_console?: boolean): int;
 
 /**
  * Delays execution of the current thread by [param msec] milliseconds. [param msec] must be greater than or equal to `0`. Otherwise, [method delay_msec] does nothing and prints an error message.
@@ -113,7 +113,7 @@ create_process(): int;
  * **Note:** When [method delay_msec] is called on the main thread, it will freeze the project and will prevent it from redrawing and registering input until the delay has passed. When using [method delay_msec] as part of an [EditorPlugin] or [EditorScript], it will freeze the editor but won't freeze the project if it is currently running (since the project is an independent child process).
  *
 */
-delay_msec(): void;
+delay_msec(msec: int): void;
 
 /**
  * Delays execution of the current thread by [param usec] microseconds. [param usec] must be greater than or equal to `0`. Otherwise, [method delay_usec] does nothing and prints an error message.
@@ -123,7 +123,7 @@ delay_msec(): void;
  * **Note:** When [method delay_usec] is called on the main thread, it will freeze the project and will prevent it from redrawing and registering input until the delay has passed. When using [method delay_usec] as part of an [EditorPlugin] or [EditorScript], it will freeze the editor but won't freeze the project if it is currently running (since the project is an independent child process).
  *
 */
-delay_usec(): void;
+delay_usec(usec: int): void;
 
 /**
  * Executes the given process in a **blocking** way. The file specified in [param path] must exist and be executable. The system path resolution will be used. The [param arguments] are used in the given order, separated by spaces, and wrapped in quotes.
@@ -179,7 +179,7 @@ delay_usec(): void;
  * **Note:** On Android, system commands such as `dumpsys` can only be run on a rooted device.
  *
 */
-execute(): int;
+execute(path: string, arguments: PackedStringArray, output?: any[], read_stderr?: boolean, open_console?: boolean): int;
 
 /**
  * Creates a new process that runs independently of Godot with redirected IO. It will not terminate when Godot terminates. The path specified in [param path] must exist and be an executable file or macOS `.app` bundle. The path is resolved based on the current platform. The [param arguments] are used in the given order and separated by a space.
@@ -205,7 +205,7 @@ execute(): int;
  * **Note:** On macOS, sandboxed applications are limited to run only embedded helper executables, specified during export or system .app bundle, system .app bundles will ignore arguments.
  *
 */
-execute_with_pipe(): Dictionary<any, any>;
+execute_with_pipe(path: string, arguments: PackedStringArray, blocking?: boolean): Dictionary<any, any>;
 
 /**
  * Finds the keycode for the given string. The returned values are equivalent to the [enum Key] constants.
@@ -230,7 +230,7 @@ execute_with_pipe(): Dictionary<any, any>;
  * See also [method get_keycode_string].
  *
 */
-find_keycode_from_string(): int;
+find_keycode_from_string(string: string): int;
 
 /**
  * Returns the **global** cache data directory according to the operating system's standards.
@@ -366,7 +366,7 @@ get_distribution_name(): string;
  * **Note:** Generating large quantities of bytes using this method can result in locking and entropy of lower quality on most platforms. Using [method Crypto.generate_random_bytes] is preferred in most cases.
  *
 */
-get_entropy(): PackedByteArray;
+get_entropy(size: int): PackedByteArray;
 
 /**
  * Returns the value of the given environment variable, or an empty string if [param variable] doesn't exist.
@@ -376,7 +376,7 @@ get_entropy(): PackedByteArray;
  * **Note:** On macOS, applications do not have access to shell environment variables.
  *
 */
-get_environment(): string;
+get_environment(variable: string): string;
 
 /**
  * Returns the file path to the current engine executable.
@@ -417,7 +417,7 @@ get_granted_permissions(): PackedStringArray;
  * See also [method find_keycode_from_string], [member InputEventKey.keycode], and [method InputEventKey.get_keycode_with_modifiers].
  *
 */
-get_keycode_string(): string;
+get_keycode_string(code: int): string;
 
 /**
  * Returns the host OS locale as a [String] of the form `language_Script_COUNTRY_VARIANT@extra`. Every substring after `language` is optional and may not exist.
@@ -558,7 +558,7 @@ get_name(): string;
  * **Note:** This method is implemented on Android, Linux, macOS and Windows.
  *
 */
-get_process_exit_code(): int;
+get_process_exit_code(pid: int): int;
 
 /**
  * Returns the number used by the host machine to uniquely identify this application.
@@ -625,7 +625,7 @@ get_system_ca_certificates(): string;
  * **Note:** Shared storage is implemented on Android and allows to differentiate between app specific and shared directories, if [param shared_storage] is `true`. Shared directories have additional restrictions on Android.
  *
 */
-get_system_dir(): string;
+get_system_dir(dir: int, shared_storage?: boolean): string;
 
 /**
  * Returns the path to the system font file with [param font_name] and style. Returns an empty string if no matching fonts found.
@@ -637,7 +637,7 @@ get_system_dir(): string;
  * **Note:** This method is implemented on Android, iOS, Linux, macOS and Windows.
  *
 */
-get_system_font_path(): string;
+get_system_font_path(font_name: string, weight?: int, stretch?: int, italic?: boolean): string;
 
 /**
  * Returns an array of the system substitute font file paths, which are similar to the font with [param font_name] and style for the specified text, locale, and script. Returns an empty array if no matching fonts found.
@@ -651,7 +651,7 @@ get_system_font_path(): string;
  * **Note:** This method is implemented on Android, iOS, Linux, macOS and Windows.
  *
 */
-get_system_font_path_for_text(): PackedStringArray;
+get_system_font_path_for_text(font_name: string, text: string, locale?: string, script?: string, weight?: int, stretch?: int, italic?: boolean): PackedStringArray;
 
 /**
  * Returns the list of font family names available.
@@ -767,7 +767,7 @@ get_video_adapter_driver_info(): PackedStringArray;
  * **Note:** Double-check the casing of [param variable]. Environment variable names are case-sensitive on all platforms except Windows.
  *
 */
-has_environment(): boolean;
+has_environment(variable: string): boolean;
 
 /**
  * Returns `true` if the feature for the given feature tag is supported in the currently running instance, depending on the platform, build, etc. Can be used to check whether you're currently running a debug build, on a certain platform or arch, etc. Refer to the [url=$DOCS_URL/tutorials/export/feature_tags.html]Feature Tags[/url] documentation for more details.
@@ -777,7 +777,7 @@ has_environment(): boolean;
  * **Note:** On the Web platform, one of the following additional tags is defined to indicate the host platform: `web_android`, `web_ios`, `web_linuxbsd`, `web_macos`, or `web_windows`.
  *
 */
-has_feature(): boolean;
+has_feature(tag_name: string): boolean;
 
 /**
  * Returns `true` if the Godot binary used to run the project is a **debug** export template, or when running in the editor.
@@ -810,7 +810,7 @@ is_debug_build(): boolean;
  * 
  *
 */
-is_keycode_unicode(): boolean;
+is_keycode_unicode(code: int): boolean;
 
 /**
  * Returns `true` if the child process ID ([param pid]) is still running or `false` if it has terminated. [param pid] must be a valid ID generated from [method create_process].
@@ -818,7 +818,7 @@ is_keycode_unicode(): boolean;
  * **Note:** This method is implemented on Android, iOS, Linux, macOS, and Windows.
  *
 */
-is_process_running(): boolean;
+is_process_running(pid: int): boolean;
 
 /** Returns [code]true[/code] if the project will automatically restart when it exits for any reason, [code]false[/code] otherwise. See also [method set_restart_on_exit] and [method get_restart_on_exit_arguments]. */
 is_restart_on_exit_set(): boolean;
@@ -845,7 +845,7 @@ is_userfs_persistent(): boolean;
  * **Note:** This method is implemented on Android, iOS, Linux, macOS and Windows.
  *
 */
-kill(): int;
+kill(pid: int): int;
 
 /**
  * Moves the file or directory at the given [param path] to the system's recycle bin. See also [method DirAccess.remove].
@@ -872,7 +872,7 @@ kill(): int;
  * **Note:** If the user has disabled the recycle bin on their system, the file will be permanently deleted instead.
  *
 */
-move_to_trash(): int;
+move_to_trash(path: string): int;
 
 /**
  * Initializes the singleton for the system MIDI driver, allowing Godot to receive [InputEventMIDI]. See also [method get_connected_midi_inputs] and [method close_midi_inputs].
@@ -894,7 +894,7 @@ open_midi_inputs(): void;
  * **Note:** On macOS, [param program_path] should ideally be the path to a `.app` bundle.
  *
 */
-open_with_program(): int;
+open_with_program(program_path: string, paths: PackedStringArray): int;
 
 /**
  * Reads a user input as raw data from the standard input. This operation can be **blocking**, which causes the window to freeze if [method read_buffer_from_stdin] is called on the main thread.
@@ -910,7 +910,7 @@ open_with_program(): int;
  * **Note:** On exported Windows builds, run the console wrapper executable to access the terminal. If standard input is console, calling this method without console wrapped will freeze permanently. If standard input is pipe or file, it can be used without console wrapper. If you need a single executable with full console support, use a custom build compiled with the `windows_subsystem=console` flag.
  *
 */
-read_buffer_from_stdin(): PackedByteArray;
+read_buffer_from_stdin(buffer_size?: int): PackedByteArray;
 
 /**
  * Reads a user input as a UTF-8 encoded string from the standard input. This operation can be **blocking**, which causes the window to freeze if [method read_string_from_stdin] is called on the main thread.
@@ -928,10 +928,10 @@ read_buffer_from_stdin(): PackedByteArray;
  * **Note:** On exported Windows builds, run the console wrapper executable to access the terminal. If standard input is console, calling this method without console wrapped will freeze permanently. If standard input is pipe or file, it can be used without console wrapper. If you need a single executable with full console support, use a custom build compiled with the `windows_subsystem=console` flag.
  *
 */
-read_string_from_stdin(): string;
+read_string_from_stdin(buffer_size?: int): string;
 
 /** Remove a custom logger added by [method add_logger]. */
-remove_logger(): void;
+remove_logger(logger: Logger): void;
 
 /**
  * Requests permission from the OS for the given [param name]. Returns `true` if the permission has already been granted. See also [signal MainLoop.on_request_permissions_result].
@@ -951,7 +951,7 @@ remove_logger(): void;
  * **Note:** This method is implemented on Android, macOS, and visionOS platforms.
  *
 */
-request_permission(): boolean;
+request_permission(name: string): boolean;
 
 /**
  * Requests **dangerous** permissions from the OS. Returns `true` if permissions have already been granted. See also [signal MainLoop.on_request_permissions_result].
@@ -972,7 +972,7 @@ revoke_granted_permissions(): void;
  * **Note:** Environment variable names are case-sensitive on all platforms except Windows. The [param variable] name cannot be empty or include the `=` character. On Windows, there is a 32767 characters limit for the combined length of [param variable], [param value], and the `=` and null terminator characters that will be registered in the environment block.
  *
 */
-set_environment(): void;
+set_environment(variable: string, value: string): void;
 
 /**
  * If [param restart] is `true`, restarts the project automatically when it is exited with [method SceneTree.quit] or [constant Node.NOTIFICATION_WM_CLOSE_REQUEST]. Command-line [param arguments] can be supplied. To restart the project with the same command line arguments as originally used to run the project, pass [method get_cmdline_args] as the value for [param arguments].
@@ -984,10 +984,10 @@ set_environment(): void;
  * **Note:** If the project process crashes or is **killed** by the user (by sending `SIGKILL` instead of the usual `SIGTERM`), the project won't restart automatically.
  *
 */
-set_restart_on_exit(): void;
+set_restart_on_exit(restart: boolean, arguments?: PackedStringArray): void;
 
 /** Assigns the given name to the current thread. Returns [constant ERR_UNAVAILABLE] if unavailable on the current platform. */
-set_thread_name(): int;
+set_thread_name(name: string): int;
 
 /**
  * If [param enabled] is `true`, when opening a file for writing, a temporary file is used in its place. When closed, it is automatically applied to the target file.
@@ -995,7 +995,7 @@ set_thread_name(): int;
  * This can useful when files may be opened by other applications, such as antiviruses, text editors, or even the Godot editor itself.
  *
 */
-set_use_file_access_save_and_swap(): void;
+set_use_file_access_save_and_swap(enabled: boolean): void;
 
 /**
  * Requests the OS to open a resource identified by [param uri] with the most appropriate program. For example:
@@ -1015,7 +1015,7 @@ set_use_file_access_save_and_swap(): void;
  * **Note:** This method is implemented on Android, iOS, Web, Linux, macOS and Windows.
  *
 */
-shell_open(): int;
+shell_open(uri: string): int;
 
 /**
  * Requests the OS to open the file manager, navigate to the given [param file_or_dir_path] and select the target file or folder.
@@ -1027,7 +1027,7 @@ shell_open(): int;
  * **Note:** This method is currently only implemented on Windows and macOS. On other platforms, it will fallback to [method shell_open] with a directory path of [param file_or_dir_path] prefixed with `file://`.
  *
 */
-shell_show_in_file_manager(): int;
+shell_show_in_file_manager(file_or_dir_path: string, open_folder?: boolean): int;
 
 /**
  * Removes the given environment variable from the current environment, if it exists. The [param variable] name cannot be empty or include the `=` character. The environment variable will be removed for the Godot process and any process executed with [method execute] after running [method unset_environment]. The removal of the environment variable will **not** persist to processes run after the Godot process was terminated.
@@ -1035,7 +1035,7 @@ shell_show_in_file_manager(): int;
  * **Note:** Environment variable names are case-sensitive on all platforms except Windows.
  *
 */
-unset_environment(): void;
+unset_environment(variable: string): void;
 
   connect<T extends SignalsOf<OSClass>>(signal: T, method: SignalFunction<OSClass[T]>): number;
 

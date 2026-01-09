@@ -20,31 +20,31 @@ declare class PhysicsDirectBodyState2DExtension extends PhysicsDirectBodyState2D
 
 
 /** Overridable version of [method PhysicsDirectBodyState2D.add_constant_central_force]. */
-protected _add_constant_central_force(): void;
+protected _add_constant_central_force(force: Vector2): void;
 
 /** Overridable version of [method PhysicsDirectBodyState2D.add_constant_force]. */
-protected _add_constant_force(): void;
+protected _add_constant_force(force: Vector2, position: Vector2): void;
 
 /** Overridable version of [method PhysicsDirectBodyState2D.add_constant_torque]. */
-protected _add_constant_torque(): void;
+protected _add_constant_torque(torque: float): void;
 
 /** Overridable version of [method PhysicsDirectBodyState2D.apply_central_force]. */
-protected _apply_central_force(): void;
+protected _apply_central_force(force: Vector2): void;
 
 /** Overridable version of [method PhysicsDirectBodyState2D.apply_central_impulse]. */
-protected _apply_central_impulse(): void;
+protected _apply_central_impulse(impulse: Vector2): void;
 
 /** Overridable version of [method PhysicsDirectBodyState2D.apply_force]. */
-protected _apply_force(): void;
+protected _apply_force(force: Vector2, position: Vector2): void;
 
 /** Overridable version of [method PhysicsDirectBodyState2D.apply_impulse]. */
-protected _apply_impulse(): void;
+protected _apply_impulse(impulse: Vector2, position: Vector2): void;
 
 /** Overridable version of [method PhysicsDirectBodyState2D.apply_torque]. */
-protected _apply_torque(): void;
+protected _apply_torque(torque: float): void;
 
 /** Overridable version of [method PhysicsDirectBodyState2D.apply_torque_impulse]. */
-protected _apply_torque_impulse(): void;
+protected _apply_torque_impulse(impulse: float): void;
 
 /** Implement to override the behavior of [member PhysicsDirectBodyState2D.angular_velocity] and its respective getter. */
 protected _get_angular_velocity(): float;
@@ -68,40 +68,40 @@ protected _get_constant_force(): Vector2;
 protected _get_constant_torque(): float;
 
 /** Overridable version of [method PhysicsDirectBodyState2D.get_contact_collider]. */
-protected _get_contact_collider(): RID;
+protected _get_contact_collider(contact_idx: int): RID;
 
 /** Overridable version of [method PhysicsDirectBodyState2D.get_contact_collider_id]. */
-protected _get_contact_collider_id(): int;
+protected _get_contact_collider_id(contact_idx: int): int;
 
 /** Overridable version of [method PhysicsDirectBodyState2D.get_contact_collider_object]. */
-protected _get_contact_collider_object(): Object;
+protected _get_contact_collider_object(contact_idx: int): Object;
 
 /** Overridable version of [method PhysicsDirectBodyState2D.get_contact_collider_position]. */
-protected _get_contact_collider_position(): Vector2;
+protected _get_contact_collider_position(contact_idx: int): Vector2;
 
 /** Overridable version of [method PhysicsDirectBodyState2D.get_contact_collider_shape]. */
-protected _get_contact_collider_shape(): int;
+protected _get_contact_collider_shape(contact_idx: int): int;
 
 /** Overridable version of [method PhysicsDirectBodyState2D.get_contact_collider_velocity_at_position]. */
-protected _get_contact_collider_velocity_at_position(): Vector2;
+protected _get_contact_collider_velocity_at_position(contact_idx: int): Vector2;
 
 /** Overridable version of [method PhysicsDirectBodyState2D.get_contact_count]. */
 protected _get_contact_count(): int;
 
 /** Overridable version of [method PhysicsDirectBodyState2D.get_contact_impulse]. */
-protected _get_contact_impulse(): Vector2;
+protected _get_contact_impulse(contact_idx: int): Vector2;
 
 /** Overridable version of [method PhysicsDirectBodyState2D.get_contact_local_normal]. */
-protected _get_contact_local_normal(): Vector2;
+protected _get_contact_local_normal(contact_idx: int): Vector2;
 
 /** Overridable version of [method PhysicsDirectBodyState2D.get_contact_local_position]. */
-protected _get_contact_local_position(): Vector2;
+protected _get_contact_local_position(contact_idx: int): Vector2;
 
 /** Overridable version of [method PhysicsDirectBodyState2D.get_contact_local_shape]. */
-protected _get_contact_local_shape(): int;
+protected _get_contact_local_shape(contact_idx: int): int;
 
 /** Overridable version of [method PhysicsDirectBodyState2D.get_contact_local_velocity_at_position]. */
-protected _get_contact_local_velocity_at_position(): Vector2;
+protected _get_contact_local_velocity_at_position(contact_idx: int): Vector2;
 
 /** Implement to override the behavior of [member PhysicsDirectBodyState2D.inverse_inertia] and its respective getter. */
 protected _get_inverse_inertia(): float;
@@ -131,7 +131,7 @@ protected _get_total_linear_damp(): float;
 protected _get_transform(): Transform2D;
 
 /** Overridable version of [method PhysicsDirectBodyState2D.get_velocity_at_local_position]. */
-protected _get_velocity_at_local_position(): Vector2;
+protected _get_velocity_at_local_position(local_position: Vector2): Vector2;
 
 /** Overridable version of [method PhysicsDirectBodyState2D.integrate_forces]. */
 protected _integrate_forces(): void;
@@ -140,28 +140,28 @@ protected _integrate_forces(): void;
 protected _is_sleeping(): boolean;
 
 /** Implement to override the behavior of [member PhysicsDirectBodyState2D.angular_velocity] and its respective setter. */
-protected _set_angular_velocity(): void;
+protected _set_angular_velocity(velocity: float): void;
 
 /** No documentation provided. */
-protected _set_collision_layer(): void;
+protected _set_collision_layer(layer: int): void;
 
 /** No documentation provided. */
-protected _set_collision_mask(): void;
+protected _set_collision_mask(mask: int): void;
 
 /** Overridable version of [method PhysicsDirectBodyState2D.set_constant_force]. */
-protected _set_constant_force(): void;
+protected _set_constant_force(force: Vector2): void;
 
 /** Overridable version of [method PhysicsDirectBodyState2D.set_constant_torque]. */
-protected _set_constant_torque(): void;
+protected _set_constant_torque(torque: float): void;
 
 /** Implement to override the behavior of [member PhysicsDirectBodyState2D.linear_velocity] and its respective setter. */
-protected _set_linear_velocity(): void;
+protected _set_linear_velocity(velocity: Vector2): void;
 
 /** Implement to override the behavior of [member PhysicsDirectBodyState2D.sleeping] and its respective setter. */
-protected _set_sleep_state(): void;
+protected _set_sleep_state(enabled: boolean): void;
 
 /** Implement to override the behavior of [member PhysicsDirectBodyState2D.transform] and its respective setter. */
-protected _set_transform(): void;
+protected _set_transform(transform: Transform2D): void;
 
   connect<T extends SignalsOf<PhysicsDirectBodyState2DExtension>>(signal: T, method: SignalFunction<PhysicsDirectBodyState2DExtension[T]>): number;
 

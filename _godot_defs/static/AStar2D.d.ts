@@ -27,7 +27,7 @@ neighbor_filter_enabled: boolean;
  * Note that this function is hidden in the default [AStar2D] class.
  *
 */
-protected _compute_cost(): float;
+protected _compute_cost(from_id: int, to_id: int): float;
 
 /**
  * Called when estimating the cost between a point and the path's ending point.
@@ -35,7 +35,7 @@ protected _compute_cost(): float;
  * Note that this function is hidden in the default [AStar2D] class.
  *
 */
-protected _estimate_cost(): float;
+protected _estimate_cost(from_id: int, end_id: int): float;
 
 /**
  * Called when neighboring enters processing and if [member neighbor_filter_enabled] is `true`. If `true` is returned the point will not be processed.
@@ -43,7 +43,7 @@ protected _estimate_cost(): float;
  * Note that this function is hidden in the default [AStar2D] class.
  *
 */
-protected _filter_neighbor(): boolean;
+protected _filter_neighbor(from_id: int, neighbor_id: int): boolean;
 
 /**
  * Adds a new point at the given position with the given identifier. The [param id] must be 0 or larger, and the [param weight_scale] must be 0.0 or greater.
@@ -66,10 +66,10 @@ protected _filter_neighbor(): boolean;
  * If there already exists a point for the given [param id], its position and weight scale are updated to the given values.
  *
 */
-add_point(): void;
+add_point(id: int, position: Vector2, weight_scale?: float): void;
 
 /** Returns whether there is a connection/segment between the given points. If [param bidirectional] is [code]false[/code], returns whether movement from [param id] to [param to_id] is possible through this segment. */
-are_points_connected(): boolean;
+are_points_connected(id: int, to_id: int, bidirectional?: boolean): boolean;
 
 /** Clears all the points and segments. */
 clear(): void;
@@ -95,10 +95,10 @@ clear(): void;
  * 
  *
 */
-connect_points(): void;
+connect_points(id: int, to_id: int, bidirectional?: boolean): void;
 
 /** Deletes the segment between the given points. If [param bidirectional] is [code]false[/code], only movement from [param id] to [param to_id] is prevented, and a unidirectional segment possibly remains. */
-disconnect_points(): void;
+disconnect_points(id: int, to_id: int, bidirectional?: boolean): void;
 
 /** Returns the next available point ID with no point associated to it. */
 get_available_point_id(): int;
@@ -109,7 +109,7 @@ get_available_point_id(): int;
  * **Note:** If several points are the closest to [param to_position], the one with the smallest ID will be returned, ensuring a deterministic result.
  *
 */
-get_closest_point(): int;
+get_closest_point(to_position: Vector2, include_disabled?: boolean): int;
 
 /**
  * Returns the closest position to [param to_position] that resides inside a segment between two connected points.
@@ -136,7 +136,7 @@ get_closest_point(): int;
  * The result is in the segment that goes from `y = 0` to `y = 5`. It's the closest position in the segment to the given point.
  *
 */
-get_closest_position_in_segment(): Vector2;
+get_closest_position_in_segment(to_position: Vector2): Vector2;
 
 /**
  * Returns an array with the IDs of the points that form the path found by AStar2D between the given points. The array is ordered from the starting point to the ending point of the path.
@@ -179,7 +179,7 @@ get_closest_position_in_segment(): Vector2;
  * If you change the 2nd point's weight to 3, then the result will be `[1, 4, 3]` instead, because now even though the distance is longer, it's "easier" to get through point 4 than through point 2.
  *
 */
-get_id_path(): PackedInt64Array;
+get_id_path(from_id: int, to_id: int, allow_partial_path?: boolean): PackedInt64Array;
 
 /** Returns the capacity of the structure backing the points, useful in conjunction with [method reserve_space]. */
 get_point_capacity(): int;
@@ -213,7 +213,7 @@ get_point_capacity(): int;
  * 
  *
 */
-get_point_connections(): PackedInt64Array;
+get_point_connections(id: int): PackedInt64Array;
 
 /** Returns the number of points currently in the points pool. */
 get_point_count(): int;
@@ -233,34 +233,34 @@ get_point_ids(): PackedInt64Array;
  * Additionally, when [param allow_partial_path] is `true` and [param to_id] is disabled the search may take an unusually long time to finish.
  *
 */
-get_point_path(): PackedVector2Array;
+get_point_path(from_id: int, to_id: int, allow_partial_path?: boolean): PackedVector2Array;
 
 /** Returns the position of the point associated with the given [param id]. */
-get_point_position(): Vector2;
+get_point_position(id: int): Vector2;
 
 /** Returns the weight scale of the point associated with the given [param id]. */
-get_point_weight_scale(): float;
+get_point_weight_scale(id: int): float;
 
 /** Returns whether a point associated with the given [param id] exists. */
-has_point(): boolean;
+has_point(id: int): boolean;
 
 /** Returns whether a point is disabled or not for pathfinding. By default, all points are enabled. */
-is_point_disabled(): boolean;
+is_point_disabled(id: int): boolean;
 
 /** Removes the point associated with the given [param id] from the points pool. */
-remove_point(): void;
+remove_point(id: int): void;
 
 /** Reserves space internally for [param num_nodes] points. Useful if you're adding a known large number of points at once, such as points on a grid. */
-reserve_space(): void;
+reserve_space(num_nodes: int): void;
 
 /** Disables or enables the specified point for pathfinding. Useful for making a temporary obstacle. */
-set_point_disabled(): void;
+set_point_disabled(id: int, disabled?: boolean): void;
 
 /** Sets the [param position] for the point with the given [param id]. */
-set_point_position(): void;
+set_point_position(id: int, position: Vector2): void;
 
 /** Sets the [param weight_scale] for the point with the given [param id]. The [param weight_scale] is multiplied by the result of [method _compute_cost] when determining the overall cost of traveling across a segment from a neighboring point to this point. */
-set_point_weight_scale(): void;
+set_point_weight_scale(id: int, weight_scale: float): void;
 
   connect<T extends SignalsOf<AStar2D>>(signal: T, method: SignalFunction<AStar2D[T]>): number;
 

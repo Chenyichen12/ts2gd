@@ -19,10 +19,10 @@ declare class AudioEffectEQ extends AudioEffect  {
 get_band_count(): int;
 
 /** Returns the band's gain at the specified index, in dB. */
-get_band_gain_db(): float;
+get_band_gain_db(band_idx: int): float;
 
 /** Sets band's gain at the specified index, in dB. */
-set_band_gain_db(): void;
+set_band_gain_db(band_idx: int, volume_db: float): void;
 
   connect<T extends SignalsOf<AudioEffectEQ>>(signal: T, method: SignalFunction<AudioEffectEQ[T]>): number;
 

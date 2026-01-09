@@ -19,7 +19,7 @@ declare class MultiplayerPeerExtension extends MultiplayerPeer  {
 protected _close(): void;
 
 /** Called when the connected [param p_peer] should be forcibly disconnected (see [method MultiplayerPeer.disconnect_peer]). */
-protected _disconnect_peer(): void;
+protected _disconnect_peer(p_peer: int, p_force: boolean): void;
 
 /** Called when the available packet count is internally requested by the [MultiplayerAPI]. */
 protected _get_available_packet_count(): int;
@@ -31,7 +31,7 @@ protected _get_connection_status(): int;
 protected _get_max_packet_size(): int;
 
 /** Called when a packet needs to be received by the [MultiplayerAPI], with [param r_buffer_size] being the size of the binary [param r_buffer] in bytes. */
-protected _get_packet(): int;
+protected _get_packet(r_buffer: const uint8_t **, r_buffer_size: int32_t*): int;
 
 /** Called to get the channel over which the next available packet was received. See [method MultiplayerPeer.get_packet_channel]. */
 protected _get_packet_channel(): int;
@@ -67,22 +67,22 @@ protected _is_server_relay_supported(): boolean;
 protected _poll(): void;
 
 /** Called when a packet needs to be sent by the [MultiplayerAPI], with [param p_buffer_size] being the size of the binary [param p_buffer] in bytes. */
-protected _put_packet(): int;
+protected _put_packet(p_buffer: const uint8_t*, p_buffer_size: int): int;
 
 /** Called when a packet needs to be sent by the [MultiplayerAPI], if [method _put_packet] isn't implemented. Use this when extending this class via GDScript. */
-protected _put_packet_script(): int;
+protected _put_packet_script(p_buffer: PackedByteArray): int;
 
 /** Called when the "refuse new connections" status is set on this [MultiplayerPeer] (see [member MultiplayerPeer.refuse_new_connections]). */
-protected _set_refuse_new_connections(): void;
+protected _set_refuse_new_connections(p_enable: boolean): void;
 
 /** Called when the target peer to use is set for this [MultiplayerPeer] (see [method MultiplayerPeer.set_target_peer]). */
-protected _set_target_peer(): void;
+protected _set_target_peer(p_peer: int): void;
 
 /** Called when the channel to use is set for this [MultiplayerPeer] (see [member MultiplayerPeer.transfer_channel]). */
-protected _set_transfer_channel(): void;
+protected _set_transfer_channel(p_channel: int): void;
 
 /** Called when the transfer mode is set on this [MultiplayerPeer] (see [member MultiplayerPeer.transfer_mode]). */
-protected _set_transfer_mode(): void;
+protected _set_transfer_mode(p_mode: int): void;
 
   connect<T extends SignalsOf<MultiplayerPeerExtension>>(signal: T, method: SignalFunction<MultiplayerPeerExtension[T]>): number;
 

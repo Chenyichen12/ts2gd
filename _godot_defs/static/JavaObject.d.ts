@@ -27,7 +27,7 @@ declare class JavaObject extends RefCounted  {
 get_java_class(): JavaClass;
 
 /** Returns [code]true[/code] if the given [param method] name exists in the object's Java methods. */
-has_java_method(): boolean;
+has_java_method(method: StringName): boolean;
 
   connect<T extends SignalsOf<JavaObject>>(signal: T, method: SignalFunction<JavaObject[T]>): number;
 

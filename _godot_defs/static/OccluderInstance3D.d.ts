@@ -65,10 +65,10 @@ bake_simplification_distance: float;
 occluder: Occluder3D;
 
 /** Returns whether or not the specified layer of the [member bake_mask] is enabled, given a [param layer_number] between 1 and 32. */
-get_bake_mask_value(): boolean;
+get_bake_mask_value(layer_number: int): boolean;
 
 /** Based on [param value], enables or disables the specified layer in the [member bake_mask], given a [param layer_number] between 1 and 32. */
-set_bake_mask_value(): void;
+set_bake_mask_value(layer_number: int, value: boolean): void;
 
   connect<T extends SignalsOf<OccluderInstance3D>>(signal: T, method: SignalFunction<OccluderInstance3D[T]>): number;
 

@@ -34,22 +34,22 @@ declare class SplineIK3D extends ChainIK3D  {
 setting_count: int;
 
 /** Returns the node path of the [Path3D] which is describing the path. */
-get_path_3d(): NodePathType;
+get_path_3d(index: int): NodePathType;
 
 /** Returns the tilt interpolation method used between the root bone and the start point of the [Curve3D] when they are apart. See also [method set_tilt_fade_in]. */
-get_tilt_fade_in(): int;
+get_tilt_fade_in(index: int): int;
 
 /** Returns the tilt interpolation method used between the end bone and the end point of the [Curve3D] when they are apart. See also [method set_tilt_fade_out]. */
-get_tilt_fade_out(): int;
+get_tilt_fade_out(index: int): int;
 
 /** Returns if the tilt property of the [Curve3D] affects the bone twist. */
-is_tilt_enabled(): boolean;
+is_tilt_enabled(index: int): boolean;
 
 /** Sets the node path of the [Path3D] which is describing the path. */
-set_path_3d(): void;
+set_path_3d(index: int, path_3d: NodePathType): void;
 
 /** Sets if the tilt property of the [Curve3D] should affect the bone twist. */
-set_tilt_enabled(): void;
+set_tilt_enabled(index: int, enabled: boolean): void;
 
 /**
  * If [param size] is greater than `0`, the tilt is interpolated between [param size] start bones from the start point of the [Curve3D] when they are apart.
@@ -59,7 +59,7 @@ set_tilt_enabled(): void;
  * If [param size] is less than `0`, the tilts between the root bone and the start point of the [Curve3D] are `0.0`.
  *
 */
-set_tilt_fade_in(): void;
+set_tilt_fade_in(index: int, size: int): void;
 
 /**
  * If [param size] is greater than `0`, the tilt is interpolated between [param size] end bones from the end point of the [Curve3D] when they are apart.
@@ -69,7 +69,7 @@ set_tilt_fade_in(): void;
  * If [param size] is less than `0`, the tilts between the end bone and the end point of the [Curve3D] are `0.0`.
  *
 */
-set_tilt_fade_out(): void;
+set_tilt_fade_out(index: int, size: int): void;
 
   connect<T extends SignalsOf<SplineIK3D>>(signal: T, method: SignalFunction<SplineIK3D[T]>): number;
 

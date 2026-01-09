@@ -87,7 +87,7 @@ linear_velocity: Vector3;
 mass: float;
 
 /** Called during physics processing, allowing you to read and safely modify the simulation state for the object. By default, it is called before the standard force integration, but the [member custom_integrator] property allows you to disable the standard force integration and do fully custom force integration for a body. */
-protected _integrate_forces(): void;
+protected _integrate_forces(state: PhysicsDirectBodyState3D): void;
 
 /**
  * Applies a directional impulse without affecting rotation.
@@ -97,7 +97,7 @@ protected _integrate_forces(): void;
  * This is equivalent to using [method apply_impulse] at the body's center of mass.
  *
 */
-apply_central_impulse(): void;
+apply_central_impulse(impulse: Vector3): void;
 
 /**
  * Applies a positioned impulse to the PhysicsBone3D.
@@ -107,7 +107,7 @@ apply_central_impulse(): void;
  * [param position] is the offset from the PhysicsBone3D origin in global coordinates.
  *
 */
-apply_impulse(): void;
+apply_impulse(impulse: Vector3, position?: Vector3): void;
 
 /** Returns the unique identifier of the PhysicsBone3D. */
 get_bone_id(): int;

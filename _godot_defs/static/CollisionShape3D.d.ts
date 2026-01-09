@@ -39,7 +39,7 @@ shape: Shape3D;
 make_convex_from_siblings(): void;
 
 /** This method does nothing. */
-resource_changed(): void;
+resource_changed(resource: Resource): void;
 
   connect<T extends SignalsOf<CollisionShape3D>>(signal: T, method: SignalFunction<CollisionShape3D[T]>): number;
 

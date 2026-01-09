@@ -96,13 +96,13 @@ state: int;
  * 
  *
 */
-rand_weighted(): int;
+rand_weighted(weights: PackedFloat32Array): int;
 
 /** Returns a pseudo-random float between [code]0.0[/code] and [code]1.0[/code] (inclusive). */
 randf(): float;
 
 /** Returns a pseudo-random float between [param from] and [param to] (inclusive). */
-randf_range(): float;
+randf_range(from: float, to: float): float;
 
 /**
  * Returns a [url=https://en.wikipedia.org/wiki/Normal_distribution]normally-distributed[/url], pseudo-random floating-point number from the specified [param mean] and a standard [param deviation]. This is also known as a Gaussian distribution.
@@ -110,13 +110,13 @@ randf_range(): float;
  * **Note:** This method uses the [url=https://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform]Box-Muller transform[/url] algorithm.
  *
 */
-randfn(): float;
+randfn(mean?: float, deviation?: float): float;
 
 /** Returns a pseudo-random 32-bit unsigned integer between [code]0[/code] and [code]4294967295[/code] (inclusive). */
 randi(): int;
 
 /** Returns a pseudo-random 32-bit signed integer between [param from] and [param to] (inclusive). */
-randi_range(): int;
+randi_range(from: int, to: int): int;
 
 /** Sets up a time-based seed for this [RandomNumberGenerator] instance. Unlike the [@GlobalScope] random number generation functions, different [RandomNumberGenerator] instances can use different seeds. */
 randomize(): void;

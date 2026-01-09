@@ -149,7 +149,7 @@ call_group_flags(...args: any[]): void;
  * **Note:** See [method change_scene_to_node] for details on the order of operations.
  *
 */
-change_scene_to_file(): int;
+change_scene_to_file(path: string): int;
 
 /**
  * Changes the running scene to the provided [Node]. Useful when you want to set up the new scene before changing.
@@ -169,7 +169,7 @@ change_scene_to_file(): int;
  * **Warning:** After using this method, the [SceneTree] will take ownership of the node and will free it automatically when changing scene again. Any references you had to that node will become invalid.
  *
 */
-change_scene_to_node(): int;
+change_scene_to_node(node: Node): int;
 
 /**
  * Changes the running scene to a new instance of the given [PackedScene] (which must be valid).
@@ -179,7 +179,7 @@ change_scene_to_node(): int;
  * **Note:** See [method change_scene_to_node] for details on the order of operations.
  *
 */
-change_scene_to_packed(): int;
+change_scene_to_packed(packed_scene: PackedScene<any>): int;
 
 /**
  * Returns a new [SceneTreeTimer]. After [param time_sec] in seconds have passed, the timer will emit [signal SceneTreeTimer.timeout] and will be automatically freed.
@@ -214,7 +214,7 @@ change_scene_to_packed(): int;
  * **Note:** The timer is always updated **after** all of the nodes in the tree. A node's [method Node._process] method would be called before the timer updates (or [method Node._physics_process] if [param process_in_physics] is set to `true`).
  *
 */
-create_timer(): SceneTreeTimer;
+create_timer(time_sec: float, process_always?: boolean, process_in_physics?: boolean, ignore_time_scale?: boolean): SceneTreeTimer;
 
 /**
  * Creates and returns a new [Tween] processed in this tree. The Tween will start automatically on the next process frame or physics frame (depending on its [enum Tween.TweenProcessMode]).
@@ -225,19 +225,19 @@ create_timer(): SceneTreeTimer;
 create_tween(): Tween;
 
 /** Returns the first [Node] found inside the tree, that has been added to the given [param group], in scene hierarchy order. Returns [code]null[/code] if no match is found. See also [method get_nodes_in_group]. */
-get_first_node_in_group(): Node;
+get_first_node_in_group(group: keyof Groups): Node;
 
 /** Returns how many physics process steps have been processed, since the application started. This is [i]not[/i] a measurement of elapsed time. See also [signal physics_frame]. For the number of frames rendered, see [method Engine.get_process_frames]. */
 get_frame(): int;
 
 /** Searches for the [MultiplayerAPI] configured for the given path, if one does not exist it searches the parent paths until one is found. If the path is empty, or none is found, the default one is returned. See [method set_multiplayer]. */
-get_multiplayer(): MultiplayerAPI;
+get_multiplayer(for_path?: NodePathType): MultiplayerAPI;
 
 /** Returns the number of nodes inside this tree. */
 get_node_count(): int;
 
 /** Returns the number of nodes assigned to the given group. */
-get_node_count_in_group(): int;
+get_node_count_in_group(group: keyof Groups): int;
 
 /** Returns an [Array] containing all nodes inside this tree, that have been added to the given [param group], in scene hierarchy order. */
 get_nodes_in_group<T extends keyof Groups>(group: T): Groups[T][]
@@ -260,13 +260,13 @@ is_accessibility_supported(): boolean;
  * **Note:** This method acts immediately on all selected nodes at once, which may cause stuttering in some performance-intensive situations.
  *
 */
-notify_group(): void;
+notify_group(group: keyof Groups, notification: int): void;
 
 /** Calls [method Object.notification] with the given [param notification] to all nodes inside this tree added to the [param group]. Use [param call_flags] to customize this method's behavior (see [enum GroupCallFlags]). */
-notify_group_flags(): void;
+notify_group_flags(call_flags: int, group: keyof Groups, notification: int): void;
 
 /** Queues the given [param obj] to be deleted, calling its [method Object.free] at the end of the current frame. This method is similar to [method Node.queue_free]. */
-queue_delete(): void;
+queue_delete(obj: Object): void;
 
 /**
  * Quits the application at the end of the current iteration, with the given [param exit_code].
@@ -276,7 +276,7 @@ queue_delete(): void;
  * **Note:** On iOS this method doesn't work. Instead, as recommended by the [url=https://developer.apple.com/library/archive/qa/qa1561/_index.html]iOS Human Interface Guidelines[/url], the user is expected to close apps via the Home button.
  *
 */
-quit(): void;
+quit(exit_code?: int): void;
 
 /**
  * Reloads the currently active scene, replacing [member current_scene] with a new instance of its original [PackedScene].
@@ -294,7 +294,7 @@ reload_current_scene(): int;
  * **Note:** In C#, [param property] must be in snake_case when referring to built-in Godot properties. Prefer using the names exposed in the `PropertyName` class to avoid allocating a new [StringName] on each call.
  *
 */
-set_group(): void;
+set_group(group: keyof Groups, property: string, value: any): void;
 
 /**
  * Sets the given [param property] to [param value] on all nodes inside this tree added to the given [param group]. Nodes that do not have the [param property] are ignored. Use [param call_flags] to customize this method's behavior (see [enum GroupCallFlags]).
@@ -302,7 +302,7 @@ set_group(): void;
  * **Note:** In C#, [param property] must be in snake_case when referring to built-in Godot properties. Prefer using the names exposed in the `PropertyName` class to avoid allocating a new [StringName] on each call.
  *
 */
-set_group_flags(): void;
+set_group_flags(call_flags: int, group: keyof Groups, property: string, value: any): void;
 
 /**
  * Sets a custom [MultiplayerAPI] with the given [param root_path] (controlling also the relative subpaths), or override the default one if [param root_path] is empty.
@@ -312,7 +312,7 @@ set_group_flags(): void;
  * **Note:** [method set_multiplayer] should be called **before** the child nodes are ready at the given [param root_path]. If multiplayer nodes like [MultiplayerSpawner] or [MultiplayerSynchronizer] are added to the tree before the custom multiplayer API is set, they will not work.
  *
 */
-set_multiplayer(): void;
+set_multiplayer(multiplayer: MultiplayerAPI, root_path?: NodePathType): void;
 
 /** If a current scene is loaded, calling this method will unload it. */
 unload_current_scene(): void;
