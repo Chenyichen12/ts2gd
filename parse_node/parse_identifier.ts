@@ -26,8 +26,14 @@ export const parseIdentifier = (
       const name = props.scope.getName(node)
 
       if (!name) {
-        return node.text
+        let text = node.text;
+        if(props.preserveTypeMap.has(text)){
+          text = props.preserveTypeMap.get(text)!
+        }
+
+        return text
       }
+
 
       return name
     },
