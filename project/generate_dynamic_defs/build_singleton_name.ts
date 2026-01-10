@@ -71,7 +71,9 @@ export default function buildSingletonName(project: TsGdProject) {
     }
   }
   for(const assetInfo of exportAssetsInfo){
-    result += `declare const ${assetInfo.loadName}: typeof import("${assetInfo.fsPath}").default;\n`
+    // remove extension from import path
+    const importPath = assetInfo.fsPath.replace(".ts", "");
+    result += `declare const ${assetInfo.loadName}: import("${importPath}").default;\n`
   }
 
   const destPath = path.join(

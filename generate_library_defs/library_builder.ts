@@ -116,9 +116,11 @@ ${Object.keys(enums)
     const inherits = json.class["$"].inherits
     const constants = (json.class.constants ?? [])[0]?.constant ?? []
     const signals = (json.class.signals ?? [])[0]?.signal ?? []
-    const methods = methodsXml.map((method) =>
-      parseMethod(method, { containgClassName: className })
+    let methods = methodsXml.map((method) =>
+      parseMethod(method, { containgClassName: className, singletons: singletons })
     )
+    // some methods are not useful in gdscript
+    // methods = methods.filter((m)=>!m.docString.includes("It is not useful to override this method in GDScript"));
     const constructorInfo = methods.filter((method) => method.isConstructor)
 
     // This is true for classes that can be constructed without a new keyword, e.g. const myVector = Vector2();
@@ -189,7 +191,7 @@ ${(() => {
     return `declare class ${className}Constructor {`
   } else {
     return `declare class ${className}${
-      inherits ? ` extends ${inherits} ` : ""
+      inherits ? ` extends ${singletons.includes(inherits)? `${inherits}Class` : inherits} ` : ""
     } {`
   }
 })()}

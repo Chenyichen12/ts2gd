@@ -119,7 +119,7 @@ const argsToString = (
 
   for (let i = 0; i < args.length; i++) {
     const arg = args[i]
-    const argName = sanitizeGodotNameForTs(arg["$"].name, "argument")
+    let argName = sanitizeGodotNameForTs(arg["$"].name, "argument")
     let argType = godotTypeToTsType(arg["$"].type)
     const isOptional = args.slice(i).every((arg) => !!arg["$"].default)
 
@@ -131,6 +131,10 @@ const argsToString = (
       if (argName === "action") {
         argType = "Action"
       }
+    }
+    if(argName === "function"){
+      // replace reserved word
+      argName = "func"
     }
 
     result.push(`${argName}${isOptional ? "?" : ""}: ${argType}`)
@@ -144,6 +148,7 @@ export const parseMethod = (
   props?: {
     containgClassName?: string
     generateAsGlobals?: boolean
+    singletons?: string[]
   }
 ) => {
   const containingClassName = props?.containgClassName ?? undefined
@@ -155,6 +160,15 @@ export const parseMethod = (
     containingClassName !== undefined && name === containingClassName
   const docString = formatJsDoc(method.description[0].trim())
   let returnType = godotTypeToTsType(method.return?.[0]["$"].type ?? "Variant")
+  if(props?.singletons && props.singletons.includes(returnType)){
+    returnType = `${returnType}Class`
+  }
+  args.forEach((arg)=>{
+    if(props?.singletons && props.singletons.includes(arg.$.type)){
+      arg.$.type = `${arg.$.type}Class`
+    }
+  })
+
   let argumentList = ""
 
   if (args || isVarArgs) {
