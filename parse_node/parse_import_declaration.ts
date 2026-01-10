@@ -119,6 +119,7 @@ export const parseImportDeclaration = (
 
     if (classDecl) {
       const declarations = ts.getDecorators(classDecl as ts.ClassDeclaration)
+      let classGlobal = true
       if (declarations != undefined) {
         for (const dec of declarations) {
           if (dec.expression.getText() === "anonymous") {
@@ -126,8 +127,20 @@ export const parseImportDeclaration = (
               typeName: defaultImportName,
               preloadPath: importedSourceFile.resPath,
             })
+            classGlobal = false
             break
           }
+        }
+      }
+      if(classGlobal){
+        // global class, no need preload but need to map the name
+        const targetNamespace = importedSourceFile.getFileNamespace();
+        if(targetNamespace != ""){
+          props.preserveTypeMap.set(
+            defaultImportName,
+            targetNamespace + "_" + defaultImportName
+          )
+          defaultImportName = targetNamespace + "_" + defaultImportName
         }
       }
     }

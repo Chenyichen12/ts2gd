@@ -178,6 +178,24 @@ This is a ts2gd bug. Please create an issue on GitHub for it.`,
     return undefined
   }
 
+  getFileNamespace(): string {
+    const ast = this.getAst()
+    if ("error" in ast) {
+      return ""
+    }
+
+    const topLevelDefinitions = ast.getChildren()[0] // SyntaxList
+    for(const d of topLevelDefinitions.getChildren()){
+      if (d.kind === SyntaxKind.ModuleDeclaration) {
+        const moduleDecl = d as ts.ModuleDeclaration
+        if(moduleDecl.flags & ts.NodeFlags.Namespace){
+          return moduleDecl.name.getText();
+        }
+      }
+    }
+    return ""
+  }
+
   // This can be different than the Godot class name for autoload classes.
   exportedTsClassName(): string | TsGdError {
     const node = this.getClassNode()
@@ -438,6 +456,7 @@ Second path: ${chalk.yellow(sf.fsPath)}`,
       sourceFile: sourceFileAst,
       sourceFileAsset: this,
       preserveTypeMap: new Map<string, string>(),
+      fileNamespace: ""
     })
 
     // TODO: Only do this once per program run max!

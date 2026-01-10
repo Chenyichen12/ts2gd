@@ -86,6 +86,7 @@ export type ParseState = {
   sourceFile: ts.SourceFile
   sourceFileAsset: AssetSourceFile,
   preserveTypeMap: Map<string, string>
+  fileNamespace: string
 }
 
 export enum ExtraLineType {
@@ -302,6 +303,8 @@ export const parseNode = (
       )
     case SyntaxKind.TypeOfExpression:
       return parseTypeofExpression(genericNode as ts.TypeOfExpression, props)
+    case SyntaxKind.ModuleDeclaration:
+      return{ content: "" }
     case SyntaxKind.IfStatement:
       return parseIfStatement(genericNode as ts.IfStatement, props)
     case SyntaxKind.EmptyStatement:

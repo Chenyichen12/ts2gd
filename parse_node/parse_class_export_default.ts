@@ -43,7 +43,12 @@ export function parseClassExportHeader(
   }
   let classNameString = ""
   if (!isAnnoumousClass) {
-    classNameString = `class_name ${node.name?.getText()}\n`
+    if(props.fileNamespace != ""){
+      classNameString = `class_name ${props.fileNamespace}_${node.name?.getText()}\n`
+      props.preserveTypeMap.set(node.name!.getText(), `${props.fileNamespace}_${node.name!.getText()}`)
+    }else{
+      classNameString = `class_name ${node.name?.getText()}\n`
+    }
   }
   let content = ""
   var extendsString = getExtentContent(node, props)

@@ -157,6 +157,29 @@ export const isDecoratedAsExportFlags = (
   )
 }
 
+function getTypeFullName(type: ts.TypeReferenceNode, props: ParseState): string {
+  function getIdName(node: ts.EntityName, props: ParseState): string {
+    if(ts.isIdentifier(node)){
+      if(props.preserveTypeMap.has(node.getText())){
+        return props.preserveTypeMap.get(node.getText())!
+      }else{
+        return node.getText()
+      }
+    }
+    if(ts.isQualifiedName(node)){
+      SyntaxKind.QualifiedName
+      const leftName = getIdName(node.left, props)
+      const rightName = getIdName(node.right, props)
+      return leftName + "." + rightName
+    }
+    return ""
+  }
+  const typeNode = type.typeName;
+  return getIdName(typeNode!, props)
+}
+
+
+
 export const parseExportFlags = (
   node:
     | ts.PropertyDeclaration
@@ -304,6 +327,15 @@ export const parsePropertyDeclaration = (
     decsType = props.preserveTypeMap.get(typeCustomName)
   }
 
+  // if(decsType == undefined){
+  //   if(node.type && ts.isTypeReferenceNode(node.type)){
+  //     const result = getTypeFullName(node.type, props)
+  //     if(result != ""){
+  //       decsType = result
+  //     }
+  //   }
+  // }
+
   // if (decsType == undefined && node.type) {
   //   const symbol = props.program
   //     .getTypeChecker()
@@ -318,7 +350,7 @@ export const parsePropertyDeclaration = (
   //     decsType = typeName;
   //   }
   // }
-  decsType = decsType ?? typeName
+  decsType = decsType ?? "RefCounted"
 
   // if (decsType == undefined || decsType == null) {
   //   var ignoreTypeUse = props.ignoreTypeUses.find(

@@ -150,6 +150,7 @@ export const compileTs = (code: string, isAutoload: boolean): ParseNodeType => {
     isAutoload: false,
     usages: utils.collectVariableUsage(sourceFile),
     preserveTypeMap: new Map<string, string>(),
+    fileNamespace: "",
   })
 
   return godotFile

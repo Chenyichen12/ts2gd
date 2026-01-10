@@ -65,6 +65,8 @@ export function parseSourceFileDefault(
     .map((statement) => {
       return (statement as ts.DeclarationStatement).name!.getText()
     })
+  const nameSpace = props.sourceFileAsset.getFileNamespace()
+  props.fileNamespace = nameSpace
   for (const name of predefine) {
     props.preserveTypeMap.set(name, name)
   }
