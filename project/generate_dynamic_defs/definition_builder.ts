@@ -6,6 +6,7 @@ import buildAssetPathsType from "./build_asset_paths"
 import buildGroupTypes from "./build_group_types"
 import buildNodePathsTypeForScript from "./build_node_paths"
 import buildSceneImports from "./build_scene_imports"
+import buildSingletonName from "./build_singleton_name"
 
 export class DefinitionBuilder {
   constructor(private project: TsGdProject) {}
@@ -35,6 +36,7 @@ export class DefinitionBuilder {
     this.buildSceneImports()
     this.buildGroupTypes()
     this.buildActionNames()
+    buildSingletonName(this.project)
   }
 }
 

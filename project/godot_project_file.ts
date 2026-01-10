@@ -56,7 +56,6 @@ export class GodotProjectFile {
 
     this.project = project
     this.fsPath = path
-
     this.autoloads = Object.values(this.rawConfig.autoload[0] ?? {})
       .filter((x) => typeof x === "string")
       .map((x) => ({

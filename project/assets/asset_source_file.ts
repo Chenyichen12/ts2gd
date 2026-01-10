@@ -117,60 +117,74 @@ This is a ts2gd bug. Please create an issue on GitHub for it.`,
     }
 
     if (topLevelClasses.length > 1) {
-      return {
-        error: ErrorName.TooManyClassesFound,
-        location: topLevelClasses[1],
-        description:
-          "Every file must have exactly one class. Consider moving this class into a new file.",
-        stack: new Error().stack ?? "",
+      // find the export default class if it exists
+      const exportDefaultClass = topLevelClasses.find((classDecl) => {
+        const mods = ts.getModifiers(classDecl)
+        let isDefault = false
+        let isExported = false
+        for (const mod of mods || []) {
+          if (mod.kind === SyntaxKind.ExportKeyword) {
+            isExported = true
+          }
+          if (mod.kind === SyntaxKind.DefaultKeyword) {
+            isDefault = true
+          }
+        }
+        return isDefault && isExported
+      })
+      if (exportDefaultClass) {
+        return exportDefaultClass
+      } else {
+        return topLevelClasses[0]
       }
     }
 
     return topLevelClasses[0]
   }
 
-  getExportDefaultClassName(): {
-    className: string
-    isAnonymous: boolean
-  } | undefined{
+  getExportDefaultClassName():
+    | {
+        className: string
+        isAnonymous: boolean
+      }
+    | undefined {
     const ast = this.getAst()
     if ("error" in ast) {
       return undefined
     }
 
     const topLevelDefinitions = ast.getChildren()[0] // SyntaxList
-    for( const d of topLevelDefinitions.getChildren()){
+    for (const d of topLevelDefinitions.getChildren()) {
       if (d.kind === SyntaxKind.ClassDeclaration) {
         const classDecl = d as ts.ClassDeclaration
-        const mods = ts.getModifiers(classDecl);
-        const declarations = ts.getDecorators(classDecl);
-        if(mods){
-          let isDefault = false;
-          let isExported = false;
+        const mods = ts.getModifiers(classDecl)
+        const declarations = ts.getDecorators(classDecl)
+        if (mods) {
+          let isDefault = false
+          let isExported = false
 
-          for(const mod of mods){
-            if(mod.kind === SyntaxKind.ExportKeyword){
-              isExported = true;
+          for (const mod of mods) {
+            if (mod.kind === SyntaxKind.ExportKeyword) {
+              isExported = true
             }
-            if(mod.kind === SyntaxKind.DefaultKeyword){
-              isDefault = true;
+            if (mod.kind === SyntaxKind.DefaultKeyword) {
+              isDefault = true
             }
           }
-          if(isDefault && isExported && classDecl.name){
+          if (isDefault && isExported && classDecl.name) {
             // return classDecl.name.getText();
             // get decorators to check if it's anonymous
-            let isAnonymous = false;
-            for(const dec of declarations ?? []){
-              if(dec.expression.getText() === "anonymous"){
-                isAnonymous = true;
-                break;
+            let isAnonymous = false
+            for (const dec of declarations ?? []) {
+              if (dec.expression.getText() === "anonymous") {
+                isAnonymous = true
+                break
               }
             }
             return {
               className: classDecl.name.getText(),
-              isAnonymous: isAnonymous
+              isAnonymous: isAnonymous,
             }
-
           }
         }
       }
@@ -185,11 +199,11 @@ This is a ts2gd bug. Please create an issue on GitHub for it.`,
     }
 
     const topLevelDefinitions = ast.getChildren()[0] // SyntaxList
-    for(const d of topLevelDefinitions.getChildren()){
+    for (const d of topLevelDefinitions.getChildren()) {
       if (d.kind === SyntaxKind.ModuleDeclaration) {
         const moduleDecl = d as ts.ModuleDeclaration
-        if(moduleDecl.flags & ts.NodeFlags.Namespace){
-          return moduleDecl.name.getText();
+        if (moduleDecl.flags & ts.NodeFlags.Namespace) {
+          return moduleDecl.name.getText()
         }
       }
     }
@@ -317,7 +331,46 @@ ${chalk.green(
   }
 
   tsType(): string {
-    const className = this.exportedTsClassName()
+    const getExportedTsClassName = (): string | TsGdError => {
+      const node = this.getClassNode()
+
+      if ("error" in node) {
+        return node
+      }
+
+      const name = node?.name
+
+      if (!name) {
+        return {
+          error: ErrorName.ClassCannotBeAnonymous,
+          location: node ?? this.tsRelativePath,
+          description: "This class cannot be anonymous",
+          stack: new Error().stack ?? "",
+        }
+      }
+
+      const isDefaultExport = (classDecl: ts.ClassDeclaration) => {
+        const mods = ts.getModifiers(classDecl)
+        let isDefault = false
+        let isExported = false
+        for (const mod of mods || []) {
+          if (mod.kind === SyntaxKind.ExportKeyword) {
+            isExported = true
+          }
+          if (mod.kind === SyntaxKind.DefaultKeyword) {
+            isDefault = true
+          }
+        }
+        return isDefault && isExported
+      }
+      if(isDefaultExport(node)){
+        return "default"
+      }
+
+      return name?.text ?? null
+    }
+
+    const className = getExportedTsClassName()
 
     if (className) {
       return `import('${this.fsPath.slice(0, -".ts".length)}').${className}`
@@ -345,7 +398,7 @@ ${chalk.green(
     if ("error" in classNode) {
       return false
     }
-    const decs = ts.getDecorators(classNode);
+    const decs = ts.getDecorators(classNode)
     for (const dec of decs ?? []) {
       if (dec.expression.getText() === "autoload") {
         return true
@@ -456,7 +509,7 @@ Second path: ${chalk.yellow(sf.fsPath)}`,
       sourceFile: sourceFileAst,
       sourceFileAsset: this,
       preserveTypeMap: new Map<string, string>(),
-      fileNamespace: ""
+      fileNamespace: "",
     })
 
     // TODO: Only do this once per program run max!
