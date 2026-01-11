@@ -479,7 +479,7 @@ file_dialog_show(title: string, current_directory: string, filename: string, sho
  * **Note:** On macOS, sandboxed apps will save security-scoped bookmarks to retain access to the opened folders across multiple sessions. Use [method OS.get_granted_permissions] to get a list of saved bookmarks.
  *
 */
-file_dialog_with_options_show(title: string, current_directory: string, root: string, filename: string, show_hidden: boolean, mode: int, filters: PackedStringArray, options: Dictionary[], callback: Callable, parent_window_id?: int): int;
+file_dialog_with_options_show(title: string, current_directory: string, root: string, filename: string, show_hidden: boolean, mode: int, filters: PackedStringArray, options: Dictionary<any, any>[], callback: Callable, parent_window_id?: int): int;
 
 /**
  * Forces window manager processing while ignoring all [InputEvent]s. See also [method process_events].
@@ -1687,7 +1687,7 @@ tablet_set_current_driver(name: string): void;
  * **Note:** This method is implemented on Android, iOS, Web, Linux (X11/Wayland), macOS, and Windows.
  *
 */
-tts_get_voices(): Dictionary[];
+tts_get_voices(): Dictionary<any, any>[];
 
 /**
  * Returns a [PackedStringArray] of voice identifiers for the [param language].

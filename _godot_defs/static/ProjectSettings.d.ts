@@ -4848,7 +4848,7 @@ get_changed_settings(): PackedStringArray;
  * **Note:** Both the script and the icon paths are local to the project filesystem, i.e. they start with `res://`.
  *
 */
-get_global_class_list(): Dictionary[];
+get_global_class_list(): Dictionary<any, any>[];
 
 /** Returns the order of a configuration value (influences when saved to the config file). */
 get_order(name: string): int;

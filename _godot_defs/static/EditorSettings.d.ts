@@ -1733,7 +1733,7 @@ declare class EditorSettings extends Resource  {
 */
 "text_editor/completion/add_type_hints": boolean;
 
-/** If [code]true[/code], automatically inserts the matching closing brace when the opening brace is inserted by typing or autocompletion. Also automatically removes the closing brace when pressing [kbd]Backspace[/kbd] on the opening brace. This includes brackets ([code]()[/code], [code][][/code], [code]{}[/code]), string quotation marks ([code]''[/code], [code]""[/code]), and comments ([code]/**/[/code]) if the language supports it. */
+/** If [code]true[/code], automatically inserts the matching closing brace when the opening brace is inserted by typing or autocompletion. Also automatically removes the closing brace when pressing [kbd]Backspace[/kbd] on the opening brace. This includes brackets ([code]()[/code], [code][][/code], [code]{}[/code]), string quotation marks ([code]''[/code], [code]""[/code]), and comments ([code][/code]) if the language supports it. */
 "text_editor/completion/auto_brace_complete": boolean;
 
 /** The delay in seconds after which autocompletion suggestions should be displayed when the user stops typing. */

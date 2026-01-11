@@ -22,7 +22,10 @@ declare class AABB {
  * **Note:** In a boolean context, an [AABB] evaluates to `false` if both [member position] and [member size] are zero (equal to [constant Vector3.ZERO]). Otherwise, it always evaluates to `true`.
  *
 */
-  new(): AABB; 
+
+  new(): AABB;
+  new(from: AABB): AABB;
+  new(position: Vector3, size: Vector3): AABB;
   static "new"(): AABB 
 
 
@@ -313,6 +316,12 @@ is_finite(): boolean;
 
 /** Returns an [AABB] that encloses both this bounding box and [param with] around the edges. See also [method encloses]. */
 merge(_with: AABB): AABB;
+
+
+
+
+
+
 
   connect<T extends SignalsOf<AABB>>(signal: T, method: SignalFunction<AABB[T]>): number;
 

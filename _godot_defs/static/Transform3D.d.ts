@@ -18,7 +18,12 @@ declare class Transform3D {
  * **Note:** Godot uses a [url=https://en.wikipedia.org/wiki/Right-hand_rule]right-handed coordinate system[/url], which is a common standard. For directions, the convention for built-in types like [Camera3D] is for -Z to point forward (+X is right, +Y is up, and +Z is back). Other objects may use different direction conventions. For more information, see the [url=$DOCS_URL/tutorials/assets_pipeline/importing_3d_scenes/model_export_considerations.html#d-asset-direction-conventions]3D asset direction conventions[/url] tutorial.
  *
 */
-  new(): Transform3D; 
+
+  new(): Transform3D;
+  new(from: Transform3D): Transform3D;
+  new(basis: Basis, origin: Vector3): Transform3D;
+  new(from: Projection): Transform3D;
+  new(x_axis: Vector3, y_axis: Vector3, z_axis: Vector3, origin: Vector3): Transform3D;
   static "new"(): Transform3D 
 
 
@@ -134,6 +139,16 @@ translated(offset: Vector3): Transform3D;
  *
 */
 translated_local(offset: Vector3): Transform3D;
+
+
+
+
+
+
+
+
+
+
 
   connect<T extends SignalsOf<Transform3D>>(signal: T, method: SignalFunction<Transform3D[T]>): number;
 

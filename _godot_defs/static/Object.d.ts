@@ -234,7 +234,7 @@ protected _get(property: StringName): any;
  * **Note:** Unlike other virtual methods, this method is called automatically for every script that overrides it. This means that the base implementation should not be called via `super` in GDScript or its equivalents in other languages. The bottom-most sub-class will be called first, with subsequent calls ascending the class hierarchy.
  *
 */
-protected _get_property_list(): Dictionary[];
+protected _get_property_list(): Dictionary<any, any>[];
 
 /**
  * Called when the object's script is instantiated, oftentimes after the object is initialized in memory (through `Object.new()` in GDScript, or `new GodotObject` in C#). It can be also defined to take in parameters. This method is similar to a constructor in most programming languages.
@@ -650,7 +650,7 @@ get_class(): string;
  * - `flags` is a combination of [enum ConnectFlags].
  *
 */
-get_incoming_connections(): Dictionary[];
+get_incoming_connections(): Dictionary<any, any>[];
 
 /**
  * Gets the object's property indexed by the given [param property_path]. The path should be a [NodePath] relative to the current object and can use the colon character (`:`) to access nested properties.
@@ -728,7 +728,7 @@ get_method_argument_count(method: StringName): int;
  * **Note:** The dictionaries of `args` and `return` are formatted identically to the results of [method get_property_list], although not all entries are used.
  *
 */
-get_method_list(): Dictionary[];
+get_method_list(): Dictionary<any, any>[];
 
 /**
  * Returns the object's property list as an [Array] of dictionaries. Each [Dictionary] contains the following entries:
@@ -748,7 +748,7 @@ get_method_list(): Dictionary[];
  * **Note:** In GDScript, all class members are treated as properties. In C# and GDExtension, it may be necessary to explicitly mark class members as Godot properties using decorators or attributes.
  *
 */
-get_property_list(): Dictionary[];
+get_property_list(): Dictionary<any, any>[];
 
 /** Returns the object's [Script] instance, or [code]null[/code] if no script is attached. */
 get_script(): any;
@@ -763,7 +763,7 @@ get_script(): any;
  * - `flags` is a combination of [enum ConnectFlags].
  *
 */
-get_signal_connection_list(signal: StringName): Dictionary[];
+get_signal_connection_list(signal: StringName): Dictionary<any, any>[];
 
 /**
  * Returns the list of existing signals as an [Array] of dictionaries.
@@ -771,7 +771,7 @@ get_signal_connection_list(signal: StringName): Dictionary[];
  * **Note:** Due to the implementation, each [Dictionary] is formatted very similarly to the returned values of [method get_method_list].
  *
 */
-get_signal_list(): Dictionary[];
+get_signal_list(): Dictionary<any, any>[];
 
 /** Returns the name of the translation domain used by [method tr] and [method tr_n]. See also [TranslationServer]. */
 get_translation_domain(): StringName;

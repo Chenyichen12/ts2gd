@@ -5,7 +5,7 @@
  * Intended for use with GDExtension to create custom implementations of [PhysicsServer2D].
  *
 */
-declare class PhysicsServer2DExtension extends PhysicsServer2D  {
+declare class PhysicsServer2DExtension extends PhysicsServer2DClass  {
 
   
 /**
@@ -156,7 +156,7 @@ protected _body_clear_shapes(body: RID): void;
  * Overridable version of [PhysicsServer2D]'s internal `shape_collide` method. Corresponds to [method PhysicsDirectSpaceState2D.collide_shape].
  *
 */
-protected _body_collide_shape(body: RID, body_shape: int, shape: RID, shape_xform: Transform2D, motion: Vector2, results: void*, result_max: int, result_count: int32_t*): boolean;
+protected _body_collide_shape(body: RID, body_shape: int, shape: RID, shape_xform: Transform2D, motion: Vector2, results: CPointer, result_max: int, result_count: CPointer): boolean;
 
 /** Overridable version of [method PhysicsServer2D.body_create]. */
 protected _body_create(): RID;
@@ -319,7 +319,7 @@ protected _body_set_state(body: RID, state: int, value: any): void;
 protected _body_set_state_sync_callback(body: RID, callable: Callable): void;
 
 /** Overridable version of [method PhysicsServer2D.body_test_motion]. Unlike the exposed implementation, this method does not receive all of the arguments inside a [PhysicsTestMotionParameters2D]. */
-protected _body_test_motion(body: RID, from: Transform2D, motion: Vector2, margin: float, collide_separation_ray: boolean, recovery_as_collision: boolean, result: PhysicsServer2DExtensionMotionResult*): boolean;
+protected _body_test_motion(body: RID, from: Transform2D, motion: Vector2, margin: float, collide_separation_ray: boolean, recovery_as_collision: boolean, result: CPointer): boolean;
 
 /** Overridable version of [method PhysicsServer2D.capsule_shape_create]. */
 protected _capsule_shape_create(): RID;
@@ -445,7 +445,7 @@ protected _set_active(active: boolean): void;
  * Overridable version of [PhysicsServer2D]'s internal `shape_collide` method. Corresponds to [method PhysicsDirectSpaceState2D.collide_shape].
  *
 */
-protected _shape_collide(shape_A: RID, xform_A: Transform2D, motion_A: Vector2, shape_B: RID, xform_B: Transform2D, motion_B: Vector2, results: void*, result_max: int, result_count: int32_t*): boolean;
+protected _shape_collide(shape_A: RID, xform_A: Transform2D, motion_A: Vector2, shape_B: RID, xform_B: Transform2D, motion_B: Vector2, results: CPointer, result_max: int, result_count: CPointer): boolean;
 
 /**
  * Should return the custom solver bias of the given [param shape], which defines how much bodies are forced to separate on contact when this shape is involved.

@@ -41,7 +41,7 @@ get_local_addresses(): PackedStringArray;
  * 
  *
 */
-get_local_interfaces(): Dictionary[];
+get_local_interfaces(): Dictionary<any, any>[];
 
 /** Returns a queued hostname's IP address, given its queue [param id]. Returns an empty string on error or if resolution hasn't happened yet (see [method get_resolve_item_status]). */
 get_resolve_item_address(id: int): string;

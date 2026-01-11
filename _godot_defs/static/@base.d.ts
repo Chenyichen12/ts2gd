@@ -104,7 +104,7 @@ declare enum ExportHint {
 }
 
 declare function exports(...args: (ExportHint | string | number)[]): (target: Node, name: string) => void;
-declare function exports(target: Node, name: string): void;
+declare function exports(target: Node | Resource, name: string): void;
 declare const export_flags: (...flags: any[]) => (target: Node, name: string) => void
 declare const export_custom: (target: PropertyHint, ...args: any[]) => (target: Node, name: string) => void;
 declare function autoload(target: typeof Node): void
@@ -242,23 +242,9 @@ interface IterableIterator<T> extends Iterator<T> {
   is_valid(extended_check: boolean): boolean;
   resume(arg?: any): void;
 }
+type CPointer = any;
 
 
-
-type ReadonlyArray<T> = {
-
-        /** Returns the last element of the array. Prints an error and returns [code]null[/code] if the array is empty.
-                [b]Note:[/b] Calling this function is not the same as writing [code]array[-1][/code]. If the array is empty, accessing by index will pause project execution when running from the editor. */
-        back(): T;
-      
-      }
-
-type FlatArray<Arr, Depth extends number> = {
-        "done": Arr,
-        "recur": Arr extends ReadonlyArray<infer InnerArr>
-            ? FlatArray<InnerArr, [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20][Depth]>
-            : Arr
-    }[Depth extends -1 ? "done" : "recur"];
 
 interface Array<T> {
   /** Appends an element at the end of the array (alias of [method push_back]). */
@@ -278,8 +264,6 @@ interface Array<T> {
 
   /** Clears the array. This is equivalent to using [method resize] with a size of [code]0[/code]. */
   clear(): void;
-
-  flatten(): FlatArray<T, 20>[];
 
   /** Returns the number of times an element is in the array. */
   count(value: T): number;

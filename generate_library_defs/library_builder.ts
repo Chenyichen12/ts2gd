@@ -116,9 +116,46 @@ ${Object.keys(enums)
     const inherits = json.class["$"].inherits
     const constants = (json.class.constants ?? [])[0]?.constant ?? []
     const signals = (json.class.signals ?? [])[0]?.signal ?? []
+
+    let constructorsXml = json.class.constructors?.[0]?.constructor ?? []
+    let constructorsInfo = constructorsXml?.map((ctor: any) =>{
+      if(typeof ctor === "object"){
+        let params = ctor?.param;
+        let decs = ctor.description?.[0] || "";
+        let returnType = ctor.return?.[0].$.type || "void";
+        let argumentList = params ? params.map((p: any)=>{
+          let paramName = p.$.name;
+          let paramType = godotTypeToTsType(p.$.type);
+          return `${paramName}: ${paramType}`;
+        }).join(", ") : "";
+        return {
+          docString: decs as string,
+          returnType: godotTypeToTsType(returnType),
+          argumentList: argumentList,
+        }
+      }
+      else{
+        return undefined;
+      }
+    }).filter((ctor: any) => ctor !== undefined);
+
+    
+
     let methods = methodsXml.map((method) =>
       parseMethod(method, { containgClassName: className, singletons: singletons })
     )
+    for(const ctorInfo of constructorsInfo ?? []){
+      methods.push({
+        name: "new",
+        codegen: "",
+        argumentList: ctorInfo.argumentList,
+        isConstructor: true,
+        docString: ctorInfo.docString,
+        returnType: ctorInfo.returnType,
+        isAbstract: false
+      })
+    }
+
     // some methods are not useful in gdscript
     // methods = methods.filter((m)=>!m.docString.includes("It is not useful to override this method in GDScript"));
     const constructorInfo = methods.filter((method) => method.isConstructor)

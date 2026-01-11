@@ -22,7 +22,11 @@ declare class String {
  * **Note:** In a boolean context, a string will evaluate to `false` if it is empty (`""`). Otherwise, a string will always evaluate to `true`.
  *
 */
-  new(): String; 
+
+  new(): String;
+  new(from: string): String;
+  new(from: NodePathType): String;
+  new(from: StringName): String;
   static "new"(): String 
 
 
@@ -1124,6 +1128,14 @@ xml_escape(escape_quotes?: boolean): string;
 
 /** Returns a copy of the string with escaped characters replaced by their meanings according to the XML standard. */
 xml_unescape(): string;
+
+
+
+
+
+
+
+
 
   connect<T extends SignalsOf<String>>(signal: T, method: SignalFunction<String[T]>): number;
 

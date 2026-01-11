@@ -50,7 +50,7 @@ get_node_unsafe<T extends Node>(path: NodePathType): T;
 
 
 /** Returns the list of connected nodes with the specified type. */
-get_node_connections(type: int): Dictionary[];
+get_node_connections(type: int): Dictionary<any, any>[];
 
 /** Returns the list of all nodes in the shader with the specified type. */
 get_node_list(type: int): PackedInt32Array;

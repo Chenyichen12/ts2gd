@@ -38,7 +38,7 @@ protected _get_bpm(): float;
 protected _get_length(): float;
 
 /** Return the controllable parameters of this stream. This array contains dictionaries with a property info description format (see [method Object.get_property_list]). Additionally, the default value for this parameter must be added tho each dictionary in "default_value" field. */
-protected _get_parameter_list(): Dictionary[];
+protected _get_parameter_list(): Dictionary<any, any>[];
 
 /** Override this method to customize the name assigned to this audio stream. Unused by the engine. */
 protected _get_stream_name(): string;

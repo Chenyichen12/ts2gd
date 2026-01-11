@@ -75,7 +75,7 @@ get_rest_info(parameters: PhysicsShapeQueryParameters3D): Dictionary<any, any>;
  * The number of intersections can be limited with the [param max_results] parameter, to reduce the processing time.
  *
 */
-intersect_point(parameters: PhysicsPointQueryParameters3D, max_results?: int): Dictionary[];
+intersect_point(parameters: PhysicsPointQueryParameters3D, max_results?: int): Dictionary<any, any>[];
 
 /**
  * Intersects a ray in a given space. Ray position and other parameters are defined through [PhysicsRayQueryParameters3D]. The returned object is a dictionary with the following fields:
@@ -117,7 +117,7 @@ intersect_ray(parameters: PhysicsRayQueryParameters3D): Dictionary<any, any>;
  * **Note:** This method does not take into account the `motion` property of the object.
  *
 */
-intersect_shape(parameters: PhysicsShapeQueryParameters3D, max_results?: int): Dictionary[];
+intersect_shape(parameters: PhysicsShapeQueryParameters3D, max_results?: int): Dictionary<any, any>[];
 
   connect<T extends SignalsOf<PhysicsDirectSpaceState3D>>(signal: T, method: SignalFunction<PhysicsDirectSpaceState3D[T]>): number;
 

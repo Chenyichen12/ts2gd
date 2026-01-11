@@ -31,13 +31,16 @@ export function parseClassExportHeader(
   props: ParseState
 ): ParseNodeType {
   let isAnnoumousClass = false
+  let isToolClass = false
   // get decorator name to check if is annoumous class
   const decorators = ts.getDecorators(node)
   if (decorators != undefined) {
     for (const dec of decorators) {
       if (dec.expression.getText() === "anonymous") {
         isAnnoumousClass = true
-        break
+      }
+      if (dec.expression.getText() === "tool") {
+        isToolClass = true
       }
     }
   }
@@ -53,6 +56,7 @@ export function parseClassExportHeader(
   let content = ""
   var extendsString = getExtentContent(node, props)
   content = `
+${isToolClass ? "@tool\n" : ""}
 ${classNameString}
 ${extendsString}
 `

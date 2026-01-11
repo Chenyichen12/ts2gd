@@ -137,7 +137,7 @@ add_blend_shape(name: StringName): void;
  * **Note:** When using indices, it is recommended to only use points, lines, or triangles.
  *
 */
-add_surface_from_arrays(primitive: int, arrays: any[], blend_shapes?: Array[], lods?: Dictionary<any, any>, flags?: int): void;
+add_surface_from_arrays(primitive: int, arrays: any[], blend_shapes?: any[][], lods?: Dictionary<any, any>, flags?: int): void;
 
 /** Removes all blend shapes from this [ArrayMesh]. */
 clear_blend_shapes(): void;

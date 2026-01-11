@@ -22,7 +22,11 @@ declare class Vector4 {
  * **Note:** In a boolean context, a Vector4 will evaluate to `false` if it's equal to `Vector4(0, 0, 0, 0)`. Otherwise, a Vector4 will always evaluate to `true`.
  *
 */
-  new(): Vector4; 
+
+  new(): Vector4;
+  new(from: Vector4): Vector4;
+  new(from: Vector4i): Vector4;
+  new(x: float, y: float, z: float, w: float): Vector4;
   static "new"(): Vector4 
 
 
@@ -158,6 +162,14 @@ snapped(step: Vector4): Vector4;
 
 /** Returns a new vector with each component snapped to the nearest multiple of [param step]. This can also be used to round the components to an arbitrary number of decimals. */
 snappedf(step: float): Vector4;
+
+
+
+
+
+
+
+
 
   connect<T extends SignalsOf<Vector4>>(signal: T, method: SignalFunction<Vector4[T]>): number;
 

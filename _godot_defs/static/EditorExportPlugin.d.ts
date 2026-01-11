@@ -179,7 +179,7 @@ protected _get_export_option_warning(platform: EditorExportPlatform, option: str
  * - `update_visibility`: An optional boolean value. If set to `true`, the preset will emit [signal Object.property_list_changed] when the option is changed.
  *
 */
-protected _get_export_options(platform: EditorExportPlatform): Dictionary[];
+protected _get_export_options(platform: EditorExportPlatform): Dictionary<any, any>[];
 
 /**
  * Return a [Dictionary] of override values for export options, that will be used instead of user-provided values. Overridden options will be hidden from the user interface.

@@ -171,7 +171,7 @@ protected _font_get_script_support_override(font_rid: RID, script: string): bool
 protected _font_get_script_support_overrides(font_rid: RID): PackedStringArray;
 
 /** Returns font cache information, each entry contains the following fields: [code]Vector2i size_px[/code] - font size in pixels, [code]float viewport_oversampling[/code] - viewport oversampling factor, [code]int glyphs[/code] - number of rendered glyphs, [code]int textures[/code] - number of used textures, [code]int textures_size[/code] - size of texture data in bytes. */
-protected _font_get_size_cache_info(font_rid: RID): Dictionary[];
+protected _font_get_size_cache_info(font_rid: RID): Dictionary<any, any>[];
 
 /** Returns list of the font sizes in the cache. Each size is [Vector2i] with font size and outline size. */
 protected _font_get_size_cache_list(font_rid: RID): Vector2i[];
@@ -282,7 +282,7 @@ protected _font_set_baseline_offset(font_rid: RID, baseline_offset: float): void
 protected _font_set_data(font_rid: RID, data: PackedByteArray): void;
 
 /** Sets pointer to the font source data, e.g contents of the dynamic font source file. */
-protected _font_set_data_ptr(font_rid: RID, data_ptr: const uint8_t*, data_size: int): void;
+protected _font_set_data_ptr(font_rid: RID, data_ptr: CPointer, data_size: int): void;
 
 /** Sets the font descent (number of pixels below the baseline). */
 protected _font_set_descent(font_rid: RID, size: int, descent: float): void;
@@ -556,7 +556,7 @@ protected _shaped_text_fit_to_width(shaped: RID, width: float, justification_fla
 protected _shaped_text_get_ascent(shaped: RID): float;
 
 /** Returns shapes of the carets corresponding to the character offset [param position] in the text. Returned caret shape is 1 pixel wide rectangle. */
-protected _shaped_text_get_carets(shaped: RID, position: int, caret: CaretInfo*): void;
+protected _shaped_text_get_carets(shaped: RID, position: int, caret: CPointer): void;
 
 /** Returns array of the composite character boundaries. */
 protected _shaped_text_get_character_breaks(shaped: RID): PackedInt32Array;
@@ -580,7 +580,7 @@ protected _shaped_text_get_dominant_direction_in_range(shaped: RID, start: int, 
 protected _shaped_text_get_ellipsis_glyph_count(shaped: RID): int;
 
 /** Returns array of the glyphs in the ellipsis. */
-protected _shaped_text_get_ellipsis_glyphs(shaped: RID): const Glyph*;
+protected _shaped_text_get_ellipsis_glyphs(shaped: RID): CPointer;
 
 /** Returns position of the ellipsis. */
 protected _shaped_text_get_ellipsis_pos(shaped: RID): int;
@@ -589,7 +589,7 @@ protected _shaped_text_get_ellipsis_pos(shaped: RID): int;
 protected _shaped_text_get_glyph_count(shaped: RID): int;
 
 /** Returns an array of glyphs in the visual order. */
-protected _shaped_text_get_glyphs(shaped: RID): const Glyph*;
+protected _shaped_text_get_glyphs(shaped: RID): CPointer;
 
 /** Returns composite character's bounds as offsets from the start of the line. */
 protected _shaped_text_get_grapheme_bounds(shaped: RID, pos: int): Vector2;
@@ -712,7 +712,7 @@ protected _shaped_text_set_spacing(shaped: RID, spacing: int, value: int): void;
 protected _shaped_text_shape(shaped: RID): boolean;
 
 /** Returns text glyphs in the logical order. */
-protected _shaped_text_sort_logical(shaped: RID): const Glyph*;
+protected _shaped_text_sort_logical(shaped: RID): CPointer;
 
 /** Returns text buffer for the substring of the text in the [param shaped] text buffer (including inline objects). */
 protected _shaped_text_substr(shaped: RID, start: int, length: int): RID;

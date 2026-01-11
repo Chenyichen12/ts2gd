@@ -27,7 +27,7 @@ declare class JavaClass extends RefCounted  {
 get_java_class_name(): string;
 
 /** Returns the object's Java methods and their signatures as an [Array] of dictionaries, in the same format as [method Object.get_method_list]. */
-get_java_method_list(): Dictionary[];
+get_java_method_list(): Dictionary<any, any>[];
 
 /** Returns a [JavaClass] representing the Java parent class of this class. */
 get_java_parent_class(): JavaClass;

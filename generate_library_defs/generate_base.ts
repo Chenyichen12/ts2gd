@@ -114,6 +114,7 @@ declare enum ExportHint {
 
 declare function exports(...args: (ExportHint | string | number)[]): (target: Node, name: string) => void;
 declare function exports(target: Node | Resource, name: string): void;
+declare function onready(target: Node, name: string):void;
 declare const export_flags: (...flags: any[]) => (target: Node, name: string) => void
 declare const export_custom: (target: PropertyHint, ...args: any[]) => (target: Node, name: string) => void;
 declare function autoload(target: typeof Node): void

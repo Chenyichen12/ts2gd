@@ -18,7 +18,10 @@ declare class PackedColorArray {
  * **Note:** Packed arrays are always passed by reference. To get a copy of an array that can be modified independently of the original array, use [method duplicate]. This is **not** the case for built-in properties and methods. In these cases the returned packed array is a copy, and changing it will **not** affect the original value. To update a built-in property of this type, modify the returned array and then assign it to the property again.
  *
 */
-  new(): PackedColorArray; 
+
+  new(): PackedColorArray;
+  new(from: PackedColorArray): PackedColorArray;
+  new(from: any[]): PackedColorArray;
   static "new"(): PackedColorArray 
 
 
@@ -113,6 +116,12 @@ sort(): void;
 
 /** Returns a [PackedByteArray] with each color encoded as bytes. */
 to_byte_array(): PackedByteArray;
+
+
+
+
+
+
 
   connect<T extends SignalsOf<PackedColorArray>>(signal: T, method: SignalFunction<PackedColorArray[T]>): number;
 

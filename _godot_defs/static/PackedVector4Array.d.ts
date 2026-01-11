@@ -18,7 +18,10 @@ declare class PackedVector4Array {
  * **Note:** Packed arrays are always passed by reference. To get a copy of an array that can be modified independently of the original array, use [method duplicate]. This is **not** the case for built-in properties and methods. In these cases the returned packed array is a copy, and changing it will **not** affect the original value. To update a built-in property of this type, modify the returned array and then assign it to the property again.
  *
 */
-  new(): PackedVector4Array; 
+
+  new(): PackedVector4Array;
+  new(from: PackedVector4Array): PackedVector4Array;
+  new(from: any[]): PackedVector4Array;
   static "new"(): PackedVector4Array 
 
 
@@ -145,6 +148,12 @@ sort(): void;
 
 /** Returns a [PackedByteArray] with each vector encoded as bytes. */
 to_byte_array(): PackedByteArray;
+
+
+
+
+
+
 
   connect<T extends SignalsOf<PackedVector4Array>>(signal: T, method: SignalFunction<PackedVector4Array[T]>): number;
 

@@ -26,7 +26,13 @@ declare class Quaternion {
  * **Note:** Similarly to [Vector2] and [Vector3], the components of a quaternion use 32-bit precision by default, unlike [float] which is always 64-bit. If double precision is needed, compile the engine with the option `precision=double`.
  *
 */
-  new(): Quaternion; 
+
+  new(): Quaternion;
+  new(from: Quaternion): Quaternion;
+  new(arc_from: Vector3, arc_to: Vector3): Quaternion;
+  new(axis: Vector3, angle: float): Quaternion;
+  new(from: Basis): Quaternion;
+  new(x: float, y: float, z: float, w: float): Quaternion;
   static "new"(): Quaternion 
 
 
@@ -148,6 +154,18 @@ spherical_cubic_interpolate(b: Quaternion, pre_a: Quaternion, post_b: Quaternion
  *
 */
 spherical_cubic_interpolate_in_time(b: Quaternion, pre_a: Quaternion, post_b: Quaternion, weight: float, b_t: float, pre_a_t: float, post_b_t: float): Quaternion;
+
+
+
+
+
+
+
+
+
+
+
+
 
   connect<T extends SignalsOf<Quaternion>>(signal: T, method: SignalFunction<Quaternion[T]>): number;
 

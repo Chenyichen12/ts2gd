@@ -90,6 +90,7 @@ export function parseSourceFileDefault(
     const content = parseNode(topNode, props)
     sourceContents += content.content
   }
+  sourceContents += "\n"
 
 
 

@@ -42,7 +42,7 @@ protected _surface_get_array_len(index: int): int;
 protected _surface_get_arrays(index: int): any[];
 
 /** Virtual method to override the blend shape arrays for a custom class extending [Mesh]. */
-protected _surface_get_blend_shape_arrays(index: int): Array[];
+protected _surface_get_blend_shape_arrays(index: int): any[][];
 
 /** Virtual method to override the surface format for a custom class extending [Mesh]. */
 protected _surface_get_format(index: int): int;
@@ -104,7 +104,7 @@ get_surface_count(): int;
 surface_get_arrays(surf_idx: int): any[];
 
 /** Returns the blend shape arrays for the requested surface. */
-surface_get_blend_shape_arrays(surf_idx: int): Array[];
+surface_get_blend_shape_arrays(surf_idx: int): any[][];
 
 /**
  * Returns a [Material] in a given surface. Surface is rendered using this material.

@@ -144,7 +144,7 @@ fill_weight_scale_region(region: Rect2i, weight_scale: float): void;
 get_id_path(from_id: Vector2i, to_id: Vector2i, allow_partial_path?: boolean): Vector2i[];
 
 /** Returns an array of dictionaries with point data ([code]id[/code]: [Vector2i], [code]position[/code]: [Vector2], [code]solid[/code]: [bool], [code]weight_scale[/code]: [float]) within a [param region]. */
-get_point_data_in_region(region: Rect2i): Dictionary[];
+get_point_data_in_region(region: Rect2i): Dictionary<any, any>[];
 
 /**
  * Returns an array with the points that are in the path found by [AStarGrid2D] between the given points. The array is ordered from the starting point to the ending point of the path.

@@ -246,7 +246,7 @@ canvas_item_get_instance_shader_parameter_default_value(instance: RID, parameter
  * The returned dictionary is in PropertyInfo format, with the keys `name`, `class_name`, `type`, `hint`, `hint_string`, and `usage`.
  *
 */
-canvas_item_get_instance_shader_parameter_list(instance: RID): Dictionary[];
+canvas_item_get_instance_shader_parameter_list(instance: RID): Dictionary<any, any>[];
 
 /**
  * Prevents physics interpolation for the current physics tick.
@@ -840,7 +840,7 @@ get_rendering_device(): RenderingDevice;
 get_rendering_info(info: int): int;
 
 /** Returns the parameters of a shader. */
-get_shader_parameter_list(shader: RID): Dictionary[];
+get_shader_parameter_list(shader: RID): Dictionary<any, any>[];
 
 /** Returns the RID of the test cube. This mesh will be created and returned on the first call to [method get_test_cube], then it will be cached for subsequent calls. See also [method make_sphere_mesh]. */
 get_test_cube(): RID;
@@ -1002,7 +1002,7 @@ instance_geometry_get_shader_parameter(instance: RID, parameter: StringName): an
 instance_geometry_get_shader_parameter_default_value(instance: RID, parameter: StringName): any;
 
 /** Returns a dictionary of per-instance shader uniform names of the per-instance shader uniform from the specified 3D geometry instance. The returned dictionary is in PropertyInfo format, with the keys [code]name[/code], [code]class_name[/code], [code]type[/code], [code]hint[/code], [code]hint_string[/code] and [code]usage[/code]. Equivalent to [method GeometryInstance3D.get_instance_shader_parameter]. */
-instance_geometry_get_shader_parameter_list(instance: RID): Dictionary[];
+instance_geometry_get_shader_parameter_list(instance: RID): Dictionary<any, any>[];
 
 /** Sets the shadow casting setting. Equivalent to [member GeometryInstance3D.cast_shadow]. */
 instance_geometry_set_cast_shadows_setting(instance: RID, shadow_casting_setting: int): void;
@@ -1257,7 +1257,7 @@ mesh_clear(mesh: RID): void;
 mesh_create(): RID;
 
 /** No documentation provided. */
-mesh_create_from_surfaces(surfaces: Dictionary[], blend_shape_count?: int): RID;
+mesh_create_from_surfaces(surfaces: Dictionary<any, any>[], blend_shape_count?: int): RID;
 
 /** Returns a mesh's blend shape count. */
 mesh_get_blend_shape_count(mesh: RID): int;
@@ -1287,7 +1287,7 @@ mesh_set_shadow_mesh(mesh: RID, shadow_mesh: RID): void;
 mesh_surface_get_arrays(mesh: RID, surface: int): any[];
 
 /** Returns a mesh's surface's arrays for blend shapes. */
-mesh_surface_get_blend_shape_arrays(mesh: RID, surface: int): Array[];
+mesh_surface_get_blend_shape_arrays(mesh: RID, surface: int): any[][];
 
 /** Returns the stride of the attribute buffer for a mesh with given [param format]. */
 mesh_surface_get_format_attribute_stride(format: int, vertex_count: int): int;

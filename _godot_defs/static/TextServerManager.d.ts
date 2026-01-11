@@ -32,7 +32,7 @@ get_interface(idx: int): TextServer;
 get_interface_count(): int;
 
 /** Returns a list of available interfaces, with the index and name of each interface. */
-get_interfaces(): Dictionary[];
+get_interfaces(): Dictionary<any, any>[];
 
 /** Returns the primary [TextServer] interface currently in use. */
 get_primary_interface(): TextServer;

@@ -113,7 +113,7 @@ protected _get_export_option_warning(preset: EditorExportPreset, option: StringN
  * See also [method Object._get_property_list].
  *
 */
-protected _get_export_options(): Dictionary[];
+protected _get_export_options(): Dictionary<any, any>[];
 
 /** Returns the platform logo displayed in the export dialog. The logo should be 32×32 pixels, adjusted for the current editor scale (see [method EditorInterface.get_editor_scale]). */
 protected _get_logo(): Texture2D;

@@ -163,6 +163,16 @@ is_finite(): boolean;
 /** Returns a [Rect2] that encloses both this rectangle and [param b] around the edges. See also [method encloses]. */
 merge(b: Rect2): Rect2;
 
+
+
+
+
+
+
+
+
+
+
   connect<T extends SignalsOf<Rect2>>(signal: T, method: SignalFunction<Rect2[T]>): number;
 
 
@@ -174,8 +184,17 @@ merge(b: Rect2): Rect2;
 
 declare type Rect2 = Rect2Constructor;
 declare var Rect2: typeof Rect2Constructor & {
-    new(): Rect2; 
+  
+  new(): Rect2;
+  new(from: Rect2): Rect2;
+  new(from: Rect2i): Rect2;
+  new(position: Vector2, size: Vector2): Rect2;
+  new(x: float, y: float, width: float, height: float): Rect2;
 
-
+  (): Rect2;
+  (from: Rect2): Rect2;
+  (from: Rect2i): Rect2;
+  (position: Vector2, size: Vector2): Rect2;
+  (x: float, y: float, width: float, height: float): Rect2;
 
 }

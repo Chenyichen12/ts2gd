@@ -605,7 +605,7 @@ add_translation_parser_plugin(parser: EditorTranslationParserPlugin): void;
 add_undo_redo_inspector_hook_callback(callable: Callable): void;
 
 /** Returns the [EditorInterface] singleton instance. */
-get_editor_interface(): EditorInterface;
+get_editor_interface(): EditorInterfaceClass;
 
 /** Returns the [PopupMenu] under [b]Scene > Export As...[/b]. */
 get_export_as_menu(): PopupMenu;

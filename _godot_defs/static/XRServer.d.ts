@@ -74,7 +74,7 @@ get_interface(idx: int): XRInterface;
 get_interface_count(): int;
 
 /** Returns a list of available interfaces the ID and name of each interface. */
-get_interfaces(): Dictionary[];
+get_interfaces(): Dictionary<any, any>[];
 
 /** Returns the reference frame transform. Mostly used internally and exposed for GDExtension build interfaces. */
 get_reference_frame(): Transform3D;

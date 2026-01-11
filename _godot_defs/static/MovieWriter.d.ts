@@ -84,7 +84,7 @@ protected _write_begin(movie_size: Vector2i, fps: int, base_path: string): int;
 protected _write_end(): void;
 
 /** Called at the end of every rendered frame. The [param frame_image] and [param audio_frame_block] function arguments should be written to. */
-protected _write_frame(frame_image: Image, audio_frame_block: const void*): int;
+protected _write_frame(frame_image: Image, audio_frame_block: CPointer): int;
 
 /**
  * Adds a writer to be usable by the engine. The supported file extensions can be set by overriding [method _handles_file].

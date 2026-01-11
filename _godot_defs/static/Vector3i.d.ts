@@ -87,6 +87,14 @@ snapped(step: Vector3i): Vector3i;
 /** Returns a new vector with each component snapped to the closest multiple of [param step]. */
 snappedi(step: int): Vector3i;
 
+
+
+
+
+
+
+
+
   connect<T extends SignalsOf<Vector3i>>(signal: T, method: SignalFunction<Vector3i[T]>): number;
 
 
@@ -180,8 +188,15 @@ static BACK: Vector3i;
 
 declare type Vector3i = Vector3iConstructor;
 declare var Vector3i: typeof Vector3iConstructor & {
-    new(): Vector3i; 
+  
+  new(): Vector3i;
+  new(from: Vector3i): Vector3i;
+  new(from: Vector3): Vector3i;
+  new(x: int, y: int, z: int): Vector3i;
 
-
+  (): Vector3i;
+  (from: Vector3i): Vector3i;
+  (from: Vector3): Vector3i;
+  (x: int, y: int, z: int): Vector3i;
 
 }

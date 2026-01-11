@@ -279,6 +279,14 @@ snapped(step: Vector2): Vector2;
 /** Returns a new vector with each component snapped to the nearest multiple of [param step]. This can also be used to round the components to an arbitrary number of decimals. */
 snappedf(step: float): Vector2;
 
+
+
+
+
+
+
+
+
   connect<T extends SignalsOf<Vector2>>(signal: T, method: SignalFunction<Vector2[T]>): number;
 
 
@@ -348,8 +356,15 @@ static DOWN: Vector2;
 
 declare type Vector2 = Vector2Constructor;
 declare var Vector2: typeof Vector2Constructor & {
-    new(): Vector2; 
+  
+  new(): Vector2;
+  new(from: Vector2): Vector2;
+  new(from: Vector2i): Vector2;
+  new(x: float, y: float): Vector2;
 
-
+  (): Vector2;
+  (from: Vector2): Vector2;
+  (from: Vector2i): Vector2;
+  (x: float, y: float): Vector2;
 
 }

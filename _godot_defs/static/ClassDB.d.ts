@@ -55,7 +55,7 @@ class_get_method_argument_count(_class: StringName, method: StringName, no_inher
  * **Note:** In exported release builds the debug info is not available, so the returned dictionaries will contain only method names.
  *
 */
-class_get_method_list(_class: StringName, no_inheritance?: boolean): Dictionary[];
+class_get_method_list(_class: StringName, no_inheritance?: boolean): Dictionary<any, any>[];
 
 /** Returns the value of [param property] of [param object] or its ancestry. */
 class_get_property(object: Object, property: StringName): any;
@@ -67,7 +67,7 @@ class_get_property_default_value(_class: StringName, property: StringName): any;
 class_get_property_getter(_class: StringName, property: StringName): StringName;
 
 /** Returns an array with all the properties of [param class] or its ancestry if [param no_inheritance] is [code]false[/code]. */
-class_get_property_list(_class: StringName, no_inheritance?: boolean): Dictionary[];
+class_get_property_list(_class: StringName, no_inheritance?: boolean): Dictionary<any, any>[];
 
 /** Returns the setter method name of [param property] of [param class]. */
 class_get_property_setter(_class: StringName, property: StringName): StringName;
@@ -76,7 +76,7 @@ class_get_property_setter(_class: StringName, property: StringName): StringName;
 class_get_signal(_class: StringName, signal: StringName): Dictionary<any, any>;
 
 /** Returns an array with all the signals of [param class] or its ancestry if [param no_inheritance] is [code]false[/code]. Every element of the array is a [Dictionary] as described in [method class_get_signal]. */
-class_get_signal_list(_class: StringName, no_inheritance?: boolean): Dictionary[];
+class_get_signal_list(_class: StringName, no_inheritance?: boolean): Dictionary<any, any>[];
 
 /** Returns whether [param class] or its ancestry has an enum called [param name] or not. */
 class_has_enum(_class: StringName, name: StringName, no_inheritance?: boolean): boolean;

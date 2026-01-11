@@ -102,7 +102,10 @@ declare class NodePath {
  * **Note:** In a boolean context, a [NodePath] will evaluate to `false` if it is empty (`NodePath("")`). Otherwise, a [NodePath] will always evaluate to `true`.
  *
 */
-  new(): NodePath; 
+
+  new(): NodePath;
+  new(from: NodePathType): NodePath;
+  new(from: string): NodePath;
   static "new"(): NodePath 
 
 
@@ -237,6 +240,12 @@ is_empty(): boolean;
  *
 */
 slice(begin: int, end?: int): NodePathType;
+
+
+
+
+
+
 
   connect<T extends SignalsOf<NodePath>>(signal: T, method: SignalFunction<NodePath[T]>): number;
 

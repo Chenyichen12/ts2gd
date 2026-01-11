@@ -33,7 +33,7 @@ protected _complete_code(code: string, path: string, owner: Object): Dictionary<
 protected _create_script(): Object;
 
 /** No documentation provided. */
-protected _debug_get_current_stack_info(): Dictionary[];
+protected _debug_get_current_stack_info(): Dictionary<any, any>[];
 
 /** No documentation provided. */
 protected _debug_get_error(): string;
@@ -48,7 +48,7 @@ protected _debug_get_stack_level_count(): int;
 protected _debug_get_stack_level_function(level: int): string;
 
 /** No documentation provided. */
-protected _debug_get_stack_level_instance(level: int): void*;
+protected _debug_get_stack_level_instance(level: int): CPointer;
 
 /** No documentation provided. */
 protected _debug_get_stack_level_line(level: int): int;
@@ -66,7 +66,7 @@ protected _debug_get_stack_level_source(level: int): string;
 protected _debug_parse_stack_level_expression(level: int, expression: string, max_subitems: int, max_depth: int): string;
 
 /** Returns the line where the function is defined in the code, or [code]-1[/code] if the function is not present. */
-protected _find_function(function: string, code: string): int;
+protected _find_function(func: string, code: string): int;
 
 /** No documentation provided. */
 protected _finish(): void;
@@ -75,7 +75,7 @@ protected _finish(): void;
 protected _frame(): void;
 
 /** No documentation provided. */
-protected _get_built_in_templates(object: StringName): Dictionary[];
+protected _get_built_in_templates(object: StringName): Dictionary<any, any>[];
 
 /** No documentation provided. */
 protected _get_comment_delimiters(): PackedStringArray;
@@ -93,13 +93,13 @@ protected _get_global_class_name(path: string): Dictionary<any, any>;
 protected _get_name(): string;
 
 /** No documentation provided. */
-protected _get_public_annotations(): Dictionary[];
+protected _get_public_annotations(): Dictionary<any, any>[];
 
 /** No documentation provided. */
 protected _get_public_constants(): Dictionary<any, any>;
 
 /** No documentation provided. */
-protected _get_public_functions(): Dictionary[];
+protected _get_public_functions(): Dictionary<any, any>[];
 
 /** No documentation provided. */
 protected _get_recognized_extensions(): PackedStringArray;
@@ -147,10 +147,10 @@ protected _overrides_external_editor(): boolean;
 protected _preferred_file_name_casing(): int;
 
 /** No documentation provided. */
-protected _profiling_get_accumulated_data(info_array: ScriptLanguageExtensionProfilingInfo*, info_max: int): int;
+protected _profiling_get_accumulated_data(info_array: CPointer, info_max: int): int;
 
 /** No documentation provided. */
-protected _profiling_get_frame_data(info_array: ScriptLanguageExtensionProfilingInfo*, info_max: int): int;
+protected _profiling_get_frame_data(info_array: CPointer, info_max: int): int;
 
 /** No documentation provided. */
 protected _profiling_set_save_native_calls(enable: boolean): void;

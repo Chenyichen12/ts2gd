@@ -226,7 +226,7 @@ protected _can_import_threaded(): boolean;
 protected _get_format_version(): int;
 
 /** Gets the options and default values for the preset at this index. Returns an Array of Dictionaries with the following keys: [code]name[/code], [code]default_value[/code], [code]property_hint[/code] (optional), [code]hint_string[/code] (optional), [code]usage[/code] (optional). */
-protected _get_import_options(path: string, preset_index: int): Dictionary[];
+protected _get_import_options(path: string, preset_index: int): Dictionary<any, any>[];
 
 /** Gets the order of this importer to be run when importing resources. Importers with [i]lower[/i] import orders will be called first, and higher values will be called later. Use this to ensure the importer runs after the dependencies are already imported. The default import order is [code]0[/code] unless overridden by a specific importer. See [enum ResourceImporter.ImportOrder] for some predefined values. */
 protected _get_import_order(): int;

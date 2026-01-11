@@ -32,7 +32,7 @@ is_extension_loaded(path: string): boolean;
 load_extension(path: string): int;
 
 /** Loads the extension already in address space via the given path and initialization function. The [param path] needs to be unique and start with [code]"libgodot://"[/code]. Returns [constant LOAD_STATUS_OK] if successful. */
-load_extension_from_function(path: string, init_func: const GDExtensionInitializationFunction*): int;
+load_extension_from_function(path: string, init_func: CPointer): int;
 
 /**
  * Reloads the extension at the given file path. The [param path] needs to point to a valid [GDExtension], otherwise this method may return either [constant LOAD_STATUS_NOT_LOADED] or [constant LOAD_STATUS_FAILED].

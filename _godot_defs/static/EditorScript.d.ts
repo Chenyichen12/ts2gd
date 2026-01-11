@@ -82,7 +82,7 @@ protected _run(): void;
 add_root_node(node: Node): void;
 
 /** Returns the [EditorInterface] singleton instance. */
-get_editor_interface(): EditorInterface;
+get_editor_interface(): EditorInterfaceClass;
 
 /** Returns the edited (current) scene's root [Node]. Equivalent of [method EditorInterface.get_edited_scene_root]. */
 get_scene(): Node;

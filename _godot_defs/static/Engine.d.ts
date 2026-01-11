@@ -131,7 +131,7 @@ get_author_info(): Dictionary<any, any>;
  * - `license` - The license applied to this component (such as "[url=https://en.wikipedia.org/wiki/MIT_License#Ambiguity_and_variants]Expat[/url]" or "[url=https://creativecommons.org/licenses/by/4.0/]CC-BY-4.0[/url]").
  *
 */
-get_copyright_info(): Dictionary[];
+get_copyright_info(): Dictionary<any, any>[];
 
 /**
  * Returns a [Dictionary] of categorized donor names. Each entry is an [Array] of strings:

@@ -20,22 +20,22 @@ declare class PhysicsDirectSpaceState2DExtension extends PhysicsDirectSpaceState
 
 
 /** No documentation provided. */
-protected _cast_motion(shape_rid: RID, transform: Transform2D, motion: Vector2, margin: float, collision_mask: int, collide_with_bodies: boolean, collide_with_areas: boolean, closest_safe: float*, closest_unsafe: float*): boolean;
+protected _cast_motion(shape_rid: RID, transform: Transform2D, motion: Vector2, margin: float, collision_mask: int, collide_with_bodies: boolean, collide_with_areas: boolean, closest_safe: CPointer, closest_unsafe: CPointer): boolean;
 
 /** No documentation provided. */
-protected _collide_shape(shape_rid: RID, transform: Transform2D, motion: Vector2, margin: float, collision_mask: int, collide_with_bodies: boolean, collide_with_areas: boolean, results: void*, max_results: int, result_count: int32_t*): boolean;
+protected _collide_shape(shape_rid: RID, transform: Transform2D, motion: Vector2, margin: float, collision_mask: int, collide_with_bodies: boolean, collide_with_areas: boolean, results: CPointer, max_results: int, result_count: CPointer): boolean;
 
 /** No documentation provided. */
-protected _intersect_point(position: Vector2, canvas_instance_id: int, collision_mask: int, collide_with_bodies: boolean, collide_with_areas: boolean, results: PhysicsServer2DExtensionShapeResult*, max_results: int): int;
+protected _intersect_point(position: Vector2, canvas_instance_id: int, collision_mask: int, collide_with_bodies: boolean, collide_with_areas: boolean, results: CPointer, max_results: int): int;
 
 /** No documentation provided. */
-protected _intersect_ray(from: Vector2, to: Vector2, collision_mask: int, collide_with_bodies: boolean, collide_with_areas: boolean, hit_from_inside: boolean, result: PhysicsServer2DExtensionRayResult*): boolean;
+protected _intersect_ray(from: Vector2, to: Vector2, collision_mask: int, collide_with_bodies: boolean, collide_with_areas: boolean, hit_from_inside: boolean, result: CPointer): boolean;
 
 /** No documentation provided. */
-protected _intersect_shape(shape_rid: RID, transform: Transform2D, motion: Vector2, margin: float, collision_mask: int, collide_with_bodies: boolean, collide_with_areas: boolean, result: PhysicsServer2DExtensionShapeResult*, max_results: int): int;
+protected _intersect_shape(shape_rid: RID, transform: Transform2D, motion: Vector2, margin: float, collision_mask: int, collide_with_bodies: boolean, collide_with_areas: boolean, result: CPointer, max_results: int): int;
 
 /** No documentation provided. */
-protected _rest_info(shape_rid: RID, transform: Transform2D, motion: Vector2, margin: float, collision_mask: int, collide_with_bodies: boolean, collide_with_areas: boolean, rest_info: PhysicsServer2DExtensionShapeRestInfo*): boolean;
+protected _rest_info(shape_rid: RID, transform: Transform2D, motion: Vector2, margin: float, collision_mask: int, collide_with_bodies: boolean, collide_with_areas: boolean, rest_info: CPointer): boolean;
 
 /** No documentation provided. */
 is_body_excluded_from_query(body: RID): boolean;

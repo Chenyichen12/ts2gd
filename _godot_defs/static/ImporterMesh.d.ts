@@ -38,7 +38,7 @@ add_blend_shape(name: string): void;
  * **Note:** When using indices, it is recommended to only use points, lines, or triangles.
  *
 */
-add_surface(primitive: int, arrays: any[], blend_shapes?: Array[], lods?: Dictionary<any, any>, material?: Material, name?: string, flags?: int): void;
+add_surface(primitive: int, arrays: any[], blend_shapes?: any[][], lods?: Dictionary<any, any>, material?: Material, name?: string, flags?: int): void;
 
 /** Removes all surfaces and blend shapes from this [ImporterMesh]. */
 clear(): void;

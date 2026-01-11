@@ -56,7 +56,7 @@ connection_lines_thickness: float;
  * Connections with `keep_alive` set to `false` may be deleted automatically if invalid during a redraw.
  *
 */
-connections: Dictionary[];
+connections: Dictionary<any, any>[];
 
 
 /** The pattern used for drawing the grid. */
@@ -315,7 +315,7 @@ get_connection_line(from_node: Vector2, to_node: Vector2): PackedVector2Array;
  * 
  *
 */
-get_connection_list_from_node(node: StringName): Dictionary[];
+get_connection_list_from_node(node: StringName): Dictionary<any, any>[];
 
 /**
  * Returns an [Array] containing the list of connections that intersect with the given [Rect2].
@@ -335,7 +335,7 @@ get_connection_list_from_node(node: StringName): Dictionary[];
  * 
  *
 */
-get_connections_intersecting_with_rect(rect: Rect2): Dictionary[];
+get_connections_intersecting_with_rect(rect: Rect2): Dictionary<any, any>[];
 
 /** Returns the [GraphFrame] that contains the [GraphElement] with the given name. */
 get_element_frame(element: StringName): GraphFrame;

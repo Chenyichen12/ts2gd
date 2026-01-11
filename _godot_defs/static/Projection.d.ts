@@ -18,7 +18,11 @@ declare class Projection {
  * Used internally as [Camera3D]'s projection matrix.
  *
 */
-  new(): Projection; 
+
+  new(): Projection;
+  new(from: Projection): Projection;
+  new(from: Transform3D): Projection;
+  new(x_axis: Vector4, y_axis: Vector4, z_axis: Vector4, w_axis: Vector4): Projection;
   static "new"(): Projection 
 
 
@@ -158,6 +162,14 @@ jitter_offseted(offset: Vector2): Projection;
  *
 */
 perspective_znear_adjusted(new_znear: float): Projection;
+
+
+
+
+
+
+
+
 
   connect<T extends SignalsOf<Projection>>(signal: T, method: SignalFunction<Projection[T]>): number;
 

@@ -33,7 +33,7 @@ protected _is_playing(): boolean;
  * **Note:** It is not useful to override this method in GDScript or C#. Only GDExtension can take advantage of it.
  *
 */
-protected _mix(buffer: AudioFrame*, rate_scale: float, frames: int): int;
+protected _mix(buffer: CPointer, rate_scale: float, frames: int): int;
 
 /** Override this method to customize what happens when seeking this audio stream at the given [param position], such as by calling [method AudioStreamPlayer.seek]. */
 protected _seek(position: float): void;

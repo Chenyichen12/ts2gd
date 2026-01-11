@@ -95,7 +95,7 @@ protected _confirm_code_completion(replace: boolean): void;
  * Both [param candidates] and the return is an [Array] of [Dictionary], see [method get_code_completion_option] for [Dictionary] content.
  *
 */
-protected _filter_code_completion_candidates(candidates: Dictionary[]): Dictionary[];
+protected _filter_code_completion_candidates(candidates: Dictionary<any, any>[]): Dictionary<any, any>[];
 
 /** Override this method to define what happens when the user requests code completion. If [param force] is [code]true[/code], any checks should be bypassed. */
 protected _request_code_completion(force: boolean): void;
@@ -224,7 +224,7 @@ get_breakpointed_lines(): PackedInt32Array;
 get_code_completion_option(index: int): Dictionary<any, any>;
 
 /** Gets all completion options, see [method get_code_completion_option] for return content. */
-get_code_completion_options(): Dictionary[];
+get_code_completion_options(): Dictionary<any, any>[];
 
 /** Gets the index of the current selected completion option. */
 get_code_completion_selected_index(): int;

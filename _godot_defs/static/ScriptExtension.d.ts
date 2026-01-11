@@ -30,7 +30,7 @@ protected _get_constants(): Dictionary<any, any>;
 protected _get_doc_class_name(): StringName;
 
 /** No documentation provided. */
-protected _get_documentation(): Dictionary[];
+protected _get_documentation(): Dictionary<any, any>[];
 
 /** No documentation provided. */
 protected _get_global_name(): StringName;
@@ -60,13 +60,13 @@ protected _get_rpc_config(): any;
 protected _get_script_method_argument_count(method: StringName): any;
 
 /** No documentation provided. */
-protected _get_script_method_list(): Dictionary[];
+protected _get_script_method_list(): Dictionary<any, any>[];
 
 /** No documentation provided. */
-protected _get_script_property_list(): Dictionary[];
+protected _get_script_property_list(): Dictionary<any, any>[];
 
 /** No documentation provided. */
-protected _get_script_signal_list(): Dictionary[];
+protected _get_script_signal_list(): Dictionary<any, any>[];
 
 /** No documentation provided. */
 protected _get_source_code(): string;
@@ -90,7 +90,7 @@ protected _has_static_method(method: StringName): boolean;
 protected _inherits_script(script: Script): boolean;
 
 /** No documentation provided. */
-protected _instance_create(for_object: Object): void*;
+protected _instance_create(for_object: Object): CPointer;
 
 /** No documentation provided. */
 protected _instance_has(object: Object): boolean;
@@ -108,10 +108,10 @@ protected _is_tool(): boolean;
 protected _is_valid(): boolean;
 
 /** No documentation provided. */
-protected _placeholder_erased(placeholder: void*): void;
+protected _placeholder_erased(placeholder: CPointer): void;
 
 /** No documentation provided. */
-protected _placeholder_instance_create(for_object: Object): void*;
+protected _placeholder_instance_create(for_object: Object): CPointer;
 
 /** No documentation provided. */
 protected _reload(keep_state: boolean): int;

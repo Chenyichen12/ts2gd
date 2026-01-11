@@ -495,6 +495,20 @@ to_rgba32(): int;
 */
 to_rgba64(): int;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   connect<T extends SignalsOf<Color>>(signal: T, method: SignalFunction<Color[T]>): number;
 
 
@@ -1381,8 +1395,21 @@ static YELLOW_GREEN: Color;
 
 declare type Color = ColorConstructor;
 declare var Color: typeof ColorConstructor & {
-    new(): Color; 
+  
+  new(): Color;
+  new(from: Color, alpha: float): Color;
+  new(from: Color): Color;
+  new(code: string): Color;
+  new(code: string, alpha: float): Color;
+  new(r: float, g: float, b: float): Color;
+  new(r: float, g: float, b: float, a: float): Color;
 
-
+  (): Color;
+  (from: Color, alpha: float): Color;
+  (from: Color): Color;
+  (code: string): Color;
+  (code: string, alpha: float): Color;
+  (r: float, g: float, b: float): Color;
+  (r: float, g: float, b: float, a: float): Color;
 
 }

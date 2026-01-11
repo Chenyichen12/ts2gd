@@ -22,7 +22,12 @@ declare class Transform2D {
  * **Note:** Unlike [Transform3D], there is no 2D equivalent to the [Basis] type. All mentions of "basis" refer to the [member x] and [member y] components of [Transform2D].
  *
 */
-  new(): Transform2D; 
+
+  new(): Transform2D;
+  new(from: Transform2D): Transform2D;
+  new(rotation: float, position: Vector2): Transform2D;
+  new(rotation: float, scale: Vector2, skew: float, position: Vector2): Transform2D;
+  new(x_axis: Vector2, y_axis: Vector2, origin: Vector2): Transform2D;
   static "new"(): Transform2D 
 
 
@@ -210,6 +215,16 @@ translated(offset: Vector2): Transform2D;
  *
 */
 translated_local(offset: Vector2): Transform2D;
+
+
+
+
+
+
+
+
+
+
 
   connect<T extends SignalsOf<Transform2D>>(signal: T, method: SignalFunction<Transform2D[T]>): number;
 

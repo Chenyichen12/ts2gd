@@ -18,7 +18,9 @@ declare class RID {
  * **Note:** RIDs are only useful during the current session. It won't correspond to a similar resource if sent over a network, or loaded from a file at a later time.
  *
 */
-  new(): RID; 
+
+  new(): RID;
+  new(from: RID): RID;
   static "new"(): RID 
 
 
@@ -28,6 +30,10 @@ get_id(): int;
 
 /** Returns [code]true[/code] if the [RID] is not [code]0[/code]. */
 is_valid(): boolean;
+
+
+
+
 
   connect<T extends SignalsOf<RID>>(signal: T, method: SignalFunction<RID[T]>): number;
 

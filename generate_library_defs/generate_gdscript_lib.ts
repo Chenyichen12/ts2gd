@@ -163,7 +163,8 @@ export const parseMethod = (
   if(props?.singletons && props.singletons.includes(returnType)){
     returnType = `${returnType}Class`
   }
-  args.forEach((arg)=>{
+
+  args?.forEach((arg)=>{
     if(props?.singletons && props.singletons.includes(arg.$.type)){
       arg.$.type = `${arg.$.type}Class`
     }

@@ -73,7 +73,7 @@ get_rest_info(parameters: PhysicsShapeQueryParameters2D): Dictionary<any, any>;
  * **Note:** [ConcavePolygonShape2D]s and [CollisionPolygon2D]s in `Segments` build mode are not solid shapes. Therefore, they will not be detected.
  *
 */
-intersect_point(parameters: PhysicsPointQueryParameters2D, max_results?: int): Dictionary[];
+intersect_point(parameters: PhysicsPointQueryParameters2D, max_results?: int): Dictionary<any, any>[];
 
 /**
  * Intersects a ray in a given space. Ray position and other parameters are defined through [PhysicsRayQueryParameters2D]. The returned object is a dictionary with the following fields:
@@ -109,7 +109,7 @@ intersect_ray(parameters: PhysicsRayQueryParameters2D): Dictionary<any, any>;
  * The number of intersections can be limited with the [param max_results] parameter, to reduce the processing time.
  *
 */
-intersect_shape(parameters: PhysicsShapeQueryParameters2D, max_results?: int): Dictionary[];
+intersect_shape(parameters: PhysicsShapeQueryParameters2D, max_results?: int): Dictionary<any, any>[];
 
   connect<T extends SignalsOf<PhysicsDirectSpaceState2D>>(signal: T, method: SignalFunction<PhysicsDirectSpaceState2D[T]>): number;
 

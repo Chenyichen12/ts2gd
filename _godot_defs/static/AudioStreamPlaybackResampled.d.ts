@@ -15,7 +15,7 @@ declare class AudioStreamPlaybackResampled extends AudioStreamPlayback  {
 protected _get_stream_sampling_rate(): float;
 
 /** No documentation provided. */
-protected _mix_resampled(dst_buffer: AudioFrame*, frame_count: int): int;
+protected _mix_resampled(dst_buffer: CPointer, frame_count: int): int;
 
 /** No documentation provided. */
 begin_resample(): void;

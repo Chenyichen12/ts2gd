@@ -18,7 +18,11 @@ declare class Vector4i {
  * **Note:** In a boolean context, a Vector4i will evaluate to `false` if it's equal to `Vector4i(0, 0, 0, 0)`. Otherwise, a Vector4i will always evaluate to `true`.
  *
 */
-  new(): Vector4i; 
+
+  new(): Vector4i;
+  new(from: Vector4i): Vector4i;
+  new(from: Vector4): Vector4i;
+  new(x: int, y: int, z: int, w: int): Vector4i;
   static "new"(): Vector4i 
 
 
@@ -91,6 +95,14 @@ snapped(step: Vector4i): Vector4i;
 
 /** Returns a new vector with each component snapped to the closest multiple of [param step]. */
 snappedi(step: int): Vector4i;
+
+
+
+
+
+
+
+
 
   connect<T extends SignalsOf<Vector4i>>(signal: T, method: SignalFunction<Vector4i[T]>): number;
 

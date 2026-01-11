@@ -10,7 +10,14 @@ declare class Plane {
  * Represents a normalized plane equation. [member normal] is the normal of the plane (a, b, c normalized), and [member d] is the distance from the origin to the plane (in the direction of "normal"). "Over" or "Above" the plane is considered the side of the plane towards where the normal is pointing.
  *
 */
-  new(): Plane; 
+
+  new(): Plane;
+  new(from: Plane): Plane;
+  new(a: float, b: float, c: float, d: float): Plane;
+  new(normal: Vector3): Plane;
+  new(normal: Vector3, d: float): Plane;
+  new(normal: Vector3, point: Vector3): Plane;
+  new(point1: Vector3, point2: Vector3, point3: Vector3): Plane;
   static "new"(): Plane 
 
 
@@ -71,6 +78,20 @@ normalized(): Plane;
 
 /** Returns the orthogonal projection of [param point] into a point in the plane. */
 project(point: Vector3): Vector3;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   connect<T extends SignalsOf<Plane>>(signal: T, method: SignalFunction<Plane[T]>): number;
 

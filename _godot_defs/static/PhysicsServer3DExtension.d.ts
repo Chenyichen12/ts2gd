@@ -5,7 +5,7 @@
  * Intended for use with GDExtension to create custom implementations of [PhysicsServer3D].
  *
 */
-declare class PhysicsServer3DExtension extends PhysicsServer3D  {
+declare class PhysicsServer3DExtension extends PhysicsServer3DClass  {
 
   
 /**
@@ -278,7 +278,7 @@ protected _body_set_state_sync_callback(body: RID, callable: Callable): void;
 protected _body_set_user_flags(body: RID, flags: int): void;
 
 /** No documentation provided. */
-protected _body_test_motion(body: RID, from: Transform3D, motion: Vector3, margin: float, max_collisions: int, collide_separation_ray: boolean, recovery_as_collision: boolean, result: PhysicsServer3DExtensionMotionResult*): boolean;
+protected _body_test_motion(body: RID, from: Transform3D, motion: Vector3, margin: float, max_collisions: int, collide_separation_ray: boolean, recovery_as_collision: boolean, result: CPointer): boolean;
 
 /** No documentation provided. */
 protected _box_shape_create(): RID;

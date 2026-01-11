@@ -30,7 +30,10 @@ declare class StringName {
  * **Note:** In a boolean context, a [StringName] will evaluate to `false` if it is empty (`StringName("")`). Otherwise, a [StringName] will always evaluate to `true`.
  *
 */
-  new(): StringName; 
+
+  new(): StringName;
+  new(from: StringName): StringName;
+  new(from: string): StringName;
   static "new"(): StringName 
 
 
@@ -1026,6 +1029,12 @@ xml_escape(escape_quotes?: boolean): string;
 
 /** Returns a copy of the string with escaped characters replaced by their meanings according to the XML standard. */
 xml_unescape(): string;
+
+
+
+
+
+
 
   connect<T extends SignalsOf<StringName>>(signal: T, method: SignalFunction<StringName[T]>): number;
 

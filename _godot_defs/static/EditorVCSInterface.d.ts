@@ -40,16 +40,16 @@ protected _get_branch_list(): String[];
 protected _get_current_branch_name(): string;
 
 /** Returns an array of [Dictionary] items (see [method create_diff_file], [method create_diff_hunk], [method create_diff_line], [method add_line_diffs_into_diff_hunk] and [method add_diff_hunks_into_diff_file]), each containing information about a diff. If [param identifier] is a file path, returns a file diff, and if it is a commit identifier, then returns a commit diff. */
-protected _get_diff(identifier: string, area: int): Dictionary[];
+protected _get_diff(identifier: string, area: int): Dictionary<any, any>[];
 
 /** Returns an [Array] of [Dictionary] items (see [method create_diff_hunk]), each containing a line diff between a file at [param file_path] and the [param text] which is passed in. */
-protected _get_line_diff(file_path: string, text: string): Dictionary[];
+protected _get_line_diff(file_path: string, text: string): Dictionary<any, any>[];
 
 /** Returns an [Array] of [Dictionary] items (see [method create_status_file]), each containing the status data of every modified file in the project folder. */
-protected _get_modified_files_data(): Dictionary[];
+protected _get_modified_files_data(): Dictionary<any, any>[];
 
 /** Returns an [Array] of [Dictionary] items (see [method create_commit]), each containing the data for a past commit. */
-protected _get_previous_commits(max_commits: int): Dictionary[];
+protected _get_previous_commits(max_commits: int): Dictionary<any, any>[];
 
 /** Returns an [Array] of [String]s, each containing the name of a remote configured in the VCS. */
 protected _get_remotes(): String[];
@@ -85,10 +85,10 @@ protected _stage_file(file_path: string): void;
 protected _unstage_file(file_path: string): void;
 
 /** Helper function to add an array of [param diff_hunks] into a [param diff_file]. */
-add_diff_hunks_into_diff_file(diff_file: Dictionary<any, any>, diff_hunks: Dictionary[]): Dictionary<any, any>;
+add_diff_hunks_into_diff_file(diff_file: Dictionary<any, any>, diff_hunks: Dictionary<any, any>[]): Dictionary<any, any>;
 
 /** Helper function to add an array of [param line_diffs] into a [param diff_hunk]. */
-add_line_diffs_into_diff_hunk(diff_hunk: Dictionary<any, any>, line_diffs: Dictionary[]): Dictionary<any, any>;
+add_line_diffs_into_diff_hunk(diff_hunk: Dictionary<any, any>, line_diffs: Dictionary<any, any>[]): Dictionary<any, any>;
 
 /** Helper function to create a commit [Dictionary] item. [param msg] is the commit message of the commit. [param author] is a single human-readable string containing all the author's details, e.g. the email and name configured in the VCS. [param id] is the identifier of the commit, in whichever format your VCS may provide an identifier to commits. [param unix_timestamp] is the UTC Unix timestamp of when the commit was created. [param offset_minutes] is the timezone offset in minutes, recorded from the system timezone where the commit was created. */
 create_commit(msg: string, author: string, id: string, unix_timestamp: int, offset_minutes: int): Dictionary<any, any>;

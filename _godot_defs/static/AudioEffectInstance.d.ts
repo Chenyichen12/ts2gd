@@ -21,7 +21,7 @@ declare class AudioEffectInstance extends RefCounted  {
  * **Note:** It is not useful to override this method in GDScript or C#. Only GDExtension can take advantage of it.
  *
 */
-protected _process(src_buffer: const void*, dst_buffer: AudioFrame*, frame_count: int): void;
+protected _process(src_buffer: CPointer, dst_buffer: CPointer, frame_count: int): void;
 
 /**
  * Override this method to customize the processing behavior of this effect instance.

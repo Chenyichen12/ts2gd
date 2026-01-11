@@ -22,7 +22,12 @@ declare class Rect2i {
  * **Note:** In a boolean context, a [Rect2i] evaluates to `false` if both [member position] and [member size] are zero (equal to [constant Vector2i.ZERO]). Otherwise, it always evaluates to `true`.
  *
 */
-  new(): Rect2i; 
+
+  new(): Rect2i;
+  new(from: Rect2i): Rect2i;
+  new(from: Rect2): Rect2i;
+  new(position: Vector2i, size: Vector2i): Rect2i;
+  new(x: int, y: int, width: int, height: int): Rect2i;
   static "new"(): Rect2i 
 
 
@@ -160,6 +165,16 @@ intersects(b: Rect2i): boolean;
 
 /** Returns a [Rect2i] that encloses both this rectangle and [param b] around the edges. See also [method encloses]. */
 merge(b: Rect2i): Rect2i;
+
+
+
+
+
+
+
+
+
+
 
   connect<T extends SignalsOf<Rect2i>>(signal: T, method: SignalFunction<Rect2i[T]>): number;
 

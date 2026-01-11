@@ -50,7 +50,12 @@ declare class Basis {
  * **Note:** The basis matrices are exposed as [url=https://www.mindcontrol.org/~hplus/graphics/matrix-layout.html]column-major[/url] order, which is the same as OpenGL. However, they are stored internally in row-major order, which is the same as DirectX.
  *
 */
-  new(): Basis; 
+
+  new(): Basis;
+  new(from: Basis): Basis;
+  new(axis: Vector3, angle: float): Basis;
+  new(from: Quaternion): Basis;
+  new(x_axis: Vector3, y_axis: Vector3, z_axis: Vector3): Basis;
   static "new"(): Basis 
 
 
@@ -432,6 +437,16 @@ tdotz(_with: Vector3): float;
  *
 */
 transposed(): Basis;
+
+
+
+
+
+
+
+
+
+
 
   connect<T extends SignalsOf<Basis>>(signal: T, method: SignalFunction<Basis[T]>): number;
 

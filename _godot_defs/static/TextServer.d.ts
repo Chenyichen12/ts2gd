@@ -258,7 +258,7 @@ font_get_script_support_override(font_rid: RID, script: string): boolean;
 font_get_script_support_overrides(font_rid: RID): PackedStringArray;
 
 /** Returns font cache information, each entry contains the following fields: [code]Vector2i size_px[/code] - font size in pixels, [code]float viewport_oversampling[/code] - viewport oversampling factor, [code]int glyphs[/code] - number of rendered glyphs, [code]int textures[/code] - number of used textures, [code]int textures_size[/code] - size of texture data in bytes. */
-font_get_size_cache_info(font_rid: RID): Dictionary[];
+font_get_size_cache_info(font_rid: RID): Dictionary<any, any>[];
 
 /** Returns list of the font sizes in the cache. Each size is [Vector2i] with font size and outline size. */
 font_get_size_cache_list(font_rid: RID): Vector2i[];
@@ -762,7 +762,7 @@ shaped_text_get_dominant_direction_in_range(shaped: RID, start: int, end: int): 
 shaped_text_get_ellipsis_glyph_count(shaped: RID): int;
 
 /** Returns array of the glyphs in the ellipsis. */
-shaped_text_get_ellipsis_glyphs(shaped: RID): Dictionary[];
+shaped_text_get_ellipsis_glyphs(shaped: RID): Dictionary<any, any>[];
 
 /** Returns position of the ellipsis. */
 shaped_text_get_ellipsis_pos(shaped: RID): int;
@@ -771,7 +771,7 @@ shaped_text_get_ellipsis_pos(shaped: RID): int;
 shaped_text_get_glyph_count(shaped: RID): int;
 
 /** Returns an array of glyphs in the visual order. */
-shaped_text_get_glyphs(shaped: RID): Dictionary[];
+shaped_text_get_glyphs(shaped: RID): Dictionary<any, any>[];
 
 /** Returns composite character's bounds as offsets from the start of the line. */
 shaped_text_get_grapheme_bounds(shaped: RID, pos: int): Vector2;
@@ -922,7 +922,7 @@ shaped_text_set_spacing(shaped: RID, spacing: int, value: int): void;
 shaped_text_shape(shaped: RID): boolean;
 
 /** Returns text glyphs in the logical order. */
-shaped_text_sort_logical(shaped: RID): Dictionary[];
+shaped_text_sort_logical(shaped: RID): Dictionary<any, any>[];
 
 /** Returns text buffer for the substring of the text in the [param shaped] text buffer (including inline objects). */
 shaped_text_substr(shaped: RID, start: int, length: int): RID;

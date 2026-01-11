@@ -140,7 +140,10 @@ declare class Callable {
  * 
  *
 */
-  new(): Callable; 
+
+  new(): Callable;
+  new(from: Callable): Callable;
+  new(object: Object, method: StringName): Callable;
   static "new"(): Callable 
 
 
@@ -299,6 +302,12 @@ is_valid(): boolean;
  *
 */
 unbind(argcount: int): Callable;
+
+
+
+
+
+
 
   connect<T extends SignalsOf<Callable>>(signal: T, method: SignalFunction<Callable[T]>): number;
 

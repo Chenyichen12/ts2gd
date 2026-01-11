@@ -73,7 +73,7 @@ get_script_constant_map(): Dictionary<any, any>;
  * **Note:** The dictionaries returned by this method are formatted identically to those returned by [method Object.get_method_list].
  *
 */
-get_script_method_list(): Dictionary[];
+get_script_method_list(): Dictionary<any, any>[];
 
 /**
  * Returns the list of properties in this [Script].
@@ -81,7 +81,7 @@ get_script_method_list(): Dictionary[];
  * **Note:** The dictionaries returned by this method are formatted identically to those returned by [method Object.get_property_list].
  *
 */
-get_script_property_list(): Dictionary[];
+get_script_property_list(): Dictionary<any, any>[];
 
 /**
  * Returns the list of signals defined in this [Script].
@@ -89,7 +89,7 @@ get_script_property_list(): Dictionary[];
  * **Note:** The dictionaries returned by this method are formatted identically to those returned by [method Object.get_signal_list].
  *
 */
-get_script_signal_list(): Dictionary[];
+get_script_signal_list(): Dictionary<any, any>[];
 
 /** Returns [code]true[/code] if the script, or a base class, defines a signal with the given name. */
 has_script_signal(signal_name: StringName): boolean;

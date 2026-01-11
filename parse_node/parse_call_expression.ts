@@ -91,6 +91,7 @@ export const parseCallExpression = (
     }
     return false
   }
+
   if (!isMethodOrFunction(symbol)) {
     return combine({
       parent: node,
@@ -102,6 +103,22 @@ export const parseCallExpression = (
       },
     })
   } else {
+    // if static method
+    // get expression type
+    const decl = symbol?.getDeclarations() ?? []
+    const isStaticMethod = decl.some((d) => {
+      return (
+        (ts.isMethodDeclaration(d) || ts.isMethodSignature(d)) &&
+        d.modifiers?.some(
+          (mod) => mod.kind === ts.SyntaxKind.StaticKeyword
+        )
+      )
+    });
+    if (isStaticMethod) {
+      callFullText = callFullText.replace("self.", ""); // remove self.
+    }
+
+
     if (node.expression.kind === SyntaxKind.PropertyAccessExpression) {
       const prop = node.expression as ts.PropertyAccessExpression
       const type = props.program

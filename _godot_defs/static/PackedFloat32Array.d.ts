@@ -18,7 +18,10 @@ declare class PackedFloat32Array {
  * **Note:** Packed arrays are always passed by reference. To get a copy of an array that can be modified independently of the original array, use [method duplicate]. This is **not** the case for built-in properties and methods. In these cases the returned packed array is a copy, and changing it will **not** affect the original value. To update a built-in property of this type, modify the returned array and then assign it to the property again.
  *
 */
-  new(): PackedFloat32Array; 
+
+  new(): PackedFloat32Array;
+  new(from: PackedFloat32Array): PackedFloat32Array;
+  new(from: any[]): PackedFloat32Array;
   static "new"(): PackedFloat32Array 
 
 
@@ -150,6 +153,12 @@ sort(): void;
  *
 */
 to_byte_array(): PackedByteArray;
+
+
+
+
+
+
 
   connect<T extends SignalsOf<PackedFloat32Array>>(signal: T, method: SignalFunction<PackedFloat32Array[T]>): number;
 
