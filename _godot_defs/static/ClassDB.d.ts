@@ -23,7 +23,7 @@ declare class ClassDBClass extends Object  {
 can_instantiate(_class: StringName): boolean;
 
 /** Calls a static method on a class. */
-class_call_static(...args: any[]): any;
+class_call_static(_class: StringName, method: StringName, ...args: any[]): any;
 
 /** Returns whether the specified [param class] is available or not. */
 class_exists(_class: StringName): boolean;

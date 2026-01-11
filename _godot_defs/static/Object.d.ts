@@ -507,7 +507,7 @@ add_user_signal(signal: string, arguments?: any[]): void;
  * **Note:** In C#, [param method] must be in snake_case when referring to built-in Godot methods. Prefer using the names exposed in the `MethodName` class to avoid allocating a new [StringName] on each call.
  *
 */
-call(...args: any[]): any;
+call(method: StringName, ...args: any[]): any;
 
 /**
  * Calls the [param method] on the object during idle time. Always returns `null`, **not** the method's result.
@@ -549,7 +549,7 @@ call(...args: any[]): any;
  * 
  *
 */
-call_deferred(...args: any[]): any;
+call_deferred(method: StringName, ...args: any[]): any;
 
 /**
  * Calls the [param method] on the object and returns the result. Unlike [method call], this method expects all parameters to be contained inside [param arg_array].

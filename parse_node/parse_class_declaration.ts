@@ -104,9 +104,9 @@ export const parseClassDeclaration = (
   const settersAndGetters = getSettersAndGetters(node.members, props)
   const parsedSetterGetters = settersAndGetters
     .map(({ setter, getter, name, exportText }) => {
-      return `${exportText ?? ""}var ${name} setget ${
-        setter ? name + "_set" : ""
-      }, ${getter ? name + "_get" : ""}`
+      return `${exportText ?? ""}var ${name}:\n${
+        setter ? `\tset(value): ${name}_set(value)\n` : ""
+      }${getter ? `\tget: return ${name}_get()` : ""}`
     })
     .join("\n")
 

@@ -28,7 +28,7 @@ declare class JavaScriptBridgeClass extends Object  {
 create_callback(callable: Callable): JavaScriptObject;
 
 /** Creates a new JavaScript object using the [code]new[/code] constructor. The [param object] must a valid property of the JavaScript [code]window[/code]. See [JavaScriptObject] for usage. */
-create_object(...args: any[]): any;
+create_object(object: string, ...args: any[]): any;
 
 /**
  * Prompts the user to download a file containing the specified [param buffer]. The file will have the given [param name] and [param mime] type.

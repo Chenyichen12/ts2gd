@@ -116,17 +116,13 @@ export const parsePropertyAccessExpression = (
           nullCoalesce = [
             {
               type: "before",
-              line: `var ${lhsName} = ${lhs}`,
-              lineType: ExtraLineType.NullableIntermediateExpression,
-            },
-            {
-              type: "before",
-              line: `var ${exprName} = [funcref(${lhsName}, "${rhs}") if ${lhsName} != null else null, {}, null]`,
-              lineType: ExtraLineType.NullableIntermediateExpression,
+              // line: `var ${exprName} = [funcref(${lhsName}, "${rhs}") if ${lhsName} != null else null, {}, null]`,
+              line: `${lhs} and `,
+              lineType: ExtraLineType.Increment,
             },
           ]
 
-          return exprName
+          return `${lhs}.${rhs}`
         } else {
           exprName = props.scope.createUniqueName()
 

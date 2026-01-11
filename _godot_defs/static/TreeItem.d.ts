@@ -46,7 +46,7 @@ add_button(column: int, button: Texture2D, id?: int, disabled?: boolean, tooltip
 add_child(child: TreeItem): void;
 
 /** Calls the [param method] on the actual TreeItem and its children recursively. Pass parameters as a comma separated list. */
-call_recursive(...args: any[]): void;
+call_recursive(method: StringName, ...args: any[]): void;
 
 /** Removes all buttons from all columns of this item. */
 clear_buttons(): void;

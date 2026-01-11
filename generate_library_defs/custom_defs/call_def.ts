@@ -1,4 +1,4 @@
-
+export const CallDefinition = `
 /**
  * [Callable] is a built-in [Variant] type that represents a function. It can either be a method within an [Object] instance, or a custom callable used for different purposes (see [method is_custom]). Like all [Variant] types, it can be stored in variables and passed to other functions. It is most commonly used for signal callbacks.
  *
@@ -60,7 +60,7 @@
  * @example 
  * 
  * var dictionary = { "hello": "world" }
- * # This will not work, `clear` is treated as a key.
+ * # This will not work, "clear" is treated as a key.
  * tween.tween_callback(dictionary.clear)
  * # This will work.
  * tween.tween_callback(Callable.create(dictionary, "clear"))
@@ -68,7 +68,7 @@
  * 
  *
 */
-declare class Callable {
+declare class Callable<T extends (...args: any[])=> any = ()=>any> {
 
   
 /**
@@ -132,7 +132,7 @@ declare class Callable {
  * @example 
  * 
  * var dictionary = { "hello": "world" }
- * # This will not work, `clear` is treated as a key.
+ * # This will not work, "clear" is treated as a key.
  * tween.tween_callback(dictionary.clear)
  * # This will work.
  * tween.tween_callback(Callable.create(dictionary, "clear"))
@@ -141,10 +141,10 @@ declare class Callable {
  *
 */
 
-  new(): Callable;
-  new(from: Callable): Callable;
+  new(): Callable
+  new(from?: Callable<T>): Callable<T>;
   new(object: Object, method: StringName): Callable;
-  static "new"(): Callable 
+//   static "new"(): Callable 
 
 
 
@@ -154,7 +154,7 @@ declare class Callable {
  * **Note:** When this method is chained with other similar methods, the order in which the argument list is modified is read from right to left.
  *
 */
-bind(): Callable;
+bind(...args: any[]): Callable;
 
 /**
  * Returns a copy of this [Callable] with one or more arguments bound, reading them from an array. When called, the bound arguments are passed **after** the arguments supplied by [method call]. See also [method unbind].
@@ -165,7 +165,7 @@ bind(): Callable;
 bindv(arguments: any[]): Callable;
 
 /** Calls the method represented by this [Callable]. Arguments can be passed and should match the method's signature. */
-call(): any;
+call(...args: Parameters<T>): ReturnType<T>;
 
 /**
  * Calls the method represented by this [Callable] in deferred mode, i.e. at the end of the current frame. Arguments can be passed and should match the method's signature.
@@ -190,7 +190,7 @@ call(): any;
  * See also [method Object.call_deferred].
  *
 */
-call_deferred(): void;
+call_deferred(...args: any[]): void;
 
 /** Calls the method represented by this [Callable]. Unlike [method call], this method expects all arguments to be contained inside the [param arguments] [Array]. */
 callv(arguments: any[]): any;
@@ -256,7 +256,7 @@ get_unbound_arguments_count(): int;
 hash(): int;
 
 /**
- * Returns `true` if this [Callable] is a custom callable. Custom callables are used:
+ * Returns "true" if this [Callable] is a custom callable. Custom callables are used:
  *
  * - for binding/unbinding arguments (see [method bind] and [method unbind]);
  *
@@ -270,9 +270,9 @@ hash(): int;
 is_custom(): boolean;
 
 /**
- * Returns `true` if this [Callable] has no target to call the method on. Equivalent to `callable == Callable()`.
+ * Returns "true" if this [Callable] has no target to call the method on. Equivalent to "callable == Callable()".
  *
- * **Note:** This is **not** the same as `not is_valid()` and using `not is_null()` will **not** guarantee that this callable can be called. Use [method is_valid] instead.
+ * **Note:** This is **not** the same as "not is_valid()" and using "not is_null()" will **not** guarantee that this callable can be called. Use [method is_valid] instead.
  *
 */
 is_null(): boolean;
@@ -304,17 +304,11 @@ is_valid(): boolean;
 unbind(argcount: int): Callable;
 
 
-
-
-
-
-
-  connect<T extends SignalsOf<Callable>>(signal: T, method: SignalFunction<Callable[T]>): number;
-
-
-
-
-
+connect<T extends SignalsOf<Callable>>(signal: T, method: SignalFunction<Callable[T]>): number;
 
 }
 
+
+
+
+`

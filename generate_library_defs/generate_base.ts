@@ -6,6 +6,7 @@ import { Paths } from "../project"
 import { ArrayDefinition } from "./custom_defs/array_def"
 import { DictionaryDefinition } from "./custom_defs/dictionary_def"
 import { PackedSceneDef } from "./custom_defs/packed_scene_def"
+import { CallDefinition } from "./custom_defs/call_def"
 
 export const baseFileContent = `
 
@@ -255,6 +256,7 @@ interface IterableIterator<T> extends Iterator<T> {
 type CPointer = any;
 
 ${ArrayDefinition}
+${CallDefinition}
 ${DictionaryDefinition}
 ${PackedSceneDef}
 

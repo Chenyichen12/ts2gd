@@ -49,7 +49,7 @@ declare class EditorUndoRedoManager extends Object  {
  * If this is the first operation, the [param object] will be used to deduce target undo history.
  *
 */
-add_do_method(...args: any[]): void;
+add_do_method(object: Object, method: StringName, ...args: any[]): void;
 
 /**
  * Register a property value change for "do".
@@ -68,7 +68,7 @@ add_do_reference(object: Object): void;
  * If this is the first operation, the [param object] will be used to deduce target undo history.
  *
 */
-add_undo_method(...args: any[]): void;
+add_undo_method(object: Object, method: StringName, ...args: any[]): void;
 
 /**
  * Register a property value change for "undo".

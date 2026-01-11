@@ -282,6 +282,14 @@ export const parsePropertyDeclaration = (
     node.type
   )
   let typeName = type.symbol?.getName() ?? ""
+  if(type.isUnion()){
+    const unionTypes = type.types.filter(t => t.flags & ts.TypeFlags.Null || t.flags & ts.TypeFlags.Undefined ? false : true)
+    // typeName = unionTypes[0].symbol?.getName() ?? typeName
+    if(unionTypes.length >= 1){
+      typeName = unionTypes[0].symbol?.getName() ?? typeName
+    }
+  }
+
   let typeHintName = typeGodotName
 
   if (isEnumType(type)) {

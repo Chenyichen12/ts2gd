@@ -390,10 +390,10 @@ atr(message: string, context?: StringName): string;
 atr_n(message: string, plural_message: StringName, n: int, context?: StringName): string;
 
 /** This function is similar to [method Object.call_deferred] except that the call will take place when the node thread group is processed. If the node thread group processes in sub-threads, then the call will be done on that thread, right before [constant NOTIFICATION_PROCESS] or [constant NOTIFICATION_PHYSICS_PROCESS], the [method _process] or [method _physics_process] or their internal versions are called. */
-call_deferred_thread_group(...args: any[]): any;
+call_deferred_thread_group(method: StringName, ...args: any[]): any;
 
 /** This function ensures that the calling of this function will succeed, no matter whether it's being done from a thread or not. If called from a thread that is not allowed to call the function, the call will become deferred. Otherwise, the call will go through directly. */
-call_thread_safe(...args: any[]): any;
+call_thread_safe(method: StringName, ...args: any[]): any;
 
 /** Returns [code]true[/code] if this node can automatically translate messages depending on the current locale. See [member auto_translate_mode], [method atr], and [method atr_n]. */
 can_auto_translate(): boolean;

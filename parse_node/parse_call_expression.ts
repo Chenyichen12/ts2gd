@@ -41,14 +41,15 @@ export const parseCallExpression = (
   let callIdentifier: ts.Identifier | undefined = undefined
 
   // callFullText = callFullText.replace("this.", "self.")
-  let callFullText = combine({
+  let propertyAccessContent = combine({
     parent: node,
     nodes: node.expression,
     props,
     parsedStrings: (expr) => {
       return expr
     },
-  }).content
+  })
+  let callFullText = propertyAccessContent.content
 
   if (node.expression.kind === SyntaxKind.PropertyAccessExpression) {
     const prop = node.expression as ts.PropertyAccessExpression
@@ -75,15 +76,15 @@ export const parseCallExpression = (
       }
       // if variable declaration but with declare modifier
       // make it as function
-      if(ts.isVariableDeclaration(decl)){
+      if (ts.isVariableDeclaration(decl)) {
         // is in declaration
         // get origin declaration
-        const statment = decl.parent.parent;
-        if(ts.isVariableStatement(statment)){
-          const tsModifiers = ts.getModifiers(statment) ?? [];
-          for(const mod of tsModifiers){
-            if(mod.kind === ts.SyntaxKind.DeclareKeyword){
-              return true;
+        const statment = decl.parent.parent
+        if (ts.isVariableStatement(statment)) {
+          const tsModifiers = ts.getModifiers(statment) ?? []
+          for (const mod of tsModifiers) {
+            if (mod.kind === ts.SyntaxKind.DeclareKeyword) {
+              return true
             }
           }
         }
@@ -99,7 +100,24 @@ export const parseCallExpression = (
       props,
       parsedStrings: (...parsedArgs) => {
         let parsedArgContents = parsedArgs.join(", ")
-        return callFullText + `.call(${parsedArgContents})`
+        let beforeString = ""
+        let afterString = ""
+        if (propertyAccessContent.extraLines) {
+          for (const line of propertyAccessContent.extraLines) {
+            if (line.type === "before") {
+              beforeString += line.line + "\n"
+            }
+            if (line.type === "after") {
+              afterString += "\n" + line.line
+            }
+          }
+        }
+        return (
+          beforeString +
+          callFullText +
+          `.call(${parsedArgContents})` +
+          afterString
+        )
       },
     })
   } else {
@@ -109,46 +127,55 @@ export const parseCallExpression = (
     const isStaticMethod = decl.some((d) => {
       return (
         (ts.isMethodDeclaration(d) || ts.isMethodSignature(d)) &&
-        d.modifiers?.some(
-          (mod) => mod.kind === ts.SyntaxKind.StaticKeyword
-        )
+        d.modifiers?.some((mod) => mod.kind === ts.SyntaxKind.StaticKeyword)
       )
-    });
+    })
     if (isStaticMethod) {
-      callFullText = callFullText.replace("self.", ""); // remove self.
+      callFullText = callFullText.replace("self.", "") // remove self.
     }
 
-
-    if (node.expression.kind === SyntaxKind.PropertyAccessExpression) {
-      const prop = node.expression as ts.PropertyAccessExpression
-      const type = props.program
-        .getTypeChecker()
-        .getTypeAtLocation(prop.expression)
-      const typeAsString = props.program.getTypeChecker().typeToString(type)
-      if (
-        typeAsString === "Vector2Constructor" ||
-        typeAsString === "Vector2iConstructor" ||
-        typeAsString === "Vector3Constructor" ||
-        typeAsString === "Vector3iConstructor"
-      ) {
-        return combine({
-          parent: node,
-          nodes: [...args],
-          props,
-          parsedStrings: (...parsedArgs) => {
-            let parsedArgContents = parsedArgs.join(", ")
-            return callFullText + parsedArgContents
-          }
-        })
-      }
-    }
+    // if (node.expression.kind === SyntaxKind.PropertyAccessExpression) {
+    //   const prop = node.expression as ts.PropertyAccessExpression
+    //   const type = props.program
+    //     .getTypeChecker()
+    //     .getTypeAtLocation(prop.expression)
+    //   const typeAsString = props.program.getTypeChecker().typeToString(type)
+    //   if (
+    //     typeAsString === "Vector2Constructor" ||
+    //     typeAsString === "Vector2iConstructor" ||
+    //     typeAsString === "Vector3Constructor" ||
+    //     typeAsString === "Vector3iConstructor"
+    //   ) {
+    //     return combine({
+    //       parent: node,
+    //       nodes: [...args],
+    //       props,
+    //       parsedStrings: (...parsedArgs) => {
+    //         let parsedArgContents = parsedArgs.join(", ")
+    //         return callFullText + parsedArgContents
+    //       }
+    //     })
+    //   }
+    // }
     return combine({
       parent: node,
       nodes: [...args],
       props,
       parsedStrings: (...parsedArgs) => {
         let parsedArgContents = parsedArgs.join(", ")
-        return callFullText + `(${parsedArgContents})`
+        let beforeString = ""
+        let afterString = ""
+        if (propertyAccessContent.extraLines) {
+          for (const line of propertyAccessContent.extraLines) {
+            if (line.type === "before" && line.lineType === ExtraLineType.Increment) {
+              beforeString += line.line;
+            }
+            if (line.type === "after" && line.lineType === ExtraLineType.Increment) {
+              afterString += line.line;
+            }
+          }
+        }
+        return beforeString + callFullText + `(${parsedArgContents})` + afterString
       },
     })
   }

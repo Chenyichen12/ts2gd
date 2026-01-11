@@ -403,6 +403,9 @@ declare var ${className}: typeof ${className}Constructor & {
       if(fileName === "Signal.xml") {
         continue
       }
+      if(fileName === "Callable.xml") {
+        continue
+      }
 
       const result = await this.parseFile(fullPath, singletons)
 

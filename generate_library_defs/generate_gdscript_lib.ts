@@ -155,7 +155,7 @@ export const parseMethod = (
   const generateAsGlobal = props?.generateAsGlobals ?? false
   const name = method.$.name
   const args = method.param;
-  const isVarArgs = method.$.qualifiers === "vararg"
+  const isVarArgs = method.$.qualifiers?.includes("vararg") ?? false 
   const isConstructor =
     containingClassName !== undefined && name === containingClassName
   const docString = formatJsDoc(method.description[0].trim())
@@ -174,7 +174,10 @@ export const parseMethod = (
 
   if (args || isVarArgs) {
     if (isVarArgs) {
-      argumentList = "...args: any[]"
+      if(args){
+        argumentList = argsToString(args).join(", ") + ", "
+      }
+      argumentList += "...args: any[]"
     } else {
       argumentList = argsToString(args).join(", ")
     }

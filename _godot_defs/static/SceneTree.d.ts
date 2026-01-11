@@ -122,7 +122,7 @@ root: Window;
  * **Note:** In C#, [param method] must be in snake_case when referring to built-in Godot methods. Prefer using the names exposed in the `MethodName` class to avoid allocating a new [StringName] on each call.
  *
 */
-call_group(...args: any[]): void;
+call_group(group: keyof Groups, method: StringName, ...args: any[]): void;
 
 /**
  * Calls the given [param method] on each node inside this tree added to the given [param group]. Use [param flags] to customize this method's behavior (see [enum GroupCallFlags]). Additional arguments for [param method] can be passed at the end of this method. Nodes that cannot call [param method] (either because the method doesn't exist or the arguments do not match) are ignored.
@@ -139,7 +139,7 @@ call_group(...args: any[]): void;
  * **Note:** In C#, [param method] must be in snake_case when referring to built-in Godot methods. Prefer using the names exposed in the `MethodName` class to avoid allocating a new [StringName] on each call.
  *
 */
-call_group_flags(...args: any[]): void;
+call_group_flags(flags: int, group: keyof Groups, method: StringName, ...args: any[]): void;
 
 /**
  * Changes the running scene to the one at the given [param path], after loading it into a [PackedScene] and creating a new instance.
