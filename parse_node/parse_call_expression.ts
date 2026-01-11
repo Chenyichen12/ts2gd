@@ -73,6 +73,21 @@ export const parseCallExpression = (
       ) {
         return true
       }
+      // if variable declaration but with declare modifier
+      // make it as function
+      if(ts.isVariableDeclaration(decl)){
+        // is in declaration
+        // get origin declaration
+        const statment = decl.parent.parent;
+        if(ts.isVariableStatement(statment)){
+          const tsModifiers = ts.getModifiers(statment) ?? [];
+          for(const mod of tsModifiers){
+            if(mod.kind === ts.SyntaxKind.DeclareKeyword){
+              return true;
+            }
+          }
+        }
+      }
     }
     return false
   }

@@ -227,6 +227,15 @@ with either "int" or "float".`
   if (tsTypeName === "boolean") {
     return "bool"
   }
+  if(tsTypeName === "Vector2" || tsTypeName === "Vector2Constructor"){
+    return "Vector2"
+  }
+  if(tsTypeName === "Vector3" || tsTypeName === "Vector3Constructor"){
+    return "Vector3"
+  }
+  if(tsTypeName === "Color" || tsTypeName === "ColorConstructor"){
+    return "Color"
+  }
 
   if (tsTypeName.startsWith("IterableIterator")) {
     return "Array"

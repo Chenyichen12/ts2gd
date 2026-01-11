@@ -157,16 +157,19 @@ export const isDecoratedAsExportFlags = (
   )
 }
 
-function getTypeFullName(type: ts.TypeReferenceNode, props: ParseState): string {
+function getTypeFullName(
+  type: ts.TypeReferenceNode,
+  props: ParseState
+): string {
   function getIdName(node: ts.EntityName, props: ParseState): string {
-    if(ts.isIdentifier(node)){
-      if(props.preserveTypeMap.has(node.getText())){
+    if (ts.isIdentifier(node)) {
+      if (props.preserveTypeMap.has(node.getText())) {
         return props.preserveTypeMap.get(node.getText())!
-      }else{
+      } else {
         return node.getText()
       }
     }
-    if(ts.isQualifiedName(node)){
+    if (ts.isQualifiedName(node)) {
       SyntaxKind.QualifiedName
       const leftName = getIdName(node.left, props)
       const rightName = getIdName(node.right, props)
@@ -174,11 +177,9 @@ function getTypeFullName(type: ts.TypeReferenceNode, props: ParseState): string 
     }
     return ""
   }
-  const typeNode = type.typeName;
+  const typeNode = type.typeName
   return getIdName(typeNode!, props)
 }
-
-
 
 export const parseExportFlags = (
   node:
@@ -314,17 +315,30 @@ export const parsePropertyDeclaration = (
 
   const decs = ts.getDecorators(node)
 
-  const decsText = decs?.map((dec) => {
-    let text = dec.getText()
-    if(text.startsWith("@exports")) {
-      text = text.replace("@exports", "@export")
-    }
-    return text
-  }).join("\n") ?? ""
+  const decsText =
+    decs
+      ?.map((dec) => {
+        let text = dec.getText()
+        if (text.startsWith("@exports")) {
+          text = text.replace("@exports", "@export")
+        }
+        return text
+      })
+      .join("\n") ?? ""
   let decsType = typeHintName ?? undefined
   if (decsType == undefined) {
-    const typeCustomName = props.program.getTypeChecker().typeToString(type)
+    const tc = props.program.getTypeChecker()
+    const typeCustomName = tc.typeToString(type)
     decsType = props.preserveTypeMap.get(typeCustomName)
+  }
+
+  if (decsType == undefined) {
+    if(typeName == "default" || typeName == "any" || typeName == "unknown"){
+      decsType = "Variant"
+    }
+    else{
+      decsType = typeName;
+    }
   }
 
   // if(decsType == undefined){
@@ -340,7 +354,6 @@ export const parsePropertyDeclaration = (
   //   const symbol = props.program
   //     .getTypeChecker()
   //     .getSymbolAtLocation(node.type)
-    
 
   //   const declarations = symbol?.getDeclarations()
   //   const isInterface = declarations?.some(
@@ -350,7 +363,6 @@ export const parsePropertyDeclaration = (
   //     decsType = typeName;
   //   }
   // }
-  decsType = decsType ?? "RefCounted"
 
   // if (decsType == undefined || decsType == null) {
   //   var ignoreTypeUse = props.ignoreTypeUses.find(
@@ -376,7 +388,9 @@ export const parsePropertyDeclaration = (
     parsedStrings: (initializer, name) => {
       return `
 ${decsText}
-${isStatic ? "static " : ""}var ${name}: ${decsType}${initializer ? ` = ${initializer}` : ""}
+${isStatic ? "static " : ""}var ${name}: ${decsType}${
+        initializer ? ` = ${initializer}` : ""
+      }
       `
     },
   })
