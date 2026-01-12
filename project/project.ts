@@ -125,6 +125,7 @@ export class TsGdProject {
     | AssetGlb
     | null {
     //TODO: move these checks to the asset classes in static methods
+    const ext = path.split(".").pop()?.toLowerCase()
     if (path.endsWith(".ts")) {
       return new AssetSourceFile(path, this)
     } else if (path.endsWith(".tscn")) {
@@ -136,10 +137,7 @@ export class TsGdProject {
     } else if (path.endsWith(".glb")) {
       return new AssetGlb(path, this)
     } else if (
-      path.endsWith(".png") ||
-      path.endsWith(".gif") ||
-      path.endsWith(".bmp") ||
-      path.endsWith(".jpg")
+      AssetImage.extensions().includes("." + ext || "")
     ) {
       return new AssetImage(path, this)
     }
