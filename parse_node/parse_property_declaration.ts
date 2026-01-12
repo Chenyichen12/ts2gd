@@ -282,12 +282,28 @@ export const parsePropertyDeclaration = (
     node.type
   )
   let typeName = type.symbol?.getName() ?? ""
-  if(type.isUnion()){
-    const unionTypes = type.types.filter(t => t.flags & ts.TypeFlags.Null || t.flags & ts.TypeFlags.Undefined ? false : true)
-    // typeName = unionTypes[0].symbol?.getName() ?? typeName
-    if(unionTypes.length >= 1){
-      typeName = unionTypes[0].symbol?.getName() ?? typeName
+  let firstSelect: ts.Type = type
+  if (type.isUnion()) {
+    const unionTypes = type.types.filter((t) =>
+      t.flags & ts.TypeFlags.Null || t.flags & ts.TypeFlags.Undefined
+        ? false
+        : true
+    )
+    if (unionTypes.length >= 1) {
+      firstSelect = unionTypes[0]
     }
+  }
+  let isInterface = false
+  for (const decl of firstSelect.symbol?.declarations ?? []) {
+    if (ts.isInterfaceDeclaration(decl)) {
+      isInterface = true
+      break
+    }
+  }
+  if (!isInterface) {
+    typeName = firstSelect.symbol?.getName() ?? typeName
+  } else {
+    typeName = "Variant"
   }
 
   let typeHintName = typeGodotName
@@ -341,11 +357,10 @@ export const parsePropertyDeclaration = (
   }
 
   if (decsType == undefined) {
-    if(typeName == "default" || typeName == "any" || typeName == "unknown"){
+    if (typeName == "default" || typeName == "any" || typeName == "unknown") {
       decsType = "Variant"
-    }
-    else{
-      decsType = typeName;
+    } else {
+      decsType = typeName
     }
   }
 
