@@ -37,7 +37,19 @@ export const parseMethodDeclaration = (
     parent: node,
     nodes: node.parameters,
     props,
-    parsedStrings: (...params) => params.join(", "),
+
+    parsedStrings: (...params) => {
+      const combinedParams: string[] = []
+      for(let i = 0; i < params.length; i++) {
+        if(node.parameters[i].questionToken){
+          combinedParams.push(params[i] + " = null")
+        }
+        else{
+          combinedParams.push(params[i])
+        }
+      }
+      return combinedParams.join(", ")
+    },
   })
 
   let result = combine({

@@ -236,6 +236,10 @@ with either "int" or "float".`
   if(tsTypeName === "Color" || tsTypeName === "ColorConstructor"){
     return "Color"
   }
+  // regex catch for Callable<...>
+  if(/^Callable<.*>$/.test(tsTypeName) || /^CallableConstructor<.*>$/.test(tsTypeName)){
+    return "Callable"
+  }
 
   if (tsTypeName.startsWith("IterableIterator")) {
     return "Array"

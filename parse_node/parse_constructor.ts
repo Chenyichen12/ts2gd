@@ -9,10 +9,14 @@ export const parseConstructor = (
   if (node.body) {
     // The trim() is for a constructor with only one element: a super() call
     let paramString = ""
-    for(let i = 0; i < node.parameters.length; i++) {
+    for (let i = 0; i < node.parameters.length; i++) {
       const param = node.parameters[i]
       const paramName = param.name.getText()
-      paramString += paramName
+      if (param.questionToken) {
+        paramString += paramName + " = null"
+      } else {
+        paramString += paramName
+      }
       if (i < node.parameters.length - 1) {
         paramString += ", "
       }
