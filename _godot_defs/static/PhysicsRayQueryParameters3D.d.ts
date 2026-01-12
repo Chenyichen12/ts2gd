@@ -54,7 +54,7 @@ to: Vector3;
  * 
  *
 */
-create(from: Vector3, to: Vector3, collision_mask?: int, exclude?: RID[]): PhysicsRayQueryParameters3D;
+static create(from: Vector3, to: Vector3, collision_mask?: int, exclude?: RID[]): PhysicsRayQueryParameters3D;
 
   connect<T extends SignalsOf<PhysicsRayQueryParameters3D>>(signal: T, method: SignalFunction<PhysicsRayQueryParameters3D[T]>): number;
 

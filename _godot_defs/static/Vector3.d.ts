@@ -177,7 +177,7 @@ move_toward(to: Vector3, delta: float): Vector3;
 normalized(): Vector3;
 
 /** Returns the [Vector3] from an octahedral-compressed form created using [method octahedron_encode] (stored as a [Vector2]). */
-octahedron_decode(uv: Vector2): Vector3;
+static octahedron_decode(uv: Vector2): Vector3;
 
 /**
  * Returns the octahedral-encoded (oct32) form of this [Vector3] as a [Vector2]. Since a [Vector2] occupies 1/3 less memory compared to [Vector3], this form of compression can be used to pass greater amounts of [method normalized] [Vector3]s without increasing storage or memory requirements. See also [method octahedron_decode].

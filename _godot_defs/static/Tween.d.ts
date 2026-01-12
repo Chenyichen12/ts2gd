@@ -305,7 +305,7 @@ get_total_elapsed_time(): float;
  * **Note:** If [param duration] is equal to `0`, the method will always return the final value, regardless of [param elapsed_time] provided.
  *
 */
-interpolate_value(initial_value: any, delta_value: any, elapsed_time: float, duration: float, trans_type: int, ease_type: int): any;
+static interpolate_value(initial_value: any, delta_value: any, elapsed_time: float, duration: float, trans_type: int, ease_type: int): any;
 
 /** Returns whether the [Tween] is currently running, i.e. it wasn't paused and it's not finished. */
 is_running(): boolean;

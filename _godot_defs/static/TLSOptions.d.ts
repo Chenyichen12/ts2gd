@@ -55,7 +55,7 @@ declare class TLSOptions extends RefCounted  {
  * **Note:** On the Web platform, TLS verification is always enforced against the CA list of the web browser. This is considered a security feature.
  *
 */
-client(trusted_chain?: X509Certificate, common_name_override?: string): TLSOptions;
+static client(trusted_chain?: X509Certificate, common_name_override?: string): TLSOptions;
 
 /**
  * Creates an **unsafe** TLS client configuration where certificate validation is optional. You can optionally provide a valid [param trusted_chain], but the common name of the certificates will never be checked. Using this configuration for purposes other than testing **is not recommended**.
@@ -63,7 +63,7 @@ client(trusted_chain?: X509Certificate, common_name_override?: string): TLSOptio
  * **Note:** On the Web platform, TLS verification is always enforced against the CA list of the web browser. This is considered a security feature.
  *
 */
-client_unsafe(trusted_chain?: X509Certificate): TLSOptions;
+static client_unsafe(trusted_chain?: X509Certificate): TLSOptions;
 
 /** Returns the common name (domain name) override specified when creating with [method TLSOptions.client]. */
 get_common_name_override(): string;
@@ -89,7 +89,7 @@ is_unsafe_client(): boolean;
  * **Note:** The [param certificate] should include the full certificate chain up to the signing CA (certificates file can be concatenated using a general purpose text editor).
  *
 */
-server(key: CryptoKey, certificate: X509Certificate): TLSOptions;
+static server(key: CryptoKey, certificate: X509Certificate): TLSOptions;
 
   connect<T extends SignalsOf<TLSOptions>>(signal: T, method: SignalFunction<TLSOptions[T]>): number;
 

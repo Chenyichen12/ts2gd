@@ -122,7 +122,7 @@ casecmp_to(to: string): int;
  * See also [method unicode_at], [method @GDScript.char], and [method @GDScript.ord].
  *
 */
-chr(code: int): string;
+static chr(code: int): string;
 
 /**
  * Returns `true` if the string contains [param what]. In GDScript, this corresponds to the `in` operator.
@@ -416,7 +416,7 @@ hex_to_int(): int;
  * The result is in [url=https://en.wikipedia.org/wiki/Binary_prefix#IEC_prefixes]IEC prefix format[/url], which may end in either `"B"`, `"KiB"`, `"MiB"`, `"GiB"`, `"TiB"`, `"PiB"`, or `"EiB"`.
  *
 */
-humanize_size(size: int): string;
+static humanize_size(size: int): string;
 
 /**
  * Indents every line of the string with the given [param prefix]. Empty lines are not indented. See also [method dedent] to remove indentation.
@@ -694,7 +694,7 @@ nocasecmp_to(to: string): int;
  * 
  *
 */
-num(number: float, decimals?: int): string;
+static num(number: float, decimals?: int): string;
 
 /**
  * Converts the given [param number] to a string representation, with the given [param base].
@@ -704,7 +704,7 @@ num(number: float, decimals?: int): string;
  * If [param capitalize_hex] is `true`, digits higher than 9 are represented in uppercase.
  *
 */
-num_int64(number: int, base?: int, capitalize_hex?: boolean): string;
+static num_int64(number: int, base?: int, capitalize_hex?: boolean): string;
 
 /**
  * Converts the given [param number] to a string representation, in scientific notation.
@@ -729,7 +729,7 @@ num_int64(number: int, base?: int, capitalize_hex?: boolean): string;
  * **Note:** In C#, this method is not implemented. To achieve similar results, see C#'s [url=https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings]Standard numeric format strings[/url].
  *
 */
-num_scientific(number: float): string;
+static num_scientific(number: float): string;
 
 /**
  * Converts the given unsigned [int] to a string representation, with the given [param base].
@@ -739,7 +739,7 @@ num_scientific(number: float): string;
  * If [param capitalize_hex] is `true`, digits higher than 9 are represented in uppercase.
  *
 */
-num_uint64(number: int, base?: int, capitalize_hex?: boolean): string;
+static num_uint64(number: int, base?: int, capitalize_hex?: boolean): string;
 
 /** Formats the string representing a number to have an exact number of [param digits] [i]after[/i] the decimal point. */
 pad_decimals(digits: int): string;

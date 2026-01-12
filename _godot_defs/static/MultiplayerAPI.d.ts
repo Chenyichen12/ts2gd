@@ -30,10 +30,10 @@ declare class MultiplayerAPI extends RefCounted  {
 multiplayer_peer: MultiplayerPeer;
 
 /** Returns a new instance of the default MultiplayerAPI. */
-create_default_interface(): MultiplayerAPI;
+static create_default_interface(): MultiplayerAPI;
 
 /** Returns the default MultiplayerAPI implementation class name. This is usually [code]"SceneMultiplayer"[/code] when [SceneMultiplayer] is available. See [method set_default_interface]. */
-get_default_interface(): StringName;
+static get_default_interface(): StringName;
 
 /** Returns the peer IDs of all connected peers of this MultiplayerAPI's [member multiplayer_peer]. */
 get_peers(): PackedInt32Array;
@@ -82,7 +82,7 @@ poll(): int;
 
 
 /** Sets the default MultiplayerAPI implementation class. This method can be used by modules and extensions to configure which implementation will be used by [SceneTree] when the engine starts. */
-set_default_interface(interface_name: StringName): void;
+static set_default_interface(interface_name: StringName): void;
 
   connect<T extends SignalsOf<MultiplayerAPI>>(signal: T, method: SignalFunction<MultiplayerAPI[T]>): number;
 

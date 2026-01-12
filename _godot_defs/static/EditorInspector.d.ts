@@ -53,7 +53,7 @@ get_edited_object(): Object;
 get_selected_path(): string;
 
 /** Creates a property editor that can be used by plugin UI to edit the specified property of an [param object]. */
-instantiate_property_editor(object: Object, type: int, path: string, hint: int, hint_text: string, usage: int, wide?: boolean): EditorProperty;
+static instantiate_property_editor(object: Object, type: int, path: string, hint: int, hint_text: string, usage: int, wide?: boolean): EditorProperty;
 
   connect<T extends SignalsOf<EditorInspector>>(signal: T, method: SignalFunction<EditorInspector[T]>): number;
 

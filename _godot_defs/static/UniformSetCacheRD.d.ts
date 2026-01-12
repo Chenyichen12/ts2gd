@@ -16,7 +16,7 @@ declare class UniformSetCacheRD extends Object  {
 
 
 /** Creates/returns a cached uniform set based on the provided uniforms for a given shader. */
-get_cache(shader: RID, set: int, uniforms: RDUniform[]): RID;
+static get_cache(shader: RID, set: int, uniforms: RDUniform[]): RID;
 
   connect<T extends SignalsOf<UniformSetCacheRD>>(signal: T, method: SignalFunction<UniformSetCacheRD[T]>): number;
 

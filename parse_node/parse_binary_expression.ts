@@ -55,16 +55,22 @@ export const parseBinaryExpression = (
           leftTypeString.includes("|")
         ) {
           // TODO: We should cache the left and right expressions - we evaluate them twice rn
-
-          return `((typeof(${left}) == typeof(${right})) and (${left} == ${right}))`
+          if(operatorToken === "==") {
+            return `(${left} == ${right})`
+          }else{
+            return `((typeof(${left}) == typeof(${right})) and (${left} == ${right}))`
+          }
         }
       }
 
       if (operatorToken === "!=" || operatorToken === "!==") {
         if (leftTypeString !== rightTypeString) {
           // TODO: We should cache the left and right expressions - we evaluate them twice rn
-
-          return `((typeof(${left}) != typeof(${right})) or ((typeof(${left}) == typeof(${right})) and (${left} != ${right})))`
+          if(operatorToken === "!=") {
+            return `(${left} != ${right})`
+          }else{
+            return `((typeof(${left}) != typeof(${right})) or ((typeof(${left}) == typeof(${right})) and (${left} != ${right})))`
+          }
         }
       }
 

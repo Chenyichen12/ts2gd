@@ -137,7 +137,7 @@ darkened(amount: float): Color;
  * 
  *
 */
-from_hsv(h: float, s: float, v: float, alpha?: float): Color;
+static from_hsv(h: float, s: float, v: float, alpha?: float): Color;
 
 /**
  * Constructs a color from an [url=https://bottosson.github.io/posts/colorpicker/]OK HSL profile[/url]. The hue ([param h]), saturation ([param s]), and lightness ([param l]) are typically between 0.0 and 1.0.
@@ -154,7 +154,7 @@ from_hsv(h: float, s: float, v: float, alpha?: float): Color;
  * 
  *
 */
-from_ok_hsl(h: float, s: float, l: float, alpha?: float): Color;
+static from_ok_hsl(h: float, s: float, l: float, alpha?: float): Color;
 
 /**
  * Returns a [Color] constructed from red ([param r8]), green ([param g8]), blue ([param b8]), and optionally alpha ([param a8]) integer channels, each divided by `255.0` for their final value.
@@ -170,10 +170,10 @@ from_ok_hsl(h: float, s: float, l: float, alpha?: float): Color;
  * **Note:** Due to the lower precision of [method from_rgba8] compared to the standard [Color] constructor, a color created with [method from_rgba8] will generally not be equal to the same color created with the standard [Color] constructor. Use [method is_equal_approx] for comparisons to avoid issues with floating-point precision error.
  *
 */
-from_rgba8(r8: int, g8: int, b8: int, a8?: int): Color;
+static from_rgba8(r8: int, g8: int, b8: int, a8?: int): Color;
 
 /** Decodes a [Color] from an RGBE9995 format integer. See [constant Image.FORMAT_RGBE9995]. */
-from_rgbe9995(rgbe: int): Color;
+static from_rgbe9995(rgbe: int): Color;
 
 /**
  * Creates a [Color] from the given string, which can be either an HTML color code or a named color (case-insensitive). Returns [param default] if the color cannot be inferred from the string.
@@ -181,7 +181,7 @@ from_rgbe9995(rgbe: int): Color;
  * If you want to create a color from String in a constant expression, use the equivalent constructor instead (i.e. `Color("color string")`).
  *
 */
-from_string(str: string, _default: Color): Color;
+static from_string(str: string, _default: Color): Color;
 
 /**
  * Returns the light intensity of the color, as a value between 0.0 and 1.0 (inclusive). This is useful when determining light or dark color. Colors with a luminance smaller than 0.5 can be generally considered dark.
@@ -214,7 +214,7 @@ get_luminance(): float;
  * If you want to use hex notation in a constant expression, use the equivalent constructor instead (i.e. `Color(0xRRGGBBAA)`).
  *
 */
-hex(hex: int): Color;
+static hex(hex: int): Color;
 
 /**
  * Returns the [Color] associated with the provided [param hex] integer in 64-bit RGBA format (16 bits per channel). This method is the inverse of [method to_rgba64].
@@ -222,7 +222,7 @@ hex(hex: int): Color;
  * In GDScript and C#, the [int] is best visualized with hexadecimal notation (`"0x"` prefix, making it `"0xRRRRGGGGBBBBAAAA"`).
  *
 */
-hex64(hex: int): Color;
+static hex64(hex: int): Color;
 
 /**
  * Returns a new color from [param rgba], an HTML hexadecimal color string. [param rgba] is not case-sensitive, and may be prefixed by a hash sign (`#`).
@@ -245,7 +245,7 @@ hex64(hex: int): Color;
  * 
  *
 */
-html(rgba: string): Color;
+static html(rgba: string): Color;
 
 /**
  * Returns `true` if [param color] is a valid HTML hexadecimal color string. The string must be a hexadecimal value (case-insensitive) of either 3, 4, 6 or 8 digits, and may be prefixed by a hash sign (`#`). This method is identical to [method String.is_valid_html_color].
@@ -272,7 +272,7 @@ html(rgba: string): Color;
  * 
  *
 */
-html_is_valid(color: string): boolean;
+static html_is_valid(color: string): boolean;
 
 /**
  * Returns the color with its [member r], [member g], and [member b] components inverted (`(1 - r, 1 - g, 1 - b, a)`).

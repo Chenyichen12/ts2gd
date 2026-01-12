@@ -152,7 +152,8 @@ ${Object.keys(enums)
         isConstructor: true,
         docString: ctorInfo.docString,
         returnType: ctorInfo.returnType,
-        isAbstract: false
+        isAbstract: false,
+        isStatic: false
       })
     }
 
@@ -356,10 +357,13 @@ declare var ${className}: typeof ${className}Constructor & {
     const globalFunctions = await generateGdscriptLib(
       path.join(this.paths.gdscriptPath, "@GDScript.xml")
     )
+    const globalFunctions2 = await generateGdscriptLib(
+      path.join(this.paths.normalClassesPath, "@GlobalScope.xml")
+    )
 
     fs.writeFileSync(
       path.join(this.paths.staticGodotDefsPath, "@global_functions.d.ts"),
-      globalFunctions
+      globalFunctions + "\n" + globalFunctions2
     )
 
     const xmlPaths = [

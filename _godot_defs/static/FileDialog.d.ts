@@ -160,7 +160,7 @@ clear_filters(): void;
 deselect_all(): void;
 
 /** Returns the list of favorite directories, which is shared by all [FileDialog] nodes. Useful to store the list of favorites between project sessions. This method can be called only from the main thread. */
-get_favorite_list(): PackedStringArray;
+static get_favorite_list(): PackedStringArray;
 
 /**
  * Returns the LineEdit for the selected file.
@@ -180,7 +180,7 @@ get_option_name(option: int): string;
 get_option_values(option: int): PackedStringArray;
 
 /** Returns the list of recent directories, which is shared by all [FileDialog] nodes. Useful to store the list of recents between project sessions. This method can be called only from the main thread. */
-get_recent_list(): PackedStringArray;
+static get_recent_list(): PackedStringArray;
 
 /** Returns a [Dictionary] with the selected values of the additional [OptionButton]s and/or [CheckBox]es. [Dictionary] keys are names and values are selected value indices. */
 get_selected_options(): Dictionary<any, any>;
@@ -218,10 +218,10 @@ set_customization_flag_enabled(flag: int, enabled: boolean): void;
  * **Note:** [FileDialog] will update its internal [ItemList] of favorites when its visibility changes. Be sure to call this method earlier if you want your changes to have effect.
  *
 */
-set_favorite_list(favorites: PackedStringArray): void;
+static set_favorite_list(favorites: PackedStringArray): void;
 
 /** Sets the callback used by the [FileDialog] nodes to get a file icon, when [constant DISPLAY_LIST] mode is used. The callback should take a single [String] argument (file path), and return a [Texture2D]. If an invalid texture is returned, the [theme_item file] icon will be used instead. */
-set_get_icon_callback(callback: Callable): void;
+static set_get_icon_callback(callback: Callable): void;
 
 /**
  * Sets the callback used by the [FileDialog] nodes to get a file icon, when [constant DISPLAY_THUMBNAILS] mode is used. The callback should take a single [String] argument (file path), and return a [Texture2D]. If an invalid texture is returned, the [theme_item file_thumbnail] icon will be used instead.
@@ -243,7 +243,7 @@ set_get_icon_callback(callback: Callable): void;
  * 
  *
 */
-set_get_thumbnail_callback(callback: Callable): void;
+static set_get_thumbnail_callback(callback: Callable): void;
 
 /** Sets the default value index of the [OptionButton] or [CheckBox] with index [param option]. */
 set_option_default(option: int, default_value_index: int): void;
@@ -260,7 +260,7 @@ set_option_values(option: int, values: PackedStringArray): void;
  * **Note:** [FileDialog] will update its internal [ItemList] of recent directories when its visibility changes. Be sure to call this method earlier if you want your changes to have effect.
  *
 */
-set_recent_list(recents: PackedStringArray): void;
+static set_recent_list(recents: PackedStringArray): void;
 
   connect<T extends SignalsOf<FileDialog>>(signal: T, method: SignalFunction<FileDialog[T]>): number;
 

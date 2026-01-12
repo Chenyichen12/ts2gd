@@ -39,7 +39,7 @@ create_id(): int;
 create_id_for_path(path: string): int;
 
 /** Returns a path, converting [param path_or_uid] if necessary. Fails and returns an empty string if an invalid UID is provided. */
-ensure_path(path_or_uid: string): string;
+static ensure_path(path_or_uid: string): string;
 
 /**
  * Returns the path that the given UID value refers to.
@@ -56,7 +56,7 @@ has_id(id: int): boolean;
 id_to_text(id: int): string;
 
 /** Converts the provided resource [param path] to a UID. Returns the unchanged path if it has no associated UID. */
-path_to_uid(path: string): string;
+static path_to_uid(path: string): string;
 
 /**
  * Removes a loaded UID value from the cache.
@@ -78,7 +78,7 @@ set_id(id: int, path: string): void;
 text_to_id(text_id: string): int;
 
 /** Converts the provided [param uid] to a path. Prints an error if the UID is invalid. */
-uid_to_path(uid: string): string;
+static uid_to_path(uid: string): string;
 
   connect<T extends SignalsOf<ResourceUIDClass>>(signal: T, method: SignalFunction<ResourceUIDClass[T]>): number;
 

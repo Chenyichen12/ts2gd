@@ -116,7 +116,7 @@ data: any;
  * 
  *
 */
-from_native(variant: any, full_objects?: boolean): any;
+static from_native(variant: any, full_objects?: boolean): any;
 
 /** Returns [code]0[/code] if the last call to [method parse] was successful, or the line number where the parse failed. */
 get_error_line(): int;
@@ -140,7 +140,7 @@ get_parsed_text(): string;
 parse(json_text: string, keep_text?: boolean): int;
 
 /** Attempts to parse the [param json_string] provided and returns the parsed data. Returns [code]null[/code] if parse failed. */
-parse_string(json_string: string): any;
+static parse_string(json_string: string): any;
 
 /**
  * Converts a [Variant] var to JSON text and returns the result. Useful for serializing data to store or send over the network.
@@ -193,7 +193,7 @@ parse_string(json_string: string): any;
  * 
  *
 */
-stringify(data: any, indent?: string, sort_keys?: boolean, full_precision?: boolean): string;
+static stringify(data: any, indent?: string, sort_keys?: boolean, full_precision?: boolean): string;
 
 /**
  * Converts a JSON-compliant value that was created with [method from_native] back to native engine types.
@@ -210,7 +210,7 @@ stringify(data: any, indent?: string, sort_keys?: boolean, full_precision?: bool
  * 
  *
 */
-to_native(json: any, allow_objects?: boolean): any;
+static to_native(json: any, allow_objects?: boolean): any;
 
   connect<T extends SignalsOf<JSON>>(signal: T, method: SignalFunction<JSON[T]>): number;
 

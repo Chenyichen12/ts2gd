@@ -92,7 +92,7 @@ protected _write_frame(frame_image: Image, audio_frame_block: CPointer): int;
  * **Note:** [method add_writer] must be called early enough in the engine initialization to work, as movie writing is designed to start at the same time as the rest of the engine.
  *
 */
-add_writer(writer: MovieWriter): void;
+static add_writer(writer: MovieWriter): void;
 
   connect<T extends SignalsOf<MovieWriter>>(signal: T, method: SignalFunction<MovieWriter[T]>): number;
 

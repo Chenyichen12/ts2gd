@@ -158,7 +158,7 @@ floor(): Vector2;
  * **Note:** The length of the returned [Vector2] is **approximately** `1.0`, but is is not guaranteed to be exactly `1.0` due to floating-point precision issues. Call [method normalized] on the returned [Vector2] if you require a unit vector.
  *
 */
-from_angle(angle: float): Vector2;
+static from_angle(angle: float): Vector2;
 
 /** Returns [code]true[/code] if this vector and [param to] are approximately equal, by running [method @GlobalScope.is_equal_approx] on each component. */
 is_equal_approx(to: Vector2): boolean;

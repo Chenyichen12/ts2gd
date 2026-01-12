@@ -44,7 +44,7 @@ add_surface(primitive: int, arrays: any[], blend_shapes?: any[][], lods?: Dictio
 clear(): void;
 
 /** Converts the given [Mesh] into an [ImporterMesh] by copying all its surfaces, blend shapes, materials, and metadata into a new [ImporterMesh] object. */
-from_mesh(mesh: Mesh): ImporterMesh;
+static from_mesh(mesh: Mesh): ImporterMesh;
 
 /**
  * Generates all lods for this ImporterMesh.

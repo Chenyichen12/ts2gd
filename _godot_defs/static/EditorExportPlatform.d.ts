@@ -75,7 +75,7 @@ gen_export_flags(flags: int): PackedStringArray;
 get_current_presets(): any[];
 
 /** Returns array of core file names that always should be exported regardless of preset config. */
-get_forced_export_files(preset?: EditorExportPreset): PackedStringArray;
+static get_forced_export_files(preset?: EditorExportPreset): PackedStringArray;
 
 /** Returns additional files that should always be exported regardless of preset configuration, and are not part of the project source. The returned [Dictionary] contains filename keys ([String]) and their corresponding raw data ([PackedByteArray]). */
 get_internal_export_files(preset: EditorExportPreset, debug: boolean): Dictionary<any, any>;

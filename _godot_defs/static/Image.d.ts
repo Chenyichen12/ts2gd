@@ -94,13 +94,13 @@ convert(format: int): void;
 copy_from(src: Image): void;
 
 /** Creates an empty image of the given size and format. If [param use_mipmaps] is [code]true[/code], generates mipmaps for this image (see [method generate_mipmaps]). */
-create(width: int, height: int, use_mipmaps: boolean, format: int): Image;
+static create(width: int, height: int, use_mipmaps: boolean, format: int): Image;
 
 /** Creates an empty image of the given size and format. If [param use_mipmaps] is [code]true[/code], generates mipmaps for this image (see [method generate_mipmaps]). */
-create_empty(width: int, height: int, use_mipmaps: boolean, format: int): Image;
+static create_empty(width: int, height: int, use_mipmaps: boolean, format: int): Image;
 
 /** Creates a new image of the given size and format. Fills the image with the given raw data. If [param use_mipmaps] is [code]true[/code], loads the mipmaps for this image from [param data]. See [method generate_mipmaps]. */
-create_from_data(width: int, height: int, use_mipmaps: boolean, format: int, data: PackedByteArray): Image;
+static create_from_data(width: int, height: int, use_mipmaps: boolean, format: int, data: PackedByteArray): Image;
 
 /** Crops the image to the given [param width] and [param height]. If the specified size is larger than the current size, the extra area is filled with black pixels. */
 crop(width: int, height: int): void;
@@ -230,7 +230,7 @@ load_dds_from_buffer(buffer: PackedByteArray): int;
 load_exr_from_buffer(buffer: PackedByteArray): int;
 
 /** Creates a new [Image] and loads data from the specified file. */
-load_from_file(path: string): Image;
+static load_from_file(path: string): Image;
 
 /** Loads an image from the binary contents of a JPEG file. */
 load_jpg_from_buffer(buffer: PackedByteArray): int;

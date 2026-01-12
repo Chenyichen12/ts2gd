@@ -751,7 +751,7 @@ get_node_rpc_config(): any;
  * **Note:** [method get_orphan_node_ids] only works in debug builds. When called in a project exported in release mode, [method get_orphan_node_ids] will return an empty array.
  *
 */
-get_orphan_node_ids(): int[];
+static get_orphan_node_ids(): int[];
 
 /** Returns this node's parent node, or [code]null[/code] if the node doesn't have a parent. */
 get_parent(): Node;
@@ -947,7 +947,7 @@ notify_thread_safe(what: int): void;
  * **Note:** This method only works in debug builds. It does nothing in a project exported in release mode.
  *
 */
-print_orphan_nodes(): void;
+static print_orphan_nodes(): void;
 
 /**
  * Prints the node and its children to the console, recursively. The node does not have to be inside the tree. This method outputs [NodePath]s relative to this node, and is good for copy/pasting into [method get_node]. See also [method print_tree_pretty].

@@ -345,7 +345,7 @@ get_contents_minimum_size(): Vector2;
 get_flag(flag: int): boolean;
 
 /** Returns the focused window. */
-get_focused_window(): Window;
+static get_focused_window(): Window;
 
 /** Returns layout direction and text writing direction. */
 get_layout_direction(): int;

@@ -39,10 +39,10 @@ y: Vector4;
 z: Vector4;
 
 /** Creates a new [Projection] that projects positions from a depth range of [code]-1[/code] to [code]1[/code] to one that ranges from [code]0[/code] to [code]1[/code], and flips the projected positions vertically, according to [param flip_y]. */
-create_depth_correction(flip_y: boolean): Projection;
+static create_depth_correction(flip_y: boolean): Projection;
 
 /** Creates a new [Projection] that scales a given projection to fit around a given [AABB] in projection space. */
-create_fit_aabb(aabb: AABB): Projection;
+static create_fit_aabb(aabb: AABB): Projection;
 
 /**
  * Creates a new [Projection] for projecting positions onto a head-mounted display with the given X:Y aspect ratio, distance between eyes, display width, distance to lens, oversampling factor, and depth clipping planes.
@@ -50,10 +50,10 @@ create_fit_aabb(aabb: AABB): Projection;
  * [param eye] creates the projection for the left eye when set to 1, or the right eye when set to 2.
  *
 */
-create_for_hmd(eye: int, aspect: float, intraocular_dist: float, display_width: float, display_to_lens: float, oversample: float, z_near: float, z_far: float): Projection;
+static create_for_hmd(eye: int, aspect: float, intraocular_dist: float, display_width: float, display_to_lens: float, oversample: float, z_near: float, z_far: float): Projection;
 
 /** Creates a new [Projection] that projects positions in a frustum with the given clipping planes. */
-create_frustum(left: float, right: float, bottom: float, top: float, z_near: float, z_far: float): Projection;
+static create_frustum(left: float, right: float, bottom: float, top: float, z_near: float, z_far: float): Projection;
 
 /**
  * Creates a new [Projection] that projects positions in a frustum with the given size, X:Y aspect ratio, offset, and clipping planes.
@@ -61,13 +61,13 @@ create_frustum(left: float, right: float, bottom: float, top: float, z_near: flo
  * [param flip_fov] determines whether the projection's field of view is flipped over its diagonal.
  *
 */
-create_frustum_aspect(size: float, aspect: float, offset: Vector2, z_near: float, z_far: float, flip_fov?: boolean): Projection;
+static create_frustum_aspect(size: float, aspect: float, offset: Vector2, z_near: float, z_far: float, flip_fov?: boolean): Projection;
 
 /** Creates a new [Projection] that projects positions into the given [Rect2]. */
-create_light_atlas_rect(rect: Rect2): Projection;
+static create_light_atlas_rect(rect: Rect2): Projection;
 
 /** Creates a new [Projection] that projects positions using an orthogonal projection with the given clipping planes. */
-create_orthogonal(left: float, right: float, bottom: float, top: float, z_near: float, z_far: float): Projection;
+static create_orthogonal(left: float, right: float, bottom: float, top: float, z_near: float, z_far: float): Projection;
 
 /**
  * Creates a new [Projection] that projects positions using an orthogonal projection with the given size, X:Y aspect ratio, and clipping planes.
@@ -75,7 +75,7 @@ create_orthogonal(left: float, right: float, bottom: float, top: float, z_near: 
  * [param flip_fov] determines whether the projection's field of view is flipped over its diagonal.
  *
 */
-create_orthogonal_aspect(size: float, aspect: float, z_near: float, z_far: float, flip_fov?: boolean): Projection;
+static create_orthogonal_aspect(size: float, aspect: float, z_near: float, z_far: float, flip_fov?: boolean): Projection;
 
 /**
  * Creates a new [Projection] that projects positions using a perspective projection with the given Y-axis field of view (in degrees), X:Y aspect ratio, and clipping planes.
@@ -83,7 +83,7 @@ create_orthogonal_aspect(size: float, aspect: float, z_near: float, z_far: float
  * [param flip_fov] determines whether the projection's field of view is flipped over its diagonal.
  *
 */
-create_perspective(fovy: float, aspect: float, z_near: float, z_far: float, flip_fov?: boolean): Projection;
+static create_perspective(fovy: float, aspect: float, z_near: float, z_far: float, flip_fov?: boolean): Projection;
 
 /**
  * Creates a new [Projection] that projects positions using a perspective projection with the given Y-axis field of view (in degrees), X:Y aspect ratio, and clipping distances. The projection is adjusted for a head-mounted display with the given distance between eyes and distance to a point that can be focused on.
@@ -93,7 +93,7 @@ create_perspective(fovy: float, aspect: float, z_near: float, z_far: float, flip
  * [param flip_fov] determines whether the projection's field of view is flipped over its diagonal.
  *
 */
-create_perspective_hmd(fovy: float, aspect: float, z_near: float, z_far: float, flip_fov: boolean, eye: int, intraocular_dist: float, convergence_dist: float): Projection;
+static create_perspective_hmd(fovy: float, aspect: float, z_near: float, z_far: float, flip_fov: boolean, eye: int, intraocular_dist: float, convergence_dist: float): Projection;
 
 /**
  * Returns a scalar value that is the signed factor by which areas are scaled by this matrix. If the sign is negative, the matrix flips the orientation of the area.
@@ -121,7 +121,7 @@ get_fov(): float;
  * **Note:** Unlike most methods of [Projection], [param aspect] is expected to be 1 divided by the X:Y aspect ratio.
  *
 */
-get_fovy(fovx: float, aspect: float): float;
+static get_fovy(fovx: float, aspect: float): float;
 
 /** Returns the factor by which the visible level of detail is scaled by this [Projection]. */
 get_lod_multiplier(): float;

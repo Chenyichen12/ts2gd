@@ -26,10 +26,10 @@ declare class AnimationNodeExtension extends AnimationNode  {
 protected _process_animation_node(playback_info: PackedFloat64Array, test_only: boolean): PackedFloat32Array;
 
 /** Returns the animation's remaining time for the given node info. For looping animations, it will only return the remaining time if [param break_loop] is [code]true[/code], a large integer value will be returned otherwise. */
-get_remaining_time(node_info: PackedFloat32Array, break_loop: boolean): float;
+static get_remaining_time(node_info: PackedFloat32Array, break_loop: boolean): float;
 
 /** Returns [code]true[/code] if the animation for the given [param node_info] is looping. */
-is_looping(node_info: PackedFloat32Array): boolean;
+static is_looping(node_info: PackedFloat32Array): boolean;
 
   connect<T extends SignalsOf<AnimationNodeExtension>>(signal: T, method: SignalFunction<AnimationNodeExtension[T]>): number;
 

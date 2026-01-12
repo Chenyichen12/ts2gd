@@ -48,7 +48,7 @@ is_alive(): boolean;
  * **Note:** This is a static method and isn't associated with a specific [Thread] object.
  *
 */
-is_main_thread(): boolean;
+static is_main_thread(): boolean;
 
 /** Returns [code]true[/code] if this [Thread] has been started. Once started, this will return [code]true[/code] until it is joined using [method wait_to_finish]. For checking if a [Thread] is still executing its task, use [method is_alive]. */
 is_started(): boolean;
@@ -69,7 +69,7 @@ is_started(): boolean;
  * **Note:** Even in the case of having disabled the checks in a [WorkerThreadPool] task, there's no need to re-enable them at the end. The engine will do so.
  *
 */
-set_thread_safety_checks_enabled(enabled: boolean): void;
+static set_thread_safety_checks_enabled(enabled: boolean): void;
 
 /**
  * Starts a new [Thread] that calls [param callable].

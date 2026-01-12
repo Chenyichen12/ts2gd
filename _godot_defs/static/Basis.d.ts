@@ -122,7 +122,7 @@ determinant(): float;
  * The order of each consecutive rotation can be changed with [param order] (see [enum EulerOrder] constants). By default, the YXZ convention is used ([constant EULER_ORDER_YXZ]): the basis rotates first around the Y axis (yaw), then X (pitch), and lastly Z (roll). When using the opposite method [method get_euler], this order is reversed.
  *
 */
-from_euler(euler: Vector3, order?: int): Basis;
+static from_euler(euler: Vector3, order?: int): Basis;
 
 /**
  * Constructs a new [Basis] that only represents scale, with no rotation or shear, from the given [param scale] vector.
@@ -147,7 +147,7 @@ from_euler(euler: Vector3, order?: int): Basis;
  * **Note:** In linear algebra, the matrix of this basis is also known as a [url=https://en.wikipedia.org/wiki/Diagonal_matrix]diagonal matrix[/url].
  *
 */
-from_scale(scale: Vector3): Basis;
+static from_scale(scale: Vector3): Basis;
 
 /**
  * Returns this basis's rotation as a [Vector3] of [url=https://en.wikipedia.org/wiki/Euler_angles]Euler angles[/url], in radians. For the returned value:
@@ -234,7 +234,7 @@ is_finite(): boolean;
  * The [param target] and the [param up] cannot be [constant Vector3.ZERO], and shouldn't be colinear to avoid unintended rotation around local Z axis.
  *
 */
-looking_at(target: Vector3, up?: Vector3, use_model_front?: boolean): Basis;
+static looking_at(target: Vector3, up?: Vector3, use_model_front?: boolean): Basis;
 
 /**
  * Returns the orthonormalized version of this basis. An orthonormal basis is both **orthogonal** (the axes are perpendicular to each other) and **normalized** (the axes have a length of `1.0`), which also means it can only represent a rotation.

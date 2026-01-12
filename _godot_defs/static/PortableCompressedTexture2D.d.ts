@@ -59,7 +59,7 @@ get_compression_mode(): int;
 get_format(): int;
 
 /** Returns [code]true[/code] if the flag is overridden for all textures of this type. */
-is_keeping_all_compressed_buffers(): boolean;
+static is_keeping_all_compressed_buffers(): boolean;
 
 /**
  * Sets the compressor parameters for Basis Universal compression. See also the settings in [ResourceImporterTexture].
@@ -70,7 +70,7 @@ is_keeping_all_compressed_buffers(): boolean;
 set_basisu_compressor_params(uastc_level: int, rdo_quality_loss: float): void;
 
 /** If [param keep] is [code]true[/code], overrides the flag globally for all textures of this type. This is used primarily by the editor. */
-set_keep_all_compressed_buffers(keep: boolean): void;
+static set_keep_all_compressed_buffers(keep: boolean): void;
 
   connect<T extends SignalsOf<PortableCompressedTexture2D>>(signal: T, method: SignalFunction<PortableCompressedTexture2D[T]>): number;
 

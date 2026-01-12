@@ -25,7 +25,7 @@ color_map: Dictionary<any, any>;
 saturation: float;
 
 /** Creates a new [DPITexture] and initializes it by allocating and setting the SVG data to [param source]. */
-create_from_string(source: string, scale?: float, saturation?: float, color_map?: Dictionary<any, any>): DPITexture;
+static create_from_string(source: string, scale?: float, saturation?: float, color_map?: Dictionary<any, any>): DPITexture;
 
 /** Returns the [RID] of the texture rasterized to match the oversampling of the currently drawn canvas item. */
 get_scaled_rid(): RID;

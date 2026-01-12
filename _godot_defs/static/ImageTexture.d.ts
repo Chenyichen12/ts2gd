@@ -84,7 +84,7 @@ declare class ImageTexture extends Texture2D  {
 
 
 /** Creates a new [ImageTexture] and initializes it by allocating and setting the data from an [Image]. */
-create_from_image(image: Image): ImageTexture;
+static create_from_image(image: Image): ImageTexture;
 
 /** Returns the format of the texture. */
 get_format(): int;

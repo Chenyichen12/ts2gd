@@ -88,7 +88,7 @@ dot(_with: Quaternion): float;
 exp(): Quaternion;
 
 /** Constructs a new [Quaternion] from the given [Vector3] of [url=https://en.wikipedia.org/wiki/Euler_angles]Euler angles[/url], in radians. This method always uses the YXZ convention ([constant EULER_ORDER_YXZ]). */
-from_euler(euler: Vector3): Quaternion;
+static from_euler(euler: Vector3): Quaternion;
 
 /**
  * Returns the angle of the rotation represented by this quaternion.

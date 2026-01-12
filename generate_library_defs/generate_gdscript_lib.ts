@@ -34,6 +34,7 @@ export const getCodeForMethod = (
     argumentList: string
     returnType: string
     isAbstract: boolean
+    isStatic: boolean
   },
   // TOOD: This should really not be undefined
   containingClassName?: string
@@ -45,6 +46,7 @@ export const getCodeForMethod = (
     docString,
     isAbstract,
     returnType,
+    isStatic,
   } = props
 
   switch (name) {
@@ -100,7 +102,7 @@ declare const ${name}: (${argumentList}) => ${returnType}
     `
       } else {
         return `${docString}
-${isAbstract ? "protected " : ""}${name}(${argumentList}): ${returnType};`
+${isAbstract ? "protected " : ""}${isStatic ? "static " : ""}${name}(${argumentList}): ${returnType};`
       }
   }
 }
@@ -156,6 +158,7 @@ export const parseMethod = (
   const name = method.$.name
   const args = method.param;
   const isVarArgs = method.$.qualifiers?.includes("vararg") ?? false 
+  const isStatic = method.$.qualifiers?.includes("static") ?? false
   const isConstructor =
     containingClassName !== undefined && name === containingClassName
   const docString = formatJsDoc(method.description[0].trim())
@@ -228,6 +231,7 @@ export const parseMethod = (
     docString,
     returnType,
     isAbstract,
+    isStatic,
   }
 
   return {

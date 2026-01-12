@@ -116,7 +116,7 @@ close(): void;
  * Returns `null` if opening the file failed. You can use [method get_open_error] to check the error that occurred.
  *
 */
-create_temp(mode_flags: int, prefix?: string, extension?: string, keep?: boolean): FileAccess;
+static create_temp(mode_flags: int, prefix?: string, extension?: string, keep?: boolean): FileAccess;
 
 /**
  * Returns `true` if the file cursor has already read past the end of the file.
@@ -149,7 +149,7 @@ eof_reached(): boolean;
  * For a non-static, relative equivalent, use [method DirAccess.file_exists].
  *
 */
-file_exists(path: string): boolean;
+static file_exists(path: string): boolean;
 
 /**
  * Writes the file's buffer to disk. Flushing is automatically performed when the file is closed. This means you don't need to call [method flush] manually before closing a file. Still, calling [method flush] can be used to ensure the data is safe even if the project crashes instead of being closed gracefully.
@@ -172,7 +172,7 @@ get_32(): int;
 get_64(): int;
 
 /** Returns the last time the [param file] was accessed in Unix timestamp format, or [code]0[/code] on error. This Unix timestamp can be converted to another format using the [Time] singleton. */
-get_access_time(file: string): int;
+static get_access_time(file: string): int;
 
 /** Returns the whole file as a [String]. Text is interpreted as being UTF-8 encoded. This ignores the file cursor and does not affect it. */
 get_as_text(): string;
@@ -221,7 +221,7 @@ get_error(): int;
  * **Note:** On Windows, alternate data streams are used to store extended attributes.
  *
 */
-get_extended_attribute(file: string, attribute_name: string): PackedByteArray;
+static get_extended_attribute(file: string, attribute_name: string): PackedByteArray;
 
 /**
  * Reads the file extended attribute with name [param attribute_name] as a UTF-8 encoded string.
@@ -235,7 +235,7 @@ get_extended_attribute(file: string, attribute_name: string): PackedByteArray;
  * **Note:** On Windows, alternate data streams are used to store extended attributes.
  *
 */
-get_extended_attribute_string(file: string, attribute_name: string): string;
+static get_extended_attribute_string(file: string, attribute_name: string): string;
 
 /**
  * Returns a list of file extended attributes.
@@ -249,7 +249,7 @@ get_extended_attribute_string(file: string, attribute_name: string): string;
  * **Note:** On Windows, alternate data streams are used to store extended attributes.
  *
 */
-get_extended_attributes_list(file: string): PackedStringArray;
+static get_extended_attributes_list(file: string): PackedStringArray;
 
 /**
  * Returns the whole [param path] file contents as a [PackedByteArray] without any decoding.
@@ -257,7 +257,7 @@ get_extended_attributes_list(file: string): PackedStringArray;
  * Returns an empty [PackedByteArray] if an error occurred while opening the file. You can use [method get_open_error] to check the error that occurred.
  *
 */
-get_file_as_bytes(path: string): PackedByteArray;
+static get_file_as_bytes(path: string): PackedByteArray;
 
 /**
  * Returns the whole [param path] file contents as a [String]. Text is interpreted as being UTF-8 encoded.
@@ -265,7 +265,7 @@ get_file_as_bytes(path: string): PackedByteArray;
  * Returns an empty [String] if an error occurred while opening the file. You can use [method get_open_error] to check the error that occurred.
  *
 */
-get_file_as_string(path: string): string;
+static get_file_as_string(path: string): string;
 
 /** Returns the next 32 bits from the file as a floating-point number. This advances the file cursor by 4 bytes. */
 get_float(): float;
@@ -279,7 +279,7 @@ get_half(): float;
  * **Note:** This method is implemented on iOS, BSD, macOS, and Windows.
  *
 */
-get_hidden_attribute(file: string): boolean;
+static get_hidden_attribute(file: string): boolean;
 
 /** Returns the size of the file in bytes. For a pipe, returns the number of bytes available for reading from the pipe. */
 get_length(): int;
@@ -293,13 +293,13 @@ get_length(): int;
 get_line(): string;
 
 /** Returns an MD5 String representing the file at the given path or an empty [String] on failure. */
-get_md5(path: string): string;
+static get_md5(path: string): string;
 
 /** Returns the last time the [param file] was modified in Unix timestamp format, or [code]0[/code] on error. This Unix timestamp can be converted to another format using the [Time] singleton. */
-get_modified_time(file: string): int;
+static get_modified_time(file: string): int;
 
 /** Returns the result of the last [method open] call in the current thread. */
-get_open_error(): int;
+static get_open_error(): int;
 
 /**
  * Returns a [String] saved in Pascal format from the file, meaning that the length of the string is explicitly stored at the start. See [method store_pascal_string]. This may include newline characters. The file cursor is advanced after the bytes read.
@@ -324,7 +324,7 @@ get_position(): int;
  * **Note:** This method is implemented on iOS, BSD, macOS, and Windows.
  *
 */
-get_read_only_attribute(file: string): boolean;
+static get_read_only_attribute(file: string): boolean;
 
 /**
  * Returns the next bits from the file as a floating-point number. This advances the file cursor by either 4 or 8 bytes, depending on the precision used by the Godot build that saved the file.
@@ -335,10 +335,10 @@ get_read_only_attribute(file: string): boolean;
 get_real(): float;
 
 /** Returns an SHA-256 [String] representing the file at the given path or an empty [String] on failure. */
-get_sha256(path: string): string;
+static get_sha256(path: string): string;
 
 /** Returns the size of the file at the given path, in bytes, or [code]-1[/code] on error. */
-get_size(file: string): int;
+static get_size(file: string): int;
 
 /**
  * Returns the UNIX permissions of the file at the given path.
@@ -346,7 +346,7 @@ get_size(file: string): int;
  * **Note:** This method is implemented on iOS, Linux/BSD, and macOS.
  *
 */
-get_unix_permissions(file: string): int;
+static get_unix_permissions(file: string): int;
 
 /**
  * Returns the next [Variant] value from the file. If [param allow_objects] is `true`, decoding objects is allowed. This advances the file cursor by the number of bytes read.
@@ -367,7 +367,7 @@ is_open(): boolean;
  * Returns `null` if opening the file failed. You can use [method get_open_error] to check the error that occurred.
  *
 */
-open(path: string, flags: int): FileAccess;
+static open(path: string, flags: int): FileAccess;
 
 /**
  * Creates a new [FileAccess] object and opens a compressed file for reading or writing.
@@ -377,7 +377,7 @@ open(path: string, flags: int): FileAccess;
  * Returns `null` if opening the file failed. You can use [method get_open_error] to check the error that occurred.
  *
 */
-open_compressed(path: string, mode_flags: int, compression_mode?: int): FileAccess;
+static open_compressed(path: string, mode_flags: int, compression_mode?: int): FileAccess;
 
 /**
  * Creates a new [FileAccess] object and opens an encrypted file in write or read mode. You need to pass a binary key to encrypt/decrypt it.
@@ -387,7 +387,7 @@ open_compressed(path: string, mode_flags: int, compression_mode?: int): FileAcce
  * Returns `null` if opening the file failed. You can use [method get_open_error] to check the error that occurred.
  *
 */
-open_encrypted(path: string, mode_flags: int, key: PackedByteArray, iv?: PackedByteArray): FileAccess;
+static open_encrypted(path: string, mode_flags: int, key: PackedByteArray, iv?: PackedByteArray): FileAccess;
 
 /**
  * Creates a new [FileAccess] object and opens an encrypted file in write or read mode. You need to pass a password to encrypt/decrypt it.
@@ -395,7 +395,7 @@ open_encrypted(path: string, mode_flags: int, key: PackedByteArray, iv?: PackedB
  * Returns `null` if opening the file failed. You can use [method get_open_error] to check the error that occurred.
  *
 */
-open_encrypted_with_pass(path: string, mode_flags: int, pass: string): FileAccess;
+static open_encrypted_with_pass(path: string, mode_flags: int, pass: string): FileAccess;
 
 /**
  * Removes file extended attribute with name [param attribute_name].
@@ -409,7 +409,7 @@ open_encrypted_with_pass(path: string, mode_flags: int, pass: string): FileAcces
  * **Note:** On Windows, alternate data streams are used to store extended attributes.
  *
 */
-remove_extended_attribute(file: string, attribute_name: string): int;
+static remove_extended_attribute(file: string, attribute_name: string): int;
 
 /** Resizes the file to a specified length. The file must be open in a mode that permits writing. If the file is extended, NUL characters are appended. If the file is truncated, all data from the end file to the original length of the file is lost. */
 resize(length: int): int;
@@ -437,7 +437,7 @@ seek_end(position?: int): void;
  * **Note:** On Windows, alternate data streams are used to store extended attributes.
  *
 */
-set_extended_attribute(file: string, attribute_name: string, data: PackedByteArray): int;
+static set_extended_attribute(file: string, attribute_name: string, data: PackedByteArray): int;
 
 /**
  * Writes file extended attribute with name [param attribute_name] as a UTF-8 encoded string.
@@ -451,7 +451,7 @@ set_extended_attribute(file: string, attribute_name: string, data: PackedByteArr
  * **Note:** On Windows, alternate data streams are used to store extended attributes.
  *
 */
-set_extended_attribute_string(file: string, attribute_name: string, data: string): int;
+static set_extended_attribute_string(file: string, attribute_name: string, data: string): int;
 
 /**
  * Sets file **hidden** attribute.
@@ -459,7 +459,7 @@ set_extended_attribute_string(file: string, attribute_name: string, data: string
  * **Note:** This method is implemented on iOS, BSD, macOS, and Windows.
  *
 */
-set_hidden_attribute(file: string, hidden: boolean): int;
+static set_hidden_attribute(file: string, hidden: boolean): int;
 
 /**
  * Sets file **read only** attribute.
@@ -467,7 +467,7 @@ set_hidden_attribute(file: string, hidden: boolean): int;
  * **Note:** This method is implemented on iOS, BSD, macOS, and Windows.
  *
 */
-set_read_only_attribute(file: string, ro: boolean): int;
+static set_read_only_attribute(file: string, ro: boolean): int;
 
 /**
  * Sets file UNIX permissions.
@@ -475,7 +475,7 @@ set_read_only_attribute(file: string, ro: boolean): int;
  * **Note:** This method is implemented on iOS, Linux/BSD, and macOS.
  *
 */
-set_unix_permissions(file: string, permissions: int): int;
+static set_unix_permissions(file: string, permissions: int): int;
 
 /**
  * Stores an integer as 8 bits in the file. This advances the file cursor by 1 byte. Returns `true` if the operation is successful.

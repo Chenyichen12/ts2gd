@@ -185,7 +185,7 @@ change_dir(to_dir: string): int;
 copy(from: string, to: string, chmod_flags?: int): int;
 
 /** Static version of [method copy]. Supports only absolute paths. */
-copy_absolute(from: string, to: string, chmod_flags?: int): int;
+static copy_absolute(from: string, to: string, chmod_flags?: int): int;
 
 /**
  * Creates symbolic link between files or folders.
@@ -207,7 +207,7 @@ create_link(source: string, target: string): int;
  * Returns `null` if opening the directory failed. You can use [method get_open_error] to check the error that occurred.
  *
 */
-create_temp(prefix?: string, keep?: boolean): DirAccess;
+static create_temp(prefix?: string, keep?: boolean): DirAccess;
 
 /** Returns whether the current item processed with the last [method get_next] call is a directory ([code].[/code] and [code]..[/code] are considered directories). */
 current_is_dir(): boolean;
@@ -226,7 +226,7 @@ dir_exists(path: string): boolean;
  * **Note:** The returned [bool] in the editor and after exporting when used on a path in the `res://` directory may be different. Some files are converted to engine-specific formats when exported, potentially changing the directory structure.
  *
 */
-dir_exists_absolute(path: string): boolean;
+static dir_exists_absolute(path: string): boolean;
 
 /**
  * Returns whether the target file exists. The argument can be relative to the current directory, or an absolute path.
@@ -262,7 +262,7 @@ get_directories(): PackedStringArray;
  * **Note:** The returned directories in the editor and after exporting in the `res://` directory may differ as some files are converted to engine-specific formats when exported.
  *
 */
-get_directories_at(path: string): PackedStringArray;
+static get_directories_at(path: string): PackedStringArray;
 
 /**
  * On Windows, returns the number of drives (partitions) mounted on the current filesystem.
@@ -274,7 +274,7 @@ get_directories_at(path: string): PackedStringArray;
  * On other platforms, the method returns 0.
  *
 */
-get_drive_count(): int;
+static get_drive_count(): int;
 
 /**
  * On Windows, returns the name of the drive (partition) passed as an argument (e.g. `C:`).
@@ -288,7 +288,7 @@ get_drive_count(): int;
  * On other platforms, or if the requested drive does not exist, the method returns an empty String.
  *
 */
-get_drive_name(idx: int): string;
+static get_drive_name(idx: int): string;
 
 /**
  * Returns a [PackedStringArray] containing filenames of the directory contents, excluding directories. The array is sorted alphabetically.
@@ -308,7 +308,7 @@ get_files(): PackedStringArray;
  * **Note:** When used on a `res://` path in an exported project, only the files included in the PCK at the given folder level are returned. In practice, this means that since imported resources are stored in a top-level `.godot/` folder, only paths to `.gd` and `.import` files are returned (plus a few other files, such as `project.godot` or `project.binary` and the project icon). In an exported project, the list of returned files will also vary depending on [member ProjectSettings.editor/export/convert_text_resources_to_binary].
  *
 */
-get_files_at(path: string): PackedStringArray;
+static get_files_at(path: string): PackedStringArray;
 
 /**
  * Returns file system type name of the current directory's disk. Returned values are uppercase strings like `NTFS`, `FAT32`, `EXFAT`, `APFS`, `EXT4`, `BTRFS`, and so on.
@@ -327,7 +327,7 @@ get_filesystem_type(): string;
 get_next(): string;
 
 /** Returns the result of the last [method open] call in the current thread. */
-get_open_error(): int;
+static get_open_error(): int;
 
 /** Returns the available space on the current directory's disk, in bytes. Returns [code]0[/code] if the platform-specific method to query the available space fails. */
 get_space_left(): int;
@@ -381,7 +381,7 @@ list_dir_end(): void;
 make_dir(path: string): int;
 
 /** Static version of [method make_dir]. Supports only absolute paths. */
-make_dir_absolute(path: string): int;
+static make_dir_absolute(path: string): int;
 
 /**
  * Creates a target directory and all necessary intermediate directories in its path, by calling [method make_dir] recursively. The argument can be relative to the current directory, or an absolute path.
@@ -392,7 +392,7 @@ make_dir_absolute(path: string): int;
 make_dir_recursive(path: string): int;
 
 /** Static version of [method make_dir_recursive]. Supports only absolute paths. */
-make_dir_recursive_absolute(path: string): int;
+static make_dir_recursive_absolute(path: string): int;
 
 /**
  * Creates a new [DirAccess] object and opens an existing directory of the filesystem. The [param path] argument can be within the project tree (`res://folder`), the user directory (`user://folder`) or an absolute path of the user filesystem (e.g. `/tmp/folder` or `C:\tmp\folder`).
@@ -400,7 +400,7 @@ make_dir_recursive_absolute(path: string): int;
  * Returns `null` if opening the directory failed. You can use [method get_open_error] to check the error that occurred.
  *
 */
-open(path: string): DirAccess;
+static open(path: string): DirAccess;
 
 /**
  * Returns target of the symbolic link.
@@ -421,7 +421,7 @@ read_link(path: string): string;
 remove(path: string): int;
 
 /** Static version of [method remove]. Supports only absolute paths. */
-remove_absolute(path: string): int;
+static remove_absolute(path: string): int;
 
 /**
  * Renames (move) the [param from] file or directory to the [param to] destination. Both arguments should be paths to files or directories, either relative or absolute. If the destination file or directory exists and is not access-protected, it will be overwritten.
@@ -432,7 +432,7 @@ remove_absolute(path: string): int;
 rename(from: string, to: string): int;
 
 /** Static version of [method rename]. Supports only absolute paths. */
-rename_absolute(from: string, to: string): int;
+static rename_absolute(from: string, to: string): int;
 
   connect<T extends SignalsOf<DirAccess>>(signal: T, method: SignalFunction<DirAccess[T]>): number;
 
