@@ -10,7 +10,8 @@ declare class MeshLibrary extends Resource  {
  * A library of meshes. Contains a list of [Mesh] resources, each with a name and ID. Each item can also include collision and navigation shapes. This resource is used in [GridMap].
  *
 */
-  new(): MeshLibrary; 
+  new(): MeshLibrary;
+  constructor();
   static "new"(): MeshLibrary 
 
 

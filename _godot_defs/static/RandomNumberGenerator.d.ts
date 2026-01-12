@@ -34,7 +34,8 @@ declare class RandomNumberGenerator extends RefCounted  {
  * 
  *
 */
-  new(): RandomNumberGenerator; 
+  new(): RandomNumberGenerator;
+  constructor();
   static "new"(): RandomNumberGenerator 
 
 

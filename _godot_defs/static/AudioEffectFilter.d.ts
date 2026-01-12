@@ -10,7 +10,8 @@ declare class AudioEffectFilter extends AudioEffect  {
  * Allows frequencies other than the [member cutoff_hz] to pass.
  *
 */
-  new(): AudioEffectFilter; 
+  new(): AudioEffectFilter;
+  constructor();
   static "new"(): AudioEffectFilter 
 
 

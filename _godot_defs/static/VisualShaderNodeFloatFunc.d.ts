@@ -10,7 +10,8 @@ declare class VisualShaderNodeFloatFunc extends VisualShaderNode  {
  * Accept a floating-point scalar (`x`) to the input port and transform it according to [member function].
  *
 */
-  new(): VisualShaderNodeFloatFunc; 
+  new(): VisualShaderNodeFloatFunc;
+  constructor();
   static "new"(): VisualShaderNodeFloatFunc 
 
 

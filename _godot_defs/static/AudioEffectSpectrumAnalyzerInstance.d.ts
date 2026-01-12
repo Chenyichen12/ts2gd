@@ -14,7 +14,8 @@ declare class AudioEffectSpectrumAnalyzerInstance extends AudioEffectInstance  {
  * An instance of this class can be obtained with [method AudioServer.get_bus_effect_instance].
  *
 */
-  new(): AudioEffectSpectrumAnalyzerInstance; 
+  new(): AudioEffectSpectrumAnalyzerInstance;
+  constructor();
   static "new"(): AudioEffectSpectrumAnalyzerInstance 
 
 

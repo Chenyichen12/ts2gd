@@ -14,7 +14,8 @@ declare class AimModifier3D extends BoneConstraint3D  {
  * The feature is simplified, but instead it is implemented with smooth tracking without euler, see [method set_use_euler].
  *
 */
-  new(): AimModifier3D; 
+  new(): AimModifier3D;
+  constructor();
   static "new"(): AimModifier3D 
 
 

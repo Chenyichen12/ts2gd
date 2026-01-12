@@ -14,7 +14,8 @@ declare class PlaneMesh extends PrimitiveMesh  {
  * **Note:** When using a large textured [PlaneMesh] (e.g. as a floor), you may stumble upon UV jittering issues depending on the camera angle. To solve this, increase [member subdivide_depth] and [member subdivide_width] until you no longer notice UV jittering.
  *
 */
-  new(): PlaneMesh; 
+  new(): PlaneMesh;
+  constructor();
   static "new"(): PlaneMesh 
 
 

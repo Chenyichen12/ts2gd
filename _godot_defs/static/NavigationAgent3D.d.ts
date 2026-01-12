@@ -22,7 +22,8 @@ declare class NavigationAgent3D extends Node  {
  * **Note:** Several methods of this class, such as [method get_next_path_position], can trigger a new path calculation. Calling these in your callback to an agent's signal, such as [signal waypoint_reached], can cause infinite recursion. It is recommended to call these methods in the physics step or, alternatively, delay their call until the end of the frame (see [method Object.call_deferred] or [constant Object.CONNECT_DEFERRED]).
  *
 */
-  new(): NavigationAgent3D; 
+  new(): NavigationAgent3D;
+  constructor();
   static "new"(): NavigationAgent3D 
 
 

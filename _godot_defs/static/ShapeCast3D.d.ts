@@ -18,7 +18,8 @@ declare class ShapeCast3D extends Node3D  {
  * **Note:** Shape casting is more computationally expensive than ray casting.
  *
 */
-  new(): ShapeCast3D; 
+  new(): ShapeCast3D;
+  constructor();
   static "new"(): ShapeCast3D 
 
 

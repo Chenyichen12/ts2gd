@@ -14,7 +14,8 @@ declare class Shape2D extends Resource  {
  * **Performance:** Primitive shapes, especially [CircleShape2D], are fast to check collisions against. [ConvexPolygonShape2D] is slower, and [ConcavePolygonShape2D] is the slowest.
  *
 */
-  new(): Shape2D; 
+  new(): Shape2D;
+  constructor();
   static "new"(): Shape2D 
 
 

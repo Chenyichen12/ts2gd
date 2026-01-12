@@ -20,8 +20,14 @@ declare class PackedByteArray {
 */
 
   new(): PackedByteArray;
+  constructor();
+
   new(from: PackedByteArray): PackedByteArray;
+  constructor(from: PackedByteArray);
+
   new(from: any[]): PackedByteArray;
+  constructor(from: any[]);
+
   static "new"(): PackedByteArray 
 
 

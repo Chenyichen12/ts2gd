@@ -10,7 +10,8 @@ declare class ParticleProcessMaterial extends Material  {
  * [ParticleProcessMaterial] defines particle properties and behavior. It is used in the `process_material` of the [GPUParticles2D] and [GPUParticles3D] nodes. Some of this material's properties are applied to each particle when emitted, while others can have a [CurveTexture] or a [GradientTexture1D] applied to vary numerical or color values over the lifetime of the particle.
  *
 */
-  new(): ParticleProcessMaterial; 
+  new(): ParticleProcessMaterial;
+  constructor();
   static "new"(): ParticleProcessMaterial 
 
 

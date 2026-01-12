@@ -14,7 +14,8 @@ declare class TextureLayeredRD extends TextureLayered  {
  * **Note:** [TextureLayeredRD] is intended for low-level usage with [RenderingDevice]. For most use cases, use [TextureLayered] instead.
  *
 */
-  new(): TextureLayeredRD; 
+  new(): TextureLayeredRD;
+  constructor();
   static "new"(): TextureLayeredRD 
 
 

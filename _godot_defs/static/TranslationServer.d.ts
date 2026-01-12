@@ -14,7 +14,8 @@ declare class TranslationServerClass extends Object  {
  * Translations are stored in [TranslationDomain]s, which can be accessed by name. The most commonly used translation domain is the main translation domain. It always exists and can be accessed using an empty [StringName]. The translation server provides wrapper methods for accessing the main translation domain directly, without having to fetch the translation domain first. Custom translation domains are mainly for advanced usages like editor plugins. Names starting with `godot.` are reserved for engine internals.
  *
 */
-  new(): TranslationServerClass; 
+  new(): TranslationServerClass;
+  constructor();
   static "new"(): TranslationServerClass 
 
 

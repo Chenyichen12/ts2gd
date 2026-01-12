@@ -10,7 +10,8 @@ declare class VisualShaderNodeTransformConstant extends VisualShaderNodeConstant
  * A constant [Transform3D], which can be used as an input node.
  *
 */
-  new(): VisualShaderNodeTransformConstant; 
+  new(): VisualShaderNodeTransformConstant;
+  constructor();
   static "new"(): VisualShaderNodeTransformConstant 
 
 

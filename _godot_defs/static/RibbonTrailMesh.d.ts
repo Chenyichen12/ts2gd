@@ -14,7 +14,8 @@ declare class RibbonTrailMesh extends PrimitiveMesh  {
  * This primitive mesh is usually used for particle trails.
  *
 */
-  new(): RibbonTrailMesh; 
+  new(): RibbonTrailMesh;
+  constructor();
   static "new"(): RibbonTrailMesh 
 
 

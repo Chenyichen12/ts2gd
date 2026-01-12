@@ -18,7 +18,8 @@ declare class ResourceFormatLoader extends RefCounted  {
  * **Note:** You can also extend [EditorImportPlugin] if the resource type you need exists but Godot is unable to load its format. Choosing one way over another depends on if the format is suitable or not for the final exported game. For example, it's better to import `.png` textures as `.ctex` ([CompressedTexture2D]) first, so they can be loaded with better efficiency on the graphics card.
  *
 */
-  new(): ResourceFormatLoader; 
+  new(): ResourceFormatLoader;
+  constructor();
   static "new"(): ResourceFormatLoader 
 
 

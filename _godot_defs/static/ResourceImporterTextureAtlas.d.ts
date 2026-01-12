@@ -14,7 +14,8 @@ declare class ResourceImporterTextureAtlas extends ResourceImporter  {
  * **Note:** [ResourceImporterTextureAtlas] does not handle importing [TileSetAtlasSource], which is created using the [TileSet] editor instead.
  *
 */
-  new(): ResourceImporterTextureAtlas; 
+  new(): ResourceImporterTextureAtlas;
+  constructor();
   static "new"(): ResourceImporterTextureAtlas 
 
 

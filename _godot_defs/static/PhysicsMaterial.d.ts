@@ -10,7 +10,8 @@ declare class PhysicsMaterial extends Resource  {
  * Holds physics-related properties of a surface, namely its roughness and bounciness. This class is used to apply these properties to a physics body.
  *
 */
-  new(): PhysicsMaterial; 
+  new(): PhysicsMaterial;
+  constructor();
   static "new"(): PhysicsMaterial 
 
 

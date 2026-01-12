@@ -14,7 +14,8 @@ declare class MissingResource extends Resource  {
  * **Warning:** Ignore missing resources unless you know what you are doing. Existing properties on a missing resource can be freely modified in code, regardless of the type they are intended to be.
  *
 */
-  new(): MissingResource; 
+  new(): MissingResource;
+  constructor();
   static "new"(): MissingResource 
 
 

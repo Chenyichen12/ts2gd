@@ -14,7 +14,8 @@ declare class ResourceImporterImageFont extends ResourceImporter  {
  * See also [ResourceImporterDynamicFont].
  *
 */
-  new(): ResourceImporterImageFont; 
+  new(): ResourceImporterImageFont;
+  constructor();
   static "new"(): ResourceImporterImageFont 
 
 

@@ -14,7 +14,8 @@ declare class AnimationNodeBlendTree extends AnimationRootNode  {
  * An [AnimationNodeOutput] node named `output` is created by default.
  *
 */
-  new(): AnimationNodeBlendTree; 
+  new(): AnimationNodeBlendTree;
+  constructor();
   static "new"(): AnimationNodeBlendTree 
 
 

@@ -10,7 +10,8 @@ declare class VisualShaderNodeTransformVecMult extends VisualShaderNode  {
  * A multiplication operation on a transform (4×4 matrix) and a vector, with support for different multiplication operators.
  *
 */
-  new(): VisualShaderNodeTransformVecMult; 
+  new(): VisualShaderNodeTransformVecMult;
+  constructor();
   static "new"(): VisualShaderNodeTransformVecMult 
 
 

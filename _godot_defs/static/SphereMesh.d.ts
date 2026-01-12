@@ -10,7 +10,8 @@ declare class SphereMesh extends PrimitiveMesh  {
  * Class representing a spherical [PrimitiveMesh].
  *
 */
-  new(): SphereMesh; 
+  new(): SphereMesh;
+  constructor();
   static "new"(): SphereMesh 
 
 

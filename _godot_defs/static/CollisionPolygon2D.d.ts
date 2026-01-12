@@ -14,7 +14,8 @@ declare class CollisionPolygon2D extends Node2D  {
  * **Warning:** A non-uniformly scaled [CollisionPolygon2D] will likely not behave as expected. Make sure to keep its scale the same on all axes and adjust its polygon instead.
  *
 */
-  new(): CollisionPolygon2D; 
+  new(): CollisionPolygon2D;
+  constructor();
   static "new"(): CollisionPolygon2D 
 
 

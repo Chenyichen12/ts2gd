@@ -14,7 +14,8 @@ declare class NavigationServer2DManagerClass extends Object  {
  * **Note:** It is not possible to switch servers at runtime. This class is only used on startup at the server initialization level.
  *
 */
-  new(): NavigationServer2DManagerClass; 
+  new(): NavigationServer2DManagerClass;
+  constructor();
   static "new"(): NavigationServer2DManagerClass 
 
 

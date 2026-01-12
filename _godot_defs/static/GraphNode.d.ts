@@ -22,7 +22,8 @@ declare class GraphNode extends GraphElement  {
  * **Note:** While GraphNode is set up using slots and slot indices, connections are made between the ports which are enabled. Because of that [GraphEdit] uses the port's index and not the slot's index. You can use [method get_input_port_slot] and [method get_output_port_slot] to get the slot index from the port index.
  *
 */
-  new(): GraphNode; 
+  new(): GraphNode;
+  constructor();
   static "new"(): GraphNode 
 
 

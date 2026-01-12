@@ -144,7 +144,8 @@ declare class DirAccess extends RefCounted  {
  * Keep in mind that file names may change or be remapped after export. If you want to see the actual resource file list as it appears in the editor, use [method ResourceLoader.list_directory] instead.
  *
 */
-  new(): DirAccess; 
+  new(): DirAccess;
+  constructor();
   static "new"(): DirAccess 
 
 

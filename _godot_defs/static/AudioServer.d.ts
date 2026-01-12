@@ -10,7 +10,8 @@ declare class AudioServerClass extends Object  {
  * [AudioServer] is a low-level server interface for audio access. It is in charge of creating sample data (playable audio) as well as its playback via a voice interface.
  *
 */
-  new(): AudioServerClass; 
+  new(): AudioServerClass;
+  constructor();
   static "new"(): AudioServerClass 
 
 

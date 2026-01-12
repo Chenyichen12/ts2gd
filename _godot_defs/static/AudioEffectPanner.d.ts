@@ -10,7 +10,8 @@ declare class AudioEffectPanner extends AudioEffect  {
  * Determines how much of an audio signal is sent to the left and right buses.
  *
 */
-  new(): AudioEffectPanner; 
+  new(): AudioEffectPanner;
+  constructor();
   static "new"(): AudioEffectPanner 
 
 

@@ -10,7 +10,8 @@ declare class InputMapClass extends Object  {
  * Manages all [InputEventAction] which can be created/modified from the project settings menu **Project > Project Settings > Input Map** or in code with [method add_action] and [method action_add_event]. See [method Node._input].
  *
 */
-  new(): InputMapClass; 
+  new(): InputMapClass;
+  constructor();
   static "new"(): InputMapClass 
 
 

@@ -22,7 +22,8 @@ declare class PlaceholderCubemapArray extends PlaceholderTextureLayered  {
  * **Note:** This class is not intended for rendering or for use in shaders. Operations like calculating UV are not guaranteed to work.
  *
 */
-  new(): PlaceholderCubemapArray; 
+  new(): PlaceholderCubemapArray;
+  constructor();
   static "new"(): PlaceholderCubemapArray 
 
 

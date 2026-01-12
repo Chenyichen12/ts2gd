@@ -10,7 +10,8 @@ declare class Joint2D extends Node2D  {
  * Abstract base class for all joints in 2D physics. 2D joints bind together two physics bodies ([member node_a] and [member node_b]) and apply a constraint.
  *
 */
-  new(): Joint2D; 
+  new(): Joint2D;
+  constructor();
   static "new"(): Joint2D 
 
 

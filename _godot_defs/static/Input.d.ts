@@ -14,7 +14,8 @@ declare class InputClass extends Object  {
  * **Note:** [Input]'s methods reflect the global input state and are not affected by [method Control.accept_event] or [method Viewport.set_input_as_handled], as those methods only deal with the way input is propagated in the [SceneTree].
  *
 */
-  new(): InputClass; 
+  new(): InputClass;
+  constructor();
   static "new"(): InputClass 
 
 

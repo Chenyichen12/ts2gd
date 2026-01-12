@@ -72,7 +72,8 @@ declare class WebSocketPeer extends PacketPeer  {
  * To use the peer as part of a WebSocket server refer to [method accept_stream] and the online tutorial.
  *
 */
-  new(): WebSocketPeer; 
+  new(): WebSocketPeer;
+  constructor();
   static "new"(): WebSocketPeer 
 
 

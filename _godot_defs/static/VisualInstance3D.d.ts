@@ -10,7 +10,8 @@ declare class VisualInstance3D extends Node3D  {
  * The [VisualInstance3D] is used to connect a resource to a visual representation. All visual 3D nodes inherit from the [VisualInstance3D]. In general, you should not access the [VisualInstance3D] properties directly as they are accessed and managed by the nodes that inherit from [VisualInstance3D]. [VisualInstance3D] is the node representation of the [RenderingServer] instance.
  *
 */
-  new(): VisualInstance3D; 
+  new(): VisualInstance3D;
+  constructor();
   static "new"(): VisualInstance3D 
 
 

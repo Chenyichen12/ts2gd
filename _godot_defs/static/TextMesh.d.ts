@@ -18,7 +18,8 @@ declare class TextMesh extends PrimitiveMesh  {
  * The UV layout is arranged in 4 horizontal strips, top to bottom: 40% of the height for the front face, 40% for the back face, 10% for the outer edges and 10% for the inner edges.
  *
 */
-  new(): TextMesh; 
+  new(): TextMesh;
+  constructor();
   static "new"(): TextMesh 
 
 

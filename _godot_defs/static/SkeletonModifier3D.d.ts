@@ -18,7 +18,8 @@ declare class SkeletonModifier3D extends Node3D  {
  * This node should be used to implement custom IK solvers, constraints, or skeleton physics.
  *
 */
-  new(): SkeletonModifier3D; 
+  new(): SkeletonModifier3D;
+  constructor();
   static "new"(): SkeletonModifier3D 
 
 

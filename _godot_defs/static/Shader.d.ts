@@ -14,7 +14,8 @@ declare class Shader extends Resource  {
  * This class is used by a [ShaderMaterial] and allows you to write your own custom behavior for rendering visual items or updating particle information. For a detailed explanation and usage, please see the tutorials linked below.
  *
 */
-  new(): Shader; 
+  new(): Shader;
+  constructor();
   static "new"(): Shader 
 
 

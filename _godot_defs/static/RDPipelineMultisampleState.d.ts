@@ -10,7 +10,8 @@ declare class RDPipelineMultisampleState extends RefCounted  {
  * [RDPipelineMultisampleState] is used to control how multisample or supersample antialiasing is being performed when rendering using [RenderingDevice].
  *
 */
-  new(): RDPipelineMultisampleState; 
+  new(): RDPipelineMultisampleState;
+  constructor();
   static "new"(): RDPipelineMultisampleState 
 
 

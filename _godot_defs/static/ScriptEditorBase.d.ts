@@ -10,7 +10,8 @@ declare class ScriptEditorBase extends VBoxContainer  {
  * Base editor for editing scripts in the [ScriptEditor]. This does not include documentation items.
  *
 */
-  new(): ScriptEditorBase; 
+  new(): ScriptEditorBase;
+  constructor();
   static "new"(): ScriptEditorBase 
 
 

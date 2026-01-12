@@ -30,7 +30,8 @@ declare class AnimationNodeBlend3 extends AnimationNodeSync  {
  * In general, the blend value should be in the `[-1.0, 1.0]` range. Values outside of this range can blend amplified animations, however, [AnimationNodeAdd3] works better for this purpose.
  *
 */
-  new(): AnimationNodeBlend3; 
+  new(): AnimationNodeBlend3;
+  constructor();
   static "new"(): AnimationNodeBlend3 
 
 

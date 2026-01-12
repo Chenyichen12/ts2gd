@@ -10,7 +10,8 @@ declare class VisualShaderNodeParticleRingEmitter extends VisualShaderNodePartic
  * [VisualShaderNodeParticleEmitter] that makes the particles emitted in ring shape with the specified inner and outer radii and height.
  *
 */
-  new(): VisualShaderNodeParticleRingEmitter; 
+  new(): VisualShaderNodeParticleRingEmitter;
+  constructor();
   static "new"(): VisualShaderNodeParticleRingEmitter 
 
 

@@ -26,7 +26,8 @@ declare class NavigationMeshGeneratorClass extends Object  {
  * **Note:** Using meshes to not only define walkable surfaces but also obstruct navigation baking does not always work. The navigation baking has no concept of what is a geometry "inside" when dealing with mesh source geometry and this is intentional. Depending on current baking parameters, as soon as the obstructing mesh is large enough to fit a navigation mesh area inside, the baking will generate navigation mesh areas that are inside the obstructing source geometry mesh.
  *
 */
-  new(): NavigationMeshGeneratorClass; 
+  new(): NavigationMeshGeneratorClass;
+  constructor();
   static "new"(): NavigationMeshGeneratorClass 
 
 

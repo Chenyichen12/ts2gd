@@ -44,7 +44,8 @@ declare class SkeletonIK3D extends SkeletonModifier3D  {
  * 
  *
 */
-  new(): SkeletonIK3D; 
+  new(): SkeletonIK3D;
+  constructor();
   static "new"(): SkeletonIK3D 
 
 

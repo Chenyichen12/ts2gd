@@ -18,7 +18,8 @@ declare class CompressedTexture3D extends Texture3D  {
  * See [Texture3D] for a general description of 3D textures.
  *
 */
-  new(): CompressedTexture3D; 
+  new(): CompressedTexture3D;
+  constructor();
   static "new"(): CompressedTexture3D 
 
 

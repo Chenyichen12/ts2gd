@@ -14,7 +14,8 @@ declare class AudioEffectDistortion extends AudioEffect  {
  * By distorting the waveform the frequency content changes, which will often make the sound "crunchy" or "abrasive". For games, it can simulate sound coming from some saturated device or speaker very efficiently.
  *
 */
-  new(): AudioEffectDistortion; 
+  new(): AudioEffectDistortion;
+  constructor();
   static "new"(): AudioEffectDistortion 
 
 

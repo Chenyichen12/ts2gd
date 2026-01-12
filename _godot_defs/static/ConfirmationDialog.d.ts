@@ -40,7 +40,8 @@ declare class ConfirmationDialog extends AcceptDialog  {
  * **Note:** [AcceptDialog] is invisible by default. To make it visible, call one of the `popup_*` methods from [Window] on the node, such as [method Window.popup_centered_clamped].
  *
 */
-  new(): ConfirmationDialog; 
+  new(): ConfirmationDialog;
+  constructor();
   static "new"(): ConfirmationDialog 
 
 

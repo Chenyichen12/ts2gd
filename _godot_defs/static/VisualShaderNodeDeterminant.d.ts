@@ -10,7 +10,8 @@ declare class VisualShaderNodeDeterminant extends VisualShaderNode  {
  * Translates to `determinant(x)` in the shader language.
  *
 */
-  new(): VisualShaderNodeDeterminant; 
+  new(): VisualShaderNodeDeterminant;
+  constructor();
   static "new"(): VisualShaderNodeDeterminant 
 
 

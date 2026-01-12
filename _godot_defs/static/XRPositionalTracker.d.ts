@@ -18,7 +18,8 @@ declare class XRPositionalTracker extends XRTracker  {
  * The [XRNode3D] and [XRAnchor3D] both consume objects of this type and should be used in your project. The positional trackers are just under-the-hood objects that make this all work. These are mostly exposed so that GDExtension-based interfaces can interact with them.
  *
 */
-  new(): XRPositionalTracker; 
+  new(): XRPositionalTracker;
+  constructor();
   static "new"(): XRPositionalTracker 
 
 

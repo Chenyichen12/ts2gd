@@ -10,7 +10,8 @@ declare class EditorProperty extends Container  {
  * A custom control for editing properties that can be added to the [EditorInspector]. It is added via [EditorInspectorPlugin].
  *
 */
-  new(): EditorProperty; 
+  new(): EditorProperty;
+  constructor();
   static "new"(): EditorProperty 
 
 

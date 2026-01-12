@@ -14,7 +14,8 @@ declare class ButtonGroup extends Resource  {
  * Every member of a [ButtonGroup] should have [member BaseButton.toggle_mode] set to `true`.
  *
 */
-  new(): ButtonGroup; 
+  new(): ButtonGroup;
+  constructor();
   static "new"(): ButtonGroup 
 
 

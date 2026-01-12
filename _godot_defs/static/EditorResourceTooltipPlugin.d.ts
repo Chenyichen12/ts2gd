@@ -14,7 +14,8 @@ declare class EditorResourceTooltipPlugin extends RefCounted  {
  * A plugin must be first registered with [method FileSystemDock.add_resource_tooltip_plugin]. When the user hovers a resource in filesystem dock which is handled by the plugin, [method _make_tooltip_for_path] is called to create the tooltip. It works similarly to [method Control._make_custom_tooltip].
  *
 */
-  new(): EditorResourceTooltipPlugin; 
+  new(): EditorResourceTooltipPlugin;
+  constructor();
   static "new"(): EditorResourceTooltipPlugin 
 
 

@@ -14,7 +14,8 @@ declare class MissingNode extends Node  {
  * **Warning:** Ignore missing nodes unless you know what you are doing. Existing properties on a missing node can be freely modified in code, regardless of the type they are intended to be.
  *
 */
-  new(): MissingNode; 
+  new(): MissingNode;
+  constructor();
   static "new"(): MissingNode 
 
 

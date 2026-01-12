@@ -10,7 +10,8 @@ declare class AudioEffectChorus extends AudioEffect  {
  * Adds a chorus audio effect. The effect applies a filter with voices to duplicate the audio source and manipulate it through the filter.
  *
 */
-  new(): AudioEffectChorus; 
+  new(): AudioEffectChorus;
+  constructor();
   static "new"(): AudioEffectChorus 
 
 

@@ -18,7 +18,8 @@ declare class FABRIK3D extends IterateIK3D  {
  * **Note:** When the target is close to the root, it tends to produce zig-zag patterns, resulting in unnatural visual movement.
  *
 */
-  new(): FABRIK3D; 
+  new(): FABRIK3D;
+  constructor();
   static "new"(): FABRIK3D 
 
 

@@ -10,7 +10,8 @@ declare class Geometry3DClass extends Object  {
  * Provides a set of helper functions to create geometric shapes, compute intersections between shapes, and process various other geometric operations in 3D.
  *
 */
-  new(): Geometry3DClass; 
+  new(): Geometry3DClass;
+  constructor();
   static "new"(): Geometry3DClass 
 
 

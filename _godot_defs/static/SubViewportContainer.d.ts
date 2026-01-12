@@ -18,7 +18,8 @@ declare class SubViewportContainer extends Container  {
  * **Note:** The [SubViewportContainer] forwards mouse-enter and mouse-exit notifications to its sub-viewports.
  *
 */
-  new(): SubViewportContainer; 
+  new(): SubViewportContainer;
+  constructor();
   static "new"(): SubViewportContainer 
 
 

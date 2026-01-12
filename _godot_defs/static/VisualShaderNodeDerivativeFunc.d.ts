@@ -10,7 +10,8 @@ declare class VisualShaderNodeDerivativeFunc extends VisualShaderNode  {
  * This node is only available in `Fragment` and `Light` visual shaders.
  *
 */
-  new(): VisualShaderNodeDerivativeFunc; 
+  new(): VisualShaderNodeDerivativeFunc;
+  constructor();
   static "new"(): VisualShaderNodeDerivativeFunc 
 
 

@@ -10,7 +10,8 @@ declare class CapsuleMesh extends PrimitiveMesh  {
  * Class representing a capsule-shaped [PrimitiveMesh].
  *
 */
-  new(): CapsuleMesh; 
+  new(): CapsuleMesh;
+  constructor();
   static "new"(): CapsuleMesh 
 
 

@@ -10,7 +10,8 @@ declare class VisualShaderNodeVarying extends VisualShaderNode  {
  * Varying values are shader variables that can be passed between shader functions, e.g. from Vertex shader to Fragment shader.
  *
 */
-  new(): VisualShaderNodeVarying; 
+  new(): VisualShaderNodeVarying;
+  constructor();
   static "new"(): VisualShaderNodeVarying 
 
 

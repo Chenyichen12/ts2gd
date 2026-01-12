@@ -10,7 +10,8 @@ declare class Geometry2DClass extends Object  {
  * Provides a set of helper functions to create geometric shapes, compute intersections between shapes, and process various other geometric operations in 2D.
  *
 */
-  new(): Geometry2DClass; 
+  new(): Geometry2DClass;
+  constructor();
   static "new"(): Geometry2DClass 
 
 

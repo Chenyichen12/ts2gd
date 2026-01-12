@@ -10,7 +10,8 @@ declare class RDPipelineDepthStencilState extends RefCounted  {
  * [RDPipelineDepthStencilState] controls the way depth and stencil comparisons are performed when sampling those values using [RenderingDevice].
  *
 */
-  new(): RDPipelineDepthStencilState; 
+  new(): RDPipelineDepthStencilState;
+  constructor();
   static "new"(): RDPipelineDepthStencilState 
 
 

@@ -10,7 +10,8 @@ declare class VisualShaderNodeTexture3DParameter extends VisualShaderNodeTexture
  * Translated to `uniform sampler3D` in the shader language.
  *
 */
-  new(): VisualShaderNodeTexture3DParameter; 
+  new(): VisualShaderNodeTexture3DParameter;
+  constructor();
   static "new"(): VisualShaderNodeTexture3DParameter 
 
 

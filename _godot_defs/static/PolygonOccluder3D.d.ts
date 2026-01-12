@@ -14,7 +14,8 @@ declare class PolygonOccluder3D extends Occluder3D  {
  * See [OccluderInstance3D]'s documentation for instructions on setting up occlusion culling.
  *
 */
-  new(): PolygonOccluder3D; 
+  new(): PolygonOccluder3D;
+  constructor();
   static "new"(): PolygonOccluder3D 
 
 

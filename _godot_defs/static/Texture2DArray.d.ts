@@ -18,7 +18,8 @@ declare class Texture2DArray extends ImageTextureLayered  {
  * To create such a texture file yourself, reimport your image files using the Godot Editor import presets. To create a Texture2DArray from code, use [method ImageTextureLayered.create_from_images] on an instance of the Texture2DArray class.
  *
 */
-  new(): Texture2DArray; 
+  new(): Texture2DArray;
+  constructor();
   static "new"(): Texture2DArray 
 
 

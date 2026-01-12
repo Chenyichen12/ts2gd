@@ -70,7 +70,8 @@ declare class NativeMenuClass extends Object  {
  * 
  *
 */
-  new(): NativeMenuClass; 
+  new(): NativeMenuClass;
+  constructor();
   static "new"(): NativeMenuClass 
 
 

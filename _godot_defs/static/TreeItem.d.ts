@@ -18,7 +18,8 @@ declare class TreeItem extends Object  {
  * **Note:** The ID values used for buttons are 32-bit, unlike [int] which is always 64-bit. They go from `-2147483648` to `2147483647`.
  *
 */
-  new(): TreeItem; 
+  new(): TreeItem;
+  constructor();
   static "new"(): TreeItem 
 
 

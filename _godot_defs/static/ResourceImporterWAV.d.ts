@@ -14,7 +14,8 @@ declare class ResourceImporterWAV extends ResourceImporter  {
  * By default, Godot imports WAV files using the lossy Quite OK Audio compression. You may change this by setting the [member compress/mode] property.
  *
 */
-  new(): ResourceImporterWAV; 
+  new(): ResourceImporterWAV;
+  constructor();
   static "new"(): ResourceImporterWAV 
 
 

@@ -14,7 +14,8 @@ declare class SubtweenTweener extends Tweener  {
  * **Note:** [method Tween.tween_subtween] is the only correct way to create [SubtweenTweener]. Any [SubtweenTweener] created manually will not function correctly.
  *
 */
-  new(): SubtweenTweener; 
+  new(): SubtweenTweener;
+  constructor();
   static "new"(): SubtweenTweener 
 
 

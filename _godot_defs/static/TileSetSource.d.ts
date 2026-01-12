@@ -26,7 +26,8 @@ declare class TileSetSource extends Resource  {
  * **Warning:** [TileSetSource] can only be added to one TileSet at the same time. Calling [method TileSet.add_source] on a second [TileSet] will remove the source from the first one.
  *
 */
-  new(): TileSetSource; 
+  new(): TileSetSource;
+  constructor();
   static "new"(): TileSetSource 
 
 

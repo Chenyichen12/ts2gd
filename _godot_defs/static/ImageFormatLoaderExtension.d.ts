@@ -14,7 +14,8 @@ declare class ImageFormatLoaderExtension extends ImageFormatLoader  {
  * Be sure to respect the documented return types and values. You should create an instance of it, and call [method add_format_loader] to register that loader during the initialization phase.
  *
 */
-  new(): ImageFormatLoaderExtension; 
+  new(): ImageFormatLoaderExtension;
+  constructor();
   static "new"(): ImageFormatLoaderExtension 
 
 

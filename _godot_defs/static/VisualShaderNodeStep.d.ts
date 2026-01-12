@@ -14,7 +14,8 @@ declare class VisualShaderNodeStep extends VisualShaderNode  {
  * Returns `0.0` if `x` is smaller than `edge` and `1.0` otherwise.
  *
 */
-  new(): VisualShaderNodeStep; 
+  new(): VisualShaderNodeStep;
+  constructor();
   static "new"(): VisualShaderNodeStep 
 
 

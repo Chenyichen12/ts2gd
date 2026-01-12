@@ -10,7 +10,8 @@ declare class RDPipelineRasterizationState extends RefCounted  {
  * This object is used by [RenderingDevice].
  *
 */
-  new(): RDPipelineRasterizationState; 
+  new(): RDPipelineRasterizationState;
+  constructor();
   static "new"(): RDPipelineRasterizationState 
 
 

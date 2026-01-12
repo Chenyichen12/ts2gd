@@ -10,7 +10,8 @@ declare class AudioEffectReverb extends AudioEffect  {
  * Simulates the sound of acoustic environments such as rooms, concert halls, caverns, or an open spaces.
  *
 */
-  new(): AudioEffectReverb; 
+  new(): AudioEffectReverb;
+  constructor();
   static "new"(): AudioEffectReverb 
 
 

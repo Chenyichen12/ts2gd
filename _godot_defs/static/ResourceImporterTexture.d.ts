@@ -10,7 +10,8 @@ declare class ResourceImporterTexture extends ResourceImporter  {
  * This importer imports [CompressedTexture2D] resources. If you need to process the image in scripts in a more convenient way, use [ResourceImporterImage] instead. See also [ResourceImporterLayeredTexture].
  *
 */
-  new(): ResourceImporterTexture; 
+  new(): ResourceImporterTexture;
+  constructor();
   static "new"(): ResourceImporterTexture 
 
 

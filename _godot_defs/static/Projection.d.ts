@@ -20,9 +20,17 @@ declare class Projection {
 */
 
   new(): Projection;
+  constructor();
+
   new(from: Projection): Projection;
+  constructor(from: Projection);
+
   new(from: Transform3D): Projection;
+  constructor(from: Transform3D);
+
   new(x_axis: Vector4, y_axis: Vector4, z_axis: Vector4, w_axis: Vector4): Projection;
+  constructor(x_axis: Vector4, y_axis: Vector4, z_axis: Vector4, w_axis: Vector4);
+
   static "new"(): Projection 
 
 

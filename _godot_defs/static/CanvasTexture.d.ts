@@ -14,7 +14,8 @@ declare class CanvasTexture extends Texture2D  {
  * **Note:** [CanvasTexture] cannot be used in 3D. It will not display correctly when applied to any [VisualInstance3D], such as [Sprite3D] or [Decal]. For physically-based materials in 3D, use [BaseMaterial3D] instead.
  *
 */
-  new(): CanvasTexture; 
+  new(): CanvasTexture;
+  constructor();
   static "new"(): CanvasTexture 
 
 

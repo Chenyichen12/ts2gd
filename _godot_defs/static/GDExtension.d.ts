@@ -14,7 +14,8 @@ declare class GDExtension extends Resource  {
  * **Note:** GDExtension itself is not a scripting language and has no relation to [GDScript] resources.
  *
 */
-  new(): GDExtension; 
+  new(): GDExtension;
+  constructor();
   static "new"(): GDExtension 
 
 

@@ -22,7 +22,8 @@ declare class AnimationPlayer extends AnimationMixer  {
  * Updating the target properties of animations occurs at the process frame.
  *
 */
-  new(): AnimationPlayer; 
+  new(): AnimationPlayer;
+  constructor();
   static "new"(): AnimationPlayer 
 
 

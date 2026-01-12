@@ -108,7 +108,8 @@ declare class MeshDataTool extends RefCounted  {
  * **Note:** Godot uses clockwise [url=https://learnopengl.com/Advanced-OpenGL/Face-culling]winding order[/url] for front faces of triangle primitive modes.
  *
 */
-  new(): MeshDataTool; 
+  new(): MeshDataTool;
+  constructor();
   static "new"(): MeshDataTool 
 
 

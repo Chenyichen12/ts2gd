@@ -10,7 +10,8 @@ declare class EditorExportPreset extends RefCounted  {
  * Represents the configuration of an export preset, as created by the editor's export dialog. An [EditorExportPreset] instance is intended to be used a read-only configuration passed to the [EditorExportPlatform] methods when exporting the project.
  *
 */
-  new(): EditorExportPreset; 
+  new(): EditorExportPreset;
+  constructor();
   static "new"(): EditorExportPreset 
 
 

@@ -54,7 +54,8 @@ declare class ConvertTransformModifier3D extends BoneConstraint3D  {
  * **Note:** If there is a rotation greater than `180` degrees with constrained axes, flipping may occur.
  *
 */
-  new(): ConvertTransformModifier3D; 
+  new(): ConvertTransformModifier3D;
+  constructor();
   static "new"(): ConvertTransformModifier3D 
 
 

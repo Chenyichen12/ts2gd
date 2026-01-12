@@ -10,7 +10,8 @@ declare class VisualShaderNodeParticleMultiplyByAxisAngle extends VisualShaderNo
  * This node helps to multiply a position input vector by rotation using specific axis. Intended to work with emitters.
  *
 */
-  new(): VisualShaderNodeParticleMultiplyByAxisAngle; 
+  new(): VisualShaderNodeParticleMultiplyByAxisAngle;
+  constructor();
   static "new"(): VisualShaderNodeParticleMultiplyByAxisAngle 
 
 

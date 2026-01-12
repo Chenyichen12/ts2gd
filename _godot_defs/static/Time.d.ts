@@ -26,7 +26,8 @@ declare class TimeClass extends Object  {
  * **Important:** The `_from_system` methods use the system clock that the user can manually set. **Never use** this method for precise time calculation since its results are subject to automatic adjustments by the user or the operating system. **Always use** [method get_ticks_usec] or [method get_ticks_msec] for precise time calculation instead, since they are guaranteed to be monotonic (i.e. never decrease).
  *
 */
-  new(): TimeClass; 
+  new(): TimeClass;
+  constructor();
   static "new"(): TimeClass 
 
 

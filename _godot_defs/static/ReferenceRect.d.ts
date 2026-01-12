@@ -10,7 +10,8 @@ declare class ReferenceRect extends Control  {
  * A rectangular box that displays only a colored border around its rectangle (see [method Control.get_rect]). It can be used to visualize the extents of a [Control] node, for testing purposes.
  *
 */
-  new(): ReferenceRect; 
+  new(): ReferenceRect;
+  constructor();
   static "new"(): ReferenceRect 
 
 

@@ -10,7 +10,8 @@ declare class BaseMaterial3D extends Material  {
  * This class serves as a default material with a wide variety of rendering features and properties without the need to write shader code. See the tutorial below for details.
  *
 */
-  new(): BaseMaterial3D; 
+  new(): BaseMaterial3D;
+  constructor();
   static "new"(): BaseMaterial3D 
 
 

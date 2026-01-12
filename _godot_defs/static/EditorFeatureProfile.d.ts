@@ -14,7 +14,8 @@ declare class EditorFeatureProfile extends RefCounted  {
  * To manage editor feature profiles visually, use **Editor > Manage Feature Profiles...** at the top of the editor window.
  *
 */
-  new(): EditorFeatureProfile; 
+  new(): EditorFeatureProfile;
+  constructor();
   static "new"(): EditorFeatureProfile 
 
 

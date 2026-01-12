@@ -14,7 +14,8 @@ declare class RemoteTransform3D extends Node3D  {
  * It can be set to update another Node's position, rotation and/or scale. It can use either global or local coordinates.
  *
 */
-  new(): RemoteTransform3D; 
+  new(): RemoteTransform3D;
+  constructor();
   static "new"(): RemoteTransform3D 
 
 

@@ -14,7 +14,8 @@ declare class PhysicsDirectSpaceState3D extends Object  {
  * **Note:** This class is not meant to be instantiated directly. Use [member World3D.direct_space_state] to get the world's physics 3D space state.
  *
 */
-  new(): PhysicsDirectSpaceState3D; 
+  new(): PhysicsDirectSpaceState3D;
+  constructor();
   static "new"(): PhysicsDirectSpaceState3D 
 
 

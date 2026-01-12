@@ -30,7 +30,8 @@ declare class AudioEffectCompressor extends AudioEffect  {
  * - Accentuates transients by using a wider attack, making effects sound more punchy.
  *
 */
-  new(): AudioEffectCompressor; 
+  new(): AudioEffectCompressor;
+  constructor();
   static "new"(): AudioEffectCompressor 
 
 

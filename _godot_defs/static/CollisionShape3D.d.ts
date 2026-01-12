@@ -14,7 +14,8 @@ declare class CollisionShape3D extends Node3D  {
  * **Warning:** A non-uniformly scaled [CollisionShape3D] will likely not behave as expected. Make sure to keep its scale the same on all axes and adjust its [member shape] resource instead.
  *
 */
-  new(): CollisionShape3D; 
+  new(): CollisionShape3D;
+  constructor();
   static "new"(): CollisionShape3D 
 
 

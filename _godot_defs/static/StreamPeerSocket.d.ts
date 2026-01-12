@@ -10,7 +10,8 @@ declare class StreamPeerSocket extends StreamPeer  {
  * StreamPeerSocket is an abstract base class that defines common behavior for socket-based streams.
  *
 */
-  new(): StreamPeerSocket; 
+  new(): StreamPeerSocket;
+  constructor();
   static "new"(): StreamPeerSocket 
 
 

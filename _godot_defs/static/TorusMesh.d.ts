@@ -10,7 +10,8 @@ declare class TorusMesh extends PrimitiveMesh  {
  * Class representing a torus [PrimitiveMesh].
  *
 */
-  new(): TorusMesh; 
+  new(): TorusMesh;
+  constructor();
   static "new"(): TorusMesh 
 
 

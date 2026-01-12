@@ -24,9 +24,17 @@ declare class Vector4 {
 */
 
   new(): Vector4;
+  constructor();
+
   new(from: Vector4): Vector4;
+  constructor(from: Vector4);
+
   new(from: Vector4i): Vector4;
+  constructor(from: Vector4i);
+
   new(x: float, y: float, z: float, w: float): Vector4;
+  constructor(x: float, y: float, z: float, w: float);
+
   static "new"(): Vector4 
 
 

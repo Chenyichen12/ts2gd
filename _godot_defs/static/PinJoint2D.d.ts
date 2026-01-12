@@ -10,7 +10,8 @@ declare class PinJoint2D extends Joint2D  {
  * A physics joint that attaches two 2D physics bodies at a single point, allowing them to freely rotate. For example, a [RigidBody2D] can be attached to a [StaticBody2D] to create a pendulum or a seesaw.
  *
 */
-  new(): PinJoint2D; 
+  new(): PinJoint2D;
+  constructor();
   static "new"(): PinJoint2D 
 
 

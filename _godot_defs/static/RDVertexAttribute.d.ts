@@ -10,7 +10,8 @@ declare class RDVertexAttribute extends RefCounted  {
  * This object is used by [RenderingDevice].
  *
 */
-  new(): RDVertexAttribute; 
+  new(): RDVertexAttribute;
+  constructor();
   static "new"(): RDVertexAttribute 
 
 

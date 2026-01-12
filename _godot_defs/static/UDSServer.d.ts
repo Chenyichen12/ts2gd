@@ -14,7 +14,8 @@ declare class UDSServer extends SocketServer  {
  * **Note:** Unix Domain Sockets are only available on Unix-like systems (Linux, macOS, etc.) and are not supported on Windows.
  *
 */
-  new(): UDSServer; 
+  new(): UDSServer;
+  constructor();
   static "new"(): UDSServer 
 
 

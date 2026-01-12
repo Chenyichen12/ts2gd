@@ -88,7 +88,8 @@ declare class WorkerThreadPoolClass extends Object  {
  * **Note:** Using this singleton could affect performance negatively if the task being distributed between threads is not computationally expensive.
  *
 */
-  new(): WorkerThreadPoolClass; 
+  new(): WorkerThreadPoolClass;
+  constructor();
   static "new"(): WorkerThreadPoolClass 
 
 

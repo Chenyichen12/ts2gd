@@ -10,7 +10,8 @@ declare class AnimationLibrary extends Resource  {
  * An animation library stores a set of animations accessible through [StringName] keys, for use with [AnimationPlayer] nodes.
  *
 */
-  new(): AnimationLibrary; 
+  new(): AnimationLibrary;
+  constructor();
   static "new"(): AnimationLibrary 
 
 

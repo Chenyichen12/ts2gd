@@ -14,7 +14,8 @@ declare class AudioStreamPolyphonic extends AudioStream  {
  * Playback control is done via the [AudioStreamPlaybackPolyphonic] instance set inside the player, which can be obtained via [method AudioStreamPlayer.get_stream_playback], [method AudioStreamPlayer2D.get_stream_playback] or [method AudioStreamPlayer3D.get_stream_playback] methods. Obtaining the playback instance is only valid after the `stream` property is set as an [AudioStreamPolyphonic] in those players.
  *
 */
-  new(): AudioStreamPolyphonic; 
+  new(): AudioStreamPolyphonic;
+  constructor();
   static "new"(): AudioStreamPolyphonic 
 
 

@@ -10,7 +10,8 @@ declare class AudioEffectAmplify extends AudioEffect  {
  * Increases or decreases the volume being routed through the audio bus.
  *
 */
-  new(): AudioEffectAmplify; 
+  new(): AudioEffectAmplify;
+  constructor();
   static "new"(): AudioEffectAmplify 
 
 

@@ -74,7 +74,8 @@ declare class FontVariation extends Font  {
  * 
  *
 */
-  new(): FontVariation; 
+  new(): FontVariation;
+  constructor();
   static "new"(): FontVariation 
 
 

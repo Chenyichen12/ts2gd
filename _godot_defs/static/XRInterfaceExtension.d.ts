@@ -10,7 +10,8 @@ declare class XRInterfaceExtension extends XRInterface  {
  * External XR interface plugins should inherit from this class.
  *
 */
-  new(): XRInterfaceExtension; 
+  new(): XRInterfaceExtension;
+  constructor();
   static "new"(): XRInterfaceExtension 
 
 

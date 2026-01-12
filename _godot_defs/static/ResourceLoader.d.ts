@@ -22,7 +22,8 @@ declare class ResourceLoaderClass extends Object  {
  * **Note:** Non-resource files such as plain text files cannot be read using [ResourceLoader]. Use [FileAccess] for those files instead, and be aware that non-resource files are not exported by default (see notes in the [FileAccess] class description for instructions on exporting them).
  *
 */
-  new(): ResourceLoaderClass; 
+  new(): ResourceLoaderClass;
+  constructor();
   static "new"(): ResourceLoaderClass 
 
 

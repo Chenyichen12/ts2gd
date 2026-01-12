@@ -10,7 +10,8 @@ declare class VisualShaderNodeFloatConstant extends VisualShaderNodeConstant  {
  * Translated to [code skip-lint]float` in the shader language.
  *
 */
-  new(): VisualShaderNodeFloatConstant; 
+  new(): VisualShaderNodeFloatConstant;
+  constructor();
   static "new"(): VisualShaderNodeFloatConstant 
 
 

@@ -58,7 +58,8 @@ declare class StyleBoxFlat extends StyleBox  {
  * 
  *
 */
-  new(): StyleBoxFlat; 
+  new(): StyleBoxFlat;
+  constructor();
   static "new"(): StyleBoxFlat 
 
 

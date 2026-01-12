@@ -78,7 +78,8 @@ declare class ImageTexture extends Texture2D  {
  * **Note:** The maximum texture size is 16384×16384 pixels due to graphics hardware limitations.
  *
 */
-  new(): ImageTexture; 
+  new(): ImageTexture;
+  constructor();
   static "new"(): ImageTexture 
 
 

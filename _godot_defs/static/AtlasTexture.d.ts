@@ -18,7 +18,8 @@ declare class AtlasTexture extends Texture2D  {
  * **Note:** [AtlasTexture] cannot be used in an [AnimatedTexture], and will not tile properly in nodes such as [TextureRect] or [Sprite2D]. To tile an [AtlasTexture], modify its [member region] instead.
  *
 */
-  new(): AtlasTexture; 
+  new(): AtlasTexture;
+  constructor();
   static "new"(): AtlasTexture 
 
 

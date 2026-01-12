@@ -14,7 +14,8 @@ declare class StreamPeerUDS extends StreamPeerSocket  {
  * **Note:** UNIX Domain Sockets are only available on UNIX-like systems (Linux, macOS, etc.) and are not supported on Windows.
  *
 */
-  new(): StreamPeerUDS; 
+  new(): StreamPeerUDS;
+  constructor();
   static "new"(): StreamPeerUDS 
 
 

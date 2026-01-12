@@ -18,7 +18,8 @@ declare class NavigationObstacle2D extends Node2D  {
  * With [member avoidance_enabled] the obstacle can constrain the avoidance velocities of avoidance using agents. If the obstacle's vertices are wound in clockwise order, avoidance agents will be pushed in by the obstacle, otherwise, avoidance agents will be pushed out. Obstacles using vertices and avoidance can warp to a new position but should not be moved every single frame as each change requires a rebuild of the avoidance map.
  *
 */
-  new(): NavigationObstacle2D; 
+  new(): NavigationObstacle2D;
+  constructor();
   static "new"(): NavigationObstacle2D 
 
 

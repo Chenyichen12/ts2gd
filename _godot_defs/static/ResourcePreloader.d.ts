@@ -14,7 +14,8 @@ declare class ResourcePreloader extends Node  {
  * GDScript has a simplified [method @GDScript.preload] built-in method which can be used in most situations, leaving the use of [ResourcePreloader] for more advanced scenarios.
  *
 */
-  new(): ResourcePreloader; 
+  new(): ResourcePreloader;
+  constructor();
   static "new"(): ResourcePreloader 
 
 

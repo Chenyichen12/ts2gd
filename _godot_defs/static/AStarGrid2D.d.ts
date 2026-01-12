@@ -60,7 +60,8 @@ declare class AStarGrid2D extends RefCounted  {
  * To remove a point from the pathfinding grid, it must be set as "solid" with [method set_point_solid].
  *
 */
-  new(): AStarGrid2D; 
+  new(): AStarGrid2D;
+  constructor();
   static "new"(): AStarGrid2D 
 
 

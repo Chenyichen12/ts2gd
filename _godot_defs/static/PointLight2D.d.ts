@@ -10,7 +10,8 @@ declare class PointLight2D extends Light2D  {
  * Casts light in a 2D environment. This light's shape is defined by a (usually grayscale) texture.
  *
 */
-  new(): PointLight2D; 
+  new(): PointLight2D;
+  constructor();
   static "new"(): PointLight2D 
 
 

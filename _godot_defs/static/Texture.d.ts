@@ -10,7 +10,8 @@ declare class Texture extends Resource  {
  * [Texture] is the base class for all texture types. Common texture types are [Texture2D] and [ImageTexture]. See also [Image].
  *
 */
-  new(): Texture; 
+  new(): Texture;
+  constructor();
   static "new"(): Texture 
 
 

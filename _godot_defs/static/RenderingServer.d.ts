@@ -42,7 +42,8 @@ declare class RenderingServerClass extends Object  {
  * **Headless mode:** Starting the engine with the `--headless` [url=$DOCS_URL/tutorials/editor/command_line_tutorial.html]command line argument[/url] disables all rendering and window management functions. Most functions from [RenderingServer] will return dummy values in this case.
  *
 */
-  new(): RenderingServerClass; 
+  new(): RenderingServerClass;
+  constructor();
   static "new"(): RenderingServerClass 
 
 

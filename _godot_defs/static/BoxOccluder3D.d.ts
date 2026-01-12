@@ -14,7 +14,8 @@ declare class BoxOccluder3D extends Occluder3D  {
  * See [OccluderInstance3D]'s documentation for instructions on setting up occlusion culling.
  *
 */
-  new(): BoxOccluder3D; 
+  new(): BoxOccluder3D;
+  constructor();
   static "new"(): BoxOccluder3D 
 
 

@@ -18,7 +18,8 @@ declare class CameraServerClass extends Object  {
  * **Note:** This class is currently only implemented on Linux, Android, macOS, and iOS. On other platforms no [CameraFeed]s will be available. To get a [CameraFeed] on iOS, the camera plugin from [url=https://github.com/godotengine/godot-ios-plugins]godot-ios-plugins[/url] is required.
  *
 */
-  new(): CameraServerClass; 
+  new(): CameraServerClass;
+  constructor();
   static "new"(): CameraServerClass 
 
 

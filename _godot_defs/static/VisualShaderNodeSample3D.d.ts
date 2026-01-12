@@ -10,7 +10,8 @@ declare class VisualShaderNodeSample3D extends VisualShaderNode  {
  * A virtual class, use the descendants instead.
  *
 */
-  new(): VisualShaderNodeSample3D; 
+  new(): VisualShaderNodeSample3D;
+  constructor();
   static "new"(): VisualShaderNodeSample3D 
 
 

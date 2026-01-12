@@ -10,7 +10,8 @@ declare class XRServerClass extends Object  {
  * The AR/VR server is the heart of our Advanced and Virtual Reality solution and handles all the processing.
  *
 */
-  new(): XRServerClass; 
+  new(): XRServerClass;
+  constructor();
   static "new"(): XRServerClass 
 
 

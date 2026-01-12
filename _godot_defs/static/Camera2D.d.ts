@@ -22,7 +22,8 @@ declare class Camera2D extends Node2D  {
  * Note that the [Camera2D] node's [member Node2D.global_position] doesn't represent the actual position of the screen, which may differ due to applied smoothing or limits. You can use [method get_screen_center_position] to get the real position. Same for the node's [member Node2D.global_rotation] which may be different due to applied rotation smoothing. You can use [method get_screen_rotation] to get the current rotation of the screen.
  *
 */
-  new(): Camera2D; 
+  new(): Camera2D;
+  constructor();
   static "new"(): Camera2D 
 
 

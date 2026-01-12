@@ -22,7 +22,8 @@ declare class CanvasLayer extends Node  {
  * **Note:** Each [CanvasLayer] is drawn on one specific [Viewport] and cannot be shared between multiple [Viewport]s, see [member custom_viewport]. When using multiple [Viewport]s, for example in a split-screen game, you need to create an individual [CanvasLayer] for each [Viewport] you want it to be drawn on.
  *
 */
-  new(): CanvasLayer; 
+  new(): CanvasLayer;
+  constructor();
   static "new"(): CanvasLayer 
 
 

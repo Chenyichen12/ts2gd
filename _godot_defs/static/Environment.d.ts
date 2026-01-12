@@ -30,7 +30,8 @@ declare class Environment extends Resource  {
  * - Adjustments
  *
 */
-  new(): Environment; 
+  new(): Environment;
+  constructor();
   static "new"(): Environment 
 
 

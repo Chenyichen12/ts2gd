@@ -10,7 +10,8 @@ declare class PhysicsPointQueryParameters3D extends RefCounted  {
  * By changing various properties of this object, such as the point position, you can configure the parameters for [method PhysicsDirectSpaceState3D.intersect_point].
  *
 */
-  new(): PhysicsPointQueryParameters3D; 
+  new(): PhysicsPointQueryParameters3D;
+  constructor();
   static "new"(): PhysicsPointQueryParameters3D 
 
 

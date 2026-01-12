@@ -30,7 +30,8 @@ declare class PopupMenu extends Popup  {
  * **Note:** The ID values used for items are limited to 32 bits, not full 64 bits of [int]. This has a range of `-2^32` to `2^32 - 1`, i.e. `-2147483648` to `2147483647`.
  *
 */
-  new(): PopupMenu; 
+  new(): PopupMenu;
+  constructor();
   static "new"(): PopupMenu 
 
 

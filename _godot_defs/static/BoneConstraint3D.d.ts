@@ -10,7 +10,8 @@ declare class BoneConstraint3D extends SkeletonModifier3D  {
  * Base class of [SkeletonModifier3D] that modifies the bone set in [method set_apply_bone] based on the transform of the bone retrieved by [method get_reference_bone].
  *
 */
-  new(): BoneConstraint3D; 
+  new(): BoneConstraint3D;
+  constructor();
   static "new"(): BoneConstraint3D 
 
 

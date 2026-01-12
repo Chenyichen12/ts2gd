@@ -22,7 +22,8 @@ declare class TileMapLayer extends Node2D  {
  * **Note:** For performance and compatibility reasons, the coordinates serialized by [TileMapLayer] are limited to 16-bit signed integers, i.e. the range for X and Y coordinates is from `-32768` to `32767`. When saving tile data, tiles outside this range are wrapped.
  *
 */
-  new(): TileMapLayer; 
+  new(): TileMapLayer;
+  constructor();
   static "new"(): TileMapLayer 
 
 

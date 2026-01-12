@@ -10,7 +10,8 @@ declare class PinJoint3D extends Joint3D  {
  * A physics joint that attaches two 3D physics bodies at a single point, allowing them to freely rotate. For example, a [RigidBody3D] can be attached to a [StaticBody3D] to create a pendulum or a seesaw.
  *
 */
-  new(): PinJoint3D; 
+  new(): PinJoint3D;
+  constructor();
   static "new"(): PinJoint3D 
 
 

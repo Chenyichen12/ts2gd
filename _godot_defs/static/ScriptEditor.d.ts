@@ -14,7 +14,8 @@ declare class ScriptEditor extends PanelContainer  {
  * **Note:** This class shouldn't be instantiated directly. Instead, access the singleton using [method EditorInterface.get_script_editor].
  *
 */
-  new(): ScriptEditor; 
+  new(): ScriptEditor;
+  constructor();
   static "new"(): ScriptEditor 
 
 

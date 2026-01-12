@@ -10,7 +10,8 @@ declare class VisualShaderNodeCurveXYZTexture extends VisualShaderNodeResizableB
  * Comes with a built-in editor for texture's curves.
  *
 */
-  new(): VisualShaderNodeCurveXYZTexture; 
+  new(): VisualShaderNodeCurveXYZTexture;
+  constructor();
   static "new"(): VisualShaderNodeCurveXYZTexture 
 
 

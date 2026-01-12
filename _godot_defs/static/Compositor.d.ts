@@ -10,7 +10,8 @@ declare class Compositor extends Resource  {
  * The compositor resource stores attributes used to customize how a [Viewport] is rendered.
  *
 */
-  new(): Compositor; 
+  new(): Compositor;
+  constructor();
   static "new"(): Compositor 
 
 

@@ -14,7 +14,8 @@ declare class GradientTexture2D extends Texture2D  {
  * The gradient is sampled individually for each pixel so it does not necessarily represent an exact copy of the gradient (see [member width] and [member height]). See also [GradientTexture1D], [CurveTexture] and [CurveXYZTexture].
  *
 */
-  new(): GradientTexture2D; 
+  new(): GradientTexture2D;
+  constructor();
   static "new"(): GradientTexture2D 
 
 

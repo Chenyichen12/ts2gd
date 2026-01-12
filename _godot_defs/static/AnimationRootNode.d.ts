@@ -14,7 +14,8 @@ declare class AnimationRootNode extends AnimationNode  {
  * Examples of built-in root nodes include [AnimationNodeBlendTree] (allows blending nodes between each other using various modes), [AnimationNodeStateMachine] (allows to configure blending and transitions between nodes using a state machine pattern), [AnimationNodeBlendSpace2D] (allows linear blending between **three** [AnimationNode]s), [AnimationNodeBlendSpace1D] (allows linear blending only between **two** [AnimationNode]s).
  *
 */
-  new(): AnimationRootNode; 
+  new(): AnimationRootNode;
+  constructor();
   static "new"(): AnimationRootNode 
 
 

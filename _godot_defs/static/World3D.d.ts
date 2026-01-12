@@ -10,7 +10,8 @@ declare class World3D extends Resource  {
  * Class that has everything pertaining to a world: A physics space, a visual scenario, and a sound space. 3D nodes register their resources into the current 3D world.
  *
 */
-  new(): World3D; 
+  new(): World3D;
+  constructor();
   static "new"(): World3D 
 
 

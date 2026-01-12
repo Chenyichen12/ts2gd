@@ -14,7 +14,8 @@ declare class ResourceUIDClass extends Object  {
  * [ResourceUID] keeps track of all registered resource UIDs in a project, generates new UIDs, and converts between their string and integer representations.
  *
 */
-  new(): ResourceUIDClass; 
+  new(): ResourceUIDClass;
+  constructor();
   static "new"(): ResourceUIDClass 
 
 

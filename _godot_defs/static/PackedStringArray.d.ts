@@ -40,8 +40,14 @@ declare class PackedStringArray {
 */
 
   new(): PackedStringArray;
+  constructor();
+
   new(from: PackedStringArray): PackedStringArray;
+  constructor(from: PackedStringArray);
+
   new(from: any[]): PackedStringArray;
+  constructor(from: any[]);
+
   static "new"(): PackedStringArray 
 
 

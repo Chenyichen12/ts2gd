@@ -22,7 +22,8 @@ declare class VisualShaderNodeIf extends VisualShaderNode  {
  * - Ports **4**, **5**, and **6** are the possible outputs, returned if `a == b`, `a > b`, or `a < b` respectively.
  *
 */
-  new(): VisualShaderNodeIf; 
+  new(): VisualShaderNodeIf;
+  constructor();
   static "new"(): VisualShaderNodeIf 
 
 

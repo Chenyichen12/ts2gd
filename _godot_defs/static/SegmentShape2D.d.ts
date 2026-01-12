@@ -10,7 +10,8 @@ declare class SegmentShape2D extends Shape2D  {
  * A 2D line segment shape, intended for use in physics. Usually used to provide a shape for a [CollisionShape2D].
  *
 */
-  new(): SegmentShape2D; 
+  new(): SegmentShape2D;
+  constructor();
   static "new"(): SegmentShape2D 
 
 

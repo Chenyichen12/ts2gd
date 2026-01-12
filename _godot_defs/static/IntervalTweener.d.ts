@@ -14,7 +14,8 @@ declare class IntervalTweener extends Tweener  {
  * **Note:** [method Tween.tween_interval] is the only correct way to create [IntervalTweener]. Any [IntervalTweener] created manually will not function correctly.
  *
 */
-  new(): IntervalTweener; 
+  new(): IntervalTweener;
+  constructor();
   static "new"(): IntervalTweener 
 
 

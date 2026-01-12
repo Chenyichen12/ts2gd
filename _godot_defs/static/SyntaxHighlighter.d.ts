@@ -14,7 +14,8 @@ declare class SyntaxHighlighter extends Resource  {
  * **Note:** A [SyntaxHighlighter] instance should not be used across multiple [TextEdit] nodes.
  *
 */
-  new(): SyntaxHighlighter; 
+  new(): SyntaxHighlighter;
+  constructor();
   static "new"(): SyntaxHighlighter 
 
 

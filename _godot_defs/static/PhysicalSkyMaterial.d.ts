@@ -14,7 +14,8 @@ declare class PhysicalSkyMaterial extends Material  {
  * The [PhysicalSkyMaterial] only supports one sun. The color, energy, and direction of the sun are taken from the first [DirectionalLight3D] in the scene tree.
  *
 */
-  new(): PhysicalSkyMaterial; 
+  new(): PhysicalSkyMaterial;
+  constructor();
   static "new"(): PhysicalSkyMaterial 
 
 

@@ -14,7 +14,8 @@ declare class AStar2D extends RefCounted  {
  * See [AStar3D] for a more thorough explanation on how to use this class. [AStar2D] is a wrapper for [AStar3D] that enforces 2D coordinates.
  *
 */
-  new(): AStar2D; 
+  new(): AStar2D;
+  constructor();
   static "new"(): AStar2D 
 
 

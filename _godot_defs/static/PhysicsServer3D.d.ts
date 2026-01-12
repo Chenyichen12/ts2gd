@@ -38,7 +38,8 @@ declare class PhysicsServer3DClass extends Object  {
  * **Note:** All the 3D physics nodes use the physics server internally. Adding a physics node to the scene tree will cause a corresponding physics object to be created in the physics server. A rigid body node registers a callback that updates the node's transform with the transform of the respective body object in the physics server (every physics update). An area node registers a callback to inform the area node about overlaps with the respective area object in the physics server. The raycast node queries the direct state of the relevant space in the physics server.
  *
 */
-  new(): PhysicsServer3DClass; 
+  new(): PhysicsServer3DClass;
+  constructor();
   static "new"(): PhysicsServer3DClass 
 
 

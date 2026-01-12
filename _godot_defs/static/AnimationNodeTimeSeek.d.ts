@@ -56,7 +56,8 @@ declare class AnimationNodeTimeSeek extends AnimationNode  {
  * 
  *
 */
-  new(): AnimationNodeTimeSeek; 
+  new(): AnimationNodeTimeSeek;
+  constructor();
   static "new"(): AnimationNodeTimeSeek 
 
 

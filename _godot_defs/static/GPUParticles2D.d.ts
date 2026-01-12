@@ -18,7 +18,8 @@ declare class GPUParticles2D extends Node2D  {
  * 2D particles can optionally collide with [LightOccluder2D], but they don't collide with [PhysicsBody2D] nodes.
  *
 */
-  new(): GPUParticles2D; 
+  new(): GPUParticles2D;
+  constructor();
   static "new"(): GPUParticles2D 
 
 

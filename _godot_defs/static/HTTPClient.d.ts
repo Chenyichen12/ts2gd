@@ -46,7 +46,8 @@ declare class HTTPClient extends RefCounted  {
  * **Warning:** TLS certificate revocation and certificate pinning are currently not supported. Revoked certificates are accepted as long as they are otherwise valid. If this is a concern, you may want to use automatically managed certificates with a short validity period.
  *
 */
-  new(): HTTPClient; 
+  new(): HTTPClient;
+  constructor();
   static "new"(): HTTPClient 
 
 

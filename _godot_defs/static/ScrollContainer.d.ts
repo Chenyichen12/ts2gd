@@ -10,7 +10,8 @@ declare class ScrollContainer extends Container  {
  * A container used to provide a child control with scrollbars when needed. Scrollbars will automatically be drawn at the right (for vertical) or bottom (for horizontal) and will enable dragging to move the viewable Control (and its children) within the ScrollContainer. Scrollbars will also automatically resize the grabber based on the [member Control.custom_minimum_size] of the Control relative to the ScrollContainer.
  *
 */
-  new(): ScrollContainer; 
+  new(): ScrollContainer;
+  constructor();
   static "new"(): ScrollContainer 
 
 

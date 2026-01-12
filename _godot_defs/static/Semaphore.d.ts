@@ -26,7 +26,8 @@ declare class Semaphore extends RefCounted  {
  * - When a [Thread]'s reference count reaches zero and it is therefore destroyed, it must not be waiting on any semaphore.
  *
 */
-  new(): Semaphore; 
+  new(): Semaphore;
+  constructor();
   static "new"(): Semaphore 
 
 

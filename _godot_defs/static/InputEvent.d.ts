@@ -10,7 +10,8 @@ declare class InputEvent extends Resource  {
  * Abstract base class of all types of input events. See [method Node._input].
  *
 */
-  new(): InputEvent; 
+  new(): InputEvent;
+  constructor();
   static "new"(): InputEvent 
 
 

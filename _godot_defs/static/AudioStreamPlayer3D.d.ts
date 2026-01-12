@@ -22,7 +22,8 @@ declare class AudioStreamPlayer3D extends Node3D  {
  * **Note:** Hiding an [AudioStreamPlayer3D] node does not disable its audio output. To temporarily disable an [AudioStreamPlayer3D]'s audio output, set [member volume_db] to a very low value like `-100` (which isn't audible to human hearing).
  *
 */
-  new(): AudioStreamPlayer3D; 
+  new(): AudioStreamPlayer3D;
+  constructor();
   static "new"(): AudioStreamPlayer3D 
 
 

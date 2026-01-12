@@ -18,7 +18,8 @@ declare class JavaClass extends RefCounted  {
  * **Note:** This class is not to be confused with [JavaScriptObject].
  *
 */
-  new(): JavaClass; 
+  new(): JavaClass;
+  constructor();
   static "new"(): JavaClass 
 
 

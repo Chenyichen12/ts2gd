@@ -14,7 +14,8 @@ declare class RDShaderSource extends RefCounted  {
  * See also [RDShaderFile]. [RDShaderSource] is only meant to be used with the [RenderingDevice] API. It should not be confused with Godot's own [Shader] resource, which is what Godot's various nodes use for high-level shader programming.
  *
 */
-  new(): RDShaderSource; 
+  new(): RDShaderSource;
+  constructor();
   static "new"(): RDShaderSource 
 
 

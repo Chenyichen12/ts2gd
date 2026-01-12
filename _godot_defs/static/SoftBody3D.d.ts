@@ -18,7 +18,8 @@ declare class SoftBody3D extends MeshInstance3D  {
  * **Note:** It's recommended to use Jolt Physics when using [SoftBody3D] instead of the default GodotPhysics3D, as Jolt Physics' soft body implementation is faster and more reliable. You can switch the physics engine using the [member ProjectSettings.physics/3d/physics_engine] project setting.
  *
 */
-  new(): SoftBody3D; 
+  new(): SoftBody3D;
+  constructor();
   static "new"(): SoftBody3D 
 
 

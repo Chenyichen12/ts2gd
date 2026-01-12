@@ -14,7 +14,8 @@ declare class AcceptDialog extends Window  {
  * **Note:** [AcceptDialog] is invisible by default. To make it visible, call one of the `popup_*` methods from [Window] on the node, such as [method Window.popup_centered_clamped].
  *
 */
-  new(): AcceptDialog; 
+  new(): AcceptDialog;
+  constructor();
   static "new"(): AcceptDialog 
 
 

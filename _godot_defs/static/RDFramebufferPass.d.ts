@@ -18,7 +18,8 @@ declare class RDFramebufferPass extends RefCounted  {
  * This object is used by [RenderingDevice].
  *
 */
-  new(): RDFramebufferPass; 
+  new(): RDFramebufferPass;
+  constructor();
   static "new"(): RDFramebufferPass 
 
 

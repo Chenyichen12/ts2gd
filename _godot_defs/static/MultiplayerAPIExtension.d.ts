@@ -152,7 +152,8 @@ declare class MultiplayerAPIExtension extends MultiplayerAPI  {
  * Native extensions can alternatively use the [method MultiplayerAPI.set_default_interface] method during initialization to configure themselves as the default implementation.
  *
 */
-  new(): MultiplayerAPIExtension; 
+  new(): MultiplayerAPIExtension;
+  constructor();
   static "new"(): MultiplayerAPIExtension 
 
 

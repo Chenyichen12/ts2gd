@@ -18,7 +18,8 @@ declare class MeshInstance2D extends Node2D  {
  * A [MeshInstance2D] can be created from an existing [Sprite2D] via a tool in the editor toolbar. Select the [Sprite2D] node, then choose **Sprite2D > Convert to MeshInstance2D** at the top of the 2D editor viewport.
  *
 */
-  new(): MeshInstance2D; 
+  new(): MeshInstance2D;
+  constructor();
   static "new"(): MeshInstance2D 
 
 

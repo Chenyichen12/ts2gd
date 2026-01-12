@@ -12,12 +12,26 @@ declare class Plane {
 */
 
   new(): Plane;
+  constructor();
+
   new(from: Plane): Plane;
+  constructor(from: Plane);
+
   new(a: float, b: float, c: float, d: float): Plane;
+  constructor(a: float, b: float, c: float, d: float);
+
   new(normal: Vector3): Plane;
+  constructor(normal: Vector3);
+
   new(normal: Vector3, d: float): Plane;
+  constructor(normal: Vector3, d: float);
+
   new(normal: Vector3, point: Vector3): Plane;
+  constructor(normal: Vector3, point: Vector3);
+
   new(point1: Vector3, point2: Vector3, point3: Vector3): Plane;
+  constructor(point1: Vector3, point2: Vector3, point3: Vector3);
+
   static "new"(): Plane 
 
 

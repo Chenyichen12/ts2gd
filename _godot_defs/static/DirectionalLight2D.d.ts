@@ -18,7 +18,8 @@ declare class DirectionalLight2D extends Light2D  {
  * **Note:** [DirectionalLight2D] does not support light cull masks (but it supports shadow cull masks). It will always light up 2D nodes, regardless of the 2D node's [member CanvasItem.light_mask].
  *
 */
-  new(): DirectionalLight2D; 
+  new(): DirectionalLight2D;
+  constructor();
   static "new"(): DirectionalLight2D 
 
 

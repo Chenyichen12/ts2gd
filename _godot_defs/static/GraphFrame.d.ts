@@ -14,7 +14,8 @@ declare class GraphFrame extends GraphElement  {
  * A GraphFrame is always kept behind the connection layer and other [GraphElement]s inside a [GraphEdit].
  *
 */
-  new(): GraphFrame; 
+  new(): GraphFrame;
+  constructor();
   static "new"(): GraphFrame 
 
 

@@ -10,7 +10,8 @@ declare class ScrollBar extends Range  {
  * Abstract base class for scrollbars, typically used to navigate through content that extends beyond the visible area of a control. Scrollbars are [Range]-based controls.
  *
 */
-  new(): ScrollBar; 
+  new(): ScrollBar;
+  constructor();
   static "new"(): ScrollBar 
 
 

@@ -10,7 +10,8 @@ declare class SkeletonModification2DLookAt extends SkeletonModification2D  {
  * This [SkeletonModification2D] rotates a bone to look a target. This is extremely helpful for moving character's head to look at the player, rotating a turret to look at a target, or any other case where you want to make a bone rotate towards something quickly and easily.
  *
 */
-  new(): SkeletonModification2DLookAt; 
+  new(): SkeletonModification2DLookAt;
+  constructor();
   static "new"(): SkeletonModification2DLookAt 
 
 

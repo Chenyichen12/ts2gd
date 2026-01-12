@@ -10,7 +10,8 @@ declare class AudioEffectNotchFilter extends AudioEffectFilter  {
  * Attenuates frequencies in a narrow band around the [member AudioEffectFilter.cutoff_hz] and cuts frequencies outside of this range.
  *
 */
-  new(): AudioEffectNotchFilter; 
+  new(): AudioEffectNotchFilter;
+  constructor();
   static "new"(): AudioEffectNotchFilter 
 
 

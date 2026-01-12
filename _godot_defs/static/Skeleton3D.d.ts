@@ -18,7 +18,8 @@ declare class Skeleton3D extends Node3D  {
  * Note that "global pose" below refers to the overall transform of the bone with respect to skeleton, so it is not the actual global/world transform of the bone.
  *
 */
-  new(): Skeleton3D; 
+  new(): Skeleton3D;
+  constructor();
   static "new"(): Skeleton3D 
 
 

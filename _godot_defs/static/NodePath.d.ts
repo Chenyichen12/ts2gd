@@ -104,8 +104,14 @@ declare class NodePath {
 */
 
   new(): NodePath;
+  constructor();
+
   new(from: NodePathType): NodePath;
+  constructor(from: NodePathType);
+
   new(from: string): NodePath;
+  constructor(from: string);
+
   static "new"(): NodePath 
 
 

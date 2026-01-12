@@ -14,7 +14,8 @@ declare class PhysicsServer3DExtension extends PhysicsServer3DClass  {
  * Intended for use with GDExtension to create custom implementations of [PhysicsServer3D].
  *
 */
-  new(): PhysicsServer3DExtension; 
+  new(): PhysicsServer3DExtension;
+  constructor();
   static "new"(): PhysicsServer3DExtension 
 
 

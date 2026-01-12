@@ -14,7 +14,8 @@ declare class RDPipelineSpecializationConstant extends RefCounted  {
  * This object is used by [RenderingDevice].
  *
 */
-  new(): RDPipelineSpecializationConstant; 
+  new(): RDPipelineSpecializationConstant;
+  constructor();
   static "new"(): RDPipelineSpecializationConstant 
 
 

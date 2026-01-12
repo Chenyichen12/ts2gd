@@ -14,7 +14,8 @@ declare class SphereShape3D extends Shape3D  {
  * **Performance:** [SphereShape3D] is fast to check collisions against. It is faster than [BoxShape3D], [CapsuleShape3D], and [CylinderShape3D].
  *
 */
-  new(): SphereShape3D; 
+  new(): SphereShape3D;
+  constructor();
   static "new"(): SphereShape3D 
 
 

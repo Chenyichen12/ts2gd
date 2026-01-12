@@ -10,7 +10,8 @@ declare class VisualShaderNodeReroute extends VisualShaderNode  {
  * Automatically adapts its port type to the type of the incoming connection and ensures valid connections.
  *
 */
-  new(): VisualShaderNodeReroute; 
+  new(): VisualShaderNodeReroute;
+  constructor();
   static "new"(): VisualShaderNodeReroute 
 
 

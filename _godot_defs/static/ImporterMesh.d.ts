@@ -14,7 +14,8 @@ declare class ImporterMesh extends Resource  {
  * Unlike its runtime counterpart, [ImporterMesh] contains mesh data before various import steps, such as lod and shadow mesh generation, have taken place. Modify surface data by calling [method clear], followed by [method add_surface] for each surface.
  *
 */
-  new(): ImporterMesh; 
+  new(): ImporterMesh;
+  constructor();
   static "new"(): ImporterMesh 
 
 

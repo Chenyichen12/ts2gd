@@ -14,7 +14,8 @@ declare class AudioListener2D extends Node2D  {
  * If there is no active [AudioListener2D] in the current [Viewport], center of the screen will be used as a hearing point for the audio. [AudioListener2D] needs to be inside [SceneTree] to function.
  *
 */
-  new(): AudioListener2D; 
+  new(): AudioListener2D;
+  constructor();
   static "new"(): AudioListener2D 
 
 

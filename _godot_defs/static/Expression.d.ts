@@ -96,7 +96,8 @@ declare class Expression extends RefCounted  {
  * 
  *
 */
-  new(): Expression; 
+  new(): Expression;
+  constructor();
   static "new"(): Expression 
 
 

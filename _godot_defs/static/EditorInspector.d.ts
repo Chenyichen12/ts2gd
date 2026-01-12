@@ -30,7 +30,8 @@ declare class EditorInspector extends ScrollContainer  {
  * **Note:** Unlike sections created from path-like property names, [EditorInspector] won't capitalize the name for sections created from groups. So properties with group usage usually use capitalized names instead of snake_cased names.
  *
 */
-  new(): EditorInspector; 
+  new(): EditorInspector;
+  constructor();
   static "new"(): EditorInspector 
 
 

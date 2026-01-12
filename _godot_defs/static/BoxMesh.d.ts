@@ -18,7 +18,8 @@ declare class BoxMesh extends PrimitiveMesh  {
  * **Note:** When using a large textured [BoxMesh] (e.g. as a floor), you may stumble upon UV jittering issues depending on the camera angle. To solve this, increase [member subdivide_depth], [member subdivide_height] and [member subdivide_width] until you no longer notice UV jittering.
  *
 */
-  new(): BoxMesh; 
+  new(): BoxMesh;
+  constructor();
   static "new"(): BoxMesh 
 
 

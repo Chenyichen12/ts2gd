@@ -40,7 +40,8 @@ declare class Timer extends Node  {
  * **Note:** Timers are affected by [member Engine.time_scale] unless [member ignore_time_scale] is `true`. The higher the time scale, the sooner timers will end. How often a timer processes may depend on the framerate or [member Engine.physics_ticks_per_second].
  *
 */
-  new(): Timer; 
+  new(): Timer;
+  constructor();
   static "new"(): Timer 
 
 

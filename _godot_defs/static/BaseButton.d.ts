@@ -10,7 +10,8 @@ declare class BaseButton extends Control  {
  * [BaseButton] is an abstract base class for GUI buttons. It doesn't display anything by itself.
  *
 */
-  new(): BaseButton; 
+  new(): BaseButton;
+  constructor();
   static "new"(): BaseButton 
 
 

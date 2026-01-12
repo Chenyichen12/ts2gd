@@ -196,7 +196,8 @@ declare class ConfigFile extends RefCounted  {
  * **Note:** The file extension given to a ConfigFile does not have any impact on its formatting or behavior. By convention, the `.cfg` extension is used here, but any other extension such as `.ini` is also valid. Since neither `.cfg` nor `.ini` are standardized, Godot's ConfigFile formatting may differ from files written by other programs.
  *
 */
-  new(): ConfigFile; 
+  new(): ConfigFile;
+  constructor();
   static "new"(): ConfigFile 
 
 

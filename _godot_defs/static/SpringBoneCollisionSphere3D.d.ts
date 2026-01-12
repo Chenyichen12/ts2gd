@@ -10,7 +10,8 @@ declare class SpringBoneCollisionSphere3D extends SpringBoneCollision3D  {
  * A sphere shape collision that interacts with [SpringBoneSimulator3D].
  *
 */
-  new(): SpringBoneCollisionSphere3D; 
+  new(): SpringBoneCollisionSphere3D;
+  constructor();
   static "new"(): SpringBoneCollisionSphere3D 
 
 

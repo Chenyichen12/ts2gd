@@ -10,7 +10,8 @@ declare class Mesh extends Resource  {
  * Mesh is a type of [Resource] that contains vertex array-based geometry, divided in **surfaces**. Each surface contains a completely separate array and a material used to draw it. Design wise, a mesh with multiple surfaces is preferred to a single surface, because objects created in 3D editing software commonly contain multiple materials. The maximum number of surfaces per mesh is [constant RenderingServer.MAX_MESH_SURFACES].
  *
 */
-  new(): Mesh; 
+  new(): Mesh;
+  constructor();
   static "new"(): Mesh 
 
 

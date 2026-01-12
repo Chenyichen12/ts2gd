@@ -10,7 +10,8 @@ declare class PhysicsDirectBodyState2D extends Object  {
  * Provides direct access to a physics body in the [PhysicsServer2D], allowing safe changes to physics properties. This object is passed via the direct state callback of [RigidBody2D], and is intended for changing the direct state of that body. See [method RigidBody2D._integrate_forces].
  *
 */
-  new(): PhysicsDirectBodyState2D; 
+  new(): PhysicsDirectBodyState2D;
+  constructor();
   static "new"(): PhysicsDirectBodyState2D 
 
 

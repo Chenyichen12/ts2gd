@@ -14,7 +14,8 @@ declare class AudioStreamMicrophone extends AudioStream  {
  * **Note:** [member ProjectSettings.audio/driver/enable_input] must be `true` for audio input to work. See also that setting's description for caveats related to permissions and operating system privacy settings.
  *
 */
-  new(): AudioStreamMicrophone; 
+  new(): AudioStreamMicrophone;
+  constructor();
   static "new"(): AudioStreamMicrophone 
 
 

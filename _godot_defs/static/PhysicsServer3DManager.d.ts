@@ -14,7 +14,8 @@ declare class PhysicsServer3DManagerClass extends Object  {
  * **Note:** It is not possible to switch physics servers at runtime. This class is only used on startup at the server initialization level, by Godot itself and possibly by GDExtensions.
  *
 */
-  new(): PhysicsServer3DManagerClass; 
+  new(): PhysicsServer3DManagerClass;
+  constructor();
   static "new"(): PhysicsServer3DManagerClass 
 
 

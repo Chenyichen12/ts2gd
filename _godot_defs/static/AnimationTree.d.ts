@@ -14,7 +14,8 @@ declare class AnimationTree extends AnimationMixer  {
  * **Note:** When linked with an [AnimationPlayer], several properties and methods of the corresponding [AnimationPlayer] will not function as expected. Playback and transitions should be handled using only the [AnimationTree] and its constituent [AnimationNode](s). The [AnimationPlayer] node should be used solely for adding, deleting, and editing animations.
  *
 */
-  new(): AnimationTree; 
+  new(): AnimationTree;
+  constructor();
   static "new"(): AnimationTree 
 
 

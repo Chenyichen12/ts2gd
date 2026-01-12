@@ -10,7 +10,8 @@ declare class VisualShaderNodeUVFunc extends VisualShaderNode  {
  * UV functions are similar to [Vector2] functions, but the input port of this node uses the shader's UV value by default.
  *
 */
-  new(): VisualShaderNodeUVFunc; 
+  new(): VisualShaderNodeUVFunc;
+  constructor();
   static "new"(): VisualShaderNodeUVFunc 
 
 

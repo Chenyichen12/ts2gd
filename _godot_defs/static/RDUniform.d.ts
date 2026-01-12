@@ -10,7 +10,8 @@ declare class RDUniform extends RefCounted  {
  * This object is used by [RenderingDevice].
  *
 */
-  new(): RDUniform; 
+  new(): RDUniform;
+  constructor();
   static "new"(): RDUniform 
 
 

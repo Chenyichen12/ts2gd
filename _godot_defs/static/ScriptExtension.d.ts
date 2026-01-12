@@ -6,7 +6,8 @@ declare class ScriptExtension extends Script  {
   
 /**
 */
-  new(): ScriptExtension; 
+  new(): ScriptExtension;
+  constructor();
   static "new"(): ScriptExtension 
 
 

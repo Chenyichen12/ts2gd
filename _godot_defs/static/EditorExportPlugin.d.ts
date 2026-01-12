@@ -14,7 +14,8 @@ declare class EditorExportPlugin extends RefCounted  {
  * To use [EditorExportPlugin], register it using the [method EditorPlugin.add_export_plugin] method first.
  *
 */
-  new(): EditorExportPlugin; 
+  new(): EditorExportPlugin;
+  constructor();
   static "new"(): EditorExportPlugin 
 
 

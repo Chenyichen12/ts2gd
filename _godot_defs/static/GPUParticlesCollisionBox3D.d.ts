@@ -22,7 +22,8 @@ declare class GPUParticlesCollisionBox3D extends GPUParticlesCollision3D  {
  * **Note:** Particle collision only affects [GPUParticles3D], not [CPUParticles3D].
  *
 */
-  new(): GPUParticlesCollisionBox3D; 
+  new(): GPUParticlesCollisionBox3D;
+  constructor();
   static "new"(): GPUParticlesCollisionBox3D 
 
 

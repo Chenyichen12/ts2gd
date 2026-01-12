@@ -10,7 +10,8 @@ declare class DPITexture extends Texture2D  {
  * An automatically scalable [Texture2D] based on an SVG image. [DPITexture]s are used to automatically re-rasterize icons and other texture based UI theme elements to match viewport scale and font oversampling. See also [member ProjectSettings.display/window/stretch/mode] ("canvas_items" mode) and [member Viewport.oversampling_override].
  *
 */
-  new(): DPITexture; 
+  new(): DPITexture;
+  constructor();
   static "new"(): DPITexture 
 
 

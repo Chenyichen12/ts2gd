@@ -10,7 +10,8 @@ declare class NavigationPathQueryResult2D extends RefCounted  {
  * This class stores the result of a 2D navigation path query from the [NavigationServer2D].
  *
 */
-  new(): NavigationPathQueryResult2D; 
+  new(): NavigationPathQueryResult2D;
+  constructor();
   static "new"(): NavigationPathQueryResult2D 
 
 

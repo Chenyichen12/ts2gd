@@ -10,7 +10,8 @@ declare class XRVRS extends Object  {
  * This class is used by various XR interfaces to generate VRS textures that can be used to speed up rendering.
  *
 */
-  new(): XRVRS; 
+  new(): XRVRS;
+  constructor();
   static "new"(): XRVRS 
 
 

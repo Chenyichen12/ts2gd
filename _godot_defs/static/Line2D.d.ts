@@ -18,7 +18,8 @@ declare class Line2D extends Node2D  {
  * **Note:** [Line2D] is drawn using a 2D mesh.
  *
 */
-  new(): Line2D; 
+  new(): Line2D;
+  constructor();
   static "new"(): Line2D 
 
 

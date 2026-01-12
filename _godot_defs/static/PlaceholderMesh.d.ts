@@ -18,7 +18,8 @@ declare class PlaceholderMesh extends Mesh  {
  * - When this subclass is missing due to using a different engine version or build (e.g. modules disabled).
  *
 */
-  new(): PlaceholderMesh; 
+  new(): PlaceholderMesh;
+  constructor();
   static "new"(): PlaceholderMesh 
 
 

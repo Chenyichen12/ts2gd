@@ -14,7 +14,8 @@ declare class SceneState extends RefCounted  {
  * This class cannot be instantiated directly, it is retrieved for a given scene as the result of [method PackedScene.get_state].
  *
 */
-  new(): SceneState; 
+  new(): SceneState;
+  constructor();
   static "new"(): SceneState 
 
 

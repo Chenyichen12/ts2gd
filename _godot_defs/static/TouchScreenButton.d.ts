@@ -18,7 +18,8 @@ declare class TouchScreenButton extends Node2D  {
  * You can configure TouchScreenButton to be visible only on touch devices, helping you develop your game both for desktop and mobile devices.
  *
 */
-  new(): TouchScreenButton; 
+  new(): TouchScreenButton;
+  constructor();
   static "new"(): TouchScreenButton 
 
 

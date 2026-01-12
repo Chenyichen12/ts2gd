@@ -14,7 +14,8 @@ declare class Parallax2D extends Node2D  {
  * **Note:** Any changes to this node's position made after it enters the scene tree will be overridden if [member ignore_camera_scroll] is `false` or [member screen_offset] is modified.
  *
 */
-  new(): Parallax2D; 
+  new(): Parallax2D;
+  constructor();
   static "new"(): Parallax2D 
 
 

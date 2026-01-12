@@ -10,7 +10,8 @@ declare class Slider extends Range  {
  * Abstract base class for sliders, used to adjust a value by moving a grabber along a horizontal or vertical axis. Sliders are [Range]-based controls.
  *
 */
-  new(): Slider; 
+  new(): Slider;
+  constructor();
   static "new"(): Slider 
 
 

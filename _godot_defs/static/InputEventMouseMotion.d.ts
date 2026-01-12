@@ -18,7 +18,8 @@ declare class InputEventMouseMotion extends InputEventMouse  {
  * **Note:** This event may be emitted even when the mouse hasn't moved, either by the operating system or by Godot itself. If you really need to know if the mouse has moved (e.g. to suppress displaying a tooltip), you should check that `relative.is_zero_approx()` is `false`.
  *
 */
-  new(): InputEventMouseMotion; 
+  new(): InputEventMouseMotion;
+  constructor();
   static "new"(): InputEventMouseMotion 
 
 

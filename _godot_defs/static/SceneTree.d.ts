@@ -18,7 +18,8 @@ declare class SceneTree extends MainLoop  {
  * [SceneTree] is the default [MainLoop] implementation used by the engine, and is thus in charge of the game loop.
  *
 */
-  new(): SceneTree; 
+  new(): SceneTree;
+  constructor();
   static "new"(): SceneTree 
 
 

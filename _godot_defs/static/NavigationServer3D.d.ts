@@ -38,7 +38,8 @@ declare class NavigationServer3DClass extends Object  {
  * This server keeps tracks of any call and executes them during the sync phase. This means that you can request any change to the map, using any thread, without worrying.
  *
 */
-  new(): NavigationServer3DClass; 
+  new(): NavigationServer3DClass;
+  constructor();
   static "new"(): NavigationServer3DClass 
 
 

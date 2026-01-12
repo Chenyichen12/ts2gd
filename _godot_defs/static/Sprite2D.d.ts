@@ -10,7 +10,8 @@ declare class Sprite2D extends Node2D  {
  * A node that displays a 2D texture. The texture displayed can be a region from a larger atlas texture, or a frame from a sprite sheet animation.
  *
 */
-  new(): Sprite2D; 
+  new(): Sprite2D;
+  constructor();
   static "new"(): Sprite2D 
 
 

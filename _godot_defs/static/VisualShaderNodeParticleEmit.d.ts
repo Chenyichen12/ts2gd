@@ -10,7 +10,8 @@ declare class VisualShaderNodeParticleEmit extends VisualShaderNode  {
  * This node internally calls `emit_subparticle` shader method. It will emit a particle from the configured sub-emitter and also allows to customize how its emitted. Requires a sub-emitter assigned to the particles node with this shader.
  *
 */
-  new(): VisualShaderNodeParticleEmit; 
+  new(): VisualShaderNodeParticleEmit;
+  constructor();
   static "new"(): VisualShaderNodeParticleEmit 
 
 

@@ -10,7 +10,8 @@ declare class VisualShaderNodeSDFRaymarch extends VisualShaderNode  {
  * Casts a ray against the screen SDF (signed-distance field) and returns the distance travelled.
  *
 */
-  new(): VisualShaderNodeSDFRaymarch; 
+  new(): VisualShaderNodeSDFRaymarch;
+  constructor();
   static "new"(): VisualShaderNodeSDFRaymarch 
 
 

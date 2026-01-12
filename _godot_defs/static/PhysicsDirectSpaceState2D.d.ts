@@ -14,7 +14,8 @@ declare class PhysicsDirectSpaceState2D extends Object  {
  * **Note:** This class is not meant to be instantiated directly. Use [member World2D.direct_space_state] to get the world's physics 2D space state.
  *
 */
-  new(): PhysicsDirectSpaceState2D; 
+  new(): PhysicsDirectSpaceState2D;
+  constructor();
   static "new"(): PhysicsDirectSpaceState2D 
 
 

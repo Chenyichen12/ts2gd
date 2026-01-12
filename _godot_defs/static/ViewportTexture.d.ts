@@ -44,7 +44,8 @@ declare class ViewportTexture extends Texture2D  {
  * **Note:** Some nodes such as [Decal], [Light3D], and [PointLight2D] do not support using [ViewportTexture] directly. To use texture data from a [ViewportTexture] in these nodes, you need to create an [ImageTexture] by calling [method Texture2D.get_image] on the [ViewportTexture] and passing the result to [method ImageTexture.create_from_image]. This conversion is a slow operation, so it should not be performed every frame.
  *
 */
-  new(): ViewportTexture; 
+  new(): ViewportTexture;
+  constructor();
   static "new"(): ViewportTexture 
 
 

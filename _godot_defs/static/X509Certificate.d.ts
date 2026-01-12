@@ -14,7 +14,8 @@ declare class X509Certificate extends Resource  {
  * They can be used as the server certificate in [method StreamPeerTLS.accept_stream] (along with the proper [CryptoKey]), and to specify the only certificate that should be accepted when connecting to a TLS server via [method StreamPeerTLS.connect_to_stream].
  *
 */
-  new(): X509Certificate; 
+  new(): X509Certificate;
+  constructor();
   static "new"(): X509Certificate 
 
 

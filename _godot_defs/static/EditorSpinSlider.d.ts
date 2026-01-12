@@ -14,7 +14,8 @@ declare class EditorSpinSlider extends Range  {
  * If the [member Range.step] value is `1`, the [EditorSpinSlider] will display up/down arrows, similar to [SpinBox]. If the [member Range.step] value is not `1`, a slider will be displayed instead.
  *
 */
-  new(): EditorSpinSlider; 
+  new(): EditorSpinSlider;
+  constructor();
   static "new"(): EditorSpinSlider 
 
 

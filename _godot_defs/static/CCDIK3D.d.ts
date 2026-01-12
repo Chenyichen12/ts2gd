@@ -18,7 +18,8 @@ declare class CCDIK3D extends IterateIK3D  {
  * **Note:** When the target is close to the root, it can cause unnatural movement, including joint flips and oscillations.
  *
 */
-  new(): CCDIK3D; 
+  new(): CCDIK3D;
+  constructor();
   static "new"(): CCDIK3D 
 
 

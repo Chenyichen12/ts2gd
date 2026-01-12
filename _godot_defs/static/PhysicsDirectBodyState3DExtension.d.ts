@@ -14,7 +14,8 @@ declare class PhysicsDirectBodyState3DExtension extends PhysicsDirectBodyState3D
  * Intended for use with GDExtension to create custom implementations of [PhysicsDirectBodyState3D].
  *
 */
-  new(): PhysicsDirectBodyState3DExtension; 
+  new(): PhysicsDirectBodyState3DExtension;
+  constructor();
   static "new"(): PhysicsDirectBodyState3DExtension 
 
 

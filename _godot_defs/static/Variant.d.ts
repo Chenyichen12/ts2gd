@@ -204,7 +204,8 @@ declare class Variant {
  * Modifications to a container will modify all references to it. A [Mutex] should be created to lock it if multi-threaded access is desired.
  *
 */
-  new(): Variant; 
+  new(): Variant;
+  constructor();
   static "new"(): Variant 
 
 

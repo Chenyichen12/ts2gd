@@ -14,7 +14,8 @@ declare class GDExtensionManagerClass extends Object  {
  * **Note:** Do not worry about GDExtension unless you know what you are doing.
  *
 */
-  new(): GDExtensionManagerClass; 
+  new(): GDExtensionManagerClass;
+  constructor();
   static "new"(): GDExtensionManagerClass 
 
 

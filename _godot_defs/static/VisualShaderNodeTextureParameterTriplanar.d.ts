@@ -10,7 +10,8 @@ declare class VisualShaderNodeTextureParameterTriplanar extends VisualShaderNode
  * Performs a lookup operation on the texture provided as a uniform for the shader, with support for triplanar mapping.
  *
 */
-  new(): VisualShaderNodeTextureParameterTriplanar; 
+  new(): VisualShaderNodeTextureParameterTriplanar;
+  constructor();
   static "new"(): VisualShaderNodeTextureParameterTriplanar 
 
 

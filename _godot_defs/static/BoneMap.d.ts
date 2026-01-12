@@ -14,7 +14,8 @@ declare class BoneMap extends Resource  {
  * By assigning the actual [Skeleton3D] bone name as the key value, it maps the [Skeleton3D] to the [SkeletonProfile].
  *
 */
-  new(): BoneMap; 
+  new(): BoneMap;
+  constructor();
   static "new"(): BoneMap 
 
 

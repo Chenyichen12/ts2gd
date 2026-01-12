@@ -10,7 +10,8 @@ declare class VisualShaderNodeIntConstant extends VisualShaderNodeConstant  {
  * Translated to [code skip-lint]int` in the shader language.
  *
 */
-  new(): VisualShaderNodeIntConstant; 
+  new(): VisualShaderNodeIntConstant;
+  constructor();
   static "new"(): VisualShaderNodeIntConstant 
 
 

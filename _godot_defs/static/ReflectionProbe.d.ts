@@ -26,7 +26,8 @@ declare class ReflectionProbe extends VisualInstance3D  {
  * **Note:** When using the Mobile rendering method, reflection probes will only correctly affect meshes whose visibility AABB intersects with the reflection probe's AABB. If using a shader to deform the mesh in a way that makes it go outside its AABB, [member GeometryInstance3D.extra_cull_margin] must be increased on the mesh. Otherwise, the reflection probe may not be visible on the mesh.
  *
 */
-  new(): ReflectionProbe; 
+  new(): ReflectionProbe;
+  constructor();
   static "new"(): ReflectionProbe 
 
 

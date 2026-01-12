@@ -14,7 +14,8 @@ declare class Skeleton2D extends Node2D  {
  * To set up different types of inverse kinematics for the given Skeleton2D, a [SkeletonModificationStack2D] should be created. The inverse kinematics be applied by increasing [member SkeletonModificationStack2D.modification_count] and creating the desired number of modifications.
  *
 */
-  new(): Skeleton2D; 
+  new(): Skeleton2D;
+  constructor();
   static "new"(): Skeleton2D 
 
 

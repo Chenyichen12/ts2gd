@@ -14,7 +14,8 @@ declare class CharacterBody2D extends PhysicsBody2D  {
  * For game objects that don't require complex movement or collision detection, such as moving platforms, [AnimatableBody2D] is simpler to configure.
  *
 */
-  new(): CharacterBody2D; 
+  new(): CharacterBody2D;
+  constructor();
   static "new"(): CharacterBody2D 
 
 

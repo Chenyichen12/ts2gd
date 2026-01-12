@@ -14,7 +14,8 @@ declare class Occluder3D extends Resource  {
  * See [OccluderInstance3D]'s documentation for instructions on setting up occlusion culling.
  *
 */
-  new(): Occluder3D; 
+  new(): Occluder3D;
+  constructor();
   static "new"(): Occluder3D 
 
 

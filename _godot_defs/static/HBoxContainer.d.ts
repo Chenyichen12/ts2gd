@@ -10,7 +10,8 @@ declare class HBoxContainer extends BoxContainer  {
  * A variant of [BoxContainer] that can only arrange its child controls horizontally. Child controls are rearranged automatically when their minimum size changes.
  *
 */
-  new(): HBoxContainer; 
+  new(): HBoxContainer;
+  constructor();
   static "new"(): HBoxContainer 
 
 

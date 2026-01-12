@@ -10,7 +10,8 @@ declare class VisualShaderNodeTransformOp extends VisualShaderNode  {
  * Applies [member operator] to two transform (4×4 matrices) inputs.
  *
 */
-  new(): VisualShaderNodeTransformOp; 
+  new(): VisualShaderNodeTransformOp;
+  constructor();
   static "new"(): VisualShaderNodeTransformOp 
 
 

@@ -10,7 +10,8 @@ declare class VisualShaderNodeTextureParameter extends VisualShaderNodeParameter
  * Performs a lookup operation on the texture provided as a uniform for the shader.
  *
 */
-  new(): VisualShaderNodeTextureParameter; 
+  new(): VisualShaderNodeTextureParameter;
+  constructor();
   static "new"(): VisualShaderNodeTextureParameter 
 
 

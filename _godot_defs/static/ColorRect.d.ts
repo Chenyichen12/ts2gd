@@ -10,7 +10,8 @@ declare class ColorRect extends Control  {
  * Displays a rectangle filled with a solid [member color]. If you need to display the border alone, consider using a [Panel] instead.
  *
 */
-  new(): ColorRect; 
+  new(): ColorRect;
+  constructor();
   static "new"(): ColorRect 
 
 

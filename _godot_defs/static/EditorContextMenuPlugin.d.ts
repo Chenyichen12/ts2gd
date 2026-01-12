@@ -14,7 +14,8 @@ declare class EditorContextMenuPlugin extends RefCounted  {
  * Currently, context menus are supported for three commonly used areas: the file system, scene tree, and editor script list panel.
  *
 */
-  new(): EditorContextMenuPlugin; 
+  new(): EditorContextMenuPlugin;
+  constructor();
   static "new"(): EditorContextMenuPlugin 
 
 

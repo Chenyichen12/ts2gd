@@ -82,7 +82,8 @@ declare class PackedDataContainerRef extends RefCounted  {
  * 
  *
 */
-  new(): PackedDataContainerRef; 
+  new(): PackedDataContainerRef;
+  constructor();
   static "new"(): PackedDataContainerRef 
 
 

@@ -14,7 +14,8 @@ declare class TileMapPattern extends Resource  {
  * A pattern always starts at the `(0, 0)` coordinates and cannot have cells with negative coordinates.
  *
 */
-  new(): TileMapPattern; 
+  new(): TileMapPattern;
+  constructor();
   static "new"(): TileMapPattern 
 
 

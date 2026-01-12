@@ -14,7 +14,8 @@ declare class XRFaceTracker extends XRTracker  {
  * As face trackers are turned on they are registered with the [XRServer].
  *
 */
-  new(): XRFaceTracker; 
+  new(): XRFaceTracker;
+  constructor();
   static "new"(): XRFaceTracker 
 
 

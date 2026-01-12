@@ -18,7 +18,8 @@ declare class PhysicalBone2D extends RigidBody2D  {
  * **Note:** The [PhysicalBone2D] node does not automatically create a [Joint2D] node to keep [PhysicalBone2D] nodes together. They must be created manually. For most cases, you want to use a [PinJoint2D] node. The [PhysicalBone2D] node will automatically configure the [Joint2D] node once it's been added as a child node.
  *
 */
-  new(): PhysicalBone2D; 
+  new(): PhysicalBone2D;
+  constructor();
   static "new"(): PhysicalBone2D 
 
 

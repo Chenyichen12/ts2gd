@@ -30,7 +30,8 @@ declare class TileSet extends Resource  {
  * See the functions to add new layers for more information.
  *
 */
-  new(): TileSet; 
+  new(): TileSet;
+  constructor();
   static "new"(): TileSet 
 
 

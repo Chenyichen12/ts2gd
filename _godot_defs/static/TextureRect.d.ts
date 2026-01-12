@@ -10,7 +10,8 @@ declare class TextureRect extends Control  {
  * A control that displays a texture, for example an icon inside a GUI. The texture's placement can be controlled with the [member stretch_mode] property. It can scale, tile, or stay centered inside its bounding rectangle.
  *
 */
-  new(): TextureRect; 
+  new(): TextureRect;
+  constructor();
   static "new"(): TextureRect 
 
 

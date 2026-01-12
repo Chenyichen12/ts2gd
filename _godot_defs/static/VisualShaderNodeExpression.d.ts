@@ -14,7 +14,8 @@ declare class VisualShaderNodeExpression extends VisualShaderNodeGroupBase  {
  * The provided code is directly injected into the graph's matching shader function (`vertex`, `fragment`, or `light`), so it cannot be used to declare functions, varyings, uniforms, or global constants. See [VisualShaderNodeGlobalExpression] for such global definitions.
  *
 */
-  new(): VisualShaderNodeExpression; 
+  new(): VisualShaderNodeExpression;
+  constructor();
   static "new"(): VisualShaderNodeExpression 
 
 

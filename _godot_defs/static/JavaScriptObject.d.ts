@@ -64,7 +64,8 @@ declare class JavaScriptObject extends RefCounted  {
  * **Note:** Only available in the Web platform.
  *
 */
-  new(): JavaScriptObject; 
+  new(): JavaScriptObject;
+  constructor();
   static "new"(): JavaScriptObject 
 
 

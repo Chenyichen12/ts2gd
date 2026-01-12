@@ -50,7 +50,8 @@ declare class CubemapArray extends ImageTextureLayered  {
  * **Note:** [CubemapArray] is not supported in the Compatibility renderer due to graphics API limitations.
  *
 */
-  new(): CubemapArray; 
+  new(): CubemapArray;
+  constructor();
   static "new"(): CubemapArray 
 
 

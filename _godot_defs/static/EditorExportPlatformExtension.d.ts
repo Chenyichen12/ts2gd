@@ -14,7 +14,8 @@ declare class EditorExportPlatformExtension extends EditorExportPlatform  {
  * To use [EditorExportPlatform], register it using the [method EditorPlugin.add_export_platform] method first.
  *
 */
-  new(): EditorExportPlatformExtension; 
+  new(): EditorExportPlatformExtension;
+  constructor();
   static "new"(): EditorExportPlatformExtension 
 
 

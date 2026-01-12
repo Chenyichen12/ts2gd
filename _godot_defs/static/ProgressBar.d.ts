@@ -10,7 +10,8 @@ declare class ProgressBar extends Range  {
  * A control used for visual representation of a percentage. Shows the fill percentage in the center. Can also be used to show indeterminate progress. For more fill modes, use [TextureProgressBar] instead.
  *
 */
-  new(): ProgressBar; 
+  new(): ProgressBar;
+  constructor();
   static "new"(): ProgressBar 
 
 

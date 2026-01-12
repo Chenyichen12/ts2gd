@@ -10,7 +10,8 @@ declare class VisualShaderNodeVec2Constant extends VisualShaderNodeConstant  {
  * A constant [Vector2], which can be used as an input node.
  *
 */
-  new(): VisualShaderNodeVec2Constant; 
+  new(): VisualShaderNodeVec2Constant;
+  constructor();
   static "new"(): VisualShaderNodeVec2Constant 
 
 

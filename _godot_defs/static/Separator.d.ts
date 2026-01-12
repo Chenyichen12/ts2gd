@@ -10,7 +10,8 @@ declare class Separator extends Control  {
  * Abstract base class for separators, used for separating other controls. [Separator]s are purely visual and normally drawn as a [StyleBoxLine].
  *
 */
-  new(): Separator; 
+  new(): Separator;
+  constructor();
   static "new"(): Separator 
 
 

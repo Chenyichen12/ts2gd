@@ -22,7 +22,8 @@ declare class Area3D extends CollisionObject3D  {
  * **Warning:** Using a [ConcavePolygonShape3D] inside a [CollisionShape3D] child of this node (created e.g. by using the **Create Trimesh Collision Sibling** option in the **Mesh** menu that appears when selecting a [MeshInstance3D] node) may give unexpected results, since this collision shape is hollow. If this is not desired, it has to be split into multiple [ConvexPolygonShape3D]s or primitive shapes like [BoxShape3D], or in some cases it may be replaceable by a [CollisionPolygon3D].
  *
 */
-  new(): Area3D; 
+  new(): Area3D;
+  constructor();
   static "new"(): Area3D 
 
 

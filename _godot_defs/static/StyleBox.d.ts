@@ -14,7 +14,8 @@ declare class StyleBox extends Resource  {
  * **Note:** For control nodes that have **Theme Properties**, the `focus` [StyleBox] is displayed over the `normal`, `hover` or `pressed` [StyleBox]. This makes the `focus` [StyleBox] more reusable across different nodes.
  *
 */
-  new(): StyleBox; 
+  new(): StyleBox;
+  constructor();
   static "new"(): StyleBox 
 
 

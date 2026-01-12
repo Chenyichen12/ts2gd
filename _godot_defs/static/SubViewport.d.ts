@@ -18,7 +18,8 @@ declare class SubViewport extends Viewport  {
  * **Note:** [InputEvent]s are not passed to a standalone [SubViewport] by default. To ensure [InputEvent] propagation, a [SubViewport] can be placed inside of a [SubViewportContainer].
  *
 */
-  new(): SubViewport; 
+  new(): SubViewport;
+  constructor();
   static "new"(): SubViewport 
 
 

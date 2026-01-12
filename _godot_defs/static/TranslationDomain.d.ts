@@ -14,7 +14,8 @@ declare class TranslationDomain extends RefCounted  {
  * If you're working with the main translation domain, it is more convenient to use the wrap methods on [TranslationServer].
  *
 */
-  new(): TranslationDomain; 
+  new(): TranslationDomain;
+  constructor();
   static "new"(): TranslationDomain 
 
 

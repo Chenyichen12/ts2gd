@@ -14,7 +14,8 @@ declare class DirectionalLight3D extends Light3D  {
  * Light is emitted in the -Z direction of the node's global basis. For an unrotated light, this means that the light is emitted forwards, illuminating the front side of a 3D model (see [constant Vector3.FORWARD] and [constant Vector3.MODEL_FRONT]). The position of the node is ignored; only the basis is used to determine light direction.
  *
 */
-  new(): DirectionalLight3D; 
+  new(): DirectionalLight3D;
+  constructor();
   static "new"(): DirectionalLight3D 
 
 

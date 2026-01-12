@@ -20,8 +20,14 @@ declare class PackedColorArray {
 */
 
   new(): PackedColorArray;
+  constructor();
+
   new(from: PackedColorArray): PackedColorArray;
+  constructor(from: PackedColorArray);
+
   new(from: any[]): PackedColorArray;
+  constructor(from: any[]);
+
   static "new"(): PackedColorArray 
 
 

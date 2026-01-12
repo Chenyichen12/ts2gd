@@ -14,7 +14,8 @@ declare class QuadOccluder3D extends Occluder3D  {
  * See [OccluderInstance3D]'s documentation for instructions on setting up occlusion culling.
  *
 */
-  new(): QuadOccluder3D; 
+  new(): QuadOccluder3D;
+  constructor();
   static "new"(): QuadOccluder3D 
 
 

@@ -10,7 +10,8 @@ declare class NavigationPathQueryResult3D extends RefCounted  {
  * This class stores the result of a 3D navigation path query from the [NavigationServer3D].
  *
 */
-  new(): NavigationPathQueryResult3D; 
+  new(): NavigationPathQueryResult3D;
+  constructor();
   static "new"(): NavigationPathQueryResult3D 
 
 

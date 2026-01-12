@@ -10,7 +10,8 @@ declare class VisualShaderNodeColorParameter extends VisualShaderNodeParameter  
  * Translated to `uniform vec4` in the shader language.
  *
 */
-  new(): VisualShaderNodeColorParameter; 
+  new(): VisualShaderNodeColorParameter;
+  constructor();
   static "new"(): VisualShaderNodeColorParameter 
 
 

@@ -10,7 +10,8 @@ declare class NavigationLink2D extends Node2D  {
  * A link between two positions on [NavigationRegion2D]s that agents can be routed through. These positions can be on the same [NavigationRegion2D] or on two different ones. Links are useful to express navigation methods other than traveling along the surface of the navigation polygon, such as ziplines, teleporters, or gaps that can be jumped across.
  *
 */
-  new(): NavigationLink2D; 
+  new(): NavigationLink2D;
+  constructor();
   static "new"(): NavigationLink2D 
 
 

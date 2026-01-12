@@ -14,7 +14,8 @@ declare class Path3D extends Node3D  {
  * Note that the path is considered as relative to the moved nodes (children of [PathFollow3D]). As such, the curve should usually start with a zero vector `(0, 0, 0)`.
  *
 */
-  new(): Path3D; 
+  new(): Path3D;
+  constructor();
   static "new"(): Path3D 
 
 

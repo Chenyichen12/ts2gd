@@ -52,10 +52,20 @@ declare class Basis {
 */
 
   new(): Basis;
+  constructor();
+
   new(from: Basis): Basis;
+  constructor(from: Basis);
+
   new(axis: Vector3, angle: float): Basis;
+  constructor(axis: Vector3, angle: float);
+
   new(from: Quaternion): Basis;
+  constructor(from: Quaternion);
+
   new(x_axis: Vector3, y_axis: Vector3, z_axis: Vector3): Basis;
+  constructor(x_axis: Vector3, y_axis: Vector3, z_axis: Vector3);
+
   static "new"(): Basis 
 
 

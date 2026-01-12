@@ -10,7 +10,8 @@ declare class InputEventJoypadMotion extends InputEvent  {
  * Stores information about joystick motions. One [InputEventJoypadMotion] represents one axis at a time. For gamepad buttons, see [InputEventJoypadButton].
  *
 */
-  new(): InputEventJoypadMotion; 
+  new(): InputEventJoypadMotion;
+  constructor();
   static "new"(): InputEventJoypadMotion 
 
 

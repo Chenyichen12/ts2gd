@@ -14,7 +14,8 @@ declare class EditorExportPlatform extends RefCounted  {
  * Used in scripting by [EditorExportPlugin] to configure platform-specific customization of scenes and resources. See [method EditorExportPlugin._begin_customize_scenes] and [method EditorExportPlugin._begin_customize_resources] for more details.
  *
 */
-  new(): EditorExportPlatform; 
+  new(): EditorExportPlatform;
+  constructor();
   static "new"(): EditorExportPlatform 
 
 

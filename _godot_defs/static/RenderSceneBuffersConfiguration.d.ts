@@ -10,7 +10,8 @@ declare class RenderSceneBuffersConfiguration extends RefCounted  {
  * This configuration object is created and populated by the render engine on a viewport change and used to (re)configure a [RenderSceneBuffers] object.
  *
 */
-  new(): RenderSceneBuffersConfiguration; 
+  new(): RenderSceneBuffersConfiguration;
+  constructor();
   static "new"(): RenderSceneBuffersConfiguration 
 
 

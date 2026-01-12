@@ -10,7 +10,8 @@ declare class ResourceImporter extends RefCounted  {
  * This is the base class for Godot's resource importers. To implement your own resource importers using editor plugins, see [EditorImportPlugin].
  *
 */
-  new(): ResourceImporter; 
+  new(): ResourceImporter;
+  constructor();
   static "new"(): ResourceImporter 
 
 

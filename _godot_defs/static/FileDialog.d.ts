@@ -14,7 +14,8 @@ declare class FileDialog extends ConfirmationDialog  {
  * **Note:** [FileDialog] is invisible by default. To make it visible, call one of the `popup_*` methods from [Window] on the node, such as [method Window.popup_centered_clamped].
  *
 */
-  new(): FileDialog; 
+  new(): FileDialog;
+  constructor();
   static "new"(): FileDialog 
 
 

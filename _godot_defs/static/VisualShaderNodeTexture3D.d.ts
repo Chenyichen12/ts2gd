@@ -10,7 +10,8 @@ declare class VisualShaderNodeTexture3D extends VisualShaderNodeSample3D  {
  * Performs a lookup operation on the provided texture, with support for multiple texture sources to choose from.
  *
 */
-  new(): VisualShaderNodeTexture3D; 
+  new(): VisualShaderNodeTexture3D;
+  constructor();
   static "new"(): VisualShaderNodeTexture3D 
 
 

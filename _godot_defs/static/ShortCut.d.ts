@@ -110,7 +110,8 @@ declare class Shortcut extends Resource  {
  * 
  *
 */
-  new(): Shortcut; 
+  new(): Shortcut;
+  constructor();
   static "new"(): Shortcut 
 
 

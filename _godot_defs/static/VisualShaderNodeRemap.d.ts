@@ -10,7 +10,8 @@ declare class VisualShaderNodeRemap extends VisualShaderNode  {
  * Remap will transform the input range into output range, e.g. you can change a `0..1` value to `-2..2` etc. See [method @GlobalScope.remap] for more details.
  *
 */
-  new(): VisualShaderNodeRemap; 
+  new(): VisualShaderNodeRemap;
+  constructor();
   static "new"(): VisualShaderNodeRemap 
 
 

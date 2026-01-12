@@ -96,7 +96,8 @@ declare class Cubemap extends ImageTextureLayered  {
  * Alternatively, you can use [url=https://danilw.github.io/GLSL-howto/cubemap_to_panorama_js/cubemap_to_panorama.html]this tool[/url] to convert a cubemap to an equirectangular sky map and use [PanoramaSkyMaterial] as usual.
  *
 */
-  new(): Cubemap; 
+  new(): Cubemap;
+  constructor();
   static "new"(): Cubemap 
 
 

@@ -14,7 +14,8 @@ declare class RectangleShape2D extends Shape2D  {
  * **Performance:** [RectangleShape2D] is fast to check collisions against. It is faster than [CapsuleShape2D], but slower than [CircleShape2D].
  *
 */
-  new(): RectangleShape2D; 
+  new(): RectangleShape2D;
+  constructor();
   static "new"(): RectangleShape2D 
 
 

@@ -30,7 +30,8 @@ declare class Decal extends VisualInstance3D  {
  * **Note:** When using the Mobile rendering method, decals will only correctly affect meshes whose visibility AABB intersects with the decal's AABB. If using a shader to deform the mesh in a way that makes it go outside its AABB, [member GeometryInstance3D.extra_cull_margin] must be increased on the mesh. Otherwise, the decal may not be visible on the mesh.
  *
 */
-  new(): Decal; 
+  new(): Decal;
+  constructor();
   static "new"(): Decal 
 
 

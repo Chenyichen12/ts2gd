@@ -10,7 +10,8 @@ declare class VideoStreamPlayback extends Resource  {
  * This class is intended to be overridden by video decoder extensions with custom implementations of [VideoStream].
  *
 */
-  new(): VideoStreamPlayback; 
+  new(): VideoStreamPlayback;
+  constructor();
   static "new"(): VideoStreamPlayback 
 
 

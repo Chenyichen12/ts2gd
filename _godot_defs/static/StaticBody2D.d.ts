@@ -18,7 +18,8 @@ declare class StaticBody2D extends PhysicsBody2D  {
  * [StaticBody2D] is useful for completely static objects like floors and walls, as well as moving surfaces like conveyor belts and circular revolving platforms (by using [member constant_linear_velocity] and [member constant_angular_velocity]).
  *
 */
-  new(): StaticBody2D; 
+  new(): StaticBody2D;
+  constructor();
   static "new"(): StaticBody2D 
 
 

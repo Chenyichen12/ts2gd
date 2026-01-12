@@ -10,7 +10,8 @@ declare class InputEventScreenDrag extends InputEventFromWindow  {
  * Stores information about screen drag events. See [method Node._input].
  *
 */
-  new(): InputEventScreenDrag; 
+  new(): InputEventScreenDrag;
+  constructor();
   static "new"(): InputEventScreenDrag 
 
 

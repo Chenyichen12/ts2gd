@@ -54,7 +54,8 @@ declare class Node extends Object  {
  * **Note:** The `script` property is part of the [Object] class, not [Node]. It isn't exposed like most properties but does have a setter and getter (see [method Object.set_script] and [method Object.get_script]).
  *
 */
-  new(): Node; 
+  new(): Node;
+  constructor();
   static "new"(): Node 
 
 

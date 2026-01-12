@@ -10,7 +10,8 @@ declare class TextParagraph extends RefCounted  {
  * Abstraction over [TextServer] for handling a single paragraph of text.
  *
 */
-  new(): TextParagraph; 
+  new(): TextParagraph;
+  constructor();
   static "new"(): TextParagraph 
 
 

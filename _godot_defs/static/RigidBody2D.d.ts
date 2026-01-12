@@ -30,7 +30,8 @@ declare class RigidBody2D extends PhysicsBody2D  {
  * **Note:** Changing the 2D transform or [member linear_velocity] of a [RigidBody2D] very often may lead to some unpredictable behaviors. This also happens when a [RigidBody2D] is the descendant of a constantly moving node, like another [RigidBody2D], as that will cause its global transform to be set whenever its ancestor moves.
  *
 */
-  new(): RigidBody2D; 
+  new(): RigidBody2D;
+  constructor();
   static "new"(): RigidBody2D 
 
 

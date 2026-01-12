@@ -10,7 +10,8 @@ declare class RenderDataExtension extends RenderData  {
  * This class allows for a RenderData implementation to be made in GDExtension.
  *
 */
-  new(): RenderDataExtension; 
+  new(): RenderDataExtension;
+  constructor();
   static "new"(): RenderDataExtension 
 
 

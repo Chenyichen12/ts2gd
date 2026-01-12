@@ -112,7 +112,8 @@ declare class ResourceImporterCSVTranslation extends ResourceImporter  {
  * 
  *
 */
-  new(): ResourceImporterCSVTranslation; 
+  new(): ResourceImporterCSVTranslation;
+  constructor();
   static "new"(): ResourceImporterCSVTranslation 
 
 

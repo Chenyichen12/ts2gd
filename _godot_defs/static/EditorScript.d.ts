@@ -70,7 +70,8 @@ declare class EditorScript extends RefCounted  {
  * **Note:** EditorScript is [RefCounted], meaning it is destroyed when nothing references it. This can cause errors during asynchronous operations if there are no references to the script.
  *
 */
-  new(): EditorScript; 
+  new(): EditorScript;
+  constructor();
   static "new"(): EditorScript 
 
 

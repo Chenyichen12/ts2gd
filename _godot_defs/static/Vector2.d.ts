@@ -358,9 +358,13 @@ declare type Vector2 = Vector2Constructor;
 declare var Vector2: typeof Vector2Constructor & {
   
   new(): Vector2;
+
   new(from: Vector2): Vector2;
+
   new(from: Vector2i): Vector2;
+
   new(x: float, y: float): Vector2;
+
 
   (): Vector2;
   (from: Vector2): Vector2;

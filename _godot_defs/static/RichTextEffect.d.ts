@@ -44,7 +44,8 @@ declare class RichTextEffect extends Resource  {
  * **Note:** As soon as a [RichTextLabel] contains at least one [RichTextEffect], it will continuously process the effect unless the project is paused. This may impact battery life negatively.
  *
 */
-  new(): RichTextEffect; 
+  new(): RichTextEffect;
+  constructor();
   static "new"(): RichTextEffect 
 
 

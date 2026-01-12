@@ -14,7 +14,8 @@ declare class AnimatableBody2D extends StaticBody2D  {
  * When [AnimatableBody2D] is moved, its linear and angular velocity are estimated and used to affect other physics bodies in its path. This makes it useful for moving platforms, doors, and other moving objects.
  *
 */
-  new(): AnimatableBody2D; 
+  new(): AnimatableBody2D;
+  constructor();
   static "new"(): AnimatableBody2D 
 
 

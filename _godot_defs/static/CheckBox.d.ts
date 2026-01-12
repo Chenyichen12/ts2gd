@@ -18,7 +18,8 @@ declare class CheckBox extends Button  {
  * When [member BaseButton.button_group] specifies a [ButtonGroup], [CheckBox] changes its appearance to that of a radio button and uses the various `radio_*` theme properties.
  *
 */
-  new(): CheckBox; 
+  new(): CheckBox;
+  constructor();
   static "new"(): CheckBox 
 
 

@@ -1397,12 +1397,19 @@ declare type Color = ColorConstructor;
 declare var Color: typeof ColorConstructor & {
   
   new(): Color;
+
   new(from: Color, alpha: float): Color;
+
   new(from: Color): Color;
+
   new(code: string): Color;
+
   new(code: string, alpha: float): Color;
+
   new(r: float, g: float, b: float): Color;
+
   new(r: float, g: float, b: float, a: float): Color;
+
 
   (): Color;
   (from: Color, alpha: float): Color;

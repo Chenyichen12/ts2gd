@@ -116,7 +116,8 @@ declare class HashingContext extends RefCounted  {
  * 
  *
 */
-  new(): HashingContext; 
+  new(): HashingContext;
+  constructor();
   static "new"(): HashingContext 
 
 

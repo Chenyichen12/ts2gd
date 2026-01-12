@@ -10,7 +10,8 @@ declare class Sprite3D extends SpriteBase3D  {
  * A node that displays a 2D texture in a 3D environment. The texture displayed can be a region from a larger atlas texture, or a frame from a sprite sheet animation. See also [SpriteBase3D] where properties such as the billboard mode are defined.
  *
 */
-  new(): Sprite3D; 
+  new(): Sprite3D;
+  constructor();
   static "new"(): Sprite3D 
 
 

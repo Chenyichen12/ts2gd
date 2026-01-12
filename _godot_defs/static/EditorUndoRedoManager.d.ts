@@ -38,7 +38,8 @@ declare class EditorUndoRedoManager extends Object  {
  * The manager's API is mostly the same as in [UndoRedo], so you can refer to its documentation for more examples. The main difference is that [EditorUndoRedoManager] uses object + method name for actions, instead of [Callable].
  *
 */
-  new(): EditorUndoRedoManager; 
+  new(): EditorUndoRedoManager;
+  constructor();
   static "new"(): EditorUndoRedoManager 
 
 

@@ -14,7 +14,8 @@ declare class InputEventMagnifyGesture extends InputEventGesture  {
  * **Note:** On Android, this requires the [member ProjectSettings.input_devices/pointing/android/enable_pan_and_scale_gestures] project setting to be enabled.
  *
 */
-  new(): InputEventMagnifyGesture; 
+  new(): InputEventMagnifyGesture;
+  constructor();
   static "new"(): InputEventMagnifyGesture 
 
 

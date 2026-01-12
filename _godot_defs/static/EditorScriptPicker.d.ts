@@ -14,7 +14,8 @@ declare class EditorScriptPicker extends EditorResourcePicker  {
  * **Note:** You must set the [member script_owner] for the custom context menu items to work.
  *
 */
-  new(): EditorScriptPicker; 
+  new(): EditorScriptPicker;
+  constructor();
   static "new"(): EditorScriptPicker 
 
 

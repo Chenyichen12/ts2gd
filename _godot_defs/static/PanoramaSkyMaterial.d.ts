@@ -18,7 +18,8 @@ declare class PanoramaSkyMaterial extends Material  {
  * You can use [url=https://danilw.github.io/GLSL-howto/cubemap_to_panorama_js/cubemap_to_panorama.html]this tool[/url] to convert a cubemap to an equirectangular sky map.
  *
 */
-  new(): PanoramaSkyMaterial; 
+  new(): PanoramaSkyMaterial;
+  constructor();
   static "new"(): PanoramaSkyMaterial 
 
 

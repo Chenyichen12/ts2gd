@@ -14,7 +14,8 @@ declare class KinematicCollision2D extends RefCounted  {
  * The collision data includes the colliding object, the remaining motion, and the collision position. This data can be used to determine a custom response to the collision.
  *
 */
-  new(): KinematicCollision2D; 
+  new(): KinematicCollision2D;
+  constructor();
   static "new"(): KinematicCollision2D 
 
 

@@ -14,7 +14,8 @@ declare class PhysicsDirectBodyState2DExtension extends PhysicsDirectBodyState2D
  * Intended for use with GDExtension to create custom implementations of [PhysicsDirectBodyState2D].
  *
 */
-  new(): PhysicsDirectBodyState2DExtension; 
+  new(): PhysicsDirectBodyState2DExtension;
+  constructor();
   static "new"(): PhysicsDirectBodyState2DExtension 
 
 

@@ -10,7 +10,8 @@ declare class AudioSample extends RefCounted  {
  * Base class for audio samples.
  *
 */
-  new(): AudioSample; 
+  new(): AudioSample;
+  constructor();
   static "new"(): AudioSample 
 
 

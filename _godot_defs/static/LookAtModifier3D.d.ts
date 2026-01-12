@@ -14,7 +14,8 @@ declare class LookAtModifier3D extends SkeletonModifier3D  {
  * When applying multiple [LookAtModifier3D]s, the [LookAtModifier3D] assigned to the parent bone must be put above the [LookAtModifier3D] assigned to the child bone in the list in order for the child bone results to be correct.
  *
 */
-  new(): LookAtModifier3D; 
+  new(): LookAtModifier3D;
+  constructor();
   static "new"(): LookAtModifier3D 
 
 

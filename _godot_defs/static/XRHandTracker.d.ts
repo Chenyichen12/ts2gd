@@ -14,7 +14,8 @@ declare class XRHandTracker extends XRPositionalTracker  {
  * Use [XRHandModifier3D] to animate a hand mesh using hand tracking data.
  *
 */
-  new(): XRHandTracker; 
+  new(): XRHandTracker;
+  constructor();
   static "new"(): XRHandTracker 
 
 

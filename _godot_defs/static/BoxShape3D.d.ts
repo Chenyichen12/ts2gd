@@ -14,7 +14,8 @@ declare class BoxShape3D extends Shape3D  {
  * **Performance:** [BoxShape3D] is fast to check collisions against. It is faster than [CapsuleShape3D] and [CylinderShape3D], but slower than [SphereShape3D].
  *
 */
-  new(): BoxShape3D; 
+  new(): BoxShape3D;
+  constructor();
   static "new"(): BoxShape3D 
 
 

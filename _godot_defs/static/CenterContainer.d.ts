@@ -10,7 +10,8 @@ declare class CenterContainer extends Container  {
  * [CenterContainer] is a container that keeps all of its child controls in its center at their minimum size.
  *
 */
-  new(): CenterContainer; 
+  new(): CenterContainer;
+  constructor();
   static "new"(): CenterContainer 
 
 

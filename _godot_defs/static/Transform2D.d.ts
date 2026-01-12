@@ -24,10 +24,20 @@ declare class Transform2D {
 */
 
   new(): Transform2D;
+  constructor();
+
   new(from: Transform2D): Transform2D;
+  constructor(from: Transform2D);
+
   new(rotation: float, position: Vector2): Transform2D;
+  constructor(rotation: float, position: Vector2);
+
   new(rotation: float, scale: Vector2, skew: float, position: Vector2): Transform2D;
+  constructor(rotation: float, scale: Vector2, skew: float, position: Vector2);
+
   new(x_axis: Vector2, y_axis: Vector2, origin: Vector2): Transform2D;
+  constructor(x_axis: Vector2, y_axis: Vector2, origin: Vector2);
+
   static "new"(): Transform2D 
 
 

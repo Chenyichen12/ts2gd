@@ -14,7 +14,8 @@ declare class BackBufferCopy extends Node2D  {
  * **Note:** Since this node inherits from [Node2D] (and not [Control]), anchors and margins won't apply to child [Control]-derived nodes. This can be problematic when resizing the window. To avoid this, add [Control]-derived nodes as **siblings** to the [BackBufferCopy] node instead of adding them as children.
  *
 */
-  new(): BackBufferCopy; 
+  new(): BackBufferCopy;
+  constructor();
   static "new"(): BackBufferCopy 
 
 

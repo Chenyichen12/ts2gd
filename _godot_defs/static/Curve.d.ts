@@ -14,7 +14,8 @@ declare class Curve extends Resource  {
  * Please note that many resources and nodes assume they are given **unit curves**. A unit curve is a curve whose domain (the X axis) is between `0` and `1`. Some examples of unit curve usage are [member CPUParticles2D.angle_curve] and [member Line2D.width_curve].
  *
 */
-  new(): Curve; 
+  new(): Curve;
+  constructor();
   static "new"(): Curve 
 
 

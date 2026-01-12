@@ -74,7 +74,8 @@ declare class Object {
  * **Note:** In a boolean context, an [Object] will evaluate to `false` if it is equal to `null` or it has been freed. Otherwise, an [Object] will always evaluate to `true`. See also [method @GlobalScope.is_instance_valid].
  *
 */
-  new(): Object; 
+  new(): Object;
+  constructor();
   static "new"(): Object 
 
 

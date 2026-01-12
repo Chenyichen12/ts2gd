@@ -10,7 +10,8 @@ declare class SpringBoneCollisionCapsule3D extends SpringBoneCollision3D  {
  * A capsule shape collision that interacts with [SpringBoneSimulator3D].
  *
 */
-  new(): SpringBoneCollisionCapsule3D; 
+  new(): SpringBoneCollisionCapsule3D;
+  constructor();
   static "new"(): SpringBoneCollisionCapsule3D 
 
 

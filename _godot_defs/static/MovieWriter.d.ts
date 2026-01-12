@@ -46,7 +46,8 @@ declare class MovieWriter extends Object  {
  * **Note:** OGV support (`.ogv` file extension) depends on the `theora` module being enabled at compile time (default behavior). Theora compression is only available in editor binaries.
  *
 */
-  new(): MovieWriter; 
+  new(): MovieWriter;
+  constructor();
   static "new"(): MovieWriter 
 
 

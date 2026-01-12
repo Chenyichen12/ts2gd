@@ -10,7 +10,8 @@ declare class ResourceImporterLayeredTexture extends ResourceImporter  {
  * This imports a 3-dimensional texture, which can then be used in custom shaders, as a [FogMaterial] density map or as a [GPUParticlesAttractorVectorField3D]. See also [ResourceImporterTexture] and [ResourceImporterTextureAtlas].
  *
 */
-  new(): ResourceImporterLayeredTexture; 
+  new(): ResourceImporterLayeredTexture;
+  constructor();
   static "new"(): ResourceImporterLayeredTexture 
 
 

@@ -10,7 +10,8 @@ declare class VisualShaderNodeCompare extends VisualShaderNode  {
  * Compares `a` and `b` of [member type] by [member function]. Returns a boolean scalar. Translates to `if` instruction in shader code.
  *
 */
-  new(): VisualShaderNodeCompare; 
+  new(): VisualShaderNodeCompare;
+  constructor();
   static "new"(): VisualShaderNodeCompare 
 
 

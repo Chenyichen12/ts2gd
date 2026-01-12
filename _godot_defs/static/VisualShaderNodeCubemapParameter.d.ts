@@ -10,7 +10,8 @@ declare class VisualShaderNodeCubemapParameter extends VisualShaderNodeTexturePa
  * Translated to `uniform samplerCube` in the shader language. The output value can be used as port for [VisualShaderNodeCubemap].
  *
 */
-  new(): VisualShaderNodeCubemapParameter; 
+  new(): VisualShaderNodeCubemapParameter;
+  constructor();
   static "new"(): VisualShaderNodeCubemapParameter 
 
 

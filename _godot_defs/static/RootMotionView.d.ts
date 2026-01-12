@@ -14,7 +14,8 @@ declare class RootMotionView extends VisualInstance3D  {
  * **Note:** [RootMotionView] is only visible in the editor. It will be hidden automatically in the running project.
  *
 */
-  new(): RootMotionView; 
+  new(): RootMotionView;
+  constructor();
   static "new"(): RootMotionView 
 
 

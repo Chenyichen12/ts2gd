@@ -14,7 +14,8 @@ declare class Lightmapper extends RefCounted  {
  * Godot contains a built-in GPU-based lightmapper [LightmapperRD] that uses compute shaders, but custom lightmappers can be implemented by C++ modules.
  *
 */
-  new(): Lightmapper; 
+  new(): Lightmapper;
+  constructor();
   static "new"(): Lightmapper 
 
 

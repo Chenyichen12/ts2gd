@@ -22,7 +22,8 @@ declare class Resource extends RefCounted  {
  * **Note:** In C#, resources will not be freed instantly after they are no longer in use. Instead, garbage collection will run periodically and will free resources that are no longer in use. This means that unused resources will remain in memory for a while before being removed.
  *
 */
-  new(): Resource; 
+  new(): Resource;
+  constructor();
   static "new"(): Resource 
 
 

@@ -34,7 +34,8 @@ declare class SpringBoneSimulator3D extends SkeletonModifier3D  {
  * **Warning:** A scaled [SpringBoneSimulator3D] will likely not behave as expected. Make sure that the parent [Skeleton3D] and its bones are not scaled.
  *
 */
-  new(): SpringBoneSimulator3D; 
+  new(): SpringBoneSimulator3D;
+  constructor();
   static "new"(): SpringBoneSimulator3D 
 
 

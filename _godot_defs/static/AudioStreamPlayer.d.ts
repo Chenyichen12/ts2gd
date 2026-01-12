@@ -18,7 +18,8 @@ declare class AudioStreamPlayer extends Node  {
  * If you need to play audio at a specific position, use [AudioStreamPlayer2D] or [AudioStreamPlayer3D] instead.
  *
 */
-  new(): AudioStreamPlayer; 
+  new(): AudioStreamPlayer;
+  constructor();
   static "new"(): AudioStreamPlayer 
 
 

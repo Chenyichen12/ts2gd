@@ -10,7 +10,8 @@ declare class VisualShaderNodeTexture2DParameter extends VisualShaderNodeTexture
  * Translated to `uniform sampler2D` in the shader language.
  *
 */
-  new(): VisualShaderNodeTexture2DParameter; 
+  new(): VisualShaderNodeTexture2DParameter;
+  constructor();
   static "new"(): VisualShaderNodeTexture2DParameter 
 
 

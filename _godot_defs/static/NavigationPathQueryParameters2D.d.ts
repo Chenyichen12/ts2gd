@@ -10,7 +10,8 @@ declare class NavigationPathQueryParameters2D extends RefCounted  {
  * By changing various properties of this object, such as the start and target position, you can configure path queries to the [NavigationServer2D].
  *
 */
-  new(): NavigationPathQueryParameters2D; 
+  new(): NavigationPathQueryParameters2D;
+  constructor();
   static "new"(): NavigationPathQueryParameters2D 
 
 

@@ -22,7 +22,8 @@ declare class RenderSceneBuffersRD extends RenderSceneBuffers  {
  * **Note:** This is an internal rendering server object. Do not instantiate this class from a script.
  *
 */
-  new(): RenderSceneBuffersRD; 
+  new(): RenderSceneBuffersRD;
+  constructor();
   static "new"(): RenderSceneBuffersRD 
 
 

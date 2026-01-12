@@ -10,7 +10,8 @@ declare class MarshallsClass extends Object  {
  * Provides data transformation and encoding utility functions.
  *
 */
-  new(): MarshallsClass; 
+  new(): MarshallsClass;
+  constructor();
   static "new"(): MarshallsClass 
 
 

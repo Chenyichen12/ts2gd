@@ -10,7 +10,8 @@ declare class VisualShaderNodeBooleanParameter extends VisualShaderNodeParameter
  * Translated to `uniform bool` in the shader language.
  *
 */
-  new(): VisualShaderNodeBooleanParameter; 
+  new(): VisualShaderNodeBooleanParameter;
+  constructor();
   static "new"(): VisualShaderNodeBooleanParameter 
 
 

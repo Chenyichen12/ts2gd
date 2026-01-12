@@ -10,7 +10,8 @@ declare class VisualShaderNodeTransformFunc extends VisualShaderNode  {
  * Computes an inverse or transpose function on the provided [Transform3D].
  *
 */
-  new(): VisualShaderNodeTransformFunc; 
+  new(): VisualShaderNodeTransformFunc;
+  constructor();
   static "new"(): VisualShaderNodeTransformFunc 
 
 

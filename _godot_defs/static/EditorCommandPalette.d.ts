@@ -52,7 +52,8 @@ declare class EditorCommandPalette extends ConfirmationDialog  {
  * **Note:** This class shouldn't be instantiated directly. Instead, access the singleton using [method EditorInterface.get_command_palette].
  *
 */
-  new(): EditorCommandPalette; 
+  new(): EditorCommandPalette;
+  constructor();
   static "new"(): EditorCommandPalette 
 
 

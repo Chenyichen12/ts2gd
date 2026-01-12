@@ -26,7 +26,8 @@ declare class Viewport extends Node  {
  * Finally, viewports can also behave as render targets, in which case they will not be visible unless the associated texture is used to draw.
  *
 */
-  new(): Viewport; 
+  new(): Viewport;
+  constructor();
   static "new"(): Viewport 
 
 

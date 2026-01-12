@@ -106,7 +106,8 @@ declare class EditorScenePostImport extends RefCounted  {
  * 
  *
 */
-  new(): EditorScenePostImport; 
+  new(): EditorScenePostImport;
+  constructor();
   static "new"(): EditorScenePostImport 
 
 

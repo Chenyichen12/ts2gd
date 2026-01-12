@@ -10,7 +10,8 @@ declare class EditorResourcePreviewGenerator extends RefCounted  {
  * Custom code to generate previews. Check [member EditorSettings.filesystem/file_dialog/thumbnail_size] to find a proper size to generate previews at.
  *
 */
-  new(): EditorResourcePreviewGenerator; 
+  new(): EditorResourcePreviewGenerator;
+  constructor();
   static "new"(): EditorResourcePreviewGenerator 
 
 

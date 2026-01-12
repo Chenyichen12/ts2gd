@@ -32,8 +32,14 @@ declare class StringName {
 */
 
   new(): StringName;
+  constructor();
+
   new(from: StringName): StringName;
+  constructor(from: StringName);
+
   new(from: string): StringName;
+  constructor(from: string);
+
   static "new"(): StringName 
 
 

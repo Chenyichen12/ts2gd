@@ -14,7 +14,8 @@ declare class ImageTexture3D extends Texture3D  {
  * 3D textures are typically used to store density maps for [FogMaterial], color correction LUTs for [Environment], vector fields for [GPUParticlesAttractorVectorField3D] and collision maps for [GPUParticlesCollisionSDF3D]. 3D textures can also be used in custom shaders.
  *
 */
-  new(): ImageTexture3D; 
+  new(): ImageTexture3D;
+  constructor();
   static "new"(): ImageTexture3D 
 
 

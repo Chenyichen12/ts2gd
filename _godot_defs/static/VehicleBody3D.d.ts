@@ -22,7 +22,8 @@ declare class VehicleBody3D extends RigidBody3D  {
  * **Note:** This class has known issues and isn't designed to provide realistic 3D vehicle physics. If you want advanced vehicle physics, you may have to write your own physics integration using [CharacterBody3D] or [RigidBody3D].
  *
 */
-  new(): VehicleBody3D; 
+  new(): VehicleBody3D;
+  constructor();
   static "new"(): VehicleBody3D 
 
 

@@ -56,7 +56,8 @@ declare class MarginContainer extends Container  {
  * 
  *
 */
-  new(): MarginContainer; 
+  new(): MarginContainer;
+  constructor();
   static "new"(): MarginContainer 
 
 

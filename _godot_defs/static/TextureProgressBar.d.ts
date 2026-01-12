@@ -10,7 +10,8 @@ declare class TextureProgressBar extends Range  {
  * TextureProgressBar works like [ProgressBar], but uses up to 3 textures instead of Godot's [Theme] resource. It can be used to create horizontal, vertical and radial progress bars.
  *
 */
-  new(): TextureProgressBar; 
+  new(): TextureProgressBar;
+  constructor();
   static "new"(): TextureProgressBar 
 
 

@@ -18,7 +18,8 @@ declare class JacobianIK3D extends IterateIK3D  {
  * **Note:** It converges more slowly than other IK solvers, leading to gentler and less immediate tracking of targets.
  *
 */
-  new(): JacobianIK3D; 
+  new(): JacobianIK3D;
+  constructor();
   static "new"(): JacobianIK3D 
 
 

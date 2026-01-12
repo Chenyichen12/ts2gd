@@ -36,7 +36,8 @@ declare class AnimationNodeStateMachinePlayback extends Resource  {
  * 
  *
 */
-  new(): AnimationNodeStateMachinePlayback; 
+  new(): AnimationNodeStateMachinePlayback;
+  constructor();
   static "new"(): AnimationNodeStateMachinePlayback 
 
 

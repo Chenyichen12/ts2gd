@@ -1,75 +1,19 @@
 export const CallDefinition = `
-/**
- * [Callable] is a built-in [Variant] type that represents a function. It can either be a method within an [Object] instance, or a custom callable used for different purposes (see [method is_custom]). Like all [Variant] types, it can be stored in variables and passed to other functions. It is most commonly used for signal callbacks.
- *
- * @example 
- * 
- * 
- * func print_args(arg1, arg2, arg3 = ""):
- * 	prints(arg1, arg2, arg3)
- * func test():
- * 	var callable = Callable(self, "print_args")
- * 	callable.call("hello", "world")  # Prints "hello world ".
- * 	callable.call(Vector2.UP, 42, callable)  # Prints "(0.0, -1.0) 42 Node(node.gd)::print_args"
- * 	callable.call("invalid")  # Invalid call, should have at least 2 arguments.
- * 
- * 
- * // Default parameter values are not supported.
- * public void PrintArgs(Variant arg1, Variant arg2, Variant arg3 = default)
- * {
- * 	GD.PrintS(arg1, arg2, arg3);
- * }
- * public void Test()
- * {
- * 	// Invalid calls fail silently.
- * 	Callable callable = new Callable(this, MethodName.PrintArgs);
- * 	callable.Call("hello", "world"); // Default parameter values are not supported, should have 3 arguments.
- * 	callable.Call(Vector2.Up, 42, callable); // Prints "(0, -1) 42 Node(Node.cs)::PrintArgs"
- * 	callable.Call("invalid"); // Invalid call, should have 3 arguments.
- * }
- * 
- * @summary 
- * 
- *
- * In GDScript, it's possible to create lambda functions within a method. Lambda functions are custom callables that are not associated with an [Object] instance. Optionally, lambda functions can also be named. The name will be displayed in the debugger, or when calling [method get_method].
- *
- * @example 
- * 
- * func _init():
- * 	var my_lambda = func (message):
- * 		print(message)
- * 	# Prints "Hello everyone!"
- * 	my_lambda.call("Hello everyone!")
- * 	# Prints "Attack!", when the button_pressed signal is emitted.
- * 	button_pressed.connect(func(): print("Attack!"))
- * @summary 
- * 
- *
- * In GDScript, you can access methods and global functions as [Callable]s:
- *
- * @example 
- * 
- * tween.tween_callback(node.queue_free)  # Object methods.
- * tween.tween_callback(array.clear)  # Methods of built-in types.
- * tween.tween_callback(print.bind("Test"))  # Global functions.
- * @summary 
- * 
- *
- * **Note:** [Dictionary] does not support the above due to ambiguity with keys.
- *
- * @example 
- * 
- * var dictionary = { "hello": "world" }
- * # This will not work, "clear" is treated as a key.
- * tween.tween_callback(dictionary.clear)
- * # This will work.
- * tween.tween_callback(Callable.create(dictionary, "clear"))
- * @summary 
- * 
- *
-*/
-declare class Callable<T extends (...args: any[])=> any = ()=>any> {
 
+declare type Callable<T extends (...args: any[])=> any = (...args: any[])=>any> = CallableConstructor<T>;
+
+declare var Callable: {
+    new(): Callable;
+    new<T extends (...args: any[])=> any = (...args: any[])=>any>(func: T): Callable<T>;
+    new<T extends (...args: any[])=> any = (...args: any[])=>any>(from: Callable<T>): Callable<T>;
+    new(object: Object, method: StringName): Callable;
+    (): Callable
+    <T extends (...args: any[])=> any = (...args: any[])=>any>(func: T): Callable<T>;
+    <T extends (...args: any[])=> any = (...args: any[])=>any>(from: Callable<T>): Callable<T>;
+    (object: Object, method: StringName): Callable;
+};
+
+declare class CallableConstructor<T extends (...args: any[])=> any = (...args: any[])=>any> {
   
 /**
  * [Callable] is a built-in [Variant] type that represents a function. It can either be a method within an [Object] instance, or a custom callable used for different purposes (see [method is_custom]). Like all [Variant] types, it can be stored in variables and passed to other functions. It is most commonly used for signal callbacks.
@@ -140,11 +84,6 @@ declare class Callable<T extends (...args: any[])=> any = ()=>any> {
  * 
  *
 */
-
-  new(): Callable
-  new(from?: Callable<T>): Callable<T>;
-  new(object: Object, method: StringName): Callable;
-//   static "new"(): Callable 
 
 
 

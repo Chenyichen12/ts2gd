@@ -18,7 +18,8 @@ declare class CylinderShape3D extends Shape3D  {
  * **Performance:** [CylinderShape3D] is fast to check collisions against, but it is slower than [CapsuleShape3D], [BoxShape3D], and [SphereShape3D].
  *
 */
-  new(): CylinderShape3D; 
+  new(): CylinderShape3D;
+  constructor();
   static "new"(): CylinderShape3D 
 
 

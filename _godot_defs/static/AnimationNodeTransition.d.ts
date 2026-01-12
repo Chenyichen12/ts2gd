@@ -72,7 +72,8 @@ declare class AnimationNodeTransition extends AnimationNodeSync  {
  * 
  *
 */
-  new(): AnimationNodeTransition; 
+  new(): AnimationNodeTransition;
+  constructor();
   static "new"(): AnimationNodeTransition 
 
 

@@ -100,7 +100,8 @@ declare class ArrayMesh extends Mesh  {
  * **Note:** Godot uses clockwise [url=https://learnopengl.com/Advanced-OpenGL/Face-culling]winding order[/url] for front faces of triangle primitive modes.
  *
 */
-  new(): ArrayMesh; 
+  new(): ArrayMesh;
+  constructor();
   static "new"(): ArrayMesh 
 
 

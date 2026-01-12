@@ -14,7 +14,8 @@ declare class Node3DGizmo extends RefCounted  {
  * [Node3DGizmo] by itself has no exposed API, refer to [method Node3D.add_gizmo] and pass it an [EditorNode3DGizmo] instance.
  *
 */
-  new(): Node3DGizmo; 
+  new(): Node3DGizmo;
+  constructor();
   static "new"(): Node3DGizmo 
 
 

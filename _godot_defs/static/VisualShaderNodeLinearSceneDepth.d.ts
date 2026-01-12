@@ -10,7 +10,8 @@ declare class VisualShaderNodeLinearSceneDepth extends VisualShaderNode  {
  * This node can be used in fragment shaders.
  *
 */
-  new(): VisualShaderNodeLinearSceneDepth; 
+  new(): VisualShaderNodeLinearSceneDepth;
+  constructor();
   static "new"(): VisualShaderNodeLinearSceneDepth 
 
 

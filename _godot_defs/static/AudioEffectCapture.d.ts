@@ -18,7 +18,8 @@ declare class AudioEffectCapture extends AudioEffect  {
  * Unlike [AudioEffectRecord], this effect only returns the raw audio samples instead of encoding them into an [AudioStream].
  *
 */
-  new(): AudioEffectCapture; 
+  new(): AudioEffectCapture;
+  constructor();
   static "new"(): AudioEffectCapture 
 
 

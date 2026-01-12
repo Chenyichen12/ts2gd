@@ -28,11 +28,23 @@ declare class Quaternion {
 */
 
   new(): Quaternion;
+  constructor();
+
   new(from: Quaternion): Quaternion;
+  constructor(from: Quaternion);
+
   new(arc_from: Vector3, arc_to: Vector3): Quaternion;
+  constructor(arc_from: Vector3, arc_to: Vector3);
+
   new(axis: Vector3, angle: float): Quaternion;
+  constructor(axis: Vector3, angle: float);
+
   new(from: Basis): Quaternion;
+  constructor(from: Basis);
+
   new(x: float, y: float, z: float, w: float): Quaternion;
+  constructor(x: float, y: float, z: float, w: float);
+
   static "new"(): Quaternion 
 
 

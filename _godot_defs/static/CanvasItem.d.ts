@@ -26,7 +26,8 @@ declare class CanvasItem extends Node  {
  * Note that properties like transform, modulation, and visibility are only propagated to **direct** [CanvasItem] child nodes. If there is a non-[CanvasItem] node in between, like [Node] or [AnimationPlayer], the [CanvasItem] nodes below will have an independent position and [member modulate] chain. See also [member top_level].
  *
 */
-  new(): CanvasItem; 
+  new(): CanvasItem;
+  constructor();
   static "new"(): CanvasItem 
 
 

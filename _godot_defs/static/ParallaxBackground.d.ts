@@ -14,7 +14,8 @@ declare class ParallaxBackground extends CanvasLayer  {
  * **Note:** Each [ParallaxBackground] is drawn on one specific [Viewport] and cannot be shared between multiple [Viewport]s, see [member CanvasLayer.custom_viewport]. When using multiple [Viewport]s, for example in a split-screen game, you need create an individual [ParallaxBackground] for each [Viewport] you want it to be drawn on.
  *
 */
-  new(): ParallaxBackground; 
+  new(): ParallaxBackground;
+  constructor();
   static "new"(): ParallaxBackground 
 
 

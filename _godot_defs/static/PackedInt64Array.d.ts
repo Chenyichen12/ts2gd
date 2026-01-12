@@ -24,8 +24,14 @@ declare class PackedInt64Array {
 */
 
   new(): PackedInt64Array;
+  constructor();
+
   new(from: PackedInt64Array): PackedInt64Array;
+  constructor(from: PackedInt64Array);
+
   new(from: any[]): PackedInt64Array;
+  constructor(from: any[]);
+
   static "new"(): PackedInt64Array 
 
 

@@ -10,7 +10,8 @@ declare class VisualShaderNodeTexture2DArray extends VisualShaderNodeSample3D  {
  * Translated to `uniform sampler2DArray` in the shader language.
  *
 */
-  new(): VisualShaderNodeTexture2DArray; 
+  new(): VisualShaderNodeTexture2DArray;
+  constructor();
   static "new"(): VisualShaderNodeTexture2DArray 
 
 

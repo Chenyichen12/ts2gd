@@ -14,7 +14,8 @@ declare class RemoteTransform2D extends Node2D  {
  * It can be set to update another node's position, rotation and/or scale. It can use either global or local coordinates.
  *
 */
-  new(): RemoteTransform2D; 
+  new(): RemoteTransform2D;
+  constructor();
   static "new"(): RemoteTransform2D 
 
 

@@ -14,7 +14,8 @@ declare class ResourceImporterOBJ extends ResourceImporter  {
  * See also [ResourceImporterScene], which is used for more advanced 3D formats such as glTF.
  *
 */
-  new(): ResourceImporterOBJ; 
+  new(): ResourceImporterOBJ;
+  constructor();
   static "new"(): ResourceImporterOBJ 
 
 

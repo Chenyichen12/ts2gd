@@ -10,7 +10,8 @@ declare class SplitContainer extends Container  {
  * A container that arranges child controls horizontally or vertically and creates grabbers between them. The grabbers can be dragged around to change the size relations between the child controls.
  *
 */
-  new(): SplitContainer; 
+  new(): SplitContainer;
+  constructor();
   static "new"(): SplitContainer 
 
 

@@ -10,7 +10,8 @@ declare class CollisionShape2D extends Node2D  {
  * A node that provides a [Shape2D] to a [CollisionObject2D] parent and allows it to be edited. This can give a detection shape to an [Area2D] or turn a [PhysicsBody2D] into a solid object.
  *
 */
-  new(): CollisionShape2D; 
+  new(): CollisionShape2D;
+  constructor();
   static "new"(): CollisionShape2D 
 
 

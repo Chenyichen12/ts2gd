@@ -10,7 +10,8 @@ declare class NinePatchRect extends Control  {
  * Also known as 9-slice panels, [NinePatchRect] produces clean panels of any size based on a small texture. To do so, it splits the texture in a 3×3 grid. When you scale the node, it tiles the texture's edges horizontally or vertically, tiles the center on both axes, and leaves the corners unchanged.
  *
 */
-  new(): NinePatchRect; 
+  new(): NinePatchRect;
+  constructor();
   static "new"(): NinePatchRect 
 
 

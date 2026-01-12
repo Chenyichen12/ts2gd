@@ -18,7 +18,8 @@ declare class ShaderMaterial extends Material  {
  * **Note:** For performance reasons, the [signal Resource.changed] signal is only emitted when the [member Resource.resource_name] changes. Only in editor, it is also emitted for [member shader] changes.
  *
 */
-  new(): ShaderMaterial; 
+  new(): ShaderMaterial;
+  constructor();
   static "new"(): ShaderMaterial 
 
 

@@ -68,7 +68,8 @@ declare class Animation extends Resource  {
  * **Note:** For 3D position/rotation/scale, using the dedicated [constant TYPE_POSITION_3D], [constant TYPE_ROTATION_3D] and [constant TYPE_SCALE_3D] track types instead of [constant TYPE_VALUE] is recommended for performance reasons.
  *
 */
-  new(): Animation; 
+  new(): Animation;
+  constructor();
   static "new"(): Animation 
 
 

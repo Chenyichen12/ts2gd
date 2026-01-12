@@ -10,7 +10,8 @@ declare class Font extends Resource  {
  * Abstract base class for different font types. It has methods for drawing text and font character introspection.
  *
 */
-  new(): Font; 
+  new(): Font;
+  constructor();
   static "new"(): Font 
 
 

@@ -22,7 +22,8 @@ declare class Bone2D extends Node2D  {
  * If in the editor, you can set the rest pose of an entire skeleton using a menu option, from the code, you need to iterate over the bones to set their individual rest poses.
  *
 */
-  new(): Bone2D; 
+  new(): Bone2D;
+  constructor();
   static "new"(): Bone2D 
 
 

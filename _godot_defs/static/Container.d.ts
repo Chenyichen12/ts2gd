@@ -10,7 +10,8 @@ declare class Container extends Control  {
  * Base class for all GUI containers. A [Container] automatically arranges its child controls in a certain way. This class can be inherited to make custom container types.
  *
 */
-  new(): Container; 
+  new(): Container;
+  constructor();
   static "new"(): Container 
 
 

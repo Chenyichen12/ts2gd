@@ -14,7 +14,8 @@ declare class Popup extends Window  {
  * **Note:** [Popup] is invisible by default. To make it visible, call one of the `popup_*` methods from [Window] on the node, such as [method Window.popup_centered_clamped].
  *
 */
-  new(): Popup; 
+  new(): Popup;
+  constructor();
   static "new"(): Popup 
 
 

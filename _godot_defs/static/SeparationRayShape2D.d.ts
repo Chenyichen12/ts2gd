@@ -10,7 +10,8 @@ declare class SeparationRayShape2D extends Shape2D  {
  * A 2D ray shape, intended for use in physics. Usually used to provide a shape for a [CollisionShape2D]. When a [SeparationRayShape2D] collides with an object, it tries to separate itself from it by moving its endpoint to the collision point. For example, a [SeparationRayShape2D] next to a character can allow it to instantly move up when touching stairs.
  *
 */
-  new(): SeparationRayShape2D; 
+  new(): SeparationRayShape2D;
+  constructor();
   static "new"(): SeparationRayShape2D 
 
 

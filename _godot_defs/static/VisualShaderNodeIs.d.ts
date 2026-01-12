@@ -10,7 +10,8 @@ declare class VisualShaderNodeIs extends VisualShaderNode  {
  * Returns the boolean result of the comparison between `INF` or `NaN` and a scalar parameter.
  *
 */
-  new(): VisualShaderNodeIs; 
+  new(): VisualShaderNodeIs;
+  constructor();
   static "new"(): VisualShaderNodeIs 
 
 

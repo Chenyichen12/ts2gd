@@ -14,7 +14,8 @@ declare class LightmapperRD extends Lightmapper  {
  * **Note:** This lightmapper requires the GPU to support the [RenderingDevice] backend (Forward+ and Mobile renderers). When using the Compatibility renderer, baking will use a temporary [RenderingDevice]. Support for [RenderingDevice] is not required to **render** lightmaps that were already baked beforehand.
  *
 */
-  new(): LightmapperRD; 
+  new(): LightmapperRD;
+  constructor();
   static "new"(): LightmapperRD 
 
 

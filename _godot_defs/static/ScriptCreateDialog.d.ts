@@ -52,7 +52,8 @@ declare class ScriptCreateDialog extends ConfirmationDialog  {
  * 
  *
 */
-  new(): ScriptCreateDialog; 
+  new(): ScriptCreateDialog;
+  constructor();
   static "new"(): ScriptCreateDialog 
 
 

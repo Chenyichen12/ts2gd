@@ -10,7 +10,8 @@ declare class CharFXTransform extends RefCounted  {
  * By setting various properties on this object, you can control how individual characters will be displayed in a [RichTextEffect].
  *
 */
-  new(): CharFXTransform; 
+  new(): CharFXTransform;
+  constructor();
   static "new"(): CharFXTransform 
 
 

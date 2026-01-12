@@ -10,7 +10,8 @@ declare class CompressedTextureLayered extends TextureLayered  {
  * Base class for [CompressedTexture2DArray] and [CompressedTexture3D]. Cannot be used directly, but contains all the functions necessary for accessing the derived resource types. See also [TextureLayered].
  *
 */
-  new(): CompressedTextureLayered; 
+  new(): CompressedTextureLayered;
+  constructor();
   static "new"(): CompressedTextureLayered 
 
 

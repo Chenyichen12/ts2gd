@@ -22,7 +22,8 @@ declare class MultiplayerAPI extends RefCounted  {
  * It is also possible to extend or replace the default implementation via scripting or native extensions. See [MultiplayerAPIExtension] for details about extensions, [SceneMultiplayer] for the details about the default implementation.
  *
 */
-  new(): MultiplayerAPI; 
+  new(): MultiplayerAPI;
+  constructor();
   static "new"(): MultiplayerAPI 
 
 

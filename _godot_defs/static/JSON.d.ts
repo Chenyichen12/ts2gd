@@ -94,7 +94,8 @@ declare class JSON extends Resource  {
  * - Certain errors, such as invalid Unicode sequences, do not cause a parser error. Instead, the string is cleaned up and an error is logged to the console.
  *
 */
-  new(): JSON; 
+  new(): JSON;
+  constructor();
   static "new"(): JSON 
 
 

@@ -10,7 +10,8 @@ declare class PhysicsBody2D extends CollisionObject2D  {
  * [PhysicsBody2D] is an abstract base class for 2D game objects affected by physics. All 2D physics bodies inherit from it.
  *
 */
-  new(): PhysicsBody2D; 
+  new(): PhysicsBody2D;
+  constructor();
   static "new"(): PhysicsBody2D 
 
 

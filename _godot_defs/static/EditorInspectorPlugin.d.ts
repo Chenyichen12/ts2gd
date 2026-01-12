@@ -34,7 +34,8 @@ declare class EditorInspectorPlugin extends RefCounted  {
  * To use [EditorInspectorPlugin], register it using the [method EditorPlugin.add_inspector_plugin] method first.
  *
 */
-  new(): EditorInspectorPlugin; 
+  new(): EditorInspectorPlugin;
+  constructor();
   static "new"(): EditorInspectorPlugin 
 
 

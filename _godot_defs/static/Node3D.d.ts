@@ -22,7 +22,8 @@ declare class Node3D extends Node  {
  * **Note:** In Godot 3 and older, [Node3D] was named **Spatial**.
  *
 */
-  new(): Node3D; 
+  new(): Node3D;
+  constructor();
   static "new"(): Node3D 
 
 

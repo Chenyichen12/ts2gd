@@ -18,7 +18,8 @@ declare class ShapeCast2D extends Node2D  {
  * **Note:** Shape casting is more computationally expensive than ray casting.
  *
 */
-  new(): ShapeCast2D; 
+  new(): ShapeCast2D;
+  constructor();
   static "new"(): ShapeCast2D 
 
 

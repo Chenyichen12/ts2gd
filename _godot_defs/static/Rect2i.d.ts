@@ -24,10 +24,20 @@ declare class Rect2i {
 */
 
   new(): Rect2i;
+  constructor();
+
   new(from: Rect2i): Rect2i;
+  constructor(from: Rect2i);
+
   new(from: Rect2): Rect2i;
+  constructor(from: Rect2);
+
   new(position: Vector2i, size: Vector2i): Rect2i;
+  constructor(position: Vector2i, size: Vector2i);
+
   new(x: int, y: int, width: int, height: int): Rect2i;
+  constructor(x: int, y: int, width: int, height: int);
+
   static "new"(): Rect2i 
 
 

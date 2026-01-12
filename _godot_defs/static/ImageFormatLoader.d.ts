@@ -10,7 +10,8 @@ declare class ImageFormatLoader extends RefCounted  {
  * The engine supports multiple image formats out of the box (PNG, SVG, JPEG, WebP to name a few), but you can choose to implement support for additional image formats by extending [ImageFormatLoaderExtension].
  *
 */
-  new(): ImageFormatLoader; 
+  new(): ImageFormatLoader;
+  constructor();
   static "new"(): ImageFormatLoader 
 
 

@@ -14,7 +14,8 @@ declare class Curve2D extends Resource  {
  * It keeps a cache of precalculated points along the curve, to speed up further calculations.
  *
 */
-  new(): Curve2D; 
+  new(): Curve2D;
+  constructor();
   static "new"(): Curve2D 
 
 

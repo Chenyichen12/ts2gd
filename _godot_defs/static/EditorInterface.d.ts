@@ -38,7 +38,8 @@ declare class EditorInterfaceClass extends Object  {
  * 
  *
 */
-  new(): EditorInterfaceClass; 
+  new(): EditorInterfaceClass;
+  constructor();
   static "new"(): EditorInterfaceClass 
 
 

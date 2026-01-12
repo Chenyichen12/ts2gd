@@ -10,7 +10,8 @@ declare class NavigationMesh extends Resource  {
  * A navigation mesh is a collection of polygons that define which areas of an environment are traversable to aid agents in pathfinding through complicated spaces.
  *
 */
-  new(): NavigationMesh; 
+  new(): NavigationMesh;
+  constructor();
   static "new"(): NavigationMesh 
 
 

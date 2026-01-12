@@ -10,7 +10,8 @@ declare class XRNode3D extends Node3D  {
  * This node can be bound to a specific pose of an [XRPositionalTracker] and will automatically have its [member Node3D.transform] updated by the [XRServer]. Nodes of this type must be added as children of the [XROrigin3D] node.
  *
 */
-  new(): XRNode3D; 
+  new(): XRNode3D;
+  constructor();
   static "new"(): XRNode3D 
 
 

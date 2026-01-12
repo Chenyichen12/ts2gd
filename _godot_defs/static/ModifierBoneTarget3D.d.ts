@@ -14,7 +14,8 @@ declare class ModifierBoneTarget3D extends SkeletonModifier3D  {
  * The functionality is similar to [BoneAttachment3D], but this node adopts the [SkeletonModifier3D] cycle and is intended to be used as another [SkeletonModifier3D]'s target.
  *
 */
-  new(): ModifierBoneTarget3D; 
+  new(): ModifierBoneTarget3D;
+  constructor();
   static "new"(): ModifierBoneTarget3D 
 
 

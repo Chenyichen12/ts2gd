@@ -14,7 +14,8 @@ declare class SkeletonModification2DTwoBoneIK extends SkeletonModification2D  {
  * TwoBoneIK is great for arms, legs, and really any joints that can be represented by just two bones that bend to reach a target. This solver is more lightweight than [SkeletonModification2DFABRIK], but gives similar, natural looking results.
  *
 */
-  new(): SkeletonModification2DTwoBoneIK; 
+  new(): SkeletonModification2DTwoBoneIK;
+  constructor();
   static "new"(): SkeletonModification2DTwoBoneIK 
 
 

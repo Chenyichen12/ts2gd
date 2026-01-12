@@ -14,7 +14,8 @@ declare class EditorFileSystem extends Node  {
  * **Note:** This class shouldn't be instantiated directly. Instead, access the singleton using [method EditorInterface.get_resource_filesystem].
  *
 */
-  new(): EditorFileSystem; 
+  new(): EditorFileSystem;
+  constructor();
   static "new"(): EditorFileSystem 
 
 

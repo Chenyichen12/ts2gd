@@ -10,7 +10,8 @@ declare class VisualShaderNodeMultiplyAdd extends VisualShaderNode  {
  * Uses three operands to compute `(a * b + c)` expression.
  *
 */
-  new(): VisualShaderNodeMultiplyAdd; 
+  new(): VisualShaderNodeMultiplyAdd;
+  constructor();
   static "new"(): VisualShaderNodeMultiplyAdd 
 
 

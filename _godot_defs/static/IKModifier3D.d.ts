@@ -10,7 +10,8 @@ declare class IKModifier3D extends SkeletonModifier3D  {
  * Base class of [SkeletonModifier3D]s that has some joint lists and applies inverse kinematics. This class has some structs, enums, and helper methods which are useful to solve inverse kinematics.
  *
 */
-  new(): IKModifier3D; 
+  new(): IKModifier3D;
+  constructor();
   static "new"(): IKModifier3D 
 
 

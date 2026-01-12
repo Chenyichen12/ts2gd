@@ -50,7 +50,8 @@ declare class Control extends CanvasItem  {
  * **Note:** Theme items are **not** [Object] properties. This means you can't access their values using [method Object.get] and [method Object.set]. Instead, use the `get_theme_*` and `add_theme_*_override` methods provided by this class.
  *
 */
-  new(): Control; 
+  new(): Control;
+  constructor();
   static "new"(): Control 
 
 

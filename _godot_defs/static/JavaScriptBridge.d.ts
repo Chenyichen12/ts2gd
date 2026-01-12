@@ -14,7 +14,8 @@ declare class JavaScriptBridgeClass extends Object  {
  * **Note:** This singleton can be disabled at build-time to improve security. By default, the JavaScriptBridge singleton is enabled. Official export templates also have the JavaScriptBridge singleton enabled. See [url=$DOCS_URL/engine_details/development/compiling/compiling_for_web.html]Compiling for the Web[/url] in the documentation for more information.
  *
 */
-  new(): JavaScriptBridgeClass; 
+  new(): JavaScriptBridgeClass;
+  constructor();
   static "new"(): JavaScriptBridgeClass 
 
 

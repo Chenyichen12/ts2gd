@@ -14,7 +14,8 @@ declare class Texture2DRD extends Texture2D  {
  * **Note:** [Texture2DRD] is intended for low-level usage with [RenderingDevice]. For most use cases, use [Texture2D] instead.
  *
 */
-  new(): Texture2DRD; 
+  new(): Texture2DRD;
+  constructor();
   static "new"(): Texture2DRD 
 
 

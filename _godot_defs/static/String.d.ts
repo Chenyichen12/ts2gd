@@ -24,9 +24,17 @@ declare class String {
 */
 
   new(): String;
+  constructor();
+
   new(from: string): String;
+  constructor(from: string);
+
   new(from: NodePathType): String;
+  constructor(from: NodePathType);
+
   new(from: StringName): String;
+  constructor(from: StringName);
+
   static "new"(): String 
 
 

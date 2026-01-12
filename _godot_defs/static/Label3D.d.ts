@@ -10,7 +10,8 @@ declare class Label3D extends GeometryInstance3D  {
  * A node for displaying plain text in 3D space. By adjusting various properties of this node, you can configure things such as the text's appearance and whether it always faces the camera.
  *
 */
-  new(): Label3D; 
+  new(): Label3D;
+  constructor();
   static "new"(): Label3D 
 
 

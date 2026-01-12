@@ -10,7 +10,8 @@ declare class EditorScenePostImportPlugin extends RefCounted  {
  * This plugin type exists to modify the process of importing scenes, allowing to change the content as well as add importer options at every stage of the process.
  *
 */
-  new(): EditorScenePostImportPlugin; 
+  new(): EditorScenePostImportPlugin;
+  constructor();
   static "new"(): EditorScenePostImportPlugin 
 
 

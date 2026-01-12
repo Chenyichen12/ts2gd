@@ -10,7 +10,8 @@ declare class AnimationNodeOutput extends AnimationNode  {
  * A node created automatically in an [AnimationNodeBlendTree] that outputs the final animation.
  *
 */
-  new(): AnimationNodeOutput; 
+  new(): AnimationNodeOutput;
+  constructor();
   static "new"(): AnimationNodeOutput 
 
 

@@ -10,7 +10,8 @@ declare class StyleBoxTexture extends StyleBox  {
  * A texture-based nine-patch [StyleBox], in a way similar to [NinePatchRect]. This stylebox performs a 3×3 scaling of a texture, where only the center cell is fully stretched. This makes it possible to design bordered styles regardless of the stylebox's size.
  *
 */
-  new(): StyleBoxTexture; 
+  new(): StyleBoxTexture;
+  constructor();
   static "new"(): StyleBoxTexture 
 
 

@@ -10,7 +10,8 @@ declare class SpriteFrames extends Resource  {
  * Sprite frame library for an [AnimatedSprite2D] or [AnimatedSprite3D] node. Contains frames and animation data for playback.
  *
 */
-  new(): SpriteFrames; 
+  new(): SpriteFrames;
+  constructor();
   static "new"(): SpriteFrames 
 
 

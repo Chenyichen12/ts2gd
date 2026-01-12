@@ -26,7 +26,8 @@ declare class SplineIK3D extends ChainIK3D  {
  * If the end bone joint exceeds the path length, it is bent as close as possible to the end point of the [Curve3D].
  *
 */
-  new(): SplineIK3D; 
+  new(): SplineIK3D;
+  constructor();
   static "new"(): SplineIK3D 
 
 

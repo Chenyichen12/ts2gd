@@ -18,7 +18,8 @@ declare class CallbackTweener extends Tweener  {
  * **Note:** [method Tween.tween_callback] is the only correct way to create [CallbackTweener]. Any [CallbackTweener] created manually will not function correctly.
  *
 */
-  new(): CallbackTweener; 
+  new(): CallbackTweener;
+  constructor();
   static "new"(): CallbackTweener 
 
 

@@ -106,7 +106,8 @@ declare class MainLoop extends Object  {
  * 
  *
 */
-  new(): MainLoop; 
+  new(): MainLoop;
+  constructor();
   static "new"(): MainLoop 
 
 

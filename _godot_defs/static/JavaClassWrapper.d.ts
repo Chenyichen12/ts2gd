@@ -38,7 +38,8 @@ declare class JavaClassWrapperClass extends Object  {
  * **Warning:** When calling Java methods, be sure to check [method JavaClassWrapper.get_exception] to check if the method threw an exception.
  *
 */
-  new(): JavaClassWrapperClass; 
+  new(): JavaClassWrapperClass;
+  constructor();
   static "new"(): JavaClassWrapperClass 
 
 

@@ -164,7 +164,8 @@ declare class RDPipelineColorBlendStateAttachment extends RefCounted  {
  * 
  *
 */
-  new(): RDPipelineColorBlendStateAttachment; 
+  new(): RDPipelineColorBlendStateAttachment;
+  constructor();
   static "new"(): RDPipelineColorBlendStateAttachment 
 
 

@@ -10,7 +10,8 @@ declare class VisualShaderNodeGroupBase extends VisualShaderNodeResizableBase  {
  * Currently, has no direct usage, use the derived classes instead.
  *
 */
-  new(): VisualShaderNodeGroupBase; 
+  new(): VisualShaderNodeGroupBase;
+  constructor();
   static "new"(): VisualShaderNodeGroupBase 
 
 

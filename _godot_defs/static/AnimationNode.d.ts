@@ -38,7 +38,8 @@ declare class AnimationNode extends Resource  {
  * 
  *
 */
-  new(): AnimationNode; 
+  new(): AnimationNode;
+  constructor();
   static "new"(): AnimationNode 
 
 

@@ -18,7 +18,8 @@ declare class LightmapProbe extends Node3D  {
  * **Note:** [LightmapProbe] nodes that are placed after baking lightmaps are ignored by dynamic objects. You must bake lightmaps again after creating or modifying [LightmapProbe]s for the probes to be effective.
  *
 */
-  new(): LightmapProbe; 
+  new(): LightmapProbe;
+  constructor();
   static "new"(): LightmapProbe 
 
 

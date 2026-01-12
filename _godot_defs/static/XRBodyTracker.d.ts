@@ -14,7 +14,8 @@ declare class XRBodyTracker extends XRPositionalTracker  {
  * Use [XRBodyModifier3D] to animate a body mesh using body tracking data.
  *
 */
-  new(): XRBodyTracker; 
+  new(): XRBodyTracker;
+  constructor();
   static "new"(): XRBodyTracker 
 
 

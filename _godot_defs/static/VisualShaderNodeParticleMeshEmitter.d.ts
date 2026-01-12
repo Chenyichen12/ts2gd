@@ -10,7 +10,8 @@ declare class VisualShaderNodeParticleMeshEmitter extends VisualShaderNodePartic
  * [VisualShaderNodeParticleEmitter] that makes the particles emitted in a shape of the assigned [member mesh]. It will emit from the mesh's surfaces, either all or only the specified one.
  *
 */
-  new(): VisualShaderNodeParticleMeshEmitter; 
+  new(): VisualShaderNodeParticleMeshEmitter;
+  constructor();
   static "new"(): VisualShaderNodeParticleMeshEmitter 
 
 

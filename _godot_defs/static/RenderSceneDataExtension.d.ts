@@ -10,7 +10,8 @@ declare class RenderSceneDataExtension extends RenderSceneData  {
  * This class allows for a RenderSceneData implementation to be made in GDExtension.
  *
 */
-  new(): RenderSceneDataExtension; 
+  new(): RenderSceneDataExtension;
+  constructor();
   static "new"(): RenderSceneDataExtension 
 
 

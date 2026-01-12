@@ -26,7 +26,8 @@ declare class Thread extends RefCounted  {
  * - [method wait_to_finish] should have been called on it.
  *
 */
-  new(): Thread; 
+  new(): Thread;
+  constructor();
   static "new"(): Thread 
 
 

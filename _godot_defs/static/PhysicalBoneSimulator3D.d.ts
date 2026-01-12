@@ -10,7 +10,8 @@ declare class PhysicalBoneSimulator3D extends SkeletonModifier3D  {
  * Node that can be the parent of [PhysicalBone3D] and can apply the simulation results to [Skeleton3D].
  *
 */
-  new(): PhysicalBoneSimulator3D; 
+  new(): PhysicalBoneSimulator3D;
+  constructor();
   static "new"(): PhysicalBoneSimulator3D 
 
 

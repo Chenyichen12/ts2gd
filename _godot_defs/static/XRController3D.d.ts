@@ -22,7 +22,8 @@ declare class XRController3D extends XRNode3D  {
  * The current [XRInterface] defines the names of inputs. In the case of OpenXR, these are the names of actions in the current action set from the OpenXR action map.
  *
 */
-  new(): XRController3D; 
+  new(): XRController3D;
+  constructor();
   static "new"(): XRController3D 
 
 

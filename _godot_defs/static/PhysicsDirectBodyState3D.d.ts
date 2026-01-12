@@ -10,7 +10,8 @@ declare class PhysicsDirectBodyState3D extends Object  {
  * Provides direct access to a physics body in the [PhysicsServer3D], allowing safe changes to physics properties. This object is passed via the direct state callback of [RigidBody3D], and is intended for changing the direct state of that body. See [method RigidBody3D._integrate_forces].
  *
 */
-  new(): PhysicsDirectBodyState3D; 
+  new(): PhysicsDirectBodyState3D;
+  constructor();
   static "new"(): PhysicsDirectBodyState3D 
 
 

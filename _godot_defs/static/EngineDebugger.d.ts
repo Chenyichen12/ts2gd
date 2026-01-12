@@ -10,7 +10,8 @@ declare class EngineDebuggerClass extends Object  {
  * [EngineDebugger] handles the communication between the editor and the running game. It is active in the running game. Messages can be sent/received through it. It also manages the profilers.
  *
 */
-  new(): EngineDebuggerClass; 
+  new(): EngineDebuggerClass;
+  constructor();
   static "new"(): EngineDebuggerClass 
 
 

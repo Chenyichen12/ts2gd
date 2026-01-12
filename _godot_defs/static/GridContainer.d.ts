@@ -14,7 +14,8 @@ declare class GridContainer extends Container  {
  * **Note:** [GridContainer] only works with child nodes inheriting from [Control]. It won't rearrange child nodes inheriting from [Node2D].
  *
 */
-  new(): GridContainer; 
+  new(): GridContainer;
+  constructor();
   static "new"(): GridContainer 
 
 

@@ -14,7 +14,8 @@ declare class CameraTexture extends Texture2D  {
  * **Note:** Many cameras supply YCbCr images which need to be converted in a shader.
  *
 */
-  new(): CameraTexture; 
+  new(): CameraTexture;
+  constructor();
   static "new"(): CameraTexture 
 
 

@@ -14,7 +14,8 @@ declare class SkeletonProfile extends Resource  {
  * **Note:** These parameters need to be set only when creating a custom profile. In [SkeletonProfileHumanoid], they are defined internally as read-only values.
  *
 */
-  new(): SkeletonProfile; 
+  new(): SkeletonProfile;
+  constructor();
   static "new"(): SkeletonProfile 
 
 

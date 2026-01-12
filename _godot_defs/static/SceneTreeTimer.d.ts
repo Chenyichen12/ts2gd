@@ -60,7 +60,8 @@ declare class SceneTreeTimer extends RefCounted  {
  * **Note:** The timer is processed after all of the nodes in the current frame, i.e. node's [method Node._process] method would be called before the timer (or [method Node._physics_process] if `process_in_physics` in [method SceneTree.create_timer] has been set to `true`).
  *
 */
-  new(): SceneTreeTimer; 
+  new(): SceneTreeTimer;
+  constructor();
   static "new"(): SceneTreeTimer 
 
 

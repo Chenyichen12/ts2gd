@@ -10,7 +10,8 @@ declare class ChainIK3D extends IKModifier3D  {
  * Base class of [SkeletonModifier3D] that automatically generates a joint list from the bones between the root bone and the end bone.
  *
 */
-  new(): ChainIK3D; 
+  new(): ChainIK3D;
+  constructor();
   static "new"(): ChainIK3D 
 
 

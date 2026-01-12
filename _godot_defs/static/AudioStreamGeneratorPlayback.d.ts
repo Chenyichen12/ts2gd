@@ -10,7 +10,8 @@ declare class AudioStreamGeneratorPlayback extends AudioStreamPlaybackResampled 
  * This class is meant to be used with [AudioStreamGenerator] to play back the generated audio in real-time.
  *
 */
-  new(): AudioStreamGeneratorPlayback; 
+  new(): AudioStreamGeneratorPlayback;
+  constructor();
   static "new"(): AudioStreamGeneratorPlayback 
 
 

@@ -30,7 +30,8 @@ declare class GPUParticlesCollision3D extends VisualInstance3D  {
  * **Note:** Particles pushed by a collider that is being moved will not be interpolated, which can result in visible stuttering. This can be alleviated by setting [member GPUParticles3D.fixed_fps] to `0` or a value that matches or exceeds the target framerate.
  *
 */
-  new(): GPUParticlesCollision3D; 
+  new(): GPUParticlesCollision3D;
+  constructor();
   static "new"(): GPUParticlesCollision3D 
 
 

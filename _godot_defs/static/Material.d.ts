@@ -14,7 +14,8 @@ declare class Material extends Resource  {
  * Importantly, you can inherit from [Material] to create your own custom material type in script or in GDExtension.
  *
 */
-  new(): Material; 
+  new(): Material;
+  constructor();
   static "new"(): Material 
 
 

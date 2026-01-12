@@ -26,7 +26,8 @@ declare class AnimatedTexture extends Texture2D  {
  * **Warning:** The current implementation is not efficient for the modern renderers.
  *
 */
-  new(): AnimatedTexture; 
+  new(): AnimatedTexture;
+  constructor();
   static "new"(): AnimatedTexture 
 
 

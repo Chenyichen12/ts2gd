@@ -30,7 +30,8 @@ declare class AnimationNodeAdd3 extends AnimationNodeSync  {
  * If the absolute value of the amount is greater than `1.0`, the animation connected to "in" port is blended with the amplified animation connected to "-add"/"+add" port.
  *
 */
-  new(): AnimationNodeAdd3; 
+  new(): AnimationNodeAdd3;
+  constructor();
   static "new"(): AnimationNodeAdd3 
 
 

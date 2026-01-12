@@ -10,7 +10,8 @@ declare class DampedSpringJoint2D extends Joint2D  {
  * A physics joint that connects two 2D physics bodies with a spring-like force. This behaves like a spring that always wants to stretch to a given length.
  *
 */
-  new(): DampedSpringJoint2D; 
+  new(): DampedSpringJoint2D;
+  constructor();
   static "new"(): DampedSpringJoint2D 
 
 

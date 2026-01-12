@@ -50,7 +50,8 @@ declare class EditorResourceConversionPlugin extends RefCounted  {
  * To use an [EditorResourceConversionPlugin], register it using the [method EditorPlugin.add_resource_conversion_plugin] method first.
  *
 */
-  new(): EditorResourceConversionPlugin; 
+  new(): EditorResourceConversionPlugin;
+  constructor();
   static "new"(): EditorResourceConversionPlugin 
 
 

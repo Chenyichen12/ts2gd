@@ -14,7 +14,8 @@ declare class AudioEffectLimiter extends AudioEffect  {
  * Soft clipping starts to reduce the peaks a little below the threshold level and progressively increases its effect as the input level increases such that the threshold is never exceeded.
  *
 */
-  new(): AudioEffectLimiter; 
+  new(): AudioEffectLimiter;
+  constructor();
   static "new"(): AudioEffectLimiter 
 
 

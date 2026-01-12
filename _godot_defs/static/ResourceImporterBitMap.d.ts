@@ -10,7 +10,8 @@ declare class ResourceImporterBitMap extends ResourceImporter  {
  * [BitMap] resources are typically used as click masks in [TextureButton] and [TouchScreenButton].
  *
 */
-  new(): ResourceImporterBitMap; 
+  new(): ResourceImporterBitMap;
+  constructor();
   static "new"(): ResourceImporterBitMap 
 
 

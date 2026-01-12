@@ -14,7 +14,8 @@ declare class AudioStreamWAV extends AudioStream  {
  * This class can also be used to store dynamically-generated PCM audio data. See also [AudioStreamGenerator] for procedural audio generation.
  *
 */
-  new(): AudioStreamWAV; 
+  new(): AudioStreamWAV;
+  constructor();
   static "new"(): AudioStreamWAV 
 
 

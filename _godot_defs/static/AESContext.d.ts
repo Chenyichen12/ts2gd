@@ -144,7 +144,8 @@ declare class AESContext extends RefCounted  {
  * 
  *
 */
-  new(): AESContext; 
+  new(): AESContext;
+  constructor();
   static "new"(): AESContext 
 
 

@@ -22,7 +22,8 @@ declare class SkeletonModification2DCCDIK extends SkeletonModification2D  {
  * CCDIK also fully supports angle constraints, allowing for more control over how a solution is met.
  *
 */
-  new(): SkeletonModification2DCCDIK; 
+  new(): SkeletonModification2DCCDIK;
+  constructor();
   static "new"(): SkeletonModification2DCCDIK 
 
 

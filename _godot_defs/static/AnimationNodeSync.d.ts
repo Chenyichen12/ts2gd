@@ -10,7 +10,8 @@ declare class AnimationNodeSync extends AnimationNode  {
  * An animation node used to combine, mix, or blend two or more animations together while keeping them synchronized within an [AnimationTree].
  *
 */
-  new(): AnimationNodeSync; 
+  new(): AnimationNodeSync;
+  constructor();
   static "new"(): AnimationNodeSync 
 
 

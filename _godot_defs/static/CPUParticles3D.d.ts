@@ -14,7 +14,8 @@ declare class CPUParticles3D extends GeometryInstance3D  {
  * See also [GPUParticles3D], which provides the same functionality with hardware acceleration, but may not run on older devices.
  *
 */
-  new(): CPUParticles3D; 
+  new(): CPUParticles3D;
+  constructor();
   static "new"(): CPUParticles3D 
 
 

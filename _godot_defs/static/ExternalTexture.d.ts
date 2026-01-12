@@ -18,7 +18,8 @@ declare class ExternalTexture extends Texture2D  {
  * **Note:** This is currently only supported in Android builds.
  *
 */
-  new(): ExternalTexture; 
+  new(): ExternalTexture;
+  constructor();
   static "new"(): ExternalTexture 
 
 

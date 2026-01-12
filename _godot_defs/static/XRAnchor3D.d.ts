@@ -18,7 +18,8 @@ declare class XRAnchor3D extends XRNode3D  {
  * Keep in mind that, as long as plane detection is enabled, the size, placing and orientation of an anchor will be updated as the detection logic learns more about the real world out there especially if only part of the surface is in view.
  *
 */
-  new(): XRAnchor3D; 
+  new(): XRAnchor3D;
+  constructor();
   static "new"(): XRAnchor3D 
 
 

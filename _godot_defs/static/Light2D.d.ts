@@ -10,7 +10,8 @@ declare class Light2D extends Node2D  {
  * Casts light in a 2D environment. A light is defined as a color, an energy value, a mode (see constants), and various other parameters (range and shadows-related).
  *
 */
-  new(): Light2D; 
+  new(): Light2D;
+  constructor();
   static "new"(): Light2D 
 
 

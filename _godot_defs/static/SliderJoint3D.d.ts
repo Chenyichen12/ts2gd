@@ -10,7 +10,8 @@ declare class SliderJoint3D extends Joint3D  {
  * A physics joint that restricts the movement of a 3D physics body along an axis relative to another physics body. For example, Body A could be a [StaticBody3D] representing a piston base, while Body B could be a [RigidBody3D] representing the piston head, moving up and down.
  *
 */
-  new(): SliderJoint3D; 
+  new(): SliderJoint3D;
+  constructor();
   static "new"(): SliderJoint3D 
 
 

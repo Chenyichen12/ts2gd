@@ -26,7 +26,8 @@ declare class VoxelGI extends VisualInstance3D  {
  * **Note:** Meshes should have sufficiently thick walls to avoid light leaks (avoid one-sided walls). For interior levels, enclose your level geometry in a sufficiently large box and bridge the loops to close the mesh. To further prevent light leaks, you can also strategically place temporary [MeshInstance3D] nodes with their [member GeometryInstance3D.gi_mode] set to [constant GeometryInstance3D.GI_MODE_STATIC]. These temporary nodes can then be hidden after baking the [VoxelGI] node.
  *
 */
-  new(): VoxelGI; 
+  new(): VoxelGI;
+  constructor();
   static "new"(): VoxelGI 
 
 

@@ -18,7 +18,8 @@ declare class AnimationNodeAdd2 extends AnimationNodeSync  {
  * If the amount is less than `0.0`, the animation connected to "in" port is blended with the inverted animation connected to "add" port.
  *
 */
-  new(): AnimationNodeAdd2; 
+  new(): AnimationNodeAdd2;
+  constructor();
   static "new"(): AnimationNodeAdd2 
 
 

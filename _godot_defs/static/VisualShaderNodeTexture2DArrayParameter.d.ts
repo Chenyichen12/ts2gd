@@ -10,7 +10,8 @@ declare class VisualShaderNodeTexture2DArrayParameter extends VisualShaderNodeTe
  * This parameter allows to provide a collection of textures for the shader. You can use [VisualShaderNodeTexture2DArray] to extract the textures from array.
  *
 */
-  new(): VisualShaderNodeTexture2DArrayParameter; 
+  new(): VisualShaderNodeTexture2DArrayParameter;
+  constructor();
   static "new"(): VisualShaderNodeTexture2DArrayParameter 
 
 

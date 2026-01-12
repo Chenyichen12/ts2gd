@@ -14,7 +14,8 @@ declare class RenderSceneData extends Object  {
  * **Note:** This is an internal rendering server object. Do not instantiate this class from a script.
  *
 */
-  new(): RenderSceneData; 
+  new(): RenderSceneData;
+  constructor();
   static "new"(): RenderSceneData 
 
 

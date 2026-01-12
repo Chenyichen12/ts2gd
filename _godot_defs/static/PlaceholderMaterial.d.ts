@@ -18,7 +18,8 @@ declare class PlaceholderMaterial extends Material  {
  * - When this subclass is missing due to using a different engine version or build (e.g. modules disabled).
  *
 */
-  new(): PlaceholderMaterial; 
+  new(): PlaceholderMaterial;
+  constructor();
   static "new"(): PlaceholderMaterial 
 
 

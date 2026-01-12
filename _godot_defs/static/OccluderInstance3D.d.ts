@@ -30,7 +30,8 @@ declare class OccluderInstance3D extends VisualInstance3D  {
  * **Note:** Due to memory constraints, occlusion culling is not supported by default in Web export templates. It can be enabled by compiling custom Web export templates with `module_raycast_enabled=yes`.
  *
 */
-  new(): OccluderInstance3D; 
+  new(): OccluderInstance3D;
+  constructor();
   static "new"(): OccluderInstance3D 
 
 

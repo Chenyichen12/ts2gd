@@ -197,11 +197,14 @@ ${Object.keys(enums)
       let constructors = ""
 
       if (constructorInfo.length === 0) {
-        constructors += `  new()${typeAnnotation};\nconstructor();\n`
+        constructors += `  new()${typeAnnotation};\n`
+        if(!isSpecialConstructorClass){
+          constructors += `  constructor();\n`
+        }
       } else {
         constructors += `
 ${constructorInfo
-  .map((inf) => `  new(${inf.argumentList})${typeAnnotation};\nconstructor(${inf.argumentList});`)
+  .map((inf) => `  new(${inf.argumentList})${typeAnnotation};\n${isSpecialConstructorClass ? "" : `  constructor(${inf.argumentList});\n`}`)
   .join("\n")}
 `
       }

@@ -14,7 +14,8 @@ declare class CollisionObject2D extends Node2D  {
  * **Note:** Only collisions between objects within the same canvas ([Viewport] canvas or [CanvasLayer]) are supported. The behavior of collisions between objects in different canvases is undefined.
  *
 */
-  new(): CollisionObject2D; 
+  new(): CollisionObject2D;
+  constructor();
   static "new"(): CollisionObject2D 
 
 

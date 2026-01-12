@@ -10,7 +10,8 @@ declare class AudioEffectLowPassFilter extends AudioEffectFilter  {
  * Cuts frequencies higher than the [member AudioEffectFilter.cutoff_hz] and allows lower frequencies to pass.
  *
 */
-  new(): AudioEffectLowPassFilter; 
+  new(): AudioEffectLowPassFilter;
+  constructor();
   static "new"(): AudioEffectLowPassFilter 
 
 

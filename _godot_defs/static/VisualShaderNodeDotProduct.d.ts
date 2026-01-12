@@ -10,7 +10,8 @@ declare class VisualShaderNodeDotProduct extends VisualShaderNode  {
  * Translates to `dot(a, b)` in the shader language.
  *
 */
-  new(): VisualShaderNodeDotProduct; 
+  new(): VisualShaderNodeDotProduct;
+  constructor();
   static "new"(): VisualShaderNodeDotProduct 
 
 

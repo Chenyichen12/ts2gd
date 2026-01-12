@@ -18,7 +18,8 @@ declare class AnimationNodeBlendSpace2D extends AnimationRootNode  {
  * You can add vertices to the blend space with [method add_blend_point] and automatically triangulate it by setting [member auto_triangles] to `true`. Otherwise, use [method add_triangle] and [method remove_triangle] to triangulate the blend space by hand.
  *
 */
-  new(): AnimationNodeBlendSpace2D; 
+  new(): AnimationNodeBlendSpace2D;
+  constructor();
   static "new"(): AnimationNodeBlendSpace2D 
 
 

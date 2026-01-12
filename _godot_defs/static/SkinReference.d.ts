@@ -26,7 +26,8 @@ declare class SkinReference extends RefCounted  {
  * On the other hand, a [Skeleton3D] with multiple [MeshInstance3D] nodes which each have different [member MeshInstance3D.skin] objects may have multiple SkinReference instances (and hence, multiple skeleton [RID]s).
  *
 */
-  new(): SkinReference; 
+  new(): SkinReference;
+  constructor();
   static "new"(): SkinReference 
 
 

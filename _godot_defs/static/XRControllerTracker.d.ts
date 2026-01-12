@@ -18,7 +18,8 @@ declare class XRControllerTracker extends XRPositionalTracker  {
  * The [XRController3D] consumes objects of this type and should be used in your project.
  *
 */
-  new(): XRControllerTracker; 
+  new(): XRControllerTracker;
+  constructor();
   static "new"(): XRControllerTracker 
 
 

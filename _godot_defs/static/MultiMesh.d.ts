@@ -30,7 +30,8 @@ declare class MultiMesh extends Resource  {
  * **Note:** Blend Shapes will be ignored if used in a MultiMesh.
  *
 */
-  new(): MultiMesh; 
+  new(): MultiMesh;
+  constructor();
   static "new"(): MultiMesh 
 
 

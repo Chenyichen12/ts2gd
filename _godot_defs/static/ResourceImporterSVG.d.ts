@@ -10,7 +10,8 @@ declare class ResourceImporterSVG extends ResourceImporter  {
  * This importer imports [DPITexture] resources. See also [ResourceImporterTexture] and [ResourceImporterImage].
  *
 */
-  new(): ResourceImporterSVG; 
+  new(): ResourceImporterSVG;
+  constructor();
   static "new"(): ResourceImporterSVG 
 
 

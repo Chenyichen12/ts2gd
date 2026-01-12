@@ -40,7 +40,8 @@ declare class TextServer extends RefCounted  {
  * 
  *
 */
-  new(): TextServer; 
+  new(): TextServer;
+  constructor();
   static "new"(): TextServer 
 
 

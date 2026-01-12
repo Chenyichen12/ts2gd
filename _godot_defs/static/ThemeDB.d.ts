@@ -14,7 +14,8 @@ declare class ThemeDBClass extends Object  {
  * [ThemeDB] also contains fallback values for theme properties.
  *
 */
-  new(): ThemeDBClass; 
+  new(): ThemeDBClass;
+  constructor();
   static "new"(): ThemeDBClass 
 
 

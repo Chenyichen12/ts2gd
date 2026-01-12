@@ -14,7 +14,8 @@ declare class InstancePlaceholder extends Node  {
  * **Note:** Like [Node], [InstancePlaceholder] does not have a transform. This causes any child nodes to be positioned relatively to the [Viewport] origin, rather than their parent as displayed in the editor. Replacing the placeholder with a scene with a transform will transform children relatively to their parent again.
  *
 */
-  new(): InstancePlaceholder; 
+  new(): InstancePlaceholder;
+  constructor();
   static "new"(): InstancePlaceholder 
 
 

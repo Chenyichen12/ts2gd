@@ -30,7 +30,8 @@ declare class RichTextLabel extends Control  {
  * **Note:** While [member bbcode_enabled] is enabled, alignment tags such as [code skip-lint][center]` will take priority over the [member horizontal_alignment] setting which determines the default text alignment.
  *
 */
-  new(): RichTextLabel; 
+  new(): RichTextLabel;
+  constructor();
   static "new"(): RichTextLabel 
 
 

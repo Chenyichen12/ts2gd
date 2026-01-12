@@ -10,7 +10,8 @@ declare class AudioStreamRandomizer extends AudioStream  {
  * Picks a random AudioStream from the pool, depending on the playback mode, and applies random pitch shifting and volume shifting during playback.
  *
 */
-  new(): AudioStreamRandomizer; 
+  new(): AudioStreamRandomizer;
+  constructor();
   static "new"(): AudioStreamRandomizer 
 
 

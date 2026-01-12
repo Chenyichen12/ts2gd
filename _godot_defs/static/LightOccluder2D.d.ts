@@ -10,7 +10,8 @@ declare class LightOccluder2D extends Node2D  {
  * Occludes light cast by a Light2D, casting shadows. The LightOccluder2D must be provided with an [OccluderPolygon2D] in order for the shadow to be computed.
  *
 */
-  new(): LightOccluder2D; 
+  new(): LightOccluder2D;
+  constructor();
   static "new"(): LightOccluder2D 
 
 

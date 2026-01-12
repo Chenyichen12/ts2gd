@@ -14,7 +14,8 @@ declare class MultiMeshInstance2D extends Node2D  {
  * Usage is the same as [MultiMeshInstance3D].
  *
 */
-  new(): MultiMeshInstance2D; 
+  new(): MultiMeshInstance2D;
+  constructor();
   static "new"(): MultiMeshInstance2D 
 
 

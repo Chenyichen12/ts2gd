@@ -96,7 +96,8 @@ declare class HMACContext extends RefCounted  {
  * 
  *
 */
-  new(): HMACContext; 
+  new(): HMACContext;
+  constructor();
   static "new"(): HMACContext 
 
 

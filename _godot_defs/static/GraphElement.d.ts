@@ -10,7 +10,8 @@ declare class GraphElement extends Container  {
  * [GraphElement] allows to create custom elements for a [GraphEdit] graph. By default such elements can be selected, resized, and repositioned, but they cannot be connected. For a graph element that allows for connections see [GraphNode].
  *
 */
-  new(): GraphElement; 
+  new(): GraphElement;
+  constructor();
   static "new"(): GraphElement 
 
 

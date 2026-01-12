@@ -10,7 +10,8 @@ declare class SkeletonModification2DPhysicalBones extends SkeletonModification2D
  * This modification takes the transforms of [PhysicalBone2D] nodes and applies them to [Bone2D] nodes. This allows the [Bone2D] nodes to react to physics thanks to the linked [PhysicalBone2D] nodes.
  *
 */
-  new(): SkeletonModification2DPhysicalBones; 
+  new(): SkeletonModification2DPhysicalBones;
+  constructor();
   static "new"(): SkeletonModification2DPhysicalBones 
 
 

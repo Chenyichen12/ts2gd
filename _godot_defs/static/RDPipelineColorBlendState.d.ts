@@ -10,7 +10,8 @@ declare class RDPipelineColorBlendState extends RefCounted  {
  * This object is used by [RenderingDevice].
  *
 */
-  new(): RDPipelineColorBlendState; 
+  new(): RDPipelineColorBlendState;
+  constructor();
   static "new"(): RDPipelineColorBlendState 
 
 

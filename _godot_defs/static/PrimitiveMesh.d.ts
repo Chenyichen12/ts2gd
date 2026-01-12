@@ -10,7 +10,8 @@ declare class PrimitiveMesh extends Mesh  {
  * Base class for all primitive meshes. Handles applying a [Material] to a primitive mesh. Examples include [BoxMesh], [CapsuleMesh], [CylinderMesh], [PlaneMesh], [PrismMesh], and [SphereMesh].
  *
 */
-  new(): PrimitiveMesh; 
+  new(): PrimitiveMesh;
+  constructor();
   static "new"(): PrimitiveMesh 
 
 

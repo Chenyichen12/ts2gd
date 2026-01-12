@@ -18,7 +18,8 @@ declare class VisibleOnScreenNotifier2D extends Node2D  {
  * **Note:** [VisibleOnScreenNotifier2D] uses the render culling code to determine whether it's visible on screen, so it won't function unless [member CanvasItem.visible] is set to `true`.
  *
 */
-  new(): VisibleOnScreenNotifier2D; 
+  new(): VisibleOnScreenNotifier2D;
+  constructor();
   static "new"(): VisibleOnScreenNotifier2D 
 
 

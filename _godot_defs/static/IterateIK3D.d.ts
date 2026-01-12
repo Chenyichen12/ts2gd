@@ -14,7 +14,8 @@ declare class IterateIK3D extends ChainIK3D  {
  * Each bone chain (setting) has one effector, which is processed in order of the setting list. You can set some limitations for each joint.
  *
 */
-  new(): IterateIK3D; 
+  new(): IterateIK3D;
+  constructor();
   static "new"(): IterateIK3D 
 
 

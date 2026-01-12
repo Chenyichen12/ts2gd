@@ -10,7 +10,8 @@ declare class Panel extends Control  {
  * [Panel] is a GUI control that displays a [StyleBox]. See also [PanelContainer].
  *
 */
-  new(): Panel; 
+  new(): Panel;
+  constructor();
   static "new"(): Panel 
 
 

@@ -10,7 +10,8 @@ declare class VisualShaderNodeScreenNormalWorldSpace extends VisualShaderNode  {
  * The ScreenNormalWorldSpace node allows to create outline effects.
  *
 */
-  new(): VisualShaderNodeScreenNormalWorldSpace; 
+  new(): VisualShaderNodeScreenNormalWorldSpace;
+  constructor();
   static "new"(): VisualShaderNodeScreenNormalWorldSpace 
 
 

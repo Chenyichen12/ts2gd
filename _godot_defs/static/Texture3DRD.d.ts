@@ -14,7 +14,8 @@ declare class Texture3DRD extends Texture3D  {
  * **Note:** [Texture3DRD] is intended for low-level usage with [RenderingDevice]. For most use cases, use [Texture3D] instead.
  *
 */
-  new(): Texture3DRD; 
+  new(): Texture3DRD;
+  constructor();
   static "new"(): Texture3DRD 
 
 

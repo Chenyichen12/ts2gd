@@ -14,7 +14,8 @@ declare class Generic6DOFJoint3D extends Joint3D  {
  * The first 3 DOF represent the linear motion of the physics bodies and the last 3 DOF represent the angular motion of the physics bodies. Each axis can be either locked, or limited.
  *
 */
-  new(): Generic6DOFJoint3D; 
+  new(): Generic6DOFJoint3D;
+  constructor();
   static "new"(): Generic6DOFJoint3D 
 
 

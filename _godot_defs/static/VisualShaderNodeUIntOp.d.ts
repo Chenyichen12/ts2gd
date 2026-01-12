@@ -10,7 +10,8 @@ declare class VisualShaderNodeUIntOp extends VisualShaderNode  {
  * Applies [member operator] to two unsigned integer inputs: `a` and `b`.
  *
 */
-  new(): VisualShaderNodeUIntOp; 
+  new(): VisualShaderNodeUIntOp;
+  constructor();
   static "new"(): VisualShaderNodeUIntOp 
 
 

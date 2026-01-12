@@ -26,7 +26,8 @@ declare class ConcavePolygonShape2D extends Shape2D  {
  * **Performance:** Due to its complexity, [ConcavePolygonShape2D] is the slowest 2D collision shape to check collisions against. Its use should generally be limited to level geometry. If the polyline is closed, [CollisionPolygon2D]'s [constant CollisionPolygon2D.BUILD_SOLIDS] mode can be used, which decomposes the polygon into convex ones; see [ConvexPolygonShape2D]'s documentation for instructions.
  *
 */
-  new(): ConcavePolygonShape2D; 
+  new(): ConcavePolygonShape2D;
+  constructor();
   static "new"(): ConcavePolygonShape2D 
 
 

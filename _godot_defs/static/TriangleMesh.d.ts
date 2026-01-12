@@ -22,7 +22,8 @@ declare class TriangleMesh extends RefCounted  {
  * **Performance:** Creating the BVH tree for complex geometry is a slow process and best done in a background thread.
  *
 */
-  new(): TriangleMesh; 
+  new(): TriangleMesh;
+  constructor();
   static "new"(): TriangleMesh 
 
 

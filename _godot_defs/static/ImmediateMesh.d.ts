@@ -60,7 +60,8 @@ declare class ImmediateMesh extends Mesh  {
  * **Note:** Generating complex geometries with [ImmediateMesh] is highly inefficient. Instead, it is designed to generate simple geometry that changes often.
  *
 */
-  new(): ImmediateMesh; 
+  new(): ImmediateMesh;
+  constructor();
   static "new"(): ImmediateMesh 
 
 

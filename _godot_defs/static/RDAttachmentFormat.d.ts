@@ -10,7 +10,8 @@ declare class RDAttachmentFormat extends RefCounted  {
  * This object is used by [RenderingDevice].
  *
 */
-  new(): RDAttachmentFormat; 
+  new(): RDAttachmentFormat;
+  constructor();
   static "new"(): RDAttachmentFormat 
 
 

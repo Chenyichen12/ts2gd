@@ -22,7 +22,8 @@ declare class ConvexPolygonShape3D extends Shape3D  {
  * **Performance:** [ConvexPolygonShape3D] is faster to check collisions against compared to [ConcavePolygonShape3D], but it is slower than primitive collision shapes such as [SphereShape3D] and [BoxShape3D]. Its use should generally be limited to medium-sized objects that cannot have their collision accurately represented by primitive shapes.
  *
 */
-  new(): ConvexPolygonShape3D; 
+  new(): ConvexPolygonShape3D;
+  constructor();
   static "new"(): ConvexPolygonShape3D 
 
 

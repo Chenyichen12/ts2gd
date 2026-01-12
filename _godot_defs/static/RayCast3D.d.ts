@@ -22,7 +22,8 @@ declare class RayCast3D extends Node3D  {
  * To sweep over a region of 3D space, you can approximate the region with multiple [RayCast3D]s or use [ShapeCast3D].
  *
 */
-  new(): RayCast3D; 
+  new(): RayCast3D;
+  constructor();
   static "new"(): RayCast3D 
 
 

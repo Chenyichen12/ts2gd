@@ -76,7 +76,8 @@ declare class TileSetScenesCollectionSource extends TileSetSource  {
  * 
  *
 */
-  new(): TileSetScenesCollectionSource; 
+  new(): TileSetScenesCollectionSource;
+  constructor();
   static "new"(): TileSetScenesCollectionSource 
 
 

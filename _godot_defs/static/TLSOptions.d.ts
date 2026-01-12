@@ -42,7 +42,8 @@ declare class TLSOptions extends RefCounted  {
  * 
  *
 */
-  new(): TLSOptions; 
+  new(): TLSOptions;
+  constructor();
   static "new"(): TLSOptions 
 
 

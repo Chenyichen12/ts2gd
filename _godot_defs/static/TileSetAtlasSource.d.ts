@@ -26,7 +26,8 @@ declare class TileSetAtlasSource extends TileSetSource  {
  * As TileData properties are stored directly in the TileSetAtlasSource resource, their properties might also be set using `TileSetAtlasSource.set("<coords_x>:<coords_y>/<alternative_id>/<tile_data_property>")`.
  *
 */
-  new(): TileSetAtlasSource; 
+  new(): TileSetAtlasSource;
+  constructor();
   static "new"(): TileSetAtlasSource 
 
 

@@ -14,7 +14,8 @@ declare class EditorPlugin extends Node  {
  * **Note:** Some names in this class contain "left" or "right" (e.g. [constant DOCK_SLOT_LEFT_UL]). These APIs assume left-to-right layout, and would be backwards when using right-to-left layout. These names are kept for compatibility reasons.
  *
 */
-  new(): EditorPlugin; 
+  new(): EditorPlugin;
+  constructor();
   static "new"(): EditorPlugin 
 
 

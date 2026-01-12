@@ -14,7 +14,8 @@ declare class FileSystemDock extends EditorDock  {
  * While [FileSystemDock] doesn't expose any methods for file manipulation, it can listen for various file-related signals.
  *
 */
-  new(): FileSystemDock; 
+  new(): FileSystemDock;
+  constructor();
   static "new"(): FileSystemDock 
 
 

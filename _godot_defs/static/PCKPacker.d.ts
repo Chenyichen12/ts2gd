@@ -52,7 +52,8 @@ declare class PCKPacker extends RefCounted  {
  * **Note:** PCK is Godot's own pack file format. To create ZIP archives that can be read by any program, use [ZIPPacker] instead.
  *
 */
-  new(): PCKPacker; 
+  new(): PCKPacker;
+  constructor();
   static "new"(): PCKPacker 
 
 

@@ -10,7 +10,8 @@ declare class VisualShaderNodeParticleRandomness extends VisualShaderNode  {
  * Randomness node will output pseudo-random values of the given type based on the specified minimum and maximum values.
  *
 */
-  new(): VisualShaderNodeParticleRandomness; 
+  new(): VisualShaderNodeParticleRandomness;
+  constructor();
   static "new"(): VisualShaderNodeParticleRandomness 
 
 

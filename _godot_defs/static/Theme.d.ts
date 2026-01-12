@@ -18,7 +18,8 @@ declare class Theme extends Resource  {
  * Use [member Control.theme] of any control node to set up a theme that will be available to that control and all of its direct and indirect children.
  *
 */
-  new(): Theme; 
+  new(): Theme;
+  constructor();
   static "new"(): Theme 
 
 

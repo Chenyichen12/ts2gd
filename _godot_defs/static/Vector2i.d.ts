@@ -172,9 +172,13 @@ declare type Vector2i = Vector2iConstructor;
 declare var Vector2i: typeof Vector2iConstructor & {
   
   new(): Vector2i;
+
   new(from: Vector2i): Vector2i;
+
   new(from: Vector2): Vector2i;
+
   new(x: int, y: int): Vector2i;
+
 
   (): Vector2i;
   (from: Vector2i): Vector2i;

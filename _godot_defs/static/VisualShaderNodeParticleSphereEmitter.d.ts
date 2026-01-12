@@ -10,7 +10,8 @@ declare class VisualShaderNodeParticleSphereEmitter extends VisualShaderNodePart
  * [VisualShaderNodeParticleEmitter] that makes the particles emitted in sphere shape with the specified inner and outer radii.
  *
 */
-  new(): VisualShaderNodeParticleSphereEmitter; 
+  new(): VisualShaderNodeParticleSphereEmitter;
+  constructor();
   static "new"(): VisualShaderNodeParticleSphereEmitter 
 
 

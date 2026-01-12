@@ -10,7 +10,8 @@ declare class Polygon2D extends Node2D  {
  * A Polygon2D is defined by a set of points. Each point is connected to the next, with the final point being connected to the first, resulting in a closed polygon. Polygon2Ds can be filled with color (solid or gradient) or filled with a given texture.
  *
 */
-  new(): Polygon2D; 
+  new(): Polygon2D;
+  constructor();
   static "new"(): Polygon2D 
 
 

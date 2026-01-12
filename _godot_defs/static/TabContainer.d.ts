@@ -14,7 +14,8 @@ declare class TabContainer extends Container  {
  * **Note:** The drawing of the clickable tabs is handled by this node; [TabBar] is not needed.
  *
 */
-  new(): TabContainer; 
+  new(): TabContainer;
+  constructor();
   static "new"(): TabContainer 
 
 

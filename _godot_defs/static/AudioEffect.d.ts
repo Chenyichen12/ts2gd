@@ -14,7 +14,8 @@ declare class AudioEffect extends Resource  {
  * When applied on a bus, an audio effect creates a corresponding [AudioEffectInstance]. The instance is directly responsible for manipulating the sound, based on the original audio effect's properties.
  *
 */
-  new(): AudioEffect; 
+  new(): AudioEffect;
+  constructor();
   static "new"(): AudioEffect 
 
 

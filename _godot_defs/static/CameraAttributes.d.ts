@@ -22,7 +22,8 @@ declare class CameraAttributes extends Resource  {
  * This is a pure virtual class that is inherited by [CameraAttributesPhysical] and [CameraAttributesPractical].
  *
 */
-  new(): CameraAttributes; 
+  new(): CameraAttributes;
+  constructor();
   static "new"(): CameraAttributes 
 
 

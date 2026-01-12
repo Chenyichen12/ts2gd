@@ -84,7 +84,8 @@ declare class FileAccess extends RefCounted  {
  * **Note:** Files are automatically closed only if the process exits "normally" (such as by clicking the window manager's close button or pressing [kbd]Alt + F4[/kbd]). If you stop the project execution by pressing [kbd]F8[/kbd] while the project is running, the file won't be closed as the game process will be killed. You can work around this by calling [method flush] at regular intervals.
  *
 */
-  new(): FileAccess; 
+  new(): FileAccess;
+  constructor();
   static "new"(): FileAccess 
 
 

@@ -14,7 +14,8 @@ declare class EditorResourcePreview extends Node  {
  * **Note:** This class shouldn't be instantiated directly. Instead, access the singleton using [method EditorInterface.get_resource_previewer].
  *
 */
-  new(): EditorResourcePreview; 
+  new(): EditorResourcePreview;
+  constructor();
   static "new"(): EditorResourcePreview 
 
 

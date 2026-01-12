@@ -10,7 +10,8 @@ declare class StyleBoxEmpty extends StyleBox  {
  * An empty [StyleBox] that can be used to display nothing instead of the default style (e.g. it can "disable" `focus` styles).
  *
 */
-  new(): StyleBoxEmpty; 
+  new(): StyleBoxEmpty;
+  constructor();
   static "new"(): StyleBoxEmpty 
 
 

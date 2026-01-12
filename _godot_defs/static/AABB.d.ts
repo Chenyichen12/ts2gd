@@ -24,8 +24,14 @@ declare class AABB {
 */
 
   new(): AABB;
+  constructor();
+
   new(from: AABB): AABB;
+  constructor(from: AABB);
+
   new(position: Vector3, size: Vector3): AABB;
+  constructor(position: Vector3, size: Vector3);
+
   static "new"(): AABB 
 
 

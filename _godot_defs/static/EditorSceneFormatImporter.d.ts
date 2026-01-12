@@ -14,7 +14,8 @@ declare class EditorSceneFormatImporter extends RefCounted  {
  * To use [EditorSceneFormatImporter], register it using the [method EditorPlugin.add_scene_format_importer_plugin] method first.
  *
 */
-  new(): EditorSceneFormatImporter; 
+  new(): EditorSceneFormatImporter;
+  constructor();
   static "new"(): EditorSceneFormatImporter 
 
 

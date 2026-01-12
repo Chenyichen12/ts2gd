@@ -18,7 +18,8 @@ declare class AudioEffectSpectrumAnalyzer extends AudioEffect  {
  * See also [AudioStreamGenerator] for procedurally generating sounds.
  *
 */
-  new(): AudioEffectSpectrumAnalyzer; 
+  new(): AudioEffectSpectrumAnalyzer;
+  constructor();
   static "new"(): AudioEffectSpectrumAnalyzer 
 
 

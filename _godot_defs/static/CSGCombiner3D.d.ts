@@ -14,7 +14,8 @@ declare class CSGCombiner3D extends CSGShape3D  {
  * **Note:** CSG nodes are intended to be used for level prototyping. Creating CSG nodes has a significant CPU cost compared to creating a [MeshInstance3D] with a [PrimitiveMesh]. Moving a CSG node within another CSG node also has a significant CPU cost, so it should be avoided during gameplay.
  *
 */
-  new(): CSGCombiner3D; 
+  new(): CSGCombiner3D;
+  constructor();
   static "new"(): CSGCombiner3D 
 
 

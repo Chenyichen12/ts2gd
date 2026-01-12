@@ -22,7 +22,8 @@ declare class ConvexPolygonShape2D extends Shape2D  {
  * **Performance:** [ConvexPolygonShape2D] is faster to check collisions against compared to [ConcavePolygonShape2D], but it is slower than primitive collision shapes such as [CircleShape2D] and [RectangleShape2D]. Its use should generally be limited to medium-sized objects that cannot have their collision accurately represented by primitive shapes.
  *
 */
-  new(): ConvexPolygonShape2D; 
+  new(): ConvexPolygonShape2D;
+  constructor();
   static "new"(): ConvexPolygonShape2D 
 
 

@@ -10,7 +10,8 @@ declare class VisualShaderNodeParticleBoxEmitter extends VisualShaderNodeParticl
  * [VisualShaderNodeParticleEmitter] that makes the particles emitted in box shape with the specified extents.
  *
 */
-  new(): VisualShaderNodeParticleBoxEmitter; 
+  new(): VisualShaderNodeParticleBoxEmitter;
+  constructor();
   static "new"(): VisualShaderNodeParticleBoxEmitter 
 
 

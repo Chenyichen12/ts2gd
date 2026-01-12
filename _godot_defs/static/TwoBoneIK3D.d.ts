@@ -14,7 +14,8 @@ declare class TwoBoneIK3D extends IKModifier3D  {
  * This IK can handle twist by setting the pole direction. If there are more than one bone between each set bone, their rotations are ignored, and the straight line connecting the root-middle and middle-end joints are treated as virtual bones.
  *
 */
-  new(): TwoBoneIK3D; 
+  new(): TwoBoneIK3D;
+  constructor();
   static "new"(): TwoBoneIK3D 
 
 

@@ -18,7 +18,8 @@ declare class BoneTwistDisperser3D extends SkeletonModifier3D  {
  * **Note:** If an extracted twist is greater than 180 degrees, flipping occurs. This is similar to [ConvertTransformModifier3D].
  *
 */
-  new(): BoneTwistDisperser3D; 
+  new(): BoneTwistDisperser3D;
+  constructor();
   static "new"(): BoneTwistDisperser3D 
 
 

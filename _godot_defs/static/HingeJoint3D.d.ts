@@ -10,7 +10,8 @@ declare class HingeJoint3D extends Joint3D  {
  * A physics joint that restricts the rotation of a 3D physics body around an axis relative to another physics body. For example, Body A can be a [StaticBody3D] representing a door hinge that a [RigidBody3D] rotates around.
  *
 */
-  new(): HingeJoint3D; 
+  new(): HingeJoint3D;
+  constructor();
   static "new"(): HingeJoint3D 
 
 

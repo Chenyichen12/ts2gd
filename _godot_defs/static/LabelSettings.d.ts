@@ -10,7 +10,8 @@ declare class LabelSettings extends Resource  {
  * [LabelSettings] is a resource that provides common settings to customize the text in a [Label]. It will take priority over the properties defined in [member Control.theme]. The resource can be shared between multiple labels and changed on the fly, so it's convenient and flexible way to setup text style.
  *
 */
-  new(): LabelSettings; 
+  new(): LabelSettings;
+  constructor();
   static "new"(): LabelSettings 
 
 

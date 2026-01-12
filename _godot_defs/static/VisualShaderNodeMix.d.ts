@@ -10,7 +10,8 @@ declare class VisualShaderNodeMix extends VisualShaderNode  {
  * Translates to `mix(a, b, weight)` in the shader language.
  *
 */
-  new(): VisualShaderNodeMix; 
+  new(): VisualShaderNodeMix;
+  constructor();
   static "new"(): VisualShaderNodeMix 
 
 

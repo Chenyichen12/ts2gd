@@ -10,7 +10,8 @@ declare class VisualShaderNodeInput extends VisualShaderNode  {
  * Gives access to input variables (built-ins) available for the shader. See the shading reference for the list of available built-ins for each shader type (check `Tutorials` section for link).
  *
 */
-  new(): VisualShaderNodeInput; 
+  new(): VisualShaderNodeInput;
+  constructor();
   static "new"(): VisualShaderNodeInput 
 
 

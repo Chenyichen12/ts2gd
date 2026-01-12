@@ -6,7 +6,8 @@ declare class StreamPeerExtension extends StreamPeer  {
   
 /**
 */
-  new(): StreamPeerExtension; 
+  new(): StreamPeerExtension;
+  constructor();
   static "new"(): StreamPeerExtension 
 
 

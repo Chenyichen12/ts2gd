@@ -14,7 +14,8 @@ declare class AnimationMixer extends Node  {
  * After instantiating the playback information data within the extended class, the blending is processed by the [AnimationMixer].
  *
 */
-  new(): AnimationMixer; 
+  new(): AnimationMixer;
+  constructor();
   static "new"(): AnimationMixer 
 
 

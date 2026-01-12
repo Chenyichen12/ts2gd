@@ -6,7 +6,8 @@ declare class Skin extends Resource  {
   
 /**
 */
-  new(): Skin; 
+  new(): Skin;
+  constructor();
   static "new"(): Skin 
 
 

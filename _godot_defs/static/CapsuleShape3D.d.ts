@@ -14,7 +14,8 @@ declare class CapsuleShape3D extends Shape3D  {
  * **Performance:** [CapsuleShape3D] is fast to check collisions against. It is faster than [CylinderShape3D], but slower than [SphereShape3D] and [BoxShape3D].
  *
 */
-  new(): CapsuleShape3D; 
+  new(): CapsuleShape3D;
+  constructor();
   static "new"(): CapsuleShape3D 
 
 

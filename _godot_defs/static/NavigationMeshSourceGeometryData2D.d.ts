@@ -10,7 +10,8 @@ declare class NavigationMeshSourceGeometryData2D extends Resource  {
  * Container for parsed source geometry data used in navigation mesh baking.
  *
 */
-  new(): NavigationMeshSourceGeometryData2D; 
+  new(): NavigationMeshSourceGeometryData2D;
+  constructor();
   static "new"(): NavigationMeshSourceGeometryData2D 
 
 

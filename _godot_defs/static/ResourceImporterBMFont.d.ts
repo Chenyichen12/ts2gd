@@ -18,7 +18,8 @@ declare class ResourceImporterBMFont extends ResourceImporter  {
  * See also [ResourceImporterDynamicFont].
  *
 */
-  new(): ResourceImporterBMFont; 
+  new(): ResourceImporterBMFont;
+  constructor();
   static "new"(): ResourceImporterBMFont 
 
 

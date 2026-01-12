@@ -10,7 +10,8 @@ declare class Logger extends RefCounted  {
  * Custom logger to receive messages from the internal error/warning stream. Loggers are registered via [method OS.add_logger].
  *
 */
-  new(): Logger; 
+  new(): Logger;
+  constructor();
   static "new"(): Logger 
 
 

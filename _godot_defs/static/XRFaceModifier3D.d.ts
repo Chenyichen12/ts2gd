@@ -18,7 +18,8 @@ declare class XRFaceModifier3D extends Node3D  {
  * The node attempts to identify blend shapes based on name matching. Blend shapes should match the names listed in the [url=https://docs.vrcft.io/docs/tutorial-avatars/tutorial-avatars-extras/compatibility/overview]Unified Expressions Compatibility[/url] chart.
  *
 */
-  new(): XRFaceModifier3D; 
+  new(): XRFaceModifier3D;
+  constructor();
   static "new"(): XRFaceModifier3D 
 
 

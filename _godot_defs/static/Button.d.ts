@@ -76,7 +76,8 @@ declare class Button extends BaseButton  {
  * **Note:** Buttons do not detect touch input and therefore don't support multitouch, since mouse emulation can only press one button at a given time. Use [TouchScreenButton] for buttons that trigger gameplay movement or actions.
  *
 */
-  new(): Button; 
+  new(): Button;
+  constructor();
   static "new"(): Button 
 
 

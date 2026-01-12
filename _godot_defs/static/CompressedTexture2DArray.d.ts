@@ -42,7 +42,8 @@ declare class CompressedTexture2DArray extends CompressedTextureLayered  {
  * See [Texture2DArray] for a general description of texture arrays.
  *
 */
-  new(): CompressedTexture2DArray; 
+  new(): CompressedTexture2DArray;
+  constructor();
   static "new"(): CompressedTexture2DArray 
 
 

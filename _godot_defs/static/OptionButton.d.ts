@@ -22,7 +22,8 @@ declare class OptionButton extends Button  {
  * **Note:** The [member Button.text] and [member Button.icon] properties are set automatically based on the selected item. They shouldn't be changed manually.
  *
 */
-  new(): OptionButton; 
+  new(): OptionButton;
+  constructor();
   static "new"(): OptionButton 
 
 

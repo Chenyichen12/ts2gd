@@ -10,7 +10,8 @@ declare class Light3D extends VisualInstance3D  {
  * Light3D is the **abstract** base class for light nodes. As it can't be instantiated, it shouldn't be used directly. Other types of light nodes inherit from it. Light3D contains the common variables and parameters used for lighting.
  *
 */
-  new(): Light3D; 
+  new(): Light3D;
+  constructor();
   static "new"(): Light3D 
 
 

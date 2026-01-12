@@ -10,7 +10,8 @@ declare class AnimationNodeAnimation extends AnimationRootNode  {
  * A resource to add to an [AnimationNodeBlendTree]. Only has one output port using the [member animation] property. Used as an input for [AnimationNode]s that blend animations together.
  *
 */
-  new(): AnimationNodeAnimation; 
+  new(): AnimationNodeAnimation;
+  constructor();
   static "new"(): AnimationNodeAnimation 
 
 

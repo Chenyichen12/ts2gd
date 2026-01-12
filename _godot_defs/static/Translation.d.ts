@@ -14,7 +14,8 @@ declare class Translation extends Resource  {
  * A [Translation] consists of messages. A message is identified by its context and untranslated string. Unlike [url=https://www.gnu.org/software/gettext/]gettext[/url], using an empty context string in Godot means not using any context.
  *
 */
-  new(): Translation; 
+  new(): Translation;
+  constructor();
   static "new"(): Translation 
 
 

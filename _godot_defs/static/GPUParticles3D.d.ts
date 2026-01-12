@@ -14,7 +14,8 @@ declare class GPUParticles3D extends GeometryInstance3D  {
  * Use [member process_material] to add a [ParticleProcessMaterial] to configure particle appearance and behavior. Alternatively, you can add a [ShaderMaterial] which will be applied to all particles.
  *
 */
-  new(): GPUParticles3D; 
+  new(): GPUParticles3D;
+  constructor();
   static "new"(): GPUParticles3D 
 
 

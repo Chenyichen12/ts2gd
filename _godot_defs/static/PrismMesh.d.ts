@@ -10,7 +10,8 @@ declare class PrismMesh extends PrimitiveMesh  {
  * Class representing a prism-shaped [PrimitiveMesh].
  *
 */
-  new(): PrismMesh; 
+  new(): PrismMesh;
+  constructor();
   static "new"(): PrismMesh 
 
 

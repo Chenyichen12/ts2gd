@@ -14,7 +14,8 @@ declare class ScriptBacktrace extends RefCounted  {
  * See [member ProjectSettings.debug/settings/gdscript/always_track_call_stacks] and [member ProjectSettings.debug/settings/gdscript/always_track_local_variables] for ways of controlling the contents of this class.
  *
 */
-  new(): ScriptBacktrace; 
+  new(): ScriptBacktrace;
+  constructor();
   static "new"(): ScriptBacktrace 
 
 

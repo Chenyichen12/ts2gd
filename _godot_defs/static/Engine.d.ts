@@ -10,7 +10,8 @@ declare class EngineClass extends Object  {
  * The [Engine] singleton allows you to query and modify the project's run-time parameters, such as frames per second, time scale, and others. It also stores information about the current build of Godot, such as the current version.
  *
 */
-  new(): EngineClass; 
+  new(): EngineClass;
+  constructor();
   static "new"(): EngineClass 
 
 

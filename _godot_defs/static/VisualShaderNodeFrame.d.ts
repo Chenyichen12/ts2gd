@@ -18,7 +18,8 @@ declare class VisualShaderNodeFrame extends VisualShaderNodeResizableBase  {
  * Its title, description and color can be customized.
  *
 */
-  new(): VisualShaderNodeFrame; 
+  new(): VisualShaderNodeFrame;
+  constructor();
   static "new"(): VisualShaderNodeFrame 
 
 

@@ -18,7 +18,8 @@ declare class MethodTweener extends Tweener  {
  * **Note:** [method Tween.tween_method] is the only correct way to create [MethodTweener]. Any [MethodTweener] created manually will not function correctly.
  *
 */
-  new(): MethodTweener; 
+  new(): MethodTweener;
+  constructor();
   static "new"(): MethodTweener 
 
 

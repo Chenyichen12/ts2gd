@@ -10,7 +10,8 @@ declare class EditorFileSystemDirectory extends Object  {
  * A more generalized, low-level variation of the directory concept.
  *
 */
-  new(): EditorFileSystemDirectory; 
+  new(): EditorFileSystemDirectory;
+  constructor();
   static "new"(): EditorFileSystemDirectory 
 
 

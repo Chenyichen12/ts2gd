@@ -26,7 +26,8 @@ declare class ConcavePolygonShape3D extends Shape3D  {
  * **Performance:** Due to its complexity, [ConcavePolygonShape3D] is the slowest 3D collision shape to check collisions against. Its use should generally be limited to level geometry. For convex geometry, [ConvexPolygonShape3D] should be used. For dynamic physics bodies that need concave collision, several [ConvexPolygonShape3D]s can be used to represent its collision by using convex decomposition; see [ConvexPolygonShape3D]'s documentation for instructions.
  *
 */
-  new(): ConcavePolygonShape3D; 
+  new(): ConcavePolygonShape3D;
+  constructor();
   static "new"(): ConcavePolygonShape3D 
 
 

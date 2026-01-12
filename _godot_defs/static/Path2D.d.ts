@@ -14,7 +14,8 @@ declare class Path2D extends Node2D  {
  * **Note:** The path is considered as relative to the moved nodes (children of [PathFollow2D]). As such, the curve should usually start with a zero vector (`(0, 0)`).
  *
 */
-  new(): Path2D; 
+  new(): Path2D;
+  constructor();
   static "new"(): Path2D 
 
 

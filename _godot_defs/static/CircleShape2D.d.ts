@@ -14,7 +14,8 @@ declare class CircleShape2D extends Shape2D  {
  * **Performance:** [CircleShape2D] is fast to check collisions against. It is faster than [RectangleShape2D] and [CapsuleShape2D].
  *
 */
-  new(): CircleShape2D; 
+  new(): CircleShape2D;
+  constructor();
   static "new"(): CircleShape2D 
 
 

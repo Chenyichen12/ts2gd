@@ -20,8 +20,14 @@ declare class PackedFloat32Array {
 */
 
   new(): PackedFloat32Array;
+  constructor();
+
   new(from: PackedFloat32Array): PackedFloat32Array;
+  constructor(from: PackedFloat32Array);
+
   new(from: any[]): PackedFloat32Array;
+  constructor(from: any[]);
+
   static "new"(): PackedFloat32Array 
 
 

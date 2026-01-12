@@ -36,7 +36,8 @@ declare class AnimationNodeStateMachine extends AnimationRootNode  {
  * 
  *
 */
-  new(): AnimationNodeStateMachine; 
+  new(): AnimationNodeStateMachine;
+  constructor();
   static "new"(): AnimationNodeStateMachine 
 
 

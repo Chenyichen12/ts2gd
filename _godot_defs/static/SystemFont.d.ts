@@ -26,7 +26,8 @@ declare class SystemFont extends Font  {
  * **Note:** This class is implemented on iOS, Linux, macOS and Windows, on other platforms it will fallback to default theme font.
  *
 */
-  new(): SystemFont; 
+  new(): SystemFont;
+  constructor();
   static "new"(): SystemFont 
 
 

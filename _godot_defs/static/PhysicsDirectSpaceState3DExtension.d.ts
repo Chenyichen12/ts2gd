@@ -14,7 +14,8 @@ declare class PhysicsDirectSpaceState3DExtension extends PhysicsDirectSpaceState
  * Intended for use with GDExtension to create custom implementations of [PhysicsDirectSpaceState3D].
  *
 */
-  new(): PhysicsDirectSpaceState3DExtension; 
+  new(): PhysicsDirectSpaceState3DExtension;
+  constructor();
   static "new"(): PhysicsDirectSpaceState3DExtension 
 
 

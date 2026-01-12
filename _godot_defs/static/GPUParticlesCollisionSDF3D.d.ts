@@ -30,7 +30,8 @@ declare class GPUParticlesCollisionSDF3D extends GPUParticlesCollision3D  {
  * **Note:** Particle collision only affects [GPUParticles3D], not [CPUParticles3D].
  *
 */
-  new(): GPUParticlesCollisionSDF3D; 
+  new(): GPUParticlesCollisionSDF3D;
+  constructor();
   static "new"(): GPUParticlesCollisionSDF3D 
 
 

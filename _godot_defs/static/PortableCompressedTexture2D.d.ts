@@ -26,7 +26,8 @@ declare class PortableCompressedTexture2D extends Texture2D  {
  * This resource is intended to be created from code.
  *
 */
-  new(): PortableCompressedTexture2D; 
+  new(): PortableCompressedTexture2D;
+  constructor();
   static "new"(): PortableCompressedTexture2D 
 
 

@@ -10,7 +10,8 @@ declare class RDTextureFormat extends RefCounted  {
  * This object is used by [RenderingDevice].
  *
 */
-  new(): RDTextureFormat; 
+  new(): RDTextureFormat;
+  constructor();
   static "new"(): RDTextureFormat 
 
 

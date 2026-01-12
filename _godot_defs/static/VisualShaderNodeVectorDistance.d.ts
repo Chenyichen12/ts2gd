@@ -14,7 +14,8 @@ declare class VisualShaderNodeVectorDistance extends VisualShaderNodeVectorBase 
  * Translated to `distance(p0, p1)` in the shader language.
  *
 */
-  new(): VisualShaderNodeVectorDistance; 
+  new(): VisualShaderNodeVectorDistance;
+  constructor();
   static "new"(): VisualShaderNodeVectorDistance 
 
 

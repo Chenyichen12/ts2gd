@@ -18,7 +18,8 @@ declare class WorldEnvironment extends Node  {
  * The [WorldEnvironment] allows the user to specify default lighting parameters (e.g. ambient lighting), various post-processing effects (e.g. SSAO, DOF, Tonemapping), and how to draw the background (e.g. solid color, skybox). Usually, these are added in order to improve the realism/color balance of the scene.
  *
 */
-  new(): WorldEnvironment; 
+  new(): WorldEnvironment;
+  constructor();
   static "new"(): WorldEnvironment 
 
 

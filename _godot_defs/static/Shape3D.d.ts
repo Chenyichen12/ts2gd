@@ -14,7 +14,8 @@ declare class Shape3D extends Resource  {
  * **Performance:** Primitive shapes, especially [SphereShape3D], are fast to check collisions against. [ConvexPolygonShape3D] and [HeightMapShape3D] are slower, and [ConcavePolygonShape3D] is the slowest.
  *
 */
-  new(): Shape3D; 
+  new(): Shape3D;
+  constructor();
   static "new"(): Shape3D 
 
 

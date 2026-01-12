@@ -6,7 +6,8 @@ declare class AudioStreamPlaybackResampled extends AudioStreamPlayback  {
   
 /**
 */
-  new(): AudioStreamPlaybackResampled; 
+  new(): AudioStreamPlaybackResampled;
+  constructor();
   static "new"(): AudioStreamPlaybackResampled 
 
 

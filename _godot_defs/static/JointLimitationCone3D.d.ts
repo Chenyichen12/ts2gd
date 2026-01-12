@@ -10,7 +10,8 @@ declare class JointLimitationCone3D extends JointLimitation3D  {
  * A cone shape limitation that interacts with [ChainIK3D].
  *
 */
-  new(): JointLimitationCone3D; 
+  new(): JointLimitationCone3D;
+  constructor();
   static "new"(): JointLimitationCone3D 
 
 

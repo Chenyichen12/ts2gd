@@ -68,7 +68,8 @@ declare class EditorSettings extends Resource  {
  * **Note:** This class shouldn't be instantiated directly. Instead, access the singleton using [method EditorInterface.get_editor_settings].
  *
 */
-  new(): EditorSettings; 
+  new(): EditorSettings;
+  constructor();
   static "new"(): EditorSettings 
 
 

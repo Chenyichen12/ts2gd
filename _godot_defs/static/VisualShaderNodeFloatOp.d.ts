@@ -10,7 +10,8 @@ declare class VisualShaderNodeFloatOp extends VisualShaderNode  {
  * Applies [member operator] to two floating-point inputs: `a` and `b`.
  *
 */
-  new(): VisualShaderNodeFloatOp; 
+  new(): VisualShaderNodeFloatOp;
+  constructor();
   static "new"(): VisualShaderNodeFloatOp 
 
 

@@ -72,7 +72,8 @@ declare class SpinBox extends Range  {
  * **Note:** If you want to implement drag and drop for the underlying [LineEdit], you can use [method Control.set_drag_forwarding] on the node returned by [method get_line_edit].
  *
 */
-  new(): SpinBox; 
+  new(): SpinBox;
+  constructor();
   static "new"(): SpinBox 
 
 

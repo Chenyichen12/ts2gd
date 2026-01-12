@@ -26,7 +26,8 @@ declare class Mutex extends RefCounted  {
  * - When a [Thread]'s reference count reaches zero and it is therefore destroyed, it must not have any mutex locked.
  *
 */
-  new(): Mutex; 
+  new(): Mutex;
+  constructor();
   static "new"(): Mutex 
 
 

@@ -18,7 +18,8 @@ declare class GPUParticlesAttractorSphere3D extends GPUParticlesAttractor3D  {
  * **Note:** Particle attractors only affect [GPUParticles3D], not [CPUParticles3D].
  *
 */
-  new(): GPUParticlesAttractorSphere3D; 
+  new(): GPUParticlesAttractorSphere3D;
+  constructor();
   static "new"(): GPUParticlesAttractorSphere3D 
 
 

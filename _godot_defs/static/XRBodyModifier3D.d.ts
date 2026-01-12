@@ -18,7 +18,8 @@ declare class XRBodyModifier3D extends SkeletonModifier3D  {
  * The body tracking position-data is scaled by [member Skeleton3D.motion_scale] when applied to the skeleton, which can be used to adjust the tracked body to match the scale of the body model.
  *
 */
-  new(): XRBodyModifier3D; 
+  new(): XRBodyModifier3D;
+  constructor();
   static "new"(): XRBodyModifier3D 
 
 

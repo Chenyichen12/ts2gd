@@ -26,7 +26,8 @@ declare class CSGShape3D extends GeometryInstance3D  {
  * Entire scenes of CSG nodes can be baked to static geometry and exported with the editor glTF scene exporter: **Scene > Export As... > glTF 2.0 Scene...**
  *
 */
-  new(): CSGShape3D; 
+  new(): CSGShape3D;
+  constructor();
   static "new"(): CSGShape3D 
 
 

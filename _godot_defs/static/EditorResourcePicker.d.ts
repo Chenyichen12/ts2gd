@@ -14,7 +14,8 @@ declare class EditorResourcePicker extends HBoxContainer  {
  * **Note:** This [Control] does not include any editor for the resource, as editing is controlled by the Inspector dock itself or sub-Inspectors.
  *
 */
-  new(): EditorResourcePicker; 
+  new(): EditorResourcePicker;
+  constructor();
   static "new"(): EditorResourcePicker 
 
 

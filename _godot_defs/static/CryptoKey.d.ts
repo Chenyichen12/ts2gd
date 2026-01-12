@@ -14,7 +14,8 @@ declare class CryptoKey extends Resource  {
  * They can be used to generate a self-signed [X509Certificate] via [method Crypto.generate_self_signed_certificate] and as private key in [method StreamPeerTLS.accept_stream] along with the appropriate certificate.
  *
 */
-  new(): CryptoKey; 
+  new(): CryptoKey;
+  constructor();
   static "new"(): CryptoKey 
 
 

@@ -10,7 +10,8 @@ declare class VisualShaderNodeColorOp extends VisualShaderNode  {
  * Applies [member operator] to two color inputs.
  *
 */
-  new(): VisualShaderNodeColorOp; 
+  new(): VisualShaderNodeColorOp;
+  constructor();
   static "new"(): VisualShaderNodeColorOp 
 
 

@@ -14,7 +14,8 @@ declare class EngineProfiler extends RefCounted  {
  * See [EngineDebugger] and [EditorDebuggerPlugin] for more information.
  *
 */
-  new(): EngineProfiler; 
+  new(): EngineProfiler;
+  constructor();
   static "new"(): EngineProfiler 
 
 

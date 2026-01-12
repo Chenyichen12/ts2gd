@@ -10,7 +10,8 @@ declare class RDTextureView extends RefCounted  {
  * This object is used by [RenderingDevice].
  *
 */
-  new(): RDTextureView; 
+  new(): RDTextureView;
+  constructor();
   static "new"(): RDTextureView 
 
 

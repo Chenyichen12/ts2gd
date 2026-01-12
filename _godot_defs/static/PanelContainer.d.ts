@@ -10,7 +10,8 @@ declare class PanelContainer extends Container  {
  * A container that keeps its child controls within the area of a [StyleBox]. Useful for giving controls an outline.
  *
 */
-  new(): PanelContainer; 
+  new(): PanelContainer;
+  constructor();
   static "new"(): PanelContainer 
 
 

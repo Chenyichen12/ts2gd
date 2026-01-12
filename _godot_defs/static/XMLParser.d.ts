@@ -84,7 +84,8 @@ declare class XMLParser extends RefCounted  {
  * 
  *
 */
-  new(): XMLParser; 
+  new(): XMLParser;
+  constructor();
   static "new"(): XMLParser 
 
 

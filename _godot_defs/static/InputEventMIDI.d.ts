@@ -124,7 +124,8 @@ declare class InputEventMIDI extends InputEvent  {
  * **Note:** On the Web platform, using MIDI input requires a browser permission to be granted first. This permission request is performed when calling [method OS.open_midi_inputs]. MIDI input will not work until the user accepts the permission request.
  *
 */
-  new(): InputEventMIDI; 
+  new(): InputEventMIDI;
+  constructor();
   static "new"(): InputEventMIDI 
 
 

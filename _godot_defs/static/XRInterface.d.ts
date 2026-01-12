@@ -14,7 +14,8 @@ declare class XRInterface extends RefCounted  {
  * Interfaces should be written in such a way that simply enabling them will give us a working setup. You can query the available interfaces through [XRServer].
  *
 */
-  new(): XRInterface; 
+  new(): XRInterface;
+  constructor();
   static "new"(): XRInterface 
 
 

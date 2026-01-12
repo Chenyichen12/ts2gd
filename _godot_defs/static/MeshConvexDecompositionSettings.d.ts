@@ -10,7 +10,8 @@ declare class MeshConvexDecompositionSettings extends RefCounted  {
  * Parameters to be used with a [Mesh] convex decomposition operation.
  *
 */
-  new(): MeshConvexDecompositionSettings; 
+  new(): MeshConvexDecompositionSettings;
+  constructor();
   static "new"(): MeshConvexDecompositionSettings 
 
 

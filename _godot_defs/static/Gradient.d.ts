@@ -14,7 +14,8 @@ declare class Gradient extends Resource  {
  * See also [Curve] which supports more complex easing methods, but does not support colors.
  *
 */
-  new(): Gradient; 
+  new(): Gradient;
+  constructor();
   static "new"(): Gradient 
 
 

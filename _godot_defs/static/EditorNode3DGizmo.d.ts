@@ -10,7 +10,8 @@ declare class EditorNode3DGizmo extends Node3DGizmo  {
  * Gizmo that is used for providing custom visualization and editing (handles and subgizmos) for [Node3D] objects. Can be overridden to create custom gizmos, but for simple gizmos creating an [EditorNode3DGizmoPlugin] is usually recommended.
  *
 */
-  new(): EditorNode3DGizmo; 
+  new(): EditorNode3DGizmo;
+  constructor();
   static "new"(): EditorNode3DGizmo 
 
 

@@ -14,7 +14,8 @@ declare class VehicleWheel3D extends Node3D  {
  * **Note:** This class has known issues and isn't designed to provide realistic 3D vehicle physics. If you want advanced vehicle physics, you may need to write your own physics integration using another [PhysicsBody3D] class.
  *
 */
-  new(): VehicleWheel3D; 
+  new(): VehicleWheel3D;
+  constructor();
   static "new"(): VehicleWheel3D 
 
 

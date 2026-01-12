@@ -14,7 +14,8 @@ declare class CheckButton extends Button  {
  * See also [BaseButton] which contains common properties and methods associated with this node.
  *
 */
-  new(): CheckButton; 
+  new(): CheckButton;
+  constructor();
   static "new"(): CheckButton 
 
 

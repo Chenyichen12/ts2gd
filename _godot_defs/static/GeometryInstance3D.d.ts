@@ -10,7 +10,8 @@ declare class GeometryInstance3D extends VisualInstance3D  {
  * Base node for geometry-based visual instances. Shares some common functionality like visibility and custom materials.
  *
 */
-  new(): GeometryInstance3D; 
+  new(): GeometryInstance3D;
+  constructor();
   static "new"(): GeometryInstance3D 
 
 

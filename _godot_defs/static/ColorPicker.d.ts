@@ -14,7 +14,8 @@ declare class ColorPicker extends VBoxContainer  {
  * **Note:** This control is the color picker widget itself. You can use a [ColorPickerButton] instead if you need a button that brings up a [ColorPicker] in a popup.
  *
 */
-  new(): ColorPicker; 
+  new(): ColorPicker;
+  constructor();
   static "new"(): ColorPicker 
 
 

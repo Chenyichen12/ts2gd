@@ -18,7 +18,8 @@ declare class ParallaxLayer extends Node2D  {
  * **Note:** Any changes to this node's position and scale made after it enters the scene will be ignored.
  *
 */
-  new(): ParallaxLayer; 
+  new(): ParallaxLayer;
+  constructor();
   static "new"(): ParallaxLayer 
 
 

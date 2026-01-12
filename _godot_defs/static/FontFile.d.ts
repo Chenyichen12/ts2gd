@@ -76,7 +76,8 @@ declare class FontFile extends Font  {
  * 
  *
 */
-  new(): FontFile; 
+  new(): FontFile;
+  constructor();
   static "new"(): FontFile 
 
 

@@ -98,7 +98,8 @@ declare class NavigationPolygon extends Resource  {
  * 
  *
 */
-  new(): NavigationPolygon; 
+  new(): NavigationPolygon;
+  constructor();
   static "new"(): NavigationPolygon 
 
 

@@ -14,7 +14,8 @@ declare class CodeEdit extends TextEdit  {
  * **Note:** Regardless of locale, [CodeEdit] will by default always use left-to-right text direction to correctly display source code.
  *
 */
-  new(): CodeEdit; 
+  new(): CodeEdit;
+  constructor();
   static "new"(): CodeEdit 
 
 

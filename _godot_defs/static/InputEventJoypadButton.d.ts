@@ -10,7 +10,8 @@ declare class InputEventJoypadButton extends InputEvent  {
  * Input event type for gamepad buttons. For gamepad analog sticks and joysticks, see [InputEventJoypadMotion].
  *
 */
-  new(): InputEventJoypadButton; 
+  new(): InputEventJoypadButton;
+  constructor();
   static "new"(): InputEventJoypadButton 
 
 

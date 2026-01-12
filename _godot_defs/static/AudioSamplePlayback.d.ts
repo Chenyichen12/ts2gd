@@ -10,7 +10,8 @@ declare class AudioSamplePlayback extends RefCounted  {
  * Meta class for playing back audio samples.
  *
 */
-  new(): AudioSamplePlayback; 
+  new(): AudioSamplePlayback;
+  constructor();
   static "new"(): AudioSamplePlayback 
 
 

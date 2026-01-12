@@ -20,8 +20,14 @@ declare class PackedVector2Array {
 */
 
   new(): PackedVector2Array;
+  constructor();
+
   new(from: PackedVector2Array): PackedVector2Array;
+  constructor(from: PackedVector2Array);
+
   new(from: any[]): PackedVector2Array;
+  constructor(from: any[]);
+
   static "new"(): PackedVector2Array 
 
 

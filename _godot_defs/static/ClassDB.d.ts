@@ -14,7 +14,8 @@ declare class ClassDBClass extends Object  {
  * **Note:** Script-defined classes with `class_name` are not part of [ClassDB], so they will not return reflection data such as a method or property list. However, [GDExtension]-defined classes **are** part of [ClassDB], so they will return reflection data.
  *
 */
-  new(): ClassDBClass; 
+  new(): ClassDBClass;
+  constructor();
   static "new"(): ClassDBClass 
 
 

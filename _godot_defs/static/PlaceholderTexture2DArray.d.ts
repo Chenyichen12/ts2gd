@@ -22,7 +22,8 @@ declare class PlaceholderTexture2DArray extends PlaceholderTextureLayered  {
  * **Note:** This is not intended to be used as an actual texture for rendering. It is not guaranteed to work like one in shaders or materials (for example when calculating UV).
  *
 */
-  new(): PlaceholderTexture2DArray; 
+  new(): PlaceholderTexture2DArray;
+  constructor();
   static "new"(): PlaceholderTexture2DArray 
 
 

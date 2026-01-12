@@ -10,7 +10,8 @@ declare class VisualShaderNodeResizableBase extends VisualShaderNode  {
  * Resizable nodes have a handle that allows the user to adjust their size as needed.
  *
 */
-  new(): VisualShaderNodeResizableBase; 
+  new(): VisualShaderNodeResizableBase;
+  constructor();
   static "new"(): VisualShaderNodeResizableBase 
 
 

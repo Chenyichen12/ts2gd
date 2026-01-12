@@ -18,7 +18,8 @@ declare class FoldableContainer extends Container  {
  * A FoldableContainer can be grouped with other FoldableContainers so that only one of them can be opened at a time; see [member foldable_group] and [FoldableGroup].
  *
 */
-  new(): FoldableContainer; 
+  new(): FoldableContainer;
+  constructor();
   static "new"(): FoldableContainer 
 
 

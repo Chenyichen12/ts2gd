@@ -18,7 +18,8 @@ declare class VisibleOnScreenEnabler3D extends VisibleOnScreenNotifier3D  {
  * **Note:** [VisibleOnScreenEnabler3D] uses an approximate heuristic that doesn't take walls and other occlusion into account, unless occlusion culling is used. It also won't function unless [member Node3D.visible] is set to `true`.
  *
 */
-  new(): VisibleOnScreenEnabler3D; 
+  new(): VisibleOnScreenEnabler3D;
+  constructor();
   static "new"(): VisibleOnScreenEnabler3D 
 
 

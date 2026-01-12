@@ -14,7 +14,8 @@ declare class Window extends Viewport  {
  * At runtime, [Window]s will not close automatically when requested. You need to handle it manually using the [signal close_requested] signal (this applies both to pressing the close button and clicking outside of a popup).
  *
 */
-  new(): Window; 
+  new(): Window;
+  constructor();
   static "new"(): Window 
 
 

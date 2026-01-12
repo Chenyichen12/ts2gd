@@ -10,7 +10,8 @@ declare class VisualShaderNodeUIntConstant extends VisualShaderNodeConstant  {
  * Translated to `uint` in the shader language.
  *
 */
-  new(): VisualShaderNodeUIntConstant; 
+  new(): VisualShaderNodeUIntConstant;
+  constructor();
   static "new"(): VisualShaderNodeUIntConstant 
 
 

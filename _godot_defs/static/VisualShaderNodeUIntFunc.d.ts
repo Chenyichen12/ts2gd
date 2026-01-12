@@ -10,7 +10,8 @@ declare class VisualShaderNodeUIntFunc extends VisualShaderNode  {
  * Accept an unsigned integer scalar (`x`) to the input port and transform it according to [member function].
  *
 */
-  new(): VisualShaderNodeUIntFunc; 
+  new(): VisualShaderNodeUIntFunc;
+  constructor();
   static "new"(): VisualShaderNodeUIntFunc 
 
 

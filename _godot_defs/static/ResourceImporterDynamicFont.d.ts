@@ -18,7 +18,8 @@ declare class ResourceImporterDynamicFont extends ResourceImporter  {
  * See also [ResourceImporterBMFont] and [ResourceImporterImageFont].
  *
 */
-  new(): ResourceImporterDynamicFont; 
+  new(): ResourceImporterDynamicFont;
+  constructor();
   static "new"(): ResourceImporterDynamicFont 
 
 

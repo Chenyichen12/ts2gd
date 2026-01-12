@@ -14,7 +14,8 @@ declare class OSClass extends Object  {
  * **Note:** In Godot 4, [OS] functions related to window management, clipboard, and TTS were moved to the [DisplayServer] singleton (and the [Window] class). Functions related to time were removed and are only available in the [Time] class.
  *
 */
-  new(): OSClass; 
+  new(): OSClass;
+  constructor();
   static "new"(): OSClass 
 
 

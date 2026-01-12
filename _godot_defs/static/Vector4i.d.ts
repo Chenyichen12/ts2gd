@@ -20,9 +20,17 @@ declare class Vector4i {
 */
 
   new(): Vector4i;
+  constructor();
+
   new(from: Vector4i): Vector4i;
+  constructor(from: Vector4i);
+
   new(from: Vector4): Vector4i;
+  constructor(from: Vector4);
+
   new(x: int, y: int, z: int, w: int): Vector4i;
+  constructor(x: int, y: int, z: int, w: int);
+
   static "new"(): Vector4i 
 
 

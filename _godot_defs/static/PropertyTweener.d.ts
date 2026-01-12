@@ -18,7 +18,8 @@ declare class PropertyTweener extends Tweener  {
  * **Note:** [method Tween.tween_property] is the only correct way to create [PropertyTweener]. Any [PropertyTweener] created manually will not function correctly.
  *
 */
-  new(): PropertyTweener; 
+  new(): PropertyTweener;
+  constructor();
   static "new"(): PropertyTweener 
 
 

@@ -92,7 +92,8 @@ declare class AnimationNodeOneShot extends AnimationNodeSync  {
  * 
  *
 */
-  new(): AnimationNodeOneShot; 
+  new(): AnimationNodeOneShot;
+  constructor();
   static "new"(): AnimationNodeOneShot 
 
 

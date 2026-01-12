@@ -10,7 +10,8 @@ declare class Joint3D extends Node3D  {
  * Abstract base class for all joints in 3D physics. 3D joints bind together two physics bodies ([member node_a] and [member node_b]) and apply a constraint. If only one body is defined, it is attached to a fixed [StaticBody3D] without collision shapes.
  *
 */
-  new(): Joint3D; 
+  new(): Joint3D;
+  constructor();
   static "new"(): Joint3D 
 
 

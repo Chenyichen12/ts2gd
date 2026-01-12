@@ -10,7 +10,8 @@ declare class PhysicsRayQueryParameters2D extends RefCounted  {
  * By changing various properties of this object, such as the ray position, you can configure the parameters for [method PhysicsDirectSpaceState2D.intersect_ray].
  *
 */
-  new(): PhysicsRayQueryParameters2D; 
+  new(): PhysicsRayQueryParameters2D;
+  constructor();
   static "new"(): PhysicsRayQueryParameters2D 
 
 

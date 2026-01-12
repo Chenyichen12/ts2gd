@@ -236,7 +236,8 @@ declare class Tween extends RefCounted  {
  * **Note:** The tween is processed after all of the nodes in the current frame, i.e. node's [method Node._process] method would be called before the tween (or [method Node._physics_process] depending on the value passed to [method set_process_mode]).
  *
 */
-  new(): Tween; 
+  new(): Tween;
+  constructor();
   static "new"(): Tween 
 
 

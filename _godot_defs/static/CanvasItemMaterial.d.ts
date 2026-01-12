@@ -10,7 +10,8 @@ declare class CanvasItemMaterial extends Material  {
  * [CanvasItemMaterial]s provide a means of modifying the textures associated with a CanvasItem. They specialize in describing blend and lighting behaviors for textures. Use a [ShaderMaterial] to more fully customize a material's interactions with a [CanvasItem].
  *
 */
-  new(): CanvasItemMaterial; 
+  new(): CanvasItemMaterial;
+  constructor();
   static "new"(): CanvasItemMaterial 
 
 

@@ -10,7 +10,8 @@ declare class VisualShaderNodeVectorLen extends VisualShaderNodeVectorBase  {
  * Translated to `length(p0)` in the shader language.
  *
 */
-  new(): VisualShaderNodeVectorLen; 
+  new(): VisualShaderNodeVectorLen;
+  constructor();
   static "new"(): VisualShaderNodeVectorLen 
 
 

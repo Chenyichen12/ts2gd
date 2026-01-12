@@ -10,7 +10,8 @@ declare class AudioEffectBandPassFilter extends AudioEffectFilter  {
  * Attenuates the frequencies inside of a range around the [member AudioEffectFilter.cutoff_hz] and cuts frequencies outside of this band.
  *
 */
-  new(): AudioEffectBandPassFilter; 
+  new(): AudioEffectBandPassFilter;
+  constructor();
   static "new"(): AudioEffectBandPassFilter 
 
 

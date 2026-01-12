@@ -48,7 +48,8 @@ declare class CanvasGroup extends Node2D  {
  * **Note:** Since [CanvasGroup] and [member CanvasItem.clip_children] both utilize the backbuffer, children of a [CanvasGroup] who have their [member CanvasItem.clip_children] set to anything other than [constant CanvasItem.CLIP_CHILDREN_DISABLED] will not function correctly.
  *
 */
-  new(): CanvasGroup; 
+  new(): CanvasGroup;
+  constructor();
   static "new"(): CanvasGroup 
 
 

@@ -10,7 +10,8 @@ declare class BoxContainer extends Container  {
  * A container that arranges its child controls horizontally or vertically, rearranging them automatically when their minimum size changes.
  *
 */
-  new(): BoxContainer; 
+  new(): BoxContainer;
+  constructor();
   static "new"(): BoxContainer 
 
 

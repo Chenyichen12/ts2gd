@@ -190,9 +190,13 @@ declare type Vector3i = Vector3iConstructor;
 declare var Vector3i: typeof Vector3iConstructor & {
   
   new(): Vector3i;
+
   new(from: Vector3i): Vector3i;
+
   new(from: Vector3): Vector3i;
+
   new(x: int, y: int, z: int): Vector3i;
+
 
   (): Vector3i;
   (from: Vector3i): Vector3i;

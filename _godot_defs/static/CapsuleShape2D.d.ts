@@ -14,7 +14,8 @@ declare class CapsuleShape2D extends Shape2D  {
  * **Performance:** [CapsuleShape2D] is fast to check collisions against, but it is slower than [RectangleShape2D] and [CircleShape2D].
  *
 */
-  new(): CapsuleShape2D; 
+  new(): CapsuleShape2D;
+  constructor();
   static "new"(): CapsuleShape2D 
 
 

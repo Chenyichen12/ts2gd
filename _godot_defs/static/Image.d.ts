@@ -22,7 +22,8 @@ declare class Image extends Resource  {
  * **Note:** The maximum image size is 16384×16384 pixels due to graphics hardware limitations. Larger images may fail to import.
  *
 */
-  new(): Image; 
+  new(): Image;
+  constructor();
   static "new"(): Image 
 
 

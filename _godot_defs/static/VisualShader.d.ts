@@ -10,7 +10,8 @@ declare class VisualShader extends Shader  {
  * This class provides a graph-like visual editor for creating a [Shader]. Although [VisualShader]s do not require coding, they share the same logic with script shaders. They use [VisualShaderNode]s that can be connected to each other to control the flow of the shader. The visual shader graph is converted to a script shader behind the scenes.
  *
 */
-  new(): VisualShader; 
+  new(): VisualShader;
+  constructor();
   static "new"(): VisualShader 
 
 

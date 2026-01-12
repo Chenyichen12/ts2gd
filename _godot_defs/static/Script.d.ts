@@ -18,7 +18,8 @@ declare class Script extends Resource  {
  * The `new` method of a script subclass creates a new instance. [method Object.set_script] extends an existing object, if that object's class matches one of the script's base classes.
  *
 */
-  new(): Script; 
+  new(): Script;
+  constructor();
   static "new"(): Script 
 
 

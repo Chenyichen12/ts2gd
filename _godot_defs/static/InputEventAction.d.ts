@@ -14,7 +14,8 @@ declare class InputEventAction extends InputEvent  {
  * **Note:** Unlike the other [InputEvent] subclasses which map to unique physical events, this virtual one is not emitted by the engine. This class is useful to emit actions manually with [method Input.parse_input_event], which are then received in [method Node._input]. To check if a physical event matches an action from the Input Map, use [method InputEvent.is_action] and [method InputEvent.is_action_pressed].
  *
 */
-  new(): InputEventAction; 
+  new(): InputEventAction;
+  constructor();
   static "new"(): InputEventAction 
 
 

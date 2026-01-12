@@ -10,7 +10,8 @@ declare class VisualShaderNodeParameter extends VisualShaderNode  {
  * A parameter represents a variable in the shader which is set externally, i.e. from the [ShaderMaterial]. Parameters are exposed as properties in the [ShaderMaterial] and can be assigned from the Inspector or from a script.
  *
 */
-  new(): VisualShaderNodeParameter; 
+  new(): VisualShaderNodeParameter;
+  constructor();
   static "new"(): VisualShaderNodeParameter 
 
 

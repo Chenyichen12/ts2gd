@@ -18,7 +18,8 @@ declare class XRHandModifier3D extends SkeletonModifier3D  {
  * The hand tracking position-data is scaled by [member Skeleton3D.motion_scale] when applied to the skeleton, which can be used to adjust the tracked hand to match the scale of the hand model.
  *
 */
-  new(): XRHandModifier3D; 
+  new(): XRHandModifier3D;
+  constructor();
   static "new"(): XRHandModifier3D 
 
 

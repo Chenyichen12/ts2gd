@@ -10,7 +10,8 @@ declare class Sky extends Resource  {
  * The [Sky] class uses a [Material] to render a 3D environment's background and the light it emits by updating the reflection/radiance cubemaps.
  *
 */
-  new(): Sky; 
+  new(): Sky;
+  constructor();
   static "new"(): Sky 
 
 

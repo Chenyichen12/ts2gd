@@ -10,7 +10,8 @@ declare class VisualShaderNodeIntParameter extends VisualShaderNodeParameter  {
  * A [VisualShaderNodeParameter] of type [int]. Offers additional customization for range of accepted values.
  *
 */
-  new(): VisualShaderNodeIntParameter; 
+  new(): VisualShaderNodeIntParameter;
+  constructor();
   static "new"(): VisualShaderNodeIntParameter 
 
 

@@ -6,7 +6,8 @@ declare class PacketPeerExtension extends PacketPeer  {
   
 /**
 */
-  new(): PacketPeerExtension; 
+  new(): PacketPeerExtension;
+  constructor();
   static "new"(): PacketPeerExtension 
 
 

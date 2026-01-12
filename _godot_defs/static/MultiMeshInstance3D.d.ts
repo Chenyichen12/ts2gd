@@ -14,7 +14,8 @@ declare class MultiMeshInstance3D extends GeometryInstance3D  {
  * This is useful to optimize the rendering of a high number of instances of a given mesh (for example trees in a forest or grass strands).
  *
 */
-  new(): MultiMeshInstance3D; 
+  new(): MultiMeshInstance3D;
+  constructor();
   static "new"(): MultiMeshInstance3D 
 
 

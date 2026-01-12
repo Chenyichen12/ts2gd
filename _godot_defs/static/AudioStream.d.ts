@@ -10,7 +10,8 @@ declare class AudioStream extends Resource  {
  * Base class for audio streams. Audio streams are used for sound effects and music playback, and support WAV (via [AudioStreamWAV]) and Ogg (via [AudioStreamOggVorbis]) file formats.
  *
 */
-  new(): AudioStream; 
+  new(): AudioStream;
+  constructor();
   static "new"(): AudioStream 
 
 

@@ -14,7 +14,8 @@ declare class FogMaterial extends Material  {
  * If you need more advanced effects, use a custom [url=$DOCS_URL/tutorials/shaders/shader_reference/fog_shader.html]fog shader[/url].
  *
 */
-  new(): FogMaterial; 
+  new(): FogMaterial;
+  constructor();
   static "new"(): FogMaterial 
 
 

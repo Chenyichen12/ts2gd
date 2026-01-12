@@ -10,7 +10,8 @@ declare class Range extends Control  {
  * Range is an abstract base class for controls that represent a number within a range, using a configured [member step] and [member page] size. See e.g. [ScrollBar] and [Slider] for examples of higher-level nodes using Range.
  *
 */
-  new(): Range; 
+  new(): Range;
+  constructor();
   static "new"(): Range 
 
 

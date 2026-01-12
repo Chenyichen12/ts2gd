@@ -248,7 +248,8 @@ declare class SkeletonProfileHumanoid extends SkeletonProfile  {
  * 
  *
 */
-  new(): SkeletonProfileHumanoid; 
+  new(): SkeletonProfileHumanoid;
+  constructor();
   static "new"(): SkeletonProfileHumanoid 
 
 

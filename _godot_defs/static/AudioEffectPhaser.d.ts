@@ -10,7 +10,8 @@ declare class AudioEffectPhaser extends AudioEffect  {
  * Combines phase-shifted signals with the original signal. The movement of the phase-shifted signals is controlled using a low-frequency oscillator.
  *
 */
-  new(): AudioEffectPhaser; 
+  new(): AudioEffectPhaser;
+  constructor();
   static "new"(): AudioEffectPhaser 
 
 

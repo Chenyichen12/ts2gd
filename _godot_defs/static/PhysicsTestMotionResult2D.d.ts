@@ -10,7 +10,8 @@ declare class PhysicsTestMotionResult2D extends RefCounted  {
  * Describes the motion and collision result from [method PhysicsServer2D.body_test_motion].
  *
 */
-  new(): PhysicsTestMotionResult2D; 
+  new(): PhysicsTestMotionResult2D;
+  constructor();
   static "new"(): PhysicsTestMotionResult2D 
 
 

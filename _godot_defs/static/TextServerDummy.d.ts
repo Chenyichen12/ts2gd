@@ -44,7 +44,8 @@ declare class TextServerDummy extends TextServerExtension  {
  * The command line argument `--text-driver Dummy` (case-sensitive) can be used to force the "Dummy" [TextServer] on any project.
  *
 */
-  new(): TextServerDummy; 
+  new(): TextServerDummy;
+  constructor();
   static "new"(): TextServerDummy 
 
 

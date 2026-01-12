@@ -18,7 +18,8 @@ declare class ResourceImporterScene extends ResourceImporter  {
  * **Note:** [ResourceImporterScene] is **not** used for [PackedScene]s, such as `.tscn` and `.scn` files.
  *
 */
-  new(): ResourceImporterScene; 
+  new(): ResourceImporterScene;
+  constructor();
   static "new"(): ResourceImporterScene 
 
 

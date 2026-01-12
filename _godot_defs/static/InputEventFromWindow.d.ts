@@ -10,7 +10,8 @@ declare class InputEventFromWindow extends InputEvent  {
  * InputEventFromWindow represents events specifically received by windows. This includes mouse events, keyboard events in focused windows or touch screen actions.
  *
 */
-  new(): InputEventFromWindow; 
+  new(): InputEventFromWindow;
+  constructor();
   static "new"(): InputEventFromWindow 
 
 

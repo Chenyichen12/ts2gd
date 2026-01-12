@@ -10,7 +10,8 @@ declare class VisualShaderNodeCubemap extends VisualShaderNode  {
  * Translated to `texture(cubemap, vec3)` in the shader language. Returns a color vector and alpha channel as scalar.
  *
 */
-  new(): VisualShaderNodeCubemap; 
+  new(): VisualShaderNodeCubemap;
+  constructor();
   static "new"(): VisualShaderNodeCubemap 
 
 

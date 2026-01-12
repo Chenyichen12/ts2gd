@@ -10,7 +10,8 @@ declare class CodeHighlighter extends SyntaxHighlighter  {
  * By adjusting various properties of this resource, you can change the colors of strings, comments, numbers, and other text patterns inside a [TextEdit] control.
  *
 */
-  new(): CodeHighlighter; 
+  new(): CodeHighlighter;
+  constructor();
   static "new"(): CodeHighlighter 
 
 

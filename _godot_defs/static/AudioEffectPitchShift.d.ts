@@ -10,7 +10,8 @@ declare class AudioEffectPitchShift extends AudioEffect  {
  * Allows modulation of pitch independently of tempo. All frequencies can be increased/decreased with minimal effect on transients.
  *
 */
-  new(): AudioEffectPitchShift; 
+  new(): AudioEffectPitchShift;
+  constructor();
   static "new"(): AudioEffectPitchShift 
 
 

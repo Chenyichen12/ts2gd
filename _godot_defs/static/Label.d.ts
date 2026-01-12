@@ -14,7 +14,8 @@ declare class Label extends Control  {
  * **Note:** A single Label node is not designed to display huge amounts of text. To display large amounts of text in a single node, consider using [RichTextLabel] instead as it supports features like an integrated scroll bar and threading. [RichTextLabel] generally performs better when displaying large amounts of text (several pages or more).
  *
 */
-  new(): Label; 
+  new(): Label;
+  constructor();
   static "new"(): Label 
 
 

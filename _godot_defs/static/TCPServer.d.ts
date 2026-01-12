@@ -14,7 +14,8 @@ declare class TCPServer extends SocketServer  {
  * **Note:** When exporting to Android, make sure to enable the `INTERNET` permission in the Android export preset before exporting the project or using one-click deploy. Otherwise, network communication of any kind will be blocked by Android.
  *
 */
-  new(): TCPServer; 
+  new(): TCPServer;
+  constructor();
   static "new"(): TCPServer 
 
 

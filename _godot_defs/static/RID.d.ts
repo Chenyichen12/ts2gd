@@ -20,7 +20,11 @@ declare class RID {
 */
 
   new(): RID;
+  constructor();
+
   new(from: RID): RID;
+  constructor(from: RID);
+
   static "new"(): RID 
 
 

@@ -10,7 +10,8 @@ declare class PhysicsTestMotionParameters2D extends RefCounted  {
  * By changing various properties of this object, such as the motion, you can configure the parameters for [method PhysicsServer2D.body_test_motion].
  *
 */
-  new(): PhysicsTestMotionParameters2D; 
+  new(): PhysicsTestMotionParameters2D;
+  constructor();
   static "new"(): PhysicsTestMotionParameters2D 
 
 

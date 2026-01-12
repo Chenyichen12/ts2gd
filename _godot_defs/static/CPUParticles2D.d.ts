@@ -14,7 +14,8 @@ declare class CPUParticles2D extends Node2D  {
  * See also [GPUParticles2D], which provides the same functionality with hardware acceleration, but may not run on older devices.
  *
 */
-  new(): CPUParticles2D; 
+  new(): CPUParticles2D;
+  constructor();
   static "new"(): CPUParticles2D 
 
 

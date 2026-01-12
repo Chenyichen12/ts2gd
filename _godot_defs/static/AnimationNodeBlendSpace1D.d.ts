@@ -18,7 +18,8 @@ declare class AnimationNodeBlendSpace1D extends AnimationRootNode  {
  * You can set the extents of the axis with [member min_space] and [member max_space].
  *
 */
-  new(): AnimationNodeBlendSpace1D; 
+  new(): AnimationNodeBlendSpace1D;
+  constructor();
   static "new"(): AnimationNodeBlendSpace1D 
 
 

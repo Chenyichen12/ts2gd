@@ -232,7 +232,8 @@ declare class UDPServer extends RefCounted  {
  * 
  *
 */
-  new(): UDPServer; 
+  new(): UDPServer;
+  constructor();
   static "new"(): UDPServer 
 
 

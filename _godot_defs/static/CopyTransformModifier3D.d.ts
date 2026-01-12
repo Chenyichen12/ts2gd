@@ -50,7 +50,8 @@ declare class CopyTransformModifier3D extends BoneConstraint3D  {
  * **Note:** Relative option is available only in the case [method BoneConstraint3D.get_reference_type] is [constant BoneConstraint3D.REFERENCE_TYPE_BONE]. See also [enum BoneConstraint3D.ReferenceType].
  *
 */
-  new(): CopyTransformModifier3D; 
+  new(): CopyTransformModifier3D;
+  constructor();
   static "new"(): CopyTransformModifier3D 
 
 

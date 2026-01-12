@@ -10,7 +10,8 @@ declare class InputEventScreenTouch extends InputEventFromWindow  {
  * Stores information about multi-touch press/release input events. Supports touch press, touch release and [member index] for multi-touch count and order.
  *
 */
-  new(): InputEventScreenTouch; 
+  new(): InputEventScreenTouch;
+  constructor();
   static "new"(): InputEventScreenTouch 
 
 

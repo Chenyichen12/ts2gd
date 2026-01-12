@@ -10,7 +10,8 @@ declare class IPClass extends Object  {
  * IP contains support functions for the Internet Protocol (IP). TCP/IP support is in different classes (see [StreamPeerTCP] and [TCPServer]). IP provides DNS hostname resolution support, both blocking and threaded.
  *
 */
-  new(): IPClass; 
+  new(): IPClass;
+  constructor();
   static "new"(): IPClass 
 
 

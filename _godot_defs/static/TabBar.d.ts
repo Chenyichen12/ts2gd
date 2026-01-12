@@ -10,7 +10,8 @@ declare class TabBar extends Control  {
  * A control that provides a horizontal bar with tabs. Similar to [TabContainer] but is only in charge of drawing tabs, not interacting with children.
  *
 */
-  new(): TabBar; 
+  new(): TabBar;
+  constructor();
   static "new"(): TabBar 
 
 

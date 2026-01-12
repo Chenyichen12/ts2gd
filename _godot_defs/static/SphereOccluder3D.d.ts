@@ -14,7 +14,8 @@ declare class SphereOccluder3D extends Occluder3D  {
  * See [OccluderInstance3D]'s documentation for instructions on setting up occlusion culling.
  *
 */
-  new(): SphereOccluder3D; 
+  new(): SphereOccluder3D;
+  constructor();
   static "new"(): SphereOccluder3D 
 
 

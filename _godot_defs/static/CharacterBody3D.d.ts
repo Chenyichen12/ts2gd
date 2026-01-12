@@ -14,7 +14,8 @@ declare class CharacterBody3D extends PhysicsBody3D  {
  * For game objects that don't require complex movement or collision detection, such as moving platforms, [AnimatableBody3D] is simpler to configure.
  *
 */
-  new(): CharacterBody3D; 
+  new(): CharacterBody3D;
+  constructor();
   static "new"(): CharacterBody3D 
 
 

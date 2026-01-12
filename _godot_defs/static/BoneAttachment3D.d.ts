@@ -10,7 +10,8 @@ declare class BoneAttachment3D extends Node3D  {
  * This node selects a bone in a [Skeleton3D] and attaches to it. This means that the [BoneAttachment3D] node will either dynamically copy or override the 3D transform of the selected bone.
  *
 */
-  new(): BoneAttachment3D; 
+  new(): BoneAttachment3D;
+  constructor();
   static "new"(): BoneAttachment3D 
 
 

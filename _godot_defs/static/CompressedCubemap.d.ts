@@ -42,7 +42,8 @@ declare class CompressedCubemap extends CompressedTextureLayered  {
  * See [Cubemap] for a general description of cubemaps.
  *
 */
-  new(): CompressedCubemap; 
+  new(): CompressedCubemap;
+  constructor();
   static "new"(): CompressedCubemap 
 
 

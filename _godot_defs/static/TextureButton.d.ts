@@ -18,7 +18,8 @@ declare class TextureButton extends BaseButton  {
  * **Note:** Setting a texture for the "normal" state ([member texture_normal]) is recommended. If [member texture_normal] is not set, the [TextureButton] will still receive input events and be clickable, but the user will not be able to see it unless they activate another one of its states with a texture assigned (e.g., hover over it to show [member texture_hover]).
  *
 */
-  new(): TextureButton; 
+  new(): TextureButton;
+  constructor();
   static "new"(): TextureButton 
 
 

@@ -10,7 +10,8 @@ declare class VisualShaderNodeGlobalExpression extends VisualShaderNodeExpressio
  * Custom Godot Shader Language expression, which is placed on top of the generated shader. You can place various function definitions inside to call later in [VisualShaderNodeExpression]s (which are injected in the main shader functions). You can also declare varyings, uniforms and global constants.
  *
 */
-  new(): VisualShaderNodeGlobalExpression; 
+  new(): VisualShaderNodeGlobalExpression;
+  constructor();
   static "new"(): VisualShaderNodeGlobalExpression 
 
 

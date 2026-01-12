@@ -10,7 +10,8 @@ declare class VisualShaderNodeBillboard extends VisualShaderNode  {
  * The output port of this node needs to be connected to `Model View Matrix` port of [VisualShaderNodeOutput].
  *
 */
-  new(): VisualShaderNodeBillboard; 
+  new(): VisualShaderNodeBillboard;
+  constructor();
   static "new"(): VisualShaderNodeBillboard 
 
 

@@ -214,7 +214,8 @@ declare class EditorTranslationParserPlugin extends RefCounted  {
  * To use [EditorTranslationParserPlugin], register it using the [method EditorPlugin.add_translation_parser_plugin] method first.
  *
 */
-  new(): EditorTranslationParserPlugin; 
+  new(): EditorTranslationParserPlugin;
+  constructor();
   static "new"(): EditorTranslationParserPlugin 
 
 

@@ -10,7 +10,8 @@ declare class MeshTexture extends Texture2D  {
  * Simple texture that uses a mesh to draw itself. It's limited because flags can't be changed and region drawing is not supported.
  *
 */
-  new(): MeshTexture; 
+  new(): MeshTexture;
+  constructor();
   static "new"(): MeshTexture 
 
 

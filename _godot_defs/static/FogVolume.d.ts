@@ -18,7 +18,8 @@ declare class FogVolume extends VisualInstance3D  {
  * **Note:** [FogVolume]s only have a visible effect if [member Environment.volumetric_fog_enabled] is `true`. If you don't want fog to be globally visible (but only within [FogVolume] nodes), set [member Environment.volumetric_fog_density] to `0.0`.
  *
 */
-  new(): FogVolume; 
+  new(): FogVolume;
+  constructor();
   static "new"(): FogVolume 
 
 

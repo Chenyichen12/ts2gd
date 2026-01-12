@@ -10,7 +10,8 @@ declare class VisualShaderNode extends Resource  {
  * Visual shader graphs consist of various nodes. Each node in the graph is a separate object and they are represented as a rectangular boxes with title and a set of properties. Each node also has connection ports that allow to connect it to another nodes and control the flow of the shader.
  *
 */
-  new(): VisualShaderNode; 
+  new(): VisualShaderNode;
+  constructor();
   static "new"(): VisualShaderNode 
 
 

@@ -10,7 +10,8 @@ declare class RDSamplerState extends RefCounted  {
  * This object is used by [RenderingDevice].
  *
 */
-  new(): RDSamplerState; 
+  new(): RDSamplerState;
+  constructor();
   static "new"(): RDSamplerState 
 
 

@@ -18,7 +18,8 @@ declare class InputEventKey extends InputEventWithModifiers  {
  * When events are compared, properties are checked in the following priority - [member keycode], [member physical_keycode] and [member unicode]. Events with the first matching value will be considered equal.
  *
 */
-  new(): InputEventKey; 
+  new(): InputEventKey;
+  constructor();
   static "new"(): InputEventKey 
 
 

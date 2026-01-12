@@ -22,7 +22,8 @@ declare class GPUParticlesAttractor3D extends VisualInstance3D  {
  * **Note:** Particle attractors only affect [GPUParticles3D], not [CPUParticles3D].
  *
 */
-  new(): GPUParticlesAttractor3D; 
+  new(): GPUParticlesAttractor3D;
+  constructor();
   static "new"(): GPUParticlesAttractor3D 
 
 

@@ -10,7 +10,8 @@ declare class TileData extends Object  {
  * [TileData] object represents a single tile in a [TileSet]. It is usually edited using the tileset editor, but it can be modified at runtime using [method TileMapLayer._tile_data_runtime_update].
  *
 */
-  new(): TileData; 
+  new(): TileData;
+  constructor();
   static "new"(): TileData 
 
 

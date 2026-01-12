@@ -10,7 +10,8 @@ declare class XRTracker extends RefCounted  {
  * This object is the base of all XR trackers.
  *
 */
-  new(): XRTracker; 
+  new(): XRTracker;
+  constructor();
   static "new"(): XRTracker 
 
 

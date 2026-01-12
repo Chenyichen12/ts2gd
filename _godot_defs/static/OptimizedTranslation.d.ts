@@ -14,7 +14,8 @@ declare class OptimizedTranslation extends Translation  {
  * This class does not store the untranslated strings for optimization purposes. Therefore, [method Translation.get_message_list] always returns an empty array, and [method Translation.get_message_count] always returns `0`.
  *
 */
-  new(): OptimizedTranslation; 
+  new(): OptimizedTranslation;
+  constructor();
   static "new"(): OptimizedTranslation 
 
 

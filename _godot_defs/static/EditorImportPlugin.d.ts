@@ -202,7 +202,8 @@ declare class EditorImportPlugin extends ResourceImporter  {
  * To use [EditorImportPlugin], register it using the [method EditorPlugin.add_import_plugin] method first.
  *
 */
-  new(): EditorImportPlugin; 
+  new(): EditorImportPlugin;
+  constructor();
   static "new"(): EditorImportPlugin 
 
 

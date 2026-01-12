@@ -102,7 +102,8 @@ declare class AStar3D extends RefCounted  {
  * If the default [method _estimate_cost] and [method _compute_cost] methods are used, or if the supplied [method _estimate_cost] method returns a lower bound of the cost, then the paths returned by A* will be the lowest-cost paths. Here, the cost of a path equals the sum of the [method _compute_cost] results of all segments in the path multiplied by the `weight_scale`s of the endpoints of the respective segments. If the default methods are used and the `weight_scale`s of all points are set to `1.0`, then this equals the sum of Euclidean distances of all segments in the path.
  *
 */
-  new(): AStar3D; 
+  new(): AStar3D;
+  constructor();
   static "new"(): AStar3D 
 
 

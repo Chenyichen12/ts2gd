@@ -26,7 +26,8 @@ declare class PerformanceClass extends Object  {
  * **Note:** Custom monitors do not support negative values. Negative values are clamped to 0.
  *
 */
-  new(): PerformanceClass; 
+  new(): PerformanceClass;
+  constructor();
   static "new"(): PerformanceClass 
 
 

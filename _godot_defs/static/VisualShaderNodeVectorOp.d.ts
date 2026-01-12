@@ -10,7 +10,8 @@ declare class VisualShaderNodeVectorOp extends VisualShaderNodeVectorBase  {
  * A visual shader node for use of vector operators. Operates on vector `a` and vector `b`.
  *
 */
-  new(): VisualShaderNodeVectorOp; 
+  new(): VisualShaderNodeVectorOp;
+  constructor();
   static "new"(): VisualShaderNodeVectorOp 
 
 

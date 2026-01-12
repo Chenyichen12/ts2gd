@@ -14,7 +14,8 @@ declare class CurveXYZTexture extends Texture2D  {
  * If you only need to store one curve within a single texture, use [CurveTexture] instead. See also [GradientTexture1D] and [GradientTexture2D].
  *
 */
-  new(): CurveXYZTexture; 
+  new(): CurveXYZTexture;
+  constructor();
   static "new"(): CurveXYZTexture 
 
 

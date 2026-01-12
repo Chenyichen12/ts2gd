@@ -14,7 +14,8 @@ declare class EditorSyntaxHighlighter extends SyntaxHighlighter  {
  * Add a syntax highlighter to an individual script by calling [method ScriptEditorBase.add_syntax_highlighter]. To apply to all scripts on open, call [method ScriptEditor.register_syntax_highlighter].
  *
 */
-  new(): EditorSyntaxHighlighter; 
+  new(): EditorSyntaxHighlighter;
+  constructor();
   static "new"(): EditorSyntaxHighlighter 
 
 

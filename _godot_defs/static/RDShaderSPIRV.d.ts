@@ -14,7 +14,8 @@ declare class RDShaderSPIRV extends Resource  {
  * This object is used by [RenderingDevice].
  *
 */
-  new(): RDShaderSPIRV; 
+  new(): RDShaderSPIRV;
+  constructor();
   static "new"(): RDShaderSPIRV 
 
 

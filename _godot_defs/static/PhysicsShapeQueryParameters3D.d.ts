@@ -10,7 +10,8 @@ declare class PhysicsShapeQueryParameters3D extends RefCounted  {
  * By changing various properties of this object, such as the shape, you can configure the parameters for [PhysicsDirectSpaceState3D]'s methods.
  *
 */
-  new(): PhysicsShapeQueryParameters3D; 
+  new(): PhysicsShapeQueryParameters3D;
+  constructor();
   static "new"(): PhysicsShapeQueryParameters3D 
 
 

@@ -14,7 +14,8 @@ declare class Texture2DArrayRD extends TextureLayeredRD  {
  * **Note:** [Texture2DArrayRD] is intended for low-level usage with [RenderingDevice]. For most use cases, use [Texture2DArray] instead.
  *
 */
-  new(): Texture2DArrayRD; 
+  new(): Texture2DArrayRD;
+  constructor();
   static "new"(): Texture2DArrayRD 
 
 

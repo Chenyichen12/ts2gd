@@ -56,7 +56,8 @@ declare class HeightMapShape3D extends Shape3D  {
  * **Note:** If you need to use a spacing different than 1 unit, you can adjust the [member Node3D.scale] of the shape. However, keep in mind that GodotPhysics3D does not support non-uniform scaling: you'll need to scale the Y axis by the same amount as the X and Z axes, which means the values in [member map_data] will need to be pre-scaled by the inverse of that scale. Also note that GodotPhysics3D does not support scaling at all for dynamic bodies (that is, non-frozen [RigidBody3D] nodes); to use a scaled [HeightMapShape3D] with those, you will need to use Jolt Physics.
  *
 */
-  new(): HeightMapShape3D; 
+  new(): HeightMapShape3D;
+  constructor();
   static "new"(): HeightMapShape3D 
 
 

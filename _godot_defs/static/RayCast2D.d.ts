@@ -22,7 +22,8 @@ declare class RayCast2D extends Node2D  {
  * To sweep over a region of 2D space, you can approximate the region with multiple [RayCast2D]s or use [ShapeCast2D].
  *
 */
-  new(): RayCast2D; 
+  new(): RayCast2D;
+  constructor();
   static "new"(): RayCast2D 
 
 

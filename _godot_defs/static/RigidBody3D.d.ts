@@ -30,7 +30,8 @@ declare class RigidBody3D extends PhysicsBody3D  {
  * **Note:** Changing the 3D transform or [member linear_velocity] of a [RigidBody3D] very often may lead to some unpredictable behaviors. This also happens when a [RigidBody3D] is the descendant of a constantly moving node, like another [RigidBody3D], as that will cause its global transform to be set whenever its ancestor moves.
  *
 */
-  new(): RigidBody3D; 
+  new(): RigidBody3D;
+  constructor();
   static "new"(): RigidBody3D 
 
 

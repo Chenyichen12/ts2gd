@@ -10,7 +10,8 @@ declare class VisualShaderNodeColorFunc extends VisualShaderNode  {
  * Accept a [Color] to the input port and transform it according to [member function].
  *
 */
-  new(): VisualShaderNodeColorFunc; 
+  new(): VisualShaderNodeColorFunc;
+  constructor();
   static "new"(): VisualShaderNodeColorFunc 
 
 

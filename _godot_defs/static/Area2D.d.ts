@@ -18,7 +18,8 @@ declare class Area2D extends CollisionObject2D  {
  * **Note:** Areas and bodies created with [PhysicsServer2D] might not interact as expected with [Area2D]s, and might not emit signals or track objects correctly.
  *
 */
-  new(): Area2D; 
+  new(): Area2D;
+  constructor();
   static "new"(): Area2D 
 
 

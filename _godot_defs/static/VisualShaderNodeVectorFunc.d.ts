@@ -10,7 +10,8 @@ declare class VisualShaderNodeVectorFunc extends VisualShaderNodeVectorBase  {
  * A visual shader node able to perform different functions using vectors.
  *
 */
-  new(): VisualShaderNodeVectorFunc; 
+  new(): VisualShaderNodeVectorFunc;
+  constructor();
   static "new"(): VisualShaderNodeVectorFunc 
 
 

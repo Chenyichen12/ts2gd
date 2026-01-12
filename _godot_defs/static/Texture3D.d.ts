@@ -18,7 +18,8 @@ declare class Texture3D extends Texture  {
  * To create such a texture file yourself, reimport your image files using the Godot Editor import presets.
  *
 */
-  new(): Texture3D; 
+  new(): Texture3D;
+  constructor();
   static "new"(): Texture3D 
 
 

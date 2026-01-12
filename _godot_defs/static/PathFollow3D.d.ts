@@ -14,7 +14,8 @@ declare class PathFollow3D extends Node3D  {
  * It is useful for making other nodes follow a path, without coding the movement pattern. For that, the nodes must be children of this node. The descendant nodes will then move accordingly when setting the [member progress] in this node.
  *
 */
-  new(): PathFollow3D; 
+  new(): PathFollow3D;
+  constructor();
   static "new"(): PathFollow3D 
 
 

@@ -10,7 +10,8 @@ declare class NavigationPathQueryParameters3D extends RefCounted  {
  * By changing various properties of this object, such as the start and target position, you can configure path queries to the [NavigationServer3D].
  *
 */
-  new(): NavigationPathQueryParameters3D; 
+  new(): NavigationPathQueryParameters3D;
+  constructor();
   static "new"(): NavigationPathQueryParameters3D 
 
 

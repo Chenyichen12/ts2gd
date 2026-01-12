@@ -26,7 +26,8 @@ declare class TextureLayered extends Texture  {
  * Internally, Godot maps these files to their respective counterparts in the target rendering driver (Vulkan, OpenGL3).
  *
 */
-  new(): TextureLayered; 
+  new(): TextureLayered;
+  constructor();
   static "new"(): TextureLayered 
 
 

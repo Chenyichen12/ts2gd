@@ -142,7 +142,8 @@ declare class LineEdit extends Control  {
  * **Note:** Caret movement shortcuts listed above are not affected by [member shortcut_keys_enabled].
  *
 */
-  new(): LineEdit; 
+  new(): LineEdit;
+  constructor();
   static "new"(): LineEdit 
 
 

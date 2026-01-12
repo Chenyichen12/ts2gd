@@ -14,7 +14,8 @@ declare class MenuButton extends Button  {
  * See also [BaseButton] which contains common properties and methods associated with this node.
  *
 */
-  new(): MenuButton; 
+  new(): MenuButton;
+  constructor();
   static "new"(): MenuButton 
 
 

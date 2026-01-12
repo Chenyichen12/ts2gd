@@ -18,7 +18,8 @@ declare class SkeletonModificationStack2D extends Resource  {
  * This resource also controls how strongly all of the modifications are applied to the [Skeleton2D].
  *
 */
-  new(): SkeletonModificationStack2D; 
+  new(): SkeletonModificationStack2D;
+  constructor();
   static "new"(): SkeletonModificationStack2D 
 
 

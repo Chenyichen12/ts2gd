@@ -14,7 +14,8 @@ declare class Node2D extends CanvasItem  {
  * **Note:** Since both [Node2D] and [Control] inherit from [CanvasItem], they share several concepts from the class such as the [member CanvasItem.z_index] and [member CanvasItem.visible] properties.
  *
 */
-  new(): Node2D; 
+  new(): Node2D;
+  constructor();
   static "new"(): Node2D 
 
 

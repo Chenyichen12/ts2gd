@@ -18,7 +18,8 @@ declare class EditorFileDialog extends FileDialog  {
  * **Note:** [EditorFileDialog] is invisible by default. To make it visible, call one of the `popup_*` methods from [Window] on the node, such as [method Window.popup_centered_clamped].
  *
 */
-  new(): EditorFileDialog; 
+  new(): EditorFileDialog;
+  constructor();
   static "new"(): EditorFileDialog 
 
 

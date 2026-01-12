@@ -14,7 +14,8 @@ declare class SkeletonModification2DStackHolder extends SkeletonModification2D  
  * **Note:** The modifications in the held [SkeletonModificationStack2D] will only be executed if their execution mode matches the execution mode of the SkeletonModification2DStackHolder.
  *
 */
-  new(): SkeletonModification2DStackHolder; 
+  new(): SkeletonModification2DStackHolder;
+  constructor();
   static "new"(): SkeletonModification2DStackHolder 
 
 

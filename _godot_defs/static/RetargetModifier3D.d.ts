@@ -18,7 +18,8 @@ declare class RetargetModifier3D extends SkeletonModifier3D  {
  * **Note:** When the [member use_global_pose] is enabled, even if it is an unmapped bone, it can cause visual problems because the global pose is applied ignoring the parent bone's pose **if it has mapped bone children**. See also [member use_global_pose].
  *
 */
-  new(): RetargetModifier3D; 
+  new(): RetargetModifier3D;
+  constructor();
   static "new"(): RetargetModifier3D 
 
 

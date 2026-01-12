@@ -6,7 +6,8 @@ declare class PhysicsServer3DRenderingServerHandler extends Object  {
   
 /**
 */
-  new(): PhysicsServer3DRenderingServerHandler; 
+  new(): PhysicsServer3DRenderingServerHandler;
+  constructor();
   static "new"(): PhysicsServer3DRenderingServerHandler 
 
 

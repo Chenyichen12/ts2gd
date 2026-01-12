@@ -14,7 +14,8 @@ declare class ResourceFormatSaver extends RefCounted  {
  * By default, Godot saves resources as `.tres` (text-based), `.res` (binary) or another built-in format, but you can choose to create your own format by extending this class. Be sure to respect the documented return types and values. You should give it a global class name with `class_name` for it to be registered. Like built-in ResourceFormatSavers, it will be called automatically when saving resources of its recognized type(s). You may also implement a [ResourceFormatLoader].
  *
 */
-  new(): ResourceFormatSaver; 
+  new(): ResourceFormatSaver;
+  constructor();
   static "new"(): ResourceFormatSaver 
 
 

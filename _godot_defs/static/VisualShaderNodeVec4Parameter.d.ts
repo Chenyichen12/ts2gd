@@ -10,7 +10,8 @@ declare class VisualShaderNodeVec4Parameter extends VisualShaderNodeParameter  {
  * Translated to `uniform vec4` in the shader language.
  *
 */
-  new(): VisualShaderNodeVec4Parameter; 
+  new(): VisualShaderNodeVec4Parameter;
+  constructor();
   static "new"(): VisualShaderNodeVec4Parameter 
 
 

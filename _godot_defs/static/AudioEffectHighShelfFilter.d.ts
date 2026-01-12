@@ -10,7 +10,8 @@ declare class AudioEffectHighShelfFilter extends AudioEffectFilter  {
  * Reduces all frequencies above the [member AudioEffectFilter.cutoff_hz].
  *
 */
-  new(): AudioEffectHighShelfFilter; 
+  new(): AudioEffectHighShelfFilter;
+  constructor();
   static "new"(): AudioEffectHighShelfFilter 
 
 

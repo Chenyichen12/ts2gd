@@ -6,7 +6,8 @@ declare class StatusIndicator extends Node  {
   
 /**
 */
-  new(): StatusIndicator; 
+  new(): StatusIndicator;
+  constructor();
   static "new"(): StatusIndicator 
 
 

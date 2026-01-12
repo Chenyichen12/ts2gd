@@ -14,7 +14,8 @@ declare class TubeTrailMesh extends PrimitiveMesh  {
  * This primitive mesh is usually used for particle trails.
  *
 */
-  new(): TubeTrailMesh; 
+  new(): TubeTrailMesh;
+  constructor();
   static "new"(): TubeTrailMesh 
 
 

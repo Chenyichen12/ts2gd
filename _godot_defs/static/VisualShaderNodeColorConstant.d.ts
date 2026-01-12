@@ -14,7 +14,8 @@ declare class VisualShaderNodeColorConstant extends VisualShaderNodeConstant  {
  * Translated to `vec3 rgb` and `float alpha` in the shader language.
  *
 */
-  new(): VisualShaderNodeColorConstant; 
+  new(): VisualShaderNodeColorConstant;
+  constructor();
   static "new"(): VisualShaderNodeColorConstant 
 
 

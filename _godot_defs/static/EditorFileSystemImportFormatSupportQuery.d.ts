@@ -10,7 +10,8 @@ declare class EditorFileSystemImportFormatSupportQuery extends RefCounted  {
  * This class is used to query and configure a certain import format. It is used in conjunction with asset format import plugins.
  *
 */
-  new(): EditorFileSystemImportFormatSupportQuery; 
+  new(): EditorFileSystemImportFormatSupportQuery;
+  constructor();
   static "new"(): EditorFileSystemImportFormatSupportQuery 
 
 

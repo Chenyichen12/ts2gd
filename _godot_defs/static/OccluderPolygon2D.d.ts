@@ -10,7 +10,8 @@ declare class OccluderPolygon2D extends Resource  {
  * Editor facility that helps you draw a 2D polygon used as resource for [LightOccluder2D].
  *
 */
-  new(): OccluderPolygon2D; 
+  new(): OccluderPolygon2D;
+  constructor();
   static "new"(): OccluderPolygon2D 
 
 

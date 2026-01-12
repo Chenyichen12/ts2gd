@@ -38,7 +38,8 @@ declare class AudioEffectEQ6 extends AudioEffectEQ  {
  * See also [AudioEffectEQ], [AudioEffectEQ10], [AudioEffectEQ21].
  *
 */
-  new(): AudioEffectEQ6; 
+  new(): AudioEffectEQ6;
+  constructor();
   static "new"(): AudioEffectEQ6 
 
 

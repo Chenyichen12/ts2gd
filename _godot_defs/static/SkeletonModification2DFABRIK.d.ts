@@ -26,7 +26,8 @@ declare class SkeletonModification2DFABRIK extends SkeletonModification2D  {
  * To help control how the FABRIK joints move, a magnet vector can be passed, which can nudge the bones in a certain direction prior to solving, giving a level of control over the final result.
  *
 */
-  new(): SkeletonModification2DFABRIK; 
+  new(): SkeletonModification2DFABRIK;
+  constructor();
   static "new"(): SkeletonModification2DFABRIK 
 
 

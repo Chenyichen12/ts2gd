@@ -14,7 +14,8 @@ declare class ResourceSaverClass extends Object  {
  * It uses the many [ResourceFormatSaver] classes registered in the engine (either built-in or from a plugin) to save resource data to text-based (e.g. `.tres` or `.tscn`) or binary files (e.g. `.res` or `.scn`).
  *
 */
-  new(): ResourceSaverClass; 
+  new(): ResourceSaverClass;
+  constructor();
   static "new"(): ResourceSaverClass 
 
 

@@ -276,7 +276,8 @@ declare class DTLSServer extends RefCounted  {
  * 
  *
 */
-  new(): DTLSServer; 
+  new(): DTLSServer;
+  constructor();
   static "new"(): DTLSServer 
 
 

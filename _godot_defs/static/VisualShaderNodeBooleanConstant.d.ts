@@ -14,7 +14,8 @@ declare class VisualShaderNodeBooleanConstant extends VisualShaderNodeConstant  
  * Translated to [code skip-lint]bool` in the shader language.
  *
 */
-  new(): VisualShaderNodeBooleanConstant; 
+  new(): VisualShaderNodeBooleanConstant;
+  constructor();
   static "new"(): VisualShaderNodeBooleanConstant 
 
 

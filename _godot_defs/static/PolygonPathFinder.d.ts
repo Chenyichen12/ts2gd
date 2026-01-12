@@ -6,7 +6,8 @@ declare class PolygonPathFinder extends Resource  {
   
 /**
 */
-  new(): PolygonPathFinder; 
+  new(): PolygonPathFinder;
+  constructor();
   static "new"(): PolygonPathFinder 
 
 

@@ -14,7 +14,8 @@ declare class InputEventWithModifiers extends InputEventFromWindow  {
  * **Note:** Modifier keys are considered modifiers only when used in combination with another key. As a result, their corresponding member variables, such as [member ctrl_pressed], will return `false` if the key is pressed on its own.
  *
 */
-  new(): InputEventWithModifiers; 
+  new(): InputEventWithModifiers;
+  constructor();
   static "new"(): InputEventWithModifiers 
 
 

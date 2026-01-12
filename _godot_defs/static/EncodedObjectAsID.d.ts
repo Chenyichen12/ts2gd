@@ -14,7 +14,8 @@ declare class EncodedObjectAsID extends RefCounted  {
  * This class is used internally by the editor inspector and script debugger, but can also be used in plugins to pass and display objects as their IDs.
  *
 */
-  new(): EncodedObjectAsID; 
+  new(): EncodedObjectAsID;
+  constructor();
   static "new"(): EncodedObjectAsID 
 
 

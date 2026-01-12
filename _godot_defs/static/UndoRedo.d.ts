@@ -174,7 +174,8 @@ declare class UndoRedo extends Object  {
  * 
  *
 */
-  new(): UndoRedo; 
+  new(): UndoRedo;
+  constructor();
   static "new"(): UndoRedo 
 
 

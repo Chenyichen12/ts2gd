@@ -14,7 +14,8 @@ declare class EditorDebuggerSession extends RefCounted  {
  * You can add tabs to the session UI via [method add_session_tab], send messages via [method send_message], and toggle [EngineProfiler]s via [method toggle_profiler].
  *
 */
-  new(): EditorDebuggerSession; 
+  new(): EditorDebuggerSession;
+  constructor();
   static "new"(): EditorDebuggerSession 
 
 

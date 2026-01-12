@@ -116,7 +116,8 @@ declare class Crypto extends RefCounted  {
  * 
  *
 */
-  new(): Crypto; 
+  new(): Crypto;
+  constructor();
   static "new"(): Crypto 
 
 

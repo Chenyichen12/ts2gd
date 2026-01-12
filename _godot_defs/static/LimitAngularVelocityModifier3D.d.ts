@@ -14,7 +14,8 @@ declare class LimitAngularVelocityModifier3D extends SkeletonModifier3D  {
  * You can add bone chains by specifying their root and end bones, then add the bones between them to a list. Modifier processes either that list or the bones excluding those in the list depending on the option [member exclude].
  *
 */
-  new(): LimitAngularVelocityModifier3D; 
+  new(): LimitAngularVelocityModifier3D;
+  constructor();
   static "new"(): LimitAngularVelocityModifier3D 
 
 

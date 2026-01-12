@@ -10,7 +10,8 @@ declare class FoldableGroup extends Resource  {
  * A group of [FoldableContainer]-derived nodes. Only one container can be expanded at a time.
  *
 */
-  new(): FoldableGroup; 
+  new(): FoldableGroup;
+  constructor();
   static "new"(): FoldableGroup 
 
 

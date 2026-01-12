@@ -30,7 +30,8 @@ declare class VisualShaderNodeCustom extends VisualShaderNode  {
  * 
  *
 */
-  new(): VisualShaderNodeCustom; 
+  new(): VisualShaderNodeCustom;
+  constructor();
   static "new"(): VisualShaderNodeCustom 
 
 

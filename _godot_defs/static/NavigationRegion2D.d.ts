@@ -34,7 +34,8 @@ declare class NavigationRegion2D extends Node2D  {
  * **Note:** This node caches changes to its properties, so if you make changes to the underlying region [RID] in [NavigationServer2D], they will not be reflected in this node's properties.
  *
 */
-  new(): NavigationRegion2D; 
+  new(): NavigationRegion2D;
+  constructor();
   static "new"(): NavigationRegion2D 
 
 

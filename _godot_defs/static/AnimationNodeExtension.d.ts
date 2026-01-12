@@ -10,7 +10,8 @@ declare class AnimationNodeExtension extends AnimationNode  {
  * [AnimationNodeExtension] exposes the APIs of [AnimationRootNode] to allow users to extend it from GDScript, C#, or C++. This class is not meant to be used directly, but to be extended by other classes. It is used to create custom nodes for the [AnimationTree] system.
  *
 */
-  new(): AnimationNodeExtension; 
+  new(): AnimationNodeExtension;
+  constructor();
   static "new"(): AnimationNodeExtension 
 
 

@@ -381,9 +381,13 @@ declare type Vector3 = Vector3Constructor;
 declare var Vector3: typeof Vector3Constructor & {
   
   new(): Vector3;
+
   new(from: Vector3): Vector3;
+
   new(from: Vector3i): Vector3;
+
   new(x: float, y: float, z: float): Vector3;
+
 
   (): Vector3;
   (from: Vector3): Vector3;

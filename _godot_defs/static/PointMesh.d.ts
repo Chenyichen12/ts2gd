@@ -18,7 +18,8 @@ declare class PointMesh extends PrimitiveMesh  {
  * **Note:** When using point meshes, properties that normally affect vertices will be ignored, including [member BaseMaterial3D.billboard_mode], [member BaseMaterial3D.grow], and [member BaseMaterial3D.cull_mode].
  *
 */
-  new(): PointMesh; 
+  new(): PointMesh;
+  constructor();
   static "new"(): PointMesh 
 
 

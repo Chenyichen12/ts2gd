@@ -10,7 +10,8 @@ declare class PhysicsPointQueryParameters2D extends RefCounted  {
  * By changing various properties of this object, such as the point position, you can configure the parameters for [method PhysicsDirectSpaceState2D.intersect_point].
  *
 */
-  new(): PhysicsPointQueryParameters2D; 
+  new(): PhysicsPointQueryParameters2D;
+  constructor();
   static "new"(): PhysicsPointQueryParameters2D 
 
 

@@ -18,7 +18,8 @@ declare class StaticBody3D extends PhysicsBody3D  {
  * [StaticBody3D] is useful for completely static objects like floors and walls, as well as moving surfaces like conveyor belts and circular revolving platforms (by using [member constant_linear_velocity] and [member constant_angular_velocity]).
  *
 */
-  new(): StaticBody3D; 
+  new(): StaticBody3D;
+  constructor();
   static "new"(): StaticBody3D 
 
 

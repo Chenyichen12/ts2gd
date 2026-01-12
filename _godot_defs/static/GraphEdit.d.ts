@@ -22,7 +22,8 @@ declare class GraphEdit extends Control  {
  * **Note:** Keep in mind that [method Node.get_children] will also return the connection layer node named `_connection_layer` due to technical limitations. This behavior may change in future releases.
  *
 */
-  new(): GraphEdit; 
+  new(): GraphEdit;
+  constructor();
   static "new"(): GraphEdit 
 
 

@@ -10,7 +10,8 @@ declare class RenderSceneBuffersExtension extends RenderSceneBuffers  {
  * This class allows for a RenderSceneBuffer implementation to be made in GDExtension.
  *
 */
-  new(): RenderSceneBuffersExtension; 
+  new(): RenderSceneBuffersExtension;
+  constructor();
   static "new"(): RenderSceneBuffersExtension 
 
 

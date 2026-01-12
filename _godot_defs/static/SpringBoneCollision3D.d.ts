@@ -22,7 +22,8 @@ declare class SpringBoneCollision3D extends Node3D  {
  * **Warning:** A scaled [SpringBoneCollision3D] will likely not behave as expected. Make sure that the parent [Skeleton3D] and its bones are not scaled.
  *
 */
-  new(): SpringBoneCollision3D; 
+  new(): SpringBoneCollision3D;
+  constructor();
   static "new"(): SpringBoneCollision3D 
 
 

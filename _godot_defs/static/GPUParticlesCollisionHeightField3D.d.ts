@@ -26,7 +26,8 @@ declare class GPUParticlesCollisionHeightField3D extends GPUParticlesCollision3D
  * **Note:** Particle collision only affects [GPUParticles3D], not [CPUParticles3D].
  *
 */
-  new(): GPUParticlesCollisionHeightField3D; 
+  new(): GPUParticlesCollisionHeightField3D;
+  constructor();
   static "new"(): GPUParticlesCollisionHeightField3D 
 
 

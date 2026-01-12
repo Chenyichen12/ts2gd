@@ -10,7 +10,8 @@ declare class VisualShaderNodeClamp extends VisualShaderNode  {
  * Constrains a value to lie between `min` and `max` values.
  *
 */
-  new(): VisualShaderNodeClamp; 
+  new(): VisualShaderNodeClamp;
+  constructor();
   static "new"(): VisualShaderNodeClamp 
 
 

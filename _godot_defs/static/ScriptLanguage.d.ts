@@ -6,7 +6,8 @@ declare class ScriptLanguage extends Object  {
   
 /**
 */
-  new(): ScriptLanguage; 
+  new(): ScriptLanguage;
+  constructor();
   static "new"(): ScriptLanguage 
 
 

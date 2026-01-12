@@ -10,7 +10,8 @@ declare class World2D extends Resource  {
  * Class that has everything pertaining to a 2D world: A physics space, a canvas, and a sound space. 2D nodes register their resources into the current 2D world.
  *
 */
-  new(): World2D; 
+  new(): World2D;
+  constructor();
   static "new"(): World2D 
 
 

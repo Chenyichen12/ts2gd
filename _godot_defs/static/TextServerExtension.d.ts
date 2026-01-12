@@ -10,7 +10,8 @@ declare class TextServerExtension extends TextServer  {
  * External [TextServer] implementations should inherit from this class.
  *
 */
-  new(): TextServerExtension; 
+  new(): TextServerExtension;
+  constructor();
   static "new"(): TextServerExtension 
 
 

@@ -10,7 +10,8 @@ declare class NavigationLink3D extends Node3D  {
  * A link between two positions on [NavigationRegion3D]s that agents can be routed through. These positions can be on the same [NavigationRegion3D] or on two different ones. Links are useful to express navigation methods other than traveling along the surface of the navigation mesh, such as ziplines, teleporters, or gaps that can be jumped across.
  *
 */
-  new(): NavigationLink3D; 
+  new(): NavigationLink3D;
+  constructor();
   static "new"(): NavigationLink3D 
 
 

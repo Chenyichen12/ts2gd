@@ -10,7 +10,8 @@ declare class InputEventMouse extends InputEventWithModifiers  {
  * Stores general information about mouse events.
  *
 */
-  new(): InputEventMouse; 
+  new(): InputEventMouse;
+  constructor();
   static "new"(): InputEventMouse 
 
 

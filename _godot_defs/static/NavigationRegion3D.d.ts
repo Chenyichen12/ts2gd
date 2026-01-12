@@ -34,7 +34,8 @@ declare class NavigationRegion3D extends Node3D  {
  * **Note:** This node caches changes to its properties, so if you make changes to the underlying region [RID] in [NavigationServer3D], they will not be reflected in this node's properties.
  *
 */
-  new(): NavigationRegion3D; 
+  new(): NavigationRegion3D;
+  constructor();
   static "new"(): NavigationRegion3D 
 
 

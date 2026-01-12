@@ -10,7 +10,8 @@ declare class AudioListener3D extends Node3D  {
  * Once added to the scene tree and enabled using [method make_current], this node will override the location sounds are heard from. This can be used to listen from a location different from the [Camera3D].
  *
 */
-  new(): AudioListener3D; 
+  new(): AudioListener3D;
+  constructor();
   static "new"(): AudioListener3D 
 
 

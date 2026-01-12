@@ -18,7 +18,8 @@ declare class ProceduralSkyMaterial extends Material  {
  * [ProceduralSkyMaterial] uses a lightweight shader to draw the sky and is therefore suited for real-time updates. This makes it a great option for a sky that is simple and computationally cheap, but unrealistic. If you need a more realistic procedural option, use [PhysicalSkyMaterial].
  *
 */
-  new(): ProceduralSkyMaterial; 
+  new(): ProceduralSkyMaterial;
+  constructor();
   static "new"(): ProceduralSkyMaterial 
 
 

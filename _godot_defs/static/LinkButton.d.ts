@@ -14,7 +14,8 @@ declare class LinkButton extends BaseButton  {
  * See also [BaseButton] which contains common properties and methods associated with this node.
  *
 */
-  new(): LinkButton; 
+  new(): LinkButton;
+  constructor();
   static "new"(): LinkButton 
 
 

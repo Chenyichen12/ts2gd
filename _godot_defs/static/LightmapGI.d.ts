@@ -34,7 +34,8 @@ declare class LightmapGI extends VisualInstance3D  {
  * **Note:** The [LightmapGI] node only bakes light data for child nodes of its parent. Nodes further up the hierarchy of the scene will not be baked.
  *
 */
-  new(): LightmapGI; 
+  new(): LightmapGI;
+  constructor();
   static "new"(): LightmapGI 
 
 

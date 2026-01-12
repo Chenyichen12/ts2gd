@@ -18,7 +18,8 @@ declare class SkeletonModification2DJiggle extends SkeletonModification2D  {
  * **Note:** The Jiggle modifier has `jiggle_joints`, which are the data objects that hold the data for each joint in the Jiggle chain. This is different from than [Bone2D] nodes! Jiggle joints hold the data needed for each [Bone2D] in the bone chain used by the Jiggle modification.
  *
 */
-  new(): SkeletonModification2DJiggle; 
+  new(): SkeletonModification2DJiggle;
+  constructor();
   static "new"(): SkeletonModification2DJiggle 
 
 

@@ -14,7 +14,8 @@ declare class SkeletonModification2D extends Resource  {
  * This is used to provide Godot with a flexible and powerful Inverse Kinematics solution that can be adapted for many different uses.
  *
 */
-  new(): SkeletonModification2D; 
+  new(): SkeletonModification2D;
+  constructor();
   static "new"(): SkeletonModification2D 
 
 

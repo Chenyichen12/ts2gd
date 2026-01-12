@@ -10,7 +10,8 @@ declare class FlowContainer extends Container  {
  * A container that arranges its child controls horizontally or vertically and wraps them around at the borders. This is similar to how text in a book wraps around when no more words can fit on a line.
  *
 */
-  new(): FlowContainer; 
+  new(): FlowContainer;
+  constructor();
   static "new"(): FlowContainer 
 
 

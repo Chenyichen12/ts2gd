@@ -10,7 +10,8 @@ declare class VisualShaderNodeTransformParameter extends VisualShaderNodeParamet
  * Translated to `uniform mat4` in the shader language.
  *
 */
-  new(): VisualShaderNodeTransformParameter; 
+  new(): VisualShaderNodeTransformParameter;
+  constructor();
   static "new"(): VisualShaderNodeTransformParameter 
 
 

@@ -14,7 +14,8 @@ declare class RenderSceneBuffers extends RefCounted  {
  * **Note:** This is an internal rendering server object. Do not instantiate this class from a script.
  *
 */
-  new(): RenderSceneBuffers; 
+  new(): RenderSceneBuffers;
+  constructor();
   static "new"(): RenderSceneBuffers 
 
 

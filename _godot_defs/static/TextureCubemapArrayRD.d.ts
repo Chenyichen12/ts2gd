@@ -14,7 +14,8 @@ declare class TextureCubemapArrayRD extends TextureLayeredRD  {
  * **Note:** [TextureCubemapArrayRD] is intended for low-level usage with [RenderingDevice]. For most use cases, use [CubemapArray] instead.
  *
 */
-  new(): TextureCubemapArrayRD; 
+  new(): TextureCubemapArrayRD;
+  constructor();
   static "new"(): TextureCubemapArrayRD 
 
 

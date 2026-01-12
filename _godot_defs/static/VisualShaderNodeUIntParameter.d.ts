@@ -10,7 +10,8 @@ declare class VisualShaderNodeUIntParameter extends VisualShaderNodeParameter  {
  * A [VisualShaderNodeParameter] of type unsigned [int]. Offers additional customization for range of accepted values.
  *
 */
-  new(): VisualShaderNodeUIntParameter; 
+  new(): VisualShaderNodeUIntParameter;
+  constructor();
   static "new"(): VisualShaderNodeUIntParameter 
 
 

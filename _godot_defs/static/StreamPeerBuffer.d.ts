@@ -14,7 +14,8 @@ declare class StreamPeerBuffer extends StreamPeer  {
  * A [StreamPeerBuffer] object keeps an internal cursor which is the offset in bytes to the start of the buffer. Get and put operations are performed at the cursor position and will move the cursor accordingly.
  *
 */
-  new(): StreamPeerBuffer; 
+  new(): StreamPeerBuffer;
+  constructor();
   static "new"(): StreamPeerBuffer 
 
 

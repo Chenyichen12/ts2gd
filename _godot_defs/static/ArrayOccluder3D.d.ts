@@ -14,7 +14,8 @@ declare class ArrayOccluder3D extends Occluder3D  {
  * See [OccluderInstance3D]'s documentation for instructions on setting up occlusion culling.
  *
 */
-  new(): ArrayOccluder3D; 
+  new(): ArrayOccluder3D;
+  constructor();
   static "new"(): ArrayOccluder3D 
 
 

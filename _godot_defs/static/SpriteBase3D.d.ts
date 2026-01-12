@@ -10,7 +10,8 @@ declare class SpriteBase3D extends GeometryInstance3D  {
  * A node that displays 2D texture information in a 3D environment. See also [Sprite3D] where many other properties are defined.
  *
 */
-  new(): SpriteBase3D; 
+  new(): SpriteBase3D;
+  constructor();
   static "new"(): SpriteBase3D 
 
 

@@ -78,7 +78,8 @@ declare class PackedDataContainer extends Resource  {
  * Nested containers will be packed recursively. While iterating, they will be returned as [PackedDataContainerRef].
  *
 */
-  new(): PackedDataContainer; 
+  new(): PackedDataContainer;
+  constructor();
   static "new"(): PackedDataContainer 
 
 

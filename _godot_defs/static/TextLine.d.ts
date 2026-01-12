@@ -10,7 +10,8 @@ declare class TextLine extends RefCounted  {
  * Abstraction over [TextServer] for handling a single line of text.
  *
 */
-  new(): TextLine; 
+  new(): TextLine;
+  constructor();
   static "new"(): TextLine 
 
 

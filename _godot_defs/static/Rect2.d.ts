@@ -186,10 +186,15 @@ declare type Rect2 = Rect2Constructor;
 declare var Rect2: typeof Rect2Constructor & {
   
   new(): Rect2;
+
   new(from: Rect2): Rect2;
+
   new(from: Rect2i): Rect2;
+
   new(position: Vector2, size: Vector2): Rect2;
+
   new(x: float, y: float, width: float, height: float): Rect2;
+
 
   (): Rect2;
   (from: Rect2): Rect2;

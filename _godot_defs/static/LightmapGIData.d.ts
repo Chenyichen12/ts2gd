@@ -10,7 +10,8 @@ declare class LightmapGIData extends Resource  {
  * [LightmapGIData] contains baked lightmap and dynamic object probe data for [LightmapGI]. It is replaced every time lightmaps are baked in [LightmapGI].
  *
 */
-  new(): LightmapGIData; 
+  new(): LightmapGIData;
+  constructor();
   static "new"(): LightmapGIData 
 
 

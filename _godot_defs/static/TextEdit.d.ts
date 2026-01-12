@@ -34,7 +34,8 @@ declare class TextEdit extends Control  {
  * **Note:** When holding down [kbd]Alt[/kbd], the vertical scroll wheel will scroll 5 times as fast as it would normally do. This also works in the Godot script editor.
  *
 */
-  new(): TextEdit; 
+  new(): TextEdit;
+  constructor();
   static "new"(): TextEdit 
 
 

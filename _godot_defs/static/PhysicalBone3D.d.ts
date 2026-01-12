@@ -14,7 +14,8 @@ declare class PhysicalBone3D extends PhysicsBody3D  {
  * **Note:** In order to detect physical bones with raycasts, the [member SkeletonModifier3D.active] property of the parent [PhysicalBoneSimulator3D] must be `true` and the [Skeleton3D]'s bone must be assigned to [PhysicalBone3D] correctly; it means that [method get_bone_id] should return a valid id (`>= 0`).
  *
 */
-  new(): PhysicalBone3D; 
+  new(): PhysicalBone3D;
+  constructor();
   static "new"(): PhysicalBone3D 
 
 

@@ -20,10 +20,20 @@ declare class Transform3D {
 */
 
   new(): Transform3D;
+  constructor();
+
   new(from: Transform3D): Transform3D;
+  constructor(from: Transform3D);
+
   new(basis: Basis, origin: Vector3): Transform3D;
+  constructor(basis: Basis, origin: Vector3);
+
   new(from: Projection): Transform3D;
+  constructor(from: Projection);
+
   new(x_axis: Vector3, y_axis: Vector3, z_axis: Vector3, origin: Vector3): Transform3D;
+  constructor(x_axis: Vector3, y_axis: Vector3, z_axis: Vector3, origin: Vector3);
+
   static "new"(): Transform3D 
 
 

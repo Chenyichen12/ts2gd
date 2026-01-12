@@ -10,7 +10,8 @@ declare class StyleBoxLine extends StyleBox  {
  * A [StyleBox] that displays a single line of a given color and thickness. The line can be either horizontal or vertical. Useful for separators.
  *
 */
-  new(): StyleBoxLine; 
+  new(): StyleBoxLine;
+  constructor();
   static "new"(): StyleBoxLine 
 
 

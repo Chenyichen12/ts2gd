@@ -10,7 +10,8 @@ declare class VisualShaderNodeParameterRef extends VisualShaderNode  {
  * Creating a reference to a [VisualShaderNodeParameter] allows you to reuse this parameter in different shaders or shader stages easily.
  *
 */
-  new(): VisualShaderNodeParameterRef; 
+  new(): VisualShaderNodeParameterRef;
+  constructor();
   static "new"(): VisualShaderNodeParameterRef 
 
 

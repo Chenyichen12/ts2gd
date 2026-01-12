@@ -60,7 +60,8 @@ declare class EditorDock extends MarginContainer  {
  * 
  *
 */
-  new(): EditorDock; 
+  new(): EditorDock;
+  constructor();
   static "new"(): EditorDock 
 
 

@@ -10,7 +10,8 @@ declare class VisualShaderNodeParticleAccelerator extends VisualShaderNode  {
  * Particle accelerator can be used in "process" step of particle shader. It will accelerate the particles. Connect it to the Velocity output port.
  *
 */
-  new(): VisualShaderNodeParticleAccelerator; 
+  new(): VisualShaderNodeParticleAccelerator;
+  constructor();
   static "new"(): VisualShaderNodeParticleAccelerator 
 
 

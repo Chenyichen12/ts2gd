@@ -14,7 +14,8 @@ declare class EditorNode3DGizmoPlugin extends Resource  {
  * To use [EditorNode3DGizmoPlugin], register it using the [method EditorPlugin.add_node_3d_gizmo_plugin] method first.
  *
 */
-  new(): EditorNode3DGizmoPlugin; 
+  new(): EditorNode3DGizmoPlugin;
+  constructor();
   static "new"(): EditorNode3DGizmoPlugin 
 
 

@@ -26,7 +26,8 @@ declare class RenderingDevice extends Object  {
  * **Note:** [RenderingDevice] is not available when running in headless mode or when using the Compatibility rendering method.
  *
 */
-  new(): RenderingDevice; 
+  new(): RenderingDevice;
+  constructor();
   static "new"(): RenderingDevice 
 
 

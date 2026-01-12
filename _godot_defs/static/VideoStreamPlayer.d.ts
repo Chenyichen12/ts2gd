@@ -18,7 +18,8 @@ declare class VideoStreamPlayer extends Control  {
  * **Warning:** On Web, video playback **will** perform poorly due to missing architecture-specific assembly optimizations.
  *
 */
-  new(): VideoStreamPlayer; 
+  new(): VideoStreamPlayer;
+  constructor();
   static "new"(): VideoStreamPlayer 
 
 

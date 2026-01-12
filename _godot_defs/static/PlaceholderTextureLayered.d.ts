@@ -22,7 +22,8 @@ declare class PlaceholderTextureLayered extends TextureLayered  {
  * **Note:** This is not intended to be used as an actual texture for rendering. It is not guaranteed to work like one in shaders or materials (for example when calculating UV).
  *
 */
-  new(): PlaceholderTextureLayered; 
+  new(): PlaceholderTextureLayered;
+  constructor();
   static "new"(): PlaceholderTextureLayered 
 
 

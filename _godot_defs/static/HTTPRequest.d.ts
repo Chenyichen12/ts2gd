@@ -292,7 +292,8 @@ declare class HTTPRequest extends Node  {
  * **Note:** [HTTPRequest] nodes will automatically handle decompression of response bodies. An `Accept-Encoding` header will be automatically added to each of your requests, unless one is already specified. Any response with a `Content-Encoding: gzip` header will automatically be decompressed and delivered to you as uncompressed bytes.
  *
 */
-  new(): HTTPRequest; 
+  new(): HTTPRequest;
+  constructor();
   static "new"(): HTTPRequest 
 
 

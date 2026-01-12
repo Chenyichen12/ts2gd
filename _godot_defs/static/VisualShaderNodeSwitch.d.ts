@@ -10,7 +10,8 @@ declare class VisualShaderNodeSwitch extends VisualShaderNode  {
  * Returns an associated value of the [member op_type] type if the provided boolean value is `true` or `false`.
  *
 */
-  new(): VisualShaderNodeSwitch; 
+  new(): VisualShaderNodeSwitch;
+  constructor();
   static "new"(): VisualShaderNodeSwitch 
 
 

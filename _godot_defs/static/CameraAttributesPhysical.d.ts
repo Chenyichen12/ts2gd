@@ -22,7 +22,8 @@ declare class CameraAttributesPhysical extends CameraAttributes  {
  * **Note:** Depth of field blur is only supported in the Forward+ and Mobile rendering methods, not Compatibility.
  *
 */
-  new(): CameraAttributesPhysical; 
+  new(): CameraAttributesPhysical;
+  constructor();
   static "new"(): CameraAttributesPhysical 
 
 

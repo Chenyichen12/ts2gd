@@ -38,7 +38,8 @@ declare class CompressedTexture2D extends Texture2D  {
  * Using **VRAM Compressed** also improves loading times, as VRAM-compressed textures are faster to load compared to textures using lossless or lossy compression. VRAM compression can exhibit noticeable artifacts and is intended to be used for 3D rendering, not 2D.
  *
 */
-  new(): CompressedTexture2D; 
+  new(): CompressedTexture2D;
+  constructor();
   static "new"(): CompressedTexture2D 
 
 

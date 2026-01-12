@@ -130,7 +130,8 @@ declare class EditorDebuggerPlugin extends RefCounted  {
  * **Note:** While the game is running, [method @GlobalScope.print] and similar functions **called in the editor** do not print anything, the Output Log prints only game messages.
  *
 */
-  new(): EditorDebuggerPlugin; 
+  new(): EditorDebuggerPlugin;
+  constructor();
   static "new"(): EditorDebuggerPlugin 
 
 

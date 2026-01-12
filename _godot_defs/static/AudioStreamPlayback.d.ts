@@ -10,7 +10,8 @@ declare class AudioStreamPlayback extends RefCounted  {
  * Can play, loop, pause a scroll through audio. See [AudioStream] and [AudioStreamOggVorbis] for usage.
  *
 */
-  new(): AudioStreamPlayback; 
+  new(): AudioStreamPlayback;
+  constructor();
   static "new"(): AudioStreamPlayback 
 
 

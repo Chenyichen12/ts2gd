@@ -14,7 +14,8 @@ declare class XRPose extends RefCounted  {
  * Orientation, location, linear velocity and angular velocity are all provided for each pose by the XR runtime. This object contains this state of a pose.
  *
 */
-  new(): XRPose; 
+  new(): XRPose;
+  constructor();
   static "new"(): XRPose 
 
 

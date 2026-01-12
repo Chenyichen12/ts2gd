@@ -22,7 +22,8 @@ declare class AnimationNodeSub2 extends AnimationNodeSync  {
  * **Note:** This calculation is different from using a negative value in [AnimationNodeAdd2], since the transformation matrices do not satisfy the commutative law. [AnimationNodeSub2] multiplies the transformation matrix of the inverted animation from the left side, while negative [AnimationNodeAdd2] multiplies it from the right side.
  *
 */
-  new(): AnimationNodeSub2; 
+  new(): AnimationNodeSub2;
+  constructor();
   static "new"(): AnimationNodeSub2 
 
 

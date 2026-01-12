@@ -18,7 +18,8 @@ declare class ColorPickerButton extends Button  {
  * **Note:** By default, the button may not be wide enough for the color preview swatch to be visible. Make sure to set [member Control.custom_minimum_size] to a big enough value to give the button enough space.
  *
 */
-  new(): ColorPickerButton; 
+  new(): ColorPickerButton;
+  constructor();
   static "new"(): ColorPickerButton 
 
 

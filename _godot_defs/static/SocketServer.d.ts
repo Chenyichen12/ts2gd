@@ -10,7 +10,8 @@ declare class SocketServer extends RefCounted  {
  * A socket server.
  *
 */
-  new(): SocketServer; 
+  new(): SocketServer;
+  constructor();
   static "new"(): SocketServer 
 
 

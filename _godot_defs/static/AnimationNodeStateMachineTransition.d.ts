@@ -14,7 +14,8 @@ declare class AnimationNodeStateMachineTransition extends Resource  {
  * You can set the timing and conditions of the transition in detail.
  *
 */
-  new(): AnimationNodeStateMachineTransition; 
+  new(): AnimationNodeStateMachineTransition;
+  constructor();
   static "new"(): AnimationNodeStateMachineTransition 
 
 

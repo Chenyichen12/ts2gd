@@ -22,7 +22,8 @@ declare class GPUParticlesAttractorVectorField3D extends GPUParticlesAttractor3D
  * **Note:** Particle attractors only affect [GPUParticles3D], not [CPUParticles3D].
  *
 */
-  new(): GPUParticlesAttractorVectorField3D; 
+  new(): GPUParticlesAttractorVectorField3D;
+  constructor();
   static "new"(): GPUParticlesAttractorVectorField3D 
 
 

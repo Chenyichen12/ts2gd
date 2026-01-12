@@ -68,7 +68,8 @@ declare class SurfaceTool extends RefCounted  {
  * **Note:** Godot uses clockwise [url=https://learnopengl.com/Advanced-OpenGL/Face-culling]winding order[/url] for front faces of triangle primitive modes.
  *
 */
-  new(): SurfaceTool; 
+  new(): SurfaceTool;
+  constructor();
   static "new"(): SurfaceTool 
 
 

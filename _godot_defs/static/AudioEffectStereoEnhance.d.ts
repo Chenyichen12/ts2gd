@@ -10,7 +10,8 @@ declare class AudioEffectStereoEnhance extends AudioEffect  {
  * An audio effect that can be used to adjust the intensity of stereo panning.
  *
 */
-  new(): AudioEffectStereoEnhance; 
+  new(): AudioEffectStereoEnhance;
+  constructor();
   static "new"(): AudioEffectStereoEnhance 
 
 

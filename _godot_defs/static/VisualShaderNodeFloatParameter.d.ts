@@ -10,7 +10,8 @@ declare class VisualShaderNodeFloatParameter extends VisualShaderNodeParameter  
  * Translated to `uniform float` in the shader language.
  *
 */
-  new(): VisualShaderNodeFloatParameter; 
+  new(): VisualShaderNodeFloatParameter;
+  constructor();
   static "new"(): VisualShaderNodeFloatParameter 
 
 

@@ -18,7 +18,8 @@ declare class EditorPaths extends Object  {
  * **Note:** On the Linux/BSD platform, Godot complies with the [url=https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html]XDG Base Directory Specification[/url]. You can override environment variables following the specification to change the editor and project data paths.
  *
 */
-  new(): EditorPaths; 
+  new(): EditorPaths;
+  constructor();
   static "new"(): EditorPaths 
 
 

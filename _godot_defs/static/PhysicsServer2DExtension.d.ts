@@ -14,7 +14,8 @@ declare class PhysicsServer2DExtension extends PhysicsServer2DClass  {
  * Intended for use with GDExtension to create custom implementations of [PhysicsServer2D].
  *
 */
-  new(): PhysicsServer2DExtension; 
+  new(): PhysicsServer2DExtension;
+  constructor();
   static "new"(): PhysicsServer2DExtension 
 
 

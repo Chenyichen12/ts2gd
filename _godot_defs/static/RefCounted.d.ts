@@ -26,7 +26,8 @@ declare class RefCounted extends Object  {
  * **Note:** In C#, reference-counted objects will not be freed instantly after they are no longer in use. Instead, garbage collection will run periodically and will free reference-counted objects that are no longer in use. This means that unused ones will remain in memory for a while before being removed.
  *
 */
-  new(): RefCounted; 
+  new(): RefCounted;
+  constructor();
   static "new"(): RefCounted 
 
 
