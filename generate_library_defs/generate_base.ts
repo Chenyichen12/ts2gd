@@ -255,6 +255,13 @@ interface IterableIterator<T> extends Iterator<T> {
 }
 type CPointer = any;
 
+type TypeContructor<T> = new (...args: any[]) => T
+declare function isType<T>(
+  value: any,
+  type: TypeContructor<T>
+): value is T
+
+
 ${ArrayDefinition}
 ${CallDefinition}
 ${DictionaryDefinition}

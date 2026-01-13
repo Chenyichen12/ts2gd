@@ -10,7 +10,12 @@ import {
   ParseNodeType,
 } from "../parse_node"
 import { Test } from "../tests/test"
-import { isArrayType, isDictionary, isNullableNode } from "../ts_utils"
+import {
+  getGodotType,
+  isArrayType,
+  isDictionary,
+  isNullableNode,
+} from "../ts_utils"
 
 import { LibraryFunctionName, LibraryFunctions } from "./library_functions"
 import { getCapturedScope } from "./parse_arrow_function"
@@ -36,6 +41,26 @@ export const parseCallExpression = (
         }
       },
     })
+  }
+
+  const testCode = node.expression.getText()
+  if(testCode == "isType"){
+    const typeArg = node.typeArguments?.[0];
+    if(typeArg){
+      // go through the first argument
+      const firstArg = parseNode(args[0], props)
+      const type = typeArg.getText().split('<')[0].trim();
+      return {
+        content: `${firstArg.content} is ${type}`,
+      }
+    }
+    else{
+      const firstArg = parseNode(args[0], props)
+      const secondArg = args[1].getText();
+      return {
+        content: `${firstArg.content} is ${secondArg}`,
+      }
+    }
   }
 
   let callIdentifier: ts.Identifier | undefined = undefined
@@ -167,15 +192,23 @@ export const parseCallExpression = (
         let afterString = ""
         if (propertyAccessContent.extraLines) {
           for (const line of propertyAccessContent.extraLines) {
-            if (line.type === "before" && line.lineType === ExtraLineType.Increment) {
-              beforeString += line.line;
+            if (
+              line.type === "before" &&
+              line.lineType === ExtraLineType.Increment
+            ) {
+              beforeString += line.line
             }
-            if (line.type === "after" && line.lineType === ExtraLineType.Increment) {
-              afterString += line.line;
+            if (
+              line.type === "after" &&
+              line.lineType === ExtraLineType.Increment
+            ) {
+              afterString += line.line
             }
           }
         }
-        return beforeString + callFullText + `(${parsedArgContents})` + afterString
+        return (
+          beforeString + callFullText + `(${parsedArgContents})` + afterString
+        )
       },
     })
   }
